@@ -3,83 +3,62 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 20px;
-}
 
-.outer-filter-box {
-  color: black;
-  background-color: #d8d9db;
-  display: flex;
-  align-items: center;
-  border-radius: 3px;
-}
-
-.filter-box {
-    color: black;
-    display: flex;
-    align-items: center;
-    height: 5vh;
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-
-  .selectedBox {
-    font-size: 12px;
-    background-color: #0662B7;
-    height: 5vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 3px;
-  }
-  
   .third-header {
     display: flex;
     flex-direction: row;
     margin-bottom: 26px;
     width: 100%;
     justify-content: flex-end;
-  }
-  
-  .seperater-div {
-    border: 0.5px solid #8a8b8c;
-    height: 3vh;
-  }
-  
-  .overview-text3{
-    font-size: 12px;
-    color: black;
-    font-weight: 500;
-    cursor: pointer;
-  }
-  
-  .selected-overview-text3 {
-    font-size: 12px;
-    color: white;
-    font-weight: 500;
-    cursor: pointer;
-  }
-  
-  .selected-hour-box {
-    color: black;
-    font-size: 12px;
-    background-color: #2d67b4;
-    height: 4vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 3px;
-  }
 
-.selected-overview-text3 {
-  font-size: 12px;
-  color: white;
-  font-weight: 500;
-  cursor: pointer;
-}
+    .outer-filter-box {
+      color: black;
+      background-color: #d8d9db;
+      display: flex;
+      align-items: center;
+      border-radius: 3px;
+
+      .filter-box {
+        color: black;
+        display: flex;
+        align-items: center;
+        height: 5vh;
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+      .selectedBox {
+        font-size: 12px;
+        background-color: #0662b7;
+        height: 5vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-radius: 3px;
+      }
+
+      .overview-text3 {
+        font-size: 12px;
+        color: black;
+        font-weight: 500;
+        cursor: pointer;
+      }
+
+      .selected-overview-text3 {
+        font-size: 12px;
+        color: white;
+        font-weight: 500;
+        cursor: pointer;
+      }
+
+      .seperater-div {
+        border: 0.5px solid #8a8b8c;
+        height: 3vh;
+      }
+    }
+  }
 
 .selected-hour-box {
   color: black;
@@ -104,8 +83,8 @@
   display: flex;
   flex-direction: row;
 }
-
-.dotIcon {
-  margin-top: 4px;
-  margin-right: 12px;
+  .dotIcon {
+    margin-top: 4px;
+    margin-right: 12px;
+  }
 }

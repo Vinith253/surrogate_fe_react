@@ -159,10 +159,11 @@ function TableComp(props: {
             <Button
               startIcon={<EditIcon />}
               sx={{
-                fontSize: "14px",
+                fontSize: "1vw",
                 marginLeft: "56px",
                 color: "#0662B7",
                 fontWeight: "600",
+                textTransform:'none'
               }}
             >
               Edit Columns
@@ -174,13 +175,14 @@ function TableComp(props: {
             <Button
               endIcon={<RightArrow />}
               sx={{
-                fontSize: "14px",
+                fontSize: "1vw",
                 marginLeft: "35px",
                 color: "#0662B7",
                 fontWeight: "600",
+                textTransform:'none'
               }}
             >
-              Detailed Report
+              Detailed Reports
             </Button>
           </div>
         )}

@@ -3,9 +3,10 @@ import {
   JSXElementConstructor,
   ReactFragment,
   ReactPortal,
-} from 'react';
-import './card.scss';
-import ApprovalRate from '../../../../assets/icons/approval_rate_icon.svg';
+} from "react";
+import "./card.scss";
+import { Button } from "@mui/material";
+import { ReactComponent as RightArrow } from "../../../../assets/icons/rightArrow.svg";
 
 function DashboardCard(props: {
   title:
@@ -42,9 +43,14 @@ function DashboardCard(props: {
       </div>
       {props.more && (
         <div className="lower-div">
-          <li onClick={() => console.log('more clicked')} className="more-text">
-            More
-          </li>
+          <Button
+          endIcon={<RightArrow style={{width:'5px', height: '10px'}}/>}
+          sx={{ fontSize: "0.8vw",color:'#0662B7',textTransform:'none'}}
+        >
+          More
+        </Button>
+
+
         </div>
       )}
     </div>
