@@ -1,26 +1,18 @@
-
-import React, { useMemo, useState } from 'react';
-import './table.scss';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-
-import {
-  Button,
-  Grid,
-  Typography
-} from '@mui/material';
-import Edit from '@mui/icons-material/Edit';
-import LeftArrow from '@mui/icons-material/KeyboardDoubleArrowLeft';
-import LastArrow from '@mui/icons-material/KeyboardDoubleArrowRight';
-import RightArrow from '@mui/icons-material/ArrowRightAltRounded';
-import GreenDot from '../../../assets/icons/greendot.svg';
-import DroppedDot from '../../../assets/icons/droppeddot.svg';
-import FailureDot from '../../../assets/icons/failuredot.svg';
-import ProgressDot from '../../../assets/icons/progressdot.svg';
+import React, { useMemo, useState } from "react";
+import "./table.scss";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import { Button, Grid, Typography } from "@mui/material";
+import GreenDot from "../../../assets/icons/greendot.svg";
+import DroppedDot from "../../../assets/icons/droppeddot.svg";
+import FailureDot from "../../../assets/icons/failuredot.svg";
+import ProgressDot from "../../../assets/icons/progressdot.svg";
+import { ReactComponent as EditIcon } from "../../../assets/icons/editColumn.svg";
+import { ReactComponent as RightArrow } from "../../../assets/icons/rightArrow.svg";
 import {
   rowsDataInterface,
   statusRowHeadingInterface,
@@ -38,6 +30,7 @@ function TableComp(props: {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [currentPage, setCurrentPage] = useState(1);
+  const [filteredData, setFilterteredData] = useState(props.rows);
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
@@ -62,63 +55,116 @@ function TableComp(props: {
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * rowsPerPage;
     const lastPageIndex = firstPageIndex + rowsPerPage;
-    return props.rows.slice(firstPageIndex, lastPageIndex);
-  }, [currentPage, rowsPerPage]);
+    return filteredData.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, rowsPerPage, graphView]);
 
   return (
     <div className="table-div">
       <div className="third-header">
-        <div className={'hour-box'}>
-          <li
-            onClick={() => setGraphView(1)}
-            className={
-              graphView == 1 ? 'selected-overview-text3' : 'overview-text3'
-            }
-          >
-            All
-          </li>
-          <div className="line2-div" />
-          <li
-            onClick={() => setGraphView(2)}
-            className={
-              graphView == 2 ? 'selected-overview-text3' : 'overview-text3'
-            }
-          >
-            Approved
-          </li>
-          <div className="line2-div" />
-          <li
-            onClick={() => setGraphView(3)}
-            className={
-              graphView == 3 ? 'selected-overview-text3' : 'overview-text3'
-            }
-          >
-            In-Progress
-          </li>
-          <div className="line2-div" />
-          <li
-            onClick={() => setGraphView(4)}
-            className={
-              graphView == 4 ? 'selected-overview-text3' : 'overview-text3'
-            }
-          >
-            Rejected
-          </li>
-          <div className="line2-div" />
-          <li
-            onClick={() => setGraphView(5)}
-            className={
-              graphView == 5 ? 'selected-overview-text3' : 'overview-text3'
-            }
-          >
-            Dropped
-          </li>
+        <div className={"outer-filter-box"}>
+          <div className={graphView == 1 ? "selectedBox" : "filter-box"}>
+            <li
+              onClick={() => {
+                setFilterteredData(props.rows);
+                setCurrentPage(1);
+                setPage(1);
+                setGraphView(1);
+              }}
+              className={
+                graphView == 1 ? "selected-overview-text3" : "overview-text3"
+              }
+            >
+              All
+            </li>
+          </div>
+          <div className="seperater-div" />
+          <div className={graphView == 2 ? "selectedBox" : "filter-box"}>
+            <li
+              onClick={() => {
+                const currentData = props.rows.filter(function (item) {
+                  return item.status === "Approved";
+                });
+                setFilterteredData(currentData);
+                setCurrentPage(1);
+                setPage(1);
+                setGraphView(2);
+              }}
+              className={
+                graphView == 2 ? "selected-overview-text3" : "overview-text3"
+              }
+            >
+              Approved
+            </li>
+          </div>
+          <div className="seperater-div" />
+          <div className={graphView == 3 ? "selectedBox" : "filter-box"}>
+            <li
+              onClick={() => {
+                const currentData = props.rows.filter(function (item) {
+                  return item.status === "In-Progress";
+                });
+                setFilterteredData(currentData);
+                setCurrentPage(1);
+                setPage(1);
+                setGraphView(3);
+              }}
+              className={
+                graphView == 3 ? "selected-overview-text3" : "overview-text3"
+              }
+            >
+              In-Progress
+            </li>
+          </div>
+          <div className="seperater-div" />
+          <div className={graphView == 4 ? "selectedBox" : "filter-box"}>
+            <li
+              onClick={() => {
+                const currentData = props.rows.filter(function (item) {
+                  return item.status === "Rejected";
+                });
+                setFilterteredData(currentData);
+                setCurrentPage(1);
+                setPage(1);
+                setGraphView(4);
+              }}
+              className={
+                graphView == 4 ? "selected-overview-text3" : "overview-text3"
+              }
+            >
+              Rejected
+            </li>
+          </div>
+          <div className="seperater-div" />
+          <div className={graphView == 5 ? "selectedBox" : "filter-box"}>
+            <li
+              onClick={() => {
+                const currentData = props.rows.filter(function (item) {
+                  return item.status === "Dropped";
+                });
+                setFilterteredData(currentData);
+                setCurrentPage(1);
+                setPage(1);
+                setGraphView(5);
+              }}
+              className={
+                graphView == 5 ? "selected-overview-text3" : "overview-text3"
+              }
+            >
+              Dropped
+            </li>
+          </div>
         </div>
         {props.flag === 'dashboard' && (
           <div className="reset-data">
             <Button
-              startIcon={<Edit />}
-              sx={{ fontSize: '14px', marginLeft: '56px' }}
+              startIcon={<EditIcon />}
+              sx={{
+                fontSize: "1vw",
+                marginLeft: "56px",
+                color: "#0662B7",
+                fontWeight: "600",
+                textTransform:'none'
+              }}
             >
               Edit Columns
             </Button>
@@ -128,9 +174,15 @@ function TableComp(props: {
           <div className="reset-data">
             <Button
               endIcon={<RightArrow />}
-              sx={{ fontSize: '14px', marginLeft: '35px' }}
+              sx={{
+                fontSize: "1vw",
+                marginLeft: "35px",
+                color: "#0662B7",
+                fontWeight: "600",
+                textTransform:'none'
+              }}
             >
-              Detailed Report
+              Detailed Reports
             </Button>
           </div>
         )}
@@ -379,23 +431,24 @@ function TableComp(props: {
             </TableContainer>
           </div>
         </Grid>
-
-        <PaginationComp 
-        rows={props.rows}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        handleChangePage={handleChangePage}
-        handleChangeRowsPerPage={handleChangeRowsPerPage}
-        onPageChange={onPageChange}
-        onLastClick={()=> {
-          setPage(Math.ceil(props.rows.length / rowsPerPage));
-          setCurrentPage(Math.ceil(props.rows.length / rowsPerPage));
-        }}
-        onFirstClick={() => {
-          setPage(1);
-          setCurrentPage(1);
-        }}
-        lastButtonDisabled={page == Math.ceil(props.rows.length / rowsPerPage)}
+        <PaginationComp
+          rows={filteredData}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          handleChangePage={handleChangePage}
+          handleChangeRowsPerPage={handleChangeRowsPerPage}
+          onPageChange={onPageChange}
+          onLastClick={() => {
+            setPage(Math.ceil(filteredData.length / rowsPerPage));
+            setCurrentPage(Math.ceil(filteredData.length / rowsPerPage));
+          }}
+          onFirstClick={() => {
+            setPage(1);
+            setCurrentPage(1);
+          }}
+          lastButtonDisabled={
+            page == Math.ceil(filteredData.length / rowsPerPage)
+          }
         />
       </Grid>
     </div>
