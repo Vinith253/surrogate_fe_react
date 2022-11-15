@@ -1,0 +1,25 @@
+.filter-header {
+    display: flex;
+    margin: 40px;
+    cursor: pointer;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  
+  .filter-data {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .filter-text {
+    font-size: 16px;
+    color: #2d67b4;
+    font-weight: bold;
+  }
+  
+  .reset-data {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }

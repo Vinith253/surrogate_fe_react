@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  border: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+  transition: all 300ms ease;
+  hyphens: auto;
+}
+body,
+html {
+  background-color: #E3E3E3;
+  /* width: 100vw;
+  height: 100vh; */
+  font-size: 16px;
+  font-weight: 400;
+}
