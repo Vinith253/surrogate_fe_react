@@ -5,8 +5,8 @@ import {
   listRowHeading,
   salesDashboardList,
   statusRowHeading,
-} from "./dashboard.const";
-import DsaPage from "./dsaPage/dsa";
+} from './dashboard.const';
+import DsaPage from './dsaPage/dsa';
 
 function Dashboard() {
   const [inputNumber, setInputNumber] = useState<number>(1);

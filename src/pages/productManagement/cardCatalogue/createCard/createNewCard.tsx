@@ -1,4 +1,4 @@
-import react, { useRef, useState } from "react";
+import react, { useRef, useState } from 'react';
 import {
   Stack,
   Box,
@@ -11,25 +11,25 @@ import {
   Card,
   Grid,
   Divider,
-} from "@mui/material";
+} from '@mui/material';
 
-import BtnContained from "../../../../components/commonComponent/CustomText/Button/Contained";
-import BtnOutlined from "../../../../components/commonComponent/CustomText/Button/Outlined";
-import BtnText from "../../../../components/commonComponent/CustomText/Button/Text";
+import BtnContained from '../../../../components/commonComponent/CustomText/Button/Contained';
+import BtnOutlined from '../../../../components/commonComponent/CustomText/Button/Outlined';
+import BtnText from '../../../../components/commonComponent/CustomText/Button/Text';
 // import Checkbox from "@mui/material/Checkbox";
-import InfoIcon from "@mui/icons-material/Info";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import FileUploadIcon from "@mui/icons-material/FileUpload";
-import ControlPointIcon from "@mui/icons-material/ControlPoint";
-import IconButton from "@mui/material/IconButton";
-import PhotoCamera from "@mui/icons-material/PhotoCamera";
+import InfoIcon from '@mui/icons-material/Info';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import FileUploadIcon from '@mui/icons-material/FileUpload';
+import ControlPointIcon from '@mui/icons-material/ControlPoint';
+import IconButton from '@mui/material/IconButton';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
 // import { Divider } from "@material-ui/core";
 // import CadActions from "@mui/material/CardActions";
 // import CardContent from "@mui/material/CardContent";
-import CheckBox from "../../../../components/commonComponent/CheckBox/checkBox";
-import TypoText from "../../../../components/commonComponent/CustomText/Textfield";
-import TypographyInfo from "../../../../components/commonComponent/CustomText/Info";
-import { useNavigate } from "react-router-dom";
+import CheckBox from '../../../../components/commonComponent/CheckBox/checkBox';
+import TypoText from '../../../../components/commonComponent/CustomText/Textfield';
+import TypographyInfo from '../../../../components/commonComponent/CustomText/Info';
+import { useNavigate } from 'react-router-dom';
 
 const CreateNewCard = () => {
   // const uploadRef = useRef<any>();
@@ -43,36 +43,36 @@ const CreateNewCard = () => {
   // };
   const [data, setData] = useState<any>();
   let obj = {
-    businessId: "",
-    cardName: "",
-    interestRate: "",
-    maximumCardLimit: "",
-    cibilScore: "",
-    itrLimit: "",
-    salaryLimit: "",
-    c4cLimit: "",
-    joiningFee: "",
-    joiningFeeWavier: "",
-    fuelSurchargeWavier: "",
-    currencyMarkup: "",
-    fuelSurcharge: "",
-    fuelSurchargeDescription: "",
-    annualFee: "",
-    rewardDescription: [{ value: " " }],
-    keyBenefits: [{ value: " " }],
-    additionalBenefits: [{ value: " " }],
-    welcomeBenefits: [{ value: "" }],
+    businessId: '',
+    cardName: '',
+    interestRate: '',
+    maximumCardLimit: '',
+    cibilScore: '',
+    itrLimit: '',
+    salaryLimit: '',
+    c4cLimit: '',
+    joiningFee: '',
+    joiningFeeWavier: '',
+    fuelSurchargeWavier: '',
+    currencyMarkup: '',
+    fuelSurcharge: '',
+    fuelSurchargeDescription: '',
+    annualFee: '',
+    rewardDescription: [{ value: ' ' }],
+    keyBenefits: [{ value: ' ' }],
+    additionalBenefits: [{ value: ' ' }],
+    welcomeBenefits: [{ value: '' }],
   };
   const [dataObj, setDataObj] = useState(obj);
   const handleValueChange = (e: any, value: any) => {
     setDataObj((prev) => ({ ...prev, [value]: e }));
   };
   const handleSubmitClick = () => {
-    console.log(dataObj, "dataObj");
-    navigate("/productManagement/cardCatalogue/singleupload/reviewCard");
+    console.log(dataObj, 'dataObj');
+    navigate('/productManagement/cardCatalogue/singleupload/reviewCard');
   };
   const AddRewardList = () => {
-    let newVal = { value: "" };
+    let newVal = { value: '' };
     setDataObj((prev) => ({
       ...prev,
       rewardDescription: [...prev.rewardDescription, newVal],
@@ -80,7 +80,7 @@ const CreateNewCard = () => {
   };
 
   const AddKeyList = () => {
-    let newVal = { value: "" };
+    let newVal = { value: '' };
     setDataObj((prev) => ({
       ...prev,
       keyBenefits: [...prev.keyBenefits, newVal],
@@ -88,7 +88,7 @@ const CreateNewCard = () => {
   };
 
   const AddAdditionalList = () => {
-    let newVal = { value: "" };
+    let newVal = { value: '' };
     setDataObj((prev) => ({
       ...prev,
       additionalBenefits: [...prev.additionalBenefits, newVal],
@@ -96,7 +96,7 @@ const CreateNewCard = () => {
   };
 
   const AddWelcomeList = () => {
-    let newVal = { value: "" };
+    let newVal = { value: '' };
     setDataObj((prev) => ({
       ...prev,
       welcomeBenefits: [...prev.welcomeBenefits, newVal],
@@ -152,18 +152,18 @@ const CreateNewCard = () => {
   return (
     <Box
       sx={{
-        backgroundColor: "#eceff2",
+        backgroundColor: '#eceff2',
         // margin: 0,
         padding: 0,
         paddingBottom: 15,
       }}
     >
-      <Box sx={{ backgroundColor: "white", paddingX: 3, padding: 2 }}>
-        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+      <Box sx={{ backgroundColor: 'white', paddingX: 3, padding: 2 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Box
             sx={{
-              display: "flex",
-              justifyContent: "flex-start",
+              display: 'flex',
+              justifyContent: 'flex-start',
               gap: 1,
             }}
           >
@@ -182,11 +182,11 @@ const CreateNewCard = () => {
         </Box>
       </Box>
 
-      <Box sx={{ backgroundColor: "white", padding: 3, marginTop: 3 }}>
+      <Box sx={{ backgroundColor: 'white', padding: 3, marginTop: 3 }}>
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "flex-start",
+            display: 'flex',
+            justifyContent: 'flex-start',
             gap: 1,
           }}
         >
@@ -230,11 +230,11 @@ const CreateNewCard = () => {
             sx={{
               width: 350,
               height: 150,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              backgroundColor: "#e0e0de",
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: '#e0e0de',
             }}
           >
             <IconButton
@@ -253,11 +253,11 @@ const CreateNewCard = () => {
           </Card>
         </Box>
       </Box>
-      <Box sx={{ backgroundColor: "white", marginTop: 3, padding: 3 }}>
+      <Box sx={{ backgroundColor: 'white', marginTop: 3, padding: 3 }}>
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "flex-start",
+            display: 'flex',
+            justifyContent: 'flex-start',
             gap: 1,
           }}
         >
@@ -269,34 +269,34 @@ const CreateNewCard = () => {
 
         <Grid container sx={{ paddingY: 2 }} spacing={5}>
           <Grid item xs={12} sm={6} md={4}>
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
               <TypoText title="Business ID" />
               <TypoText
                 placeholder="Business ID"
                 handleChange={handleValueChange}
-                value={"businessId"}
+                value={'businessId'}
               />
             </Box>
           </Grid>
 
           <Grid item xs={12} sm={6} md={4}>
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
               <TypoText title="Card Name" />
               <TypoText
                 placeholder="Card Name"
                 handleChange={handleValueChange}
-                value={"cardName"}
+                value={'cardName'}
               />
             </Box>
           </Grid>
 
           <Grid item xs={12} sm={6} md={4}>
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
               <TypoText title="Interest Rate (in%)" />
               <TypoText
                 placeholder="Interest Rate (in%)"
                 handleChange={handleValueChange}
-                value={"interestRate"}
+                value={'interestRate'}
               />
             </Box>
           </Grid>
@@ -304,21 +304,21 @@ const CreateNewCard = () => {
 
         <Grid container spacing={5}>
           <Grid item xs={12} sm={6} md={4}>
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
               <TypoText title="Card Type" />
               <Select placeholder="Card type" variant="outlined" size="small" />
             </Box>
           </Grid>
 
           <Grid item xs={12} sm={6} md={4}>
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
               <TypoText title="Card Mode" />
               <Select placeholder="Card type" variant="outlined" size="small" />
             </Box>
           </Grid>
 
           <Grid item xs={12} sm={6} md={4}>
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
               <TypoText title="Card Category" />
               <Select placeholder="Card type" variant="outlined" size="small" />
             </Box>
@@ -333,24 +333,24 @@ const CreateNewCard = () => {
         >
           <Grid item xs={12} sm={6} md={4}>
             <Box
-              sx={{ display: "flex", flexDirection: "column", width: "92%" }}
+              sx={{ display: 'flex', flexDirection: 'column', width: '92%' }}
             >
               <TypoText title="Maximum Card Limit" />
               <TypoText
                 placeholder="Enter maximum card limit"
                 handleChange={handleValueChange}
-                value={"maximumCardLimit"}
+                value={'maximumCardLimit'}
               />
             </Box>
           </Grid>
         </Grid>
       </Box>
 
-      <Box sx={{ marginTop: 3, backgroundColor: "white", padding: 3 }}>
+      <Box sx={{ marginTop: 3, backgroundColor: 'white', padding: 3 }}>
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "flex-start",
+            display: 'flex',
+            justifyContent: 'flex-start',
             gap: 1,
           }}
         >
@@ -360,39 +360,39 @@ const CreateNewCard = () => {
         </Box>
         <Divider />
 
-        <Grid container sx={{ display: "flex", marginTop: 2 }}>
+        <Grid container sx={{ display: 'flex', marginTop: 2 }}>
           <Grid item xs={12} sm={6} md={2}>
-            <Box sx={{ display: "flex" }}>
+            <Box sx={{ display: 'flex' }}>
               <CheckBox />
               <Typography sx={{ paddingTop: 1 }}>Payroll</Typography>
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={2}>
-            <Box sx={{ display: "flex" }}>
+            <Box sx={{ display: 'flex' }}>
               <CheckBox />
               <Typography sx={{ paddingTop: 1 }}>Card For Card</Typography>
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={2}>
-            <Box sx={{ display: "flex" }}>
+            <Box sx={{ display: 'flex' }}>
               <CheckBox />
               <Typography sx={{ paddingTop: 1 }}>CIBIL</Typography>
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={2}>
-            <Box sx={{ display: "flex" }}>
+            <Box sx={{ display: 'flex' }}>
               <CheckBox />
               <Typography sx={{ paddingTop: 1 }}>AQB</Typography>
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={2}>
-            <Box sx={{ display: "flex" }}>
+            <Box sx={{ display: 'flex' }}>
               <CheckBox />
               <Typography sx={{ paddingTop: 1 }}>Pre-Approved</Typography>
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={2}>
-            <Box sx={{ display: "flex" }}>
+            <Box sx={{ display: 'flex' }}>
               <CheckBox />
               <Typography sx={{ paddingTop: 1 }}>Secured</Typography>
             </Box>
@@ -400,11 +400,11 @@ const CreateNewCard = () => {
         </Grid>
       </Box>
 
-      <Box sx={{ marginTop: 3, backgroundColor: "white", padding: 3 }}>
+      <Box sx={{ marginTop: 3, backgroundColor: 'white', padding: 3 }}>
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "flex-start",
+            display: 'flex',
+            justifyContent: 'flex-start',
             gap: 2,
           }}
         >
@@ -416,21 +416,21 @@ const CreateNewCard = () => {
         </Box>
         <Divider />
 
-        <Grid container sx={{ display: "flex", gap: 12, marginTop: 2 }}>
+        <Grid container sx={{ display: 'flex', gap: 12, marginTop: 2 }}>
           <Grid item>
-            <Box sx={{ display: "flex" }}>
+            <Box sx={{ display: 'flex' }}>
               <CheckBox />
               <Typography sx={{ paddingTop: 1 }}>Bank</Typography>
             </Box>
           </Grid>
           <Grid item>
-            <Box sx={{ display: "flex" }}>
+            <Box sx={{ display: 'flex' }}>
               <CheckBox />
               <Typography sx={{ paddingTop: 1 }}>DSA</Typography>
             </Box>
           </Grid>
           <Grid item>
-            <Box sx={{ display: "flex" }}>
+            <Box sx={{ display: 'flex' }}>
               <CheckBox />
               <Typography sx={{ paddingTop: 1 }}>Fintech Partner</Typography>
             </Box>
@@ -438,11 +438,11 @@ const CreateNewCard = () => {
         </Grid>
       </Box>
 
-      <Box sx={{ backgroundColor: "white", marginTop: 3, padding: 3 }}>
+      <Box sx={{ backgroundColor: 'white', marginTop: 3, padding: 3 }}>
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "flex-start",
+            display: 'flex',
+            justifyContent: 'flex-start',
             gap: 1,
           }}
         >
@@ -454,35 +454,35 @@ const CreateNewCard = () => {
 
         <Grid container sx={{ paddingY: 2 }} spacing={5}>
           <Grid item xs={12} sm={6} md={4}>
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
               <TypoText title="CIBIL Score" />
               <TypoText
                 placeholder="CIBIL Score"
                 handleChange={handleValueChange}
-                value={"cibilScore"}
+                value={'cibilScore'}
               />
               {/* <TextField sx={{ width: "350px" }} size="small" placeholder="0" /> */}
             </Box>
           </Grid>
 
           <Grid item xs={12} sm={6} md={4}>
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
               <TypoText title="Salary Limit" />
               <TypoText
                 placeholder="$ 00.00"
                 handleChange={handleValueChange}
-                value={"salaryLimit"}
+                value={'salaryLimit'}
               />
             </Box>
           </Grid>
 
           <Grid item xs={12} sm={6} md={4}>
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
               <TypoText title="ITR Limit" />
               <TypoText
                 placeholder="$ 00.00"
                 handleChange={handleValueChange}
-                value={"itrLimit"}
+                value={'itrLimit'}
               />
               {/* <TextField
                 sx={{ width: "350px" }}
@@ -501,24 +501,24 @@ const CreateNewCard = () => {
         >
           <Grid item xs={12} sm={6} md={4}>
             <Box
-              sx={{ display: "flex", flexDirection: "column", width: "92%" }}
+              sx={{ display: 'flex', flexDirection: 'column', width: '92%' }}
             >
               <TypoText title="C4C Limit" />
               <TypoText
                 placeholder="00.00"
                 handleChange={handleValueChange}
-                value={"c4cLimit"}
+                value={'c4cLimit'}
               />
             </Box>
           </Grid>
         </Grid>
       </Box>
 
-      <Box sx={{ marginTop: 3, backgroundColor: "white", padding: 3 }}>
+      <Box sx={{ marginTop: 3, backgroundColor: 'white', padding: 3 }}>
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "flex-start",
+            display: 'flex',
+            justifyContent: 'flex-start',
             gap: 2,
           }}
         >
@@ -529,29 +529,29 @@ const CreateNewCard = () => {
         <Divider />
 
         <Box sx={{ marginTop: 2 }}>
-          <Box sx={{ display: "flex" }}>
+          <Box sx={{ display: 'flex' }}>
             <CheckBox />
             <Typography sx={{ paddingTop: 1 }}>
               Currency Markup Charges
             </Typography>
           </Box>
-          <Box sx={{ display: "flex" }}>
+          <Box sx={{ display: 'flex' }}>
             <CheckBox />
             <Typography sx={{ paddingTop: 1 }}>Airmiles</Typography>
           </Box>
-          <Box sx={{ display: "flex" }}>
+          <Box sx={{ display: 'flex' }}>
             <CheckBox />
             <Typography sx={{ paddingTop: 1 }}>Cashbacks</Typography>
           </Box>
         </Box>
       </Box>
 
-      <Box sx={{ backgroundColor: "white", marginTop: 3, padding: 3 }}>
-        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+      <Box sx={{ backgroundColor: 'white', marginTop: 3, padding: 3 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Box
             sx={{
-              display: "flex",
-              justifyContent: "flex-start",
+              display: 'flex',
+              justifyContent: 'flex-start',
               gap: 2,
             }}
           >
@@ -559,10 +559,10 @@ const CreateNewCard = () => {
             <InfoIcon />
             <TypographyInfo title="From here you can add fee wavier details" />
           </Box>
-          <Box sx={{ display: "flex" }}>
+          <Box sx={{ display: 'flex' }}>
             <Button color="secondary">
               <ControlPointIcon />
-              <Typography sx={{ textTransform: "capitalize" }}>
+              <Typography sx={{ textTransform: 'capitalize' }}>
                 Add Additional Benefits
               </Typography>
             </Button>
@@ -571,26 +571,26 @@ const CreateNewCard = () => {
         <Divider />
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "flex-start",
-            padding: "10px 0",
+            display: 'flex',
+            justifyContent: 'flex-start',
+            padding: '10px 0',
           }}
         >
           <TypoText title="Joining Fee " />
           <TypoText
             title=" (optional)"
-            style={{ marginLeft: "3px", color: "grey" }}
+            style={{ marginLeft: '3px', color: 'grey' }}
           />
         </Box>
 
         <Grid container sx={{ paddingY: 2 }} spacing={5}>
           <Grid item xs={12} sm={6} md={4}>
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
               <TypoText title="Joining Fee" />
               <TypoText
                 placeholder="$ 00.00"
                 handleChange={handleValueChange}
-                value={"joiningFee"}
+                value={'joiningFee'}
               />
               {/* <TextField
                 sx={{ width: "350px" }}
@@ -599,8 +599,8 @@ const CreateNewCard = () => {
               /> */}
               <Typography
                 sx={{
-                  display: "flex",
-                  justifyContent: "flex-end",
+                  display: 'flex',
+                  justifyContent: 'flex-end',
                   fontSize: 13,
                   marginTop: 1,
                 }}
@@ -610,12 +610,12 @@ const CreateNewCard = () => {
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
               <TypoText title="Joining Fee Wavier SpendLimit" />
               <TypoText
                 placeholder="$ 00.00"
                 handleChange={handleValueChange}
-                value={"joiningFeeWavier"}
+                value={'joiningFeeWavier'}
               />
               {/* <TextField
                 sx={{ width: "350px" }}
@@ -625,22 +625,22 @@ const CreateNewCard = () => {
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
               <TypoText title="Select Period" />
               <Select
                 placeholder="choose period"
-                sx={{ height: "40px" }}
+                sx={{ height: '40px' }}
               ></Select>
             </Box>
           </Grid>
         </Grid>
 
-        <Box sx={{ display: "flex", flexDirection: "column" }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
           <TypoText title="Joining Fee Description" />
           <Box
             sx={{
               // width: 1200,
-              width: "100%",
+              width: '100%',
             }}
           >
             <TypoText placeholder="Enter Joining Fee Description" />
@@ -649,32 +649,32 @@ const CreateNewCard = () => {
 
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "flex-start",
-            padding: "15px 0 20px 0",
-            marginTop: "20px",
+            display: 'flex',
+            justifyContent: 'flex-start',
+            padding: '15px 0 20px 0',
+            marginTop: '20px',
           }}
         >
           <TypoText title="Annual Fee " />
           <TypoText
             title=" (optional)"
-            style={{ marginLeft: "3px", color: "grey" }}
+            style={{ marginLeft: '3px', color: 'grey' }}
           />
         </Box>
 
         <Grid container spacing={5}>
           <Grid item xs={12} sm={6} md={4}>
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
               <TypoText title="Enter Annual Fee" />
               <TypoText
                 placeholder="Enter Currency Markup Charges (in %)"
                 handleChange={handleValueChange}
-                value={"annualFee"}
+                value={'annualFee'}
               />
               <Typography
                 sx={{
-                  display: "flex",
-                  justifyContent: "flex-end",
+                  display: 'flex',
+                  justifyContent: 'flex-end',
                   fontSize: 13,
                   marginTop: 1,
                 }}
@@ -684,19 +684,19 @@ const CreateNewCard = () => {
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
               <TypoText title=" Annual Fee Wavier SpendLimit" />
               <TypoText
                 placeholder="$ 00.00"
                 handleChange={handleValueChange}
-                value={"annualFeeWavier"}
+                value={'annualFeeWavier'}
               />
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
               <TypoText title="Select Period" />
-              <Select placeholder="choose category" sx={{ height: "40px" }}>
+              <Select placeholder="choose category" sx={{ height: '40px' }}>
                 {/* <MenuItem value={10}>Ten</MenuItem>
                 <MenuItem value={20}>Twenty</MenuItem>
                 <MenuItem value={30}>Thirty</MenuItem> */}
@@ -704,50 +704,50 @@ const CreateNewCard = () => {
             </Box>
           </Grid>
         </Grid>
-        <Box sx={{ display: "flex", flexDirection: "column", marginTop: 1 }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', marginTop: 1 }}>
           <TypoText title="Currency Markup Description" />
           <Box
             sx={{
               // width: 1200,
-              maxWidth: "100%",
+              maxWidth: '100%',
             }}
           >
             <TypoText
               placeholder="Enter Currency Markup Charges (in %)"
               handleChange={handleValueChange}
-              value={"currencyMarkup"}
+              value={'currencyMarkup'}
             />
           </Box>
         </Box>
 
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "flex-start",
-            padding: "15px 0 20px 0",
-            marginTop: "20px",
+            display: 'flex',
+            justifyContent: 'flex-start',
+            padding: '15px 0 20px 0',
+            marginTop: '20px',
           }}
         >
           <TypoText title="Fuel Surcharge" />
           <TypoText
             title=" (optional)"
-            style={{ marginLeft: "3px", color: "grey" }}
+            style={{ marginLeft: '3px', color: 'grey' }}
           />
         </Box>
 
         <Grid container spacing={5}>
           <Grid item xs={12} sm={6} md={4}>
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
               <TypoText title="Fuel Surcharge (in %)" />
               <TypoText
                 placeholder="Enter fuel surcharge in %"
                 handleChange={handleValueChange}
-                value={"fuelSurcharge"}
+                value={'fuelSurcharge'}
               />
               <Typography
                 sx={{
-                  display: "flex",
-                  justifyContent: "flex-end",
+                  display: 'flex',
+                  justifyContent: 'flex-end',
                   fontSize: 13,
                   marginTop: 1,
                 }}
@@ -757,19 +757,19 @@ const CreateNewCard = () => {
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
               <TypoText title="Fuel Surcharge Wavier Spend Limit" />
               <TypoText
                 placeholder="$ 00.00"
                 handleChange={handleValueChange}
-                value={"fuelSurchargeWavier"}
+                value={'fuelSurchargeWavier'}
               />
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
               <TypoText title="Select Period" />
-              <Select placeholder="choose category" sx={{ height: "40px" }}>
+              <Select placeholder="choose category" sx={{ height: '40px' }}>
                 {/* <MenuItem value={10}>Ten</MenuItem>
                 <MenuItem value={20}>Twenty</MenuItem>
                 <MenuItem value={30}>Thirty</MenuItem> */}
@@ -778,28 +778,28 @@ const CreateNewCard = () => {
           </Grid>
         </Grid>
 
-        <Box sx={{ display: "flex", flexDirection: "column", marginTop: 1 }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', marginTop: 1 }}>
           <TypoText title="Fuel Surcharge Description" />
           <Box
             sx={{
-              width: "100%",
+              width: '100%',
             }}
           >
             <TypoText
               placeholder="Enter Fuel Surcharge Description"
               handleChange={handleValueChange}
-              value={"fuelSurchargeDescription"}
+              value={'fuelSurchargeDescription'}
             />
           </Box>
         </Box>
       </Box>
 
-      <Box sx={{ backgroundColor: "white", marginTop: 3, padding: 4 }}>
-        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+      <Box sx={{ backgroundColor: 'white', marginTop: 3, padding: 4 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Box
             sx={{
-              display: "flex",
-              justifyContent: "flex-start",
+              display: 'flex',
+              justifyContent: 'flex-start',
               gap: 2,
             }}
           >
@@ -807,10 +807,10 @@ const CreateNewCard = () => {
             <InfoIcon />
             <TypographyInfo title="Add your reward contents here" />
           </Box>
-          <Box sx={{ display: "flex" }}>
+          <Box sx={{ display: 'flex' }}>
             <Button color="secondary" onClick={AddRewardList}>
               <ControlPointIcon />
-              <Typography sx={{ textTransform: "capitalize" }}>
+              <Typography sx={{ textTransform: 'capitalize' }}>
                 Add description
               </Typography>
             </Button>
@@ -823,13 +823,13 @@ const CreateNewCard = () => {
               <TypoText title={`Reward Description ${index + 1} `} />
               <Box
                 sx={{
-                  width: "100%",
+                  width: '100%',
                 }}
               >
                 <TypoText
                   placeholder="Enter Description for the Rewards"
                   handleChange={handleValueChange}
-                  value={"rewardDescription"}
+                  value={'rewardDescription'}
                 />
               </Box>
             </Box>
@@ -837,12 +837,12 @@ const CreateNewCard = () => {
         })}
       </Box>
 
-      <Box sx={{ backgroundColor: "white", marginTop: 3, padding: 4 }}>
-        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+      <Box sx={{ backgroundColor: 'white', marginTop: 3, padding: 4 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Box
             sx={{
-              display: "flex",
-              justifyContent: "flex-start",
+              display: 'flex',
+              justifyContent: 'flex-start',
               gap: 2,
             }}
           >
@@ -850,10 +850,10 @@ const CreateNewCard = () => {
             <InfoIcon />
             <TypographyInfo title="Add your key benifits from here" />
           </Box>
-          <Box sx={{ display: "flex" }}>
+          <Box sx={{ display: 'flex' }}>
             <Button color="secondary" onClick={AddKeyList}>
               <ControlPointIcon />
-              <Typography sx={{ textTransform: "capitalize" }}>
+              <Typography sx={{ textTransform: 'capitalize' }}>
                 Add description
               </Typography>
             </Button>
@@ -866,13 +866,13 @@ const CreateNewCard = () => {
               <TypoText title={`Key Benefits Description ${index + 1}`} />
               <Box
                 sx={{
-                  width: "100%",
+                  width: '100%',
                 }}
               >
                 <TypoText
                   placeholder="Enter Description for the key benefits "
                   handleChange={handleValueChange}
-                  value={"keyBenefits"}
+                  value={'keyBenefits'}
                 />
               </Box>
             </Box>
@@ -880,12 +880,12 @@ const CreateNewCard = () => {
         })}
       </Box>
 
-      <Box sx={{ backgroundColor: "white", marginTop: 3, padding: 4 }}>
-        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+      <Box sx={{ backgroundColor: 'white', marginTop: 3, padding: 4 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Box
             sx={{
-              display: "flex",
-              justifyContent: "flex-start",
+              display: 'flex',
+              justifyContent: 'flex-start',
               gap: 2,
             }}
           >
@@ -893,10 +893,10 @@ const CreateNewCard = () => {
             <InfoIcon />
             <TypographyInfo title="Add your additional benifits here" />
           </Box>
-          <Box sx={{ display: "flex" }}>
+          <Box sx={{ display: 'flex' }}>
             <Button color="secondary" onClick={AddAdditionalList}>
               <ControlPointIcon />
-              <Typography sx={{ textTransform: "capitalize" }}>
+              <Typography sx={{ textTransform: 'capitalize' }}>
                 Add description
               </Typography>
             </Button>
@@ -908,25 +908,25 @@ const CreateNewCard = () => {
             <TypoText title={`Additional Benefits Description ${index + 1}`} />
             <Box
               sx={{
-                width: "100%",
+                width: '100%',
               }}
             >
               <TypoText
                 placeholder="Enter Description for the Additional benefits"
                 handleChange={handleValueChange}
-                value={"additionalBenefits"}
+                value={'additionalBenefits'}
               />
             </Box>
           </Box>
         ))}
       </Box>
 
-      <Box sx={{ backgroundColor: "white", marginTop: 3, padding: 4 }}>
-        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+      <Box sx={{ backgroundColor: 'white', marginTop: 3, padding: 4 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Box
             sx={{
-              display: "flex",
-              justifyContent: "flex-start",
+              display: 'flex',
+              justifyContent: 'flex-start',
               gap: 2,
             }}
           >
@@ -934,10 +934,10 @@ const CreateNewCard = () => {
             <InfoIcon />
             <TypographyInfo title="Add your additional benifits here" />
           </Box>
-          <Box sx={{ display: "flex" }}>
+          <Box sx={{ display: 'flex' }}>
             <Button color="secondary" onClick={AddWelcomeList}>
               <ControlPointIcon />
-              <Typography sx={{ textTransform: "capitalize" }}>
+              <Typography sx={{ textTransform: 'capitalize' }}>
                 Add Description
               </Typography>
             </Button>
@@ -951,13 +951,13 @@ const CreateNewCard = () => {
               <TypoText title={`Welcome Benefits Description ${index + 1}`} />
               <Box
                 sx={{
-                  width: "100%",
+                  width: '100%',
                 }}
               >
                 <TypoText
                   placeholder="Enter Description for the welcome benefits "
                   handleChange={handleValueChange}
-                  value={"welcomeBenefits"}
+                  value={'welcomeBenefits'}
                 />
               </Box>
             </Box>
@@ -967,16 +967,16 @@ const CreateNewCard = () => {
 
       <Box
         sx={{
-          backgroundColor: "white",
+          backgroundColor: 'white',
           marginTop: 3,
           padding: 4,
-          position: "fixed",
+          position: 'fixed',
           bottom: 0,
           right: 0,
-          width: "100%",
+          width: '100%',
         }}
       >
-        <Box sx={{ display: "flex", justifyContent: "flex-end", gap: 2 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 2 }}>
           <BtnOutlined title="close" />
 
           <BtnText title="Save as draft" />

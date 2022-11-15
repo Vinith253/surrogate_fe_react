@@ -3,9 +3,9 @@ import {
   JSXElementConstructor,
   ReactFragment,
   ReactPortal,
-} from "react";
-import "./card.scss";
-import ApprovalRate from "../../../../assets/icons/approval_rate_icon.svg";
+} from 'react';
+import './card.scss';
+import ApprovalRate from '../../../../assets/icons/approval_rate_icon.svg';
 
 function DashboardCard(props: {
   title:
@@ -42,7 +42,7 @@ function DashboardCard(props: {
       </div>
       {props.more && (
         <div className="lower-div">
-          <li onClick={() => console.log("more clicked")} className="more-text">
+          <li onClick={() => console.log('more clicked')} className="more-text">
             More
           </li>
         </div>

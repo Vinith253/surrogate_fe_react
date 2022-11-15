@@ -4,36 +4,36 @@ import {
   LinearProgress,
   LinearProgressProps,
   Typography,
-} from "@mui/material";
-import React, { useEffect, useState } from "react";
-import DragDrop from "../../../../../components/commonComponent/dragDrop/DragDrop";
-import PageLayout from "../../../../../components/layout/pageLayout/pageLayout";
-import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
+} from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import DragDrop from '../../../../../components/commonComponent/dragDrop/DragDrop';
+import PageLayout from '../../../../../components/layout/pageLayout/pageLayout';
+import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 
 function LinearProgressWithLabel(
   props: LinearProgressProps & { value: number }
 ) {
   return (
     <Box>
-      <Box sx={{ width: "100%", margin: "0.8rem 0" }}>
+      <Box sx={{ width: '100%', margin: '0.8rem 0' }}>
         <LinearProgress
           variant="determinate"
           {...props}
           sx={{
-            "& .MuiLinearProgress-bar1Determinate": {
-              backgroundColor: "green",
+            '& .MuiLinearProgress-bar1Determinate': {
+              backgroundColor: 'green',
             },
-            backgroundColor: "rgb(167 237 194)",
-            borderRadius: "10px",
-            height: "8px",
+            backgroundColor: 'rgb(167 237 194)',
+            borderRadius: '10px',
+            height: '8px',
           }}
         />
       </Box>
       <Box
         sx={{
           minWidth: 35,
-          display: "flex",
-          justifyContent: "flex-end",
+          display: 'flex',
+          justifyContent: 'flex-end',
           mt: 2,
         }}
       >
@@ -53,7 +53,7 @@ const UploadCard = ({ toggle, data, correction }: any) => {
         setProgress((oldProgress) => {
           if (oldProgress === 100) {
             toggle(true);
-            if (data.title === "Correction File") {
+            if (data.title === 'Correction File') {
               correction();
             }
           }
@@ -75,18 +75,18 @@ const UploadCard = ({ toggle, data, correction }: any) => {
 
   return (
     <PageLayout>
-      <Box sx={{ backgroundColor: "white" }}>
+      <Box sx={{ backgroundColor: 'white' }}>
         <Typography
           variant="h2"
-          sx={{ fontSize: "1.2rem", fontWeight: "bold" }}
+          sx={{ fontSize: '1.2rem', fontWeight: 'bold' }}
         >
           {data.title}
         </Typography>
         <Typography
           sx={{
-            margin: "1% 0",
-            fontWeight: "bold",
-            color: progress > 0 ? "#D3D3D3" : "",
+            margin: '1% 0',
+            fontWeight: 'bold',
+            color: progress > 0 ? '#D3D3D3' : '',
           }}
         >
           {data.para}
@@ -97,8 +97,8 @@ const UploadCard = ({ toggle, data, correction }: any) => {
           disabled={progress > 0 ? true : false}
           startIcon={
             <FileDownloadOutlinedIcon
-              color={progress > 0 ? "disabled" : "secondary"}
-              sx={{ fontSize: "1.5rem !important" }}
+              color={progress > 0 ? 'disabled' : 'secondary'}
+              sx={{ fontSize: '1.5rem !important' }}
             />
           }
         >

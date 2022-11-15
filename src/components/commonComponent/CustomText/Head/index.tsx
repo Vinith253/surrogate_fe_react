@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   Stack,
   Box,
@@ -8,18 +8,18 @@ import {
   FormControl,
   Select,
   MenuItem,
-} from "@mui/material";
+} from '@mui/material';
 
 const TypographyHead = (props: any) => {
-  console.log("title", props);
+  console.log('title', props);
   return (
     <Typography
       sx={{
         margin: 0,
-        fontSize: "16px",
-        fontWeight: "500",
-        display: "flex",
-        justifyContent: "flex-start",
+        fontSize: '16px',
+        fontWeight: '500',
+        display: 'flex',
+        justifyContent: 'flex-start',
       }}
       style={props.style}
       variant="body1"

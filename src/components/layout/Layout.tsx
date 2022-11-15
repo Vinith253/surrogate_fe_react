@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Box,
   // MuiDrawer,
@@ -10,123 +10,123 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-} from "@mui/material";
-import { flexbox } from "@mui/system";
-import { Link, Outlet } from "react-router-dom";
+} from '@mui/material';
+import { flexbox } from '@mui/system';
+import { Link, Outlet } from 'react-router-dom';
 
-import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
+import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
 // import Box from "@mui/material/Box";
-import MuiDrawer from "@mui/material/Drawer";
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
-import CssBaseline from "@mui/material/CssBaseline";
-import Typography from "@mui/material/Typography";
-import YesBank from "../../assets/images/bank_axis_logo.svg";
-import Home from "../../assets/icons/home_icon.svg";
-import drop_up_arrow_icon from "../../assets/icons/drop_up_arrow_icon.svg";
-import drop_down_arrow_icon from "../../assets/icons/drop_down_arrow_icon.svg";
-import access_library from "../../assets/icons/access_library.svg";
-import dashboard_icon from "../../assets/icons/dashboard_icon.svg";
-import credit_rule_icon from "../../assets/icons/credit_rule_icon.svg";
-import card_catalogue_icon from "../../assets/icons/card_catalogue_icon.svg";
-import apply_credit_card_icon from "../../assets/icons/apply_credit_card_icon.svg";
-import collape_icon from "../../assets/icons/collape_icon.svg";
-import sales_icon from "../../assets/icons/sales_icon.svg";
-import user_managemen_icon from "../../assets/icons/user_managemen_icon.svg";
-import risk_management_icon from "../../assets/icons/risk_management_icon.svg";
-import lms_icon from "../../assets/icons/lms_icon.svg";
-import product_management_icon from "../../assets/icons/product_management_icon.svg";
-import programme_management_icon from "../../assets/icons/programme_management_icon.svg";
-import profile_icon from "../../assets/icons/profile_icon.svg";
-import profile_arrow_icon from "../../assets/icons/profile_arrow_icon.svg";
-import Collapse from "@mui/material/Collapse";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
+import MuiDrawer from '@mui/material/Drawer';
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import List from '@mui/material/List';
+import CssBaseline from '@mui/material/CssBaseline';
+import Typography from '@mui/material/Typography';
+import YesBank from '../../assets/images/bank_axis_logo.svg';
+import Home from '../../assets/icons/home_icon.svg';
+import drop_up_arrow_icon from '../../assets/icons/drop_up_arrow_icon.svg';
+import drop_down_arrow_icon from '../../assets/icons/drop_down_arrow_icon.svg';
+import access_library from '../../assets/icons/access_library.svg';
+import dashboard_icon from '../../assets/icons/dashboard_icon.svg';
+import credit_rule_icon from '../../assets/icons/credit_rule_icon.svg';
+import card_catalogue_icon from '../../assets/icons/card_catalogue_icon.svg';
+import apply_credit_card_icon from '../../assets/icons/apply_credit_card_icon.svg';
+import collape_icon from '../../assets/icons/collape_icon.svg';
+import sales_icon from '../../assets/icons/sales_icon.svg';
+import user_managemen_icon from '../../assets/icons/user_managemen_icon.svg';
+import risk_management_icon from '../../assets/icons/risk_management_icon.svg';
+import lms_icon from '../../assets/icons/lms_icon.svg';
+import product_management_icon from '../../assets/icons/product_management_icon.svg';
+import programme_management_icon from '../../assets/icons/programme_management_icon.svg';
+import profile_icon from '../../assets/icons/profile_icon.svg';
+import profile_arrow_icon from '../../assets/icons/profile_arrow_icon.svg';
+import Collapse from '@mui/material/Collapse';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 const drawerWidth = 260;
 
 const sideBarOptions = [
-  { key: 1, content: "HOME", path: "/", image: Home, subContent: [] },
+  { key: 1, content: 'HOME', path: '/', image: Home, subContent: [] },
   {
     key: 2,
-    content: "DASHBOARD",
-    path: "/dashboard",
+    content: 'DASHBOARD',
+    path: '/dashboard',
     image: dashboard_icon,
     subContent: [],
   },
   {
     key: 3,
-    content: "PRODUCT MNGMT.",
-    path: "/productManagement",
+    content: 'PRODUCT MNGMT.',
+    path: '/productManagement',
     image: product_management_icon,
     subContent: [
       {
-        data: "Programme Mngmt.",
-        path: "/productManagement/programmeManagement",
+        data: 'Programme Mngmt.',
+        path: '/productManagement/programmeManagement',
         img: programme_management_icon,
       },
       {
-        data: "Credit Rule",
-        path: "/productManagement/creditRule",
+        data: 'Credit Rule',
+        path: '/productManagement/creditRule',
         img: credit_rule_icon,
       },
       {
-        data: "Card Catalogue",
-        path: "/productManagement/cardCatalogue",
+        data: 'Card Catalogue',
+        path: '/productManagement/cardCatalogue',
         img: card_catalogue_icon,
       },
     ],
   },
   {
     key: 4,
-    content: "SALES",
-    path: "/sales",
+    content: 'SALES',
+    path: '/sales',
     image: sales_icon,
     subContent: [
       {
-        data: "Dashboard",
-        path: "/sales/salesDashboard",
+        data: 'Dashboard',
+        path: '/sales/salesDashboard',
         img: programme_management_icon,
       },
       {
-        data: "Sales Report",
-        path: "/productManagement/creditRule",
+        data: 'Sales Report',
+        path: '/productManagement/creditRule',
         img: credit_rule_icon,
       },
       {
-        data: "Performance Report",
-        path: "/productManagement/performanceReport",
+        data: 'Performance Report',
+        path: '/productManagement/performanceReport',
         img: card_catalogue_icon,
       },
     ],
   },
   {
     key: 5,
-    content: "APPLY CREDIT CARD",
-    path: "/applyCreditCard",
+    content: 'APPLY CREDIT CARD',
+    path: '/applyCreditCard',
     image: apply_credit_card_icon,
     subContent: [],
   },
   {
     key: 6,
-    content: "USER MNGMT.",
-    path: "/userManagement",
+    content: 'USER MNGMT.',
+    path: '/userManagement',
     image: user_managemen_icon,
     subContent: [],
   },
-  { key: 7, content: "LMS", path: "/lms", image: lms_icon, subContent: [] },
+  { key: 7, content: 'LMS', path: '/lms', image: lms_icon, subContent: [] },
   {
     key: 8,
-    content: "RISK MNGMT.",
-    path: "/risktManagement",
+    content: 'RISK MNGMT.',
+    path: '/risktManagement',
     image: risk_management_icon,
     subContent: [],
   },
   {
     key: 9,
-    content: "ACCESS LIBRARY",
-    path: "/accessLibrary",
+    content: 'ACCESS LIBRARY',
+    path: '/accessLibrary',
     image: access_library,
     subContent: [],
   },
@@ -134,34 +134,34 @@ const sideBarOptions = [
 
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
-  transition: theme.transitions.create("width", {
+  transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
   }),
   // overflowX: "hidden",
-  overflow: "unset",
-  backgroundColor: "black",
-  color: "white",
+  overflow: 'unset',
+  backgroundColor: 'black',
+  color: 'white',
 });
 
 const closedMixin = (theme: Theme): CSSObject => ({
-  transition: theme.transitions.create("width", {
+  transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
-  overflow: "unset",
+  overflow: 'unset',
   width: `calc(${theme.spacing(7)} + 1px)`,
-  [theme.breakpoints.up("sm")]: {
+  [theme.breakpoints.up('sm')]: {
     width: `calc(${theme.spacing(8)} + 1px)`,
   },
-  backgroundColor: "black",
-  color: "white",
+  backgroundColor: 'black',
+  color: 'white',
 });
 
-const DrawerHeader = styled("div")(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "flex-start",
+const DrawerHeader = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-start',
   padding: theme.spacing(0, 1),
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
@@ -172,22 +172,22 @@ interface AppBarProps extends MuiAppBarProps {
 }
 
 const Drawer = styled(MuiDrawer, {
-  shouldForwardProp: (prop) => prop !== "open",
+  shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
   width: drawerWidth,
   flexShrink: 0,
-  whiteSpace: "nowrap",
-  boxSizing: "border-box",
-  "& .MuiDivider-root": { borderColor: "grey" },
-  "& .MuiListItemIcon-root": { minWidth: "unset", marginLeft: "4px" },
-  "& .MuiButtonBase-root-MuiListItemButton-root ": { padding: "0 1.5rem" },
+  whiteSpace: 'nowrap',
+  boxSizing: 'border-box',
+  '& .MuiDivider-root': { borderColor: 'grey' },
+  '& .MuiListItemIcon-root': { minWidth: 'unset', marginLeft: '4px' },
+  '& .MuiButtonBase-root-MuiListItemButton-root ': { padding: '0 1.5rem' },
   ...(open && {
     ...openedMixin(theme),
-    "& .MuiDrawer-paper": openedMixin(theme),
+    '& .MuiDrawer-paper': openedMixin(theme),
   }),
   ...(!open && {
     ...closedMixin(theme),
-    "& .MuiDrawer-paper": closedMixin(theme),
+    '& .MuiDrawer-paper': closedMixin(theme),
   }),
 }));
 
@@ -216,8 +216,8 @@ export default function Layout() {
   };
   const handleClick = (id: number) => {
     setOpenIndex(id);
-    console.log("checkIndex", checkIndex);
-    console.log("id", id);
+    console.log('checkIndex', checkIndex);
+    console.log('id', id);
     if (checkIndex === id) {
       setOpenList(!openList);
     } else {
@@ -225,30 +225,30 @@ export default function Layout() {
     }
   };
   const listStyle = {
-    display: "block",
+    display: 'block',
   };
   // const handleClose = () => {};
   return (
     <main>
       <Box
         sx={{
-          display: "flex",
+          display: 'flex',
         }}
       >
         <Drawer variant="permanent" open={open}>
-          <DrawerHeader sx={{ height: "10vh" }}>
-            <IconButton sx={{ display: !open ? "none" : "block" }}>
+          <DrawerHeader sx={{ height: '10vh' }}>
+            <IconButton sx={{ display: !open ? 'none' : 'block' }}>
               <img src={YesBank} />
             </IconButton>
             <IconButton onClick={handleDrawerClose}>
               <img
-                src={theme.direction === "rtl" ? collape_icon : collape_icon}
+                src={theme.direction === 'rtl' ? collape_icon : collape_icon}
                 style={{
                   // marginTop: "10px",
-                  position: "absolute",
-                  top: "35px",
+                  position: 'absolute',
+                  top: '35px',
                   zIndex: 999999,
-                  right: open ? "-104px" : "-50px",
+                  right: open ? '-104px' : '-50px',
                 }}
               />
             </IconButton>
@@ -267,15 +267,15 @@ export default function Layout() {
                     <ListItemButton
                       sx={{
                         minHeight: 48,
-                        justifyContent: open ? "initial" : "center",
+                        justifyContent: open ? 'initial' : 'center',
                         px: 2.5,
                       }}
                     >
                       <ListItemIcon
                         sx={{
                           minWidth: 0,
-                          mr: open ? 3 : "auto",
-                          justifyContent: "center",
+                          mr: open ? 3 : 'auto',
+                          justifyContent: 'center',
                         }}
                       >
                         <img src={text.image} />
@@ -284,8 +284,8 @@ export default function Layout() {
                         primary={text.content}
                         sx={{
                           opacity: open ? 1 : 0,
-                          padding: "0 0.5rem",
-                          color: "white",
+                          padding: '0 0.5rem',
+                          color: 'white',
                         }}
                       />
                     </ListItemButton>
@@ -305,8 +305,8 @@ export default function Layout() {
                         primary={text.content}
                         sx={{
                           opacity: open ? 1 : 0,
-                          paddingLeft: "30px",
-                          color: "white",
+                          paddingLeft: '30px',
+                          color: 'white',
                         }}
                       />
                       {open && (
@@ -334,9 +334,9 @@ export default function Layout() {
                                   <ListItemText
                                     primary={subData.data}
                                     sx={{
-                                      paddingLeft: "8px",
+                                      paddingLeft: '8px',
                                       opacity: open ? 1 : 0,
-                                      color: "white",
+                                      color: 'white',
                                     }}
                                   />
                                 </ListItemButton>
@@ -354,40 +354,40 @@ export default function Layout() {
 
         <Box
           sx={{
-            width: "100%",
-            height: "100vh",
+            width: '100%',
+            height: '100vh',
             // borderBottom: "2px solid"
           }}
         >
           <Box
             sx={{
-              width: "100%",
-              height: "10vh",
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-              padding: "0 20px",
-              borderBottom: "1px solid",
-              boxShadow: "0 0 15px #aaaaaa",
-              backgroundColor: "white",
+              width: '100%',
+              height: '10vh',
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: '0 20px',
+              borderBottom: '1px solid',
+              boxShadow: '0 0 15px #aaaaaa',
+              backgroundColor: 'white',
             }}
           >
-            <Typography variant="h5" sx={{ letterSpacing: "0.2px" }}>
+            <Typography variant="h5" sx={{ letterSpacing: '0.2px' }}>
               Surrogate Programme
             </Typography>
 
             <Box
               sx={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                padding: "0 20px",
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                padding: '0 20px',
                 // borderBottom
                 // borderColor: "success.light"
               }}
             >
-              <Box style={{ marginRight: "40px" }}>
+              <Box style={{ marginRight: '40px' }}>
                 <Typography>Ashwin Kumar</Typography>
                 <Typography>Surrogate Manager</Typography>
               </Box>
@@ -409,14 +409,14 @@ export default function Layout() {
 
                   width: 45,
                 }}
-                aria-controls={openMenu ? "basic-menu" : undefined}
+                aria-controls={openMenu ? 'basic-menu' : undefined}
                 aria-haspopup="true"
-                aria-expanded={openMenu ? "true" : undefined}
+                aria-expanded={openMenu ? 'true' : undefined}
                 onClick={handleMenuClick}
               >
                 <img src={profile_icon} />
 
-                <img src={profile_arrow_icon} style={{ padding: "0 10px" }} />
+                <img src={profile_arrow_icon} style={{ padding: '0 10px' }} />
               </IconButton>
 
               <Menu
@@ -425,7 +425,7 @@ export default function Layout() {
                 open={openMenu}
                 onClose={handleClose}
                 MenuListProps={{
-                  "aria-labelledby": "basic-button",
+                  'aria-labelledby': 'basic-button',
                 }}
               >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
@@ -435,8 +435,8 @@ export default function Layout() {
           </Box>
           <Box
             sx={{
-              width: "100%",
-              height: "90vh",
+              width: '100%',
+              height: '90vh',
             }}
           >
             <Outlet />

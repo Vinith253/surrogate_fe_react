@@ -1,11 +1,11 @@
-import React, { HTMLInputTypeAttribute } from "react";
-import { useRef, useState } from "react";
-import InsertDriveFileOutlinedIcon from "@mui/icons-material/InsertDriveFileOutlined";
-import FileUploadOutlinedIcon from "@mui/icons-material/FileUploadOutlined";
-import "./DragDrop.scss";
-import { bulkUpload } from "../../../utils/Constants";
-import { Box, Button, ButtonProps, styled, Typography } from "@mui/material";
-import { toggleFunctionType } from "../../../interface/Types";
+import React, { HTMLInputTypeAttribute } from 'react';
+import { useRef, useState } from 'react';
+import InsertDriveFileOutlinedIcon from '@mui/icons-material/InsertDriveFileOutlined';
+import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
+import './DragDrop.scss';
+import { bulkUpload } from '../../../utils/Constants';
+import { Box, Button, ButtonProps, styled, Typography } from '@mui/material';
+import { toggleFunctionType } from '../../../interface/Types';
 
 const DragDrop = ({ progress, progressValue, buttonText }: any) => {
   const inputRef = useRef<any>();
@@ -16,20 +16,20 @@ const DragDrop = ({ progress, progressValue, buttonText }: any) => {
   const handleDrag = function (e: any) {
     e.preventDefault();
     e.stopPropagation();
-    console.log("enter");
-    if (e.type === "dragenter" || e.type === "dragover") {
+    console.log('enter');
+    if (e.type === 'dragenter' || e.type === 'dragover') {
       setDragActive(true);
-    } else if (e.type === "dragleave") {
+    } else if (e.type === 'dragleave') {
       setDragActive(false);
     }
   };
   const handleDrop = function (e: any) {
     e.preventDefault();
     e.stopPropagation();
-    console.log("drop");
+    console.log('drop');
     setDragActive(false);
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      console.log(e.dataTransfer.files[0], "e.dataTransfer.files");
+      console.log(e.dataTransfer.files[0], 'e.dataTransfer.files');
       // at least one file has been dropped so do something
       // handleFiles(e.dataTransfer.files);
     }
@@ -38,7 +38,7 @@ const DragDrop = ({ progress, progressValue, buttonText }: any) => {
   const handleChange = function (e: any) {
     e.preventDefault();
     if (e.target.files && e.target.files[0]) {
-      console.log("success", e.target.files);
+      console.log('success', e.target.files);
       progress(1);
       // at least one file has been selected so do something
       // handleFiles(e.target.files);
@@ -48,17 +48,17 @@ const DragDrop = ({ progress, progressValue, buttonText }: any) => {
     inputRef?.current?.click();
   };
   const uploadStyle = {
-    "&:hover": "unset",
-    backgroundColor: "black",
-    fontSize: "0.8rem",
+    '&:hover': 'unset',
+    backgroundColor: 'black',
+    fontSize: '0.8rem',
   };
   const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
-    backgroundColor: "black",
-    "&:hover": {
-      backgroundColor: "black",
+    backgroundColor: 'black',
+    '&:hover': {
+      backgroundColor: 'black',
     },
-    marginTop: "4%",
-    fontSize: "0.2rem",
+    marginTop: '4%',
+    fontSize: '0.2rem',
   }));
   return (
     <form
@@ -78,27 +78,27 @@ const DragDrop = ({ progress, progressValue, buttonText }: any) => {
         id="label-file-upload"
         htmlFor="input-file-upload"
         style={{
-          backgroundColor: progressValue === 100 ? "#F1F9F3" : "",
+          backgroundColor: progressValue === 100 ? '#F1F9F3' : '',
         }}
       >
         <Box>
           <Box>
             <InsertDriveFileOutlinedIcon
-              sx={{ fontSize: "4rem" }}
-              color={progressValue === 100 ? "success" : "inherit"}
+              sx={{ fontSize: '4rem' }}
+              color={progressValue === 100 ? 'success' : 'inherit'}
             />
           </Box>
 
-          <Typography sx={{ fontSize: "1.5rem", fontWeight: "bold" }}>
+          <Typography sx={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
             {bulkUpload.DRAG_AND_DROP}
           </Typography>
-          <Typography sx={{ fontSize: "1" }}>
+          <Typography sx={{ fontSize: '1' }}>
             {bulkUpload.SUPPORTED_FORMATS}
           </Typography>
           <ColorButton
             variant="contained"
             startIcon={
-              <FileUploadOutlinedIcon sx={{ fontSize: "1.5rem !important" }} />
+              <FileUploadOutlinedIcon sx={{ fontSize: '1.5rem !important' }} />
             }
             className="upload-button"
             onClick={onButtonClick}

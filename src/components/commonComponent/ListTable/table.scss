@@ -1,8 +1,8 @@
 .table-div {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
 }
 
 .outer-filter-box {
@@ -74,18 +74,38 @@
     border-radius: 3px;
   }
 
-  .recent-data-text {
-    font-size: 14px;
-    color: black;
-    font-weight: bold;
-  }
+.selected-overview-text3 {
+  font-size: 12px;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+}
 
-  .status-box {
-    display: flex;
-    flex-direction: row;
-  }
+.selected-hour-box {
+  color: black;
+  font-size: 12px;
+  background-color: #2d67b4;
+  height: 4vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 3px;
+}
 
-  .dotIcon{
-    margin-top: 4px;
-    margin-right: 12px ;
-  }
+.recent-data-text {
+  font-size: 14px;
+  color: black;
+  font-weight: bold;
+}
+
+.status-box {
+  display: flex;
+  flex-direction: row;
+}
+
+.dotIcon {
+  margin-top: 4px;
+  margin-right: 12px;
+}
