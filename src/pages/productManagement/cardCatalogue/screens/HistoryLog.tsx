@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 const HistoryLog = () => {
-  return (
-    <div>HistoryLog</div>
-  )
-}
+  return <div>HistoryLog</div>;
+};
 
-export default HistoryLog
+export default HistoryLog;

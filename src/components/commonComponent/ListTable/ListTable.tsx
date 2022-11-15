@@ -1,26 +1,31 @@
-import React, { useMemo, useState } from "react";
-import "./table.css";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
+
+import React, { useMemo, useState } from 'react';
+import './table.scss';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+
 import {
   Button,
   Grid,
-  Typography,
-} from "@mui/material";
-import Edit from "@mui/icons-material/Edit";
-import RightArrow from "@mui/icons-material/ArrowRightAltRounded";
-import GreenDot from "../../../assets/icons/greendot.svg";
-import DroppedDot from "../../../assets/icons/droppeddot.svg";
-import FailureDot from "../../../assets/icons/failuredot.svg";
-import ProgressDot from "../../../assets/icons/progressdot.svg";
+  Typography
+} from '@mui/material';
+import Edit from '@mui/icons-material/Edit';
+import LeftArrow from '@mui/icons-material/KeyboardDoubleArrowLeft';
+import LastArrow from '@mui/icons-material/KeyboardDoubleArrowRight';
+import RightArrow from '@mui/icons-material/ArrowRightAltRounded';
+import GreenDot from '../../../assets/icons/greendot.svg';
+import DroppedDot from '../../../assets/icons/droppeddot.svg';
+import FailureDot from '../../../assets/icons/failuredot.svg';
+import ProgressDot from '../../../assets/icons/progressdot.svg';
 import {
   rowsDataInterface,
   statusRowHeadingInterface,
-} from "../../../pages/sales/dashboard/dashboard.const";
+} from '../../../pages/sales/dashboard/dashboard.const';
+import { useStyles } from '../../../style/MuiStyles/muiStyles';
 import PaginationComp from "../Pagination/Pagination";
 
 function TableComp(props: {
@@ -63,11 +68,11 @@ function TableComp(props: {
   return (
     <div className="table-div">
       <div className="third-header">
-        <div className={"hour-box"}>
+        <div className={'hour-box'}>
           <li
             onClick={() => setGraphView(1)}
             className={
-              graphView == 1 ? "selected-overview-text3" : "overview-text3"
+              graphView == 1 ? 'selected-overview-text3' : 'overview-text3'
             }
           >
             All
@@ -76,7 +81,7 @@ function TableComp(props: {
           <li
             onClick={() => setGraphView(2)}
             className={
-              graphView == 2 ? "selected-overview-text3" : "overview-text3"
+              graphView == 2 ? 'selected-overview-text3' : 'overview-text3'
             }
           >
             Approved
@@ -85,7 +90,7 @@ function TableComp(props: {
           <li
             onClick={() => setGraphView(3)}
             className={
-              graphView == 3 ? "selected-overview-text3" : "overview-text3"
+              graphView == 3 ? 'selected-overview-text3' : 'overview-text3'
             }
           >
             In-Progress
@@ -94,7 +99,7 @@ function TableComp(props: {
           <li
             onClick={() => setGraphView(4)}
             className={
-              graphView == 4 ? "selected-overview-text3" : "overview-text3"
+              graphView == 4 ? 'selected-overview-text3' : 'overview-text3'
             }
           >
             Rejected
@@ -103,27 +108,27 @@ function TableComp(props: {
           <li
             onClick={() => setGraphView(5)}
             className={
-              graphView == 5 ? "selected-overview-text3" : "overview-text3"
+              graphView == 5 ? 'selected-overview-text3' : 'overview-text3'
             }
           >
             Dropped
           </li>
         </div>
-        {props.flag === "dashboard" && (
+        {props.flag === 'dashboard' && (
           <div className="reset-data">
             <Button
               startIcon={<Edit />}
-              sx={{ fontSize: "14px", marginLeft: "56px" }}
+              sx={{ fontSize: '14px', marginLeft: '56px' }}
             >
               Edit Columns
             </Button>
           </div>
         )}
-        {props.flag === "dashboard" && (
+        {props.flag === 'dashboard' && (
           <div className="reset-data">
             <Button
               endIcon={<RightArrow />}
-              sx={{ fontSize: "14px", marginLeft: "35px" }}
+              sx={{ fontSize: '14px', marginLeft: '35px' }}
             >
               Detailed Report
             </Button>
@@ -137,13 +142,13 @@ function TableComp(props: {
             <Table aria-label="simple table">
               <TableHead>
                 {props?.listRowHeading.map((row) => (
-                  <TableRow sx={{ backgroundColor: "#EFF7FE" }}>
+                  <TableRow sx={{ backgroundColor: '#EFF7FE' }}>
                     <TableCell
                       scope="row"
                       sx={{
-                        fontWeight: "bold",
-                        borderBottom: "none",
-                        backgroundColor: "#EFF7FE",
+                        fontWeight: 'bold',
+                        borderBottom: 'none',
+                        backgroundColor: '#EFF7FE',
                       }}
                     >
                       {row?.header1}
@@ -152,10 +157,10 @@ function TableComp(props: {
                       align="left"
                       scope="row"
                       sx={{
-                        fontWeight: "bold",
-                        borderBottom: "none",
-                        backgroundColor: "#EFF7FE",
-                        minWidth: "100px",
+                        fontWeight: 'bold',
+                        borderBottom: 'none',
+                        backgroundColor: '#EFF7FE',
+                        minWidth: '100px',
                       }}
                     >
                       {row?.header2}
@@ -163,10 +168,10 @@ function TableComp(props: {
                     <TableCell
                       align="left"
                       sx={{
-                        fontWeight: "bold",
-                        borderBottom: "none",
-                        backgroundColor: "#EFF7FE",
-                        minWidth: "150px",
+                        fontWeight: 'bold',
+                        borderBottom: 'none',
+                        backgroundColor: '#EFF7FE',
+                        minWidth: '150px',
                       }}
                     >
                       {row?.header3}
@@ -174,10 +179,10 @@ function TableComp(props: {
                     <TableCell
                       align="left"
                       sx={{
-                        fontWeight: "bold",
-                        borderBottom: "none",
-                        backgroundColor: "#EFF7FE",
-                        minWidth: "150px",
+                        fontWeight: 'bold',
+                        borderBottom: 'none',
+                        backgroundColor: '#EFF7FE',
+                        minWidth: '150px',
                       }}
                     >
                       {row?.header4}
@@ -185,10 +190,10 @@ function TableComp(props: {
                     <TableCell
                       align="left"
                       sx={{
-                        fontWeight: "bold",
-                        borderBottom: "none",
-                        backgroundColor: "#EFF7FE",
-                        minWidth: "100px",
+                        fontWeight: 'bold',
+                        borderBottom: 'none',
+                        backgroundColor: '#EFF7FE',
+                        minWidth: '100px',
                       }}
                     >
                       {row?.header5}
@@ -196,10 +201,10 @@ function TableComp(props: {
                     <TableCell
                       align="left"
                       sx={{
-                        fontWeight: "bold",
-                        borderBottom: "none",
-                        backgroundColor: "#EFF7FE",
-                        minWidth: "150px",
+                        fontWeight: 'bold',
+                        borderBottom: 'none',
+                        backgroundColor: '#EFF7FE',
+                        minWidth: '150px',
                       }}
                     >
                       {row?.header6}
@@ -207,10 +212,10 @@ function TableComp(props: {
                     <TableCell
                       align="left"
                       sx={{
-                        fontWeight: "bold",
-                        borderBottom: "none",
-                        backgroundColor: "#EFF7FE",
-                        minWidth: "150px",
+                        fontWeight: 'bold',
+                        borderBottom: 'none',
+                        backgroundColor: '#EFF7FE',
+                        minWidth: '150px',
                       }}
                     >
                       {row?.header7}
@@ -218,10 +223,10 @@ function TableComp(props: {
                     <TableCell
                       align="left"
                       sx={{
-                        fontWeight: "bold",
-                        borderBottom: "none",
-                        backgroundColor: "#EFF7FE",
-                        minWidth: "100px",
+                        fontWeight: 'bold',
+                        borderBottom: 'none',
+                        backgroundColor: '#EFF7FE',
+                        minWidth: '100px',
                       }}
                     >
                       {row?.header8}
@@ -229,10 +234,10 @@ function TableComp(props: {
                     <TableCell
                       align="left"
                       sx={{
-                        fontWeight: "bold",
-                        borderBottom: "none",
-                        backgroundColor: "#EFF7FE",
-                        minWidth: "100px",
+                        fontWeight: 'bold',
+                        borderBottom: 'none',
+                        backgroundColor: '#EFF7FE',
+                        minWidth: '100px',
                       }}
                     >
                       {row?.header9}
@@ -240,10 +245,10 @@ function TableComp(props: {
                     <TableCell
                       align="left"
                       sx={{
-                        fontWeight: "bold",
-                        borderBottom: "none",
-                        backgroundColor: "#EFF7FE",
-                        minWidth: "100px",
+                        fontWeight: 'bold',
+                        borderBottom: 'none',
+                        backgroundColor: '#EFF7FE',
+                        minWidth: '100px',
                       }}
                     >
                       {row?.header10}
@@ -255,41 +260,41 @@ function TableComp(props: {
                 {currentTableData.map((row) => (
                   <TableRow
                     key={row.id}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
                     <TableCell
                       component="th"
                       scope="row"
-                      sx={{ borderBottom: "none", height: "68px" }}
+                      sx={{ borderBottom: 'none', height: '68px' }}
                     >
                       {row.id}
                     </TableCell>
-                    <TableCell align="left" sx={{ borderBottom: "none" }}>
-                      {"#"}
+                    <TableCell align="left" sx={{ borderBottom: 'none' }}>
+                      {'#'}
                       {row.applicationNum}
                     </TableCell>
-                    <TableCell align="left" sx={{ borderBottom: "none" }}>
+                    <TableCell align="left" sx={{ borderBottom: 'none' }}>
                       {row.customerName}
                     </TableCell>
-                    <TableCell align="left" sx={{ borderBottom: "none" }}>
+                    <TableCell align="left" sx={{ borderBottom: 'none' }}>
                       {row.mobileNum}
                     </TableCell>
-                    <TableCell align="left" sx={{ borderBottom: "none" }}>
+                    <TableCell align="left" sx={{ borderBottom: 'none' }}>
                       {row.lead}
                     </TableCell>
-                    <TableCell align="left" sx={{ borderBottom: "none" }}>
+                    <TableCell align="left" sx={{ borderBottom: 'none' }}>
                       {row.surrogateName}
                     </TableCell>
-                    <TableCell align="left" sx={{ borderBottom: "none" }}>
+                    <TableCell align="left" sx={{ borderBottom: 'none' }}>
                       {row.dateTime}
                     </TableCell>
-                    <TableCell align="left" sx={{ borderBottom: "none" }}>
+                    <TableCell align="left" sx={{ borderBottom: 'none' }}>
                       {row.Policy}
                     </TableCell>
-                    <TableCell align="left" sx={{ borderBottom: "none" }}>
+                    <TableCell align="left" sx={{ borderBottom: 'none' }}>
                       {row.channelName}
                     </TableCell>
-                    <TableCell align="left" sx={{ borderBottom: "none" }}>
+                    <TableCell align="left" sx={{ borderBottom: 'none' }}>
                       {row.processedBy}
                     </TableCell>
                   </TableRow>
@@ -300,17 +305,17 @@ function TableComp(props: {
         </Grid>
 
         <Grid item sm={5}>
-          <div style={{ boxShadow: "-10px 0 8px 0 #EDEDED" }}>
+          <div style={{ boxShadow: '-10px 0 8px 0 #EDEDED' }}>
             <TableContainer>
               <Table aria-label="simple table">
                 <TableHead>
                   {props?.statusRowsHeading.map((row) => (
-                    <TableRow sx={{ backgroundColor: "#EFF7FE" }}>
+                    <TableRow sx={{ backgroundColor: '#EFF7FE' }}>
                       <TableCell
                         component="th"
                         align="left"
                         scope="row"
-                        sx={{ fontWeight: "bold", borderBottom: "none" }}
+                        sx={{ fontWeight: 'bold', borderBottom: 'none' }}
                       >
                         {row?.header1}
                       </TableCell>
@@ -318,7 +323,7 @@ function TableComp(props: {
                         component="th"
                         align="left"
                         scope="row"
-                        sx={{ fontWeight: "bold", borderBottom: "none" }}
+                        sx={{ fontWeight: 'bold', borderBottom: 'none' }}
                       >
                         {row?.header2}
                       </TableCell>
@@ -326,7 +331,7 @@ function TableComp(props: {
                         component="th"
                         align="left"
                         scope="row"
-                        sx={{ fontWeight: "bold", borderBottom: "none" }}
+                        sx={{ fontWeight: 'bold', borderBottom: 'none' }}
                       >
                         {row?.header3}
                       </TableCell>
@@ -335,34 +340,34 @@ function TableComp(props: {
                 </TableHead>
                 <TableBody>
                   {currentTableData.map((row: any) => (
-                    <TableRow key={row.id} sx={{ borderBottom: "none" }}>
+                    <TableRow key={row.id} sx={{ borderBottom: 'none' }}>
                       <TableCell
                         component="th"
                         scope="row"
-                        sx={{ borderBottom: "none" }}
+                        sx={{ borderBottom: 'none' }}
                       >
-                        {row?.kycStatus?.includes("Success") &&
-                          kycStatus(row?.kycStatus, GreenDot, "#6AB06E")}
-                        {row?.kycStatus?.includes("Progress") &&
-                          kycStatus(row.kycStatus, ProgressDot, "#F37B21")}
-                        {row?.kycStatus?.includes("Failure") &&
-                          kycStatus(row?.kycStatus, FailureDot, "#E63946")}
-                        {row?.kycStatus.includes("Dropped") &&
-                          kycStatus(row?.kycStatus, DroppedDot, "#992D26")}
+                        {row?.kycStatus?.includes('Success') &&
+                          kycStatus(row?.kycStatus, GreenDot, '#6AB06E')}
+                        {row?.kycStatus?.includes('Progress') &&
+                          kycStatus(row.kycStatus, ProgressDot, '#F37B21')}
+                        {row?.kycStatus?.includes('Failure') &&
+                          kycStatus(row?.kycStatus, FailureDot, '#E63946')}
+                        {row?.kycStatus.includes('Dropped') &&
+                          kycStatus(row?.kycStatus, DroppedDot, '#992D26')}
                       </TableCell>
-                      <TableCell align="left" sx={{ borderBottom: "none" }}>
-                        {row?.status?.includes("Approved") &&
-                          kycStatus(row?.status, GreenDot, "#6AB06E")}
-                        {row?.status?.includes("In-Progress") &&
-                          kycStatus(row?.status, ProgressDot, "#F37B21")}
-                        {row?.status?.includes("Rejected") &&
-                          kycStatus(row?.status, FailureDot, "#E63946")}
-                        {row?.status?.includes("Dropped") &&
-                          kycStatus(row?.status, DroppedDot, "#992D26")}
+                      <TableCell align="left" sx={{ borderBottom: 'none' }}>
+                        {row?.status?.includes('Approved') &&
+                          kycStatus(row?.status, GreenDot, '#6AB06E')}
+                        {row?.status?.includes('In-Progress') &&
+                          kycStatus(row?.status, ProgressDot, '#F37B21')}
+                        {row?.status?.includes('Rejected') &&
+                          kycStatus(row?.status, FailureDot, '#E63946')}
+                        {row?.status?.includes('Dropped') &&
+                          kycStatus(row?.status, DroppedDot, '#992D26')}
                       </TableCell>
-                      <TableCell align="left" sx={{ borderBottom: "none" }}>
+                      <TableCell align="left" sx={{ borderBottom: 'none' }}>
                         <div className="reset-data">
-                          <Button sx={{ fontSize: "14px", marginLeft: "35px" }}>
+                          <Button sx={{ fontSize: '14px', marginLeft: '35px' }}>
                             View
                           </Button>
                         </div>
@@ -374,6 +379,7 @@ function TableComp(props: {
             </TableContainer>
           </div>
         </Grid>
+
         <PaginationComp 
         rows={props.rows}
         rowsPerPage={rowsPerPage}
@@ -408,12 +414,12 @@ function kycStatus(
       </div>
       <div>
         <Typography
-          sx={{ fontWeight: "bold", color: _textColor, fontSize: "14px" }}
+          sx={{ fontWeight: 'bold', color: _textColor, fontSize: '14px' }}
         >
           {status}
         </Typography>
         <Typography
-          sx={{ fontWeight: "bold", color: "grey", fontSize: "10px" }}
+          sx={{ fontWeight: 'bold', color: 'grey', fontSize: '10px' }}
         >
           22/02/022 - 7.30 PM
         </Typography>

@@ -1,4 +1,4 @@
-import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
 export default function RequireAuth() {
   const auth = { user: true }; // This will change in the future
@@ -7,6 +7,6 @@ export default function RequireAuth() {
   return auth.user ? (
     <Outlet />
   ) : (
-    <Navigate to={"/login"} state={{ from: location }} replace />
+    <Navigate to={'/login'} state={{ from: location }} replace />
   );
 }

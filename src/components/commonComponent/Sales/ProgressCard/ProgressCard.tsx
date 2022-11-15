@@ -1,6 +1,6 @@
-import React from "react";
-import "../SalesDashbaordCard/card.scss";
-import ApprovalRate from "../../../../assets/icons/approval_rate_icon.svg";
+import React from 'react';
+import '../SalesDashbaordCard/card.scss';
+import ApprovalRate from '../../../../assets/icons/approval_rate_icon.svg';
 
 function ProgressCard(props: {
   title:
@@ -42,18 +42,18 @@ function ProgressCard(props: {
   image: any;
   index: number;
 }) {
-  var boxstyles = "";
+  var boxstyles = '';
   if (props.index == 1) {
-    boxstyles = "progress-icon-box";
+    boxstyles = 'progress-icon-box';
   }
   if (props.index == 2) {
-    boxstyles = "approval-icon-box";
+    boxstyles = 'approval-icon-box';
   }
   if (props.index == 3) {
-    boxstyles = "dropped-icon-box";
+    boxstyles = 'dropped-icon-box';
   }
   if (props.index == 4) {
-    boxstyles = "rejected-icon-box";
+    boxstyles = 'rejected-icon-box';
   }
 
   return (
@@ -84,8 +84,8 @@ function ProgressCard(props: {
             <text className="card-text-value">{props.lastYearValue}</text>
           )}
         </div>
-        <li onClick={() => console.log("more clicked")} className="more-text">
-          More{" >"}
+        <li onClick={() => console.log('more clicked')} className="more-text">
+          More{' >'}
         </li>
       </div>
     </div>

@@ -1,49 +1,48 @@
-import React, { useState } from "react";
-import "../../../style/Style.scss";
-import { Button, Stack, Typography } from "@mui/material";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormControl from "@mui/material/FormControl";
-import TextareaAutosize from "@mui/material/TextareaAutosize";
-import TextField from "@mui/material/TextField";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import Dialog from "@mui/material/Dialog";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import Box from "@mui/material/Box";
-import FormGroup from "@mui/material/FormGroup";
-import Checkbox from "@mui/material/Checkbox";
-import Grid from "@mui/material/Grid";
-import { colors } from "../../../style/Color";
-import card_catalogue_sucess_icon from "../../../assets/icons/card_catalogue_sucess_icon.svg";
-import card_catalogue_rejecte_icon from "../../../assets/icons/modal_rejected_icon.svg";
+import React, { useState } from 'react';
+import '../../../style/Style.scss';
+import { Button, Stack, Typography } from '@mui/material';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import TextareaAutosize from '@mui/material/TextareaAutosize';
+import TextField from '@mui/material/TextField';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import Box from '@mui/material/Box';
+import FormGroup from '@mui/material/FormGroup';
+import Checkbox from '@mui/material/Checkbox';
+import Grid from '@mui/material/Grid';
+import { colors } from '../../../style/Color';
+import card_catalogue_sucess_icon from '../../../assets/icons/card_catalogue_sucess_icon.svg';
+import card_catalogue_rejecte_icon from '../../../assets/icons/modal_rejected_icon.svg';
 
-
-type props={
-  openSuccess?:any,
-  handleCloseSuccess ?:()=>void,
-  normalPause ?:string,
-  title ?:String,
-  successModalTitle ?:string,
-  rejectedModaltitle ?:string,
-  successModalMsg ?:string,
-  rejectedModalMsg ?:string,
-  pause_content ?:string,
-  scheulePause ?:string,
-  datepickerLabelStart ?:string,
-  datepickerLabelEnd ?:string,
-  scheduledPause_content ?:string,
-  dateRange_title ?:string,
-  textarea_title ?:string,
-  maxLength ?:string,
-  product_label ?:Array<any>,
-  btn ?:string,
-  submit ?:string,
-  close ?:string
-}
+type props = {
+  openSuccess?: any;
+  handleCloseSuccess?: () => void;
+  normalPause?: string;
+  title?: String;
+  successModalTitle?: string;
+  rejectedModaltitle?: string;
+  successModalMsg?: string;
+  rejectedModalMsg?: string;
+  pause_content?: string;
+  scheulePause?: string;
+  datepickerLabelStart?: string;
+  datepickerLabelEnd?: string;
+  scheduledPause_content?: string;
+  dateRange_title?: string;
+  textarea_title?: string;
+  maxLength?: string;
+  product_label?: Array<any>;
+  btn?: string;
+  submit?: string;
+  close?: string;
+};
 
 function CustomModal({
   openSuccess,
@@ -65,13 +64,10 @@ function CustomModal({
   product_label,
   btn,
   submit,
-  close
-}:props) {
-
- 
-
+  close,
+}: props) {
   // const classess = useStyles();
- 
+
   const [pauseStatus, setPauseStatus] = useState(normalPause);
   const [startDatevalue, setStartDateValue] = useState(null);
   const [endDatevalue, setEndDateValue] = useState(null);
@@ -84,7 +80,7 @@ function CustomModal({
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <Stack py={3} style={{ maxWidth: "450px" }} px={title ? 3 : 0}>
+        <Stack py={3} style={{ maxWidth: '450px' }} px={title ? 3 : 0}>
           {title && (
             <Typography
               className="modal_title"
@@ -103,10 +99,10 @@ function CustomModal({
           {(successModalTitle || rejectedModaltitle) && (
             <Box
               sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                margin: "0 auto",
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 auto',
               }}
               component="img"
               src={
@@ -120,16 +116,16 @@ function CustomModal({
           )}
 
           {successModalTitle && (
-            <DialogContent sx={{ paddingTop: "18px", paddingBottom: "5px" }}>
+            <DialogContent sx={{ paddingTop: '18px', paddingBottom: '5px' }}>
               <DialogContentText
                 id="alert-dialog-slide-description"
-                align={"center"}
+                align={'center'}
                 fontSize={16}
                 fontWeight={600}
                 color="#1d1d1d"
                 sx={{
                   padding: {
-                    xs: "0 13px",
+                    xs: '0 13px',
                   },
                 }}
               >
@@ -139,16 +135,16 @@ function CustomModal({
           )}
 
           {rejectedModaltitle && (
-            <DialogContent sx={{ paddingTop: "18px", paddingBottom: "5px" }}>
+            <DialogContent sx={{ paddingTop: '18px', paddingBottom: '5px' }}>
               <DialogContentText
                 id="alert-dialog-slide-description"
-                align={"center"}
+                align={'center'}
                 fontSize={16}
                 fontWeight={600}
                 color="#1d1d1d"
                 sx={{
                   padding: {
-                    xs: "0 13px",
+                    xs: '0 13px',
                   },
                 }}
               >
@@ -160,13 +156,13 @@ function CustomModal({
           {successModalMsg && (
             <Typography
               fontWeight={700}
-              align={"center"}
+              align={'center'}
               pb={0}
               fontSize={12}
               sx={{
                 padding: {
-                  xs: "0 13px",
-                  sm: "0 70px",
+                  xs: '0 13px',
+                  sm: '0 70px',
                 },
               }}
             >
@@ -177,13 +173,13 @@ function CustomModal({
           {rejectedModalMsg && (
             <Typography
               fontWeight={700}
-              align={"center"}
+              align={'center'}
               pb={0}
               fontSize={13}
               sx={{
                 padding: {
-                  xs: "0 13px",
-                  sm: "0 70px",
+                  xs: '0 13px',
+                  sm: '0 70px',
                 },
               }}
             >
@@ -196,18 +192,18 @@ function CustomModal({
             pb={1}
             pt={2}
             fontSize={12}
-            color={"#171717"}
+            color={'#171717'}
             fontWeight={500}
           >
-            {" "}
+            {' '}
             {pause_content}
           </Typography>
 
           {(normalPause || scheulePause) && (
-            <FormControl style={{ fontSize: "1px" }}>
+            <FormControl style={{ fontSize: '1px' }}>
               <Stack pb={1}>
                 <RadioGroup
-                color=""
+                  color=""
                   row
                   aria-labelledby="demo-radio-buttons-group-label"
                   value={pauseStatus}
@@ -215,10 +211,9 @@ function CustomModal({
                   onChange={(e) => setPauseStatus(e.target.value)}
                 >
                   <FormControlLabel
-                  
-                    style={{ fontSize: "1px" }}
+                    style={{ fontSize: '1px' }}
                     value={normalPause}
-                    control={<Radio color="secondary"/>}
+                    control={<Radio color="secondary" />}
                     label={normalPause}
                   />
                   <FormControlLabel
@@ -240,11 +235,11 @@ function CustomModal({
                   pb={1}
                   pt={3}
                   fontSize={12}
-                  color={"#171717"}
+                  color={'#171717'}
                   fontWeight={500}
                   style={{ borderTop: `1px solid #36363624` }}
                 >
-                  {" "}
+                  {' '}
                   {scheduledPause_content}
                 </Typography>
 
@@ -262,10 +257,10 @@ function CustomModal({
                   <Stack
                     className="Modal_datepicker"
                     sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                      paddingBottom: "16px",
+                      display: 'flex',
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      paddingBottom: '16px',
                     }}
                   >
                     <DatePicker
@@ -277,7 +272,7 @@ function CustomModal({
                         setStartDateValue(newValue);
                       }}
                       renderInput={(params: any) => (
-                        <TextField size="small" {...params}  />
+                        <TextField size="small" {...params} />
                       )}
                     />
 
@@ -321,14 +316,14 @@ function CustomModal({
 
               <Stack
                 sx={{
-                  display: "flex",
-                  flexDirection: "row-reverse",
-                  marginTop: "5px",
+                  display: 'flex',
+                  flexDirection: 'row-reverse',
+                  marginTop: '5px',
                 }}
               >
                 <Typography
                   className="textarea"
-                  sx={{ float: "right", fontSize: "8px", color: "#b6b7b7" }}
+                  sx={{ float: 'right', fontSize: '8px', color: '#b6b7b7' }}
                   pb={2}
                 >
                   {maxLength}
@@ -342,16 +337,16 @@ function CustomModal({
               sx={{
                 borderTop: `1px solid #36363624`,
                 borderBottom: `1px solid #36363624`,
-                marginBottom: "20px",
+                marginBottom: '20px',
               }}
             >
-              <FormGroup sx={{ paddingTop: "10px" }}>
+              <FormGroup sx={{ paddingTop: '10px' }}>
                 <Grid container>
                   {product_label.map((item: any) => {
                     return (
                       <Grid item xs={6} sm={4} key={item.id}>
-                        {" "}
-                        <FormControlLabel 
+                        {' '}
+                        <FormControlLabel
                           control={
                             <Checkbox checked={item.defaultChecked == true} />
                           }
@@ -368,9 +363,8 @@ function CustomModal({
           <Stack
             className="modal_buttons"
             sx={{
-              flexDirection: "row",
-              justifyContent: "flex-end",
-             
+              flexDirection: 'row',
+              justifyContent: 'flex-end',
             }}
           >
             {submit && (
@@ -378,11 +372,11 @@ function CustomModal({
                 onClick={handleCloseSuccess}
                 variant="outlined"
                 sx={{
-                  fontSize: "11px",
-                  textTransform: "capitalize",
+                  fontSize: '11px',
+                  textTransform: 'capitalize',
                   border: `1px solid ${colors.ModallightGrey}`,
-                  color: "#363636",
-                  fontWeight: "600",
+                  color: '#363636',
+                  fontWeight: '600',
                 }}
               >
                 {close}
@@ -392,23 +386,23 @@ function CustomModal({
               <Button
                 variant="contained"
                 sx={{
-                  fontSize: "11px",
-                  marginLeft: "35px",
-                  textTransform: "capitalize",
+                  fontSize: '11px',
+                  marginLeft: '35px',
+                  textTransform: 'capitalize',
                   backgroundColor: `${colors.Modalblue}`,
-                  fontWeight: "600",
+                  fontWeight: '600',
                 }}
                 onClick={handleCloseSuccess}
               >
-                {submit}{" "}
+                {submit}{' '}
               </Button>
             )}
           </Stack>
           {btn && (
             <Box
               sx={{
-                display: "flex",
-                justifyContent: "center",
+                display: 'flex',
+                justifyContent: 'center',
               }}
               pb={0}
               px={4}
@@ -417,9 +411,9 @@ function CustomModal({
                 variant="contained"
                 onClick={handleCloseSuccess}
                 style={{
-                  width: "30em",
-                  height: "3em",
-                  fontSize: "12px",
+                  width: '30em',
+                  height: '3em',
+                  fontSize: '12px',
                   backgroundColor: `${colors.Modalblue}`,
                 }}
               >

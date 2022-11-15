@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Typography,
   Card,
@@ -8,11 +8,11 @@ import {
   IconButton,
   MenuItem,
   Menu,
-} from "@mui/material";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { colors } from "../../../../../style/Color";
-import { checkTagStatus } from "../../../../../utils/tagBasedIndicator/tagStatus";
-import { programMmgt } from "../../../../../utils/Constants";
+} from '@mui/material';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { colors } from '../../../../../style/Color';
+import { checkTagStatus } from '../../../../../utils/tagBasedIndicator/tagStatus';
+import { programMmgt } from '../../../../../utils/Constants';
 
 export interface cardDetailsType {
   schema: string;
@@ -27,7 +27,7 @@ export interface cardDetailsType {
 
 const useStyles = {
   root: {
-    boxShadow: "1px 1px 4px rgba(0, 0, 0, 0.12)",
+    boxShadow: '1px 1px 4px rgba(0, 0, 0, 0.12)',
   },
 };
 
@@ -44,9 +44,9 @@ function CardList() {
     <>
       <Box
         sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
         }}
       >
         {cardDetails.map((data: cardDetailsType) => (
@@ -54,15 +54,15 @@ function CardList() {
             width="31.5%"
             height="300px"
             sx={{
-              borderRadius: "4px",
-              ...useStyles.root
+              borderRadius: '4px',
+              ...useStyles.root,
             }}
           >
             <Card
               sx={{
-                height: "300px",
-                borderRadius: "4px",
-                "&:hover": {
+                height: '300px',
+                borderRadius: '4px',
+                '&:hover': {
                   outline: `1.5px solid ${colors.blue}`,
                 },
               }}
@@ -70,17 +70,17 @@ function CardList() {
               <CardContent>
                 <Box
                   sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
                     borderBottom: `2px solid ${colors.lightGrey}`,
-                    padding: "0",
+                    padding: '0',
                   }}
                 >
                   <Box
                     sx={{
-                      display: "flex",
-                      alignItems: "center",
+                      display: 'flex',
+                      alignItems: 'center',
                     }}
                   >
                     <Checkbox
@@ -91,48 +91,48 @@ function CardList() {
                       //   },
                       // }}
                     />
-                    <Typography sx={{ letterSpacing: "0.5px" }}>
+                    <Typography sx={{ letterSpacing: '0.5px' }}>
                       {data.schema}
                     </Typography>
                   </Box>
                   <Box
                     id="more-button"
                     onClick={handleClick}
-                    aria-controls={open ? "more-menu" : undefined}
+                    aria-controls={open ? 'more-menu' : undefined}
                     aria-haspopup="true"
-                    aria-expanded={open ? "true" : undefined}
+                    aria-expanded={open ? 'true' : undefined}
                   >
                     <IconButton aria-label="settings">
                       <MoreVertIcon />
                     </IconButton>
                   </Box>
                 </Box>
-                <Box sx={{ padding: "0 8px" }}>
-                  <Box sx={{ padding: "15px 0" }}>
+                <Box sx={{ padding: '0 8px' }}>
+                  <Box sx={{ padding: '15px 0' }}>
                     <Typography
                       sx={{
                         color: checkTagStatus(data.status).color,
                         backgroundColor: checkTagStatus(data.status).bgColor,
-                        fontSize: "13px",
-                        padding: "1px 8px",
-                        borderRadius: "5px",
+                        fontSize: '13px',
+                        padding: '1px 8px',
+                        borderRadius: '5px',
                         // textAlign: "center",
-                        width: "max-content",
+                        width: 'max-content',
                       }}
                     >
                       {data.status}
                     </Typography>
                   </Box>
-                  <Box sx={{ padding: "0 0px 10px 0" }}>
+                  <Box sx={{ padding: '0 0px 10px 0' }}>
                     <Typography
                       variant="subtitle2"
-                      sx={{ color: "#9F9FA0", fontSize: "small" }}
+                      sx={{ color: '#9F9FA0', fontSize: 'small' }}
                     >
                       {data.lastModified}
                     </Typography>
                     <Typography
                       variant="subtitle1"
-                      sx={{ fontSize: "15px", fontWeight: 500, color: "black" }}
+                      sx={{ fontSize: '15px', fontWeight: 500, color: 'black' }}
                     >
                       {data.lastModifiedDate}
                     </Typography>
@@ -140,13 +140,13 @@ function CardList() {
                   <Box>
                     <Typography
                       variant="subtitle2"
-                      sx={{ color: "#9F9FA0", fontSize: "small" }}
+                      sx={{ color: '#9F9FA0', fontSize: 'small' }}
                     >
                       {data.statusActive}
                     </Typography>
                     <Typography
                       variant="subtitle1"
-                      sx={{ fontSize: "14px", fontWeight: 500, color: "black" }}
+                      sx={{ fontSize: '14px', fontWeight: 500, color: 'black' }}
                     >
                       {data.StatusActiveDate}
                     </Typography>
@@ -154,9 +154,9 @@ function CardList() {
                       <Typography
                         variant="subtitle1"
                         sx={{
-                          fontSize: "14px",
+                          fontSize: '14px',
                           fontWeight: 500,
-                          color: "black",
+                          color: 'black',
                         }}
                       >
                         {data.resumeStatus}
@@ -165,10 +165,10 @@ function CardList() {
                     {data.resumeItNow && (
                       <Typography
                         sx={{
-                          padding: "3px 0",
-                          fontSize: "13px",
-                          textDecoration: "underline",
-                          cursor: "pointer",
+                          padding: '3px 0',
+                          fontSize: '13px',
+                          textDecoration: 'underline',
+                          cursor: 'pointer',
                         }}
                         color="secondary"
                       >
@@ -186,33 +186,33 @@ function CardList() {
           anchorEl={anchorElement}
           open={open}
           MenuListProps={{
-            "aria-labelledby": "more-button",
+            'aria-labelledby': 'more-button',
           }}
           onClose={handleClose}
           anchorOrigin={{
-            vertical: "top",
-            horizontal: "right",
+            vertical: 'top',
+            horizontal: 'right',
           }}
           transformOrigin={{
-            vertical: "top",
-            horizontal: "left",
+            vertical: 'top',
+            horizontal: 'left',
           }}
         >
           <MenuItem
             onClick={handleClose}
-            style={{ padding: "10px 20px", textAlign: "left" }}
+            style={{ padding: '10px 20px', textAlign: 'left' }}
           >
             {programMmgt.RESUME_SURROGATE}
           </MenuItem>
           <MenuItem
             onClick={handleClose}
-            style={{ padding: "10px 20px", textAlign: "left" }}
+            style={{ padding: '10px 20px', textAlign: 'left' }}
           >
             {programMmgt.PAUSE_SURROGATE}
           </MenuItem>
           <MenuItem
             onClick={handleClose}
-            style={{ padding: "10px 20px", textAlign: "left" }}
+            style={{ padding: '10px 20px', textAlign: 'left' }}
           >
             {programMmgt.EDIT_SCHEDULE_PAUSE}
           </MenuItem>
@@ -224,34 +224,34 @@ function CardList() {
 
 const cardDetails = [
   {
-    schema: "Card For Card",
-    status: "Active",
-    lastModified: "Last Modified",
-    lastModifiedDate: "10/June/2022 19:30:12",
-    statusActive: "Status",
-    StatusActiveDate: "Active since June 20, 2022",
-    resumeStatus: "",
-    resumeItNow: "",
+    schema: 'Card For Card',
+    status: 'Active',
+    lastModified: 'Last Modified',
+    lastModifiedDate: '10/June/2022 19:30:12',
+    statusActive: 'Status',
+    StatusActiveDate: 'Active since June 20, 2022',
+    resumeStatus: '',
+    resumeItNow: '',
   },
   {
-    schema: "Payroll",
-    status: "Paused",
-    lastModified: "Last Modified",
-    lastModifiedDate: "10/June/2022 19:30:12",
-    statusActive: "Status",
-    StatusActiveDate: "Active since June 20, 2022",
-    resumeStatus: "",
-    resumeItNow: "Resume It Now",
+    schema: 'Payroll',
+    status: 'Paused',
+    lastModified: 'Last Modified',
+    lastModifiedDate: '10/June/2022 19:30:12',
+    statusActive: 'Status',
+    StatusActiveDate: 'Active since June 20, 2022',
+    resumeStatus: '',
+    resumeItNow: 'Resume It Now',
   },
   {
-    schema: "Card For Card",
-    status: "Paused (scheduled)",
-    lastModified: "Last Modified",
-    lastModifiedDate: "10/June/2022 19:30:12",
-    statusActive: "Status",
-    StatusActiveDate: "Active since June 20, 2022",
-    resumeStatus: "It will resume on June 20, 2022",
-    resumeItNow: "Resume It Now",
+    schema: 'Card For Card',
+    status: 'Paused (scheduled)',
+    lastModified: 'Last Modified',
+    lastModifiedDate: '10/June/2022 19:30:12',
+    statusActive: 'Status',
+    StatusActiveDate: 'Active since June 20, 2022',
+    resumeStatus: 'It will resume on June 20, 2022',
+    resumeItNow: 'Resume It Now',
   },
 ];
 

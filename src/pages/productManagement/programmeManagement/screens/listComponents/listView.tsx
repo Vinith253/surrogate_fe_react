@@ -10,12 +10,12 @@ import {
   Stack,
   MenuItem,
   Menu,
-} from "@mui/material";
-import React, { useState } from "react";
-import { colors } from "../../../../../style/Color";
-import { programMmgt } from "../../../../../utils/Constants";
-import { checkTagStatus } from "../../../../../utils/tagBasedIndicator/tagStatus";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+} from '@mui/material';
+import React, { useState } from 'react';
+import { colors } from '../../../../../style/Color';
+import { programMmgt } from '../../../../../utils/Constants';
+import { checkTagStatus } from '../../../../../utils/tagBasedIndicator/tagStatus';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 export interface dataList {
   surrogateProgramme: string;
   activeSince: string;
@@ -33,35 +33,35 @@ export interface dataHeaderList {
 }
 const tableData = [
   {
-    surrogateProgramme: "Card For Card",
-    activeSince: "20 June 2022, 11.00",
-    lastModify: "20 June 2022, 11.00",
-    status: "Active",
-    autoResumeForm: "",
+    surrogateProgramme: 'Card For Card',
+    activeSince: '20 June 2022, 11.00',
+    lastModify: '20 June 2022, 11.00',
+    status: 'Active',
+    autoResumeForm: '',
   },
   {
-    surrogateProgramme: "Payroll",
-    activeSince: "20 June 2022, 11.00",
-    lastModify: "20 June 2022, 11.00",
-    status: "Paused",
-    autoResumeForm: "20 June 2022, 11.00",
+    surrogateProgramme: 'Payroll',
+    activeSince: '20 June 2022, 11.00',
+    lastModify: '20 June 2022, 11.00',
+    status: 'Paused',
+    autoResumeForm: '20 June 2022, 11.00',
   },
   {
-    surrogateProgramme: "Payroll",
-    activeSince: "20 June 2022, 11.00",
-    lastModify: "20 June 2022, 11.00",
-    status: "Paused (scheduled)",
-    autoResumeForm: "",
+    surrogateProgramme: 'Payroll',
+    activeSince: '20 June 2022, 11.00',
+    lastModify: '20 June 2022, 11.00',
+    status: 'Paused (scheduled)',
+    autoResumeForm: '',
   },
 ];
 const tableHeaderData = [
   {
-    surrogateProgramme: "Surrogate Programme",
-    activeSince: "Active Since",
-    lastModify: "Last Modified",
-    status: "Status",
-    autoResumeForm: "Auto Resume Form",
-    more: "More",
+    surrogateProgramme: 'Surrogate Programme',
+    activeSince: 'Active Since',
+    lastModify: 'Last Modified',
+    status: 'Status',
+    autoResumeForm: 'Auto Resume Form',
+    more: 'More',
   },
 ];
 export const ListView = () => {
@@ -109,13 +109,13 @@ export const ListView = () => {
         <Table aria-label="Table">
           <TableHead
             style={{ background: colors.tableHeaderLightBlue }}
-            sx={{ padding: "5px" }}
+            sx={{ padding: '5px' }}
           >
             {tableHeaderData.map((items: dataHeaderList, index: number) => (
-              <TableRow key={index} sx={{ padding: "5px" }}>
-                <TableCell padding="checkbox" sx={{ padding: "5px" }}>
+              <TableRow key={index} sx={{ padding: '5px' }}>
+                <TableCell padding="checkbox" sx={{ padding: '5px' }}>
                   <Checkbox
-                    color={"secondary"}
+                    color={'secondary'}
                     indeterminate={
                       selected.length > 0 && selected.length < tableData.length
                     }
@@ -125,29 +125,29 @@ export const ListView = () => {
                     }
                     onChange={handleSelectAllClick}
                     inputProps={{
-                      "aria-label": "select all desserts",
+                      'aria-label': 'select all desserts',
                     }}
                   />
                 </TableCell>
-                <TableCell sx={{ fontWeight: 800, padding: "5px" }}>
+                <TableCell sx={{ fontWeight: 800, padding: '5px' }}>
                   {items.surrogateProgramme}
                 </TableCell>
-                <TableCell sx={{ fontWeight: 800, padding: "5px" }}>
+                <TableCell sx={{ fontWeight: 800, padding: '5px' }}>
                   {items.activeSince}
                 </TableCell>
-                <TableCell sx={{ fontWeight: 800, padding: "5px" }}>
+                <TableCell sx={{ fontWeight: 800, padding: '5px' }}>
                   {items.lastModify}
                 </TableCell>
-                <TableCell sx={{ fontWeight: 800, padding: "5px" }}>
+                <TableCell sx={{ fontWeight: 800, padding: '5px' }}>
                   {items.status}
                 </TableCell>
                 <TableCell
-                  sx={{ fontWeight: 800, padding: "5px" }}
+                  sx={{ fontWeight: 800, padding: '5px' }}
                   align="center"
                 >
                   {items.autoResumeForm}
                 </TableCell>
-                <TableCell sx={{ fontWeight: 800, padding: "5px" }}>
+                <TableCell sx={{ fontWeight: 800, padding: '5px' }}>
                   {items.more}
                 </TableCell>
               </TableRow>
@@ -165,52 +165,52 @@ export const ListView = () => {
                       ? { background: colors.white }
                       : { background: colors.tableGrey }
                   }
-                  sx={{ padding: "5px" }}
+                  sx={{ padding: '5px' }}
                 >
-                  <TableCell padding={"checkbox"} sx={{ padding: "5px" }}>
+                  <TableCell padding={'checkbox'} sx={{ padding: '5px' }}>
                     <Checkbox
-                      color={"secondary"}
+                      color={'secondary'}
                       checked={isItemSelected}
                       inputProps={{
-                        "aria-labelledby": labelId,
+                        'aria-labelledby': labelId,
                       }}
                       onChange={(event: any) =>
                         handleClickCheckbox(event, data.surrogateProgramme)
                       }
                     />
                   </TableCell>
-                  <TableCell sx={{ padding: "5px" }}>
+                  <TableCell sx={{ padding: '5px' }}>
                     {data.surrogateProgramme}
                   </TableCell>
                   <TableCell
                     sx={{
                       color: checkTagStatus(data.activeSince).color,
-                      padding: "5px",
+                      padding: '5px',
                     }}
                   >
                     {data.activeSince}
                   </TableCell>
-                  <TableCell sx={{ padding: "5px" }}>
+                  <TableCell sx={{ padding: '5px' }}>
                     {data.lastModify}
                   </TableCell>
                   <TableCell
                     sx={{
                       color: checkTagStatus(data.status).color,
-                      padding: "5px",
+                      padding: '5px',
                     }}
                   >
                     {data.status}
                   </TableCell>
-                  <TableCell align="center" sx={{ padding: "5px" }}>
-                    {data.autoResumeForm === "" ? "-" : data.autoResumeForm}
+                  <TableCell align="center" sx={{ padding: '5px' }}>
+                    {data.autoResumeForm === '' ? '-' : data.autoResumeForm}
                   </TableCell>
                   <TableCell
                     id="more-button"
                     onClick={handleClick}
-                    aria-controls={open ? "more-menu" : undefined}
+                    aria-controls={open ? 'more-menu' : undefined}
                     aria-haspopup="true"
-                    aria-expanded={open ? "true" : undefined}
-                    sx={{ padding: "5px" }}
+                    aria-expanded={open ? 'true' : undefined}
+                    sx={{ padding: '5px' }}
                   >
                     <MoreVertIcon />
                   </TableCell>
@@ -225,33 +225,33 @@ export const ListView = () => {
         anchorEl={anchorElement}
         open={open}
         MenuListProps={{
-          "aria-labelledby": "more-button",
+          'aria-labelledby': 'more-button',
         }}
         onClose={handleClose}
         anchorOrigin={{
-          vertical: "top",
-          horizontal: "right",
+          vertical: 'top',
+          horizontal: 'right',
         }}
         transformOrigin={{
-          vertical: "top",
-          horizontal: "left",
+          vertical: 'top',
+          horizontal: 'left',
         }}
       >
         <MenuItem
           onClick={handleClose}
-          style={{ padding: "10px 20px", textAlign: "left" }}
+          style={{ padding: '10px 20px', textAlign: 'left' }}
         >
           {programMmgt.RESUME_SURROGATE}
         </MenuItem>
         <MenuItem
           onClick={handleClose}
-          style={{ padding: "10px 20px", textAlign: "left" }}
+          style={{ padding: '10px 20px', textAlign: 'left' }}
         >
           {programMmgt.PAUSE_SURROGATE}
         </MenuItem>
         <MenuItem
           onClick={handleClose}
-          style={{ padding: "10px 20px", textAlign: "left" }}
+          style={{ padding: '10px 20px', textAlign: 'left' }}
         >
           {programMmgt.EDIT_SCHEDULE_PAUSE}
         </MenuItem>
