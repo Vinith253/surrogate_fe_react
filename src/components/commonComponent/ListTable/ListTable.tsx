@@ -1,3 +1,4 @@
+
 import React, { useMemo, useState } from 'react';
 import './table.scss';
 import Table from '@mui/material/Table';
@@ -6,12 +7,11 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+
 import {
   Button,
   Grid,
-  Pagination,
-  TablePagination,
-  Typography,
+  Typography
 } from '@mui/material';
 import Edit from '@mui/icons-material/Edit';
 import LeftArrow from '@mui/icons-material/KeyboardDoubleArrowLeft';
@@ -26,6 +26,7 @@ import {
   statusRowHeadingInterface,
 } from '../../../pages/sales/dashboard/dashboard.const';
 import { useStyles } from '../../../style/MuiStyles/muiStyles';
+import PaginationComp from "../Pagination/Pagination";
 
 function TableComp(props: {
   rows: rowsDataInterface[];
@@ -378,90 +379,28 @@ function TableComp(props: {
             </TableContainer>
           </div>
         </Grid>
-        <Grid container sx={{ justifyContent: 'space-between' }}>
-          <Grid>
-            <TableRow>
-              <TablePagination
-                rowsPerPageOptions={[10, 20, 30, { label: 'All', value: -1 }]}
-                colSpan={3}
-                count={props.rows.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                labelRowsPerPage={'Listing per Page'}
-                SelectProps={{
-                  inputProps: {
-                    'aria-label': 'listing per page',
-                  },
-                  native: true,
-                }}
-                sx={{
-                  height: '70px',
-                  borderBottom: 'none',
-                  ...useStyles.pagination,
-                }}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-                ActionsComponent={ActionComponentDisabled}
-              />
-            </TableRow>
-          </Grid>
-          <Grid>
-            <TableCell
-              sx={{
-                borderBottom: 'none',
-                display: 'flex',
-                flexDirection: 'row',
-              }}
-            >
-              <Button
-                disabled={page == 1}
-                startIcon={<LeftArrow />}
-                sx={{
-                  fontSize: '14px',
-                  marginBottom: '20px',
-                  marginRight: '20px',
-                }}
-                onClick={() => {
-                  setPage(1);
-                  setCurrentPage(1);
-                }}
-              >
-                First
-              </Button>
-              <Pagination
-                sx={{
-                  ...useStyles.numberPag,
-                }}
-                count={Math.ceil(props.rows.length / rowsPerPage)}
-                variant="outlined"
-                shape="rounded"
-                onChange={onPageChange}
-                siblingCount={0}
-              />
-              <Button
-                disabled={page == Math.ceil(props.rows.length / rowsPerPage)}
-                endIcon={<LastArrow />}
-                sx={{
-                  fontSize: '14px',
-                  marginBottom: '20px',
-                  marginLeft: '20px',
-                }}
-                onClick={() => {
-                  setPage(Math.ceil(props.rows.length / rowsPerPage));
-                  setCurrentPage(Math.ceil(props.rows.length / rowsPerPage));
-                }}
-              >
-                Last
-              </Button>
-            </TableCell>
-          </Grid>
-        </Grid>
+
+        <PaginationComp 
+        rows={props.rows}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        handleChangePage={handleChangePage}
+        handleChangeRowsPerPage={handleChangeRowsPerPage}
+        onPageChange={onPageChange}
+        onLastClick={()=> {
+          setPage(Math.ceil(props.rows.length / rowsPerPage));
+          setCurrentPage(Math.ceil(props.rows.length / rowsPerPage));
+        }}
+        onFirstClick={() => {
+          setPage(1);
+          setCurrentPage(1);
+        }}
+        lastButtonDisabled={page == Math.ceil(props.rows.length / rowsPerPage)}
+        />
       </Grid>
     </div>
   );
 }
-
-const ActionComponentDisabled = () => <span />;
 
 function kycStatus(
   status: string,
