@@ -1,17 +1,17 @@
-import { Button, IconButton, Stack, Typography } from "@mui/material";
-import PauseCircleFilledIcon from "@mui/icons-material/PauseCircleFilled";
-import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
-import EditIcon from "@mui/icons-material/Edit";
-import { useState } from "react";
-import { colors } from "../../../../style/Color";
-import { programMmgt, tabBar } from "../../../../utils/Constants";
-import { ListView } from "./listComponents/listView";
-import CardList from "./listComponents/cardList";
-import cardListIcon from "../../../../assets/images/cardListIcon.svg";
-import ListIcon from "../../../../assets/images/list_layout.svg";
-import resumeIcon from "../../../../assets/images/resume_surrogate_icon.svg";
-import editIcon from "../../../../assets/images/edit_scheduled_pause_icon.svg";
-import pauseIcon from "../../../../assets/images/pause_surrogate_icon.svg";
+import { Button, IconButton, Stack, Typography } from '@mui/material';
+import PauseCircleFilledIcon from '@mui/icons-material/PauseCircleFilled';
+import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
+import EditIcon from '@mui/icons-material/Edit';
+import { useState } from 'react';
+import { colors } from '../../../../style/Color';
+import { programMmgt, tabBar } from '../../../../utils/Constants';
+import { ListView } from './listComponents/listView';
+import CardList from './listComponents/cardList';
+import cardListIcon from '../../../../assets/images/cardListIcon.svg';
+import ListIcon from '../../../../assets/images/list_layout.svg';
+import resumeIcon from '../../../../assets/images/resume_surrogate_icon.svg';
+import editIcon from '../../../../assets/images/edit_scheduled_pause_icon.svg';
+import pauseIcon from '../../../../assets/images/pause_surrogate_icon.svg';
 export const ProgramManagementScreen = () => {
   const [listView, setListView] = useState(true);
 
@@ -24,7 +24,7 @@ export const ProgramManagementScreen = () => {
     useState<boolean>(false);
 
   return (
-    <Stack sx={{ padding: "25px 30px 0 30px" }}>
+    <Stack sx={{ padding: '25px 30px 0 30px' }}>
       <Stack
         sx={{
           borderBottom: `2px solid ${colors.lightGrey}`,
@@ -32,10 +32,10 @@ export const ProgramManagementScreen = () => {
       >
         <Stack
           sx={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
           }}
         >
           <Stack>
@@ -46,8 +46,8 @@ export const ProgramManagementScreen = () => {
               variant="subtitle2"
               sx={{
                 letterSpacing: 0.2,
-                color: "#A3A3A5",
-                paddingBottom: "20px",
+                color: '#A3A3A5',
+                paddingBottom: '20px',
               }}
             >
               {tabBar.TEMPORARILY_PAUSE}
@@ -56,14 +56,14 @@ export const ProgramManagementScreen = () => {
 
           <Stack
             sx={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
             }}
           >
             <Stack
               sx={{
-                padding: "0 10px",
+                padding: '0 10px',
               }}
               onClick={() => {
                 setListView(false);
@@ -76,15 +76,15 @@ export const ProgramManagementScreen = () => {
                   style={{
                     filter:
                       listView === false
-                        ? "invert(16%) sepia(97%) saturate(2280%) hue-rotate(207deg) brightness(100%) contrast(91%)"
-                        : "",
+                        ? 'invert(16%) sepia(97%) saturate(2280%) hue-rotate(207deg) brightness(100%) contrast(91%)'
+                        : '',
                   }}
                 />
               </IconButton>
             </Stack>
             <Stack
               sx={{
-                padding: "0 10px",
+                padding: '0 10px',
               }}
               onClick={() => {
                 setListView(true);
@@ -97,8 +97,8 @@ export const ProgramManagementScreen = () => {
                   style={{
                     filter:
                       listView === true
-                        ? "invert(15%) sepia(98%) saturate(2693%) hue-rotate(209deg) brightness(97%) contrast(87%)"
-                        : "",
+                        ? 'invert(15%) sepia(98%) saturate(2693%) hue-rotate(209deg) brightness(97%) contrast(87%)'
+                        : '',
                   }}
                 />
               </IconButton>
@@ -107,19 +107,19 @@ export const ProgramManagementScreen = () => {
         </Stack>
       </Stack>
       <Stack>
-        <Stack direction="row" spacing={3} sx={{ margin: "30px 0px" }}>
+        <Stack direction="row" spacing={3} sx={{ margin: '30px 0px' }}>
           <Button
             variant="contained"
             color="secondary"
             sx={{
-              padding: "3px 8px",
-              fontSize: "12px",
-              display: "flex",
-              alignItems: "center",
+              padding: '3px 8px',
+              fontSize: '12px',
+              display: 'flex',
+              alignItems: 'center',
             }}
             onClick={() => setShowPauseModal(true)}
           >
-            <IconButton sx={{ padding: "0", marginRight: "8px" }}>
+            <IconButton sx={{ padding: '0', marginRight: '8px' }}>
               <img src={resumeIcon} alt="resumeIcon" />
             </IconButton>
             {programMmgt.RESUME_SURROGATE}
@@ -128,13 +128,13 @@ export const ProgramManagementScreen = () => {
             variant="contained"
             color="secondary"
             sx={{
-              padding: "3px 8px",
-              fontSize: "12px",
-              display: "flex",
-              alignItems: "center",
+              padding: '3px 8px',
+              fontSize: '12px',
+              display: 'flex',
+              alignItems: 'center',
             }}
           >
-            <IconButton sx={{ padding: "0", marginRight: "8px" }}>
+            <IconButton sx={{ padding: '0', marginRight: '8px' }}>
               <img src={pauseIcon} alt="resumeIcon" />
             </IconButton>
             {programMmgt.PAUSE_SURROGATE}
@@ -143,13 +143,13 @@ export const ProgramManagementScreen = () => {
             variant="contained"
             color="secondary"
             sx={{
-              padding: "3px 8px",
-              fontSize: "12px",
-              display: "flex",
-              alignItems: "center",
+              padding: '3px 8px',
+              fontSize: '12px',
+              display: 'flex',
+              alignItems: 'center',
             }}
           >
-            <IconButton sx={{ padding: "0", marginRight: "8px" }}>
+            <IconButton sx={{ padding: '0', marginRight: '8px' }}>
               <img src={editIcon} alt="resumeIcon" />
             </IconButton>
             {programMmgt.EDIT_SCHEDULE_PAUSE}

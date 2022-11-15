@@ -1,13 +1,13 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes } from 'react-router-dom';
 
-import { Layout, PrivateRoute } from "./components";
-import { Dashboard, HomePage, LoginPage, NotFoundPage } from "./pages";
-import BulkUpload from "./pages/productManagement/cardCatalogue/bulkUpload";
-import CreateNewCard from "./pages/productManagement/cardCatalogue/createCard/createNewCard";
+import { Layout, PrivateRoute } from './components';
+import { Dashboard, HomePage, LoginPage, NotFoundPage } from './pages';
+import BulkUpload from './pages/productManagement/cardCatalogue/bulkUpload';
+import CreateNewCard from './pages/productManagement/cardCatalogue/createCard/createNewCard';
 // import { CreateNewCard } from "./pages/productManagement/cardCatalogue/createCard/createNewCard";
-import CardCatalogue from "./pages/productManagement/cardCatalogue/landingScreen/cardTab";
-import ProgramManagement from "./pages/productManagement/programmeManagement/landingScreen";
-import SalesDashboard from "./pages/sales/dashboard/Dashboard";
+import CardCatalogue from './pages/productManagement/cardCatalogue/landingScreen/cardTab';
+import ProgramManagement from './pages/productManagement/programmeManagement/landingScreen';
+import SalesDashboard from './pages/sales/dashboard/Dashboard';
 export default function App() {
   return (
     <Routes>

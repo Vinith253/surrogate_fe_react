@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 const reviewCard = () => {
-  return (
-    <div>reviewCard</div>
-  )
-}
+  return <div>reviewCard</div>;
+};
 
-export default reviewCard
+export default reviewCard;

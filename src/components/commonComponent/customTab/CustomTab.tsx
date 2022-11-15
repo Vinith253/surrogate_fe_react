@@ -1,11 +1,11 @@
-import { Box, Tab } from "@mui/material";
-import { TabContext, TabList, TabPanel } from "@mui/lab";
-import { useState } from "react";
-import { dataList, tabList } from "../../../interface/Types";
-import { colors } from "../../../style/Color";
+import { Box, Tab } from '@mui/material';
+import { TabContext, TabList, TabPanel } from '@mui/lab';
+import { useState } from 'react';
+import { dataList, tabList } from '../../../interface/Types';
+import { colors } from '../../../style/Color';
 
 export const TabBar = ({ data }: { data: dataList }) => {
-  const [value, setValue] = useState("1");
+  const [value, setValue] = useState('1');
   const handleChange = (event: React.SyntheticEvent, val: string) => {
     setValue(val);
   };
@@ -21,7 +21,7 @@ export const TabBar = ({ data }: { data: dataList }) => {
             indicatorColor="secondary"
             sx={{
               backgroundColor: colors.lightGrey,
-              padding: "30px 30px 0  30px",
+              padding: '30px 30px 0  30px',
             }}
           >
             {data.map((item: tabList, index: number) => {
@@ -36,10 +36,10 @@ export const TabBar = ({ data }: { data: dataList }) => {
           </TabList>
           {data.map((item: tabList, index: number) => {
             return (
-<TabPanel
+              <TabPanel
                 key={index}
                 value={item.id}
-                sx={{ padding: "0px 0px 0 0px" }}
+                sx={{ padding: '0px 0px 0 0px' }}
               >
                 {item.component}
               </TabPanel>

@@ -1,8 +1,6 @@
-import { Button } from "@mui/material";
-import React, { useState } from "react";
-import CustomModal from "./CustomModal";
-
-
+import { Button } from '@mui/material';
+import React, { useState } from 'react';
+import CustomModal from './CustomModal';
 
 function PauseModalSucces() {
   const [openSuccess, setOpenSuccess] = useState(false);
@@ -23,12 +21,11 @@ function PauseModalSucces() {
       <CustomModal
         openSuccess={openSuccess}
         handleCloseSuccess={handleCloseSuccess}
-        successModalTitle={"Card For Card - Pause"}
+        successModalTitle={'Card For Card - Pause'}
         successModalMsg={
-          " Your action of pausing - Card For Card Surrogate has been successully sent to the reviewer"
+          ' Your action of pausing - Card For Card Surrogate has been successully sent to the reviewer'
         }
-        btn={" Close"}
-       
+        btn={' Close'}
       />
     </div>
   );

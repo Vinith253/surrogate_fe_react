@@ -1,10 +1,9 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react';
 
-import { Button } from "@mui/material";
+import { Button } from '@mui/material';
 import CustomModal from './CustomModal';
 
 function SchedulePauseSuccess() {
-
   const [openSuccess, setOpenSuccess] = useState(false);
 
   const handleClickOpen = () => {
@@ -17,18 +16,21 @@ function SchedulePauseSuccess() {
 
   return (
     <div>
-        <Button variant="outlined" onClick={handleClickOpen}> Schedule Pause Success</Button>
+      <Button variant="outlined" onClick={handleClickOpen}>
+        {' '}
+        Schedule Pause Success
+      </Button>
       <CustomModal
-       openSuccess={openSuccess}
-       handleCloseSuccess={handleCloseSuccess}
-        successModalTitle={"Card For Card - Scheduled Pause"}
-        successModalMsg={"Your action of Scheduled Pause - Card For Card Surrogate From  DD/MM/YYYTo DD/MM/YYY is successfully sent to reviewer"}
-        btn={" Close"}
-       
+        openSuccess={openSuccess}
+        handleCloseSuccess={handleCloseSuccess}
+        successModalTitle={'Card For Card - Scheduled Pause'}
+        successModalMsg={
+          'Your action of Scheduled Pause - Card For Card Surrogate From  DD/MM/YYYTo DD/MM/YYY is successfully sent to reviewer'
+        }
+        btn={' Close'}
       />
-
     </div>
-  )
+  );
 }
 
-export default SchedulePauseSuccess
+export default SchedulePauseSuccess;

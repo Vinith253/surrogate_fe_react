@@ -1,20 +1,20 @@
-import React, { useState } from "react";
-import "./dashboard.scss";
-import TableComp from "../../../components/commonComponent/ListTable/ListTable";
-import ApprovalRate from "../../../assets/icons/approval_rate_icon.svg";
-import TotalApplications from "../../../assets/icons/total_application_icon.svg";
-import Comparisions from "../../../assets/icons/comparision_icon.svg";
-import VirtualCard from "../../../assets/icons/virtual_card_icon.svg";
-import ApprovedIcon from "../../../assets/icons/approved_icon.svg";
-import Dropped from "../../../assets/icons/dropped_icon.svg";
-import InProgress from "../../../assets/icons/in_progress_icon.svg";
-import Rejected from "../../../assets/icons/rejected_icon.svg";
+import React, { useState } from 'react';
+import './dashboard.scss';
+import TableComp from '../../../components/commonComponent/ListTable/ListTable';
+import ApprovalRate from '../../../assets/icons/approval_rate_icon.svg';
+import TotalApplications from '../../../assets/icons/total_application_icon.svg';
+import Comparisions from '../../../assets/icons/comparision_icon.svg';
+import VirtualCard from '../../../assets/icons/virtual_card_icon.svg';
+import ApprovedIcon from '../../../assets/icons/approved_icon.svg';
+import Dropped from '../../../assets/icons/dropped_icon.svg';
+import InProgress from '../../../assets/icons/in_progress_icon.svg';
+import Rejected from '../../../assets/icons/rejected_icon.svg';
 import {
   listRowHeading,
   salesDashboardList,
   statusRowHeading,
-} from "./dashboard.const";
-import DsaPage from "./dsaPage/dsa";
+} from './dashboard.const';
+import DsaPage from './dsaPage/dsa';
 interface IStatus {
   label: string;
   value: number;
