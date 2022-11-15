@@ -1,4 +1,4 @@
-import * as React from "react";
+import react, { useRef, useState } from "react";
 import {
   Stack,
   Box,
@@ -16,32 +16,146 @@ import {
 import BtnContained from "../../../../components/commonComponent/CustomText/Button/Contained";
 import BtnOutlined from "../../../../components/commonComponent/CustomText/Button/Outlined";
 import BtnText from "../../../../components/commonComponent/CustomText/Button/Text";
-import Checkbox from "@mui/material/Checkbox";
+// import Checkbox from "@mui/material/Checkbox";
 import InfoIcon from "@mui/icons-material/Info";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
+import IconButton from "@mui/material/IconButton";
+import PhotoCamera from "@mui/icons-material/PhotoCamera";
 // import { Divider } from "@material-ui/core";
 // import CadActions from "@mui/material/CardActions";
 // import CardContent from "@mui/material/CardContent";
+import CheckBox from "../../../../components/commonComponent/CheckBox/checkBox";
 import TypoText from "../../../../components/commonComponent/CustomText/Textfield";
 import TypographyInfo from "../../../../components/commonComponent/CustomText/Info";
 import { useNavigate } from "react-router-dom";
 
-export const CreateNewCard = () => {
+const CreateNewCard = () => {
+  // const uploadRef = useRef<any>();
   const navigate = useNavigate();
-
   const goBack = () => {
-    navigate("/productManagement/cardCatalogue");
+    navigate(-1);
   };
+  // const saveFun = () => {
+  //   navigate("/productManagement/cardCatalogue/singleupload/o");
+  //   console.log("clicked");
+  // };
+  const [data, setData] = useState<any>();
+  let obj = {
+    businessId: "",
+    cardName: "",
+    interestRate: "",
+    maximumCardLimit: "",
+    cibilScore: "",
+    itrLimit: "",
+    salaryLimit: "",
+    c4cLimit: "",
+    joiningFee: "",
+    joiningFeeWavier: "",
+    fuelSurchargeWavier: "",
+    currencyMarkup: "",
+    fuelSurcharge: "",
+    fuelSurchargeDescription: "",
+    annualFee: "",
+    rewardDescription: [{ value: " " }],
+    keyBenefits: [{ value: " " }],
+    additionalBenefits: [{ value: " " }],
+    welcomeBenefits: [{ value: "" }],
+  };
+  const [dataObj, setDataObj] = useState(obj);
+  const handleValueChange = (e: any, value: any) => {
+    setDataObj((prev) => ({ ...prev, [value]: e }));
+  };
+  const handleSubmitClick = () => {
+    console.log(dataObj, "dataObj");
+    navigate("/productManagement/cardCatalogue/singleupload/reviewCard");
+  };
+  const AddRewardList = () => {
+    let newVal = { value: "" };
+    setDataObj((prev) => ({
+      ...prev,
+      rewardDescription: [...prev.rewardDescription, newVal],
+    }));
+  };
+
+  const AddKeyList = () => {
+    let newVal = { value: "" };
+    setDataObj((prev) => ({
+      ...prev,
+      keyBenefits: [...prev.keyBenefits, newVal],
+    }));
+  };
+
+  const AddAdditionalList = () => {
+    let newVal = { value: "" };
+    setDataObj((prev) => ({
+      ...prev,
+      additionalBenefits: [...prev.additionalBenefits, newVal],
+    }));
+  };
+
+  const AddWelcomeList = () => {
+    let newVal = { value: "" };
+    setDataObj((prev) => ({
+      ...prev,
+      welcomeBenefits: [...prev.welcomeBenefits, newVal],
+    }));
+  };
+
   // const label = { inputProps: { "aria-label": "Checkbox demo" } };
+
+  // const [mainState, setMainState] = useState('initial');
+  // const [imageUploaded, setImageUploaded] = useState(0);
+  // const [selectedFile,setSelectedFile] = useState(null);
+  // const handleUploadClick = event => {
+  //   console.log();
+  //   var file = event.target.files[0];
+  //   const reader = new FileReader();
+  //   var url = reader.readAsDataURL(file);
+
+  //   reader.onloadend = function(e) {
+  //       setSelectedFile(reader.result)
+  //   }
+
+  //     setMainState("uploaded"),
+  //     setSelectedFile(event.target.files[0]),
+  //     setImageUploaded(1)
+
+  // };
+
+  // const [main,setMain] = useState('initial');
+  // const [imageUploaded,setImageUploaded] = useState(0);
+  // const [selectedFile,setSelectedFile] = useState(null);
+
+  // state = {
+  //   mainState: "initial", // initial, search, gallery, uploaded
+  //   imageUploaded: 0,
+  //   selectedFile: null
+  // };
+
+  // const handleUploadClick = event => {
+  //   console.log();
+  //   var file = event.target.files[0];
+  //   const reader = new FileReader();
+  //   var url = reader.readAsDataURL(file);
+
+  //   reader.onloadend = function(e) {
+  //       setSelectedFile(reader.result)
+
+  //   }
+  //     setMain("uploaded"),
+  //     setSelectedFile(event.target.files[0]),
+  //     setImageUploaded(1)
+  // };
 
   return (
     <Box
       sx={{
         backgroundColor: "#eceff2",
-        margin: 0,
+        // margin: 0,
         padding: 0,
+        paddingBottom: 15,
       }}
     >
       <Box sx={{ backgroundColor: "white", paddingX: 3, padding: 2 }}>
@@ -82,6 +196,36 @@ export const CreateNewCard = () => {
         </Box>
         <Divider />
         <Box sx={{ marginTop: 2 }}>
+          {/* <input
+            accept="image/*"
+            type="file"
+            onChange={(event) => setData(event.target.files)}
+            // className={classes.input}
+            id="contained-button-file"
+          /> */}
+
+          {/* <Card>
+          <Grid container sx={{ justifyContent="center", alignItems="center"}}>
+            <input
+              accept="image/*"
+              // className={classes.input}
+              id="contained-button-file"
+              multiple
+              type="file"
+              onChange={handleUploadClick}
+            />
+            <label htmlFor="contained-button-file">
+              <Button component="span" >
+                <PhotoCamera />
+              </Button>
+            </label> 
+          </Grid>
+          <img
+            width="100%"
+            src={setSelectedFile}
+          />
+        </Card> */}
+
           <Card
             sx={{
               width: 350,
@@ -93,8 +237,19 @@ export const CreateNewCard = () => {
               backgroundColor: "#e0e0de",
             }}
           >
-            <FileUploadIcon />
-            <Button color="secondary">Upload</Button>
+            <IconButton
+              color="primary"
+              aria-label="upload picture"
+              component="label"
+            >
+              <input hidden accept="image/*" type="file" />
+              <FileUploadIcon />
+            </IconButton>
+
+            <Button color="secondary">
+              Upload
+              <input hidden accept="image/*" multiple type="file" />
+            </Button>
           </Card>
         </Box>
       </Box>
@@ -116,36 +271,33 @@ export const CreateNewCard = () => {
           <Grid item xs={12} sm={6} md={4}>
             <Box sx={{ display: "flex", flexDirection: "column" }}>
               <TypoText title="Business ID" />
-              <TypoText placeholder="Business ID" />
-              {/* <TextField
-                sx={{ width: "350px" }}
-                size="small"
+              <TypoText
                 placeholder="Business ID"
-              /> */}
+                handleChange={handleValueChange}
+                value={"businessId"}
+              />
             </Box>
           </Grid>
 
           <Grid item xs={12} sm={6} md={4}>
             <Box sx={{ display: "flex", flexDirection: "column" }}>
               <TypoText title="Card Name" />
-              <TypoText placeholder="Card Name" />
-              {/* <TextField
-                sx={{ width: "350px" }}
-                size="small"
-                placeholder="card name"
-              /> */}
+              <TypoText
+                placeholder="Card Name"
+                handleChange={handleValueChange}
+                value={"cardName"}
+              />
             </Box>
           </Grid>
 
           <Grid item xs={12} sm={6} md={4}>
             <Box sx={{ display: "flex", flexDirection: "column" }}>
               <TypoText title="Interest Rate (in%)" />
-              <TypoText placeholder="Interest Rate (in%)" />
-              {/* <TextField
-                sx={{ width: "350px" }}
-                size="small"
-                placeholder="interest rate"
-              /> */}
+              <TypoText
+                placeholder="Interest Rate (in%)"
+                handleChange={handleValueChange}
+                value={"interestRate"}
+              />
             </Box>
           </Grid>
         </Grid>
@@ -173,30 +325,22 @@ export const CreateNewCard = () => {
           </Grid>
         </Grid>
 
-        <Grid container>
+        <Grid
+          container
+          sx={{
+            marginTop: 2,
+          }}
+        >
           <Grid item xs={12} sm={6} md={4}>
             <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                marginTop: 2,
-              }}
+              sx={{ display: "flex", flexDirection: "column", width: "92%" }}
             >
-              <FormControl
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  width: "350px",
-                }}
-              >
-                <TypoText title="Maximum Card Limit" />
-                <TypoText placeholder="Maximum Card Limit" />
-                {/* <TextField
-                  sx={{ width: "350px" }}
-                  size="small"
-                  placeholder="Enter maximum card limit"
-                /> */}
-              </FormControl>
+              <TypoText title="Maximum Card Limit" />
+              <TypoText
+                placeholder="Enter maximum card limit"
+                handleChange={handleValueChange}
+                value={"maximumCardLimit"}
+              />
             </Box>
           </Grid>
         </Grid>
@@ -219,37 +363,37 @@ export const CreateNewCard = () => {
         <Grid container sx={{ display: "flex", marginTop: 2 }}>
           <Grid item xs={12} sm={6} md={2}>
             <Box sx={{ display: "flex" }}>
-              <Checkbox />
+              <CheckBox />
               <Typography sx={{ paddingTop: 1 }}>Payroll</Typography>
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={2}>
             <Box sx={{ display: "flex" }}>
-              <Checkbox />
+              <CheckBox />
               <Typography sx={{ paddingTop: 1 }}>Card For Card</Typography>
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={2}>
             <Box sx={{ display: "flex" }}>
-              <Checkbox />
+              <CheckBox />
               <Typography sx={{ paddingTop: 1 }}>CIBIL</Typography>
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={2}>
             <Box sx={{ display: "flex" }}>
-              <Checkbox />
+              <CheckBox />
               <Typography sx={{ paddingTop: 1 }}>AQB</Typography>
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={2}>
             <Box sx={{ display: "flex" }}>
-              <Checkbox />
+              <CheckBox />
               <Typography sx={{ paddingTop: 1 }}>Pre-Approved</Typography>
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={2}>
             <Box sx={{ display: "flex" }}>
-              <Checkbox />
+              <CheckBox />
               <Typography sx={{ paddingTop: 1 }}>Secured</Typography>
             </Box>
           </Grid>
@@ -275,19 +419,19 @@ export const CreateNewCard = () => {
         <Grid container sx={{ display: "flex", gap: 12, marginTop: 2 }}>
           <Grid item>
             <Box sx={{ display: "flex" }}>
-              <Checkbox />
+              <CheckBox />
               <Typography sx={{ paddingTop: 1 }}>Bank</Typography>
             </Box>
           </Grid>
           <Grid item>
             <Box sx={{ display: "flex" }}>
-              <Checkbox />
+              <CheckBox />
               <Typography sx={{ paddingTop: 1 }}>DSA</Typography>
             </Box>
           </Grid>
           <Grid item>
             <Box sx={{ display: "flex" }}>
-              <Checkbox />
+              <CheckBox />
               <Typography sx={{ paddingTop: 1 }}>Fintech Partner</Typography>
             </Box>
           </Grid>
@@ -312,7 +456,11 @@ export const CreateNewCard = () => {
           <Grid item xs={12} sm={6} md={4}>
             <Box sx={{ display: "flex", flexDirection: "column" }}>
               <TypoText title="CIBIL Score" />
-              <TypoText placeholder="CIBIL Score" />
+              <TypoText
+                placeholder="CIBIL Score"
+                handleChange={handleValueChange}
+                value={"cibilScore"}
+              />
               {/* <TextField sx={{ width: "350px" }} size="small" placeholder="0" /> */}
             </Box>
           </Grid>
@@ -320,14 +468,22 @@ export const CreateNewCard = () => {
           <Grid item xs={12} sm={6} md={4}>
             <Box sx={{ display: "flex", flexDirection: "column" }}>
               <TypoText title="Salary Limit" />
-              <TypoText placeholder="$ 00.00" />
+              <TypoText
+                placeholder="$ 00.00"
+                handleChange={handleValueChange}
+                value={"salaryLimit"}
+              />
             </Box>
           </Grid>
 
           <Grid item xs={12} sm={6} md={4}>
             <Box sx={{ display: "flex", flexDirection: "column" }}>
               <TypoText title="ITR Limit" />
-              <TypoText placeholder="$ 00.00" />
+              <TypoText
+                placeholder="$ 00.00"
+                handleChange={handleValueChange}
+                value={"itrLimit"}
+              />
               {/* <TextField
                 sx={{ width: "350px" }}
                 size="small"
@@ -337,30 +493,22 @@ export const CreateNewCard = () => {
           </Grid>
         </Grid>
 
-        <Grid container>
+        <Grid
+          container
+          sx={{
+            marginTop: 2,
+          }}
+        >
           <Grid item xs={12} sm={6} md={4}>
             <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                marginTop: 2,
-              }}
+              sx={{ display: "flex", flexDirection: "column", width: "92%" }}
             >
-              <FormControl
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  width: "350px",
-                }}
-              >
-                <TypoText title="C4C Limit" />
-                <TypoText placeholder="$ 00.00" />
-                {/* <TextField
-                  sx={{ width: "350px" }}
-                  size="small"
-                  placeholder="$ 00.00"
-                /> */}
-              </FormControl>
+              <TypoText title="C4C Limit" />
+              <TypoText
+                placeholder="00.00"
+                handleChange={handleValueChange}
+                value={"c4cLimit"}
+              />
             </Box>
           </Grid>
         </Grid>
@@ -382,17 +530,17 @@ export const CreateNewCard = () => {
 
         <Box sx={{ marginTop: 2 }}>
           <Box sx={{ display: "flex" }}>
-            <Checkbox />
+            <CheckBox />
             <Typography sx={{ paddingTop: 1 }}>
               Currency Markup Charges
             </Typography>
           </Box>
           <Box sx={{ display: "flex" }}>
-            <Checkbox />
+            <CheckBox />
             <Typography sx={{ paddingTop: 1 }}>Airmiles</Typography>
           </Box>
           <Box sx={{ display: "flex" }}>
-            <Checkbox />
+            <CheckBox />
             <Typography sx={{ paddingTop: 1 }}>Cashbacks</Typography>
           </Box>
         </Box>
@@ -439,7 +587,11 @@ export const CreateNewCard = () => {
           <Grid item xs={12} sm={6} md={4}>
             <Box sx={{ display: "flex", flexDirection: "column" }}>
               <TypoText title="Joining Fee" />
-              <TypoText placeholder="$ 00.00" />
+              <TypoText
+                placeholder="$ 00.00"
+                handleChange={handleValueChange}
+                value={"joiningFee"}
+              />
               {/* <TextField
                 sx={{ width: "350px" }}
                 size="small"
@@ -460,7 +612,11 @@ export const CreateNewCard = () => {
           <Grid item xs={12} sm={6} md={4}>
             <Box sx={{ display: "flex", flexDirection: "column" }}>
               <TypoText title="Joining Fee Wavier SpendLimit" />
-              <TypoText placeholder="$ 00.00" />
+              <TypoText
+                placeholder="$ 00.00"
+                handleChange={handleValueChange}
+                value={"joiningFeeWavier"}
+              />
               {/* <TextField
                 sx={{ width: "350px" }}
                 size="small"
@@ -510,7 +666,11 @@ export const CreateNewCard = () => {
           <Grid item xs={12} sm={6} md={4}>
             <Box sx={{ display: "flex", flexDirection: "column" }}>
               <TypoText title="Enter Annual Fee" />
-              <TypoText placeholder="Enter Currency Markup Charges (in %)" />
+              <TypoText
+                placeholder="Enter Currency Markup Charges (in %)"
+                handleChange={handleValueChange}
+                value={"annualFee"}
+              />
               <Typography
                 sx={{
                   display: "flex",
@@ -526,7 +686,11 @@ export const CreateNewCard = () => {
           <Grid item xs={12} sm={6} md={4}>
             <Box sx={{ display: "flex", flexDirection: "column" }}>
               <TypoText title=" Annual Fee Wavier SpendLimit" />
-              <TypoText placeholder="$ 00.00" />
+              <TypoText
+                placeholder="$ 00.00"
+                handleChange={handleValueChange}
+                value={"annualFeeWavier"}
+              />
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
@@ -540,15 +704,19 @@ export const CreateNewCard = () => {
             </Box>
           </Grid>
         </Grid>
-
         <Box sx={{ display: "flex", flexDirection: "column", marginTop: 1 }}>
           <TypoText title="Currency Markup Description" />
           <Box
             sx={{
-              width: "100%",
+              // width: 1200,
+              maxWidth: "100%",
             }}
           >
-            <TypoText placeholder="Enter Currency Markup Charges (in %)" />
+            <TypoText
+              placeholder="Enter Currency Markup Charges (in %)"
+              handleChange={handleValueChange}
+              value={"currencyMarkup"}
+            />
           </Box>
         </Box>
 
@@ -571,7 +739,11 @@ export const CreateNewCard = () => {
           <Grid item xs={12} sm={6} md={4}>
             <Box sx={{ display: "flex", flexDirection: "column" }}>
               <TypoText title="Fuel Surcharge (in %)" />
-              <TypoText placeholder="Enter fuel surcharge in %" />
+              <TypoText
+                placeholder="Enter fuel surcharge in %"
+                handleChange={handleValueChange}
+                value={"fuelSurcharge"}
+              />
               <Typography
                 sx={{
                   display: "flex",
@@ -587,7 +759,11 @@ export const CreateNewCard = () => {
           <Grid item xs={12} sm={6} md={4}>
             <Box sx={{ display: "flex", flexDirection: "column" }}>
               <TypoText title="Fuel Surcharge Wavier Spend Limit" />
-              <TypoText placeholder="$ 00.00" />
+              <TypoText
+                placeholder="$ 00.00"
+                handleChange={handleValueChange}
+                value={"fuelSurchargeWavier"}
+              />
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
@@ -601,15 +777,19 @@ export const CreateNewCard = () => {
             </Box>
           </Grid>
         </Grid>
+
         <Box sx={{ display: "flex", flexDirection: "column", marginTop: 1 }}>
-          <TypoText title="Currency Markup Description" />
+          <TypoText title="Fuel Surcharge Description" />
           <Box
             sx={{
-              // width: 1200,
-              maxWidth: "100%",
+              width: "100%",
             }}
           >
-            <TypoText placeholder="Enter Currency Markup Charges (in %)" />
+            <TypoText
+              placeholder="Enter Fuel Surcharge Description"
+              handleChange={handleValueChange}
+              value={"fuelSurchargeDescription"}
+            />
           </Box>
         </Box>
       </Box>
@@ -628,7 +808,7 @@ export const CreateNewCard = () => {
             <TypographyInfo title="Add your reward contents here" />
           </Box>
           <Box sx={{ display: "flex" }}>
-            <Button color="secondary">
+            <Button color="secondary" onClick={AddRewardList}>
               <ControlPointIcon />
               <Typography sx={{ textTransform: "capitalize" }}>
                 Add description
@@ -637,16 +817,24 @@ export const CreateNewCard = () => {
           </Box>
         </Box>
         <Divider />
-        <Box sx={{ marginTop: 3 }}>
-          <TypoText title="Reward Description 1" />
-          <Box
-            sx={{
-              width: "100%",
-            }}
-          >
-            <TypoText placeholder="Enter Key Description for the Reward npnp" />
-          </Box>
-        </Box>
+        {dataObj.rewardDescription.map((item, index) => {
+          return (
+            <Box sx={{ marginTop: 3 }}>
+              <TypoText title={`Reward Description ${index + 1} `} />
+              <Box
+                sx={{
+                  width: "100%",
+                }}
+              >
+                <TypoText
+                  placeholder="Enter Description for the Rewards"
+                  handleChange={handleValueChange}
+                  value={"rewardDescription"}
+                />
+              </Box>
+            </Box>
+          );
+        })}
       </Box>
 
       <Box sx={{ backgroundColor: "white", marginTop: 3, padding: 4 }}>
@@ -663,7 +851,7 @@ export const CreateNewCard = () => {
             <TypographyInfo title="Add your key benifits from here" />
           </Box>
           <Box sx={{ display: "flex" }}>
-            <Button color="secondary">
+            <Button color="secondary" onClick={AddKeyList}>
               <ControlPointIcon />
               <Typography sx={{ textTransform: "capitalize" }}>
                 Add description
@@ -672,16 +860,24 @@ export const CreateNewCard = () => {
           </Box>
         </Box>
         <Divider />
-        <Box sx={{ marginTop: 3 }}>
-          <TypoText title="Key Benefits Description 1" />
-          <Box
-            sx={{
-              width: "100%",
-            }}
-          >
-            <TypoText placeholder="Enter Key Description for the Reward npnp" />
-          </Box>
-        </Box>
+        {dataObj.keyBenefits.map((item, index) => {
+          return (
+            <Box sx={{ marginTop: 3 }}>
+              <TypoText title={`Key Benefits Description ${index + 1}`} />
+              <Box
+                sx={{
+                  width: "100%",
+                }}
+              >
+                <TypoText
+                  placeholder="Enter Description for the key benefits "
+                  handleChange={handleValueChange}
+                  value={"keyBenefits"}
+                />
+              </Box>
+            </Box>
+          );
+        })}
       </Box>
 
       <Box sx={{ backgroundColor: "white", marginTop: 3, padding: 4 }}>
@@ -698,7 +894,7 @@ export const CreateNewCard = () => {
             <TypographyInfo title="Add your additional benifits here" />
           </Box>
           <Box sx={{ display: "flex" }}>
-            <Button color="secondary">
+            <Button color="secondary" onClick={AddAdditionalList}>
               <ControlPointIcon />
               <Typography sx={{ textTransform: "capitalize" }}>
                 Add description
@@ -707,16 +903,22 @@ export const CreateNewCard = () => {
           </Box>
         </Box>
         <Divider />
-        <Box sx={{ marginTop: 3 }}>
-          <TypoText title="Additional Benefits Description 1" />
-          <Box
-            sx={{
-              width: "100%",
-            }}
-          >
-            <TypoText placeholder="Enter Key Description for the Reward npnp" />
+        {dataObj.additionalBenefits.map((item, index) => (
+          <Box sx={{ marginTop: 3 }}>
+            <TypoText title={`Additional Benefits Description ${index + 1}`} />
+            <Box
+              sx={{
+                width: "100%",
+              }}
+            >
+              <TypoText
+                placeholder="Enter Description for the Additional benefits"
+                handleChange={handleValueChange}
+                value={"additionalBenefits"}
+              />
+            </Box>
           </Box>
-        </Box>
+        ))}
       </Box>
 
       <Box sx={{ backgroundColor: "white", marginTop: 3, padding: 4 }}>
@@ -733,7 +935,7 @@ export const CreateNewCard = () => {
             <TypographyInfo title="Add your additional benifits here" />
           </Box>
           <Box sx={{ display: "flex" }}>
-            <Button color="secondary">
+            <Button color="secondary" onClick={AddWelcomeList}>
               <ControlPointIcon />
               <Typography sx={{ textTransform: "capitalize" }}>
                 Add Description
@@ -742,16 +944,25 @@ export const CreateNewCard = () => {
           </Box>
         </Box>
         <Divider />
-        <Box sx={{ marginTop: 3 }}>
-          <TypoText title="Additional Benefits Description 1" />
-          <Box
-            sx={{
-              width: "100%",
-            }}
-          >
-            <TypoText placeholder="Enter Key Description for the Reward " />
-          </Box>
-        </Box>
+
+        {dataObj.welcomeBenefits.map((item, index) => {
+          return (
+            <Box sx={{ marginTop: 3 }}>
+              <TypoText title={`Welcome Benefits Description ${index + 1}`} />
+              <Box
+                sx={{
+                  width: "100%",
+                }}
+              >
+                <TypoText
+                  placeholder="Enter Description for the welcome benefits "
+                  handleChange={handleValueChange}
+                  value={"welcomeBenefits"}
+                />
+              </Box>
+            </Box>
+          );
+        })}
       </Box>
 
       <Box
@@ -770,9 +981,15 @@ export const CreateNewCard = () => {
 
           <BtnText title="Save as draft" />
 
-          <BtnContained title="Submit" />
+          <BtnContained
+            title="Submit"
+            // onClick={saveFun}
+            handleButton={handleSubmitClick}
+          />
         </Box>
       </Box>
     </Box>
   );
 };
+
+export default CreateNewCard;
