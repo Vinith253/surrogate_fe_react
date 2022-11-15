@@ -91,7 +91,7 @@ const sideBarOptions = [
       },
       {
         data: 'Sales Report',
-        path: '/productManagement/creditRule',
+        path: '/sales/salesReport',
         img: credit_rule_icon,
       },
       {
