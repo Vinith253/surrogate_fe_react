@@ -5,10 +5,26 @@
     padding: 20px;
 }
 
-.hour-box {
+.outer-filter-box {
+  color: black;
+  background-color: #d8d9db;
+  display: flex;
+  align-items: center;
+  border-radius: 3px;
+}
+
+.filter-box {
     color: black;
+    display: flex;
+    align-items: center;
+    height: 5vh;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .selectedBox {
     font-size: 12px;
-    background-color: #d8d9db;
+    background-color: #0662B7;
     height: 5vh;
     display: flex;
     align-items: center;
@@ -26,10 +42,9 @@
     justify-content: flex-end;
   }
   
-  .line2-div {
+  .seperater-div {
     border: 0.5px solid #8a8b8c;
-    margin: 10px;
-    height: 2vh;
+    height: 3vh;
   }
   
   .overview-text3{

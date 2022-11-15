@@ -1,4 +1,3 @@
-import React from "react";
 import "./filter.scss";
 import { Button, Typography } from "@mui/material";
 import DownArrow from "@mui/icons-material/ArrowDropDownRounded";
