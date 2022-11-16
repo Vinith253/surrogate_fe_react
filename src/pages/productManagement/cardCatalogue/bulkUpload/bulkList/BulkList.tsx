@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -20,6 +20,7 @@ import {
   ButtonProps,
   CircularProgress,
   Divider,
+  Grid,
   TableFooter,
   ToggleButton,
   ToggleButtonGroup,
@@ -29,6 +30,9 @@ import CloseIcon from '@mui/icons-material/Close';
 import UploadCard from '../uploadCard/UploadCard';
 import { bulkUpload } from '../../../../../utils/Constants';
 import { useNavigate } from 'react-router-dom';
+import PaginationComp from '../../../../../components/commonComponent/Pagination/Pagination';
+import BulkUpload from '..';
+import CustomModal from '../../../../../components/commonComponent/customModal/CustomModal';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -223,51 +227,77 @@ function LinearProgressWithLabel(
   );
 }
 
-export default function BulkList({ toggle }: any) {
+export default function BulkList(props: any) {
+  const navigate = useNavigate();
   const [correctionState, setCorrectionState] = useState(false);
   const [progress, setProgress] = useState(0);
   const [alignment, setAlignment] = useState('web');
-  const navigate = useNavigate();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [imageUpload, setImageUpload] = useState(true);
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  useEffect(() => {
+    console.log('props', props);
+  }, []);
+
+  const handleChangePage = (
+    event: React.MouseEvent<HTMLButtonElement> | null,
+    newPage: number
+  ) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setRowsPerPage(+event.target.value);
+    setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
+    setCurrentPage(1);
+  };
+  const onPageChange = (event: React.ChangeEvent<unknown>, page: number) => {
+    setPage(page);
+    setCurrentPage(page);
   };
   const handleCorrection = () => {
-    setCorrectionState(!correctionState);
+    console.log('correction check', correctionState);
+    setCorrectionState(true);
+    console.log('correction check', correctionState);
   };
   const handleProceed = () => {
-    navigate('/productManagement/cardCatalogue');
+    props.toggle(false, 'image');
   };
   let count = 2;
+  let rows = correctionState ? rows2 : rows1;
   useEffect(() => {
+    setProgress(0);
     const timer = setInterval(() => {
       setProgress((oldProgress) => {
-        // if (oldProgress === 100) {
-        //   return 0;
-        // }
+        if (oldProgress === 100) {
+          // console.log(props.fileCheck, 'image check');
+          // if (fileName === 'image') {
+          //   setImageUpload(true);
+          //   console.log('check');
+          // }
+        }
         const diff = Math.random() * 10;
         return Math.min(oldProgress + diff, 100);
       });
-    }, 500);
+    }, 1000);
     return () => {
       clearInterval(timer);
     };
-  }, []);
+  }, [correctionState]);
 
   const handleChange = (
     event: React.MouseEvent<HTMLElement>,
     value: string
   ) => {
     setAlignment(value);
+  };
+  const closeModal = () => {
+    setImageUpload(false);
+    navigate('/productManagement/cardCatalogue');
   };
   const progressBar = {
     borderRadius: '10px',
@@ -286,7 +316,15 @@ export default function BulkList({ toggle }: any) {
     title: bulkUpload.CORRECTION_FILE,
     para: bulkUpload.DOWNLOAD_SAMPLE_CSV_XLS,
     downloadSample: bulkUpload.DOWNLOAD_ERROR_FILE,
+    supportedFormats: bulkUpload.SUPPORTED_FORMATS,
     upload: bulkUpload.UPLOAD_CORRECTION_FILE,
+  };
+  const imageCardData = {
+    title: bulkUpload.UPLOAD_CARD,
+    para: bulkUpload.UPLOAD_MISSING_CARD,
+    supportedFormats: bulkUpload.SUPPORTED_FORMATS_JPG,
+    // downloadSample: bulkUpload.DOWNLOAD_ERROR_FILE,
+    upload: bulkUpload.UPLOAD_MISSING_PHOTO,
   };
   const column = [
     { title: '#', dataIndex: 'id', key: 'id' },
@@ -365,7 +403,14 @@ export default function BulkList({ toggle }: any) {
       error: false,
     },
   ];
-  const rows = correctionState ? rows2 : rows1;
+
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * rowsPerPage;
+    const lastPageIndex = firstPageIndex + rowsPerPage;
+    return rows.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, rowsPerPage, rows]);
+
+  console.log(props.fileCheck, 'xyz');
   return (
     <PageLayout>
       <Box sx={{ padding: '2% 0' }}>
@@ -411,10 +456,12 @@ export default function BulkList({ toggle }: any) {
             Record Found: {progress === 100 && '25'}
           </Typography>
           <Typography variant="h6" sx={{ fontSize: '1rem' }}>
-            Valid Records: {progress === 100 && '20'}
+            Valid Records: {progress === 100 && correctionState && '25'}
+            {progress === 100 && !correctionState && '20'}
           </Typography>
           <Typography variant="h6" sx={{ fontSize: '1rem' }}>
-            Error Found: {progress === 100 && '02'}
+            Error Found: {progress === 100 && correctionState && '00'}
+            {progress === 100 && !correctionState && '02'}
           </Typography>
         </Box>
         {progress !== 100 && (
@@ -433,7 +480,9 @@ export default function BulkList({ toggle }: any) {
         {progress === 100 && !correctionState && (
           <Alert severity="error">{count} Error found in Uploaded File</Alert>
         )}
-        {correctionState && <Alert severity="success">No Error found</Alert>}
+        {correctionState && progress === 100 && (
+          <Alert severity="success">No Error found</Alert>
+        )}
       </Box>
       <Divider />
       <Box
@@ -465,8 +514,14 @@ export default function BulkList({ toggle }: any) {
           <ColorButton>Error</ColorButton>
         </ButtonGroup> */}
       </Box>
-      {progress === 100 && (
-        <TableContainer component={Paper} sx={{ margin: '2% 0' }}>
+      {progress > 70 && (
+        <TableContainer
+          component={Paper}
+          sx={{
+            margin: '2% 0',
+            display: progress === 100 && correctionState ? 'none' : 'block',
+          }}
+        >
           <Table style={{ width: '100%' }} aria-label="customized table">
             <TableHead sx={{ backgroundColor: '#8fc2f4' }}>
               <TableRow>
@@ -482,29 +537,28 @@ export default function BulkList({ toggle }: any) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => (
-                  <StyledTableRow
-                    key={row.id}
-                    sx={{ backgroundColor: row.error ? '#ffe5e3' : 'white' }}
-                  >
-                    <StyledTableCell component="th" scope="row">
-                      {row.id}
-                    </StyledTableCell>
-                    <StyledTableCell>{row.cardName}</StyledTableCell>
-                    <StyledTableCell>{row.surrogateName}</StyledTableCell>
-                    <StyledTableCell>{row.cardMode}</StyledTableCell>
-                    <StyledTableCell>{row.cardType}</StyledTableCell>
-                    <StyledTableCell>{row.interestRate}</StyledTableCell>
-                    <StyledTableCell>{row.extraCard}</StyledTableCell>
-                    <StyledTableCell>{row.CIBIL}</StyledTableCell>
-                    <StyledTableCell>{row.salary}</StyledTableCell>
-                  </StyledTableRow>
-                ))}
+              {currentTableData.map((row) => (
+                <StyledTableRow
+                  key={row.id}
+                  sx={{ backgroundColor: row.error ? '#ffe5e3' : 'white' }}
+                >
+                  <StyledTableCell component="th" scope="row">
+                    {row.id}
+                  </StyledTableCell>
+                  <StyledTableCell>{row.cardName}</StyledTableCell>
+                  <StyledTableCell>{row.surrogateName}</StyledTableCell>
+                  <StyledTableCell>{row.cardMode}</StyledTableCell>
+                  <StyledTableCell>{row.cardType}</StyledTableCell>
+                  <StyledTableCell>{row.interestRate}</StyledTableCell>
+                  <StyledTableCell>{row.extraCard}</StyledTableCell>
+                  <StyledTableCell>{row.CIBIL}</StyledTableCell>
+                  <StyledTableCell>{row.salary}</StyledTableCell>
+                </StyledTableRow>
+              ))}
             </TableBody>
           </Table>
-          <TablePagination
+
+          {/* <TablePagination
             rowsPerPageOptions={[5, 25, 100]}
             component="div"
             count={rows.length}
@@ -512,23 +566,92 @@ export default function BulkList({ toggle }: any) {
             page={page}
             onPageChange={handleChangePage}
             onRowsPerPageChange={handleChangeRowsPerPage}
-          />
+          /> */}
         </TableContainer>
+      )}
+      {progress === 100 && correctionState && (
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Typography sx={{ fontSize: '18px' }}>
+            *No error found in the uploaded file*
+          </Typography>
+        </Box>
+      )}
+      {progress === 100 && (
+        <Grid>
+          <PaginationComp
+            rows={rows}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            handleChangePage={handleChangePage}
+            handleChangeRowsPerPage={handleChangeRowsPerPage}
+            onPageChange={onPageChange}
+            onLastClick={() => {
+              setPage(Math.ceil(rows.length / rowsPerPage));
+              setCurrentPage(Math.ceil(rows.length / rowsPerPage));
+            }}
+            onFirstClick={() => {
+              setPage(1);
+              setCurrentPage(1);
+            }}
+            lastButtonDisabled={page == Math.ceil(rows.length / rowsPerPage)}
+          />
+        </Grid>
       )}
       {count > 0 && progress === 100 && !correctionState && (
         <UploadCard
-          toggle={toggle}
-          data={uploadData}
+          toggle={(arg1: boolean, arg2: string) => props.toggle(arg1, arg2)}
+          data={props.fileCheck === 'xls' ? uploadData : imageCardData}
+          fileName={props.fileCheck}
           correction={handleCorrection}
         />
       )}
+      {/* {imageUpload && <BulkUpload />} */}
       {progress === 100 && (
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: '1%' }}>
-          <Button variant="outlined">Cancel</Button>
-          <Button variant="contained" color="secondary" onClick={handleProceed}>
-            Proceed
-          </Button>
-        </Box>
+        <>
+          <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: '1%' }}>
+            <Button variant="outlined">Cancel</Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={handleProceed}
+            >
+              {progress === 100 && correctionState
+                ? 'Upload card Photos'
+                : 'Proceed'}
+            </Button>
+          </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              gap: '1%',
+              marginTop: '1%',
+            }}
+          >
+            <Button
+              variant="text"
+              color="secondary"
+              onClick={handleProceed}
+              sx={{ fontSize: '12px' }}
+            >
+              {`Discord Error entries and Continue >`}
+            </Button>
+          </Box>
+          {imageUpload &&
+            correctionState &&
+            progress === 100 &&
+            props.fileCheck === 'image' && (
+              <CustomModal
+                openSuccess={imageUpload}
+                handleCloseSuccess={closeModal}
+                successModalTitle={'Card Catalogue is Uploaded Successfully'}
+                successModalMsg={
+                  '  Card Catalogue has been successully sent to the reviewer'
+                }
+                btn={' Close'}
+              />
+            )}
+        </>
       )}
     </PageLayout>
   );

@@ -6,21 +6,31 @@ import UploadCard from '../bulkUpload/uploadCard/UploadCard';
 import { bulkUpload } from '../../../../utils/Constants';
 import { useNavigate } from 'react-router-dom';
 
-const BulkUpload = () => {
+const BulkUpload = ({ flag }: any) => {
   const navigate = useNavigate();
   const [openUpload, setOpenUpload] = useState(true);
   const [openList, setOpenList] = useState(false);
-  const handleToggle = (value: boolean) => {
+  const [file, setFile] = useState('xls');
+  const handleToggle = (value: boolean, check?: any) => {
+    console.log('Check', check, value);
     setOpenList(value);
     setOpenUpload(!value);
+    setFile(check);
   };
   const uploadData = {
     title: bulkUpload.UPLOAD_CARD_DETAILS,
     para: bulkUpload.DOWNLOAD_SAMPLE_CSV_XLS,
     downloadSample: bulkUpload.DOWNLOAD_SAMPLE,
+    supportedFormats: bulkUpload.SUPPORTED_FORMATS,
     upload: bulkUpload.UPLOAD_FILE,
   };
-
+  const uploadCard = {
+    title: bulkUpload.UPLOAD_CARD,
+    para: '',
+    supportedFormats: bulkUpload.SUPPORTED_FORMATS_JPG,
+    upload: bulkUpload.UPLOAD_CARD_PHOTO,
+  };
+  console.log(file, 'file check nhhx');
   return (
     <Box sx={{ width: '100%', backgroundColor: '#E3E3E3' }}>
       <Box
@@ -57,8 +67,19 @@ const BulkUpload = () => {
       <Box
         sx={{ backgroundColor: 'white', margin: ' 2rem', borderRadius: '10px' }}
       >
-        {openUpload && <UploadCard toggle={handleToggle} data={uploadData} />}
-        {openList && <BulkList toggle={handleToggle} />}
+        {openUpload && (
+          <UploadCard
+            toggle={(arg1: boolean, arg2: string) => handleToggle(arg1, arg2)}
+            data={file === 'xls' ? uploadData : uploadCard}
+            fileName={file}
+          />
+        )}
+        {openList && (
+          <BulkList
+            toggle={(arg1: boolean, arg2: string) => handleToggle(arg1, arg2)}
+            fileCheck={file}
+          />
+        )}
       </Box>
     </Box>
   );
