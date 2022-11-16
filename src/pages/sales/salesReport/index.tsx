@@ -1,6 +1,5 @@
 import React from 'react';
 import './style.scss';
-// import { withRouter } from 'react-router-dom';
 import TableComp from '../../../components/commonComponent/ListTable/ListTable';
 import {
   listRowHeading,

@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './table.scss';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -28,6 +29,7 @@ function TableComp(props: {
   listRowHeading: statusRowHeadingInterface[];
   viewPath: string;
 }) {
+  const navigate = useNavigate();
   const [graphView, setGraphView] = useState<number>(1);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -420,9 +422,12 @@ function TableComp(props: {
                           kycStatus(row?.status, DroppedDot, '#992D26')}
                       </TableCell>
                       <TableCell align="left" sx={{ borderBottom: 'none' }}>
-                        {/* <div className="reset-data"> */}
-                        <a href={props.viewPath}>View</a>
-                        {/* </div> */}
+                        <div
+                          className="reset-data"
+                          onClick={() => navigate(props.viewPath)}
+                        >
+                          View
+                        </div>
                       </TableCell>
                     </TableRow>
                   ))}
