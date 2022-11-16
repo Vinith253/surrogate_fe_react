@@ -5,11 +5,11 @@ import {
   TableCell,
   TablePagination,
   TableRow,
-} from "@mui/material";
-import { useStyles } from "../../../style/MuiStyles/muiStyles";
-import LeftArrow from "@mui/icons-material/KeyboardDoubleArrowLeft";
-import LastArrow from "@mui/icons-material/KeyboardDoubleArrowRight";
-import { ChangeEvent, ChangeEventHandler, MouseEventHandler } from "react";
+} from '@mui/material';
+import { useStyles } from '../../../style/MuiStyles/muiStyles';
+import LeftArrow from '@mui/icons-material/KeyboardDoubleArrowLeft';
+import LastArrow from '@mui/icons-material/KeyboardDoubleArrowRight';
+import { ChangeEvent, ChangeEventHandler, MouseEventHandler } from 'react';
 
 function PaginationComp(props: {
   lastButtonDisabled: boolean | undefined;
@@ -30,25 +30,25 @@ function PaginationComp(props: {
   rows: string | any[];
 }) {
   return (
-    <Grid container sx={{ justifyContent: "space-between" }}>
+    <Grid container sx={{ justifyContent: 'space-between' }}>
       <Grid>
         <TableRow>
           <TablePagination
-            rowsPerPageOptions={[10, 20, 30, { label: "All", value: -1 }]}
+            rowsPerPageOptions={[5, 10, 20, 30, { label: 'All', value: -1 }]}
             colSpan={3}
             count={props.rows.length}
             rowsPerPage={props.rowsPerPage}
             page={props.page}
-            labelRowsPerPage={"Listing per Page"}
+            labelRowsPerPage={'Listing per Page'}
             SelectProps={{
               inputProps: {
-                "aria-label": "listing per page",
+                'aria-label': 'listing per page',
               },
               native: true,
             }}
             sx={{
-              height: "70px",
-              borderBottom: "none",
+              height: '70px',
+              borderBottom: 'none',
               ...useStyles.pagination,
             }}
             onPageChange={props.handleChangePage}
@@ -60,18 +60,18 @@ function PaginationComp(props: {
       <Grid>
         <TableCell
           sx={{
-            borderBottom: "none",
-            display: "flex",
-            flexDirection: "row",
+            borderBottom: 'none',
+            display: 'flex',
+            flexDirection: 'row',
           }}
         >
           <Button
             disabled={props.page == 1}
             startIcon={<LeftArrow />}
             sx={{
-              fontSize: "14px",
-              marginBottom: "20px",
-              marginRight: "20px",
+              fontSize: '14px',
+              marginBottom: '20px',
+              marginRight: '20px',
             }}
             onClick={props.onFirstClick}
           >
@@ -91,9 +91,9 @@ function PaginationComp(props: {
             disabled={props.lastButtonDisabled}
             endIcon={<LastArrow />}
             sx={{
-              fontSize: "14px",
-              marginBottom: "20px",
-              marginLeft: "20px",
+              fontSize: '14px',
+              marginBottom: '20px',
+              marginLeft: '20px',
             }}
             onClick={props.onLastClick}
           >
