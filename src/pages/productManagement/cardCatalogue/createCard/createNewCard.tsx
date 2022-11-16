@@ -1,5 +1,5 @@
-import React from "react";
-import { useState } from "react";
+import React from 'react';
+import { useState } from 'react';
 import {
   Stack,
   Box,
@@ -74,7 +74,7 @@ const CreateNewCard = () => {
   };
   const AddRewardList = () => {
     let newVal = { value: '' };
-    setDataObj((prev: { rewardDescription: any; }) => ({
+    setDataObj((prev) => ({
       ...prev,
       rewardDescription: [...prev.rewardDescription, newVal],
     }));
@@ -82,7 +82,7 @@ const CreateNewCard = () => {
 
   const AddKeyList = () => {
     let newVal = { value: '' };
-    setDataObj((prev: { keyBenefits: any; }) => ({
+    setDataObj((prev) => ({
       ...prev,
       keyBenefits: [...prev.keyBenefits, newVal],
     }));
@@ -90,7 +90,7 @@ const CreateNewCard = () => {
 
   const AddAdditionalList = () => {
     let newVal = { value: '' };
-    setDataObj((prev: { additionalBenefits: any; }) => ({
+    setDataObj((prev) => ({
       ...prev,
       additionalBenefits: [...prev.additionalBenefits, newVal],
     }));
@@ -98,12 +98,11 @@ const CreateNewCard = () => {
 
   const AddWelcomeList = () => {
     let newVal = { value: '' };
-    setDataObj((prev: { welcomeBenefits: any; }) => ({
+    setDataObj((prev) => ({
       ...prev,
       welcomeBenefits: [...prev.welcomeBenefits, newVal],
     }));
   };
-
 
   return (
     <Box
