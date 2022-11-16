@@ -17,6 +17,9 @@ const theme = createTheme({
     },
   },
   typography: {
+    allVariants: {
+      fontFamily: 'Ilisarniq',
+    },
     subtitle1: {
       fontSize: '16px',
       color: grey[900],

@@ -11,4 +11,6 @@ export const colors = {
   ModallightGrey: '#656769',
   Modalblue: '#0662B7',
   Modalblack: '#1515151',
+  bgGrey: '#F0F2F5',
+  textGreyHeader: '#4D4E50',
 };
