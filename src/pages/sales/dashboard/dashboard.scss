@@ -12,30 +12,6 @@
     font-size: calc(10px + 2vmin);
     color: white;
 
-    .sales-tab-header {
-      display: flex;
-      margin-top: 40px;
-      margin-left: 20px;
-
-      .sales-mgmnt-tab {
-        display: inline-block;
-        font-size: 18px;
-        color: #a7a9ab;
-        margin: 0 32px 0 0;
-        padding-bottom: 10px;
-        position: relative;
-        cursor: pointer;
-        transition: 0.3s ease-in-out;
-        border-bottom: 1px solid #a7a9ab;
-        width: 8vw;
-      }
-
-      .sales-mgmnt-tab:hover {
-        color: #522296;
-        border-bottom: 1px solid #522296;
-      }
-    }
-
     .dsa-data-container {
       background-color: white;
       display: flex;
@@ -235,14 +211,31 @@ ul {
   margin-right: 40px;
 }
 
-.hour-box {
+.graph-filter-box {
   color: black;
   font-size: 12px;
   background-color: #d8d9db;
-  height: 4vh;
+  display: flex;
+  align-items: center;
+  border-radius: 3px;
+}
+
+.hour-box {
+  color: black;
+  font-size: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.selectedBox {
+  font-size: 12px;
+  background-color: #0662b7;
+  height: 5vh;
+  display: flex;
+  align-items: center;
   padding-left: 10px;
   padding-right: 10px;
   border-radius: 3px;
@@ -255,8 +248,7 @@ ul {
 
 .line2-div {
   border: 0.5px solid #8a8b8c;
-  margin: 10px;
-  height: 2vh;
+  height: 3vh;
 }
 
 .overview-text3 {
