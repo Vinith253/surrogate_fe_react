@@ -163,8 +163,6 @@ const rows = [
   ),
 ];
 
-
-
 const tableData = [
   {
     id: 1,
@@ -210,8 +208,6 @@ const tableHeaderData = [
   },
 ];
 
-
-
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
@@ -249,8 +245,6 @@ export const CardCatalogue = () => {
   const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
   const [filteredData, setFilterteredData] = useState(rows);
   const openCardMenu = Boolean(anchorEl);
-
- 
 
   // const handleClick = (event: React.MouseEvent<HTMLTableCellElement>) => {
   //   setAnchorElement(event.currentTarget);
@@ -372,7 +366,7 @@ export const CardCatalogue = () => {
           >
             <FormControl sx={{ width: '200px' }}>
               <TypographyHead title="Card Mode" />
-              
+
               <Select
                 id="demo-simple-select"
                 value={age}
@@ -562,7 +556,11 @@ export const CardCatalogue = () => {
                   {tableHeaderData.map(
                     (items: dataHeaderList, index: number) => (
                       <TableRow key={index} sx={{ padding: '5px' }}>
-                        <TableCell align="center" padding="checkbox" sx={{ padding: '5px' }}>
+                        <TableCell
+                          align="center"
+                          padding="checkbox"
+                          sx={{ padding: '5px' }}
+                        >
                           <Checkbox />
                           {/* color={'secondary'}
                     indeterminate={
@@ -578,37 +576,31 @@ export const CardCatalogue = () => {
                     }}
                   /> */}
                         </TableCell>
-                        <TableCell align="center" sx={{ fontWeight: 800, padding: '5px' }}>
+                        <TableCell
+                          align="center"
+                          sx={{ fontWeight: 800, padding: '5px' }}
+                        >
                           #
                         </TableCell>
-                        <TableCell align="center" sx={{ fontWeight: 800,  }}>
+                        <TableCell align="center" sx={{ fontWeight: 800 }}>
                           {items.cardName}
                         </TableCell>
-                        <TableCell align="center" sx={{ fontWeight: 800,  }}>
+                        <TableCell align="center" sx={{ fontWeight: 800 }}>
                           {items.productID}
                         </TableCell>
-                        <TableCell align="center" sx={{ fontWeight: 800,  }}>
+                        <TableCell align="center" sx={{ fontWeight: 800 }}>
                           {items.businessID}
                         </TableCell>
-                        <TableCell
-                          sx={{ fontWeight: 800,  }}
-                          align="center"
-                        >
+                        <TableCell sx={{ fontWeight: 800 }} align="center">
                           {items.cardMode}
                         </TableCell>
-                        <TableCell
-                          sx={{ fontWeight: 800,  }}
-                          align="center"
-                        >
+                        <TableCell sx={{ fontWeight: 800 }} align="center">
                           {items.cardCategory}
                         </TableCell>
-                        <TableCell
-                          sx={{ fontWeight: 800,  }}
-                          align="center"
-                        >
+                        <TableCell sx={{ fontWeight: 800 }} align="center">
                           {items.cardStatus}
                         </TableCell>
-                        <TableCell sx={{ fontWeight: 800,  }}>
+                        <TableCell sx={{ fontWeight: 800 }}>
                           {items.more}
                         </TableCell>
                       </TableRow>
@@ -621,7 +613,7 @@ export const CardCatalogue = () => {
                     <TableRow
                       key={row.id}
                       // sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                      sx={{padding:0}}
+                      sx={{ padding: 0 }}
                     >
                       <TableCell align="center">
                         <Checkbox />
