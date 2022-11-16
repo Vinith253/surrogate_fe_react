@@ -8,6 +8,7 @@ import CreateNewCard from './pages/productManagement/cardCatalogue/createCard/cr
 import CardCatalogue from './pages/productManagement/cardCatalogue/landingScreen/cardTab';
 import ProgramManagement from './pages/productManagement/programmeManagement/landingScreen';
 import SalesDashboard from './pages/sales/dashboard/Dashboard';
+import ReviewCard from './pages/productManagement/cardCatalogue/reviewCard/reviewCard';
 export default function App() {
   return (
     <Routes>
@@ -38,10 +39,10 @@ export default function App() {
           element={<ProgramManagement />}
         />
 
-        {/* <Route
-          path="/productManagement/programmeManagement"
-          element={<CardCatalogue />}
-        /> */}
+        <Route
+          path="/productManagement/cardCatalogue/singleupload/reviewCard"
+          element={<ReviewCard />}
+        />
 
         <Route path="/sales/salesDashboard" element={<SalesDashboard />} />
 
