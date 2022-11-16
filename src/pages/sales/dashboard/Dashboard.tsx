@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import "./dashboard.scss";
-import TableComp from "../../../components/commonComponent/ListTable/ListTable";
+import React, { useState } from 'react';
+import './dashboard.scss';
+import TableComp from '../../../components/commonComponent/ListTable/ListTable';
 import {
   listRowHeading,
   salesDashboardList,
@@ -38,10 +38,13 @@ function Dashboard() {
             <div className="diff-area" />
             <div className="list-data-box">
               <div className="recent-data">
-                <text className="recent-data-text">Recent {salesDashboardList.length} Data </text>
+                <text className="recent-data-text">
+                  Recent {salesDashboardList.length} Data{' '}
+                </text>
               </div>
               <div className="line3-div" />
               <TableComp
+                viewPath=""
                 rows={salesDashboardList}
                 statusRowsHeading={statusRowHeading}
                 listRowHeading={listRowHeading}
@@ -62,6 +65,7 @@ function Dashboard() {
               </div>
               <div className="line3-div" />
               <TableComp
+                viewPath=""
                 rows={salesDashboardList}
                 statusRowsHeading={statusRowHeading}
                 listRowHeading={listRowHeading}
@@ -82,6 +86,7 @@ function Dashboard() {
               </div>
               <div className="line3-div" />
               <TableComp
+                viewPath=""
                 rows={salesDashboardList}
                 statusRowsHeading={statusRowHeading}
                 listRowHeading={listRowHeading}
