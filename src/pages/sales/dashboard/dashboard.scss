@@ -1,35 +1,188 @@
 .App {
   text-align: center;
   display: flex;
-}
 
-.mainContainer {
-  width: 100%;
-  background-color: #f0f2f5;
-  min-height: 100vh;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+  .mainContainer {
+    width: 100%;
+    background-color: #f0f2f5;
+    min-height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
 
-.sales-mgmnt-tab {
-  display: inline-block;
-  font-size: 18px;
-  color: #a7a9ab;
-  margin: 0 32px 0 0;
-  padding-bottom: 10px;
-  position: relative;
-  cursor: pointer;
-  transition: 0.3s ease-in-out;
-  border-bottom: 1px solid #a7a9ab;
-  width: 8vw;
-}
+    .dsa-data-container {
+      background-color: white;
+      display: flex;
+      flex-direction: column;
 
-.sales-mgmnt-tab:hover {
-  color: #522296;
-  border-bottom: 1px solid #522296;
+      .report-cards {
+        display: flex;
+        height: 70vh;
+        margin: 40px;
+
+        .progress-card {
+          width: 50%;
+        }
+        .graph-card {
+          width: 50%;
+          .graph-div {
+            border: 1px solid #d8d9db;
+            border-radius: 10px;
+            margin-top: 30px;
+            margin-right: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 20px;
+
+            .overview-text {
+              font-size: 16px;
+              color: black;
+              font-weight: bold;
+            }
+
+            .overview-text2 {
+              font-size: 16px;
+              color: black;
+            }
+            .filter-graph-box {
+              margin-top: 20px;
+              display: flex;
+              justify-content: space-between;
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+
+    .fintech-data-container {
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+
+      .report-cards {
+        display: flex;
+        height: 70vh;
+        margin: 40px;
+
+        .progress-card {
+          width: 50%;
+        }
+        .graph-card {
+          width: 50%;
+
+          .graph-div {
+            border: 1px solid #d8d9db;
+            border-radius: 10px;
+            margin-top: 30px;
+            margin-right: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 20px;
+
+            .overview-text {
+              font-size: 16px;
+              color: black;
+              font-weight: bold;
+            }
+
+            .overview-text2 {
+              font-size: 16px;
+              color: black;
+            }
+
+            .filter-graph-box {
+              margin-top: 20px;
+              display: flex;
+              justify-content: space-between;
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+
+    .bank-data-container {
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+
+      .report-cards {
+        display: flex;
+        height: 70vh;
+        margin: 40px;
+
+        .progress-card {
+          width: 50%;
+        }
+        .graph-card {
+          width: 50%;
+
+          .graph-div {
+            border: 1px solid #d8d9db;
+            border-radius: 10px;
+            margin-top: 30px;
+            margin-right: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 20px;
+
+            .overview-text {
+              font-size: 16px;
+              color: black;
+              font-weight: bold;
+            }
+
+            .overview-text2 {
+              font-size: 16px;
+              color: black;
+            }
+
+            .filter-graph-box {
+              margin-top: 20px;
+              display: flex;
+              justify-content: space-between;
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+
+    .diff-area {
+      margin-top: 70px;
+    }
+
+    .list-data-box {
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+
+      .recent-data {
+        display: flex;
+        margin-top: 24px;
+        margin-left: 42px;
+
+        .recent-data-text {
+          font-size: 14px;
+          color: black;
+          font-weight: bold;
+        }
+      }
+
+      .line3-div {
+        border: 1px solid #f0f2f5;
+        margin-top: 24px;
+        margin-left: 32px;
+        margin-right: 32px;
+      }
+    }
+  }
 }
 
 li,
@@ -39,41 +192,6 @@ ul {
   margin: 0;
 }
 
-.sales-tab-header {
-  display: flex;
-  margin-top: 40px;
-  margin-left: 20px;
-}
-
-.dsa-data-container {
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-}
-
-.fintech-data-container {
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-}
-
-.bank-data-container {
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-}
-
-.overview-text {
-  font-size: 16px;
-  color: black;
-  font-weight: bold;
-}
-
-.overview-text2 {
-  font-size: 16px;
-  color: black;
-}
-
 .horizontal-cards {
   display: flex;
   height: 22vh;
@@ -81,33 +199,9 @@ ul {
   margin-right: 40px;
 }
 
-.report-cards {
-  display: flex;
-  height: 70vh;
-  margin: 40px;
-}
-
-.progress-card {
-  width: 50%;
-}
-.graph-card {
-  width: 50%;
-}
-
-.graph-div {
-  border: 1px solid #d8d9db;
-  border-radius: 10px;
-  margin-top: 30px;
-  margin-right: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 20px;
-}
-
 .line-div {
   border: 1px solid #f0f2f5;
-  margin-top: 30px;
+  margin-top: 27px;
   width: 100%;
 }
 
@@ -117,21 +211,31 @@ ul {
   margin-right: 40px;
 }
 
-.filter-graph-box {
-  margin-top: 20px;
+.graph-filter-box {
+  color: black;
+  font-size: 12px;
+  background-color: #d8d9db;
   display: flex;
-  justify-content: space-between;
-  width: 100%;
+  align-items: center;
+  border-radius: 3px;
 }
 
 .hour-box {
   color: black;
   font-size: 12px;
-  background-color: #d8d9db;
-  height: 4vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.selectedBox {
+  font-size: 12px;
+  background-color: #0662b7;
+  height: 5vh;
+  display: flex;
+  align-items: center;
   padding-left: 10px;
   padding-right: 10px;
   border-radius: 3px;
@@ -144,8 +248,7 @@ ul {
 
 .line2-div {
   border: 0.5px solid #8a8b8c;
-  margin: 10px;
-  height: 2vh;
+  height: 3vh;
 }
 
 .overview-text3 {
@@ -162,47 +265,11 @@ ul {
   cursor: pointer;
 }
 
-.selected-hour-box {
-  color: black;
-  font-size: 12px;
-  background-color: #2d67b4;
-  height: 4vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-left: 10px;
-  padding-right: 10px;
-  border-radius: 3px;
-}
-
 .formControl {
   min-width: 20vw;
 }
 
 .status-filter {
-  background-color: 'lightgrey';
+  background-color: "lightgrey";
   font-size: 10px;
-}
-
-.diff-area {
-  margin-top: 70px;
-}
-
-.list-data-box {
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-}
-
-.recent-data {
-  display: flex;
-  margin-top: 24px;
-  margin-left: 42px;
-}
-
-.line3-div {
-  border: 1px solid #f0f2f5;
-  margin-top: 24px;
-  margin-left: 32px;
-  margin-right: 32px;
 }

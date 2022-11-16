@@ -1,4 +1,5 @@
-import react, { useRef, useState } from 'react';
+import React from 'react';
+import { useState } from 'react';
 import {
   Stack,
   Box,
@@ -41,7 +42,7 @@ const CreateNewCard = () => {
   //   navigate("/productManagement/cardCatalogue/singleupload/o");
   //   console.log("clicked");
   // };
-  const [data, setData] = useState<any>();
+  // const [data, setData] = useState<any>();
   let obj = {
     businessId: '',
     cardName: '',
@@ -65,7 +66,7 @@ const CreateNewCard = () => {
   };
   const [dataObj, setDataObj] = useState(obj);
   const handleValueChange = (e: any, value: any) => {
-    setDataObj((prev) => ({ ...prev, [value]: e }));
+    setDataObj((prev: any) => ({ ...prev, [value]: e }));
   };
   const handleSubmitClick = () => {
     console.log(dataObj, 'dataObj');
@@ -102,52 +103,6 @@ const CreateNewCard = () => {
       welcomeBenefits: [...prev.welcomeBenefits, newVal],
     }));
   };
-
-  // const label = { inputProps: { "aria-label": "Checkbox demo" } };
-
-  // const [mainState, setMainState] = useState('initial');
-  // const [imageUploaded, setImageUploaded] = useState(0);
-  // const [selectedFile,setSelectedFile] = useState(null);
-  // const handleUploadClick = event => {
-  //   console.log();
-  //   var file = event.target.files[0];
-  //   const reader = new FileReader();
-  //   var url = reader.readAsDataURL(file);
-
-  //   reader.onloadend = function(e) {
-  //       setSelectedFile(reader.result)
-  //   }
-
-  //     setMainState("uploaded"),
-  //     setSelectedFile(event.target.files[0]),
-  //     setImageUploaded(1)
-
-  // };
-
-  // const [main,setMain] = useState('initial');
-  // const [imageUploaded,setImageUploaded] = useState(0);
-  // const [selectedFile,setSelectedFile] = useState(null);
-
-  // state = {
-  //   mainState: "initial", // initial, search, gallery, uploaded
-  //   imageUploaded: 0,
-  //   selectedFile: null
-  // };
-
-  // const handleUploadClick = event => {
-  //   console.log();
-  //   var file = event.target.files[0];
-  //   const reader = new FileReader();
-  //   var url = reader.readAsDataURL(file);
-
-  //   reader.onloadend = function(e) {
-  //       setSelectedFile(reader.result)
-
-  //   }
-  //     setMain("uploaded"),
-  //     setSelectedFile(event.target.files[0]),
-  //     setImageUploaded(1)
-  // };
 
   return (
     <Box
@@ -242,13 +197,13 @@ const CreateNewCard = () => {
               aria-label="upload picture"
               component="label"
             >
-              <input hidden accept="image/*" type="file" />
+              {/* <input hidden accept="image/*" type="file" /> */}
               <FileUploadIcon />
             </IconButton>
 
             <Button color="secondary">
               Upload
-              <input hidden accept="image/*" multiple type="file" />
+              {/* <input hidden accept="image/*" multiple type="file" /> */}
             </Button>
           </Card>
         </Box>
@@ -817,7 +772,7 @@ const CreateNewCard = () => {
           </Box>
         </Box>
         <Divider />
-        {dataObj.rewardDescription.map((item, index) => {
+        {dataObj.rewardDescription.map((item: any, index: number) => {
           return (
             <Box sx={{ marginTop: 3 }}>
               <TypoText title={`Reward Description ${index + 1} `} />
@@ -860,7 +815,7 @@ const CreateNewCard = () => {
           </Box>
         </Box>
         <Divider />
-        {dataObj.keyBenefits.map((item, index) => {
+        {dataObj.keyBenefits.map((item: any, index: number) => {
           return (
             <Box sx={{ marginTop: 3 }}>
               <TypoText title={`Key Benefits Description ${index + 1}`} />
@@ -903,7 +858,7 @@ const CreateNewCard = () => {
           </Box>
         </Box>
         <Divider />
-        {dataObj.additionalBenefits.map((item, index) => (
+        {dataObj.additionalBenefits.map((item: any, index: number) => (
           <Box sx={{ marginTop: 3 }}>
             <TypoText title={`Additional Benefits Description ${index + 1}`} />
             <Box
@@ -945,7 +900,7 @@ const CreateNewCard = () => {
         </Box>
         <Divider />
 
-        {dataObj.welcomeBenefits.map((item, index) => {
+        {dataObj.welcomeBenefits.map((item: any, index: number) => {
           return (
             <Box sx={{ marginTop: 3 }}>
               <TypoText title={`Welcome Benefits Description ${index + 1}`} />
