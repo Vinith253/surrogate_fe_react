@@ -27,7 +27,7 @@ function PauseModal() {
         }
         textarea_title={'Add Remarks'}
         normalPause={'Pause Now'}
-        scheulePause={'Scheule Pause'}
+        SchedulePause={'Schedule Pause'}
         dateRange_title={'Enter Date range'}
         maxLength={'Maximum of 500 words'}
         close={'Close'}

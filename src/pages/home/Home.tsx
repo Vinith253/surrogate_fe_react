@@ -1,4 +1,5 @@
-import { Box } from '@mui/material';
+import { Box, Paper } from '@mui/material';
+import Card from '../../components/commonComponent/card/Card';
 import HistoryLogCustomModal from '../../components/commonComponent/customModal/HistoryLogCustomModal';
 import HistoryModal from '../../components/commonComponent/customModal/HistoryLogModal';
 import PauseModal from '../../components/commonComponent/customModal/PauseModal';
@@ -9,6 +10,7 @@ import ResumeModalSuccess from '../../components/commonComponent/customModal/Res
 import SchedulePause from '../../components/commonComponent/customModal/SchedulePause';
 import SchedulePauseSuccess from '../../components/commonComponent/customModal/SchedulePauseSuccess';
 import SurrogateSelection from '../../components/commonComponent/customModal/SurrogateSelection';
+import PageLayout from '../../components/layout/pageLayout/pageLayout';
 // import SurrogateSelection from "../../components/commonComponent/CustomModal/SurrogateSelection";
 
 // import PauseModalSucces from "../../components/commonComponent/customModal/PauseModalSuccess";
@@ -23,10 +25,30 @@ export default function Home() {
   return (
     <Box
       sx={{
-        padding: '10px',
+        backgroundColor: 'white',
+        margin: ' 2rem',
+        borderRadius: '10px',
+        display: 'flex',
+        // width: '100',
+        height: '80vh',
+        gap: '3%',
+        padding: '5vh 3vw',
       }}
     >
-      <PauseModal />
+      <Card />
+      {/* <Paper elevation={3} sx={{ width: '100%' }}>
+        Hello
+      </Paper> */}
+      <Paper elevation={3} sx={{ width: '100%' }}>
+        Heya
+      </Paper>
+      <Paper elevation={3} sx={{ width: '100%' }}>
+        Hey
+      </Paper>
+
+      {/* Modals*/}
+
+      {/* <PauseModal />
       <PauseModalSucces />
       <SchedulePause />
       <SchedulePauseSuccess />
@@ -34,7 +56,7 @@ export default function Home() {
       <ResumeModalSuccess />
       <SurrogateSelection />
       <RejectionModal />
-      <HistoryModal/>
+      <HistoryModal/> */}
       {/* <HistoryLogCustomModal /> */}
     </Box>
   );
