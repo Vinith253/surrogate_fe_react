@@ -8,6 +8,9 @@ import CreateNewCard from './pages/productManagement/cardCatalogue/createCard/cr
 import CardCatalogue from './pages/productManagement/cardCatalogue/landingScreen/cardTab';
 import ProgramManagement from './pages/productManagement/programmeManagement/landingScreen';
 import SalesDashboard from './pages/sales/dashboard/Dashboard';
+import SalesReport from './pages/sales/salesReport';
+import SalesReportDetails from './pages/sales/salesReport/reportDetails';
+
 import ReviewCard from './pages/productManagement/cardCatalogue/reviewCard/reviewCard';
 export default function App() {
   return (
@@ -27,7 +30,7 @@ export default function App() {
         />
         <Route
           path="/productManagement/cardCatalogue/bulkupload"
-          element={<BulkUpload />}
+          element={<BulkUpload flag={'xlsFormat'} />}
         />
         <Route
           path="/productManagement/cardCatalogue/singleupload"
@@ -45,6 +48,12 @@ export default function App() {
         />
 
         <Route path="/sales/salesDashboard" element={<SalesDashboard />} />
+
+        <Route path="/sales/salesReport" element={<SalesReport />} />
+        <Route
+          path="/sales/salesReportDetails"
+          element={<SalesReportDetails />}
+        />
 
         {/* Catch all */}
         <Route path="*" element={<NotFoundPage />} />

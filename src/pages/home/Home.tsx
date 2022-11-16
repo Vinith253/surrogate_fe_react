@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
 import HistoryLogCustomModal from '../../components/commonComponent/customModal/HistoryLogCustomModal';
+import HistoryModal from '../../components/commonComponent/customModal/HistoryLogModal';
 import PauseModal from '../../components/commonComponent/customModal/PauseModal';
 import PauseModalSucces from '../../components/commonComponent/customModal/PauseModalSuccess';
 import RejectionModal from '../../components/commonComponent/customModal/RejectionModal';
@@ -33,7 +34,8 @@ export default function Home() {
       <ResumeModalSuccess />
       <SurrogateSelection />
       <RejectionModal />
-      <HistoryLogCustomModal />
+      <HistoryModal/>
+      {/* <HistoryLogCustomModal /> */}
     </Box>
   );
 }

@@ -1,18 +1,24 @@
-import { TextField } from "@mui/material";
-import ReactApexChart from "react-apexcharts";
-import ProgressCard from "../../../../components/commonComponent/CommonCard/ProgressCard/ProgressCard";
-import DashboardCard from "../../../../components/commonComponent/CommonCard/SalesDashbaordCard/DashboardCard";
-import FilterButton from "./SalesFilter/FilterButton";
-import ApprovalRate from "../../../../assets/icons/approval_rate_icon.svg";
-import TotalApplications from "../../../../assets/icons/total_application_icon.svg";
-import Comparisions from "../../../../assets/icons/comparision_icon.svg";
-import VirtualCard from "../../../../assets/icons/virtual_card_icon.svg";
-import ApprovedIcon from "../../../../assets/icons/approved_icon.svg";
-import Dropped from "../../../../assets/icons/dropped_icon.svg";
-import InProgress from "../../../../assets/icons/in_progress_icon.svg";
-import Rejected from "../../../../assets/icons/rejected_icon.svg";
-import "../dashboard.scss";
-import { useState } from "react";
+import { TextField } from '@mui/material';
+import ReactApexChart from 'react-apexcharts';
+import ProgressCard from '../../../../components/commonComponent/CommonCard/ProgressCard/ProgressCard';
+import DashboardCard from '../../../../components/commonComponent/CommonCard/SalesDashbaordCard/DashboardCard';
+import FilterButton from './SalesFilter/FilterButton';
+import ApprovalRate from '../../../../assets/icons/approval_rate_icon.svg';
+import TotalApplications from '../../../../assets/icons/total_application_icon.svg';
+import Comparisions from '../../../../assets/icons/comparision_icon.svg';
+import VirtualCard from '../../../../assets/icons/virtual_card_icon.svg';
+import ApprovedIcon from '../../../../assets/icons/approved_icon.svg';
+import Dropped from '../../../../assets/icons/dropped_icon.svg';
+import InProgress from '../../../../assets/icons/in_progress_icon.svg';
+import Rejected from '../../../../assets/icons/rejected_icon.svg';
+import '../dashboard.scss';
+import { useState } from 'react';
+import TableComp from '../../../../components/commonComponent/ListTable/ListTable';
+import {
+  listRowHeading,
+  salesDashboardList,
+  statusRowHeading,
+} from '../dashboard.const';
 
 interface IStatus {
   label: string;
@@ -209,124 +215,160 @@ export default function DsaPage() {
 
   return (
     <div>
-      <FilterButton />
-      <div className="divider-line" />
-      <div className="horizontal-cards">
-        {dashboardVal.map((value) => (
-          <DashboardCard
-            title={value.title}
-            value={value.value}
-            more={value.more}
-            image={value.image}
-          />
-        ))}
-      </div>
+      <div className="dsa-data-container">
+        <div>
+          <FilterButton />
+          <div className="divider-line" />
+          <div className="horizontal-cards">
+            {dashboardVal.map((value) => (
+              <DashboardCard
+                title={value.title}
+                value={value.value}
+                more={value.more}
+                image={value.image}
+              />
+            ))}
+          </div>
 
-      <div className="report-cards">
-        <div className="progress-card">
-          {progressValue.map((value) => (
-            <ProgressCard
-              index={value.index}
-              title={value.title}
-              value={value.value}
-              lastPeriodValue={value.lastPeriodValue}
-              lastYearValue={value.lastYearValue}
-              image={value.image}
-            />
-          ))}
-        </div>
-        <div className="graph-card">
-          <div className="graph-div">
-            <div>
-              <text className="overview-text">Sales Data </text>
-              <text className="overview-text2">- Current Day</text>
+          <div className="report-cards">
+            <div className="progress-card">
+              {progressValue.map((value) => (
+                <ProgressCard
+                  index={value.index}
+                  title={value.title}
+                  value={value.value}
+                  lastPeriodValue={value.lastPeriodValue}
+                  lastYearValue={value.lastYearValue}
+                  image={value.image}
+                />
+              ))}
             </div>
-            <div className="line-div" />
-            <div className="filter-graph-box">
-              <div>
-                <TextField
-                  id="outlined-select-currency-native"
-                  select
-                  value={currency}
-                  onChange={handleChange}
-                  SelectProps={{
-                    native: true,
-                  }}
-                  variant="outlined"
-                  inputProps={{
-                    style: {
-                      fontSize: '12px',
-                      backgroundColor: 'lightgrey',
-                      paddingTop: '10px',
-                      paddingBottom: '10px',
-                    },
-                  }}
-                >
-                  {currencies.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </TextField>
-              </div>
-              <div className="third-header">
-                <div className={'hour-box'}>
-                  <li
-                    onClick={() => setGraphView(1)}
-                    className={
-                      graphView == 1
-                        ? 'selected-overview-text3'
-                        : 'overview-text3'
-                    }
-                  >
-                    Hour
-                  </li>
-                  <div className="line2-div" />
-                  <li
-                    onClick={() => setGraphView(2)}
-                    className={
-                      graphView == 2
-                        ? 'selected-overview-text3'
-                        : 'overview-text3'
-                    }
-                  >
-                    Day
-                  </li>
-                  <div className="line2-div" />
-                  <li
-                    onClick={() => setGraphView(3)}
-                    className={
-                      graphView == 3
-                        ? 'selected-overview-text3'
-                        : 'overview-text3'
-                    }
-                  >
-                    Week
-                  </li>
-                  <div className="line2-div" />
-                  <li
-                    onClick={() => setGraphView(4)}
-                    className={
-                      graphView == 4
-                        ? 'selected-overview-text3'
-                        : 'overview-text3'
-                    }
-                  >
-                    Month
-                  </li>
+            <div className="graph-card">
+              <div className="graph-div">
+                <div>
+                  <text className="overview-text">Sales Data </text>
+                  <text className="overview-text2">- Current Day</text>
+                </div>
+                <div className="line-div" />
+                <div className="filter-graph-box">
+                  <div>
+                    <TextField
+                      id="outlined-select-currency-native"
+                      select
+                      value={currency}
+                      onChange={handleChange}
+                      SelectProps={{
+                        native: true,
+                      }}
+                      variant="outlined"
+                      inputProps={{
+                        style: {
+                          fontSize: '12px',
+                          backgroundColor: '#F3F3F3',
+                          paddingTop: '10px',
+                          paddingBottom: '10px',
+                        },
+                      }}
+                    >
+                      {currencies.map((option) => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </TextField>
+                  </div>
+                  <div className="third-header">
+                    <div className={'graph-filter-box'}>
+                      <div
+                        className={graphView == 1 ? 'selectedBox' : 'hour-box'}
+                      >
+                        <li
+                          onClick={() => setGraphView(1)}
+                          className={
+                            graphView == 1
+                              ? 'selected-overview-text3'
+                              : 'overview-text3'
+                          }
+                        >
+                          Hour
+                        </li>
+                      </div>
+                      <div className="line2-div" />
+                      <div
+                        className={graphView == 2 ? 'selectedBox' : 'hour-box'}
+                      >
+                        <li
+                          onClick={() => setGraphView(2)}
+                          className={
+                            graphView == 2
+                              ? 'selected-overview-text3'
+                              : 'overview-text3'
+                          }
+                        >
+                          Day
+                        </li>
+                      </div>
+                      <div className="line2-div" />
+                      <div
+                        className={graphView == 3 ? 'selectedBox' : 'hour-box'}
+                      >
+                        <li
+                          onClick={() => setGraphView(3)}
+                          className={
+                            graphView == 3
+                              ? 'selected-overview-text3'
+                              : 'overview-text3'
+                          }
+                        >
+                          Week
+                        </li>
+                      </div>
+                      <div className="line2-div" />
+                      <div
+                        className={graphView == 4 ? 'selectedBox' : 'hour-box'}
+                      >
+                        <li
+                          onClick={() => setGraphView(4)}
+                          className={
+                            graphView == 4
+                              ? 'selected-overview-text3'
+                              : 'overview-text3'
+                          }
+                        >
+                          Month
+                        </li>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="line-div" id="chart">
+                  <ReactApexChart
+                    options={options}
+                    series={series}
+                    type="bar"
+                    height={220}
+                  />
                 </div>
               </div>
             </div>
-            <div className="line-div" id="chart">
-              <ReactApexChart
-                options={options}
-                series={series}
-                type="bar"
-                height={220}
-              />
-            </div>
           </div>
         </div>
+      </div>
+      <div className="diff-area" />
+      <div className="list-data-box">
+        <div className="recent-data">
+          <text className="recent-data-text">
+            Recent {salesDashboardList.length} Data{' '}
+          </text>
+        </div>
+        <div className="line3-div" />
+        <TableComp
+          rows={salesDashboardList}
+          statusRowsHeading={statusRowHeading}
+          listRowHeading={listRowHeading}
+          flag="dashboard"
+          viewPath={''}
+        />
       </div>
     </div>
   );
