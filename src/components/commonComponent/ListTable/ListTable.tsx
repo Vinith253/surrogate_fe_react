@@ -420,9 +420,9 @@ function TableComp(props: {
                           kycStatus(row?.status, DroppedDot, '#992D26')}
                       </TableCell>
                       <TableCell align="left" sx={{ borderBottom: 'none' }}>
-                        <div className="reset-data">
-                          <Link to={props.viewPath}>Link</Link>
-                        </div>
+                        {/* <div className="reset-data"> */}
+                        <a href={props.viewPath}>View</a>
+                        {/* </div> */}
                       </TableCell>
                     </TableRow>
                   ))}
