@@ -1,30 +1,32 @@
-import React, { useMemo, useState } from "react";
-import "./table.scss";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import { Button, Grid, Typography } from "@mui/material";
-import GreenDot from "../../../assets/icons/greendot.svg";
-import DroppedDot from "../../../assets/icons/droppeddot.svg";
-import FailureDot from "../../../assets/icons/failuredot.svg";
-import ProgressDot from "../../../assets/icons/progressdot.svg";
-import { ReactComponent as EditIcon } from "../../../assets/icons/editColumn.svg";
-import { ReactComponent as RightArrow } from "../../../assets/icons/rightArrow.svg";
+import React, { useMemo, useState } from 'react';
+import './table.scss';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import { Button, Grid, Typography } from '@mui/material';
+import GreenDot from '../../../assets/icons/greendot.svg';
+import DroppedDot from '../../../assets/icons/droppeddot.svg';
+import FailureDot from '../../../assets/icons/failuredot.svg';
+import ProgressDot from '../../../assets/icons/progressdot.svg';
+import { ReactComponent as EditIcon } from '../../../assets/icons/editColumn.svg';
+import { ReactComponent as RightArrow } from '../../../assets/icons/rightArrow.svg';
 import {
   rowsDataInterface,
   statusRowHeadingInterface,
 } from '../../../pages/sales/dashboard/dashboard.const';
 import { useStyles } from '../../../style/MuiStyles/muiStyles';
-import PaginationComp from "../Pagination/Pagination";
+import PaginationComp from '../Pagination/Pagination';
+import { Link } from '@mui/icons-material';
 
 function TableComp(props: {
   rows: rowsDataInterface[];
   statusRowsHeading: statusRowHeadingInterface[];
   flag: string;
   listRowHeading: statusRowHeadingInterface[];
+  viewPath: string;
 }) {
   const [graphView, setGraphView] = useState<number>(1);
   const [page, setPage] = React.useState(0);
@@ -61,8 +63,8 @@ function TableComp(props: {
   return (
     <div className="table-div">
       <div className="third-header">
-        <div className={"outer-filter-box"}>
-          <div className={graphView == 1 ? "selectedBox" : "filter-box"}>
+        <div className={'outer-filter-box'}>
+          <div className={graphView == 1 ? 'selectedBox' : 'filter-box'}>
             <li
               onClick={() => {
                 setFilterteredData(props.rows);
@@ -71,18 +73,18 @@ function TableComp(props: {
                 setGraphView(1);
               }}
               className={
-                graphView == 1 ? "selected-overview-text3" : "overview-text3"
+                graphView == 1 ? 'selected-overview-text3' : 'overview-text3'
               }
             >
               All
             </li>
           </div>
           <div className="seperater-div" />
-          <div className={graphView == 2 ? "selectedBox" : "filter-box"}>
+          <div className={graphView == 2 ? 'selectedBox' : 'filter-box'}>
             <li
               onClick={() => {
                 const currentData = props.rows.filter(function (item) {
-                  return item.status === "Approved";
+                  return item.status === 'Approved';
                 });
                 setFilterteredData(currentData);
                 setCurrentPage(1);
@@ -90,18 +92,18 @@ function TableComp(props: {
                 setGraphView(2);
               }}
               className={
-                graphView == 2 ? "selected-overview-text3" : "overview-text3"
+                graphView == 2 ? 'selected-overview-text3' : 'overview-text3'
               }
             >
               Approved
             </li>
           </div>
           <div className="seperater-div" />
-          <div className={graphView == 3 ? "selectedBox" : "filter-box"}>
+          <div className={graphView == 3 ? 'selectedBox' : 'filter-box'}>
             <li
               onClick={() => {
                 const currentData = props.rows.filter(function (item) {
-                  return item.status === "In-Progress";
+                  return item.status === 'In-Progress';
                 });
                 setFilterteredData(currentData);
                 setCurrentPage(1);
@@ -109,18 +111,18 @@ function TableComp(props: {
                 setGraphView(3);
               }}
               className={
-                graphView == 3 ? "selected-overview-text3" : "overview-text3"
+                graphView == 3 ? 'selected-overview-text3' : 'overview-text3'
               }
             >
               In-Progress
             </li>
           </div>
           <div className="seperater-div" />
-          <div className={graphView == 4 ? "selectedBox" : "filter-box"}>
+          <div className={graphView == 4 ? 'selectedBox' : 'filter-box'}>
             <li
               onClick={() => {
                 const currentData = props.rows.filter(function (item) {
-                  return item.status === "Rejected";
+                  return item.status === 'Rejected';
                 });
                 setFilterteredData(currentData);
                 setCurrentPage(1);
@@ -128,18 +130,18 @@ function TableComp(props: {
                 setGraphView(4);
               }}
               className={
-                graphView == 4 ? "selected-overview-text3" : "overview-text3"
+                graphView == 4 ? 'selected-overview-text3' : 'overview-text3'
               }
             >
               Rejected
             </li>
           </div>
           <div className="seperater-div" />
-          <div className={graphView == 5 ? "selectedBox" : "filter-box"}>
+          <div className={graphView == 5 ? 'selectedBox' : 'filter-box'}>
             <li
               onClick={() => {
                 const currentData = props.rows.filter(function (item) {
-                  return item.status === "Dropped";
+                  return item.status === 'Dropped';
                 });
                 setFilterteredData(currentData);
                 setCurrentPage(1);
@@ -147,7 +149,7 @@ function TableComp(props: {
                 setGraphView(5);
               }}
               className={
-                graphView == 5 ? "selected-overview-text3" : "overview-text3"
+                graphView == 5 ? 'selected-overview-text3' : 'overview-text3'
               }
             >
               Dropped
@@ -159,11 +161,11 @@ function TableComp(props: {
             <Button
               startIcon={<EditIcon />}
               sx={{
-                fontSize: "1vw",
-                marginLeft: "56px",
-                color: "#0662B7",
-                fontWeight: "600",
-                textTransform:'none'
+                fontSize: '1vw',
+                marginLeft: '56px',
+                color: '#0662B7',
+                fontWeight: '600',
+                textTransform: 'none',
               }}
             >
               Edit Columns
@@ -175,11 +177,11 @@ function TableComp(props: {
             <Button
               endIcon={<RightArrow />}
               sx={{
-                fontSize: "1vw",
-                marginLeft: "35px",
-                color: "#0662B7",
-                fontWeight: "600",
-                textTransform:'none'
+                fontSize: '1vw',
+                marginLeft: '35px',
+                color: '#0662B7',
+                fontWeight: '600',
+                textTransform: 'none',
               }}
             >
               Detailed Reports
@@ -418,11 +420,9 @@ function TableComp(props: {
                           kycStatus(row?.status, DroppedDot, '#992D26')}
                       </TableCell>
                       <TableCell align="left" sx={{ borderBottom: 'none' }}>
-                        <div className="reset-data">
-                          <Button sx={{ fontSize: '14px', marginLeft: '35px' }}>
-                            View
-                          </Button>
-                        </div>
+                        {/* <div className="reset-data"> */}
+                        <a href={props.viewPath}>View</a>
+                        {/* </div> */}
                       </TableCell>
                     </TableRow>
                   ))}
