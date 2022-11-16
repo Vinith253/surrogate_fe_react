@@ -1,9 +1,6 @@
 import React from 'react';
 import {
   Box,
-  // MuiDrawer,
-  Card,
-  // Drawer,
   Divider,
   IconButton,
   ListItem,
@@ -11,16 +8,11 @@ import {
   ListItemIcon,
   ListItemText,
 } from '@mui/material';
-import { flexbox } from '@mui/system';
-import { Link, Outlet } from 'react-router-dom';
-
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
 // import Box from "@mui/material/Box";
 import MuiDrawer from '@mui/material/Drawer';
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
-import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
 import YesBank from '../../assets/images/bank_axis_logo.svg';
 import Home from '../../assets/icons/home_icon.svg';
@@ -167,9 +159,9 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
-interface AppBarProps extends MuiAppBarProps {
-  open?: boolean;
-}
+// interface AppBarProps extends MuiAppBarProps {
+//   open?: boolean;
+// }
 
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== 'open',
@@ -193,6 +185,7 @@ const Drawer = styled(MuiDrawer, {
 
 export default function Layout() {
   const theme = useTheme();
+  const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const [openIndex, setOpenIndex] = React.useState(0);
   const [openList, setOpenList] = React.useState(false);
@@ -208,9 +201,13 @@ export default function Layout() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const onClickHandleProfile = () => {
+    navigate('/login');
+    setAnchorEl(null);
+  };
 
   const handleDrawerClose = () => {
-    let value = !open;
+    // let value = !open;
     setOpen(!open);
     // callback(value);
   };
@@ -238,7 +235,7 @@ export default function Layout() {
         <Drawer variant="permanent" open={open}>
           <DrawerHeader sx={{ height: '10vh' }}>
             <IconButton sx={{ display: !open ? 'none' : 'block' }}>
-              <img src={YesBank} />
+              <img src={YesBank} alt="" />
             </IconButton>
             <IconButton onClick={handleDrawerClose}>
               <img
@@ -250,6 +247,7 @@ export default function Layout() {
                   zIndex: 999999,
                   right: open ? '-104px' : '-50px',
                 }}
+                alt=""
               />
             </IconButton>
           </DrawerHeader>
@@ -278,7 +276,7 @@ export default function Layout() {
                           justifyContent: 'center',
                         }}
                       >
-                        <img src={text.image} />
+                        <img src={text.image} alt="" />
                       </ListItemIcon>
                       <ListItemText
                         primary={text.content}
@@ -299,7 +297,7 @@ export default function Layout() {
                       }}
                     >
                       <ListItemIcon>
-                        <img src={text.image} />
+                        <img src={text.image} alt="" />
                       </ListItemIcon>
                       <ListItemText
                         primary={text.content}
@@ -316,6 +314,7 @@ export default function Layout() {
                               ? drop_up_arrow_icon
                               : drop_down_arrow_icon
                           }
+                          alt=""
                         />
                       )}
                     </ListItemButton>
@@ -329,7 +328,7 @@ export default function Layout() {
                               <Link to={subData.path}>
                                 <ListItemButton sx={{ pl: 4 }}>
                                   <ListItemIcon>
-                                    <img src={subData.img} />
+                                    <img src={subData.img} alt="" />
                                   </ListItemIcon>
                                   <ListItemText
                                     primary={subData.data}
@@ -414,9 +413,13 @@ export default function Layout() {
                 aria-expanded={openMenu ? 'true' : undefined}
                 onClick={handleMenuClick}
               >
-                <img src={profile_icon} />
+                <img src={profile_icon} alt="" />
 
-                <img src={profile_arrow_icon} style={{ padding: '0 10px' }} />
+                <img
+                  src={profile_arrow_icon}
+                  style={{ padding: '0 10px' }}
+                  alt=""
+                />
               </IconButton>
 
               <Menu
@@ -428,7 +431,7 @@ export default function Layout() {
                   'aria-labelledby': 'basic-button',
                 }}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem onClick={onClickHandleProfile}>Profile</MenuItem>
                 <MenuItem onClick={handleClose}>Logout</MenuItem>
               </Menu>
             </Box>
