@@ -29,7 +29,7 @@ export default function App() {
         />
         <Route
           path="/productManagement/cardCatalogue/bulkupload"
-          element={<BulkUpload />}
+          element={<BulkUpload flag={'xlsFormat'} />}
         />
         <Route
           path="/productManagement/cardCatalogue/singleupload"

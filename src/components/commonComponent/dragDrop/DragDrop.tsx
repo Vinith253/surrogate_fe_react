@@ -7,7 +7,12 @@ import { bulkUpload } from '../../../utils/Constants';
 import { Box, Button, ButtonProps, styled, Typography } from '@mui/material';
 import { toggleFunctionType } from '../../../interface/Types';
 
-const DragDrop = ({ progress, progressValue, buttonText }: any) => {
+const DragDrop = ({
+  progress,
+  progressValue,
+  buttonText,
+  supportedFiles,
+}: any) => {
   const inputRef = useRef<any>();
   // drag state
   const [dragActive, setDragActive] = useState(false);
@@ -92,9 +97,7 @@ const DragDrop = ({ progress, progressValue, buttonText }: any) => {
           <Typography sx={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
             {bulkUpload.DRAG_AND_DROP}
           </Typography>
-          <Typography sx={{ fontSize: '1' }}>
-            {bulkUpload.SUPPORTED_FORMATS}
-          </Typography>
+          <Typography sx={{ fontSize: '1' }}>{supportedFiles}</Typography>
           <ColorButton
             variant="contained"
             startIcon={

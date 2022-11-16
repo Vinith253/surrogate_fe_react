@@ -29,4 +29,9 @@ export const bulkUpload = {
   CORRECTION_FILE: 'Correction File',
   DOWNLOAD_ERROR_FILE: 'Download Error File',
   UPLOAD_CORRECTION_FILE: 'Upload correction File',
+  UPLOAD_CARD:"Upload Card Photo",
+  SUPPORTED_FORMATS_JPG:"Supported formats .jpg .png (max. 2mb)",
+  UPLOAD_CARD_PHOTO:"Upload Card Photo",
+  UPLOAD_MISSING_CARD:"Upload missing card images to import card details into card catalog",
+  UPLOAD_MISSING_PHOTO:"Upload Missing Photo"
 };

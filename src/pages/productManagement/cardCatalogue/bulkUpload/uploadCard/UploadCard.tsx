@@ -44,7 +44,7 @@ function LinearProgressWithLabel(
     </Box>
   );
 }
-const UploadCard = ({ toggle, data, correction }: any) => {
+const UploadCard = ({ toggle, data, correction, fileName }: any) => {
   const [progress, setProgress] = useState(0);
   const [progressBar, setProgressBar] = useState(0);
   useEffect(() => {
@@ -52,8 +52,11 @@ const UploadCard = ({ toggle, data, correction }: any) => {
       if (progressBar !== 0) {
         setProgress((oldProgress) => {
           if (oldProgress === 100) {
-            toggle(true);
-            if (data.title === 'Correction File') {
+            toggle(true, fileName);
+            if (
+              data.title === 'Correction File' ||
+              data.title === 'Upload Card Photo'
+            ) {
               correction();
             }
           }
@@ -72,7 +75,6 @@ const UploadCard = ({ toggle, data, correction }: any) => {
   const handleProgress = (value: number) => {
     setProgressBar(value);
   };
-
   return (
     <PageLayout>
       <Box sx={{ backgroundColor: 'white' }}>
@@ -91,23 +93,26 @@ const UploadCard = ({ toggle, data, correction }: any) => {
         >
           {data.para}
         </Typography>
-        <Button
-          variant="text"
-          color="secondary"
-          disabled={progress > 0 ? true : false}
-          startIcon={
-            <FileDownloadOutlinedIcon
-              color={progress > 0 ? 'disabled' : 'secondary'}
-              sx={{ fontSize: '1.5rem !important' }}
-            />
-          }
-        >
-          {data.downloadSample}
-        </Button>
+        {fileName === 'xls' && (
+          <Button
+            variant="text"
+            color="secondary"
+            disabled={progress > 0 ? true : false}
+            startIcon={
+              <FileDownloadOutlinedIcon
+                color={progress > 0 ? 'disabled' : 'secondary'}
+                sx={{ fontSize: '1.5rem !important' }}
+              />
+            }
+          >
+            {data.downloadSample}
+          </Button>
+        )}
 
         <DragDrop
           progress={handleProgress}
           progressValue={progress}
+          supportedFiles={data.supportedFormats}
           buttonText={data.upload}
         />
         <LinearProgressWithLabel variant="determinate" value={progress} />
