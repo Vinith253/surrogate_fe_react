@@ -6,10 +6,15 @@ import {
   salesDashboardList,
   statusRowHeading,
 } from './../dashboard/dashboard.const';
+import CurrentDayFilter from '../../../components/commonComponent/Filters/currentDay';
 
 function SalesReportList() {
   return (
     <div className="sales-report-list">
+      <div className="filters-container">
+        <div>Sales Report</div>
+        {/* <CurrentDayFilter /> */}
+      </div>
       <TableComp
         viewPath="/sales/salesReportDetails"
         rows={salesDashboardList}
