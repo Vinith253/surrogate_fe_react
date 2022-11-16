@@ -192,7 +192,7 @@ function TableComp(props: {
 
       <Grid container spacing={0}>
         <Grid item sm={7}>
-          <TableContainer>
+          <TableContainer sx={{maxWidth:'800px'}}>
             <Table aria-label="simple table">
               <TableHead>
                 {props?.listRowHeading.map((row) => (
