@@ -3,6 +3,7 @@ import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { useState } from 'react';
 import { dataList, tabList } from '../../../interface/Types';
 import { colors } from '../../../style/Color';
+import '../customTab/customTabStyle.scss';
 
 export const TabBar = ({ data }: { data: dataList }) => {
   const [value, setValue] = useState('1');
@@ -20,13 +21,14 @@ export const TabBar = ({ data }: { data: dataList }) => {
             textColor="primary"
             indicatorColor="secondary"
             sx={{
-              backgroundColor: colors.lightGrey,
+              backgroundColor: colors.bgGrey,
               padding: '30px 30px 0  30px',
             }}
           >
             {data.map((item: tabList, index: number) => {
               return (
                 <Tab
+                  className="tabBar"
                   key={index}
                   label={<span>{item.data}</span>}
                   value={item.id}

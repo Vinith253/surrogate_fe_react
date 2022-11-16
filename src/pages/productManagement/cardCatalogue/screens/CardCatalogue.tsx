@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import './cardCateloge.scss';
 // import useStyles from "./cardStyle";
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { TabContext } from '@mui/lab';
-import { TabList } from '@mui/lab';
-import { TabPanel } from '@mui/lab';
+
+import { tableCellClasses } from '@mui/material/TableCell';
 import TypographyHead from '../../../../components/commonComponent/CustomText/Head';
 import { useNavigate } from 'react-router-dom';
+import PaginationComp from '../../../../components/commonComponent/Pagination/Pagination';
 import {
   MenuItem,
-  TextField,
+  Checkbox,
   Typography,
   Box,
   Tab,
@@ -20,7 +20,6 @@ import {
   Divider,
   InputLabel,
   FormControl,
-  Select,
   SelectChangeEvent,
   Table,
   TableContainer,
@@ -30,6 +29,7 @@ import {
   TableCell,
   Paper,
   Menu,
+  Select,
 } from '@mui/material';
 import Surrogate_icon from '../../../../assets/icons/surrogates_selection_icon.svg';
 import Pause_icon from '../../../../assets/icons/pause_card_icon.svg';
@@ -41,58 +41,170 @@ import SearchIcon from '@mui/icons-material/Search';
 import TypographyInfo from '../../../../components/commonComponent/CustomText/Info';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { checkTagStatus } from '../../../../utils/tagBasedIndicator/tagStatus';
+import TablePagination from '@mui/material/TablePagination';
 
-const columns: GridColDef[] = [
-  { field: 'id', headerName: 'ID', width: 70 },
-  { field: 'firstName', headerName: 'Card Name', width: 130 },
-  { field: 'productID', headerName: 'Product ID', width: 130 },
-  { field: 'businessID', headerName: 'Business ID', width: 130 },
-  { field: 'cardMode', headerName: 'Card Mode', width: 130 },
-  { field: 'cardCategory', headerName: 'Card Category', width: 130 },
-  { field: 'cardStatus', headerName: 'Card Status', width: 120 },
-  { field: 'more', headerName: 'More', type: 'number', width: 20 },
-];
+// const columns: GridColDef[] = [
+//   { field: 'id', headerName: 'ID', width: 70 },
+//   { field: 'cardName', headerName: 'Card Name', width: 130 },
+//   { field: 'productID', headerName: 'Product ID', width: 130 },
+//   { field: 'businessID', headerName: 'Business ID', width: 130 },
+//   { field: 'cardMode', headerName: 'Card Mode', width: 130 },
+//   { field: 'cardCategory', headerName: 'Card Category', width: 130 },
+//   { field: 'cardStatus', headerName: 'Card Status', width: 120 },
+//   { field: 'more', headerName: 'More', type: 'number', width: 20 },
+// ];
+
+export interface dataHeaderList {
+  id: string;
+  cardName: string;
+  productID: string;
+  businessID: string;
+  cardMode: string;
+  cardCategory: string;
+  cardStatus: string;
+  more?: string;
+}
+
+export interface dataList {
+  id: number;
+  cardName: string;
+  productID: number;
+  businessID: number;
+  cardMode: string;
+  cardCategory: string;
+  cardStatus: string;
+  more?: string;
+}
+
+function createData(
+  id: number,
+  cardName: string,
+  productID: number,
+  businessID: number,
+  cardMode: string,
+  cardCategory: string,
+  cardStatus: string,
+  more: string
+) {
+  return {
+    id,
+    cardName,
+    productID,
+    businessID,
+    cardMode,
+    cardCategory,
+    cardStatus,
+    more,
+  };
+}
 
 const rows = [
+  createData(
+    1,
+    'ETERNA',
+    1234567890,
+    1234567890,
+    'General',
+    'Basic',
+    'Active',
+    ''
+  ),
+  createData(
+    2,
+    'PREMIER',
+    1234567890,
+    1234567890,
+    'General',
+    'Premium',
+    'InActive',
+    ''
+  ),
+  createData(
+    3,
+    'EXCLUSIVE ICAI',
+    1234567890,
+    1234567890,
+    'General',
+    'Ultra Premium',
+    'Active',
+    ''
+  ),
+  createData(
+    4,
+    'EXCLUSIVE ICAI',
+    1234567890,
+    1234567890,
+    'General',
+    'Ultra Premium',
+    'Active',
+    ''
+  ),
+  createData(
+    5,
+    'EXCLUSIVE ICAI',
+    1234567890,
+    1234567890,
+    'General',
+    'Ultra Premium',
+    'Active',
+    ''
+  ),
+  createData(
+    6,
+    'EXCLUSIVE ICAI',
+    1234567890,
+    1234567890,
+    'General',
+    'Basic',
+    'Active',
+    ''
+  ),
+];
+
+const tableData = [
   {
     id: 1,
-    productID: 'Snow',
-    firstName: 'Jon',
-    age: 35,
-    businessID: 123456789,
-    cardMode: 'Business',
+    cardName: 'ETERNA',
+    productID: 1234567890,
+    businessID: 1234567890,
+    cardMode: 'General',
     cardCategory: 'Basic',
     cardStatus: 'Active',
+    more: '',
   },
   {
     id: 2,
-    productID: 'Snow',
-    firstName: 'Jon',
-    age: 35,
-    businessID: 123456789,
-    cardMode: 'Business',
+    cardName: 'PREMIER',
+    productID: 1234567890,
+    businessID: 1234567890,
+    cardMode: 'General',
     cardCategory: 'Basic',
     cardStatus: 'Active',
+    more: '',
   },
   {
     id: 3,
-    productID: 'Snow',
-    firstName: 'Jon',
-    age: 35,
-    businessID: 123456789,
-    cardMode: 'Business',
+    cardName: 'EXCLUSIVE ICAI',
+    productID: 1234567890,
+    businessID: 1234567890,
+    cardMode: 'General',
     cardCategory: 'Basic',
     cardStatus: 'Active',
+    more: '',
   },
+];
+const tableHeaderData = [
   {
-    id: 4,
-    productID: 'Snow',
-    firstName: 'Jon',
-    age: 35,
-    businessID: 123456789,
-    cardMode: 'Business',
-    cardCategory: 'Basic',
-    cardStatus: 'Active',
+    id: 'ID',
+    cardName: 'Card Name',
+    productID: 'Product ID',
+    businessID: 'Business ID',
+    cardMode: 'Card Mode',
+    cardCategory: 'Card Category',
+    cardStatus: 'Card Status',
+    more: 'More',
   },
 ];
 
@@ -103,12 +215,62 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    // backgroundColor: theme.palette.common.white ,
+    color: theme.palette.common.black,
+    fontWeight: 'bold',
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  // hide last border
+  '&:last-child td, &:last-child th': {
+    border: 0,
+  },
+}));
+
 export const CardCatalogue = () => {
   const navigate = useNavigate();
   const [age, setAge] = useState('');
   const [open, setOpen] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [selected, setSelected] = React.useState('');
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
+  const [filteredData, setFilterteredData] = useState(rows);
   const openCardMenu = Boolean(anchorEl);
+
+  // const handleClick = (event: React.MouseEvent<HTMLTableCellElement>) => {
+  //   setAnchorElement(event.currentTarget);
+  // };
+
+  const handleChangePage = (
+    event: React.MouseEvent<HTMLButtonElement> | null,
+    newPage: number
+  ) => {
+    setPage(newPage);
+  };
+
+  const onPageChange = (event: React.ChangeEvent<unknown>, page: number) => {
+    setPage(page);
+    setCurrentPage(page);
+  };
+
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setRowsPerPage(parseInt(event.target.value, 5));
+    setPage(0);
+    setCurrentPage(1);
+  };
+  // const isSelected = (id: number) => selected.indexOf(id) !== 1;
+
   const handleCardMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -145,9 +307,6 @@ export const CardCatalogue = () => {
               Card Catelogue
             </Typography>
             <TypographyInfo title="From here you can manage all your card's information" />
-            {/* <Typography sx={{ margin: 0 }} color="textSecondary" paragraph>
-                From here you can manage all your card's information
-              </Typography> */}
           </Box>
           <Box>
             <Button
@@ -207,9 +366,8 @@ export const CardCatalogue = () => {
           >
             <FormControl sx={{ width: '200px' }}>
               <TypographyHead title="Card Mode" />
-              {/* <InputLabel id="demo-simple-select-label">Age</InputLabel> */}
+
               <Select
-                //   labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={age}
                 onChange={handleAdd}
@@ -385,17 +543,122 @@ export const CardCatalogue = () => {
             sx={{
               height: 400,
               // width: "100%",
-              backgroundColor: '#ffffff',
-              paddingX: 4,
+              backgroundColor: 'white',
+              // paddingX: ,
             }}
           >
-            <DataGrid
-              rows={rows}
+            <TableContainer component={Paper}>
+              <Table aria-label="Table">
+                <TableHead
+                  style={{ background: '#EEF7FF' }}
+                  // sx={{ padding: '5px' }}
+                >
+                  {tableHeaderData.map(
+                    (items: dataHeaderList, index: number) => (
+                      <TableRow key={index} sx={{ padding: '5px' }}>
+                        <TableCell
+                          align="center"
+                          padding="checkbox"
+                          sx={{ padding: '5px' }}
+                        >
+                          <Checkbox />
+                          {/* color={'secondary'}
+                    indeterminate={
+                      Select.length > 0 && Select.length < tableData.length
+                    }
+                    checked={
+                      tableData.length > 0 &&
+                      Select.length === tableData.length
+                    }
+                    onChange={handleSelectAllClick}
+                    inputProps={{
+                      'aria-label': 'select all desserts',
+                    }}
+                  /> */}
+                        </TableCell>
+                        <TableCell
+                          align="center"
+                          sx={{ fontWeight: 800, padding: '5px' }}
+                        >
+                          #
+                        </TableCell>
+                        <TableCell align="center" sx={{ fontWeight: 800 }}>
+                          {items.cardName}
+                        </TableCell>
+                        <TableCell align="center" sx={{ fontWeight: 800 }}>
+                          {items.productID}
+                        </TableCell>
+                        <TableCell align="center" sx={{ fontWeight: 800 }}>
+                          {items.businessID}
+                        </TableCell>
+                        <TableCell sx={{ fontWeight: 800 }} align="center">
+                          {items.cardMode}
+                        </TableCell>
+                        <TableCell sx={{ fontWeight: 800 }} align="center">
+                          {items.cardCategory}
+                        </TableCell>
+                        <TableCell sx={{ fontWeight: 800 }} align="center">
+                          {items.cardStatus}
+                        </TableCell>
+                        <TableCell sx={{ fontWeight: 800 }}>
+                          {items.more}
+                        </TableCell>
+                      </TableRow>
+                    )
+                  )}
+                </TableHead>
+
+                <TableBody>
+                  {rows.map((row) => (
+                    <TableRow
+                      key={row.id}
+                      // sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                      sx={{ padding: 0 }}
+                    >
+                      <TableCell align="center">
+                        <Checkbox />
+                      </TableCell>
+                      <TableCell align="center">{row.id}</TableCell>
+                      <TableCell align="center">{row.cardName}</TableCell>
+                      <TableCell align="center">{row.productID}</TableCell>
+                      <TableCell align="center">{row.businessID}</TableCell>
+                      <TableCell align="center">{row.cardMode}</TableCell>
+                      <TableCell align="center">{row.cardCategory}</TableCell>
+                      <TableCell align="center">{row.cardStatus}</TableCell>
+                      <TableCell align="left">{<MoreVertIcon />}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+
+              <PaginationComp
+                rows={filteredData}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                handleChangePage={handleChangePage}
+                handleChangeRowsPerPage={handleChangeRowsPerPage}
+                onPageChange={onPageChange}
+                onLastClick={() => {
+                  setPage(Math.ceil(filteredData.length / rowsPerPage));
+                  setCurrentPage(Math.ceil(filteredData.length / rowsPerPage));
+                }}
+                onFirstClick={() => {
+                  setPage(1);
+                  setCurrentPage(1);
+                }}
+                lastButtonDisabled={
+                  page == Math.ceil(filteredData.length / rowsPerPage)
+                }
+              />
+            </TableContainer>
+
+            {/* <DataGrid
+              rows={rows1}
               columns={columns}
               pageSize={5}
               rowsPerPageOptions={[5]}
               checkboxSelection
-            />
+            /> */}
           </Box>
         </Box>
       </Stack>

@@ -69,8 +69,9 @@ const CreateNewCard = () => {
     setDataObj((prev: any) => ({ ...prev, [value]: e }));
   };
   const handleSubmitClick = () => {
-    console.log(dataObj, 'dataObj');
+    console.log('dataObj');
     navigate('/productManagement/cardCatalogue/singleupload/reviewCard');
+    console.log('first');
   };
   const AddRewardList = () => {
     let newVal = { value: '' };
@@ -938,8 +939,7 @@ const CreateNewCard = () => {
 
           <BtnContained
             title="Submit"
-            // onClick={saveFun}
-            handleButton={handleSubmitClick}
+            onClick={handleSubmitClick}
           />
         </Box>
       </Box>
