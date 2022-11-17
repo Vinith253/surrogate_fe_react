@@ -66,7 +66,7 @@ function PaginationComp(props: {
           }}
         >
           <Button
-            disabled={props.page == 1}
+            disabled={props.page === 1}
             startIcon={<LeftArrow />}
             sx={{
               fontSize: '14px',
