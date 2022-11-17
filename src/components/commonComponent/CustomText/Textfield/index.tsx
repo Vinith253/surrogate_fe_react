@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Box, TextField, Typography } from '@mui/material';
 
 const TypoText = (props: any) => {
+  const { handleChange, id, value } = props;
   return (
     <Box>
       {props.title && (
@@ -12,6 +13,7 @@ const TypoText = (props: any) => {
             fontWeight: '500',
             display: 'flex',
             justifyContent: 'flex-start',
+            color:props.color,
           }}
           style={props.style}
           variant="body1"
@@ -28,6 +30,8 @@ const TypoText = (props: any) => {
           placeholder={props.placeholder}
           variant="outlined"
           size="small"
+          onChange={(e) => handleChange(e, id)}
+          value={value}
         >
           {props.placeholder}
         </TextField>
