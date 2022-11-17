@@ -44,6 +44,7 @@ type props = {
   close?: string;
   pauseMethodChecking?: any;
   handleSuccess?: any;
+  accessLibraryMsg?: string;
 };
 
 function CustomModal({
@@ -69,6 +70,7 @@ function CustomModal({
   close,
   pauseMethodChecking,
   handleSuccess,
+  accessLibraryMsg,
 }: props) {
   // const classess = useStyles();
 
@@ -183,6 +185,21 @@ function CustomModal({
               {successModalMsg}
             </Typography>
           )}
+
+          {accessLibraryMsg && (
+            <Typography
+              align="center"
+              sx={{ fontSize: ' 14px', fontWeight: '400', color: '#AFAEAF' }}
+            >
+              {accessLibraryMsg}
+            </Typography>
+          )}
+
+          {/* <Stack>
+            <Box>Org.ID : #12345 </Box>
+            <Box>Org.Name : Ganesh Agency</Box>
+            <Box>Channel Type : DSA</Box>
+          </Stack> */}
 
           {rejectedModalMsg && (
             <Typography
