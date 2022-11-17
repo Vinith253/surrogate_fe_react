@@ -2,7 +2,6 @@ import { TextField } from '@mui/material';
 import ReactApexChart from 'react-apexcharts';
 import ProgressCard from '../../../../components/commonComponent/CommonCard/ProgressCard/ProgressCard';
 import DashboardCard from '../../../../components/commonComponent/CommonCard/SalesDashbaordCard/DashboardCard';
-import FilterButton from '../../../../components/commonComponent/FilterHeader/FilterButton';
 import ApprovalRate from '../../../../assets/icons/approval_rate_icon.svg';
 import TotalApplications from '../../../../assets/icons/total_application_icon.svg';
 import Comparisions from '../../../../assets/icons/comparision_icon.svg';
@@ -20,6 +19,7 @@ import {
   salesDashboardList,
   statusRowHeading,
 } from '../dashboard.const';
+import FilterButton from '../../../../components/commonComponent/FilterHeader/FilterButton';
 
 interface IStatus {
   label: string;
@@ -218,9 +218,7 @@ export default function DsaPage() {
     <div>
       <div className="dsa-data-container">
         <div>
-          <FilterButton
-          filterHeaderData={filterHeaderData} 
-          />
+          <FilterButton filterHeaderData={filterHeaderData} />
           <div className="divider-line" />
           <div className="horizontal-cards">
             {dashboardVal.map((value) => (
