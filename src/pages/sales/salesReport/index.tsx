@@ -6,14 +6,14 @@ import {
   salesDashboardList,
   statusRowHeading,
 } from './../dashboard/dashboard.const';
-import CurrentDayFilter from '../../../components/commonComponent/Filters/currentDay';
+import StateFilter from '../../../components/commonComponent/Filters/state';
 
 function SalesReportList() {
   return (
     <div className="sales-report-list">
       <div className="filters-container">
         <div>Sales Report</div>
-        {/* <CurrentDayFilter /> */}
+        <StateFilter />
       </div>
       <TableComp
         viewPath="/sales/salesReportDetails"

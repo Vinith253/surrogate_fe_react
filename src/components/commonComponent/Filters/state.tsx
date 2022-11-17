@@ -5,7 +5,7 @@ import Select from '@mui/material/Select';
 function CurrentDayFilter() {
   return (
     <div className="filters-styles">
-      <div className="current-day-filter">
+      <div className="state-filter">
         <Select
           value={1}
           //   onChange={handleChange}
