@@ -18,7 +18,8 @@ import BtnContained from '../../../../components/commonComponent/CustomText/Butt
 import BtnOutlined from '../../../../components/commonComponent/CustomText/Button/Outlined';
 import BtnText from '../../../../components/commonComponent/CustomText/Button/Text';
 // import Checkbox from "@mui/material/Checkbox";
-import InfoIcon from '@mui/icons-material/Info';
+// import InfoIcon from '@mui/icons-material/Info';
+import Info_Icon from '../../../../assets/images/info_icon.svg';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
@@ -59,25 +60,78 @@ const CreateNewCard = () => {
     fuelSurcharge: '',
     fuelSurchargeDescription: '',
     annualFee: '',
+    annualFeeWavier: '',
     rewardDescription: [{ value: ' ' }],
     keyBenefits: [{ value: ' ' }],
     additionalBenefits: [{ value: ' ' }],
     welcomeBenefits: [{ value: '' }],
   };
   const [dataObj, setDataObj] = useState(obj);
-  const handleValueChange = (e: any, value: any) => {
-    setDataObj((prev: any) => ({ ...prev, [value]: e }));
+  const [removeClick, setRemoveClick] = useState({
+    reward: false,
+    keyBenefits: false,
+    additionalBenefits: false,
+    welcomeBenefits: false,
+  });
+  const handleValueChange = (e: any, id: string) => {
+    const value = e?.target?.value ?? '';
+    setDataObj((prev: any) => ({ ...prev, [id]: value }));
   };
-  const handleSubmitClick = () => {
-    console.log('dataObj');
-    navigate('/productManagement/cardCatalogue/singleupload/reviewCard');
-    console.log('first');
+
+  const welcomeBenefitsOnChange = (e: any, index: number) => {
+    const value = e?.target?.value ?? '';
+    setDataObj((prev: any) => {
+      let newValue = prev.welcomeBenefits;
+      newValue[index].value = value;
+      const result = { ...prev, welcomeBenefits: newValue };
+      return result;
+    });
+  };
+
+  const additionalBenefitsOnChange = (e: any, index: number) => {
+    const value = e?.target?.value ?? '';
+    setDataObj((prev: any) => {
+      let newValue = prev.additionalBenefits;
+      newValue[index].value = value;
+      const result = { ...prev, additionalBenefits: newValue };
+      return result;
+    });
+  };
+
+  const keyBenefitsOnChange = (e: any, index: number) => {
+    const value = e?.target?.value ?? '';
+    setDataObj((prev: any) => {
+      let newValue = prev.keyBenefits;
+      newValue[index].value = value;
+      const result = { ...prev, keyBenefits: newValue };
+      return result;
+    });
+  };
+
+  const rewardDescriptionOnChange = (e: any, index: number) => {
+    const value = e?.target?.value ?? '';
+    setDataObj((prev: any) => {
+      let newValue = prev.rewardDescription;
+      newValue[index].value = value;
+      const result = { ...prev, rewardDescription: newValue };
+      return result;
+    });
+  };
+
+  const handleSubmitClick = (record: any) => {
+    navigate('/productManagement/cardCatalogue/singleupload/reviewCard', {
+      state: { record: dataObj },
+    });
   };
   const AddRewardList = () => {
     let newVal = { value: '' };
     setDataObj((prev) => ({
       ...prev,
       rewardDescription: [...prev.rewardDescription, newVal],
+    }));
+    setRemoveClick((prev) => ({
+      ...prev,
+      reward: true,
     }));
   };
 
@@ -87,6 +141,10 @@ const CreateNewCard = () => {
       ...prev,
       keyBenefits: [...prev.keyBenefits, newVal],
     }));
+    setRemoveClick((prev) => ({
+      ...prev,
+      keyBenefits: true,
+    }));
   };
 
   const AddAdditionalList = () => {
@@ -95,6 +153,10 @@ const CreateNewCard = () => {
       ...prev,
       additionalBenefits: [...prev.additionalBenefits, newVal],
     }));
+    setRemoveClick((prev) => ({
+      ...prev,
+      additionalBenefits: true,
+    }));
   };
 
   const AddWelcomeList = () => {
@@ -102,6 +164,10 @@ const CreateNewCard = () => {
     setDataObj((prev) => ({
       ...prev,
       welcomeBenefits: [...prev.welcomeBenefits, newVal],
+    }));
+    setRemoveClick((prev) => ({
+      ...prev,
+      welcomeBenefits: true,
     }));
   };
 
@@ -124,7 +190,7 @@ const CreateNewCard = () => {
             }}
           >
             <Box onClick={goBack}>
-              <ArrowBackIcon />
+              <ArrowBackIcon sx={{ color: '#0078EF' }} />
             </Box>
             <Box>
               <TypoText title="Add New Card" />
@@ -133,7 +199,9 @@ const CreateNewCard = () => {
           </Box>
 
           <Box>
-            <Button>ID.No. 123456</Button>
+            <Button sx={{ backgroundColor: '#E6E7E7', borderRadius: '4px' }}>
+              ID.No. 123456
+            </Button>
           </Box>
         </Box>
       </Box>
@@ -147,41 +215,11 @@ const CreateNewCard = () => {
           }}
         >
           <TypoText title="Upload Photo" />
-          <InfoIcon />
+          <img style={{ marginBottom: '14px' }} src={Info_Icon} />
           <TypographyInfo title="Upload the image of the card" />
         </Box>
         <Divider />
         <Box sx={{ marginTop: 2 }}>
-          {/* <input
-            accept="image/*"
-            type="file"
-            onChange={(event) => setData(event.target.files)}
-            // className={classes.input}
-            id="contained-button-file"
-          /> */}
-
-          {/* <Card>
-          <Grid container sx={{ justifyContent="center", alignItems="center"}}>
-            <input
-              accept="image/*"
-              // className={classes.input}
-              id="contained-button-file"
-              multiple
-              type="file"
-              onChange={handleUploadClick}
-            />
-            <label htmlFor="contained-button-file">
-              <Button component="span" >
-                <PhotoCamera />
-              </Button>
-            </label> 
-          </Grid>
-          <img
-            width="100%"
-            src={setSelectedFile}
-          />
-        </Card> */}
-
           <Card
             sx={{
               width: 350,
@@ -218,7 +256,7 @@ const CreateNewCard = () => {
           }}
         >
           <TypoText title="Enter Card Details " />
-          <InfoIcon />
+          <img style={{ marginBottom: '14px' }} src={Info_Icon} />
           <TypographyInfo title="From here you can can add the card information" />
         </Box>
         <Divider />
@@ -230,7 +268,8 @@ const CreateNewCard = () => {
               <TypoText
                 placeholder="Business ID"
                 handleChange={handleValueChange}
-                value={'businessId'}
+                id="businessId"
+                value={dataObj?.businessId}
               />
             </Box>
           </Grid>
@@ -241,7 +280,8 @@ const CreateNewCard = () => {
               <TypoText
                 placeholder="Card Name"
                 handleChange={handleValueChange}
-                value={'cardName'}
+                id="cardName"
+                value={dataObj?.cardName}
               />
             </Box>
           </Grid>
@@ -252,7 +292,8 @@ const CreateNewCard = () => {
               <TypoText
                 placeholder="Interest Rate (in%)"
                 handleChange={handleValueChange}
-                value={'interestRate'}
+                id="interestRate"
+                value={dataObj?.interestRate}
               />
             </Box>
           </Grid>
@@ -262,7 +303,18 @@ const CreateNewCard = () => {
           <Grid item xs={12} sm={6} md={4}>
             <Box sx={{ display: 'flex', flexDirection: 'column' }}>
               <TypoText title="Card Type" />
-              <Select placeholder="Card type" variant="outlined" size="small" />
+              <Select
+                placeholder="Card type"
+                // onChange={handleValueChange}
+                id="interestRate"
+                // value={dataObj?.interestRate}
+                variant="outlined"
+                size="small"
+              >
+                <MenuItem value={10}>Ten</MenuItem>
+                <MenuItem value={20}>Twenty</MenuItem>
+                <MenuItem value={30}>Thirty</MenuItem>
+              </Select>
             </Box>
           </Grid>
 
@@ -295,7 +347,8 @@ const CreateNewCard = () => {
               <TypoText
                 placeholder="Enter maximum card limit"
                 handleChange={handleValueChange}
-                value={'maximumCardLimit'}
+                id="maximumCardLimit"
+                value={dataObj?.maximumCardLimit}
               />
             </Box>
           </Grid>
@@ -311,7 +364,7 @@ const CreateNewCard = () => {
           }}
         >
           <TypoText title="Choose Surrogate" />
-          <InfoIcon />
+          <img style={{ marginBottom: '14px' }} src={Info_Icon} />
           <TypographyInfo title="From here, you can choose the type of surrogate for the card" />
         </Box>
         <Divider />
@@ -366,7 +419,7 @@ const CreateNewCard = () => {
         >
           <TypoText title="Select Channels" />
 
-          <InfoIcon />
+          <img style={{ marginBottom: '14px' }} src={Info_Icon} />
 
           <TypographyInfo title="From here, you can choose the channel of the card" />
         </Box>
@@ -403,7 +456,7 @@ const CreateNewCard = () => {
           }}
         >
           <TypoText title="Eligibility Criteria " />
-          <InfoIcon />
+          <img style={{ marginBottom: '14px' }} src={Info_Icon} />
           <TypographyInfo title="You can add the customer's eligibility here" />
         </Box>
         <Divider />
@@ -415,7 +468,8 @@ const CreateNewCard = () => {
               <TypoText
                 placeholder="CIBIL Score"
                 handleChange={handleValueChange}
-                value={'cibilScore'}
+                id="cibilScore"
+                value={dataObj?.cibilScore}
               />
               {/* <TextField sx={{ width: "350px" }} size="small" placeholder="0" /> */}
             </Box>
@@ -427,7 +481,8 @@ const CreateNewCard = () => {
               <TypoText
                 placeholder="$ 00.00"
                 handleChange={handleValueChange}
-                value={'salaryLimit'}
+                id="salaryLimit"
+                value={dataObj?.salaryLimit}
               />
             </Box>
           </Grid>
@@ -438,7 +493,8 @@ const CreateNewCard = () => {
               <TypoText
                 placeholder="$ 00.00"
                 handleChange={handleValueChange}
-                value={'itrLimit'}
+                id="itrLimit"
+                value={dataObj?.itrLimit}
               />
               {/* <TextField
                 sx={{ width: "350px" }}
@@ -463,7 +519,8 @@ const CreateNewCard = () => {
               <TypoText
                 placeholder="00.00"
                 handleChange={handleValueChange}
-                value={'c4cLimit'}
+                id="c4climit"
+                value={dataObj?.c4cLimit}
               />
             </Box>
           </Grid>
@@ -479,7 +536,7 @@ const CreateNewCard = () => {
           }}
         >
           <TypoText title="Benifits" />
-          <InfoIcon />
+          <img style={{ marginBottom: '14px' }} src={Info_Icon} />
           <TypographyInfo title="From here you can add the card information" />
         </Box>
         <Divider />
@@ -512,7 +569,7 @@ const CreateNewCard = () => {
             }}
           >
             <TypoText title="Fee & Fee Wavier Details" />
-            <InfoIcon />
+            <img style={{ marginBottom: '14px' }} src={Info_Icon} />
             <TypographyInfo title="From here you can add fee wavier details" />
           </Box>
           <Box sx={{ display: 'flex' }}>
@@ -546,7 +603,8 @@ const CreateNewCard = () => {
               <TypoText
                 placeholder="$ 00.00"
                 handleChange={handleValueChange}
-                value={'joiningFee'}
+                id="joiningFee"
+                value={dataObj?.joiningFee}
               />
               {/* <TextField
                 sx={{ width: "350px" }}
@@ -571,7 +629,8 @@ const CreateNewCard = () => {
               <TypoText
                 placeholder="$ 00.00"
                 handleChange={handleValueChange}
-                value={'joiningFeeWavier'}
+                id="joiningFeewavier"
+                value={dataObj?.joiningFeeWavier}
               />
               {/* <TextField
                 sx={{ width: "350px" }}
@@ -625,7 +684,8 @@ const CreateNewCard = () => {
               <TypoText
                 placeholder="Enter Currency Markup Charges (in %)"
                 handleChange={handleValueChange}
-                value={'annualFee'}
+                id="annualFee"
+                value={dataObj?.annualFee}
               />
               <Typography
                 sx={{
@@ -645,7 +705,8 @@ const CreateNewCard = () => {
               <TypoText
                 placeholder="$ 00.00"
                 handleChange={handleValueChange}
-                value={'annualFeeWavier'}
+                id="annualFeeWavier"
+                value={dataObj?.annualFeeWavier}
               />
             </Box>
           </Grid>
@@ -671,7 +732,8 @@ const CreateNewCard = () => {
             <TypoText
               placeholder="Enter Currency Markup Charges (in %)"
               handleChange={handleValueChange}
-              value={'currencyMarkup'}
+              id="currencyMarkup"
+              value={dataObj?.currencyMarkup}
             />
           </Box>
         </Box>
@@ -698,7 +760,8 @@ const CreateNewCard = () => {
               <TypoText
                 placeholder="Enter fuel surcharge in %"
                 handleChange={handleValueChange}
-                value={'fuelSurcharge'}
+                id="fuelSurcharge"
+                value={dataObj?.fuelSurcharge}
               />
               <Typography
                 sx={{
@@ -718,7 +781,8 @@ const CreateNewCard = () => {
               <TypoText
                 placeholder="$ 00.00"
                 handleChange={handleValueChange}
-                value={'fuelSurchargeWavier'}
+                id="fuelSurchargeWavier"
+                value={dataObj?.fuelSurchargeWavier}
               />
             </Box>
           </Grid>
@@ -744,7 +808,8 @@ const CreateNewCard = () => {
             <TypoText
               placeholder="Enter Fuel Surcharge Description"
               handleChange={handleValueChange}
-              value={'fuelSurchargeDescription'}
+              id="fuelSurchargeDescription"
+              value={dataObj?.fuelSurchargeDescription}
             />
           </Box>
         </Box>
@@ -760,11 +825,11 @@ const CreateNewCard = () => {
             }}
           >
             <TypoText title="Rewards" />
-            <InfoIcon />
+            <img style={{ marginBottom: '14px' }} src={Info_Icon} />
             <TypographyInfo title="Add your reward contents here" />
           </Box>
-          <Box sx={{ display: 'flex' }}>
-            <Button color="secondary" onClick={AddRewardList}>
+          <Box>
+            <Button sx={{ gap: 1 }} color="secondary" onClick={AddRewardList}>
               <ControlPointIcon />
               <Typography sx={{ textTransform: 'capitalize' }}>
                 Add description
@@ -784,9 +849,25 @@ const CreateNewCard = () => {
               >
                 <TypoText
                   placeholder="Enter Description for the Rewards"
-                  handleChange={handleValueChange}
-                  value={'rewardDescription'}
+                  handleChange={(e: any) => rewardDescriptionOnChange(e, index)}
+                  id="rewardDescription"
+                  value={item?.value ?? ''}
                 />
+              </Box>
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'flex-end',
+                  paddingTop: 1,
+                }}
+              >
+                {removeClick.reward ? (
+                  <Button color="secondary" startIcon={<ControlPointIcon />}>
+                    Remove
+                  </Button>
+                ) : (
+                  ''
+                )}
               </Box>
             </Box>
           );
@@ -803,7 +884,7 @@ const CreateNewCard = () => {
             }}
           >
             <TypoText title="Key Benifits" />
-            <InfoIcon />
+            <img style={{ marginBottom: '14px' }} src={Info_Icon} />
             <TypographyInfo title="Add your key benifits from here" />
           </Box>
           <Box sx={{ display: 'flex' }}>
@@ -827,9 +908,25 @@ const CreateNewCard = () => {
               >
                 <TypoText
                   placeholder="Enter Description for the key benefits "
-                  handleChange={handleValueChange}
-                  value={'keyBenefits'}
+                  handleChange={(e: any) => keyBenefitsOnChange(e, index)}
+                  id="keyBenefits"
+                  value={item?.value ?? ''}
                 />
+              </Box>
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'flex-end',
+                  paddingTop: 1,
+                }}
+              >
+                {removeClick.keyBenefits ? (
+                  <Button color="secondary" startIcon={<ControlPointIcon />}>
+                    Remove
+                  </Button>
+                ) : (
+                  ''
+                )}
               </Box>
             </Box>
           );
@@ -846,7 +943,7 @@ const CreateNewCard = () => {
             }}
           >
             <TypoText title="Additional Benifits" />
-            <InfoIcon />
+            <img style={{ marginBottom: '14px' }} src={Info_Icon} />
             <TypographyInfo title="Add your additional benifits here" />
           </Box>
           <Box sx={{ display: 'flex' }}>
@@ -869,9 +966,25 @@ const CreateNewCard = () => {
             >
               <TypoText
                 placeholder="Enter Description for the Additional benefits"
-                handleChange={handleValueChange}
-                value={'additionalBenefits'}
+                handleChange={(e: any) => additionalBenefitsOnChange(e, index)}
+                id="additionalBenefits"
+                value={item?.value ?? ''}
               />
+            </Box>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'flex-end',
+                paddingTop: 1,
+              }}
+            >
+              {removeClick.additionalBenefits ? (
+                <Button color="secondary" startIcon={<ControlPointIcon />}>
+                  Remove
+                </Button>
+              ) : (
+                ''
+              )}
             </Box>
           </Box>
         ))}
@@ -887,7 +1000,7 @@ const CreateNewCard = () => {
             }}
           >
             <TypoText title="Welcome Benifits" />
-            <InfoIcon />
+            <img style={{ marginBottom: '14px' }} src={Info_Icon} />
             <TypographyInfo title="Add your additional benifits here" />
           </Box>
           <Box sx={{ display: 'flex' }}>
@@ -912,9 +1025,25 @@ const CreateNewCard = () => {
               >
                 <TypoText
                   placeholder="Enter Description for the welcome benefits "
-                  handleChange={handleValueChange}
-                  value={'welcomeBenefits'}
+                  handleChange={(e: any) => welcomeBenefitsOnChange(e, index)}
+                  id="welcomeBenefits"
+                  value={item?.value ?? ''}
                 />
+              </Box>
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'flex-end',
+                  paddingTop: 1,
+                }}
+              >
+                {removeClick.welcomeBenefits ? (
+                  <Button color="secondary" startIcon={<ControlPointIcon />}>
+                    Remove
+                  </Button>
+                ) : (
+                  ''
+                )}
               </Box>
             </Box>
           );
@@ -937,10 +1066,7 @@ const CreateNewCard = () => {
 
           <BtnText title="Save as draft" />
 
-          <BtnContained
-            title="Submit"
-            onClick={handleSubmitClick}
-          />
+          <BtnContained title="Submit" onClick={handleSubmitClick} />
         </Box>
       </Box>
     </Box>

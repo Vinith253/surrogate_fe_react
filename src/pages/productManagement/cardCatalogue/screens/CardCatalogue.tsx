@@ -36,7 +36,9 @@ import Pause_icon from '../../../../assets/icons/pause_card_icon.svg';
 import Edit_icon from '../../../../assets/icons/edit_scheduled_pause_icon.svg';
 import Resume_icon from '../../../../assets/icons/resume_card_icon.svg';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import InfoIcon from '@mui/icons-material/Info';
+import {} from '../../../../utils/tagBasedIndicator/tagStatus'
+// import InfoIcon from '@mui/icons-material/Info';
+import Info_Icon from '../../../../assets/images/info_icon.svg';
 import SearchIcon from '@mui/icons-material/Search';
 import TypographyInfo from '../../../../components/commonComponent/CustomText/Info';
 import { styled, alpha } from '@mui/material/styles';
@@ -163,38 +165,38 @@ const rows = [
   ),
 ];
 
-const tableData = [
-  {
-    id: 1,
-    cardName: 'ETERNA',
-    productID: 1234567890,
-    businessID: 1234567890,
-    cardMode: 'General',
-    cardCategory: 'Basic',
-    cardStatus: 'Active',
-    more: '',
-  },
-  {
-    id: 2,
-    cardName: 'PREMIER',
-    productID: 1234567890,
-    businessID: 1234567890,
-    cardMode: 'General',
-    cardCategory: 'Basic',
-    cardStatus: 'Active',
-    more: '',
-  },
-  {
-    id: 3,
-    cardName: 'EXCLUSIVE ICAI',
-    productID: 1234567890,
-    businessID: 1234567890,
-    cardMode: 'General',
-    cardCategory: 'Basic',
-    cardStatus: 'Active',
-    more: '',
-  },
-];
+// const tableData = [
+//   {
+//     id: 1,
+//     cardName: 'ETERNA',
+//     productID: 1234567890,
+//     businessID: 1234567890,
+//     cardMode: 'General',
+//     cardCategory: 'Basic',
+//     cardStatus: 'Active',
+//     more: '',
+//   },
+//   {
+//     id: 2,
+//     cardName: 'PREMIER',
+//     productID: 1234567890,
+//     businessID: 1234567890,
+//     cardMode: 'General',
+//     cardCategory: 'Basic',
+//     cardStatus: 'Active',
+//     more: '',
+//   },
+//   {
+//     id: 3,
+//     cardName: 'EXCLUSIVE ICAI',
+//     productID: 1234567890,
+//     businessID: 1234567890,
+//     cardMode: 'General',
+//     cardCategory: 'Basic',
+//     cardStatus: 'Active',
+//     more: '',
+//   },
+// ];
 const tableHeaderData = [
   {
     id: 'ID',
@@ -215,23 +217,23 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    // backgroundColor: theme.palette.common.white ,
-    color: theme.palette.common.black,
-    fontWeight: 'bold',
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
+// const StyledTableCell = styled(TableCell)(({ theme }) => ({
+//   [`&.${tableCellClasses.head}`]: {
+//     // backgroundColor: theme.palette.common.white ,
+//     color: theme.palette.common.black,
+//     fontWeight: 'bold',
+//   },
+//   [`&.${tableCellClasses.body}`]: {
+//     fontSize: 14,
+//   },
+// }));
 
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  // hide last border
-  '&:last-child td, &:last-child th': {
-    border: 0,
-  },
-}));
+// const StyledTableRow = styled(TableRow)(({ theme }) => ({
+//   // hide last border
+//   '&:last-child td, &:last-child th': {
+//     border: 0,
+//   },
+// }));
 
 export const CardCatalogue = () => {
   const navigate = useNavigate();
@@ -242,9 +244,17 @@ export const CardCatalogue = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [currentPage, setCurrentPage] = useState(1);
-  const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
   const [filteredData, setFilterteredData] = useState(rows);
   const openCardMenu = Boolean(anchorEl);
+
+  const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
+  const menuOpen = Boolean(anchorElement);
+  const handleClick = (event: React.MouseEvent<HTMLTableCellElement>) => {
+    setAnchorElement(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorElement(null);
+  };
 
   // const handleClick = (event: React.MouseEvent<HTMLTableCellElement>) => {
   //   setAnchorElement(event.currentTarget);
@@ -346,7 +356,7 @@ export const CardCatalogue = () => {
             }}
           >
             <TypographyHead title="Card List" />
-            <InfoIcon />
+            <img style={{ marginBottom: '14px' }} src={Info_Icon} />
             <TypographyInfo
               title="From here, you filter the card by its mode, status, category and
                 surrogate"
@@ -544,37 +554,21 @@ export const CardCatalogue = () => {
               height: 400,
               // width: "100%",
               backgroundColor: 'white',
-              // paddingX: ,
+              paddingX: 4,
             }}
           >
             <TableContainer component={Paper}>
-              <Table aria-label="Table">
+              <Table size="small" aria-label="Table">
                 <TableHead
                   style={{ background: '#EEF7FF' }}
                   // sx={{ padding: '5px' }}
                 >
                   {tableHeaderData.map(
                     (items: dataHeaderList, index: number) => (
-                      <TableRow key={index} sx={{ padding: '5px' }}>
-                        <TableCell
-                          align="center"
-                          padding="checkbox"
-                          sx={{ padding: '5px' }}
-                        >
-                          <Checkbox />
-                          {/* color={'secondary'}
-                    indeterminate={
-                      Select.length > 0 && Select.length < tableData.length
-                    }
-                    checked={
-                      tableData.length > 0 &&
-                      Select.length === tableData.length
-                    }
-                    onChange={handleSelectAllClick}
-                    inputProps={{
-                      'aria-label': 'select all desserts',
-                    }}
-                  /> */}
+                      <TableRow key={index} >
+                        <TableCell>
+                          <Checkbox 
+                  />
                         </TableCell>
                         <TableCell
                           align="center"
@@ -594,7 +588,7 @@ export const CardCatalogue = () => {
                         <TableCell sx={{ fontWeight: 800 }} align="center">
                           {items.cardMode}
                         </TableCell>
-                        <TableCell sx={{ fontWeight: 800 }} align="center">
+                        <TableCell sx={{ fontWeight: 800 }} align="left">
                           {items.cardCategory}
                         </TableCell>
                         <TableCell sx={{ fontWeight: 800 }} align="center">
@@ -608,14 +602,16 @@ export const CardCatalogue = () => {
                   )}
                 </TableHead>
 
-                <TableBody>
+                <TableBody >
                   {rows.map((row) => (
-                    <TableRow
+                    <TableRow 
                       key={row.id}
                       // sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                      sx={{ padding: 0 }}
+                      sx={{ padding:0,border:0 }}
                     >
-                      <TableCell align="center">
+                      <TableCell align="center"
+                          padding="checkbox"
+                          sx={{ padding: '5px' }} >
                         <Checkbox />
                       </TableCell>
                       <TableCell align="center">{row.id}</TableCell>
@@ -623,12 +619,60 @@ export const CardCatalogue = () => {
                       <TableCell align="center">{row.productID}</TableCell>
                       <TableCell align="center">{row.businessID}</TableCell>
                       <TableCell align="center">{row.cardMode}</TableCell>
-                      <TableCell align="center">{row.cardCategory}</TableCell>
-                      <TableCell align="center">{row.cardStatus}</TableCell>
-                      <TableCell align="left">{<MoreVertIcon />}</TableCell>
+                      <TableCell align="left">{row.cardCategory}</TableCell>
+                      <TableCell sx={{
+                      color: checkTagStatus(row.cardStatus).color,
+                      padding: '5px',
+                    }} align="center">{row.cardStatus}</TableCell>
+                      {/* <TableCell align="left">{<MoreVertIcon  />}</TableCell> */}
+                      <TableCell>
+                        <Box
+                          id="more-button"
+                          onClick={handleClick}
+                          aria-controls={menuOpen ? 'more-menu' : undefined}
+                          aria-haspopup="true"
+                          aria-expanded={menuOpen ? 'true' : undefined}
+                        >
+                          <IconButton aria-label="settings">
+                            <MoreVertIcon />
+                          </IconButton>
+                        </Box>
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
+                <Menu
+                  id="more-menu"
+                  anchorEl={anchorElement}
+                  open={menuOpen}
+                  MenuListProps={{
+                    'aria-labelledby': 'more-button',
+                  }}
+                  onClose={handleClose}
+                  
+                  // anchorOrigin={{
+                  //   vertical: 'top',
+                  //   horizontal: 'right',
+                  // }}
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                >
+                  
+                  <MenuItem
+                    onClick={handleClose}
+                    style={{ padding: '10px 20px', textAlign: 'left' }}
+                  >
+                    View
+                  </MenuItem>
+                  <MenuItem
+                    onClick={handleClose}
+                    style={{ padding: '10px 20px', textAlign: 'left' }}
+                  >
+                    Edit
+                  </MenuItem>
+                </Menu>
               </Table>
 
               <PaginationComp

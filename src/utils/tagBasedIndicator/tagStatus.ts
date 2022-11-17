@@ -21,5 +21,9 @@ export const checkTagStatus = (value: string) => {
     result.bgColor = colors.lightBrown;
     return result;
   }
+  if (value === tagBasedIndicator.INACTIVE) {
+    result.color = '#E63946';
+    return result;
+  }
   return result;
 };
