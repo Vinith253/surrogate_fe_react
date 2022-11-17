@@ -32,12 +32,12 @@ type dummy = {
 function Card({ content }: { content: cardItems }) {
   console.log(content, 'content');
   const cardHead = {
-    fontSize: '20px',
+    fontSize: '16px',
     color: '#656769;',
     fontWeight: '400',
   };
   const cardSubHead = {
-    fontSize: '16px',
+    fontSize: '14px',
     color: ' #AFAEAF;',
   };
   const flexClass = {
@@ -81,7 +81,7 @@ function Card({ content }: { content: cardItems }) {
         {content.data.map((item: any) => {
           return (
             <Box sx={{ display: 'flex', gap: '5%', padding: '1rem' }}>
-              <Box sx={{ width: '3.5rem' }}>
+              <Box sx={{ width: '3rem' }}>
                 <img src={item.image} style={{ width: '100%' }} />
               </Box>
               {!item.mainContent && (

@@ -12,6 +12,7 @@ import SalesReport from './pages/sales/salesReport';
 import SalesReportDetails from './pages/sales/salesReport/reportDetails';
 
 import ReviewCard from './pages/productManagement/cardCatalogue/reviewCard/reviewCard';
+import AccessLibrary from './pages/accessLibrary/AccessLibrary';
 export default function App() {
   return (
     <Routes>
@@ -54,6 +55,7 @@ export default function App() {
           path="/sales/salesReportDetails"
           element={<SalesReportDetails />}
         />
+        <Route path="/accessLibrary" element={<AccessLibrary />} />
 
         {/* Catch all */}
         <Route path="*" element={<NotFoundPage />} />
