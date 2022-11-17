@@ -1,6 +1,6 @@
 import { TabBar } from '../../../../components/commonComponent/customTab/CustomTab';
 import { dataList } from '../../../../interface/Types';
-import { HistoryLog } from '../screens/historyLog';
+import { ReviewerLog } from '../screens/ReviewerLog';
 import { ProgramManagementScreen } from '../screens/programMmgt';
 
 function ProgramManagement() {
@@ -10,7 +10,7 @@ function ProgramManagement() {
       data: 'Programme Management',
       component: <ProgramManagementScreen />,
     },
-    { id: '2', data: 'History Log', component: <HistoryLog /> },
+    { id: '2', data: 'Reviewer Log', component: <ReviewerLog /> },
   ];
   return (
     <>

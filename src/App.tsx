@@ -13,6 +13,8 @@ import SalesReportDetails from './pages/sales/salesReport/reportDetails';
 
 import ReviewCard from './pages/productManagement/cardCatalogue/reviewCard/reviewCard';
 import AccessLibrary from './pages/accessLibrary/AccessLibrary';
+import ReviewerLogDetails from './pages/productManagement/programmeManagement/screens/listComponents/ReviewerLogDetails';
+
 export default function App() {
   return (
     <Routes>
@@ -41,6 +43,11 @@ export default function App() {
         <Route
           path="/productManagement/programmeManagement"
           element={<ProgramManagement />}
+        />
+
+        <Route
+          path="/productManagement/programmeManagement/:id"
+          element={<ReviewerLogDetails />}
         />
 
         <Route
