@@ -15,7 +15,7 @@ import pauseIcon from '../../../../assets/images/pause_surrogate_icon.svg';
 import CustomModal from '../../../../components/commonComponent/customModal/CustomModal';
 import { secureApi } from '../../../../services/xhr';
 
-const  DummyTableData = [
+const DummyTableData = [
   {
     surrogateProgramme: 'Card For Card',
     activeSince: '20 June 2022, 11.00',
@@ -61,11 +61,11 @@ export const ProgramManagementScreen = () => {
   const fetchSurrogateData = () => {
     secureApi
       .get('https://jsonplaceholder.typicode.com/posts')
-      .then((response) => {
+      .then((response: any) => {
         console.log('---- response', response);
         setSurrogateData(response?.data || []);
       })
-      .catch((err) => {
+      .catch((err: any) => {
         console.log('---- err', err);
       });
   };
@@ -119,7 +119,7 @@ export const ProgramManagementScreen = () => {
           }}
         >
           <Stack>
-            <Typography variant="subtitle1" sx={{ letterSpacing: 0.5 }} >
+            <Typography variant="subtitle1" sx={{ letterSpacing: 0.5 }}>
               {tabBar.PROGRAMME_MANAGEMENT}
             </Typography>
             <Typography
