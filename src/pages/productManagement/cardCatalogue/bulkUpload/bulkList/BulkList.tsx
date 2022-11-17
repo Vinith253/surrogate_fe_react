@@ -501,9 +501,9 @@ export default function BulkList(props: any) {
           aria-label="Platform"
           // sx={ToggleBoxStyle}
         >
-          <ColorButton value="web">All</ColorButton>
-          <ColorButton value="android">Valid</ColorButton>
-          <ColorButton value="ios">Error</ColorButton>
+          <ColorButton value="all">All</ColorButton>
+          <ColorButton value="valid">Valid</ColorButton>
+          <ColorButton value="error">Error</ColorButton>
         </ToggleButtonGroup>
         {/* <ButtonGroup
           variant="contained"
