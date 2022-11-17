@@ -17,9 +17,7 @@ import {
   rowsDataInterface,
   statusRowHeadingInterface,
 } from '../../../pages/sales/dashboard/dashboard.const';
-import { useStyles } from '../../../style/MuiStyles/muiStyles';
 import PaginationComp from '../Pagination/Pagination';
-import { Link } from '@mui/icons-material';
 
 function TableComp(props: {
   rows: rowsDataInterface[];
@@ -64,7 +62,7 @@ function TableComp(props: {
     <div className="table-div">
       <div className="third-header">
         <div className={'outer-filter-box'}>
-          <div className={graphView == 1 ? 'selectedBox' : 'filter-box'}>
+          <div className={graphView === 1 ? 'selectedBox' : 'filter-box'}>
             <li
               onClick={() => {
                 setFilterteredData(props.rows);
@@ -73,14 +71,14 @@ function TableComp(props: {
                 setGraphView(1);
               }}
               className={
-                graphView == 1 ? 'selected-overview-text3' : 'overview-text3'
+                graphView === 1 ? 'selected-overview-text3' : 'overview-text3'
               }
             >
               All
             </li>
           </div>
           <div className="seperater-div" />
-          <div className={graphView == 2 ? 'selectedBox' : 'filter-box'}>
+          <div className={graphView === 2 ? 'selectedBox' : 'filter-box'}>
             <li
               onClick={() => {
                 const currentData = props.rows.filter(function (item) {
@@ -92,14 +90,14 @@ function TableComp(props: {
                 setGraphView(2);
               }}
               className={
-                graphView == 2 ? 'selected-overview-text3' : 'overview-text3'
+                graphView === 2 ? 'selected-overview-text3' : 'overview-text3'
               }
             >
               Approved
             </li>
           </div>
           <div className="seperater-div" />
-          <div className={graphView == 3 ? 'selectedBox' : 'filter-box'}>
+          <div className={graphView === 3 ? 'selectedBox' : 'filter-box'}>
             <li
               onClick={() => {
                 const currentData = props.rows.filter(function (item) {
@@ -111,14 +109,14 @@ function TableComp(props: {
                 setGraphView(3);
               }}
               className={
-                graphView == 3 ? 'selected-overview-text3' : 'overview-text3'
+                graphView === 3 ? 'selected-overview-text3' : 'overview-text3'
               }
             >
               In-Progress
             </li>
           </div>
           <div className="seperater-div" />
-          <div className={graphView == 4 ? 'selectedBox' : 'filter-box'}>
+          <div className={graphView === 4 ? 'selectedBox' : 'filter-box'}>
             <li
               onClick={() => {
                 const currentData = props.rows.filter(function (item) {
@@ -130,14 +128,14 @@ function TableComp(props: {
                 setGraphView(4);
               }}
               className={
-                graphView == 4 ? 'selected-overview-text3' : 'overview-text3'
+                graphView === 4 ? 'selected-overview-text3' : 'overview-text3'
               }
             >
               Rejected
             </li>
           </div>
           <div className="seperater-div" />
-          <div className={graphView == 5 ? 'selectedBox' : 'filter-box'}>
+          <div className={graphView === 5 ? 'selectedBox' : 'filter-box'}>
             <li
               onClick={() => {
                 const currentData = props.rows.filter(function (item) {
@@ -149,7 +147,7 @@ function TableComp(props: {
                 setGraphView(5);
               }}
               className={
-                graphView == 5 ? 'selected-overview-text3' : 'overview-text3'
+                graphView === 5 ? 'selected-overview-text3' : 'overview-text3'
               }
             >
               Dropped
@@ -447,7 +445,7 @@ function TableComp(props: {
             setCurrentPage(1);
           }}
           lastButtonDisabled={
-            page == Math.ceil(filteredData.length / rowsPerPage)
+            page === Math.ceil(filteredData.length / rowsPerPage)
           }
         />
       </Grid>
@@ -463,7 +461,7 @@ function kycStatus(
   return (
     <div className="status-box">
       <div className="dotIcon">
-        <img src={imageDot} />
+        <img src={imageDot} alt={'status-icon'} />
       </div>
       <div>
         <Typography

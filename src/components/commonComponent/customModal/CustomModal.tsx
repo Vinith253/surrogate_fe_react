@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../../style/Style.scss';
 import { Button, Stack, Typography } from '@mui/material';
 import Radio from '@mui/material/Radio';
@@ -31,7 +31,7 @@ type props = {
   successModalMsg?: string;
   rejectedModalMsg?: string;
   pause_content?: string;
-  scheulePause?: string;
+  SchedulePause?: string;
   datepickerLabelStart?: string;
   datepickerLabelEnd?: string;
   scheduledPause_content?: string;
@@ -42,6 +42,8 @@ type props = {
   btn?: string;
   submit?: string;
   close?: string;
+  pauseMethodChecking?: any;
+  handleSuccess?: any;
 };
 
 function CustomModal({
@@ -54,7 +56,7 @@ function CustomModal({
   successModalMsg,
   rejectedModalMsg,
   pause_content,
-  scheulePause,
+  SchedulePause,
   datepickerLabelStart,
   datepickerLabelEnd,
   scheduledPause_content,
@@ -65,12 +67,24 @@ function CustomModal({
   btn,
   submit,
   close,
+  pauseMethodChecking,
+  handleSuccess,
 }: props) {
   // const classess = useStyles();
 
   const [pauseStatus, setPauseStatus] = useState(normalPause);
   const [startDatevalue, setStartDateValue] = useState(null);
   const [endDatevalue, setEndDateValue] = useState(null);
+
+  useEffect(() => {
+    if (pauseStatus) {
+      pauseMethodChecking(pauseStatus);
+    }
+  }, [pauseStatus]);
+
+  const pauseValue = (value: any) => {
+    setPauseStatus(value);
+  };
 
   return (
     <Stack className="App">
@@ -199,16 +213,16 @@ function CustomModal({
             {pause_content}
           </Typography>
 
-          {(normalPause || scheulePause) && (
+          {(normalPause || SchedulePause) && (
             <FormControl style={{ fontSize: '1px' }}>
               <Stack pb={1}>
                 <RadioGroup
                   color=""
                   row
                   aria-labelledby="demo-radio-buttons-group-label"
-                  value={pauseStatus}
+                  value={pauseStatus ? pauseStatus : normalPause}
                   name="radio-buttons-group"
-                  onChange={(e) => setPauseStatus(e.target.value)}
+                  onChange={(e) => pauseValue(e.target.value)}
                 >
                   <FormControlLabel
                     style={{ fontSize: '1px' }}
@@ -217,16 +231,16 @@ function CustomModal({
                     label={normalPause}
                   />
                   <FormControlLabel
-                    value={scheulePause}
-                    control={<Radio />}
-                    label={scheulePause}
+                    value={SchedulePause}
+                    control={<Radio color="secondary" />}
+                    label={SchedulePause}
                   />
                 </RadioGroup>
               </Stack>
             </FormControl>
           )}
 
-          {pauseStatus === scheulePause &&
+          {pauseStatus === SchedulePause &&
             datepickerLabelStart &&
             datepickerLabelEnd && (
               <Stack>
@@ -392,7 +406,7 @@ function CustomModal({
                   backgroundColor: `${colors.Modalblue}`,
                   fontWeight: '600',
                 }}
-                onClick={handleCloseSuccess}
+                onClick={handleSuccess}
               >
                 {submit}{' '}
               </Button>

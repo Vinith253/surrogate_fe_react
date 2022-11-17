@@ -43,6 +43,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import TypographyInfo from '../../../../components/commonComponent/CustomText/Info';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
+import CustomModal from '../../../../components/commonComponent/customModal/CustomModal';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { checkTagStatus } from '../../../../utils/tagBasedIndicator/tagStatus';
 import TablePagination from '@mui/material/TablePagination';
@@ -238,7 +239,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export const CardCatalogue = () => {
   const navigate = useNavigate();
   const [age, setAge] = useState('');
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [surrogateSelection, setSurrogateSelection] = useState(false);
+  const [resumeModal, setResumeModal] = useState(false);
+  const [resumeSuccessModal, setResumeSuccessModal] = useState(false);
+  const [resumeRemoveModal, setResumeRemoveModal] = useState(false);
+  const [surrogateSuccessSelection, setSurrogateSuccessSelection] =
+    useState(false);
+  const [showPauseModal, setShowPauseModal] = useState<boolean>(false);
+  const [pauseMethods, setPauseMethods] = useState('Pause Now');
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [selected, setSelected] = React.useState('');
   const [page, setPage] = React.useState(0);
@@ -246,6 +255,14 @@ export const CardCatalogue = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [filteredData, setFilterteredData] = useState(rows);
   const openCardMenu = Boolean(anchorEl);
+  const [surrogateMethod, setSurrogateMethod] = useState('Assign Surrogate');
+  const [showPauseSuccessModal, setShowPauseSuccessModal] =
+    useState<boolean>(false);
+  const [showScheduledPauseSuccessModal, setShowScheduledPauseSuccessModal] =
+    useState<boolean>(false);
+
+  const NORMAL_PAUSE = 'Pause Now';
+  const SCHEDULED_PAUSE = 'Schedule Pause';
 
   const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
   const menuOpen = Boolean(anchorElement);
@@ -291,12 +308,95 @@ export const CardCatalogue = () => {
   const singleCardOpen = () => {
     navigate('/productManagement/cardCatalogue/singleupload');
   };
+
   const bulkCardOpen = () => {
     navigate('/productManagement/cardCatalogue/bulkupload');
   };
+
   const handleAdd = (event: SelectChangeEvent) => {
     setAge(event.target.value as string);
   };
+
+  const pauseMethodChange = (value: any) => {
+    setPauseMethods(value);
+  };
+  const surrogateMethodChange = (value: any) => {
+    setSurrogateMethod(value);
+  };
+
+  const closeModal = () => {
+    setSurrogateSelection(false);
+    setSurrogateSuccessSelection(false);
+    setResumeModal(false);
+    setResumeSuccessModal(false);
+    setResumeRemoveModal(false);
+    setShowPauseSuccessModal(false);
+    setShowScheduledPauseSuccessModal(false);
+    setShowPauseModal(false);
+  };
+
+  const successModal = () => {
+    if (pauseMethods === NORMAL_PAUSE) {
+      setShowPauseModal(false);
+      setShowPauseSuccessModal(true);
+      console.log('success');
+    }
+    if (pauseMethods === SCHEDULED_PAUSE) {
+      setShowPauseModal(false);
+      setShowScheduledPauseSuccessModal(true);
+      console.log('fail');
+    }
+  };
+
+  const handleSurrogateSubmit = () => {
+    if (surrogateMethod === 'Assign Surrogate') {
+      setSurrogateSuccessSelection(true);
+      setSurrogateSelection(false);
+    }
+    if (surrogateMethod === 'Remove Surrogate') {
+      setResumeRemoveModal(true);
+      setSurrogateSelection(false);
+    }
+  };
+
+  const handleResumeSuccess = () => {
+    setResumeSuccessModal(true);
+    setResumeModal(false);
+  };
+
+  const product_label = [
+    {
+      id: 1,
+      label: 'Payroll',
+      defaultChecked: true,
+    },
+    {
+      id: 2,
+      label: 'Car For Card',
+      defaultChecked: true,
+    },
+    {
+      id: 3,
+      label: 'CIBIL',
+      defaultChecked: true,
+    },
+    {
+      id: 4,
+      label: 'AQB',
+      defaultChecked: false,
+    },
+    {
+      id: 5,
+      label: 'Secured',
+      defaultChecked: false,
+    },
+    {
+      id: 6,
+      label: 'RC Surrogate',
+      defaultChecked: false,
+    },
+  ];
+
   return (
     <Stack>
       <Stack>
@@ -458,6 +558,7 @@ export const CardCatalogue = () => {
                   display: 'flex',
                   alignItems: 'center',
                 }}
+                onClick={() => setResumeModal(true)}
               >
                 <IconButton sx={{ padding: '0', marginRight: '8px' }}>
                   <img
@@ -479,6 +580,7 @@ export const CardCatalogue = () => {
                   display: 'flex',
                   alignItems: 'center',
                 }}
+                onClick={() => setShowPauseModal(true)}
               >
                 <IconButton sx={{ padding: '0', marginRight: '8px' }}>
                   <img
@@ -520,6 +622,7 @@ export const CardCatalogue = () => {
                   display: 'flex',
                   alignItems: 'center',
                 }}
+                onClick={() => setSurrogateSelection(true)}
               >
                 <IconButton sx={{ padding: '0', marginRight: '8px' }}>
                   <img
@@ -706,6 +809,114 @@ export const CardCatalogue = () => {
           </Box>
         </Box>
       </Stack>
+      {surrogateSelection && (
+        <CustomModal
+          openSuccess={surrogateSelection}
+          handleCloseSuccess={closeModal}
+          title={'Surrogate Selection'}
+          handleSuccess={handleSurrogateSubmit}
+          pause_content={'You can assign or remove surrogate.'}
+          normalPause={'Assign Surrogate'}
+          SchedulePause={'Remove Surrogate'}
+          close={'Close'}
+          submit={'Assign'}
+          pauseMethodChecking={surrogateMethodChange}
+          product_label={product_label}
+        />
+      )}
+      {surrogateSuccessSelection && (
+        <CustomModal
+          openSuccess={surrogateSuccessSelection}
+          handleCloseSuccess={closeModal}
+          successModalTitle={'Assign - Surrogate'}
+          successModalMsg={
+            'Your action of Assign Surrogate request of Payroll , Card For Card, and CIBIL were successfully sent to the reviewer.'
+          }
+          btn={' Close'}
+        />
+      )}
+      {resumeModal && (
+        <CustomModal
+          openSuccess={resumeModal}
+          handleCloseSuccess={closeModal}
+          handleSuccess={handleResumeSuccess}
+          title={'AQB - Resume Now'}
+          pause_content={
+            'You will be able to resume your paused surrogate here.'
+          }
+          textarea_title={'Add Remarks'}
+          dateRange_title={'Enter Date range'}
+          maxLength={'Maximum of 500 words'}
+          close={'Close'}
+          submit={'Submit'}
+        />
+      )}
+      {resumeSuccessModal && (
+        <CustomModal
+          openSuccess={resumeSuccessModal}
+          handleCloseSuccess={closeModal}
+          successModalTitle={'Card - Resume'}
+          successModalMsg={
+            'Your action for resuming the card request Surrogate was successfully sent to the reviewer.'
+          }
+          btn={' Close'}
+        />
+      )}
+      {resumeRemoveModal && (
+        <CustomModal
+          openSuccess={resumeRemoveModal}
+          handleCloseSuccess={closeModal}
+          successModalTitle={'Remove - Surrogate'}
+          successModalMsg={
+            'Your action of Assign Surrogate request of Payroll , Card For Card, and CIBIL were successfully sent to the reviewer.'
+          }
+          btn={' Close'}
+        />
+      )}
+      {showPauseModal && (
+        <CustomModal
+          openSuccess={showPauseModal}
+          handleCloseSuccess={closeModal}
+          handleSuccess={successModal}
+          title={'Card For Card - Pause'}
+          pause_content={'You can pause it or perform a scheduled pause.'}
+          scheduledPause_content={
+            'Please choose a date range to perform a scheduled pause.'
+          }
+          textarea_title={'Add Remarks'}
+          normalPause={NORMAL_PAUSE}
+          SchedulePause={SCHEDULED_PAUSE}
+          dateRange_title={'Enter Date range'}
+          maxLength={'Maximum of 500 words'}
+          pauseMethodChecking={pauseMethodChange}
+          close={'Close'}
+          submit={'Submit'}
+          datepickerLabelStart={'Start Date and time'}
+          datepickerLabelEnd={'End Date and time'}
+        />
+      )}
+      {showPauseSuccessModal && (
+        <CustomModal
+          openSuccess={showPauseSuccessModal}
+          handleCloseSuccess={closeModal}
+          successModalTitle={'Card For Card - Pause'}
+          successModalMsg={
+            ' Your action of pausing - Card For Card Surrogate has been successully sent to the reviewer'
+          }
+          btn={' Close'}
+        />
+      )}
+      {showScheduledPauseSuccessModal && (
+        <CustomModal
+          openSuccess={showScheduledPauseSuccessModal}
+          handleCloseSuccess={closeModal}
+          successModalTitle={'Card For Card - Scheduled Pause'}
+          successModalMsg={
+            'Your action of Scheduled Pause - Card For Card Surrogate From  DD/MM/YYYTo DD/MM/YYY is successfully sent to reviewer'
+          }
+          btn={' Close'}
+        />
+      )}
     </Stack>
   );
 };
