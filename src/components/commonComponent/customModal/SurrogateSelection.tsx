@@ -23,7 +23,7 @@ function SurrogateSelection() {
         title={'Surrogate Selection'}
         pause_content={'You can assign or remove surrogate.'}
         normalPause={'Assign Surrogate'}
-        scheulePause={'Remove Surrogate'}
+        SchedulePause={'Remove Surrogate'}
         close={'Close'}
         submit={'Assign'}
         product_label={product_label}
