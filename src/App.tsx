@@ -11,6 +11,7 @@ import SalesDashboard from './pages/sales/dashboard/Dashboard';
 import SalesReport from './pages/sales/salesReport';
 import SalesReportDetails from './pages/sales/salesReport/reportDetails';
 
+import ReviewCard from './pages/productManagement/cardCatalogue/reviewCard/reviewCard';
 export default function App() {
   return (
     <Routes>
@@ -41,10 +42,10 @@ export default function App() {
           element={<ProgramManagement />}
         />
 
-        {/* <Route
-          path="/productManagement/programmeManagement"
-          element={<CardCatalogue />}
-        /> */}
+        <Route
+          path="/productManagement/cardCatalogue/singleupload/reviewCard"
+          element={<ReviewCard />}
+        />
 
         <Route path="/sales/salesDashboard" element={<SalesDashboard />} />
 

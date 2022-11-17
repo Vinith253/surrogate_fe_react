@@ -7,7 +7,7 @@ import { dataList } from '../../../../interface/Types';
 import { CardCatalogue } from '../screens/CardCatalogue';
 import HistoryLog from '../screens/HistoryLog';
 
-export default function LabTabs() {
+const LabTabs = () => {
   const TabListData: dataList = [
     {
       id: '1',
@@ -22,3 +22,5 @@ export default function LabTabs() {
     </Stack>
   );
 }
+
+export default LabTabs;
