@@ -1,7 +1,8 @@
+
 import React from 'react';
 import './style.scss';
 import DetailsCard from './detailsCard';
-
+import { Stack } from '@mui/material';
 function SalesReportDetails() {
   const personalDetails = {
     title: 'Personal Details',
@@ -34,7 +35,6 @@ function SalesReportDetails() {
       },
     ],
   };
-
   const channelDetails = {
     title: 'Channel Details',
     icon: true,
@@ -66,7 +66,6 @@ function SalesReportDetails() {
       },
     ],
   };
-
   const applicationDetails = {
     title: 'Application Details',
     icon: true,
@@ -98,7 +97,6 @@ function SalesReportDetails() {
       },
     ],
   };
-
   const remarkDetails = {
     title: 'Remarks',
     icon: true,
@@ -111,22 +109,29 @@ function SalesReportDetails() {
       },
     ],
   };
-
   return (
-    <div className="sales-report-details-container">
-      <div className="header-container">
-        <div className="main-header">Customer Details</div>
-        <div className="info-label">
+    <Stack
+      className="sales-report-details-container"
+      sx={{ marginBottom: '20px' }}
+    >
+      <Stack className="header-container">
+        <Stack className="main-header">Customer Details</Stack>
+        <Stack className="info-label">
           Lorem ipusm dolor sit amet, consectetur adipiscing elit.integer
           senectus mattis
-        </div>
-      </div>
-      <DetailsCard data={personalDetails} />
-      <DetailsCard data={channelDetails} />
-      <DetailsCard data={applicationDetails} />
-      <DetailsCard data={remarkDetails} />
-    </div>
+        </Stack>
+      </Stack>
+      <Stack sx={{ marginBottom: '20px' }}>
+        <Stack sx={{ marginBottom: '20px' }}>
+          <DetailsCard data={personalDetails} gridColumn={4} />
+        </Stack>
+        <DetailsCard data={channelDetails} gridColumn={4} />
+        <Stack sx={{ margin: '20px 0' }}>
+          <DetailsCard data={applicationDetails} gridColumn={4} />
+        </Stack>
+        <DetailsCard data={remarkDetails} gridColumn={4} />
+      </Stack>
+    </Stack>
   );
 }
-
 export default SalesReportDetails;

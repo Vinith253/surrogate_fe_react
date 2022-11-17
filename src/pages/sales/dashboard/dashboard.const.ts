@@ -1,3 +1,6 @@
+import { ReactComponent as DownArrow } from "../../../assets/icons/downArrow.svg";
+import { ReactComponent as MoreFilter } from "../../../assets/icons/moreFilter.svg";
+
 export const salesDashboardList: rowsDataInterface[] = [
   {
     id: 1,
@@ -285,6 +288,12 @@ export interface rowsDataInterface {
   processedBy?: string;
   kycStatus?: string;
   status?: string;
+
+  version? :string;
+  currentStatus?:string;
+  initiatedBy?:string;
+  request?:string;
+  dateAndTime?:string;
 }
 
 export interface statusRowHeadingInterface {
@@ -299,3 +308,26 @@ export interface statusRowHeadingInterface {
   header9?: string;
   header10?: string;
 }
+
+
+export const filterHeaderData= {
+  title: 'Overview',
+  details: [
+    {
+      label: 'Current Day',
+      image: DownArrow,
+    },
+    {
+      label: 'All Policies',
+      image: DownArrow,
+    },
+    {
+      label: 'All Surrogates',
+      image: DownArrow,
+    },
+    {
+      label: 'More Filters',
+      image: MoreFilter,
+    },
+  ],
+};

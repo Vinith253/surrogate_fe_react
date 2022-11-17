@@ -2,7 +2,7 @@ import { TextField } from '@mui/material';
 import ReactApexChart from 'react-apexcharts';
 import ProgressCard from '../../../../components/commonComponent/CommonCard/ProgressCard/ProgressCard';
 import DashboardCard from '../../../../components/commonComponent/CommonCard/SalesDashbaordCard/DashboardCard';
-import FilterButton from './SalesFilter/FilterButton';
+import FilterButton from '../../../../components/commonComponent/FilterHeader/FilterButton';
 import ApprovalRate from '../../../../assets/icons/approval_rate_icon.svg';
 import TotalApplications from '../../../../assets/icons/total_application_icon.svg';
 import Comparisions from '../../../../assets/icons/comparision_icon.svg';
@@ -15,6 +15,7 @@ import '../dashboard.scss';
 import { useState } from 'react';
 import TableComp from '../../../../components/commonComponent/ListTable/ListTable';
 import {
+  filterHeaderData,
   listRowHeading,
   salesDashboardList,
   statusRowHeading,
@@ -217,7 +218,9 @@ export default function DsaPage() {
     <div>
       <div className="dsa-data-container">
         <div>
-          <FilterButton />
+          <FilterButton
+          filterHeaderData={filterHeaderData} 
+          />
           <div className="divider-line" />
           <div className="horizontal-cards">
             {dashboardVal.map((value) => (
@@ -280,12 +283,12 @@ export default function DsaPage() {
                   <div className="third-header">
                     <div className={'graph-filter-box'}>
                       <div
-                        className={graphView == 1 ? 'selectedBox' : 'hour-box'}
+                        className={graphView === 1 ? 'selectedBox' : 'hour-box'}
                       >
                         <li
                           onClick={() => setGraphView(1)}
                           className={
-                            graphView == 1
+                            graphView === 1
                               ? 'selected-overview-text3'
                               : 'overview-text3'
                           }
@@ -295,12 +298,12 @@ export default function DsaPage() {
                       </div>
                       <div className="line2-div" />
                       <div
-                        className={graphView == 2 ? 'selectedBox' : 'hour-box'}
+                        className={graphView === 2 ? 'selectedBox' : 'hour-box'}
                       >
                         <li
                           onClick={() => setGraphView(2)}
                           className={
-                            graphView == 2
+                            graphView === 2
                               ? 'selected-overview-text3'
                               : 'overview-text3'
                           }
@@ -310,12 +313,12 @@ export default function DsaPage() {
                       </div>
                       <div className="line2-div" />
                       <div
-                        className={graphView == 3 ? 'selectedBox' : 'hour-box'}
+                        className={graphView === 3 ? 'selectedBox' : 'hour-box'}
                       >
                         <li
                           onClick={() => setGraphView(3)}
                           className={
-                            graphView == 3
+                            graphView === 3
                               ? 'selected-overview-text3'
                               : 'overview-text3'
                           }
@@ -325,12 +328,12 @@ export default function DsaPage() {
                       </div>
                       <div className="line2-div" />
                       <div
-                        className={graphView == 4 ? 'selectedBox' : 'hour-box'}
+                        className={graphView === 4 ? 'selectedBox' : 'hour-box'}
                       >
                         <li
                           onClick={() => setGraphView(4)}
                           className={
-                            graphView == 4
+                            graphView === 4
                               ? 'selected-overview-text3'
                               : 'overview-text3'
                           }

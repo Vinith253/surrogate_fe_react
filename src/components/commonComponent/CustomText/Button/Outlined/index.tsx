@@ -3,7 +3,11 @@ import { Button, Typography } from '@mui/material';
 
 const BtnOutlined = (props: any) => {
   return (
-    <Button sx={{ height: 30, width: 70 }} variant="outlined">
+    <Button
+      onClick={props.onClick}
+      sx={{ height: 30, width: 70 }}
+      variant="outlined"
+    >
       <Typography
         sx={{
           color: 'black',
