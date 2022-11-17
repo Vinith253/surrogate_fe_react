@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Stack,
   Box,
@@ -12,12 +12,16 @@ import {
   Grid,
   Divider,
 } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import CheckBox from '../../../../components/commonComponent/CheckBox/checkBox';
 import BtnOutlined from '../../../../components/commonComponent/CustomText/Button/Outlined';
-import EditIcon from '@mui/icons-material/Edit';
+// import EditIcon from '@mui/icons-material/Edit';
+// import EditIcon from '../../../../assets/images/edit_scheduled_pause_icon.svg'
+// import EditOne from '../../../../assets/images/edit.png'
+import EditIcon from '../../../../assets/images/edit_card.svg';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import InfoIcon from '@mui/icons-material/Info';
+import Info_Icon from '../../../../assets/images/info_icon.svg';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import RotateRightIcon from '@mui/icons-material/RotateRight';
@@ -29,6 +33,38 @@ import TypographyInfo from '../../../../components/commonComponent/CustomText/In
 import TypographyHead from '../../../../components/commonComponent/CustomText/Head';
 
 const ReviewCard = () => {
+  const { state } = useLocation();
+  const [data, setData] = useState<any>();
+
+  useEffect(() => {
+    if (state) {
+      const { record } = state;
+      setData(record);
+    }
+  }, [state]);
+
+  let obj = {
+    businessId: '',
+    cardName: '',
+    interestRate: '',
+    maximumCardLimit: '',
+    cibilScore: '',
+    itrLimit: '',
+    salaryLimit: '',
+    c4cLimit: '',
+    joiningFee: '',
+    joiningFeeWavier: '',
+    fuelSurchargeWavier: '',
+    currencyMarkup: '',
+    fuelSurcharge: '',
+    fuelSurchargeDescription: '',
+    annualFee: '',
+    rewardDescription: [{ value: ' ' }],
+    keyBenefits: [{ value: ' ' }],
+    additionalBenefits: [{ value: ' ' }],
+    welcomeBenefits: [{ value: '' }],
+  };
+
   const navigate = useNavigate();
   const goBack = () => {
     navigate(-1);
@@ -36,20 +72,26 @@ const ReviewCard = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [editData, setEditData] = React.useState(obj);
+
+  const handleValueChange = (e: any, value: any) => {
+    setEditData((prev: any) => ({ ...prev, [value]: e }));
+  };
 
   const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width:'540px',
-    height:'380px',
+    width: '540px',
+    height: '380px',
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
-    paddingX:2
+    paddingX: 2,
   };
 
+  console.log('data', data);
   return (
     <Box
       sx={{
@@ -72,7 +114,7 @@ const ReviewCard = () => {
             }}
           >
             <Box onClick={goBack}>
-              <ArrowBackIcon />
+              <ArrowBackIcon sx={{ color: '#0078EF' }} />
             </Box>
             <Box>
               <TypoText title="Eterna - Platinum (ID No. 12345678" />
@@ -80,9 +122,29 @@ const ReviewCard = () => {
             </Box>
           </Box>
 
-          <Box sx={{ display: 'flex', alignItems: 'center', color: 'blue' }}>
-            <EditIcon />
-            <Button>Edit Card</Button>
+          <Box sx={{ display: 'flex', alignItems: 'center', color: '#0662B7' }}>
+            <Button
+              // variant="contained"
+              // color="secondary"
+              sx={{
+                padding: '3px 8px',
+                fontSize: '14px',
+                display: 'flex',
+                alignItems: 'center',
+                color: '#0662B7',
+                textTransform: 'none',
+              }}
+            >
+              <IconButton sx={{ padding: '0', marginRight: '8px' }}>
+                <img
+                  src={EditIcon}
+                  style={{
+                    filter: '',
+                  }}
+                />
+              </IconButton>
+              Edit Card
+            </Button>
           </Box>
         </Box>
         <Divider />
@@ -99,7 +161,12 @@ const ReviewCard = () => {
                 backgroundColor: '#e0e0de',
               }}
             >
-              <img width={'250px'} height={'160px'} src={CardImage} onClick={handleOpen} />
+              <img
+                width={'250px'}
+                height={'160px'}
+                src={CardImage}
+                onClick={handleOpen}
+              />
 
               <Modal
                 keepMounted
@@ -110,15 +177,24 @@ const ReviewCard = () => {
               >
                 <Box sx={style}>
                   <Box
-                    sx={{ display: 'flex', justifyContent: 'space-between',padding:2 }}
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      padding: 2,
+                    }}
                   >
-                    <Typography sx={{fontSize:'14px',fontWeight:400}} >
+                    <Typography sx={{ fontSize: '14px', fontWeight: 400 }}>
                       Card Photo - Eterna - Platinum
                     </Typography>
-                    <Typography sx={{color:'blue',cursor:'pointer'}} onClick={handleClose} >Close</Typography>
+                    <Typography
+                      sx={{ color: '#0662B7', cursor: 'pointer' }}
+                      onClick={handleClose}
+                    >
+                      Close
+                    </Typography>
                   </Box>
-                  <Box sx={{margin:'auto'}}  >
-                    <img  width={'500px'} height={'300px'} src={CardImage} />
+                  <Box sx={{ margin: 'auto' }}>
+                    <img width={'500px'} height={'300px'} src={CardImage} />
                   </Box>
                 </Box>
               </Modal>
@@ -128,23 +204,39 @@ const ReviewCard = () => {
           <Box>
             <Grid container sx={{ paddingY: 2 }} spacing={5}>
               <Grid item xs={12} sm={6} md={4}>
-                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                  <TypoText title="Business ID" />
-                  <TypoText placeholder="1234567890" />
+                <Box sx={{ display: 'flex', flexDirection: 'column',width:'350px' }}>
+                  <TypoText color='grey' title="Business ID" />
+                  <TypoText
+                    
+                    handleChange={handleValueChange}
+                    id={'businessId'}
+                    title={data?.businessId}
+                    // disableUnderline={true}
+                    // value={data?.businessId}
+                  />
                 </Box>
               </Grid>
 
               <Grid item xs={12} sm={6} md={4}>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                  <TypoText title="Card Name" />
-                  <TypoText placeholder="Yes Bank Credit Card" />
+                  <TypoText color='grey' title="Card Name" />
+                  <TypoText 
+                    handleChange={handleValueChange}
+                    id={'cardName'}
+                    title={data?.cardName}
+                    // value={data?.cardName}
+                  />
                 </Box>
               </Grid>
 
               <Grid item xs={12} sm={6} md={4}>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                  <TypoText title="Interest Rate (in%)" />
-                  <TypoText placeholder="12 %" />
+                  <TypoText color='grey' title="Interest Rate (in%)" />
+                  <TypoText 
+                    handleChange={handleValueChange}
+                    id={'interestRate'}
+                    title={data?.interestRate}
+                  />
                 </Box>
               </Grid>
             </Grid>
@@ -152,34 +244,37 @@ const ReviewCard = () => {
             <Grid container spacing={5}>
               <Grid item xs={12} sm={6} md={4}>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                  <TypoText title="Card Type" />
-                  <Select
+                  <TypoText color='grey' title="Card Type" />
+                  <Typography>Salaried</Typography>
+                  {/* <Select
                     placeholder="Salaried"
                     variant="outlined"
                     size="small"
-                  />
+                  /> */}
                 </Box>
               </Grid>
 
               <Grid item xs={12} sm={6} md={4}>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                  <TypoText title="Card Mode" />
-                  <Select
+                  <TypoText color='grey' title="Card Mode" />
+                  <Typography>General Basic</Typography>
+                  {/* <Select
                     placeholder="General Basic"
                     variant="outlined"
                     size="small"
-                  />
+                  /> */}
                 </Box>
               </Grid>
 
               <Grid item xs={12} sm={6} md={4}>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                  <TypoText title="Card Category" />
-                  <Select
+                  <TypoText color='grey' title="Card Category" />
+                  <Typography>General</Typography>
+                  {/* <Select
                     placeholder="General"
                     variant="outlined"
                     size="small"
-                  />
+                  /> */}
                 </Box>
               </Grid>
             </Grid>
@@ -198,8 +293,8 @@ const ReviewCard = () => {
                     width: '92%',
                   }}
                 >
-                  <TypoText title="Maximum Card Limit" />
-                  <TypoText placeholder="2,00,000.00" />
+                  <TypoText color='grey' title="Maximum Card Limit" />
+                  <TypoText title={data?.maximumCardLimit} />
                 </Box>
               </Grid>
             </Grid>
@@ -217,7 +312,7 @@ const ReviewCard = () => {
           }}
         >
           <TypoText title=" Surrogate" />
-          <InfoIcon />
+          <img src={Info_Icon} />
         </Box>
         <Divider />
 
@@ -247,7 +342,7 @@ const ReviewCard = () => {
           }}
         >
           <TypoText title=" Channels" />
-          <InfoIcon />
+          <img src={Info_Icon} />
         </Box>
         <Divider />
 
@@ -277,7 +372,7 @@ const ReviewCard = () => {
           }}
         >
           <TypoText title="Eligibility Criteria " />
-          <InfoIcon />
+          <img src={Info_Icon} />
         </Box>
         <Divider />
 
@@ -326,7 +421,7 @@ const ReviewCard = () => {
           }}
         >
           <TypoText title=" Extra Cards" />
-          <InfoIcon />
+          <img src={Info_Icon} />
         </Box>
         <Divider />
 
@@ -352,10 +447,11 @@ const ReviewCard = () => {
             display: 'flex',
             justifyContent: 'flex-start',
             gap: 2,
+            paddingBottom: 2,
           }}
         >
           <TypoText title="Benifits" />
-          <InfoIcon />
+          <img src={Info_Icon} />
         </Box>
         <Divider />
 
@@ -463,7 +559,7 @@ const ReviewCard = () => {
           }}
         >
           <TypoText title="Fee & Fee Wavier Details" />
-          <InfoIcon />
+          <img src={Info_Icon} />
         </Box>
         <Divider sx={{ paddingTop: 2 }} />
 
@@ -591,7 +687,7 @@ const ReviewCard = () => {
           }}
         >
           <TypoText title=" Rewards" />
-          <InfoIcon />
+          <img src={Info_Icon} />
         </Box>
         <Divider />
 
@@ -624,7 +720,7 @@ const ReviewCard = () => {
           }}
         >
           <TypoText title=" Key Benefits" />
-          <InfoIcon />
+          <img src={Info_Icon} />
         </Box>
         <Divider />
 
@@ -674,7 +770,7 @@ const ReviewCard = () => {
           }}
         >
           <TypoText title=" Additional Benefits" />
-          <InfoIcon />
+          <img src={Info_Icon} />
         </Box>
         <Divider />
 
@@ -721,7 +817,7 @@ const ReviewCard = () => {
           }}
         >
           <TypoText title=" Welcome Benefits" />
-          <InfoIcon />
+          <img src={Info_Icon} />
         </Box>
         <Divider />
 
@@ -770,7 +866,7 @@ const ReviewCard = () => {
         }}
       >
         <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <BtnOutlined title="close" />
+          <BtnOutlined onClick={goBack} title="close" />
         </Box>
       </Box>
     </Box>

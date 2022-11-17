@@ -14,6 +14,7 @@ export const tagBasedIndicator = {
   ACTIVE: 'Active',
   PAUSED: 'Paused',
   PAUSED_SCHEDULED: 'Paused (scheduled)',
+  INACTIVE:'InActive',
 };
 
 export const bulkUpload = {
