@@ -1,0 +1,262 @@
+.singleCard{
+    background-color: #eceff2;
+    padding: 0;
+    padding-bottom: 120px;
+    .box1{
+        background-color: white;
+        padding: 16px 24px 0 24px;
+
+        .head{
+            display: flex; 
+            justify-content: space-between;
+
+            .headFull{
+              display: flex;
+              justify-content: flex-start;
+              gap: 8px;
+            }
+            .headIcon{
+                color: #0078EF;
+
+            }
+            
+            .headId{
+                background-color: #E6E7E7;
+                border-radius: 4px;
+                
+
+            }
+
+        }
+
+    }
+    .box2{
+        background-color: white;
+        padding: 24px;
+        margin-top: 24px;
+
+        .uploadTitle{
+            display: flex;
+            justify-content: flex-start;
+            gap: 16px;
+
+            .img{
+                margin-bottom: 14px;
+
+            }
+        }
+        .ImgUploadBox{
+            margin-top: 16px;
+            .imgCard{
+              width: 350px;
+              height: 150px;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              background-color: #e0e0de;
+            }
+
+        }
+
+    }
+
+    .box3{
+        background-color: white;
+        padding: 24px;
+        margin-top: 24px;
+
+        .cardDetail{
+            display: flex;
+            justify-content: flex-start;
+            gap: 16px;
+            .img{
+                margin-bottom: 14px;
+
+            }
+        }
+
+        .cardDetailGrid1{
+            padding: 16px 0 ;
+            
+        }
+
+        .cardDetailSelect{
+            display: flex; 
+            flex-direction: column; 
+        }
+        
+
+    }
+    .box4{
+        background-color: white;
+        padding: 24px;
+        margin-top: 24px;
+        .surrogateTitle{
+            display: flex;
+            justify-content: flex-start;
+            gap: 16px;
+            .img{
+                margin-bottom: 14px;
+
+            }
+        }
+        .chooseSurrogateGrid{
+            display: flex;
+            justify-content: space-between;
+            margin-top: 16px;
+            .box{
+                display: flex;
+                .text{
+                    padding-top: 8px
+
+                }
+            }
+        }
+    }
+    .box5{
+        background-color: white;
+        padding: 24px;
+        margin-top: 24px;
+        .channelTitle{
+            display: flex;
+            justify-content: flex-start;
+            gap: 16px;
+            .img{
+                margin-bottom: 14px;
+            }
+        }
+        .chooseChannelGrid{
+            display: flex;
+             gap: 10%;
+            margin-top: 16px; 
+            .box{
+                display: flex;
+                .text{
+                    padding-top: 8px
+
+                }
+            }
+        }
+
+    }
+    .box6{
+        background-color: white;
+        padding: 24px;
+        margin-top: 24px;
+        .eligibilityTitle{
+            display: flex;
+            justify-content: flex-start;
+            gap: 16px;
+            .img{
+                margin-bottom: 14px;
+            }
+        }
+        .eligibilityGrid{
+            padding: 16px 0;
+            
+        }
+        .eligibilityGrid2{
+            margin-top: 16px;
+            .c4c{
+                display: flex;
+                 flex-direction: column;
+                 width: 92%
+            }
+        }
+        
+
+    }
+
+    .box7{
+        background-color: white;
+        padding: 24px;
+        margin-top: 24px;
+        .benefitsTitle{
+            display: flex;
+            justify-content: flex-start;
+            gap: 16px;
+            .img{
+                margin-bottom: 14px;
+            }
+        }
+        .benefitsBox{
+            margin-top: 16px;
+            .box{
+                display: flex;
+                .text{
+                    padding-top: 8px 
+                }
+            }
+            
+        }
+        
+        
+
+    }
+
+    .box8{
+        background-color: white;
+        padding: 24px;
+        margin-top: 24px;
+        .feeWavier{
+            display: flex;
+            justify-content: space-between;
+            .feeWavierHead{
+              display: flex;
+              justify-content: flex-start;
+              gap: 16px;
+              .img{
+                margin-bottom: 14px;
+              }
+
+            }
+            .btn{
+                display: flex;
+                .text{
+                    text-transform:capitalize;
+                }
+            }
+            
+        }
+        .joiningFeeBox{
+            display: flex;
+            justify-content: flex-start;
+            padding: 10px 0;
+            .text{
+                margin-left: 3px;
+                color: grey;
+            }
+
+        }
+
+        .joiningFeeGrid{
+            display: flex;
+            justify-content: flex-end;
+            font-size: 13px;
+            margin-top: 8px
+        }
+        .joiningFeeSelect{
+            display: flex;
+             flex-direction: column;
+             .field{
+                height: 40px; 
+
+             }
+        }
+        .joiningFeeFull{
+            display: flex;
+             flex-direction: column;
+             .textField{
+                width: 100%;
+             }
+        }
+        .annualFee{
+            
+        }
+        
+        
+
+    }
+
+}

@@ -20,6 +20,7 @@ import SchedulePause from '../../components/commonComponent/customModal/Schedule
 import SchedulePauseSuccess from '../../components/commonComponent/customModal/SchedulePauseSuccess';
 import SurrogateSelection from '../../components/commonComponent/customModal/SurrogateSelection';
 import PageLayout from '../../components/layout/pageLayout/pageLayout';
+// import AccessLibraryModal from '../../components/commonComponent/customModal/AccessLibraryModal';
 // import SurrogateSelection from "../../components/commonComponent/CustomModal/SurrogateSelection";
 
 // import PauseModalSucces from "../../components/commonComponent/customModal/PauseModalSuccess";
@@ -106,6 +107,7 @@ export default function Home() {
         padding: '5vh 3vw',
       }}
     >
+      {/* <AccessLibraryModal /> */}
       <Card content={pendingActionsData} />
       <Card content={savedItemsData} />
       <Card content={frequentActivitiesData} />

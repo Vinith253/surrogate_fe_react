@@ -166,38 +166,7 @@ const rows = [
   ),
 ];
 
-// const tableData = [
-//   {
-//     id: 1,
-//     cardName: 'ETERNA',
-//     productID: 1234567890,
-//     businessID: 1234567890,
-//     cardMode: 'General',
-//     cardCategory: 'Basic',
-//     cardStatus: 'Active',
-//     more: '',
-//   },
-//   {
-//     id: 2,
-//     cardName: 'PREMIER',
-//     productID: 1234567890,
-//     businessID: 1234567890,
-//     cardMode: 'General',
-//     cardCategory: 'Basic',
-//     cardStatus: 'Active',
-//     more: '',
-//   },
-//   {
-//     id: 3,
-//     cardName: 'EXCLUSIVE ICAI',
-//     productID: 1234567890,
-//     businessID: 1234567890,
-//     cardMode: 'General',
-//     cardCategory: 'Basic',
-//     cardStatus: 'Active',
-//     more: '',
-//   },
-// ];
+
 const tableHeaderData = [
   {
     id: 'ID',
@@ -218,23 +187,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-// const StyledTableCell = styled(TableCell)(({ theme }) => ({
-//   [`&.${tableCellClasses.head}`]: {
-//     // backgroundColor: theme.palette.common.white ,
-//     color: theme.palette.common.black,
-//     fontWeight: 'bold',
-//   },
-//   [`&.${tableCellClasses.body}`]: {
-//     fontSize: 14,
-//   },
-// }));
-
-// const StyledTableRow = styled(TableRow)(({ theme }) => ({
-//   // hide last border
-//   '&:last-child td, &:last-child th': {
-//     border: 0,
-//   },
-// }));
 
 export const CardCatalogue = () => {
   const navigate = useNavigate();
@@ -401,18 +353,13 @@ export const CardCatalogue = () => {
     <Stack>
       <Stack>
         <Box
-          sx={{
-            backgroundColor: 'white',
-            display: 'flex',
-            justifyContent: 'space-between',
-            padding: '20px 30px 0 30px',
-          }}
+          className='header'
         >
           <Box>
             <Typography
-              sx={{ display: 'flex', justifyContent: 'flex-start' }}
-              variant="body1"
-              color="textPrimary"
+              // sx={{ display: 'flex', justifyContent: 'flex-start' }}
+              // variant="body1"
+              // color="textPrimary"
             >
               Card Catelogue
             </Typography>
@@ -446,17 +393,12 @@ export const CardCatalogue = () => {
           </Box>
         </Box>
 
-        <Box sx={{ backgroundColor: 'white', marginTop: 3, paddingX: '30px' }}>
+        <Box className='body1'>
           <Box
-            sx={{
-              display: 'flex',
-              gap: 2,
-              backgroundColor: 'white',
-              paddingTop: 2,
-            }}
+            className='container1'
           >
             <TypographyHead title="Card List" />
-            <img style={{ marginBottom: '14px' }} src={Info_Icon} />
+            <img className='img1' src={Info_Icon} />
             <TypographyInfo
               title="From here, you filter the card by its mode, status, category and
                 surrogate"
@@ -465,50 +407,51 @@ export const CardCatalogue = () => {
           <Divider />
 
           <Box
-            sx={{
-              minWidth: 500,
-              marginTop: 2,
-              display: 'flex',
-              gap: '3%',
-              justifyContent: 'space-between',
-              backgroundColor: 'white',
-            }}
+          className='bodyBox'
+            // sx={{
+            //   minWidth: 500,
+            //   marginTop: 2,
+            //   display: 'flex',
+            //   gap: '3%',
+            //   justifyContent: 'space-between',
+            //   backgroundColor: 'white',
+            // }}
           >
-            <FormControl sx={{ width: '200px' }}>
+            <FormControl className='formctrl'>
               <TypographyHead title="Card Mode" />
 
               <Select
                 id="demo-simple-select"
                 value={age}
                 onChange={handleAdd}
-                sx={{ height: '30px', textAlign: 'left' }}
+                className='select'
               >
                 <MenuItem value={10}>Ten</MenuItem>
                 <MenuItem value={20}>Twenty</MenuItem>
                 <MenuItem value={30}>Thirty</MenuItem>
               </Select>
             </FormControl>
-            <FormControl sx={{ width: '200px' }}>
+            <FormControl className='formctrl'>
               <TypographyHead title="Card Category" />
-              <Select sx={{ height: '30px', textAlign: 'left' }}>
+              <Select className='select'>
                 <MenuItem value={10}>Ten</MenuItem>
                 <MenuItem value={20}>Twenty</MenuItem>
                 <MenuItem value={30}>Thirty</MenuItem>
               </Select>
             </FormControl>
-            <FormControl sx={{ width: '200px' }}>
+            <FormControl className='formctrl'>
               <TypographyHead title="Card Status" />
 
-              <Select sx={{ height: '30px', textAlign: 'left' }}>
+              <Select className='select' >
                 <MenuItem value={10}>Ten</MenuItem>
                 <MenuItem value={20}>Twenty</MenuItem>
                 <MenuItem value={30}>Thirty</MenuItem>
               </Select>
             </FormControl>
-            <FormControl sx={{ width: '200px' }}>
+            <FormControl className='formctrl'>
               <TypographyHead title="Choose Surrogate" />
 
-              <Select sx={{ height: '30px', textAlign: 'left' }}>
+              <Select className='select'>
                 <MenuItem value={10}>Ten</MenuItem>
                 <MenuItem value={20}>Twenty</MenuItem>
                 <MenuItem value={30}>Thirty</MenuItem>
@@ -517,50 +460,52 @@ export const CardCatalogue = () => {
           </Box>
 
           <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'flex-end',
-              gap: 2,
-              paddingTop: 3,
-              backgroundColor: 'white',
-            }}
+          className='boxBtn'
+            // sx={{
+            //   display: 'flex',
+            //   justifyContent: 'flex-end',
+            //   gap: 2,
+            //   paddingTop: 3,
+            //   paddingBottom:3,
+            //   backgroundColor: 'white',
+            // }}
           >
-            <Button
-              sx={{ color: 'black' }}
+            <Button 
+              
               variant="outlined"
-              color="secondary"
+              
             >
               Reset
             </Button>
-            <Button color="secondary" variant="contained">
+            <Button  color="secondary" variant="contained">
               Search
             </Button>
           </Box>
-          <Divider sx={{ padding: 1 }} />
+          <Divider  />
         </Box>
         <Box>
-          <Box
-            sx={{
-              paddingX: '30px',
-              backgroundColor: 'white',
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}
+          <Box className='body2'
+            // sx={{
+            //   paddingX: '30px',
+            //   backgroundColor: 'white',
+            //   display: 'flex',
+            //   justifyContent: 'space-between',
+            //   alignItems: 'center',
+            // }}
           >
             <Stack direction="row" spacing={2} sx={{ margin: '30px 0px' }}>
-              <Button
+              <Button className='btn'
                 variant="contained"
                 color="secondary"
-                sx={{
-                  padding: '3px 8px',
-                  fontSize: '12px',
-                  display: 'flex',
-                  alignItems: 'center',
-                }}
+                // sx={{
+                //   padding: '3px 8px',
+                //   fontSize: '12px',
+                //   display: 'flex',
+                //   alignItems: 'center',
+                // }}
                 onClick={() => setResumeModal(true)}
               >
-                <IconButton sx={{ padding: '0', marginRight: '8px' }}>
+                <IconButton className='icon'>
                   <img
                     src={Resume_icon}
                     alt="resumeIcon"
@@ -574,15 +519,10 @@ export const CardCatalogue = () => {
               <Button
                 variant="contained"
                 color="secondary"
-                sx={{
-                  padding: '3px 8px',
-                  fontSize: '12px',
-                  display: 'flex',
-                  alignItems: 'center',
-                }}
+                className='btn'
                 onClick={() => setShowPauseModal(true)}
               >
-                <IconButton sx={{ padding: '0', marginRight: '8px' }}>
+                <IconButton className='icon'>
                   <img
                     src={Pause_icon}
                     alt="pauseIcon"
@@ -596,14 +536,9 @@ export const CardCatalogue = () => {
               <Button
                 variant="contained"
                 color="secondary"
-                sx={{
-                  padding: '3px 8px',
-                  fontSize: '12px',
-                  display: 'flex',
-                  alignItems: 'center',
-                }}
+                className='btn'
               >
-                <IconButton sx={{ padding: '0', marginRight: '8px' }}>
+                <IconButton className='icon'>
                   <img
                     src={Edit_icon}
                     style={{
@@ -616,15 +551,10 @@ export const CardCatalogue = () => {
               <Button
                 variant="contained"
                 color="secondary"
-                sx={{
-                  padding: '3px 8px',
-                  fontSize: '12px',
-                  display: 'flex',
-                  alignItems: 'center',
-                }}
+                className='btn'
                 onClick={() => setSurrogateSelection(true)}
               >
-                <IconButton sx={{ padding: '0', marginRight: '8px' }}>
+                <IconButton className='icon'>
                   <img
                     src={Surrogate_icon}
                     alt="surrogateIcon"
@@ -638,32 +568,33 @@ export const CardCatalogue = () => {
             </Stack>
             <Stack>
               <Box
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  border: '1px solid grey',
-                  borderRadius: 1,
-                  paddingY: '5px',
-                }}
+              className='searchBox'
+                // sx={{
+                //   display: 'flex',
+                //   justifyContent: 'center',
+                //   alignItems: 'center',
+                //   border: '1px solid grey',
+                //   borderRadius: 1,
+                //   paddingY: '5px',
+                // }}
               >
-                <StyledInputBase placeholder="Search" />
-                <SearchIcon sx={{ marginRight: '15px', color: 'grey' }} />
+                <StyledInputBase placeholder="Search"/>
+                <SearchIcon className='searchIcon' />
               </Box>
             </Stack>
           </Box>
-          <Box
-            sx={{
-              height: 400,
-              // width: "100%",
-              backgroundColor: 'white',
-              paddingX: 4,
-            }}
+          <Box className='tableBox'
+            // sx={{
+            //   height: 400,
+            //   // width: "100%",
+            //   backgroundColor: 'white',
+            //   paddingX: 4,
+            // }}
           >
             <TableContainer component={Paper}>
               <Table size="small" aria-label="Table">
-                <TableHead
-                  style={{ background: '#EEF7FF' }}
+                <TableHead className='tableHead'
+                  // style={{ background: '#EEF7FF' }}
                   // sx={{ padding: '5px' }}
                 >
                   {tableHeaderData.map(
@@ -675,29 +606,29 @@ export const CardCatalogue = () => {
                         </TableCell>
                         <TableCell
                           align="center"
-                          sx={{ fontWeight: 800, padding: '5px' }}
+                          className='tableCell'
                         >
                           #
                         </TableCell>
-                        <TableCell align="center" sx={{ fontWeight: 800 }}>
+                        <TableCell align="center" className='tableCell'>
                           {items.cardName}
                         </TableCell>
-                        <TableCell align="center" sx={{ fontWeight: 800 }}>
+                        <TableCell align="center" className='tableCell'>
                           {items.productID}
                         </TableCell>
-                        <TableCell align="center" sx={{ fontWeight: 800 }}>
+                        <TableCell align="center" className='tableCell'>
                           {items.businessID}
                         </TableCell>
-                        <TableCell sx={{ fontWeight: 800 }} align="center">
+                        <TableCell className='tableCell' align="center">
                           {items.cardMode}
                         </TableCell>
-                        <TableCell sx={{ fontWeight: 800 }} align="left">
+                        <TableCell className='tableCell' align="left">
                           {items.cardCategory}
                         </TableCell>
-                        <TableCell sx={{ fontWeight: 800 }} align="center">
+                        <TableCell className='tableCell' align="center">
                           {items.cardStatus}
                         </TableCell>
-                        <TableCell sx={{ fontWeight: 800 }}>
+                        <TableCell className='tableCell'>
                           {items.more}
                         </TableCell>
                       </TableRow>
@@ -709,12 +640,11 @@ export const CardCatalogue = () => {
                   {rows.map((row) => (
                     <TableRow 
                       key={row.id}
-                      // sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                      sx={{ padding:0,border:0 }}
+                      // sx={{ padding:0,border:0 }}
                     >
                       <TableCell align="center"
                           padding="checkbox"
-                          sx={{ padding: '5px' }} >
+                           >
                         <Checkbox />
                       </TableCell>
                       <TableCell align="center">{row.id}</TableCell>
@@ -765,13 +695,13 @@ export const CardCatalogue = () => {
                   
                   <MenuItem
                     onClick={handleClose}
-                    style={{ padding: '10px 20px', textAlign: 'left' }}
+                    className='menu'
                   >
                     View
                   </MenuItem>
                   <MenuItem
                     onClick={handleClose}
-                    style={{ padding: '10px 20px', textAlign: 'left' }}
+                    className='menu'
                   >
                     Edit
                   </MenuItem>

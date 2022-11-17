@@ -288,6 +288,12 @@ export interface rowsDataInterface {
   processedBy?: string;
   kycStatus?: string;
   status?: string;
+
+  version? :string;
+  currentStatus?:string;
+  initiatedBy?:string;
+  request?:string;
+  dateAndTime?:string;
 }
 
 export interface statusRowHeadingInterface {

@@ -31,29 +31,6 @@ export interface dataHeaderList {
   autoResumeForm?: string;
   more?: string;
 }
-const tableData = [
-  {
-    surrogateProgramme: 'Card For Card',
-    activeSince: '20 June 2022, 11.00',
-    lastModify: '20 June 2022, 11.00',
-    status: 'Active',
-    autoResumeForm: '',
-  },
-  {
-    surrogateProgramme: 'Payroll',
-    activeSince: '20 June 2022, 11.00',
-    lastModify: '20 June 2022, 11.00',
-    status: 'Paused',
-    autoResumeForm: '20 June 2022, 11.00',
-  },
-  {
-    surrogateProgramme: 'Payroll',
-    activeSince: '20 June 2022, 11.00',
-    lastModify: '20 June 2022, 11.00',
-    status: 'Paused (scheduled)',
-    autoResumeForm: '',
-  },
-];
 const tableHeaderData = [
   {
     surrogateProgramme: 'Surrogate Programme',
@@ -64,7 +41,7 @@ const tableHeaderData = [
     more: 'More',
   },
 ];
-export const ListView = () => {
+export const ListView = ({ data }: any) => {
   const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const open = Boolean(anchorElement);
@@ -73,8 +50,8 @@ export const ListView = () => {
   };
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const newSelected = tableData.map((n) => n.surrogateProgramme);
-      setSelected(newSelected);
+      // const newSelected = tableData.map((n) => n.surrogateProgramme);
+      // setSelected(newSelected);
       return;
     }
     setSelected([]);
@@ -116,13 +93,13 @@ export const ListView = () => {
                 <TableCell padding="checkbox" sx={{ padding: '5px' }}>
                   <Checkbox
                     color={'secondary'}
-                    indeterminate={
-                      selected.length > 0 && selected.length < tableData.length
-                    }
-                    checked={
-                      tableData.length > 0 &&
-                      selected.length === tableData.length
-                    }
+                    // indeterminate={
+                    //   selected.length > 0 && selected.length < tableData.length
+                    // }
+                    // checked={
+                    //   tableData.length > 0 &&
+                    //   selected.length === tableData.length
+                    // }
                     onChange={handleSelectAllClick}
                     inputProps={{
                       'aria-label': 'select all desserts',
@@ -154,8 +131,8 @@ export const ListView = () => {
             ))}
           </TableHead>
           <TableBody>
-            {tableData.map((data: dataList, index: number) => {
-              const isItemSelected = isSelected(data.surrogateProgramme);
+            {data.map((dataItem: dataList, index: number) => {
+              const isItemSelected = isSelected(dataItem.surrogateProgramme);
               const labelId = `enhanced-table-checkbox-${index}`;
               return (
                 <TableRow
@@ -175,34 +152,36 @@ export const ListView = () => {
                         'aria-labelledby': labelId,
                       }}
                       onChange={(event: any) =>
-                        handleClickCheckbox(event, data.surrogateProgramme)
+                        handleClickCheckbox(event, dataItem.surrogateProgramme)
                       }
                     />
                   </TableCell>
                   <TableCell sx={{ padding: '5px' }}>
-                    {data.surrogateProgramme}
+                    {dataItem.surrogateProgramme}
                   </TableCell>
                   <TableCell
                     sx={{
-                      color: checkTagStatus(data.activeSince).color,
+                      color: checkTagStatus(dataItem.activeSince).color,
                       padding: '5px',
                     }}
                   >
-                    {data.activeSince}
+                    {dataItem.activeSince}
                   </TableCell>
                   <TableCell sx={{ padding: '5px' }}>
-                    {data.lastModify}
+                    {dataItem.lastModify}
                   </TableCell>
                   <TableCell
                     sx={{
-                      color: checkTagStatus(data.status).color,
+                      color: checkTagStatus(dataItem.status).color,
                       padding: '5px',
                     }}
                   >
-                    {data.status}
+                    {dataItem.status}
                   </TableCell>
                   <TableCell align="center" sx={{ padding: '5px' }}>
-                    {data.autoResumeForm === '' ? '-' : data.autoResumeForm}
+                    {dataItem.autoResumeForm === ''
+                      ? '-'
+                      : dataItem.autoResumeForm}
                   </TableCell>
                   <TableCell
                     id="more-button"

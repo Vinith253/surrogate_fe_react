@@ -32,5 +32,4 @@ function DetailsCard({ data, gridColumn }: Props) {
     </div>
   );
 }
-
 export default DetailsCard;

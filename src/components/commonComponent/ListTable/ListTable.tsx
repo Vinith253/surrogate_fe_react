@@ -18,11 +18,15 @@ import {
   statusRowHeadingInterface,
 } from '../../../pages/sales/dashboard/dashboard.const';
 import PaginationComp from '../Pagination/Pagination';
+import { useNavigate } from 'react-router-dom';
+import { programMmgt, tabBar } from '../../../utils/Constants';
+import { borderTop, Stack } from '@mui/system';
+import Link from '@mui/material/Link';
 
 function TableComp(props: {
   rows: rowsDataInterface[];
   statusRowsHeading: statusRowHeadingInterface[];
-  flag: string;
+  flag?: string;
   listRowHeading: statusRowHeadingInterface[];
   viewPath: string;
 }) {
@@ -58,11 +62,43 @@ function TableComp(props: {
     return filteredData.slice(firstPageIndex, lastPageIndex);
   }, [currentPage, rowsPerPage, graphView]);
 
+  const navigate = useNavigate();
+  const viewAction = (param: any) => {
+    console.log('param', param);
+    navigate(`/productManagement/programmeManagement/${param.id}`, {
+      state: { ...param },
+    });
+  };
+
   return (
     <div className="table-div">
+      {!props.flag && (
+        <Stack
+          sx={{
+            borderBottom: '2px solid #F0F2F5',
+            width: '100%',
+            marginBottom: '10px',
+          }}
+        >
+          <Typography variant="subtitle1" sx={{ letterSpacing: 0.5 }}>
+            {tabBar.PROGRAMME_MANAGEMENT}
+          </Typography>
+          <Typography
+            variant="subtitle2"
+            sx={{
+              letterSpacing: 0.2,
+              color: '#A3A3A5',
+              paddingBottom: '20px',
+            }}
+          >
+            {tabBar.TEMPORARILY_PAUSE}
+          </Typography>
+        </Stack>
+      )}
+
       <div className="third-header">
         <div className={'outer-filter-box'}>
-          <div className={graphView === 1 ? 'selectedBox' : 'filter-box'}>
+          <div className={graphView == 1 ? 'selectedBox' : 'filter-box'}>
             <li
               onClick={() => {
                 setFilterteredData(props.rows);
@@ -71,52 +107,104 @@ function TableComp(props: {
                 setGraphView(1);
               }}
               className={
-                graphView === 1 ? 'selected-overview-text3' : 'overview-text3'
+                graphView == 1 ? 'selected-overview-text3' : 'overview-text3'
               }
             >
               All
             </li>
           </div>
           <div className="seperater-div" />
-          <div className={graphView === 2 ? 'selectedBox' : 'filter-box'}>
-            <li
-              onClick={() => {
-                const currentData = props.rows.filter(function (item) {
-                  return item.status === 'Approved';
-                });
-                setFilterteredData(currentData);
-                setCurrentPage(1);
-                setPage(1);
-                setGraphView(2);
-              }}
-              className={
-                graphView === 2 ? 'selected-overview-text3' : 'overview-text3'
-              }
-            >
-              Approved
-            </li>
-          </div>
+
           <div className="seperater-div" />
-          <div className={graphView === 3 ? 'selectedBox' : 'filter-box'}>
-            <li
-              onClick={() => {
-                const currentData = props.rows.filter(function (item) {
-                  return item.status === 'In-Progress';
-                });
-                setFilterteredData(currentData);
-                setCurrentPage(1);
-                setPage(1);
-                setGraphView(3);
-              }}
-              className={
-                graphView === 3 ? 'selected-overview-text3' : 'overview-text3'
-              }
-            >
-              In-Progress
-            </li>
-          </div>
+          {!props.flag && (
+            <div className={graphView == 6 ? 'selectedBox' : 'filter-box'}>
+              <li
+                onClick={() => {
+                  const currentData = props.rows.filter(function (item) {
+                    return item.status === 'Pending';
+                  });
+                  setFilterteredData(currentData);
+                  setCurrentPage(1);
+                  setPage(1);
+                  setGraphView(6);
+                }}
+                className={
+                  graphView == 6 ? 'selected-overview-text3' : 'overview-text3'
+                }
+              >
+                Pending
+              </li>
+            </div>
+          )}
+
           <div className="seperater-div" />
-          <div className={graphView === 4 ? 'selectedBox' : 'filter-box'}>
+          {!props.flag && (
+            <div className={graphView == 7 ? 'selectedBox' : 'filter-box'}>
+              <li
+                onClick={() => {
+                  const currentData = props.rows.filter(function (item) {
+                    return item.status === 'Sent To Approver';
+                  });
+                  setFilterteredData(currentData);
+                  setCurrentPage(1);
+                  setPage(1);
+                  setGraphView(7);
+                }}
+                className={
+                  graphView == 7 ? 'selected-overview-text3' : 'overview-text3'
+                }
+              >
+                Sent To Approver
+              </li>
+            </div>
+          )}
+
+          {props.flag && (
+            <div className={graphView == 2 ? 'selectedBox' : 'filter-box'}>
+              <li
+                onClick={() => {
+                  const currentData = props.rows.filter(function (item) {
+                    return item.status === 'Approved';
+                  });
+                  setFilterteredData(currentData);
+                  setCurrentPage(1);
+                  setPage(1);
+                  setGraphView(2);
+                }}
+                className={
+                  graphView == 2 ? 'selected-overview-text3' : 'overview-text3'
+                }
+              >
+                Approved
+              </li>
+            </div>
+          )}
+
+          <div className="seperater-div" />
+
+          {props.flag && (
+            <div className={graphView == 3 ? 'selectedBox' : 'filter-box'}>
+              <li
+                onClick={() => {
+                  const currentData = props.rows.filter(function (item) {
+                    return item.status === 'In-Progress';
+                  });
+                  setFilterteredData(currentData);
+                  setCurrentPage(1);
+                  setPage(1);
+                  setGraphView(3);
+                }}
+                className={
+                  graphView == 3 ? 'selected-overview-text3' : 'overview-text3'
+                }
+              >
+                In-Progress
+              </li>
+            </div>
+          )}
+
+          <div className="seperater-div" />
+          <div className={graphView == 4 ? 'selectedBox' : 'filter-box'}>
             <li
               onClick={() => {
                 const currentData = props.rows.filter(function (item) {
@@ -128,31 +216,33 @@ function TableComp(props: {
                 setGraphView(4);
               }}
               className={
-                graphView === 4 ? 'selected-overview-text3' : 'overview-text3'
+                graphView == 4 ? 'selected-overview-text3' : 'overview-text3'
               }
             >
               Rejected
             </li>
           </div>
           <div className="seperater-div" />
-          <div className={graphView === 5 ? 'selectedBox' : 'filter-box'}>
-            <li
-              onClick={() => {
-                const currentData = props.rows.filter(function (item) {
-                  return item.status === 'Dropped';
-                });
-                setFilterteredData(currentData);
-                setCurrentPage(1);
-                setPage(1);
-                setGraphView(5);
-              }}
-              className={
-                graphView === 5 ? 'selected-overview-text3' : 'overview-text3'
-              }
-            >
-              Dropped
-            </li>
-          </div>
+          {props.flag && (
+            <div className={graphView == 5 ? 'selectedBox' : 'filter-box'}>
+              <li
+                onClick={() => {
+                  const currentData = props.rows.filter(function (item) {
+                    return item.status === 'Dropped';
+                  });
+                  setFilterteredData(currentData);
+                  setCurrentPage(1);
+                  setPage(1);
+                  setGraphView(5);
+                }}
+                className={
+                  graphView == 5 ? 'selected-overview-text3' : 'overview-text3'
+                }
+              >
+                Dropped
+              </li>
+            </div>
+          )}
         </div>
         {props.flag === 'dashboard' && (
           <div className="reset-data">
@@ -189,8 +279,8 @@ function TableComp(props: {
       </div>
 
       <Grid container spacing={0}>
-        <Grid item sm={7}>
-          <TableContainer sx={{maxWidth:'950px'}}>
+        <Grid item sm={props.flag ? 7 : 8}>
+          <TableContainer sx={{ maxWidth: '950px' }}>
             <Table aria-label="simple table">
               <TableHead>
                 {props?.listRowHeading.map((row) => (
@@ -321,34 +411,113 @@ function TableComp(props: {
                     >
                       {row.id}
                     </TableCell>
-                    <TableCell align="left" sx={{ borderBottom: 'none' }}>
-                      {'#'}
-                      {row.applicationNum}
-                    </TableCell>
-                    <TableCell align="left" sx={{ borderBottom: 'none' }}>
-                      {row.customerName}
-                    </TableCell>
-                    <TableCell align="left" sx={{ borderBottom: 'none' }}>
-                      {row.mobileNum}
-                    </TableCell>
-                    <TableCell align="left" sx={{ borderBottom: 'none' }}>
-                      {row.lead}
-                    </TableCell>
-                    <TableCell align="left" sx={{ borderBottom: 'none' }}>
-                      {row.surrogateName}
-                    </TableCell>
-                    <TableCell align="left" sx={{ borderBottom: 'none' }}>
-                      {row.dateTime}
-                    </TableCell>
-                    <TableCell align="left" sx={{ borderBottom: 'none' }}>
-                      {row.Policy}
-                    </TableCell>
-                    <TableCell align="left" sx={{ borderBottom: 'none' }}>
-                      {row.channelName}
-                    </TableCell>
-                    <TableCell align="left" sx={{ borderBottom: 'none' }}>
-                      {row.processedBy}
-                    </TableCell>
+                    {props.flag && (
+                      <TableCell align="left" sx={{ borderBottom: 'none' }}>
+                        {'#'}
+                        {row.applicationNum}
+                      </TableCell>
+                    )}
+                    {props.flag && (
+                      <TableCell align="left" sx={{ borderBottom: 'none' }}>
+                        {row.customerName}
+                      </TableCell>
+                    )}
+                    {props.flag && (
+                      <TableCell align="left" sx={{ borderBottom: 'none' }}>
+                        {row.mobileNum}
+                      </TableCell>
+                    )}
+                    {props.flag && (
+                      <TableCell align="left" sx={{ borderBottom: 'none' }}>
+                        {row.lead}
+                      </TableCell>
+                    )}
+                    {props.flag && (
+                      <TableCell align="left" sx={{ borderBottom: 'none' }}>
+                        {row.surrogateName}
+                      </TableCell>
+                    )}
+                    {props.flag && (
+                      <TableCell align="left" sx={{ borderBottom: 'none' }}>
+                        {row.dateTime}
+                      </TableCell>
+                    )}
+                    {props.flag && (
+                      <TableCell align="left" sx={{ borderBottom: 'none' }}>
+                        {row.Policy}
+                      </TableCell>
+                    )}
+                    {props.flag && (
+                      <TableCell align="left" sx={{ borderBottom: 'none' }}>
+                        {row.channelName}
+                      </TableCell>
+                    )}
+                    {props.flag && (
+                      <TableCell align="left" sx={{ borderBottom: 'none' }}>
+                        {row.processedBy}
+                      </TableCell>
+                    )}
+
+                    {!props.flag && (
+                      <TableCell align="left" sx={{ borderBottom: 'none' }}>
+                        {row.surrogateName}
+                      </TableCell>
+                    )}
+                    {!props.flag && (
+                      <TableCell align="left" sx={{ borderBottom: 'none' }}>
+                        {row.version}
+                      </TableCell>
+                    )}
+
+                    {!props.flag && (
+                      <TableCell
+                        align="left"
+                        sx={{
+                          borderBottom: 'none',
+                          color: `${
+                            row.currentStatus == 'Active'
+                              ? '#32A64D'
+                              : '#F37B21'
+                          }`,
+                        }}
+                      >
+                        {row.currentStatus}
+                      </TableCell>
+                    )}
+
+                    {!props.flag && (
+                      <TableCell align="left" sx={{ borderBottom: 'none' }}>
+                        {row.initiatedBy}
+                      </TableCell>
+                    )}
+
+                    {!props.flag && (
+                      <TableCell align="left" sx={{ borderBottom: 'none' }}>
+                        {row.request}
+                      </TableCell>
+                    )}
+
+                    {!props.flag && (
+                      <TableCell align="left" sx={{ borderBottom: 'none' }}>
+                        {row.dateAndTime}
+                      </TableCell>
+                    )}
+
+                    {!props.flag && (
+                      <TableCell align="left" sx={{ borderBottom: 'none' }}>
+                        {row.Policy}
+                      </TableCell>
+                    )}
+                    {!props.flag && (
+                      <TableCell align="left" sx={{ borderBottom: 'none' }}>
+                        {row.channelName}
+                      </TableCell>
+                    )}
+                    {!props.flag && (
+                      <TableCell align="left" sx={{ borderBottom: 'none' }}>
+                        {row.processedBy}
+                      </TableCell>
+                    )}
                   </TableRow>
                 ))}
               </TableBody>
@@ -356,57 +525,67 @@ function TableComp(props: {
           </TableContainer>
         </Grid>
 
-        <Grid item sm={5}>
+        <Grid item sm={props.flag ? 5 : 4}>
           <div style={{ boxShadow: '-10px 0 8px 0 #EDEDED' }}>
             <TableContainer>
               <Table aria-label="simple table">
                 <TableHead>
                   {props?.statusRowsHeading.map((row) => (
                     <TableRow sx={{ backgroundColor: '#EFF7FE' }}>
-                      <TableCell
-                        component="th"
-                        align="left"
-                        scope="row"
-                        sx={{ fontWeight: 'bold', borderBottom: 'none' }}
-                      >
-                        {row?.header1}
-                      </TableCell>
-                      <TableCell
-                        component="th"
-                        align="left"
-                        scope="row"
-                        sx={{ fontWeight: 'bold', borderBottom: 'none' }}
-                      >
-                        {row?.header2}
-                      </TableCell>
-                      <TableCell
-                        component="th"
-                        align="left"
-                        scope="row"
-                        sx={{ fontWeight: 'bold', borderBottom: 'none' }}
-                      >
-                        {row?.header3}
-                      </TableCell>
+                      {row.header1 && (
+                        <TableCell
+                          component="th"
+                          align="left"
+                          scope="row"
+                          sx={{ fontWeight: 'bold', borderBottom: 'none' }}
+                        >
+                          {row?.header1}
+                        </TableCell>
+                      )}
+
+                      {row.header2 && (
+                        <TableCell
+                          component="th"
+                          align="left"
+                          scope="row"
+                          sx={{ fontWeight: 'bold', borderBottom: 'none' }}
+                        >
+                          {row?.header2}
+                        </TableCell>
+                      )}
+
+                      {row.header3 && (
+                        <TableCell
+                          component="th"
+                          align="left"
+                          scope="row"
+                          sx={{ fontWeight: 'bold', borderBottom: 'none' }}
+                        >
+                          {row?.header3}
+                        </TableCell>
+                      )}
                     </TableRow>
                   ))}
                 </TableHead>
                 <TableBody>
-                  {currentTableData.map((row: any) => (
+                  {currentTableData.map((row: any, index: any) => (
                     <TableRow key={row.id} sx={{ borderBottom: 'none' }}>
-                      <TableCell
-                        component="th"
-                        scope="row"
-                        sx={{ borderBottom: 'none' }}
-                      >
-                        {row?.kycStatus?.includes('Success') &&
-                          kycStatus(row?.kycStatus, GreenDot, '#6AB06E')}
-                        {row?.kycStatus?.includes('Progress') &&
-                          kycStatus(row.kycStatus, ProgressDot, '#F37B21')}
-                        {row?.kycStatus?.includes('Failure') &&
-                          kycStatus(row?.kycStatus, FailureDot, '#E63946')}
-                        {row?.kycStatus.includes('Dropped') &&
-                          kycStatus(row?.kycStatus, DroppedDot, '#992D26')}
-                      </TableCell>
+                      {props.flag && (
+                        <TableCell
+                          component="th"
+                          scope="row"
+                          sx={{ borderBottom: 'none' }}
+                        >
+                          {row?.kycStatus?.includes('Success') &&
+                            kycStatus(row?.kycStatus, GreenDot, '#6AB06E')}
+                          {row?.kycStatus?.includes('Progress') &&
+                            kycStatus(row.kycStatus, ProgressDot, '#F37B21')}
+                          {row?.kycStatus?.includes('Failure') &&
+                            kycStatus(row?.kycStatus, FailureDot, '#E63946')}
+                          {row?.kycStatus.includes('Dropped') &&
+                            kycStatus(row?.kycStatus, DroppedDot, '#992D26')}
+                        </TableCell>
+                      )}
                       <TableCell align="left" sx={{ borderBottom: 'none' }}>
                         {row?.status?.includes('Approved') &&
                           kycStatus(row?.status, GreenDot, '#6AB06E')}
@@ -416,10 +595,20 @@ function TableComp(props: {
                           kycStatus(row?.status, FailureDot, '#E63946')}
                         {row?.status?.includes('Dropped') &&
                           kycStatus(row?.status, DroppedDot, '#992D26')}
+                        {row?.status?.includes('Pending') &&
+                          kycStatus(row?.status, ProgressDot, '#E4AC04')}
+
+                        {row?.status?.includes('Sent To Approver') &&
+                          kycStatus(row?.status, GreenDot, '#6AB06E')}
                       </TableCell>
                       <TableCell align="left" sx={{ borderBottom: 'none' }}>
                         {/* <div className="reset-data"> */}
-                        <a href={props.viewPath}>View</a>
+                        <Link
+                          sx={{ cursor: 'pointer', color: '#0662B7' }}
+                          onClick={() => viewAction(row)}
+                        >
+                          View
+                        </Link>
                         {/* </div> */}
                       </TableCell>
                     </TableRow>
@@ -445,7 +634,7 @@ function TableComp(props: {
             setCurrentPage(1);
           }}
           lastButtonDisabled={
-            page === Math.ceil(filteredData.length / rowsPerPage)
+            page == Math.ceil(filteredData.length / rowsPerPage)
           }
         />
       </Grid>

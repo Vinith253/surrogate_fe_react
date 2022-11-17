@@ -1,3 +1,4 @@
+
 import React from 'react';
 import './style.scss';
 import DetailsCard from './detailsCard';
@@ -35,7 +36,6 @@ function SalesReportDetails() {
       },
     ],
   };
-
   const channelDetails = {
     title: 'Channel Details',
     icon: true,
@@ -67,7 +67,6 @@ function SalesReportDetails() {
       },
     ],
   };
-
   const applicationDetails = {
     title: 'Application Details',
     icon: true,
@@ -99,7 +98,6 @@ function SalesReportDetails() {
       },
     ],
   };
-
   const remarkDetails = {
     title: 'Remarks',
     icon: true,
@@ -112,7 +110,6 @@ function SalesReportDetails() {
       },
     ],
   };
-
   return (
     <Stack
       className="sales-report-details-container"
@@ -138,5 +135,4 @@ function SalesReportDetails() {
     </Stack>
   );
 }
-
 export default SalesReportDetails;

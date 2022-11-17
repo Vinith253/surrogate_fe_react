@@ -21,8 +21,8 @@ export const useStyles = {
       justifyContent: 'space-between',
     },
     '& .MuiTablePagination-select': {
-      textAlignLast: 'left',
-      textAlign: 'left',
+      textAlignLast: 'left !important',
+      textAlign: 'left !important',
     },
   },
   numberPag: {
@@ -33,6 +33,11 @@ export const useStyles = {
     '& .Mui-selected': {
       backgroundColor: '#0662B7',
       color: 'white',
+    },
+    '& .MuiButtonBase-root-MuiPaginationItem-root.Mui-selected':{
+      backgroundColor: '#0662B7',
+      color: 'white',
+     
     },
     'ul > li': {
       paddingLeft: '10px',
