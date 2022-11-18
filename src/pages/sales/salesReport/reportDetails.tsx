@@ -3,6 +3,7 @@ import React from 'react';
 import './style.scss';
 import DetailsCard from './detailsCard';
 import { Stack } from '@mui/material';
+
 function SalesReportDetails() {
   const personalDetails = {
     title: 'Personal Details',

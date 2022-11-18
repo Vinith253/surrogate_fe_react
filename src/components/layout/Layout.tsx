@@ -204,7 +204,7 @@ export default function Layout() {
     setAnchorEl(null);
   };
   const onClickHandleProfile = () => {
-    navigate('/login');
+    navigate('/profile');
     setAnchorEl(null);
   };
 

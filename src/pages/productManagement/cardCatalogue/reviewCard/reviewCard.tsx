@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './reviewCard.scss'
 import {
   Stack,
   Box,
@@ -94,48 +95,29 @@ const ReviewCard = () => {
   console.log('data', data);
   return (
     <Box
-      sx={{
-        backgroundColor: '#eceff2',
-        // backgroundColor: "#898989",
-        // margin: 0,
-        padding: 0,
-        paddingBottom: 11,
-      }}
+      className='reviewCard'
     >
       <Box
-        sx={{ backgroundColor: 'white', paddingX: 3, padding: 2, marginTop: 3 }}
+        className='box1'
       >
-        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Box className='head'>
           <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'flex-start',
-              gap: 1,
-            }}
+            className='headFull'
           >
             <Box onClick={goBack}>
-              <ArrowBackIcon sx={{ color: '#0078EF' }} />
+              <ArrowBackIcon className='headback' />
             </Box>
             <Box>
-              <TypoText title="Eterna - Platinum (ID No. 12345678" />
+              <TypoText title="Eterna - Platinum (ID No. 12345678)" />
               <TypographyInfo title="From here you ca add your new card" />
             </Box>
           </Box>
 
-          <Box sx={{ display: 'flex', alignItems: 'center', color: '#0662B7' }}>
+          <Box className='headIconBox'>
             <Button
-              // variant="contained"
-              // color="secondary"
-              sx={{
-                padding: '3px 8px',
-                fontSize: '14px',
-                display: 'flex',
-                alignItems: 'center',
-                color: '#0662B7',
-                textTransform: 'none',
-              }}
+              className='btn'
             >
-              <IconButton sx={{ padding: '0', marginRight: '8px' }}>
+              <IconButton className='icon'>
                 <img
                   src={EditIcon}
                   style={{
@@ -148,22 +130,13 @@ const ReviewCard = () => {
           </Box>
         </Box>
         <Divider />
-        <Box sx={{ display: 'flex', gap: 3 }}>
-          <Box sx={{ marginTop: 2, display: 'flex' }}>
+        <Box className='body'>
+          <Box className='bodyBox'>
             <Card
-              sx={{
-                width: '250px',
-                height: '160px',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundColor: '#e0e0de',
-              }}
+              className='card'
             >
               <img
-                width={'250px'}
-                height={'160px'}
+                className='img'
                 src={CardImage}
                 onClick={handleOpen}
               />
@@ -175,26 +148,22 @@ const ReviewCard = () => {
                 aria-labelledby="keep-mounted-modal-title"
                 aria-describedby="keep-mounted-modal-description"
               >
-                <Box sx={style}>
+                <Box className='modal'>
                   <Box
-                    sx={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      padding: 2,
-                    }}
+                    className='cardHead'
                   >
-                    <Typography sx={{ fontSize: '14px', fontWeight: 400 }}>
+                    <Typography className='text'>
                       Card Photo - Eterna - Platinum
                     </Typography>
                     <Typography
-                      sx={{ color: '#0662B7', cursor: 'pointer' }}
+                      className='typo'
                       onClick={handleClose}
                     >
                       Close
                     </Typography>
                   </Box>
-                  <Box sx={{ margin: 'auto' }}>
-                    <img width={'500px'} height={'300px'} src={CardImage} />
+                  <Box className='cardImageBox'>
+                    <img className='img' src={CardImage} />
                   </Box>
                 </Box>
               </Modal>
@@ -202,9 +171,9 @@ const ReviewCard = () => {
           </Box>
 
           <Box>
-            <Grid container sx={{ paddingY: 2 }} spacing={5}>
+            <Grid container className='textGrid' spacing={5}>
               <Grid item xs={12} sm={6} md={4}>
-                <Box sx={{ display: 'flex', flexDirection: 'column',width:'350px' }}>
+                <Box className='businessText'>
                   <TypoText color='grey' title="Business ID" />
                   <TypoText
                     
@@ -218,7 +187,7 @@ const ReviewCard = () => {
               </Grid>
 
               <Grid item xs={12} sm={6} md={4}>
-                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                <Box >
                   <TypoText color='grey' title="Card Name" />
                   <TypoText 
                     handleChange={handleValueChange}
@@ -230,7 +199,7 @@ const ReviewCard = () => {
               </Grid>
 
               <Grid item xs={12} sm={6} md={4}>
-                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                <Box >
                   <TypoText color='grey' title="Interest Rate (in%)" />
                   <TypoText 
                     handleChange={handleValueChange}
@@ -243,7 +212,7 @@ const ReviewCard = () => {
 
             <Grid container spacing={5}>
               <Grid item xs={12} sm={6} md={4}>
-                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                <Box >
                   <TypoText color='grey' title="Card Type" />
                   <Typography>Salaried</Typography>
                   {/* <Select
@@ -255,7 +224,7 @@ const ReviewCard = () => {
               </Grid>
 
               <Grid item xs={12} sm={6} md={4}>
-                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                <Box >
                   <TypoText color='grey' title="Card Mode" />
                   <Typography>General Basic</Typography>
                   {/* <Select
@@ -267,7 +236,7 @@ const ReviewCard = () => {
               </Grid>
 
               <Grid item xs={12} sm={6} md={4}>
-                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                <Box >
                   <TypoText color='grey' title="Card Category" />
                   <Typography>General</Typography>
                   {/* <Select
@@ -281,17 +250,11 @@ const ReviewCard = () => {
 
             <Grid
               container
-              sx={{
-                marginTop: 2,
-              }}
+              className='maximumCardGrid'
             >
               <Grid item xs={12} sm={6} md={4}>
                 <Box
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    width: '92%',
-                  }}
+                  className='textField'
                 >
                   <TypoText color='grey' title="Maximum Card Limit" />
                   <TypoText title={data?.maximumCardLimit} />
@@ -302,14 +265,9 @@ const ReviewCard = () => {
         </Box>
       </Box>
 
-      <Box sx={{ marginTop: 3, backgroundColor: 'white', padding: 3 }}>
+      <Box className='box2'>
         <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'flex-start',
-            gap: 1,
-            paddingBottom: 2,
-          }}
+          className='surrogateHead'
         >
           <TypoText title=" Surrogate" />
           <img src={Info_Icon} />
@@ -317,29 +275,20 @@ const ReviewCard = () => {
         <Divider />
 
         <Box
-          sx={{
-            paddingTop: 2,
-            display: 'flex',
-            flexDirection: 'column',
-          }}
+          className='surrogateBody'
         >
-          <Typography variant="body2" sx={{ fontSize: 14, color: 'grey' }}>
+          <Typography variant="body2" className='title'>
             Surrogate
           </Typography>
-          <Typography sx={{ fontSize: '16px', fontWeight: '500' }}>
+          <Typography className='text'>
             Payroll,Card for Card,CIBIL,AQB
           </Typography>
         </Box>
       </Box>
 
-      <Box sx={{ marginTop: 3, backgroundColor: 'white', padding: 3 }}>
+      <Box className='box3'>
         <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'flex-start',
-            gap: 1,
-            paddingBottom: 2,
-          }}
+          className='channelHead'
         >
           <TypoText title=" Channels" />
           <img src={Info_Icon} />
@@ -347,16 +296,12 @@ const ReviewCard = () => {
         <Divider />
 
         <Box
-          sx={{
-            paddingTop: 2,
-            display: 'flex',
-            flexDirection: 'column',
-          }}
+          className='channelBody'
         >
-          <Typography variant="body2" sx={{ fontSize: 14, color: 'grey' }}>
+          <Typography variant="body2" className='title'>
             Channels
           </Typography>
-          <Typography sx={{ fontSize: '16px', fontWeight: '500' }}>
+          <Typography className='text'>
             Bank,DSA,Fintech Partner
           </Typography>
         </Box>

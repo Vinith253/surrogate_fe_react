@@ -13,7 +13,7 @@ function SalesReportList() {
     <div className="sales-report-list">
       <div className="filters-container">
         <div>Sales Report</div>
-        <StateFilter />
+        {/* <StateFilter /> */}
       </div>
       <TableComp
         viewPath="/sales/salesReportDetails"
