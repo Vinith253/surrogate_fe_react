@@ -393,7 +393,7 @@ export const CardCatalogue = () => {
     <Stack>
       <Stack>
         <Box
-          className='header'
+          className='cardHeader'
         >
           <Box>
             <Typography

@@ -7,6 +7,7 @@ import {
 import "./card.scss";
 import { Button } from "@mui/material";
 import { ReactComponent as RightArrow } from "../../../../assets/icons/rightArrow.svg";
+import { ReactComponent as DownArrow } from "../../../../assets/icons/downArrow.svg";
 
 function DashboardCard(props: {
   title:
@@ -29,11 +30,13 @@ function DashboardCard(props: {
     | undefined;
   more: any;
   image: any;
+  boxStyles?:any;
+  viewAll?: boolean
 }) {
   return (
     <div className="total-value-card">
       <div className="upper-half">
-        <div className="image-icon-box">
+        <div className={props.boxStyles ? props.boxStyles :"image-icon-box"}>
           <img src={props.image} />
         </div>
         <div className="card-text-area">
@@ -51,6 +54,16 @@ function DashboardCard(props: {
         </Button>
 
 
+        </div>
+      )}
+      {props.viewAll && (
+        <div className="lower-div">
+          <Button
+          endIcon={<DownArrow style={{width:'10px', height: '5px'}}/>}
+          sx={{ fontSize: "0.8vw",color:'#0662B7',textTransform:'none'}}
+        >
+          View All
+        </Button>
         </div>
       )}
     </div>

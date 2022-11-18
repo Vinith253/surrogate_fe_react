@@ -15,14 +15,17 @@ import { checkTagStatus } from '../../../../../utils/tagBasedIndicator/tagStatus
 import { programMmgt } from '../../../../../utils/Constants';
 
 export interface cardDetailsType {
-  schema: string;
+  surrogateProgramme: string;
+  activeSince: string;
+  lastModify: string;
   status: string;
-  lastModified: string;
-  lastModifiedDate: string;
-  statusActive: string;
-  StatusActiveDate: string;
-  resumeStatus: string;
-  resumeItNow: string;
+  autoResumeForm: string;
+  StatusActiveDate?: string;
+  resumeStatus?: string;
+  resumeItNow?: string;
+}
+export interface cardData {
+  data: cardDetailsType[];
 }
 
 const useStyles = {
@@ -31,7 +34,9 @@ const useStyles = {
   },
 };
 
-function CardList() {
+function CardList({ data }: cardData) {
+  console.log('data----', data);
+
   const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorElement);
   const handleClick = (event: React.MouseEvent<HTMLTableCellElement>) => {
@@ -49,7 +54,7 @@ function CardList() {
           alignItems: 'center',
         }}
       >
-        {cardDetails.map((data: cardDetailsType) => (
+        {data.map((dataItem: any) => (
           <Box
             width="31.5%"
             height="300px"
@@ -92,7 +97,7 @@ function CardList() {
                       // }}
                     />
                     <Typography sx={{ letterSpacing: '0.5px' }}>
-                      {data.schema}
+                      {dataItem.surrogateProgramme}
                     </Typography>
                   </Box>
                   <Box
@@ -111,8 +116,9 @@ function CardList() {
                   <Box sx={{ padding: '15px 0' }}>
                     <Typography
                       sx={{
-                        color: checkTagStatus(data.status).color,
-                        backgroundColor: checkTagStatus(data.status).bgColor,
+                        color: checkTagStatus(dataItem.status).color,
+                        backgroundColor: checkTagStatus(dataItem.status)
+                          .bgColor,
                         fontSize: '13px',
                         padding: '1px 8px',
                         borderRadius: '5px',
@@ -120,7 +126,7 @@ function CardList() {
                         width: 'max-content',
                       }}
                     >
-                      {data.status}
+                      {dataItem.status}
                     </Typography>
                   </Box>
                   <Box sx={{ padding: '0 0px 10px 0' }}>
@@ -128,13 +134,13 @@ function CardList() {
                       variant="subtitle2"
                       sx={{ color: '#9F9FA0', fontSize: 'small' }}
                     >
-                      {data.lastModified}
+                      Last Modified
                     </Typography>
                     <Typography
                       variant="subtitle1"
                       sx={{ fontSize: '15px', fontWeight: 500, color: 'black' }}
                     >
-                      {data.lastModifiedDate}
+                      {dataItem.lastModify}
                     </Typography>
                   </Box>
                   <Box>
@@ -142,15 +148,15 @@ function CardList() {
                       variant="subtitle2"
                       sx={{ color: '#9F9FA0', fontSize: 'small' }}
                     >
-                      {data.statusActive}
+                      Status
                     </Typography>
                     <Typography
                       variant="subtitle1"
                       sx={{ fontSize: '14px', fontWeight: 500, color: 'black' }}
                     >
-                      {data.StatusActiveDate}
+                      {dataItem.StatusActiveDate}
                     </Typography>
-                    {data.resumeStatus && (
+                    {dataItem.resumeStatus && (
                       <Typography
                         variant="subtitle1"
                         sx={{
@@ -159,10 +165,10 @@ function CardList() {
                           color: 'black',
                         }}
                       >
-                        {data.resumeStatus}
+                        {dataItem.resumeStatus}
                       </Typography>
                     )}
-                    {data.resumeItNow && (
+                    {dataItem.resumeItNow && (
                       <Typography
                         sx={{
                           padding: '3px 0',
@@ -172,7 +178,7 @@ function CardList() {
                         }}
                         color="secondary"
                       >
-                        {data.resumeItNow}
+                        {dataItem.resumeItNow}
                       </Typography>
                     )}
                   </Box>
@@ -221,38 +227,5 @@ function CardList() {
     </>
   );
 }
-
-const cardDetails = [
-  {
-    schema: 'Card For Card',
-    status: 'Active',
-    lastModified: 'Last Modified',
-    lastModifiedDate: '10/June/2022 19:30:12',
-    statusActive: 'Status',
-    StatusActiveDate: 'Active since June 20, 2022',
-    resumeStatus: '',
-    resumeItNow: '',
-  },
-  {
-    schema: 'Payroll',
-    status: 'Paused',
-    lastModified: 'Last Modified',
-    lastModifiedDate: '10/June/2022 19:30:12',
-    statusActive: 'Status',
-    StatusActiveDate: 'Active since June 20, 2022',
-    resumeStatus: '',
-    resumeItNow: 'Resume It Now',
-  },
-  {
-    schema: 'Card For Card',
-    status: 'Paused (scheduled)',
-    lastModified: 'Last Modified',
-    lastModifiedDate: '10/June/2022 19:30:12',
-    statusActive: 'Status',
-    StatusActiveDate: 'Active since June 20, 2022',
-    resumeStatus: 'It will resume on June 20, 2022',
-    resumeItNow: 'Resume It Now',
-  },
-];
 
 export default CardList;

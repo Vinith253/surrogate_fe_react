@@ -23,11 +23,13 @@
   .details-card-inner-container {
     padding: 20px 25px;
     width: 97%;
+
     .each-info {
       margin-bottom: 10px;
     }
   }
 }
+
 .info-label {
   color: #afaeaf;
   font-size: 12px;
@@ -45,6 +47,7 @@
   font-size: 14px;
   margin: 10px 0px;
 }
+
 .underline {
   border: 1px solid #f0f2f5;
   width: 100%;
@@ -54,6 +57,6 @@
   padding: 20px 25px;
   width: 97%;
 }
-.container {
-  margin-left: 30px;
-}
+// .container {
+//   margin-left: 30px;
+// }
