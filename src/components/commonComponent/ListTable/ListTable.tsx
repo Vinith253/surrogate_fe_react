@@ -14,6 +14,7 @@ import ProgressDot from '../../../assets/icons/progressdot.svg';
 import { ReactComponent as EditIcon } from '../../../assets/icons/editColumn.svg';
 import { ReactComponent as RightArrow } from '../../../assets/icons/rightArrow.svg';
 import {
+  product_label,
   rowsDataInterface,
   statusRowHeadingInterface,
 } from '../../../pages/sales/dashboard/dashboard.const';
@@ -22,6 +23,7 @@ import { useNavigate } from 'react-router-dom';
 import { programMmgt, tabBar } from '../../../utils/Constants';
 import { borderTop, Stack } from '@mui/system';
 import Link from '@mui/material/Link';
+import CheckBoxModal from '../customModal/PopoverModal';
 
 function TableComp(props: {
   rows: rowsDataInterface[];
@@ -35,6 +37,19 @@ function TableComp(props: {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [filteredData, setFilterteredData] = useState(props.rows);
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+    null
+  );
+  const [filteredHeader, setFilterteredHeader] = useState<
+    statusRowHeadingInterface[]
+  >(props?.listRowHeading);
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
@@ -56,11 +71,123 @@ function TableComp(props: {
     setCurrentPage(1);
   };
 
+  const handleClose = (categories: any) => {
+    handleCloseSuccess(categories);
+  };
+
+  const handleCloseSuccess = (categories: any) => {
+    setAnchorEl(null);
+    const collections = {};
+    let newArr = props.rows;
+    let updatedHeader = categories?.map(
+      (item: { label: string; defaultChecked: boolean }) => {
+        if (item.defaultChecked === true) {
+          props.listRowHeading?.map((item2) => {
+            if (item.label === item2.header1) {
+              Object.assign(collections, { header1: item.label });
+            }
+            if (item.label === item2.header2) {
+              Object.assign(collections, { header2: item.label });
+            }
+            if (item.label === item2.header3) {
+              Object.assign(collections, { header3: item.label });
+            }
+            if (item.label === item2.header4) {
+              Object.assign(collections, { header4: item.label });
+            }
+            if (item.label === item2.header5) {
+              Object.assign(collections, { header5: item.label });
+            }
+            if (item.label === item2.header6) {
+              Object.assign(collections, { header6: item.label });
+            }
+            if (item.label === item2.header7) {
+              Object.assign(collections, { header7: item.label });
+            }
+            if (item.label === item2.header8) {
+              Object.assign(collections, { header8: item.label });
+            }
+            if (item.label === item2.header9) {
+              Object.assign(collections, { header9: item.label });
+            }
+            if (item.label === item2.header10) {
+              Object.assign(collections, { header10: item.label });
+            }
+          });
+          return item; //gets everything that was already in item, and updates "done"
+        }
+        const array = [collections];
+        setFilterteredHeader(array);
+        return item; // else return unmodified item
+      }
+    );
+
+    let updatedList = categories?.map(
+      (item: { label: string; defaultChecked: boolean }) => {
+        if (item.defaultChecked === false) {
+          if (item.label === '#') {
+            newArr = newArr.map(({ id, ...rest }) => {
+              return rest;
+            });
+          }
+          if (item.label === 'Application#') {
+            newArr = newArr.map(({ applicationNum, ...rest }) => {
+              return rest;
+            });
+          }
+          if (item.label === 'Customer Name') {
+            newArr = newArr.map(({ customerName, ...rest }) => {
+              return rest;
+            });
+          }
+          if (item.label === 'Mobile Number') {
+            newArr = newArr.map(({ mobileNum, ...rest }) => {
+              return rest;
+            });
+          }
+          if (item.label === 'Lead') {
+            newArr = newArr.map(({ lead, ...rest }) => {
+              return rest;
+            });
+          }
+          if (item.label === 'Surrogate Name') {
+            newArr = newArr.map(({ surrogateName, ...rest }) => {
+              return rest;
+            });
+          }
+          if (item.label === 'Date & Time') {
+            newArr = newArr.map(({ dateTime, ...rest }) => {
+              return rest;
+            });
+          }
+          if (item.label === 'Policy') {
+            newArr = newArr.map(({ Policy, ...rest }) => {
+              return rest;
+            });
+          }
+          if (item.label === 'Channel') {
+            newArr = newArr.map(({ channelName, ...rest }) => {
+              return rest;
+            });
+          }
+          if (item.label === 'Processed') {
+            newArr = newArr.map(({ processedBy, ...rest }) => {
+              return rest;
+            });
+          }
+          setFilterteredData(newArr);
+          return item; //gets everything that was already in item, and updates "done"
+        }
+        return item; // else return unmodified item
+      }
+    );
+  };
+
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * rowsPerPage;
     const lastPageIndex = firstPageIndex + rowsPerPage;
     return filteredData.slice(firstPageIndex, lastPageIndex);
-  }, [currentPage, rowsPerPage, graphView]);
+  }, [currentPage, rowsPerPage, graphView, filteredData]);
 
   const navigate = useNavigate();
   const viewAction = (param: any) => {
@@ -248,6 +375,7 @@ function TableComp(props: {
           <div className="reset-data">
             <Button
               startIcon={<EditIcon />}
+              aria-describedby={id}
               sx={{
                 fontSize: '1vw',
                 marginLeft: '56px',
@@ -255,6 +383,7 @@ function TableComp(props: {
                 fontWeight: '600',
                 textTransform: 'none',
               }}
+              onClick={handleClick}
             >
               Edit Columns
             </Button>
@@ -277,183 +406,232 @@ function TableComp(props: {
           </div>
         )}
       </div>
-
       <Grid container spacing={0}>
         <Grid item sm={props.flag ? 7 : 8}>
           <TableContainer sx={{ maxWidth: '950px' }}>
             <Table aria-label="simple table">
               <TableHead>
-                {props?.listRowHeading.map((row) => (
+                {filteredHeader?.map((row) => (
                   <TableRow sx={{ backgroundColor: '#EFF7FE' }}>
-                    <TableCell
-                      scope="row"
-                      sx={{
-                        fontWeight: 'bold',
-                        borderBottom: 'none',
-                        backgroundColor: '#EFF7FE',
-                      }}
-                    >
-                      {row?.header1}
-                    </TableCell>
-                    <TableCell
-                      align="left"
-                      scope="row"
-                      sx={{
-                        fontWeight: 'bold',
-                        borderBottom: 'none',
-                        backgroundColor: '#EFF7FE',
-                        minWidth: '100px',
-                      }}
-                    >
-                      {row?.header2}
-                    </TableCell>
-                    <TableCell
-                      align="left"
-                      sx={{
-                        fontWeight: 'bold',
-                        borderBottom: 'none',
-                        backgroundColor: '#EFF7FE',
-                        minWidth: '150px',
-                      }}
-                    >
-                      {row?.header3}
-                    </TableCell>
-                    <TableCell
-                      align="left"
-                      sx={{
-                        fontWeight: 'bold',
-                        borderBottom: 'none',
-                        backgroundColor: '#EFF7FE',
-                        minWidth: '150px',
-                      }}
-                    >
-                      {row?.header4}
-                    </TableCell>
-                    <TableCell
-                      align="left"
-                      sx={{
-                        fontWeight: 'bold',
-                        borderBottom: 'none',
-                        backgroundColor: '#EFF7FE',
-                        minWidth: '100px',
-                      }}
-                    >
-                      {row?.header5}
-                    </TableCell>
-                    <TableCell
-                      align="left"
-                      sx={{
-                        fontWeight: 'bold',
-                        borderBottom: 'none',
-                        backgroundColor: '#EFF7FE',
-                        minWidth: '150px',
-                      }}
-                    >
-                      {row?.header6}
-                    </TableCell>
-                    <TableCell
-                      align="left"
-                      sx={{
-                        fontWeight: 'bold',
-                        borderBottom: 'none',
-                        backgroundColor: '#EFF7FE',
-                        minWidth: '150px',
-                      }}
-                    >
-                      {row?.header7}
-                    </TableCell>
-                    <TableCell
-                      align="left"
-                      sx={{
-                        fontWeight: 'bold',
-                        borderBottom: 'none',
-                        backgroundColor: '#EFF7FE',
-                        minWidth: '100px',
-                      }}
-                    >
-                      {row?.header8}
-                    </TableCell>
-                    <TableCell
-                      align="left"
-                      sx={{
-                        fontWeight: 'bold',
-                        borderBottom: 'none',
-                        backgroundColor: '#EFF7FE',
-                        minWidth: '100px',
-                      }}
-                    >
-                      {row?.header9}
-                    </TableCell>
-                    <TableCell
-                      align="left"
-                      sx={{
-                        fontWeight: 'bold',
-                        borderBottom: 'none',
-                        backgroundColor: '#EFF7FE',
-                        minWidth: '100px',
-                      }}
-                    >
-                      {row?.header10}
-                    </TableCell>
+                    {row?.header1 && (
+                      <TableCell
+                        scope="row"
+                        sx={{
+                          fontWeight: 'bold',
+                          borderBottom: 'none',
+                          backgroundColor: '#EFF7FE',
+                        }}
+                      >
+                        {row?.header1}
+                      </TableCell>
+                    )}
+                    {row?.header2 && (
+                      <TableCell
+                        align="left"
+                        scope="row"
+                        sx={{
+                          fontWeight: 'bold',
+                          borderBottom: 'none',
+                          backgroundColor: '#EFF7FE',
+                          minWidth: '100px',
+                        }}
+                      >
+                        {row?.header2}
+                      </TableCell>
+                    )}
+                    {row?.header3 && (
+                      <TableCell
+                        align="left"
+                        sx={{
+                          fontWeight: 'bold',
+                          borderBottom: 'none',
+                          backgroundColor: '#EFF7FE',
+                          minWidth: '150px',
+                        }}
+                      >
+                        {row?.header3}
+                      </TableCell>
+                    )}
+                    {row?.header4 && (
+                      <TableCell
+                        align="left"
+                        sx={{
+                          fontWeight: 'bold',
+                          borderBottom: 'none',
+                          backgroundColor: '#EFF7FE',
+                          minWidth: '150px',
+                        }}
+                      >
+                        {row?.header4}
+                      </TableCell>
+                    )}
+                    {row?.header5 && (
+                      <TableCell
+                        align="left"
+                        sx={{
+                          fontWeight: 'bold',
+                          borderBottom: 'none',
+                          backgroundColor: '#EFF7FE',
+                          minWidth: '100px',
+                        }}
+                      >
+                        {row?.header5}
+                      </TableCell>
+                    )}
+                    {row?.header6 && (
+                      <TableCell
+                        align="left"
+                        sx={{
+                          fontWeight: 'bold',
+                          borderBottom: 'none',
+                          backgroundColor: '#EFF7FE',
+                          minWidth: '150px',
+                        }}
+                      >
+                        {row?.header6}
+                      </TableCell>
+                    )}
+                    {row?.header7 && (
+                      <TableCell
+                        align="left"
+                        sx={{
+                          fontWeight: 'bold',
+                          borderBottom: 'none',
+                          backgroundColor: '#EFF7FE',
+                          minWidth: '150px',
+                        }}
+                      >
+                        {row?.header7}
+                      </TableCell>
+                    )}
+                    {row?.header8 && (
+                      <TableCell
+                        align="left"
+                        sx={{
+                          fontWeight: 'bold',
+                          borderBottom: 'none',
+                          backgroundColor: '#EFF7FE',
+                          minWidth: '100px',
+                        }}
+                      >
+                        {row?.header8}
+                      </TableCell>
+                    )}
+                    {row?.header9 && (
+                      <TableCell
+                        align="left"
+                        sx={{
+                          fontWeight: 'bold',
+                          borderBottom: 'none',
+                          backgroundColor: '#EFF7FE',
+                          minWidth: '100px',
+                        }}
+                      >
+                        {row?.header9}
+                      </TableCell>
+                    )}
+                    {row?.header10 && (
+                      <TableCell
+                        align="left"
+                        sx={{
+                          fontWeight: 'bold',
+                          borderBottom: 'none',
+                          backgroundColor: '#EFF7FE',
+                          minWidth: '100px',
+                        }}
+                      >
+                        {row?.header10}
+                      </TableCell>
+                    )}
                   </TableRow>
                 ))}
               </TableHead>
               <TableBody>
-                {currentTableData.map((row) => (
+                {currentTableData?.map((row) => (
                   <TableRow
                     key={row.id}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
-                    <TableCell
-                      component="th"
-                      scope="row"
-                      sx={{ borderBottom: 'none', height: '68px' }}
-                    >
-                      {row.id}
-                    </TableCell>
-                    {props.flag && (
-                      <TableCell align="left" sx={{ borderBottom: 'none' }}>
+                    {row.id && (
+                      <TableCell
+                        component="th"
+                        className="hidden"
+                        scope="row"
+                        sx={{ borderBottom: 'none', height: '68px' }}
+                      >
+                        {row.id}
+                      </TableCell>
+                    )}
+                    {props.flag && row.applicationNum && (
+                      <TableCell
+                        align="left"
+                        sx={{ borderBottom: 'none', height: '68px' }}
+                      >
                         {'#'}
                         {row.applicationNum}
                       </TableCell>
                     )}
-                    {props.flag && (
-                      <TableCell align="left" sx={{ borderBottom: 'none' }}>
+                    {props.flag && row.customerName && (
+                      <TableCell
+                        align="left"
+                        sx={{ borderBottom: 'none', height: '68px' }}
+                      >
                         {row.customerName}
                       </TableCell>
                     )}
-                    {props.flag && (
-                      <TableCell align="left" sx={{ borderBottom: 'none' }}>
+                    {props.flag && row.mobileNum && (
+                      <TableCell
+                        align="left"
+                        sx={{ borderBottom: 'none', height: '68px' }}
+                      >
                         {row.mobileNum}
                       </TableCell>
                     )}
-                    {props.flag && (
-                      <TableCell align="left" sx={{ borderBottom: 'none' }}>
+                    {props.flag && row.lead && (
+                      <TableCell
+                        align="left"
+                        sx={{ borderBottom: 'none', height: '68px' }}
+                      >
                         {row.lead}
                       </TableCell>
                     )}
-                    {props.flag && (
-                      <TableCell align="left" sx={{ borderBottom: 'none' }}>
+                    {props.flag && row.surrogateName && (
+                      <TableCell
+                        align="left"
+                        sx={{ borderBottom: 'none', height: '68px' }}
+                      >
                         {row.surrogateName}
                       </TableCell>
                     )}
-                    {props.flag && (
-                      <TableCell align="left" sx={{ borderBottom: 'none' }}>
+                    {props.flag && row.dateTime && (
+                      <TableCell
+                        align="left"
+                        sx={{ borderBottom: 'none', height: '68px' }}
+                      >
                         {row.dateTime}
                       </TableCell>
                     )}
-                    {props.flag && (
-                      <TableCell align="left" sx={{ borderBottom: 'none' }}>
+                    {props.flag && row.Policy && (
+                      <TableCell
+                        align="left"
+                        sx={{ borderBottom: 'none', height: '68px' }}
+                      >
                         {row.Policy}
                       </TableCell>
                     )}
-                    {props.flag && (
-                      <TableCell align="left" sx={{ borderBottom: 'none' }}>
+                    {props.flag && row.channelName && (
+                      <TableCell
+                        align="left"
+                        sx={{ borderBottom: 'none', height: '68px' }}
+                      >
                         {row.channelName}
                       </TableCell>
                     )}
-                    {props.flag && (
-                      <TableCell align="left" sx={{ borderBottom: 'none' }}>
+                    {props.flag && row.processedBy && (
+                      <TableCell
+                        align="left"
+                        sx={{ borderBottom: 'none', height: '68px' }}
+                      >
                         {row.processedBy}
                       </TableCell>
                     )}
@@ -530,7 +708,7 @@ function TableComp(props: {
             <TableContainer>
               <Table aria-label="simple table">
                 <TableHead>
-                  {props?.statusRowsHeading.map((row) => (
+                  {props?.statusRowsHeading?.map((row) => (
                     <TableRow sx={{ backgroundColor: '#EFF7FE' }}>
                       {row.header1 && (
                         <TableCell
@@ -568,7 +746,7 @@ function TableComp(props: {
                   ))}
                 </TableHead>
                 <TableBody>
-                  {currentTableData.map((row: any, index: any) => (
+                  {currentTableData?.map((row: any, index: any) => (
                     <TableRow key={row.id} sx={{ borderBottom: 'none' }}>
                       {props.flag && (
                         <TableCell
@@ -638,6 +816,18 @@ function TableComp(props: {
           }
         />
       </Grid>
+      {
+        <CheckBoxModal
+          openSuccess={open}
+          handleCloseSuccess={handleClose}
+          title={'Surrogate Selection'}
+          close={'Reset'}
+          submit={'Select'}
+          anchorEl={anchorEl}
+          product_label={product_label}
+          id={id}
+        />
+      }
     </div>
   );
 }

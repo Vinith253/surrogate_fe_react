@@ -7,7 +7,7 @@ import CreateNewCard from './pages/productManagement/cardCatalogue/createCard/cr
 // import { CreateNewCard } from "./pages/productManagement/cardCatalogue/createCard/createNewCard";
 import CardCatalogue from './pages/productManagement/cardCatalogue/landingScreen/cardTab';
 import ProgramManagement from './pages/productManagement/programmeManagement/landingScreen';
-import SalesDashboard from './pages/sales/dashboard/Dashboard';
+import SalesDashboard from './pages/sales/dashboard';
 import SalesReport from './pages/sales/salesReport';
 import SalesReportDetails from './pages/sales/salesReport/reportDetails';
 

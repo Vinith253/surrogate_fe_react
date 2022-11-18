@@ -89,6 +89,7 @@ export default function DsaPage() {
       lastPeriodValue: 0,
       lastYearValue: 0,
       image: InProgress,
+      navPath:'/sales/salesReport'
     },
     {
       index: 2,
@@ -97,6 +98,7 @@ export default function DsaPage() {
       lastPeriodValue: 2500,
       lastYearValue: 2500,
       image: ApprovedIcon,
+      navPath:'/sales/salesReport'
     },
     {
       index: 3,
@@ -105,6 +107,7 @@ export default function DsaPage() {
       lastPeriodValue: 2500,
       lastYearValue: 2500,
       image: Dropped,
+      navPath:'/sales/salesReport'
     },
     {
       index: 4,
@@ -113,6 +116,7 @@ export default function DsaPage() {
       lastPeriodValue: 2500,
       lastYearValue: 2500,
       image: Rejected,
+      navPath:'/sales/salesReport'
     },
   ];
 
@@ -215,13 +219,13 @@ export default function DsaPage() {
   ];
 
   return (
-    <div>
+    <>
       <div className="dsa-data-container">
         <div>
           <FilterButton filterHeaderData={filterHeaderData} />
           <div className="divider-line" />
           <div className="horizontal-cards">
-            {dashboardVal.map((value) => (
+            {dashboardVal?.map((value) => (
               <DashboardCard
                 title={value.title}
                 value={value.value}
@@ -233,7 +237,7 @@ export default function DsaPage() {
 
           <div className="report-cards">
             <div className="progress-card">
-              {progressValue.map((value) => (
+              {progressValue?.map((value) => (
                 <ProgressCard
                   index={value.index}
                   title={value.title}
@@ -241,6 +245,7 @@ export default function DsaPage() {
                   lastPeriodValue={value.lastPeriodValue}
                   lastYearValue={value.lastYearValue}
                   image={value.image}
+                  navPath={value.navPath}
                 />
               ))}
             </div>
@@ -271,7 +276,7 @@ export default function DsaPage() {
                         },
                       }}
                     >
-                      {currencies.map((option) => (
+                      {currencies?.map((option) => (
                         <option key={option.value} value={option.value}>
                           {option.label}
                         </option>
@@ -368,9 +373,9 @@ export default function DsaPage() {
           statusRowsHeading={statusRowHeading}
           listRowHeading={listRowHeading}
           flag="dashboard"
-          viewPath={''}
+          viewPath="/sales/salesDashboard"
         />
       </div>
-    </div>
+    </>
   );
 }
