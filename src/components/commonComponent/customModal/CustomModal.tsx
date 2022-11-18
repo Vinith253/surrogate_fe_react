@@ -20,6 +20,8 @@ import Grid from '@mui/material/Grid';
 import { colors } from '../../../style/Color';
 import card_catalogue_sucess_icon from '../../../assets/icons/card_catalogue_sucess_icon.svg';
 import card_catalogue_rejecte_icon from '../../../assets/icons/modal_rejected_icon.svg';
+import info_icon from '../../../assets/images/info_icon.svg';
+import InputLabel from '@mui/material/InputLabel';
 
 type props = {
   openSuccess?: any;
@@ -45,6 +47,19 @@ type props = {
   pauseMethodChecking?: any;
   handleSuccess?: any;
   accessLibraryMsg?: string;
+  org_ID?: string;
+  org_Name?: string;
+  channel_type?: string;
+  accessLibraryModaBtn?: string;
+  accessLibraryCloseBtn?: string;
+  changePasswordTitle?: string;
+  changePasswordTitleMsg?: string;
+  ProceedBtn?: string;
+  resentOTP?: string;
+  resentOTPmsg?: string;
+  enterNewPassword?: string;
+  confirmNewPassword?: string;
+  forgotPassword?: string;
 };
 
 function CustomModal({
@@ -71,6 +86,19 @@ function CustomModal({
   pauseMethodChecking,
   handleSuccess,
   accessLibraryMsg,
+  org_ID,
+  org_Name,
+  channel_type,
+  accessLibraryModaBtn,
+  accessLibraryCloseBtn,
+  changePasswordTitle,
+  changePasswordTitleMsg,
+  ProceedBtn,
+  resentOTP,
+  resentOTPmsg,
+  enterNewPassword,
+  confirmNewPassword,
+  forgotPassword,
 }: props) {
   // const classess = useStyles();
 
@@ -96,7 +124,7 @@ function CustomModal({
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <Stack py={3} style={{ maxWidth: '450px' }} px={title ? 3 : 0}>
+        <Stack py={3} px={title ? 3 : 0}>
           {title && (
             <Typography
               className="modal_title"
@@ -131,6 +159,17 @@ function CustomModal({
             ></Box>
           )}
 
+          {accessLibraryCloseBtn && (
+            <Button
+              variant="text"
+              color="secondary"
+              sx={{ position: 'absolute', right: '10px' }}
+              onClick={handleCloseSuccess}
+            >
+              {accessLibraryCloseBtn}
+            </Button>
+          )}
+
           {successModalTitle && (
             <DialogContent sx={{ paddingTop: '18px', paddingBottom: '5px' }}>
               <DialogContentText
@@ -148,6 +187,236 @@ function CustomModal({
                 {successModalTitle}
               </DialogContentText>
             </DialogContent>
+          )}
+
+          {/* {changePasswordTitle && (
+            <DialogContent
+              sx={{
+                paddingTop: '18px',
+                paddingBottom: '5px',
+                display: 'flex',
+                justifyContent: 'space-around',
+              }}
+            >
+              <DialogContentText
+                id="alert-dialog-slide-description"
+                fontSize={16}
+                fontWeight={600}
+                color="#1d1d1d"
+                sx={{
+                  padding: {
+                    xs: '0 13px',
+                  },
+                }}
+              >
+                {changePasswordTitle}
+              </DialogContentText>
+              <DialogContentText>
+                <Button variant="text">Close</Button>
+              </DialogContentText>
+            </DialogContent>
+          )} */}
+          {changePasswordTitle && (
+            <Stack
+              sx={{
+                margin: '50px  60px 25px 60px',
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
+            >
+              <Typography
+                sx={{ fontSize: '20px', fontWeight: '500', color: '#151515' }}
+              >
+                {changePasswordTitle}
+              </Typography>
+              <Button
+                variant="text"
+                color="secondary"
+                sx={{ fontSize: '14px', textTransform: 'capitalize' }}
+                onClick={handleCloseSuccess}
+              >
+                Close
+              </Button>
+            </Stack>
+          )}
+
+          {changePasswordTitleMsg && (
+            <Stack sx={{ margin: '0 60px', textAlign: 'start' }}>
+              <Typography fontWeight={700} pb={1} fontSize={12}>
+                {changePasswordTitleMsg}
+              </Typography>
+            </Stack>
+          )}
+
+          {enterNewPassword && (
+            <Stack sx={{ margin: '0 60px' }}>
+              <InputLabel
+                htmlFor="outlined-adornment-amount"
+                sx={{ fontSize: '12px', color: '#151515' }}
+              >
+                {enterNewPassword}
+              </InputLabel>
+              <TextField
+                variant="outlined"
+                size="small"
+                sx={{ height: '40px', width: '340px', fontSize: '14px' }}
+                id="outlined-password-input"
+                label="Password"
+                type="password"
+                autoComplete="current-password"
+              />
+
+              <InputLabel
+                htmlFor="outlined-adornment-amount"
+                sx={{ marginTop: '20px' }}
+              >
+                {confirmNewPassword}
+              </InputLabel>
+              <TextField
+                variant="outlined"
+                size="small"
+                sx={{ height: '40px', width: '340px', fontSize: '14px' }}
+                id="outlined-password-input"
+                label="Password"
+                type="password"
+                autoComplete="current-password"
+              />
+              <Typography
+                sx={{
+                  fontSize: '14px',
+                  textAlign: 'end',
+                  color: ' #0662B7',
+                  fontWeight: '500',
+                  marginTop: '10px',
+                  marginBottom: '20px',
+                }}
+              >
+                {forgotPassword}
+              </Typography>
+            </Stack>
+          )}
+
+          {resentOTP && (
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                margin: '0 60px',
+              }}
+            >
+              <TextField
+                variant="outlined"
+                size="small"
+                sx={{ width: '45px', margin: '4px' }}
+              ></TextField>
+              <TextField
+                variant="outlined"
+                size="small"
+                sx={{ width: '45px', margin: '4px' }}
+              ></TextField>
+              <TextField
+                variant="outlined"
+                size="small"
+                sx={{ width: '45px', margin: '4px' }}
+              ></TextField>
+              <TextField
+                variant="outlined"
+                size="small"
+                sx={{ width: '45px', margin: '4px' }}
+              ></TextField>
+              <TextField
+                variant="outlined"
+                size="small"
+                sx={{ width: '45px', margin: '4px' }}
+              ></TextField>
+              <TextField
+                variant="outlined"
+                size="small"
+                sx={{ width: '45px', margin: '4px' }}
+              ></TextField>
+            </Box>
+          )}
+
+          {resentOTP && (
+            <Stack
+              sx={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                margin: '10px 60px',
+              }}
+            >
+              <Typography sx={{ color: '#D02127', fontSize: '16px' }}>
+                02 : 29
+              </Typography>
+              <Typography sx={{ color: '#82B1DB', fontSize: '16px' }}>
+                {resentOTP}
+              </Typography>
+            </Stack>
+          )}
+          {ProceedBtn === 'Proceed' && (
+            <Stack sx={{ margin: '0 60px' }}>
+              {/* {ProceedBtn === 'Proceed' && ( */}
+              <TextField
+                fullWidth
+                variant="outlined"
+                size="small"
+                sx={{ height: '40px', width: '340px', fontSize: '14px' }}
+                value={'Ashwin@yesbank.com'}
+              ></TextField>
+              {/* )} */}
+
+              <Button
+                variant="contained"
+                onClick={handleCloseSuccess}
+                style={{
+                  width: '340px',
+                  height: '48px',
+                  fontSize: '12px',
+                  marginTop: '30px',
+                  marginBottom: '40px',
+                  backgroundColor: `${colors.Modalblue}`,
+                }}
+              >
+                {ProceedBtn}
+              </Button>
+            </Stack>
+          )}
+
+          {(ProceedBtn === 'Verify' || ProceedBtn === 'Update') && (
+            <Stack sx={{ margin: '0 60px' }}>
+              <Button
+                variant="contained"
+                onClick={handleCloseSuccess}
+                style={{
+                  width: '340px',
+                  height: '48px',
+                  fontSize: '12px',
+                  marginTop: '10px',
+                  marginBottom: '14px',
+                  backgroundColor: `${colors.Modalblue}`,
+                }}
+              >
+                {ProceedBtn}
+              </Button>
+            </Stack>
+          )}
+
+          {resentOTPmsg && (
+            <Stack sx={{ flexDirection: 'row', margin: '0 60px' }}>
+              <Box
+                component="img"
+                color={'#AFAEAF'}
+                src={info_icon}
+                width={18}
+              ></Box>
+              <Typography
+                sx={{ fontSize: '10px', color: '#AFAEAF', marginLeft: '6px' }}
+              >
+                {resentOTPmsg}
+              </Typography>
+            </Stack>
           )}
 
           {rejectedModaltitle && (
@@ -194,12 +463,31 @@ function CustomModal({
               {accessLibraryMsg}
             </Typography>
           )}
-
-          {/* <Stack>
-            <Box>Org.ID : #12345 </Box>
-            <Box>Org.Name : Ganesh Agency</Box>
-            <Box>Channel Type : DSA</Box>
-          </Stack> */}
+          {org_ID && org_Name && channel_type && (
+            <Stack
+              sx={{
+                flexDirection: 'row',
+                justifyContent: 'center',
+                fontSize: '14px',
+                border: '2px solid #F0F2F5',
+                padding: '15px 5px',
+                margin: '20px 30px',
+                fontWeight: '400',
+              }}
+            >
+              <Box
+                sx={{ borderRight: '1px solid #151515', paddingRight: '10px' }}
+              >
+                Org.ID : {org_ID}
+              </Box>
+              <Box sx={{ borderRight: '1px solid #151515', padding: '0 10px' }}>
+                Org.Name : {org_Name}
+              </Box>
+              <Box sx={{ paddingLeft: '10px' }}>
+                Channel Type : {channel_type}
+              </Box>
+            </Stack>
+          )}
 
           {rejectedModalMsg && (
             <Typography
@@ -451,6 +739,40 @@ function CustomModal({
                 {btn}
               </Button>
             </Box>
+          )}
+
+          {accessLibraryModaBtn && (
+            <Stack sx={{ margin: '0 30px' }}>
+              <Typography sx={{ color: '#151515', fontSize: ' 12px' }}>
+                {accessLibraryModaBtn}
+              </Typography>
+              <Grid container sx={{ alignItems: 'center' }}>
+                <Grid sm={8}>
+                  <TextField
+                    fullWidth
+                    variant="outlined"
+                    size="small"
+                    sx={{ height: '40px' }}
+                    value={
+                      'https://www.yesbank.com/content/bbp/repositories/7...'
+                    }
+                  ></TextField>
+                </Grid>
+                <Grid sm={4}>
+                  <Button
+                    variant="contained"
+                    sx={{
+                      marginLeft: '30px',
+                      padding: '8px 25px',
+                      background: '#0662B7',
+                      fontSize: '14px',
+                    }}
+                  >
+                    Copy Link
+                  </Button>
+                </Grid>
+              </Grid>
+            </Stack>
           )}
         </Stack>
       </Dialog>
