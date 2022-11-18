@@ -9,8 +9,10 @@ const TypoText = (props: any) => {
         <Typography
           sx={{
             margin: 0,
+            // fontFamily:'ilisarniq',
             fontSize: '16px',
-            fontWeight: '500',
+            fontWeight: 500,
+            lineHeight:'20px',
             display: 'flex',
             justifyContent: 'flex-start',
             color:props.color,
