@@ -14,6 +14,7 @@ import SalesReportDetails from './pages/sales/salesReport/reportDetails';
 import ReviewCard from './pages/productManagement/cardCatalogue/reviewCard/reviewCard';
 import AccessLibrary from './pages/accessLibrary/AccessLibrary';
 import ReviewerLogDetails from './pages/productManagement/programmeManagement/screens/listComponents/ReviewerLogDetails';
+import { Profile } from './pages/profile/Profile';
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
 
         {/* Public routes */}
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/profile" element={<Profile />} />
         <Route
           path="/productManagement/cardCatalogue"
           element={<CardCatalogue />}

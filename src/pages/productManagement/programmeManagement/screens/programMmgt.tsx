@@ -113,7 +113,13 @@ export const ProgramManagementScreen = () => {
   };
 
   return (
-    <Stack sx={{ padding: '25px 30px 0 30px' }}>
+    <Stack
+      sx={{
+        padding: '25px 30px 30px 30px',
+        backgroundColor: colors.white,
+        height: '75vh',
+      }}
+    >
       <Stack
         sx={{
           borderBottom: `2px solid ${colors.lightGrey}`,
