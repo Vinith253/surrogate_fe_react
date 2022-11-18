@@ -31,13 +31,8 @@ export const useStyles = {
       color: '#AFAEAF',
     },
     '& .Mui-selected': {
-      backgroundColor: '#0662B7',
+      backgroundColor: '#0662B7 !important',
       color: 'white',
-    },
-    '& .MuiButtonBase-root-MuiPaginationItem-root.Mui-selected':{
-      backgroundColor: '#0662B7',
-      color: 'white',
-     
     },
     'ul > li': {
       paddingLeft: '10px',

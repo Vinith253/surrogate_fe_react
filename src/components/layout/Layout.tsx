@@ -36,7 +36,7 @@ import Collapse from '@mui/material/Collapse';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
-const drawerWidth = 280;
+const drawerWidth = 300;
 
 const sideBarOptions = [
   { key: 1, content: 'HOME', path: '/', image: Home, subContent: [] },
@@ -248,7 +248,7 @@ export default function Layout() {
                   position: 'absolute',
                   top: '35px',
                   zIndex: 999999,
-                  right: open ? '-125px' : '-50px',
+                  right: open ? '-145px' : '-50px',
                 }}
                 alt=""
               />
@@ -330,11 +330,11 @@ export default function Layout() {
                             <List
                               component="div"
                               disablePadding
-                              sx={{ padding: '0 2rem' }}
+                              sx={{ padding: '0 2.6rem' }}
                             >
                               <Link to={subData.path}>
                                 <ListItemButton sx={{ pl: 4 }}>
-                                  <ListItemIcon sx={{ width: '1.5rem' }}>
+                                  <ListItemIcon sx={{ width: '2.5rem' }}>
                                     <img src={subData.img} alt="" />
                                   </ListItemIcon>
                                   <ListItemText

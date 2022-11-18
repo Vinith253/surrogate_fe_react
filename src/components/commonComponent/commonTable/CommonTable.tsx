@@ -72,7 +72,11 @@ const CommonTable = (props: any) => {
           <TableBody>
             {currentTableData?.map((dataItem: any) => {
               return (
-                <TableRow>
+                <TableRow
+                  sx={{
+                    backgroundColor: dataItem?.error ? '#ffe5e3' : 'white',
+                  }}
+                >
                   {props.column.map((columnItem: columnType) => {
                     return (
                       <StyledTableCell>

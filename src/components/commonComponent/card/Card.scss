@@ -1,0 +1,22 @@
+.card-container{
+  .header-container {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    padding: 1.5rem 1rem !important;
+    .avatar {
+      background-color: #0662b7;
+      .flex-box {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        color: white !important;
+        font-size: 14px !important;
+      }
+    }
+  }
+  .card-head{
+    
+  }
+}
+

@@ -6,9 +6,11 @@ import {
   Icon,
   Paper,
   Typography,
+  Stack,
 } from '@mui/material';
 import credit_rule from '../../../assets/icons/credit_rule.svg';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import '../card/Card.scss';
 
 type dataType = {
   image: string;
@@ -46,13 +48,14 @@ function Card({ content }: { content: cardItems }) {
     alignItems: 'center',
   };
   return (
-    <Paper elevation={3} sx={{ width: '100%' }}>
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          padding: '1.5rem 1rem',
-        }}
+    <Paper elevation={3} sx={{ width: '100%' }} className="card-container">
+      <Stack
+        className="header-container"
+        // sx={{
+        //   display: 'flex',
+        //   justifyContent: 'space-between',
+        //   padding: '1.5rem 1rem',
+        // }}
       >
         <Box>
           <Typography fontSize={18} fontWeight={'bold'}>
@@ -63,10 +66,8 @@ function Card({ content }: { content: cardItems }) {
           <Box>
             <Chip
               avatar={
-                <Avatar sx={{ bgcolor: ' #0662B7' }}>
-                  <Typography sx={{ color: 'white' }}>
-                    {content.clipNo}
-                  </Typography>
+                <Avatar className="avatar">
+                  <Box className="flex-box">{content.clipNo}</Box>
                 </Avatar>
               }
               label={content.clipText}
@@ -74,7 +75,7 @@ function Card({ content }: { content: cardItems }) {
             />
           </Box>
         )}
-      </Box>
+      </Stack>
       <Divider variant="middle" />
 
       <Box>
@@ -86,7 +87,9 @@ function Card({ content }: { content: cardItems }) {
               </Box>
               {!item.mainContent && (
                 <Box sx={{ width: '70%' }}>
-                  <Typography sx={cardHead}>{item.text_one}</Typography>
+                  <Typography sx={cardHead} className="card-head">
+                    {item.text_one}
+                  </Typography>
                   {item.text_three !== '' && (
                     <Typography sx={cardHead}>{item.text_three}</Typography>
                   )}

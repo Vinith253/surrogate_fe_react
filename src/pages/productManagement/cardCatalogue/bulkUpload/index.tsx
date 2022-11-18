@@ -30,7 +30,6 @@ const BulkUpload = ({ flag }: any) => {
     supportedFormats: bulkUpload.SUPPORTED_FORMATS_JPG,
     upload: bulkUpload.UPLOAD_CARD_PHOTO,
   };
-  console.log(file, 'file check nhhx');
   return (
     <Box sx={{ width: '100%', backgroundColor: '#E3E3E3' }}>
       <Box

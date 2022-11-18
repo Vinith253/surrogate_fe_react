@@ -33,6 +33,7 @@ import { useNavigate } from 'react-router-dom';
 import PaginationComp from '../../../../../components/commonComponent/Pagination/Pagination';
 import BulkUpload from '..';
 import CustomModal from '../../../../../components/commonComponent/customModal/CustomModal';
+import CommonTable from '../../../../../components/commonComponent/commonTable/CommonTable';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -231,15 +232,164 @@ export default function BulkList(props: any) {
   const navigate = useNavigate();
   const [correctionState, setCorrectionState] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [alignment, setAlignment] = useState('web');
+  const [alignment, setAlignment] = useState('all');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
   const [imageUpload, setImageUpload] = useState(true);
 
+  const column = [
+    { title: '#', dataIndex: 'id', key: 'id' },
+    { title: 'Card Name', dataIndex: 'cardName', key: 'cardName' },
+    {
+      title: 'Surrogate Name',
+      dataIndex: 'surrogateName',
+      key: 'surrogateName',
+    },
+    { title: 'Card Mode', dataIndex: 'cardMode', key: 'cardMode' },
+    { title: 'Card Type', dataIndex: 'cardType', key: 'cardType' },
+    { title: 'Interest Rate', dataIndex: 'interestRate', key: 'interestRate' },
+    { title: 'Extra Card', dataIndex: 'extraCard', key: 'extraCard' },
+    { title: 'CIBIL Score', dataIndex: 'cibilScore', key: 'cibilScore' },
+    { title: 'Salary Limit', dataIndex: 'salaryLimit', key: 'salaryLimit' },
+  ];
+  const data1 = [
+    {
+      id: 1,
+      cardName: 'Premier',
+      surrogateName: 'Card-For-Card',
+      cardMode: 'Business',
+      cardType: 'Travel',
+      interestRate: '12%',
+      extraCard: 'Applicable',
+      cibilScore: 700,
+      salaryLimit: '30,000',
+      error: false,
+    },
+    {
+      id: 2,
+      cardName: 'Premier',
+      surrogateName: 'Payroll',
+      cardMode: 'Business',
+      cardType: 'Travel',
+      interestRate: '12%',
+      extraCard: 'Non-Applicable',
+      cibilScore: 700,
+      salaryLimit: '40,000',
+      error: true,
+    },
+    {
+      id: 3,
+      cardName: 'Premier',
+      surrogateName: 'Card-For-Card',
+      cardMode: 'Business',
+      cardType: 'Travel',
+      interestRate: '12%',
+      extraCard: 'Applicable',
+      cibilScore: 700,
+      salaryLimit: '30,000',
+      error: false,
+    },
+    {
+      id: 4,
+      cardName: 'Premier',
+      surrogateName: 'CIBIL',
+      cardMode: 'Business',
+      cardType: 'Travel',
+      interestRate: '12%',
+      extraCard: 'Non-Applicable',
+      cibilScore: 700,
+      salaryLimit: '20,000',
+      error: true,
+    },
+    {
+      id: 5,
+      cardName: 'Premier',
+      surrogateName: 'Payroll',
+      cardMode: 'Business',
+      cardType: 'Travel',
+      interestRate: '12%',
+      extraCard: 'Applicable',
+      cibilScore: 700,
+      salaryLimit: '30,000',
+      error: false,
+    },
+  ];
+  const data2 = [
+    {
+      id: 1,
+      cardName: 'Premier',
+      surrogateName: 'Card-For-Card',
+      cardMode: 'Business',
+      cardType: 'Travel',
+      interestRate: '12%',
+      extraCard: 'Applicable',
+      cibilScore: 700,
+      salaryLimit: '30,000',
+      error: false,
+    },
+    {
+      id: 2,
+      cardName: 'Premier',
+      surrogateName: 'Payroll',
+      cardMode: 'Business',
+      cardType: 'Travel',
+      interestRate: '12%',
+      extraCard: 'Non-Applicable',
+      cibilScore: 700,
+      salaryLimit: '40,000',
+      error: false,
+    },
+    {
+      id: 3,
+      cardName: 'Premier',
+      surrogateName: 'Card-For-Card',
+      cardMode: 'Business',
+      cardType: 'Travel',
+      interestRate: '12%',
+      extraCard: 'Applicable',
+      cibilScore: 700,
+      salaryLimit: '30,000',
+      error: false,
+    },
+    {
+      id: 4,
+      cardName: 'Premier',
+      surrogateName: 'CIBIL',
+      cardMode: 'Business',
+      cardType: 'Travel',
+      interestRate: '12%',
+      extraCard: 'Non-Applicable',
+      cibilScore: 700,
+      salaryLimit: '20,000',
+      error: false,
+    },
+    {
+      id: 5,
+      cardName: 'Premier',
+      surrogateName: 'Payroll',
+      cardMode: 'Business',
+      cardType: 'Travel',
+      interestRate: '12%',
+      extraCard: 'Applicable',
+      cibilScore: 700,
+      salaryLimit: '30,000',
+      error: false,
+    },
+  ];
+
+  const [columnList, setcolumnList] = useState(column);
+  const [dataList, setDataList] = useState(data1);
+  const [validCount, setValidCount] = useState('20');
+  const [errorCount, setErrorCount] = useState('02');
+
   useEffect(() => {
-    console.log('props', props);
-  }, []);
+    if (correctionState) {
+      setDataList(data2);
+      setValidCount('25');
+      setErrorCount('00');
+    }
+  }, [correctionState]);
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
@@ -260,9 +410,7 @@ export default function BulkList(props: any) {
     setCurrentPage(page);
   };
   const handleCorrection = () => {
-    console.log('correction check', correctionState);
     setCorrectionState(true);
-    console.log('correction check', correctionState);
   };
   const handleProceed = () => {
     props.toggle(false, 'image');
@@ -326,83 +474,6 @@ export default function BulkList(props: any) {
     // downloadSample: bulkUpload.DOWNLOAD_ERROR_FILE,
     upload: bulkUpload.UPLOAD_MISSING_PHOTO,
   };
-  const column = [
-    { title: '#', dataIndex: 'id', key: 'id' },
-    { title: 'Card Name', dataIndex: 'cardName', key: 'cardName' },
-    {
-      title: 'Surrogate Name',
-      dataIndex: 'surrogateName',
-      key: 'surrogateName',
-    },
-    { title: 'Card Mode', dataIndex: 'cardMode', key: 'cardMode' },
-    { title: 'Card Type', dataIndex: 'cardType', key: 'cardType' },
-    { title: 'Interest Rate', dataIndex: 'interestRate', key: 'interestRate' },
-    { title: 'Extra Card', dataIndex: 'extraCard', key: 'extraCard' },
-    { title: 'CIBIL Score', dataIndex: 'cibilScore', key: 'cibilScore' },
-    { title: 'Salary Limit', dataIndex: 'salaryLimit', key: 'salaryLimit' },
-  ];
-  const data = [
-    {
-      id: 1,
-      cardName: 'Premier',
-      surrogateName: 'Card-For-Card',
-      cardMode: 'Business',
-      cardType: 'Travel',
-      interestRate: '12%',
-      extraCard: 'Applicable',
-      cibilScore: 700,
-      salaryLimit: '30,000',
-      error: false,
-    },
-    {
-      id: 2,
-      cardName: 'Premier',
-      surrogateName: 'Payroll',
-      cardMode: 'Business',
-      cardType: 'Travel',
-      interestRate: '12%',
-      extraCard: 'Non-Applicable',
-      cibilScore: 700,
-      salaryLimit: '40,000',
-      error: true,
-    },
-    {
-      id: 3,
-      cardName: 'Premier',
-      surrogateName: 'Card-For-Card',
-      cardMode: 'Business',
-      cardType: 'Travel',
-      interestRate: '12%',
-      extraCard: 'Applicable',
-      cibilScore: 700,
-      salaryLimit: '30,000',
-      error: false,
-    },
-    {
-      id: 4,
-      cardName: 'Premier',
-      surrogateName: 'CIBIL',
-      cardMode: 'Business',
-      cardType: 'Travel',
-      interestRate: '12%',
-      extraCard: 'Non-Applicable',
-      cibilScore: 700,
-      salaryLimit: '20,000',
-      error: true,
-    },
-    {
-      id: 5,
-      cardName: 'Premier',
-      surrogateName: 'Payroll',
-      cardMode: 'Business',
-      cardType: 'Travel',
-      interestRate: '12%',
-      extraCard: 'Applicable',
-      cibilScore: 700,
-      salaryLimit: '30,000',
-      error: false,
-    },
-  ];
 
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * rowsPerPage;
@@ -410,7 +481,6 @@ export default function BulkList(props: any) {
     return rows.slice(firstPageIndex, lastPageIndex);
   }, [currentPage, rowsPerPage, rows]);
 
-  console.log(props.fileCheck, 'xyz');
   return (
     <PageLayout>
       <Box sx={{ padding: '2% 0' }}>
@@ -456,12 +526,10 @@ export default function BulkList(props: any) {
             Record Found: {progress === 100 && '25'}
           </Typography>
           <Typography variant="h6" sx={{ fontSize: '1rem' }}>
-            Valid Records: {progress === 100 && correctionState && '25'}
-            {progress === 100 && !correctionState && '20'}
+            Valid Records: {progress === 100 && validCount}
           </Typography>
           <Typography variant="h6" sx={{ fontSize: '1rem' }}>
-            Error Found: {progress === 100 && correctionState && '00'}
-            {progress === 100 && !correctionState && '02'}
+            Error Found: {progress === 100 && errorCount}
           </Typography>
         </Box>
         {progress !== 100 && (
@@ -515,59 +583,67 @@ export default function BulkList(props: any) {
         </ButtonGroup> */}
       </Box>
       {progress > 70 && (
-        <TableContainer
-          component={Paper}
+        // <TableContainer
+        //   component={Paper}
+        //   sx={{
+        //     margin: '2% 0',
+        //     display: progress === 100 && correctionState ? 'none' : 'block',
+        //   }}
+        // >
+        //   <Table style={{ width: '100%' }} aria-label="customized table">
+        //     <TableHead sx={{ backgroundColor: '#8fc2f4' }}>
+        //       <TableRow>
+        //         <StyledTableCell>#</StyledTableCell>
+        //         <StyledTableCell>Card Name</StyledTableCell>
+        //         <StyledTableCell>Surrogate Name</StyledTableCell>
+        //         <StyledTableCell>Card Mode</StyledTableCell>
+        //         <StyledTableCell>Card Type</StyledTableCell>
+        //         <StyledTableCell>Interest Rate</StyledTableCell>
+        //         <StyledTableCell>Extra Card</StyledTableCell>
+        //         <StyledTableCell>CIBIL Score</StyledTableCell>
+        //         <StyledTableCell>Salary Limit</StyledTableCell>
+        //       </TableRow>
+        //     </TableHead>
+        //     <TableBody>
+        //       {currentTableData.map((row) => (
+        //         <StyledTableRow
+        //           key={row.id}
+        //           sx={{ backgroundColor: row.error ? '#ffe5e3' : 'white' }}
+        //         >
+        //           <StyledTableCell component="th" scope="row">
+        //             {row.id}
+        //           </StyledTableCell>
+        //           <StyledTableCell>{row.cardName}</StyledTableCell>
+        //           <StyledTableCell>{row.surrogateName}</StyledTableCell>
+        //           <StyledTableCell>{row.cardMode}</StyledTableCell>
+        //           <StyledTableCell>{row.cardType}</StyledTableCell>
+        //           <StyledTableCell>{row.interestRate}</StyledTableCell>
+        //           <StyledTableCell>{row.extraCard}</StyledTableCell>
+        //           <StyledTableCell>{row.CIBIL}</StyledTableCell>
+        //           <StyledTableCell>{row.salary}</StyledTableCell>
+        //         </StyledTableRow>
+        //       ))}
+        //     </TableBody>
+        //   </Table>
+
+        //   {/* <TablePagination
+        //     rowsPerPageOptions={[5, 25, 100]}
+        //     component="div"
+        //     count={rows.length}
+        //     rowsPerPage={rowsPerPage}
+        //     page={page}
+        //     onPageChange={handleChangePage}
+        //     onRowsPerPageChange={handleChangeRowsPerPage}
+        //   /> */}
+        // </TableContainer>
+        <Box
           sx={{
             margin: '2% 0',
             display: progress === 100 && correctionState ? 'none' : 'block',
           }}
         >
-          <Table style={{ width: '100%' }} aria-label="customized table">
-            <TableHead sx={{ backgroundColor: '#8fc2f4' }}>
-              <TableRow>
-                <StyledTableCell>#</StyledTableCell>
-                <StyledTableCell>Card Name</StyledTableCell>
-                <StyledTableCell>Surrogate Name</StyledTableCell>
-                <StyledTableCell>Card Mode</StyledTableCell>
-                <StyledTableCell>Card Type</StyledTableCell>
-                <StyledTableCell>Interest Rate</StyledTableCell>
-                <StyledTableCell>Extra Card</StyledTableCell>
-                <StyledTableCell>CIBIL Score</StyledTableCell>
-                <StyledTableCell>Salary Limit</StyledTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {currentTableData.map((row) => (
-                <StyledTableRow
-                  key={row.id}
-                  sx={{ backgroundColor: row.error ? '#ffe5e3' : 'white' }}
-                >
-                  <StyledTableCell component="th" scope="row">
-                    {row.id}
-                  </StyledTableCell>
-                  <StyledTableCell>{row.cardName}</StyledTableCell>
-                  <StyledTableCell>{row.surrogateName}</StyledTableCell>
-                  <StyledTableCell>{row.cardMode}</StyledTableCell>
-                  <StyledTableCell>{row.cardType}</StyledTableCell>
-                  <StyledTableCell>{row.interestRate}</StyledTableCell>
-                  <StyledTableCell>{row.extraCard}</StyledTableCell>
-                  <StyledTableCell>{row.CIBIL}</StyledTableCell>
-                  <StyledTableCell>{row.salary}</StyledTableCell>
-                </StyledTableRow>
-              ))}
-            </TableBody>
-          </Table>
-
-          {/* <TablePagination
-            rowsPerPageOptions={[5, 25, 100]}
-            component="div"
-            count={rows.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          /> */}
-        </TableContainer>
+          <CommonTable column={columnList} data={dataList} />
+        </Box>
       )}
       {progress === 100 && correctionState && (
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -576,7 +652,7 @@ export default function BulkList(props: any) {
           </Typography>
         </Box>
       )}
-      {progress === 100 && (
+      {/* {progress === 100 && (
         <Grid>
           <PaginationComp
             rows={rows}
@@ -596,7 +672,7 @@ export default function BulkList(props: any) {
             lastButtonDisabled={page == Math.ceil(rows.length / rowsPerPage)}
           />
         </Grid>
-      )}
+      )} */}
       {count > 0 && progress === 100 && !correctionState && (
         <UploadCard
           toggle={(arg1: boolean, arg2: string) => props.toggle(arg1, arg2)}
