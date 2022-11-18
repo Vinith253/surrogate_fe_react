@@ -14,6 +14,7 @@ import editIcon from '../../../../assets/images/edit_scheduled_pause_icon.svg';
 import pauseIcon from '../../../../assets/images/pause_surrogate_icon.svg';
 import CustomModal from '../../../../components/commonComponent/customModal/CustomModal';
 import { secureApi } from '../../../../services/xhr';
+import DataGridDemo from './listComponents/listData';
 
 const DummyTableData = [
   {
@@ -117,7 +118,6 @@ export const ProgramManagementScreen = () => {
       sx={{
         padding: '25px 30px 30px 30px',
         backgroundColor: colors.white,
-        height: '75vh',
       }}
     >
       <Stack
@@ -324,11 +324,7 @@ export const ProgramManagementScreen = () => {
         />
       )}
       <Stack>
-        {listView ? (
-          <ListView data={surrogateData} />
-        ) : (
-          <CardList data={surrogateData} />
-        )}
+        {listView ? <DataGridDemo /> : <CardList data={surrogateData} />}
       </Stack>
     </Stack>
   );
