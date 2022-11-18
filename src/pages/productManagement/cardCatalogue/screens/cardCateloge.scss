@@ -33,10 +33,32 @@
     background-color: white;
   }
 }
+.body1 {
+  background-color: white;
+  margin-top: 25px;
+  padding: 0 30px;
+  .container1 {
+    display: flex;
+    gap: 10px;
+    background-color: white;
+    padding-top: 10px;
+  }
+  .img1 {
+    margin-bottom: 14px;
+  }
+  .bodyBox {
+    min-width: 500;
+    margin-top: 16px;
+    display: flex;
+    gap: 3%;
+    justify-content: space-between;
+    background-color: white;
+  }
+}
 .formctrl {
   width: 200px;
   .select {
-    height: 30px;
+    height: 40px;
     text-align: left;
   }
 }

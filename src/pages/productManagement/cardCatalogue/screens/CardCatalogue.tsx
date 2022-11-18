@@ -3,6 +3,7 @@ import './cardCateloge.scss';
 // import useStyles from "./cardStyle";
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { tableCellClasses } from '@mui/material/TableCell';
 import TypographyHead from '../../../../components/commonComponent/CustomText/Head';
 import { useNavigate } from 'react-router-dom';
@@ -30,7 +31,11 @@ import {
   Paper,
   Menu,
   Select,
+  OutlinedInput,
+  ListItemText
 } from '@mui/material';
+// import OutlinedInput from '@mui/material/OutlinedInput';
+// import ListItemText from '@mui/material/ListItemText';
 import Surrogate_icon from '../../../../assets/icons/surrogates_selection_icon.svg';
 import Pause_icon from '../../../../assets/icons/pause_card_icon.svg';
 import Edit_icon from '../../../../assets/icons/edit_scheduled_pause_icon.svg';
@@ -39,6 +44,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {} from '../../../../utils/tagBasedIndicator/tagStatus'
 // import InfoIcon from '@mui/icons-material/Info';
 import Info_Icon from '../../../../assets/images/info_icon.svg';
+import DownloadIcon from '@mui/icons-material/Download';
 import SearchIcon from '@mui/icons-material/Search';
 import TypographyInfo from '../../../../components/commonComponent/CustomText/Info';
 import { styled, alpha } from '@mui/material/styles';
@@ -203,7 +209,7 @@ export const CardCatalogue = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [selected, setSelected] = React.useState('');
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [filteredData, setFilterteredData] = useState(rows);
   const openCardMenu = Boolean(anchorEl);
@@ -244,7 +250,7 @@ export const CardCatalogue = () => {
   const handleChangeRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setRowsPerPage(parseInt(event.target.value, 5));
+    setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
     setCurrentPage(1);
   };
@@ -268,6 +274,40 @@ export const CardCatalogue = () => {
   const handleAdd = (event: SelectChangeEvent) => {
     setAge(event.target.value as string);
   };
+
+
+  const modes = [
+    'Salaried',
+    'Doctor',
+    'Teacher',
+    'Business',
+    'Defence',
+    'Chartered Accountant',
+    'FD Based',
+  ];
+  
+  
+    const [cardMode, setCardMode] = React.useState<string[]>([]);
+  
+    const handleChange = (event: SelectChangeEvent<typeof cardMode>) => {
+      const {
+        target: { value },
+      } = event;
+      setCardMode(
+        // On autofill we get a stringified value.
+        typeof value === 'string' ? value.split(',') : value,
+      );
+    };
+  
+  
+
+
+
+
+
+
+
+
 
   const pauseMethodChange = (value: any) => {
     setPauseMethods(value);
@@ -420,7 +460,26 @@ export const CardCatalogue = () => {
             <FormControl className='formctrl'>
               <TypographyHead title="Card Mode" />
 
+
               <Select
+          // labelId="demo-multiple-checkbox-label"
+          id="demo-multiple-checkbox"
+          multiple
+          value={cardMode}
+          onChange={handleChange}
+          // input={<OutlinedInput label="Tag" />}
+          renderValue={(selected) => selected.join(', ')}
+          className='select'
+        >
+          {modes.map((mode) => (
+            <MenuItem key={mode} value={mode}>
+              <Checkbox checked={cardMode.indexOf(mode) > -1} />
+              <ListItemText primary={mode} />
+            </MenuItem>
+          ))}
+        </Select>
+
+              {/* <Select
                 id="demo-simple-select"
                 value={age}
                 onChange={handleAdd}
@@ -429,7 +488,7 @@ export const CardCatalogue = () => {
                 <MenuItem value={10}>Ten</MenuItem>
                 <MenuItem value={20}>Twenty</MenuItem>
                 <MenuItem value={30}>Thirty</MenuItem>
-              </Select>
+              </Select> */}
             </FormControl>
             <FormControl className='formctrl'>
               <TypographyHead title="Card Category" />
@@ -471,9 +530,8 @@ export const CardCatalogue = () => {
             // }}
           >
             <Button 
-              
+              color='secondary'
               variant="outlined"
-              
             >
               Reset
             </Button>
@@ -481,9 +539,23 @@ export const CardCatalogue = () => {
               Search
             </Button>
           </Box>
-          <Divider  />
+          
         </Box>
-        <Box>
+        <Box sx={{marginTop:4}} >
+        <Box sx={{paddingX:3,backgroundColor:'white',display:'flex',flexDirection:'row',justifyContent:'space-between',alignItems:'center',paddingY:2}} >
+              <Box><Typography>Card Details</Typography></Box>
+              <Box sx={{display:'flex', flexDirection:'row',justifyContent:'space-around'}}  >
+                <Button sx={{padding:0,color:'#0662B7',height:'40px',borderRadius:50,backgroundColor:'#F3F3F3'}} >
+                 <DownloadIcon/>
+                 </Button>
+                 <Button sx={{color:'#0662B7',padding:0,borderRadius:50}} >
+                 <MailOutlineIcon/>
+                </Button>
+                
+              </Box>
+              
+            </Box>
+            <Divider  />
           <Box className='body2'
             // sx={{
             //   paddingX: '30px',
@@ -493,6 +565,7 @@ export const CardCatalogue = () => {
             //   alignItems: 'center',
             // }}
           >
+            
             <Stack direction="row" spacing={2} sx={{ margin: '30px 0px' }}>
               <Button className='btn'
                 variant="contained"
@@ -712,6 +785,7 @@ export const CardCatalogue = () => {
                 rows={filteredData}
                 rowsPerPage={rowsPerPage}
                 page={page}
+                
                 handleChangePage={handleChangePage}
                 handleChangeRowsPerPage={handleChangeRowsPerPage}
                 onPageChange={onPageChange}
