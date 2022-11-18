@@ -15,13 +15,16 @@ import pauseIcon from '../../../../assets/images/pause_surrogate_icon.svg';
 import CustomModal from '../../../../components/commonComponent/customModal/CustomModal';
 import { secureApi } from '../../../../services/xhr';
 
-const  DummyTableData = [
+const DummyTableData = [
   {
     surrogateProgramme: 'Card For Card',
     activeSince: '20 June 2022, 11.00',
     lastModify: '20 June 2022, 11.00',
     status: 'Active',
     autoResumeForm: '',
+    StatusActiveDate: 'Active since June 20, 2022',
+    resumeStatus: '',
+    resumeItNow: '',
   },
   {
     surrogateProgramme: 'Payroll',
@@ -29,6 +32,9 @@ const  DummyTableData = [
     lastModify: '20 June 2022, 11.00',
     status: 'Paused',
     autoResumeForm: '20 June 2022, 11.00',
+    StatusActiveDate: 'Active since June 20, 2022',
+    resumeStatus: '',
+    resumeItNow: 'Resume It Now',
   },
   {
     surrogateProgramme: 'Payroll',
@@ -36,6 +42,9 @@ const  DummyTableData = [
     lastModify: '20 June 2022, 11.00',
     status: 'Paused (scheduled)',
     autoResumeForm: '',
+    StatusActiveDate: 'Active since June 20, 2022',
+    resumeStatus: 'It will resume on June 20, 2022',
+    resumeItNow: 'Resume It Now',
   },
 ];
 
@@ -54,21 +63,21 @@ export const ProgramManagementScreen = () => {
 
   const [surrogateData, setSurrogateData] = useState([...DummyTableData]);
 
-  useEffect(() => {
-    fetchSurrogateData();
-  }, []);
+  // useEffect(() => {
+  //   fetchSurrogateData();
+  // }, []);
 
-  const fetchSurrogateData = () => {
-    secureApi
-      .get('https://jsonplaceholder.typicode.com/posts')
-      .then((response) => {
-        console.log('---- response', response);
-        setSurrogateData(response?.data || []);
-      })
-      .catch((err) => {
-        console.log('---- err', err);
-      });
-  };
+  // const fetchSurrogateData = () => {
+  //   secureApi
+  //     .get('https://jsonplaceholder.typicode.com/posts')
+  //     .then((response) => {
+  //       console.log('---- response', response);
+  //       setSurrogateData(response?.data || []);
+  //     })
+  //     .catch((err) => {
+  //       console.log('---- err', err);
+  //     });
+  // };
 
   const closeModal = () => {
     setShowPauseModal(false);
@@ -119,7 +128,7 @@ export const ProgramManagementScreen = () => {
           }}
         >
           <Stack>
-            <Typography variant="subtitle1" sx={{ letterSpacing: 0.5 }} >
+            <Typography variant="subtitle1" sx={{ letterSpacing: 0.5 }}>
               {tabBar.PROGRAMME_MANAGEMENT}
             </Typography>
             <Typography
@@ -308,7 +317,13 @@ export const ProgramManagementScreen = () => {
           btn={' Close'}
         />
       )}
-      <Stack>{listView ? <ListView /> : <CardList />}</Stack>
+      <Stack>
+        {listView ? (
+          <ListView data={surrogateData} />
+        ) : (
+          <CardList data={surrogateData} />
+        )}
+      </Stack>
     </Stack>
   );
 };

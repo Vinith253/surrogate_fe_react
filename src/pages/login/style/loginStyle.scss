@@ -1,23 +1,44 @@
-.container{
-    height: 100vh !important;
-    .headerContainer{
-        padding: 30px !important;
-        display: flex !important;
-        flex-direction: row !important;
-        align-items: center !important;
-        .headerContent{
-            margin-left: 20px !important;
-            .userName{
-                font-weight: 400 !important;
-                font-size: 16px !important;
-                line-height: 20px !important;
-            }
-            .userRole{
-                padding-top: 8px;
-                font-weight: 400 !important;
-                font-size: 14px !important;
-                line-height: 16px !important;
-            }
-        }
+.container {
+  .headerContainer {
+    padding: 30px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    .headerContent {
+      margin-left: 20px !important;
+      .userName {
+        font-weight: 400 !important;
+        font-size: 16px !important;
+        line-height: 20px !important;
+      }
+      .userRole {
+        padding-top: 8px;
+        font-weight: 400 !important;
+        font-size: 14px !important;
+        line-height: 16px !important;
+      }
     }
+  }
+  // .profile-details-container {
+  //   margin-top: 30px;
+  // }
+}
+.passwordStyle {
+  display: flex !important;
+  flex-direction: row !important;
+  .passwordDetailsStyle {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    border-right: 1px solid #e6e7e7;
+    padding-right: 20px;
+  }
+  .changePassword {
+    text-decoration: underline;
+    margin-left: 10px;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    line-height: 16px !important;
+    padding-left: 20px !important;
+  }
 }
