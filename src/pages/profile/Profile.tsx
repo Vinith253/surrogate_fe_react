@@ -10,9 +10,8 @@ import React, { useState } from 'react';
 import { colors } from '../../style/Color';
 import profile_icon from '../../assets/icons/profile_icon.svg';
 import './style/style.scss';
-import DetailsCard from '../sales/salesReport/detailsCard';
-import '../../pages/sales/salesReport/style.scss';
 import passwordShow from '../../assets/icons/passwordView.svg';
+import DetailsCard from '../../components/commonComponent/DetailsCard';
 export const personalDetails = {
   title: 'Profile Details',
   icon: true,
