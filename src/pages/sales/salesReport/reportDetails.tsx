@@ -1,7 +1,6 @@
-
 import React from 'react';
 import './style.scss';
-import DetailsCard from './detailsCard';
+import DetailsCard from './../../../components/commonComponent/DetailsCard';
 import { Stack } from '@mui/material';
 
 function SalesReportDetails() {

@@ -9,8 +9,6 @@ type Props = {
 
 function DetailsCard({ data, gridColumn }: Props) {
   const record = data ?? {};
-
-  console.log({ data, gridColumn });
   return (
     <div className="details-card-container">
       <div className="details-card-inner-container">
