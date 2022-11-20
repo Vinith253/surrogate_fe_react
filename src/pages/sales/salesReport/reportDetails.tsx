@@ -110,10 +110,7 @@ function SalesReportDetails() {
     ],
   };
   return (
-    <Stack
-      className="sales-report-details-container"
-      sx={{ marginBottom: '20px' }}
-    >
+    <Stack className="sales-report-details-container">
       <Stack className="header-container">
         <Stack className="main-header">Customer Details</Stack>
         <Stack className="info-label">
@@ -121,16 +118,10 @@ function SalesReportDetails() {
           senectus mattis
         </Stack>
       </Stack>
-      <Stack sx={{ marginBottom: '20px' }}>
-        <Stack sx={{ marginBottom: '20px' }}>
-          <DetailsCard data={personalDetails} gridColumn={4} />
-        </Stack>
-        <DetailsCard data={channelDetails} gridColumn={4} />
-        <Stack sx={{ margin: '20px 0' }}>
-          <DetailsCard data={applicationDetails} gridColumn={4} />
-        </Stack>
-        <DetailsCard data={remarkDetails} gridColumn={4} />
-      </Stack>
+      <DetailsCard data={personalDetails} gridColumn={4} />
+      <DetailsCard data={channelDetails} gridColumn={4} />
+      <DetailsCard data={applicationDetails} gridColumn={4} />
+      <DetailsCard data={remarkDetails} gridColumn={4} />
     </Stack>
   );
 }

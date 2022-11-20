@@ -9,7 +9,8 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
 import { Box, Grid, Typography } from '@mui/material';
 
-function Filters() {
+function CheckboxSelectDropdown(data: any) {
+  console.log('data', data);
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
   const MenuProps = {
@@ -41,30 +42,30 @@ function Filters() {
   };
 
   return (
-    <div className="filters-styles">
-      <div className="state-filter">
-        <Grid item xs={12} sm={6} md={4}>
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <Typography>State</Typography>
-            <Select
-              value={1}
-              labelId="demo-multiple-checkbox-label"
-              id="demo-multiple-checkbox"
-              //   onChange={handleChange}
-              displayEmpty
-              inputProps={{ 'aria-label': 'Without label' }}
-            >
-              {names.map((name: any) => (
-                <MenuItem key={name} value={name}>
-                  <Checkbox checked={true} />
-                  <ListItemText primary={name} />
-                </MenuItem>
-              ))}
-            </Select>
-          </Box>
-        </Grid>
-      </div>
+    <div className="checkbox-select-dropdown">
+      <Grid item xs={4}>
+        {/* <Box sx={{ display: 'flex', flexDirection: 'column' }}> */}
+        <Typography>State</Typography>
+        <Select
+          value={1}
+          labelId="demo-multiple-checkbox-label"
+          id="demo-multiple-checkbox"
+          //   onChange={handleChange}
+          displayEmpty
+          inputProps={{ 'aria-label': 'Without label' }}
+          MenuProps={MenuProps}
+        >
+          {names.map((name: any) => (
+            <MenuItem key={name} value={name}>
+              <Checkbox checked={true} />
+              <ListItemText primary={name} />
+            </MenuItem>
+          ))}
+        </Select>
+        {/* </Box> */}
+      </Grid>
     </div>
+
     // <div>
     //   <FormControl sx={{ m: 1, width: 300 }}>
     //     <Select
@@ -89,4 +90,4 @@ function Filters() {
   );
 }
 
-export default Filters;
+export default CheckboxSelectDropdown;

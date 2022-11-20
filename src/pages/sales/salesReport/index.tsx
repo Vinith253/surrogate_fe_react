@@ -6,14 +6,17 @@ import {
   salesDashboardList,
   statusRowHeading,
 } from './../dashboard/dashboard.const';
-import StateFilter from '../../../components/commonComponent/Filters/state';
+import SelectDropdown from '../../../components/commonComponent/CheckboxSelectDropdown';
+import { salesReportFilterDropdown } from './salesReport.const';
+import ReportDetails from './../salesReport/reportDetails';
 
 function SalesReportList() {
+  console.log('salesReportFilterDropdown', salesReportFilterDropdown);
   return (
+    // <ReportDetails />
     <div className="sales-report-list">
       <div className="filters-container">
-        <div>Sales Report</div>
-        <StateFilter />
+        <SelectDropdown data={salesReportFilterDropdown} />
       </div>
       <TableComp
         viewPath="/sales/salesReportDetails"

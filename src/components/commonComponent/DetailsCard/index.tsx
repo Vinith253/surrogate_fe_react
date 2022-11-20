@@ -2,12 +2,7 @@ import React from 'react';
 import './style.scss';
 import { Grid } from '@mui/material';
 
-type Props = {
-  data: any;
-  gridColumn: number;
-};
-
-function DetailsCard({ data, gridColumn }: Props) {
+function DetailsCard(data: any, gridColumn: number) {
   const record = data ?? {};
   return (
     <div className="details-card-container">
