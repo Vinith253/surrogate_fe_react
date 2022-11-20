@@ -8,12 +8,9 @@ import {
 } from './../dashboard/dashboard.const';
 import SelectDropdown from '../../../components/commonComponent/CheckboxSelectDropdown';
 import { salesReportFilterDropdown } from './salesReport.const';
-import ReportDetails from './../salesReport/reportDetails';
 
 function SalesReportList() {
-  console.log('salesReportFilterDropdown', salesReportFilterDropdown);
   return (
-    // <ReportDetails />
     <div className="sales-report-list">
       <div className="filters-container">
         <SelectDropdown data={salesReportFilterDropdown} />
