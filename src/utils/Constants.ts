@@ -7,14 +7,14 @@ export const tabBar = {
 export const programMmgt = {
   RESUME_SURROGATE: 'Resume Surrogate',
   PAUSE_SURROGATE: 'Pause Surrogate',
-  EDIT_SCHEDULE_PAUSE: 'Edit Schedule pause',
+  EDIT_SCHEDULE_PAUSE: 'Edit Pause',
 };
 
 export const tagBasedIndicator = {
   ACTIVE: 'Active',
   PAUSED: 'Paused',
   PAUSED_SCHEDULED: 'Paused (scheduled)',
-  INACTIVE:'InActive',
+  INACTIVE: 'InActive',
 };
 
 export const bulkUpload = {
@@ -30,11 +30,12 @@ export const bulkUpload = {
   CORRECTION_FILE: 'Correction File',
   DOWNLOAD_ERROR_FILE: 'Download Error File',
   UPLOAD_CORRECTION_FILE: 'Upload correction File',
-  UPLOAD_CARD:"Upload Card Photo",
-  SUPPORTED_FORMATS_JPG:"Supported formats .jpg .png (max. 2mb)",
-  UPLOAD_CARD_PHOTO:"Upload Card Photo",
-  UPLOAD_MISSING_CARD:"Upload missing card images to import card details into card catalog",
-  UPLOAD_MISSING_PHOTO:"Upload Missing Photo"
+  UPLOAD_CARD: 'Upload Card Photo',
+  SUPPORTED_FORMATS_JPG: 'Supported formats .jpg .png (max. 2mb)',
+  UPLOAD_CARD_PHOTO: 'Upload Card Photo',
+  UPLOAD_MISSING_CARD:
+    'Upload missing card images to import card details into card catalog',
+  UPLOAD_MISSING_PHOTO: 'Upload Missing Photo',
 };
 
 export const tableHeader = {
