@@ -26,6 +26,7 @@ const DummyTableData = [
     StatusActiveDate: 'Active since June 20, 2022',
     resumeStatus: '',
     resumeItNow: '',
+    id: 1,
   },
   {
     surrogateProgramme: 'Payroll',
@@ -36,6 +37,7 @@ const DummyTableData = [
     StatusActiveDate: 'Active since June 20, 2022',
     resumeStatus: '',
     resumeItNow: 'Resume It Now',
+    id: 2,
   },
   {
     surrogateProgramme: 'Payroll',
@@ -46,6 +48,7 @@ const DummyTableData = [
     StatusActiveDate: 'Active since June 20, 2022',
     resumeStatus: 'It will resume on June 20, 2022',
     resumeItNow: 'Resume It Now',
+    id: 3,
   },
 ];
 
@@ -116,8 +119,9 @@ export const ProgramManagementScreen = () => {
   return (
     <Stack
       sx={{
-        padding: '25px 30px 30px 30px',
+        padding: '25px 30px 50px 30px',
         backgroundColor: colors.white,
+        borderRadius: '8px',
       }}
     >
       <Stack
@@ -324,7 +328,11 @@ export const ProgramManagementScreen = () => {
         />
       )}
       <Stack>
-        {listView ? <DataGridDemo /> : <CardList data={surrogateData} />}
+        {listView ? (
+          <ListView data={surrogateData} />
+        ) : (
+          <CardList data={surrogateData} />
+        )}
       </Stack>
     </Stack>
   );

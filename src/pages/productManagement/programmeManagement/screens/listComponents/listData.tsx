@@ -1,50 +1,52 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { colors } from '../../../../../style/Color';
+import UnfoldMoreIcon from '../../../../../assets/icons/sortArrow.svg';
+import { IconButton } from '@mui/material';
 
 const columns: GridColDef[] = [
   {
     field: 'surrogateProgramme',
     headerName: 'Surrogate Programme',
     width: 200,
-    editable: true,
+    editable: false,
   },
   {
     field: 'activeSince',
     headerName: 'Active Since',
     sortable: false,
-    width: 200,
-    editable: true,
+    width: 180,
+    editable: false,
   },
   {
     field: 'lastModify',
     headerName: 'Last Modified',
     sortable: false,
-    width: 200,
-    editable: true,
+    width: 180,
+    editable: false,
   },
   {
     field: 'status',
     headerName: 'Status',
     sortable: false,
-    width: 100,
-    editable: true,
+    width: 80,
+    editable: false,
   },
   {
     field: 'autoResumeForm',
     headerName: 'Auto Resume Form',
-    width: 200,
+    width: 150,
     sortable: false,
-    editable: true,
+    editable: false,
+    align: 'center',
   },
   {
     field: 'more',
     headerName: 'More',
-    width: 200,
+    width: 80,
     sortable: false,
-    editable: true,
+    editable: false,
   },
 ];
 
@@ -55,32 +57,40 @@ const rows = [
     activeSince: '20 June 2022, 11.00',
     lastModify: '20 June 2022, 11.00',
     status: 'Status',
-    autoResumeForm: '',
+    autoResumeForm: '-',
     more: '',
   },
   {
     id: '2',
-    surrogateProgramme: 'Card For Card',
-    activeSince: '20 June 2022, 11.00',
-    lastModify: '20 June 2022, 11.00',
-    status: 'Status',
-    autoResumeForm: '',
+    surrogateProgramme: 'Payroll',
+    activeSince: '21 June 2022, 12.00',
+    lastModify: '20 July 2022, 11.00',
+    status: 'Paused',
+    autoResumeForm: '-',
     more: '',
   },
   {
     id: '3',
-    surrogateProgramme: 'Card For Card',
+    surrogateProgramme: 'AQB',
     activeSince: '20 June 2022, 11.00',
     lastModify: '20 June 2022, 11.00',
     status: 'Status',
-    autoResumeForm: '',
+    autoResumeForm: '-',
     more: '',
   },
 ];
 
+export function CustomUnsortedIcon() {
+  return (
+    <IconButton>
+      <img src={UnfoldMoreIcon} alt="" />
+    </IconButton>
+  );
+}
+
 export default function DataGridDemo() {
   return (
-    <Box sx={{ height: 400, width: '100%' }}>
+    <Box sx={{ width: '100%' }}>
       <DataGrid
         rows={rows}
         columns={columns}
@@ -89,17 +99,19 @@ export default function DataGridDemo() {
         checkboxSelection
         disableSelectionOnClick
         experimentalFeatures={{ newEditingApi: true }}
+        hideFooter={true}
+        components={{
+          ColumnUnsortedIcon: CustomUnsortedIcon,
+        }}
         sx={{
           '.MuiDataGrid-columnSeparator': {
             display: 'none',
           },
-          '& .MuiDataGrid-renderingZone': {
-            '& .MuiDataGrid-row': {
-              '&:nth-child(2n)': {
-                backgroundColor: 'red',
-              },
-            },
-          },
+          // '& .MuiDataGrid-virtualScrollerRenderZone': {
+          //   '& .MuiDataGrid-row': {
+          //     '&:nth-child(2n)': { backgroundColor: 'rgba(235, 235, 235, .7)' },
+          //   },
+          // },
           '& .MuiDataGrid-columnHeaders': {
             backgroundColor: colors.tableHeaderLightBlue,
             fontSize: 14,
@@ -107,6 +119,35 @@ export default function DataGridDemo() {
           },
           '& .MuiDataGrid-menuIconButton': {
             display: 'none',
+          },
+          '& .MuiDataGrid-iconButtonContainer': {
+            marginLeft: '2px',
+            visibility: 'visible',
+            width: 'auto',
+          },
+          '& .MuiTouchRipple-root': {
+            display: 'none',
+          },
+          '.MuiDataGrid-iconButtonContainer': {
+            visibility: 'visible',
+            width: '0 !important',
+          },
+          '.MuiTouchRipple-root .css-8je8zh-MuiTouchRipple-root': {
+            visibility: 'hidden',
+          },
+          '.MuiDataGrid-footerContainer': {
+            visibility: 'hidden',
+            diplay: 'none',
+          },
+          '.MuiDataGrid-main': {
+            // border: '1px solid red',
+            height: '210px',
+          },
+          '.MuiDataGrid-columnHeaderTitleContainer': {
+            '&:hover': {
+              // backgroundColor: '#fff',
+              border: 'unset',
+            },
           },
         }}
       />
