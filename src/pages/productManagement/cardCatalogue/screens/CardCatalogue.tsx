@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import './cardCateloge.scss';
 // import useStyles from "./cardStyle";
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-
+// import DashboardCard from '../../../../components/commonComponent/CommonCard/SalesDashbaordCard/DashboardCard';
+import ProgressCard from '../../../../components/commonComponent/CommonCard/ProgressCard/ProgressCard';
+import DashboardCard from '../../../../components/commonComponent/CommonCard/SalesDashbaordCard/DashboardCard';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { tableCellClasses } from '@mui/material/TableCell';
 import TypographyHead from '../../../../components/commonComponent/CustomText/Head';
 import { useNavigate } from 'react-router-dom';
+import TableComp from '../../../../components/commonComponent/ListTable/ListTable';
 import PaginationComp from '../../../../components/commonComponent/Pagination/Pagination';
 import {
   MenuItem,
@@ -16,6 +19,8 @@ import {
   Tab,
   Stack,
   Button,
+  ToggleButtonGroup,
+  ToggleButton,
   Icon,
   IconButton,
   Divider,
@@ -31,17 +36,28 @@ import {
   Paper,
   Menu,
   Select,
+  TextField,
   OutlinedInput,
-  ListItemText
+  ListItemText,
 } from '@mui/material';
+import TypographyTitle from '../../../../components/commonComponent/CustomText/Typography';
 // import OutlinedInput from '@mui/material/OutlinedInput';
 // import ListItemText from '@mui/material/ListItemText';
 import Surrogate_icon from '../../../../assets/icons/surrogates_selection_icon.svg';
 import Pause_icon from '../../../../assets/icons/pause_card_icon.svg';
 import Edit_icon from '../../../../assets/icons/edit_scheduled_pause_icon.svg';
 import Resume_icon from '../../../../assets/icons/resume_card_icon.svg';
+import TotalApplications from '../../../../assets/icons/total_application_icon.svg';
+import Comparisions from '../../../../assets/icons/comparision_icon.svg';
+import AddIcon from '@mui/icons-material/Add';
+import VirtualCard from '../../../../assets/icons/virtual_card_icon.svg';
+import ApprovalRate from '../../../../assets/icons/approval_rate_icon.svg';
+import ApprovedIcon from '../../../../assets/icons/approved_icon.svg';
+import Dropped from '../../../../assets/icons/dropped_icon.svg';
+import InProgress from '../../../../assets/icons/in_progress_icon.svg';
+import Rejected from '../../../../assets/icons/rejected_icon.svg';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import {} from '../../../../utils/tagBasedIndicator/tagStatus'
+import {} from '../../../../utils/tagBasedIndicator/tagStatus';
 // import InfoIcon from '@mui/icons-material/Info';
 import Info_Icon from '../../../../assets/images/info_icon.svg';
 import DownloadIcon from '@mui/icons-material/Download';
@@ -52,7 +68,15 @@ import InputBase from '@mui/material/InputBase';
 import CustomModal from '../../../../components/commonComponent/customModal/CustomModal';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { checkTagStatus } from '../../../../utils/tagBasedIndicator/tagStatus';
+import FilterButton from '../../../../components/commonComponent/FilterHeader/FilterButton';
+import {
+  filterHeaderData,
+  listRowHeading,
+  salesDashboardList,
+  statusRowHeading,
+} from '../../../../pages/sales/dashboard/dashboard.const';
 import TablePagination from '@mui/material/TablePagination';
+import { Height } from '@mui/icons-material';
 
 // const columns: GridColDef[] = [
 //   { field: 'id', headerName: 'ID', width: 70 },
@@ -172,7 +196,6 @@ const rows = [
   ),
 ];
 
-
 const tableHeaderData = [
   {
     id: 'ID',
@@ -193,11 +216,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-
 export const CardCatalogue = () => {
   const navigate = useNavigate();
   const [age, setAge] = useState('');
   const [open, setOpen] = useState(false);
+  const [currency, setCurrency] = useState<number>(1);
   const [surrogateSelection, setSurrogateSelection] = useState(false);
   const [resumeModal, setResumeModal] = useState(false);
   const [resumeSuccessModal, setResumeSuccessModal] = useState(false);
@@ -221,6 +244,29 @@ export const CardCatalogue = () => {
 
   const NORMAL_PAUSE = 'Pause Now';
   const SCHEDULED_PAUSE = 'Schedule Pause';
+  const [alignment, setAlignment] = useState('');
+  // const [columnItems, setColumnItems] = useState(column);
+  // const [dataItems, setDataItems] = useState(data);
+  const handleButtonChange = (
+    event: React.MouseEvent<HTMLElement>,
+    value: string
+  ) => {
+    setAlignment(value);
+  };
+
+  const ColorButton = styled(ToggleButton)(({ theme }) => ({
+    // backgroundColor: ' rgb(240, 240, 240)',
+    // border: ' rgb(240, 240, 240) 1px ',
+    // paddingX:'2px',
+    backgroundColor: '#F3F3F3',
+    color: 'black',
+
+    '&.Mui-selected, &.Mui-selected:hover': {
+      color: 'white',
+      background: '#0662B7',
+      
+    },
+  }));
 
   const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
   const menuOpen = Boolean(anchorElement);
@@ -275,7 +321,6 @@ export const CardCatalogue = () => {
     setAge(event.target.value as string);
   };
 
-
   const modes = [
     'Salaried',
     'Doctor',
@@ -285,29 +330,91 @@ export const CardCatalogue = () => {
     'Chartered Accountant',
     'FD Based',
   ];
-  
-  
-    const [cardMode, setCardMode] = React.useState<string[]>([]);
-  
-    const handleChange = (event: SelectChangeEvent<typeof cardMode>) => {
-      const {
-        target: { value },
-      } = event;
-      setCardMode(
-        // On autofill we get a stringified value.
-        typeof value === 'string' ? value.split(',') : value,
-      );
-    };
-  
-  
 
+  const [cardMode, setCardMode] = React.useState<string[]>([]);
 
+  const handleChange = (event: SelectChangeEvent<typeof cardMode>) => {
+    const {
+      target: { value },
+    } = event;
+    setCardMode(
+      // On autofill we get a stringified value.
+      typeof value === 'string' ? value.split(',') : value
+    );
+  };
 
+  const currencyChange = (event: any) => {
+    setCurrency(event.target.value);
+  };
 
-
-
-
-
+  const dashboardVal = [
+    {
+      index: 1,
+      title: 'Total Applications',
+      value: 3500,
+      more: true,
+      image: TotalApplications,
+    },
+    {
+      index: 2,
+      title: 'Approval Rate (%)',
+      value: 98.6,
+      more: false,
+      image: ApprovalRate,
+    },
+    {
+      index: 3,
+      title: 'Comparision %(With Previous periods)',
+      value: 26,
+      more: false,
+      image: Comparisions,
+    },
+    {
+      index: 4,
+      title: 'Virtual Card Issued',
+      value: 345,
+      more: true,
+      image: VirtualCard,
+    },
+  ];
+  const progressValue = [
+    {
+      index: 1,
+      title: 'In Progress #',
+      value: 3500,
+      lastPeriodValue: 0,
+      lastYearValue: 0,
+      image: InProgress,
+      navPath: '/sales/salesReport',
+    },
+    {
+      index: 2,
+      title: 'Approval #',
+      value: 3500,
+      lastPeriodValue: 2500,
+      lastYearValue: 2500,
+      image: ApprovedIcon,
+      navPath: '/sales/salesReport',
+    },
+    {
+      index: 3,
+      title: 'Dropped #',
+      value: 3500,
+      lastPeriodValue: 2500,
+      lastYearValue: 2500,
+      image: Dropped,
+      navPath: '/sales/salesReport',
+    },
+    {
+      index: 4,
+      title: 'Rejected #',
+      value: 3500,
+      lastPeriodValue: 2500,
+      lastYearValue: 2500,
+      image: Rejected,
+      navPath: '/sales/salesReport',
+    },
+  ];
 
   const pauseMethodChange = (value: any) => {
     setPauseMethods(value);
@@ -392,23 +499,23 @@ export const CardCatalogue = () => {
   return (
     <Stack>
       <Stack>
-        <Box
-          className='cardHeader'
-        >
+        <Box className="cardHeader">
           <Box>
             <Typography
-              // sx={{ display: 'flex', justifyContent: 'flex-start' }}
-              // variant="body1"
-              // color="textPrimary"
+            // sx={{ display: 'flex', justifyContent: 'flex-start' }}
+            // variant="body1"
+            // color="textPrimary"
             >
-              Card Catelogue
+              Card Catalogue
             </Typography>
-            <TypographyInfo title="From here you can manage all your card's information" />
+            <TypographyInfo title="Manage card information from here" />
           </Box>
           <Box>
             <Button
+              sx={{textTransform:'capitalize'}}
               variant="contained"
               color="secondary"
+              startIcon={<AddIcon/>}
               endIcon={<ExpandMoreIcon />}
               aria-controls={openCardMenu ? 'basic-menu' : undefined}
               aria-haspopup="true"
@@ -416,7 +523,7 @@ export const CardCatalogue = () => {
               onClick={handleCardMenuClick}
               id="basic-button"
             >
-              + Add New Card{' '}
+              Add New Card{' '}
             </Button>
             <Menu
               id="basic-menu"
@@ -433,12 +540,10 @@ export const CardCatalogue = () => {
           </Box>
         </Box>
 
-        <Box className='body1'>
-          <Box
-            className='container1'
-          >
+        <Box className="body1">
+          <Box className="container1">
             <TypographyHead title="Card List" />
-            <img className='img1' src={Info_Icon} />
+            <img className="img1" src={Info_Icon} />
             <TypographyInfo
               title="From here, you filter the card by its mode, status, category and
                 surrogate"
@@ -447,7 +552,7 @@ export const CardCatalogue = () => {
           <Divider />
 
           <Box
-          className='bodyBox'
+            className="bodyBox"
             // sx={{
             //   minWidth: 500,
             //   marginTop: 2,
@@ -457,27 +562,27 @@ export const CardCatalogue = () => {
             //   backgroundColor: 'white',
             // }}
           >
-            <FormControl className='formctrl'>
-              <TypographyHead title="Card Mode" />
-
-
+            <FormControl className="formctrl">
+              <TypographyTitle title = 'Card Mode' />
+              {/* <InputLabel id="demo-simple-select-label">All</InputLabel> */}
               <Select
-          // labelId="demo-multiple-checkbox-label"
-          id="demo-multiple-checkbox"
-          multiple
-          value={cardMode}
-          onChange={handleChange}
-          // input={<OutlinedInput label="Tag" />}
-          renderValue={(selected) => selected.join(', ')}
-          className='select'
-        >
-          {modes.map((mode) => (
-            <MenuItem key={mode} value={mode}>
-              <Checkbox checked={cardMode.indexOf(mode) > -1} />
-              <ListItemText primary={mode} />
-            </MenuItem>
-          ))}
-        </Select>
+                // labelId="demo-multiple-checkbox-label"
+                id="demo-simple-select-label"
+                
+                multiple
+                value={cardMode}
+                onChange={handleChange}
+                // input={<OutlinedInput label="Tag" />}
+                renderValue={(selected) => selected.join(', ')}
+                className="select"
+              >
+                {modes.map((mode) => (
+                  <MenuItem key={mode} value={mode}>
+                    <Checkbox checked={cardMode.indexOf(mode) > -1} />
+                    <ListItemText primary={mode} />
+                  </MenuItem>
+                ))}
+              </Select>
 
               {/* <Select
                 id="demo-simple-select"
@@ -490,27 +595,27 @@ export const CardCatalogue = () => {
                 <MenuItem value={30}>Thirty</MenuItem>
               </Select> */}
             </FormControl>
-            <FormControl className='formctrl'>
-              <TypographyHead title="Card Category" />
-              <Select className='select'>
+            <FormControl className="formctrl">
+            <TypographyTitle title = 'Card Category' />
+              <Select className="select">
                 <MenuItem value={10}>Ten</MenuItem>
                 <MenuItem value={20}>Twenty</MenuItem>
                 <MenuItem value={30}>Thirty</MenuItem>
               </Select>
             </FormControl>
-            <FormControl className='formctrl'>
-              <TypographyHead title="Card Status" />
+            <FormControl className="formctrl">
+            <TypographyTitle title = 'Card Status' />
 
-              <Select className='select' >
+              <Select placeholder='All' className="select">
                 <MenuItem value={10}>Ten</MenuItem>
                 <MenuItem value={20}>Twenty</MenuItem>
                 <MenuItem value={30}>Thirty</MenuItem>
               </Select>
             </FormControl>
-            <FormControl className='formctrl'>
-              <TypographyHead title="Choose Surrogate" />
+            <FormControl className="formctrl">
+            <TypographyTitle title = 'Choose Surrogate' />
 
-              <Select className='select'>
+              <Select className="select">
                 <MenuItem value={10}>Ten</MenuItem>
                 <MenuItem value={20}>Twenty</MenuItem>
                 <MenuItem value={30}>Thirty</MenuItem>
@@ -519,7 +624,7 @@ export const CardCatalogue = () => {
           </Box>
 
           <Box
-          className='boxBtn'
+            className="boxBtn"
             // sx={{
             //   display: 'flex',
             //   justifyContent: 'flex-end',
@@ -529,34 +634,47 @@ export const CardCatalogue = () => {
             //   backgroundColor: 'white',
             // }}
           >
-            <Button 
-              color='secondary'
-              variant="outlined"
-            >
+            <Button color="secondary" variant="outlined">
               Reset
             </Button>
-            <Button  color="secondary" variant="contained">
+            <Button color="secondary" variant="contained">
               Search
             </Button>
           </Box>
-          
         </Box>
-        <Box sx={{marginTop:4}} >
-        <Box sx={{paddingX:3,backgroundColor:'white',display:'flex',flexDirection:'row',justifyContent:'space-between',alignItems:'center',paddingY:2}} >
-              <Box><Typography>Card Details</Typography></Box>
-              <Box sx={{display:'flex', flexDirection:'row',justifyContent:'space-around'}}  >
-                <Button sx={{padding:0,color:'#0662B7',height:'40px',borderRadius:50,backgroundColor:'#F3F3F3'}} >
-                 <DownloadIcon/>
-                 </Button>
-                 <Button sx={{color:'#0662B7',padding:0,borderRadius:50}} >
-                 <MailOutlineIcon/>
-                </Button>
-                
-              </Box>
-              
+        <Box sx={{ marginTop: 4 }}>
+          <Box
+            sx={{
+              paddingX: 3,
+              backgroundColor: 'white',
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              paddingY: 2,
+            }}
+          >
+            <Box>
+              <Typography>Card Details</Typography>
             </Box>
-            <Divider  />
-          <Box className='body2'
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+              }}
+            >
+              <Button sx={{ color: '#0662B7', padding: 0, borderRadius: 50 }}>
+                <DownloadIcon />
+              </Button>
+              <Button sx={{ color: '#0662B7', padding: 0, borderRadius: 50 }}>
+                <MailOutlineIcon />
+              </Button>
+            </Box>
+          </Box>
+          <Divider />
+          <Box
+            className="body2"
             // sx={{
             //   paddingX: '30px',
             //   backgroundColor: 'white',
@@ -565,9 +683,9 @@ export const CardCatalogue = () => {
             //   alignItems: 'center',
             // }}
           >
-            
             <Stack direction="row" spacing={2} sx={{ margin: '30px 0px' }}>
-              <Button className='btn'
+              <Button
+                className="btn"
                 variant="contained"
                 color="secondary"
                 // sx={{
@@ -578,7 +696,7 @@ export const CardCatalogue = () => {
                 // }}
                 onClick={() => setResumeModal(true)}
               >
-                <IconButton className='icon'>
+                <IconButton className="icon">
                   <img
                     src={Resume_icon}
                     alt="resumeIcon"
@@ -592,10 +710,10 @@ export const CardCatalogue = () => {
               <Button
                 variant="contained"
                 color="secondary"
-                className='btn'
+                className="btn"
                 onClick={() => setShowPauseModal(true)}
               >
-                <IconButton className='icon'>
+                <IconButton className="icon">
                   <img
                     src={Pause_icon}
                     alt="pauseIcon"
@@ -606,12 +724,8 @@ export const CardCatalogue = () => {
                 </IconButton>
                 pause card
               </Button>
-              <Button
-                variant="contained"
-                color="secondary"
-                className='btn'
-              >
-                <IconButton className='icon'>
+              <Button variant="contained" color="secondary" className="btn">
+                <IconButton className="icon">
                   <img
                     src={Edit_icon}
                     style={{
@@ -624,10 +738,10 @@ export const CardCatalogue = () => {
               <Button
                 variant="contained"
                 color="secondary"
-                className='btn'
+                className="btn"
                 onClick={() => setSurrogateSelection(true)}
               >
-                <IconButton className='icon'>
+                <IconButton className="icon">
                   <img
                     src={Surrogate_icon}
                     alt="surrogateIcon"
@@ -640,7 +754,7 @@ export const CardCatalogue = () => {
               </Button>
             </Stack>
             <Stack>
-              <Box
+              {/* <Box
               className='searchBox'
                 // sx={{
                 //   display: 'flex',
@@ -653,10 +767,38 @@ export const CardCatalogue = () => {
               >
                 <StyledInputBase placeholder="Search"/>
                 <SearchIcon className='searchIcon' />
+              </Box> */}
+              <Box
+                sx={{
+                  width: '241px',
+                  fontSize: '12px',
+                  fontFamily: 'Ilisarniq',
+                  fontWeight: 400,
+                  lineHeight: '14px',
+                }}
+              >
+                <ToggleButtonGroup
+                //  size='small'
+                  color="primary"
+                  value={alignment}
+                  exclusive
+                  onChange={handleButtonChange}
+                  aria-label="Platform"
+                  // sx={ToggleBoxStyle}
+                >
+                  <ColorButton value="all">All</ColorButton>
+                  <Divider orientation="vertical"  />
+                  <ColorButton value="activate">Activate</ColorButton>
+                  <Divider orientation="vertical"  />
+                  <ColorButton value="deactivated">Deactivated</ColorButton>
+                  <Divider orientation="vertical"  />
+                  <ColorButton value="saved">Saved</ColorButton>
+                </ToggleButtonGroup>
               </Box>
             </Stack>
           </Box>
-          <Box className='tableBox'
+          <Box
+            className="tableBox"
             // sx={{
             //   height: 400,
             //   // width: "100%",
@@ -666,42 +808,39 @@ export const CardCatalogue = () => {
           >
             <TableContainer component={Paper}>
               <Table size="small" aria-label="Table">
-                <TableHead className='tableHead'
+                <TableHead
+                  className="tableHead"
                   // style={{ background: '#EEF7FF' }}
                   // sx={{ padding: '5px' }}
                 >
                   {tableHeaderData.map(
                     (items: dataHeaderList, index: number) => (
-                      <TableRow key={index} >
+                      <TableRow key={index}>
                         <TableCell>
-                          <Checkbox 
-                  />
+                          <Checkbox />
                         </TableCell>
-                        <TableCell
-                          align="center"
-                          className='tableCell'
-                        >
+                        <TableCell width={'20px'} align="center" className="tableCell">
                           #
                         </TableCell>
-                        <TableCell align="center" className='tableCell'>
+                        <TableCell width={'160px'} align="center" className="tableCell">
                           {items.cardName}
                         </TableCell>
-                        <TableCell align="center" className='tableCell'>
+                        <TableCell align="center" className="tableCell">
                           {items.productID}
                         </TableCell>
-                        <TableCell align="center" className='tableCell'>
+                        <TableCell align="center" className="tableCell">
                           {items.businessID}
                         </TableCell>
-                        <TableCell className='tableCell' align="center">
+                        <TableCell width={'150px'} className="tableCell" align="center">
                           {items.cardMode}
                         </TableCell>
-                        <TableCell className='tableCell' align="left">
+                        <TableCell width={'150px'} className="tableCell" align="left">
                           {items.cardCategory}
                         </TableCell>
-                        <TableCell className='tableCell' align="center">
+                        <TableCell className="tableCell" align="center">
                           {items.cardStatus}
                         </TableCell>
-                        <TableCell className='tableCell'>
+                        <TableCell className="tableCell">
                           {items.more}
                         </TableCell>
                       </TableRow>
@@ -709,15 +848,13 @@ export const CardCatalogue = () => {
                   )}
                 </TableHead>
 
-                <TableBody >
+                <TableBody>
                   {rows.map((row) => (
-                    <TableRow 
+                    <TableRow
                       key={row.id}
                       // sx={{ padding:0,border:0 }}
                     >
-                      <TableCell align="center"
-                          padding="checkbox"
-                           >
+                      <TableCell align="center" padding="checkbox">
                         <Checkbox />
                       </TableCell>
                       <TableCell align="center">{row.id}</TableCell>
@@ -726,10 +863,15 @@ export const CardCatalogue = () => {
                       <TableCell align="center">{row.businessID}</TableCell>
                       <TableCell align="center">{row.cardMode}</TableCell>
                       <TableCell align="left">{row.cardCategory}</TableCell>
-                      <TableCell sx={{
-                      color: checkTagStatus(row.cardStatus).color,
-                      padding: '5px',
-                    }} align="center">{row.cardStatus}</TableCell>
+                      <TableCell
+                        sx={{
+                          color: checkTagStatus(row.cardStatus).color,
+                          padding: '5px',
+                        }}
+                        align="center"
+                      >
+                        {row.cardStatus}
+                      </TableCell>
                       {/* <TableCell align="left">{<MoreVertIcon  />}</TableCell> */}
                       <TableCell>
                         <Box
@@ -755,7 +897,6 @@ export const CardCatalogue = () => {
                     'aria-labelledby': 'more-button',
                   }}
                   onClose={handleClose}
-                  
                   // anchorOrigin={{
                   //   vertical: 'top',
                   //   horizontal: 'right',
@@ -765,17 +906,10 @@ export const CardCatalogue = () => {
                     horizontal: 'right',
                   }}
                 >
-                  
-                  <MenuItem
-                    onClick={handleClose}
-                    className='menu'
-                  >
+                  <MenuItem onClick={handleClose} className="menu">
                     View
                   </MenuItem>
-                  <MenuItem
-                    onClick={handleClose}
-                    className='menu'
-                  >
+                  <MenuItem onClick={handleClose} className="menu">
                     Edit
                   </MenuItem>
                 </Menu>
@@ -785,7 +919,6 @@ export const CardCatalogue = () => {
                 rows={filteredData}
                 rowsPerPage={rowsPerPage}
                 page={page}
-                
                 handleChangePage={handleChangePage}
                 handleChangeRowsPerPage={handleChangeRowsPerPage}
                 onPageChange={onPageChange}
@@ -813,6 +946,17 @@ export const CardCatalogue = () => {
           </Box>
         </Box>
       </Stack>
+
+      <Stack>
+        {/* <TableComp
+          rows={rows}
+          statusRowsHeading={statusRowHeading}
+          listRowHeading={listRowHeading}
+          flag="dashboard"
+          viewPath="/sales/salesDashboard"
+        /> */}
+      </Stack>
+
       {surrogateSelection && (
         <CustomModal
           openSuccess={surrogateSelection}

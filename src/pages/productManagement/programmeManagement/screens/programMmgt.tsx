@@ -1,7 +1,4 @@
 import { Button, IconButton, Stack, Typography } from '@mui/material';
-import PauseCircleFilledIcon from '@mui/icons-material/PauseCircleFilled';
-import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
-import EditIcon from '@mui/icons-material/Edit';
 import { useEffect, useState } from 'react';
 import { colors } from '../../../../style/Color';
 import { programMmgt, tabBar } from '../../../../utils/Constants';
@@ -13,8 +10,6 @@ import resumeIcon from '../../../../assets/images/resume_surrogate_icon.svg';
 import editIcon from '../../../../assets/images/edit_scheduled_pause_icon.svg';
 import pauseIcon from '../../../../assets/images/pause_surrogate_icon.svg';
 import CustomModal from '../../../../components/commonComponent/customModal/CustomModal';
-import { secureApi } from '../../../../services/xhr';
-import DataGridDemo from './listComponents/listData';
 
 const DummyTableData = [
   {
@@ -26,6 +21,7 @@ const DummyTableData = [
     StatusActiveDate: 'Active since June 20, 2022',
     resumeStatus: '',
     resumeItNow: '',
+    id: 1,
   },
   {
     surrogateProgramme: 'Payroll',
@@ -36,6 +32,7 @@ const DummyTableData = [
     StatusActiveDate: 'Active since June 20, 2022',
     resumeStatus: '',
     resumeItNow: 'Resume It Now',
+    id: 2,
   },
   {
     surrogateProgramme: 'Payroll',
@@ -46,6 +43,7 @@ const DummyTableData = [
     StatusActiveDate: 'Active since June 20, 2022',
     resumeStatus: 'It will resume on June 20, 2022',
     resumeItNow: 'Resume It Now',
+    id: 3,
   },
 ];
 
@@ -63,7 +61,7 @@ export const ProgramManagementScreen = () => {
   const [pauseMethod, setPauseMethod] = useState('Pause Now');
 
   const [surrogateData, setSurrogateData] = useState([...DummyTableData]);
-
+  console.log('pauseMethod------------', pauseMethod);
   // useEffect(() => {
   //   fetchSurrogateData();
   // }, []);
@@ -116,8 +114,9 @@ export const ProgramManagementScreen = () => {
   return (
     <Stack
       sx={{
-        padding: '25px 30px 30px 30px',
+        padding: '25px 30px 50px 30px',
         backgroundColor: colors.white,
+        borderRadius: '8px',
       }}
     >
       <Stack
@@ -207,10 +206,13 @@ export const ProgramManagementScreen = () => {
             variant="contained"
             color="secondary"
             sx={{
-              padding: '3px 8px',
-              fontSize: '12px',
+              padding: '3px 10px',
+              fontSize: '14px',
+              fontWeight: 400,
               display: 'flex',
               alignItems: 'center',
+              textTransform: 'capitalize',
+              letterSpacing: '0.0025em',
             }}
             onClick={() => setShowResumeModal(true)}
           >
@@ -223,10 +225,13 @@ export const ProgramManagementScreen = () => {
             variant="contained"
             color="secondary"
             sx={{
-              padding: '3px 8px',
-              fontSize: '12px',
+              padding: '3px 10px',
+              fontSize: '14px',
+              fontWeight: 400,
               display: 'flex',
               alignItems: 'center',
+              textTransform: 'capitalize',
+              letterSpacing: '0.0025em',
             }}
             onClick={() => setShowPauseModal(true)}
           >
@@ -239,10 +244,13 @@ export const ProgramManagementScreen = () => {
             variant="contained"
             color="secondary"
             sx={{
-              padding: '3px 8px',
-              fontSize: '12px',
+              padding: '3px 10px',
+              fontSize: '14px',
+              fontWeight: 400,
               display: 'flex',
               alignItems: 'center',
+              textTransform: 'capitalize',
+              letterSpacing: '0.0025em',
             }}
           >
             <IconButton sx={{ padding: '0', marginRight: '8px' }}>
@@ -324,7 +332,11 @@ export const ProgramManagementScreen = () => {
         />
       )}
       <Stack>
-        {listView ? <DataGridDemo /> : <CardList data={surrogateData} />}
+        {listView ? (
+          <ListView data={surrogateData} />
+        ) : (
+          <CardList data={surrogateData} />
+        )}
       </Stack>
     </Stack>
   );

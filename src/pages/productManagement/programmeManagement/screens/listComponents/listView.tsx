@@ -10,18 +10,25 @@ import {
   Stack,
   MenuItem,
   Menu,
+  IconButton,
 } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { colors } from '../../../../../style/Color';
 import { programMmgt } from '../../../../../utils/Constants';
 import { checkTagStatus } from '../../../../../utils/tagBasedIndicator/tagStatus';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import UnfoldMoreIcon from '../../../../../assets/icons/sortArrow.svg';
+import CustomModal from '../../../../../components/commonComponent/customModal/CustomModal';
 export interface dataList {
   surrogateProgramme: string;
-  activeSince: string;
   lastModify: string;
   status: string;
   autoResumeForm: string;
+  StatusActiveDate: string;
+  activeSince: string;
+  id: number;
+  resumeItNow: string;
+  resumeStatus: string;
 }
 export interface dataHeaderList {
   surrogateProgramme: string;
@@ -43,15 +50,41 @@ const tableHeaderData = [
 ];
 export const ListView = ({ data }: any) => {
   const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
-  const [selected, setSelected] = React.useState<readonly string[]>([]);
+  const [selected, setSelected] = React.useState<number[]>([]);
+  const [showPauseModal, setShowPauseModal] = useState<boolean>(false);
+  // const [isPauseModal, setIsPauseModal] = useState<boolean>(false);
+  const [showPauseSuccessModal, setShowPauseSuccessModal] =
+    useState<boolean>(false);
+  const [showResumeModal, setShowResumeModal] = useState<boolean>(false);
+  const [showResumeSuccessModal, setShowResumeSuccessModal] =
+    useState<boolean>(false);
+  const [showScheduledPauseSuccessModal, setShowScheduledPauseSuccessModal] =
+    useState<boolean>(false);
+  const [pauseMethod, setPauseMethod] = useState('Pause Now');
+  const [sortingData, setSortingData] = useState(data);
+  const [ascending, setAscending] = useState<boolean>(true);
   const open = Boolean(anchorElement);
+  const filterData = () => {
+    const sort = sortingData.sort((a: dataList, b: dataList) => {
+      if (ascending) {
+        return a.surrogateProgramme < b.surrogateProgramme ? -1 : 1;
+      }
+      return a.surrogateProgramme > b.surrogateProgramme ? -1 : 1;
+    });
+    setSortingData([...sort]);
+  };
+
+  useEffect(() => {
+    filterData();
+  }, [ascending]);
+
   const handleClick = (event: React.MouseEvent<HTMLTableCellElement>) => {
     setAnchorElement(event.currentTarget);
   };
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      // const newSelected = tableData.map((n) => n.surrogateProgramme);
-      // setSelected(newSelected);
+      const newSelected = data.map((n: any) => n.id);
+      setSelected(newSelected);
       return;
     }
     setSelected([]);
@@ -59,27 +92,63 @@ export const ListView = ({ data }: any) => {
   const handleClose = () => {
     setAnchorElement(null);
   };
-  const isSelected = (name: string) => selected.indexOf(name) !== -1;
-  const handleClickCheckbox = (
-    event: React.MouseEvent<unknown>,
-    name: string
-  ) => {
-    const selectedIndex = selected.indexOf(name);
-    let newSelected: readonly string[] = [];
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
-      );
+  const isSelected = (id: number) => {
+    const res = selected.indexOf(id);
+    if ((res && res !== -1) || res === 0) {
+      return true;
+    } else {
+      return false;
     }
-    setSelected(newSelected);
   };
+
+  const handleClickCheckbox = (id: number) => {
+    const result = isSelected(id);
+    let selectedData = selected;
+    if (result) {
+      const index = selected.indexOf(id);
+      selectedData.splice(index, 1);
+      setSelected([...selectedData]);
+    } else {
+      setSelected([...selectedData, id]);
+    }
+  };
+  const handleSortByName = () => {
+    setAscending(!ascending);
+  };
+
+  const closeModal = () => {
+    setShowPauseModal(false);
+    setShowPauseSuccessModal(false);
+    setShowScheduledPauseSuccessModal(false);
+    setShowResumeModal(false);
+    setShowResumeSuccessModal(false);
+  };
+
+  const NORMAL_PAUSE = 'Pause Now';
+  const SCHEDULED_PAUSE = 'Schedule Pause';
+
+  const pauseMethodChange = (value: any) => {
+    setPauseMethod(value);
+  };
+
+  const successModal = () => {
+    if (pauseMethod === NORMAL_PAUSE) {
+      setShowPauseModal(false);
+      setShowPauseSuccessModal(true);
+      console.log('success');
+    }
+    if (pauseMethod === SCHEDULED_PAUSE) {
+      setShowPauseModal(false);
+      setShowScheduledPauseSuccessModal(true);
+      console.log('fail');
+    }
+  };
+
+  const resumeSuccessModal = () => {
+    setShowResumeSuccessModal(true);
+    setShowResumeModal(false);
+  };
+
   return (
     <Stack>
       <TableContainer component={Paper}>
@@ -93,13 +162,10 @@ export const ListView = ({ data }: any) => {
                 <TableCell padding="checkbox" sx={{ padding: '5px' }}>
                   <Checkbox
                     color={'secondary'}
-                    // indeterminate={
-                    //   selected.length > 0 && selected.length < tableData.length
-                    // }
-                    // checked={
-                    //   tableData.length > 0 &&
-                    //   selected.length === tableData.length
-                    // }
+                    indeterminate={
+                      selected.length > 0 && selected.length < data.length
+                    }
+                    checked={data.length > 0 && selected.length === data.length}
                     onChange={handleSelectAllClick}
                     inputProps={{
                       'aria-label': 'select all desserts',
@@ -108,6 +174,9 @@ export const ListView = ({ data }: any) => {
                 </TableCell>
                 <TableCell sx={{ fontWeight: 800, padding: '5px' }}>
                   {items.surrogateProgramme}
+                  <IconButton onClick={() => handleSortByName()}>
+                    <img src={UnfoldMoreIcon} alt="Sort Icon" />
+                  </IconButton>
                 </TableCell>
                 <TableCell sx={{ fontWeight: 800, padding: '5px' }}>
                   {items.activeSince}
@@ -131,71 +200,71 @@ export const ListView = ({ data }: any) => {
             ))}
           </TableHead>
           <TableBody>
-            {data.map((dataItem: dataList, index: number) => {
-              const isItemSelected = isSelected(dataItem.surrogateProgramme);
-              const labelId = `enhanced-table-checkbox-${index}`;
-              return (
-                <TableRow
-                  key={index}
-                  style={
-                    index % 2
-                      ? { background: colors.white }
-                      : { background: colors.tableGrey }
-                  }
-                  sx={{ padding: '5px' }}
-                >
-                  <TableCell padding={'checkbox'} sx={{ padding: '5px' }}>
-                    <Checkbox
-                      color={'secondary'}
-                      checked={isItemSelected}
-                      inputProps={{
-                        'aria-labelledby': labelId,
-                      }}
-                      onChange={(event: any) =>
-                        handleClickCheckbox(event, dataItem.surrogateProgramme)
-                      }
-                    />
-                  </TableCell>
-                  <TableCell sx={{ padding: '5px' }}>
-                    {dataItem.surrogateProgramme}
-                  </TableCell>
-                  <TableCell
-                    sx={{
-                      color: checkTagStatus(dataItem.activeSince).color,
-                      padding: '5px',
-                    }}
-                  >
-                    {dataItem.activeSince}
-                  </TableCell>
-                  <TableCell sx={{ padding: '5px' }}>
-                    {dataItem.lastModify}
-                  </TableCell>
-                  <TableCell
-                    sx={{
-                      color: checkTagStatus(dataItem.status).color,
-                      padding: '5px',
-                    }}
-                  >
-                    {dataItem.status}
-                  </TableCell>
-                  <TableCell align="center" sx={{ padding: '5px' }}>
-                    {dataItem.autoResumeForm === ''
-                      ? '-'
-                      : dataItem.autoResumeForm}
-                  </TableCell>
-                  <TableCell
-                    id="more-button"
-                    onClick={handleClick}
-                    aria-controls={open ? 'more-menu' : undefined}
-                    aria-haspopup="true"
-                    aria-expanded={open ? 'true' : undefined}
+            {sortingData.length > 0 &&
+              sortingData.map((dataItem: dataList, index: number) => {
+                const isItemSelected = isSelected(dataItem.id);
+                console.log('isItemSelected', isItemSelected);
+                const labelId = `enhanced-table-checkbox-${index}`;
+                return (
+                  <TableRow
+                    key={index}
+                    style={
+                      index % 2
+                        ? { background: colors.white }
+                        : { background: colors.tableGrey }
+                    }
                     sx={{ padding: '5px' }}
                   >
-                    <MoreVertIcon />
-                  </TableCell>
-                </TableRow>
-              );
-            })}
+                    <TableCell padding={'checkbox'} sx={{ padding: '5px' }}>
+                      <Checkbox
+                        color={'secondary'}
+                        checked={isItemSelected}
+                        inputProps={{
+                          'aria-labelledby': labelId,
+                        }}
+                        onChange={() => handleClickCheckbox(dataItem.id)}
+                      />
+                    </TableCell>
+                    <TableCell sx={{ padding: '5px' }}>
+                      {dataItem.surrogateProgramme}
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        color: checkTagStatus(dataItem.activeSince).color,
+                        padding: '5px',
+                      }}
+                    >
+                      {dataItem.activeSince}
+                    </TableCell>
+                    <TableCell sx={{ padding: '5px' }}>
+                      {dataItem.lastModify}
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        color: checkTagStatus(dataItem.status).color,
+                        padding: '5px',
+                      }}
+                    >
+                      {dataItem.status}
+                    </TableCell>
+                    <TableCell align="center" sx={{ padding: '5px' }}>
+                      {dataItem.autoResumeForm === ''
+                        ? '-'
+                        : dataItem.autoResumeForm}
+                    </TableCell>
+                    <TableCell
+                      id="more-button"
+                      onClick={handleClick}
+                      aria-controls={open ? 'more-menu' : undefined}
+                      aria-haspopup="true"
+                      aria-expanded={open ? 'true' : undefined}
+                      sx={{ padding: '5px' }}
+                    >
+                      <MoreVertIcon />
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
           </TableBody>
         </Table>
       </TableContainer>
@@ -217,13 +286,21 @@ export const ListView = ({ data }: any) => {
         }}
       >
         <MenuItem
-          onClick={handleClose}
+          // onClick={() => handleClose()}
+          onClick={() => {
+            handleClose();
+            setShowResumeModal(true);
+          }}
           style={{ padding: '10px 20px', textAlign: 'left' }}
         >
           {programMmgt.RESUME_SURROGATE}
         </MenuItem>
         <MenuItem
-          onClick={handleClose}
+          // onClick={handleClose}
+          onClick={() => {
+            handleClose();
+            setShowPauseModal(true);
+          }}
           style={{ padding: '10px 20px', textAlign: 'left' }}
         >
           {programMmgt.PAUSE_SURROGATE}
@@ -235,6 +312,77 @@ export const ListView = ({ data }: any) => {
           {programMmgt.EDIT_SCHEDULE_PAUSE}
         </MenuItem>
       </Menu>
+      {showPauseModal && (
+        <CustomModal
+          openSuccess={showPauseModal}
+          handleCloseSuccess={closeModal}
+          handleSuccess={successModal}
+          title={'Card For Card - Pause'}
+          pause_content={'You can pause it or perform a scheduled pause.'}
+          scheduledPause_content={
+            'Please choose a date range to perform a scheduled pause.'
+          }
+          textarea_title={'Add Remarks'}
+          normalPause={NORMAL_PAUSE}
+          SchedulePause={SCHEDULED_PAUSE}
+          dateRange_title={'Enter Date range'}
+          maxLength={'Maximum of 500 words'}
+          pauseMethodChecking={(arg1: string) => pauseMethodChange(arg1)}
+          close={'Close'}
+          submit={'Submit'}
+          datepickerLabelStart={'Start Date and time'}
+          datepickerLabelEnd={'End Date and time'}
+        />
+      )}
+      {showPauseSuccessModal && (
+        <CustomModal
+          openSuccess={showPauseSuccessModal}
+          handleCloseSuccess={closeModal}
+          successModalTitle={'Card For Card - Pause'}
+          successModalMsg={
+            ' Your action of pausing - Card For Card Surrogate has been successully sent to the reviewer'
+          }
+          btn={' Close'}
+        />
+      )}
+      {showScheduledPauseSuccessModal && (
+        <CustomModal
+          openSuccess={showScheduledPauseSuccessModal}
+          handleCloseSuccess={closeModal}
+          successModalTitle={'Card For Card - Scheduled Pause'}
+          successModalMsg={
+            'Your action of Scheduled Pause - Card For Card Surrogate From  DD/MM/YYYTo DD/MM/YYY is successfully sent to reviewer'
+          }
+          btn={' Close'}
+        />
+      )}
+      {showResumeModal && (
+        <CustomModal
+          openSuccess={showResumeModal}
+          handleCloseSuccess={closeModal}
+          title={'AQB - Resume Now'}
+          handleSuccess={resumeSuccessModal}
+          pause_content={
+            'You will be able to resume your paused surrogate here.'
+          }
+          textarea_title={'Add Remarks'}
+          dateRange_title={'Enter Date range'}
+          maxLength={'Maximum of 500 words'}
+          close={'Close'}
+          submit={'Submit'}
+        />
+      )}
+      {showResumeSuccessModal && (
+        <CustomModal
+          openSuccess={showResumeSuccessModal}
+          handleCloseSuccess={closeModal}
+          successModalTitle={'AQB - Resume Now'}
+          successModalMsg={
+            'Your action of Resuming - AQB Surrogate has been successfully sent to the reviewer.'
+          }
+          btn={' Close'}
+        />
+      )}
     </Stack>
   );
 };

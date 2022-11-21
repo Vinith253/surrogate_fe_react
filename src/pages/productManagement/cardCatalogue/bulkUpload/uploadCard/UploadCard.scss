@@ -1,0 +1,26 @@
+.upload-card-container {
+  background-color: white;
+  .upload-card-head {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  .upload-card-subhead {
+    margin: 1% 0;
+    font-weight: bold;
+  }
+  .progress-container {
+    width: 100%;
+    margin: 0.8rem 0;
+    .upload-card-progress {
+      background-color: #a7edc2;
+      border-radius: 10px;
+      height: 8px;
+    }
+  }
+  .upload-card-progress-text {
+    min-width: 35;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 2;
+  }
+}

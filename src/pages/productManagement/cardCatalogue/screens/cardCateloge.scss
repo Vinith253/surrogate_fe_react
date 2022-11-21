@@ -9,7 +9,7 @@
   background-color: white;
   display: flex;
   justify-content: space-between;
-  padding: 20px 30px 0 30px;
+  padding: 20px 30px 20px 30px;
 }
 .body1 {
   background-color: white;
@@ -17,12 +17,14 @@
   padding: 0 30px;
   .container1 {
     display: flex;
+    align-items: center;
     gap: 10px;
     background-color: white;
-    padding-top: 10px;
+    padding: 20px 0 20px 0;
   }
   .img1 {
-    margin-bottom: 14px;
+    align-items: center;
+    // margin-bottom:14px;
   }
   .bodyBox {
     min-width: 500;
@@ -33,28 +35,29 @@
     background-color: white;
   }
 }
-.body1 {
-  background-color: white;
-  margin-top: 25px;
-  padding: 0 30px;
-  .container1 {
-    display: flex;
-    gap: 10px;
-    background-color: white;
-    padding-top: 10px;
-  }
-  .img1 {
-    margin-bottom: 14px;
-  }
-  .bodyBox {
-    min-width: 500;
-    margin-top: 16px;
-    display: flex;
-    gap: 3%;
-    justify-content: space-between;
-    background-color: white;
-  }
-}
+// .body1 {
+//   background-color: white;
+//   margin-top: 25px;
+//   padding: 0 30px;
+//   .container1 {
+//     display: flex;
+//     gap: 10px;
+//     background-color: white;
+//     padding: 20px 0;
+//   }
+//   .img1 {
+//     align-items: center;
+//     // margin-bottom: 14px;
+//   }
+//   .bodyBox {
+//     min-width: 500;
+//     margin-top: 16px;
+//     display: flex;
+//     gap: 3%;
+//     justify-content: space-between;
+//     background-color: white;
+//   }
+// }
 .formctrl {
   width: 200px;
   .select {
@@ -70,15 +73,18 @@
   padding: 24px 0;
   background-color: white;
 }
+.css-ops09h-MuiTableCell-root.MuiTableCell-paddingCheckbox{
+  padding: 0 0 0 0;
+}
 
 .body2 {
-  padding: 0 30px;
+  padding: 0 40px;
   background-color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
   .btn {
-    padding: 3px 8px;
+    padding: 3px 5px;
     font-size: 12px;
     display: flex;
     align-items: center;
@@ -86,6 +92,9 @@
       padding: 0;
       margin-right: 8px;
     }
+  }
+  .css-itrzb3-MuiButtonBase-root-MuiToggleButton-root{
+    padding: 0px;
   }
 
   .searchBox {
@@ -106,6 +115,8 @@
   background-color: white;
   padding: 0 32px;
   .tableHead {
+    font-size: 14px;
+    font-weight: 500;
     background-color: #eef7ff;
     .tableCell {
       font-weight: 800;
