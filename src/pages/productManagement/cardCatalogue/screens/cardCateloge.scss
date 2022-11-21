@@ -9,7 +9,7 @@
   background-color: white;
   display: flex;
   justify-content: space-between;
-  padding: 20px 30px 0 30px;
+  padding: 20px 30px 20px 30px;
 }
 .body1 {
   background-color: white;
@@ -72,13 +72,13 @@
 }
 
 .body2 {
-  padding: 0 30px;
+  padding: 0 40px;
   background-color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
   .btn {
-    padding: 3px 8px;
+    padding: 3px 5px;
     font-size: 12px;
     display: flex;
     align-items: center;
@@ -86,6 +86,9 @@
       padding: 0;
       margin-right: 8px;
     }
+  }
+  .css-itrzb3-MuiButtonBase-root-MuiToggleButton-root{
+    padding: 0px;
   }
 
   .searchBox {

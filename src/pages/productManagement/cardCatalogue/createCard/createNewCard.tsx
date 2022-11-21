@@ -14,7 +14,7 @@ import {
   Grid,
   Divider,
 } from '@mui/material';
-
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import BtnContained from '../../../../components/commonComponent/CustomText/Button/Contained';
 import BtnOutlined from '../../../../components/commonComponent/CustomText/Button/Outlined';
 import BtnText from '../../../../components/commonComponent/CustomText/Button/Text';
@@ -39,6 +39,9 @@ const CreateNewCard = () => {
   const navigate = useNavigate();
   const goBack = () => {
     navigate(-1);
+  };
+  const close = () => {
+    navigate('/productManagement/cardCatalogue');
   };
   // const saveFun = () => {
   //   navigate("/productManagement/cardCatalogue/singleupload/o");
@@ -74,6 +77,23 @@ const CreateNewCard = () => {
     additionalBenefits: false,
     welcomeBenefits: false,
   });
+
+  // const removeReward = (e , index) => {
+  //   setRemoveClick((prev) => ({
+  //     ...prev,
+  //     reward: false,
+  //   }))
+  //   const value = e?.target?.value ?? '';
+  //   setDataObj((prev: any) => {
+  //     let newValue = prev.rewardDescription;
+  //     newValue[index-1].value = value;
+  //     const result = { ...prev, rewardDescription: newValue };
+  //     return result;
+  //   });
+  // }
+
+  
+
   const handleValueChange = (e: any, id: string) => {
     const value = e?.target?.value ?? '';
     setDataObj((prev: any) => ({ ...prev, [id]: value }));
@@ -148,6 +168,8 @@ const CreateNewCard = () => {
     }));
   };
 
+  
+
   const AddAdditionalList = () => {
     let newVal = { value: '' };
     setDataObj((prev) => ({
@@ -171,6 +193,46 @@ const CreateNewCard = () => {
       welcomeBenefits: true,
     }));
   };
+
+  const removeWelcome = (index: number) => {
+    let newData = dataObj?.welcomeBenefits ?? [];
+    newData.splice(index, 1);
+    setDataObj((prev) => ({
+      ...prev,
+      welcomeBenefits: newData,
+    }));
+  };
+
+  const removeReward = (index:number) => {
+    let newData = dataObj?.rewardDescription ?? [];
+    newData.splice(index, 1);
+    setDataObj((prev)=>({
+      ...prev, rewardDescription:newData,
+    }));
+
+  };
+  const removeKeyBenefits = (index:number) => {
+    let newData = dataObj?.keyBenefits ?? [];
+    newData.splice(index, 1);
+    setDataObj((prev)=>({
+      ...prev, keyBenefits:newData,
+    }));
+
+  };
+
+  const removeAdditionalBenefits = (index:number) => {
+    let newData = dataObj?.additionalBenefits ?? [];
+    newData.splice(index, 1);
+    setDataObj((prev)=>({
+      ...prev, additionalBenefits:newData,
+    }));
+  };
+
+
+
+
+
+
 
   return (
     <Box className="singleCard">
@@ -649,7 +711,10 @@ const CreateNewCard = () => {
         <Grid container spacing={5}>
           <Grid item xs={12} sm={6} md={4}>
             <Box>
-              <TypoText title="Fuel Surcharge (in %)" />
+              <TypoText
+                className="fuelSurchargeTextBox"
+                title="Fuel Surcharge (in %)"
+              />
               <TypoText
                 placeholder="Enter fuel surcharge in %"
                 handleChange={handleValueChange}
@@ -729,8 +794,13 @@ const CreateNewCard = () => {
                 />
               </Box>
               <Box className="newText">
-                {removeClick.reward ? (
-                  <Button color="secondary" startIcon={<ControlPointIcon />}>
+                {dataObj.rewardDescription.length > 1 &&
+                removeClick.reward ? (
+                  <Button
+                    onClick={()=>removeReward(index)}
+                    color="secondary"
+                    startIcon={<RemoveCircleOutlineIcon />}
+                  >
                     Remove
                   </Button>
                 ) : (
@@ -770,8 +840,13 @@ const CreateNewCard = () => {
                 />
               </Box>
               <Box className="newText">
-                {removeClick.keyBenefits ? (
-                  <Button color="secondary" startIcon={<ControlPointIcon />}>
+                {dataObj.keyBenefits.length > 1 &&
+                removeClick.keyBenefits ? (
+                  <Button
+                  onClick={() => removeKeyBenefits(index)}
+                    color="secondary"
+                    startIcon={<RemoveCircleOutlineIcon />}
+                  >
                     Remove
                   </Button>
                 ) : (
@@ -810,8 +885,13 @@ const CreateNewCard = () => {
               />
             </Box>
             <Box className="newText">
-              {removeClick.additionalBenefits ? (
-                <Button color="secondary" startIcon={<ControlPointIcon />}>
+              { dataObj.additionalBenefits.length > 1 &&
+               removeClick.additionalBenefits ? (
+                <Button
+                onClick={() => removeAdditionalBenefits(index)}
+                  color="secondary"
+                  startIcon={<RemoveCircleOutlineIcon />}
+                >
                   Remove
                 </Button>
               ) : (
@@ -827,9 +907,7 @@ const CreateNewCard = () => {
           <Box className="headerBox">
             <TypoText title="Welcome Benifits" />
             <img className="img" src={Info_Icon} />
-            <TypographyInfo
-              title="Add your additional benifits here"
-            />
+            <TypographyInfo title="Add your additional benifits here" />
           </Box>
           <Box className="headerbtn">
             <Button color="secondary" onClick={AddWelcomeList}>
@@ -853,8 +931,13 @@ const CreateNewCard = () => {
                 />
               </Box>
               <Box className="newText">
-                {removeClick.welcomeBenefits ? (
-                  <Button color="secondary" startIcon={<ControlPointIcon />}>
+                {dataObj.welcomeBenefits.length > 1 &&
+                removeClick.welcomeBenefits ? (
+                  <Button
+                    onClick={() => removeWelcome(index)}
+                    color="secondary"
+                    startIcon={<RemoveCircleOutlineIcon />}
+                  >
                     Remove
                   </Button>
                 ) : (
@@ -868,7 +951,7 @@ const CreateNewCard = () => {
 
       <Box className="footer">
         <Box className="box">
-          <BtnOutlined title="close" />
+          <BtnOutlined onClick={close} title="close" />
 
           <BtnText title="Save as draft" />
 

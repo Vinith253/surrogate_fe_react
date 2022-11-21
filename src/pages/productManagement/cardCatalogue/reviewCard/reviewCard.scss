@@ -18,6 +18,7 @@
             }
             .headback{
                 color: #0078EF;
+                cursor: pointer;
 
             }
             
@@ -66,7 +67,10 @@
                 }
 
                 .modal{
-                    position: absolute;
+                    tabindex: 1px;
+                    position: relative;
+                    // top: 20%;
+                    // right: 40%;
                     top: 50%;
                     left: 50%;
                     transform: translate(-50%, -50%);
