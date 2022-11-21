@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Button } from '@mui/material';
 import CustomModal from './CustomModal';
 
-function AccessLibraryModal() {
+function ChangePasswordOTP() {
   const [openSuccess, setOpenSuccess] = useState(false);
 
   const handleClickOpen = () => {
@@ -18,24 +18,21 @@ function AccessLibraryModal() {
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
         {' '}
-        Access Library
+        Change password OTP
       </Button>
       <CustomModal
         openSuccess={openSuccess}
         handleCloseSuccess={handleCloseSuccess}
-        successModalTitle={'Share the link'}
-        // successModalMsg={
-        //   'Your action of Scheduled Pause - Card For Card Surrogate From  DD/MM/YYYTo DD/MM/YYY is successfully sent to reviewer'
-        // }
-        accessLibraryMsg={'Here you can copy the link and share it'}
-        org_ID={'#12345'}
-        org_Name={'Ganesh Agency'}
-        channel_type={'DSA'}
-        accessLibraryModaBtn={'Link to share'}
-        accessLibraryCloseBtn={' Close'}
+        changePasswordTitle={'Change Password'}
+        changePasswordTitleMsg={'Enter the 6-digit OTP sent to your email ID'}
+        ProceedBtn={'Verify'}
+        resentOTP={'Resent OTP'}
+        resentOTPmsg={
+          'Please enter the correct OTP sent to your registered email ID'
+        }
       />
     </div>
   );
 }
 
-export default AccessLibraryModal;
+export default ChangePasswordOTP;

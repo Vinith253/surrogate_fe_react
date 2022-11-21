@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Button } from '@mui/material';
 import CustomModal from './CustomModal';
 
-function AccessLibraryModal() {
+function CreateNewPassword() {
   const [openSuccess, setOpenSuccess] = useState(false);
 
   const handleClickOpen = () => {
@@ -18,24 +18,22 @@ function AccessLibraryModal() {
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
         {' '}
-        Access Library
+        Create New password
       </Button>
       <CustomModal
         openSuccess={openSuccess}
         handleCloseSuccess={handleCloseSuccess}
-        successModalTitle={'Share the link'}
-        // successModalMsg={
-        //   'Your action of Scheduled Pause - Card For Card Surrogate From  DD/MM/YYYTo DD/MM/YYY is successfully sent to reviewer'
-        // }
-        accessLibraryMsg={'Here you can copy the link and share it'}
-        org_ID={'#12345'}
-        org_Name={'Ganesh Agency'}
-        channel_type={'DSA'}
-        accessLibraryModaBtn={'Link to share'}
-        accessLibraryCloseBtn={' Close'}
+        changePasswordTitle={'Change Password'}
+        ProceedBtn={'Update'}
+        resentOTPmsg={
+          ' Password should be 8 characters, including 1 Caps, 1 lowercase, 1 numeral.'
+        }
+        enterNewPassword={'Enter New Password'}
+        confirmNewPassword={'Confirm New Password'}
+        forgotPassword={'Forgot Password?'}
       />
     </div>
   );
 }
 
-export default AccessLibraryModal;
+export default CreateNewPassword;

@@ -20,7 +20,10 @@ import SchedulePause from '../../components/commonComponent/customModal/Schedule
 import SchedulePauseSuccess from '../../components/commonComponent/customModal/SchedulePauseSuccess';
 import SurrogateSelection from '../../components/commonComponent/customModal/SurrogateSelection';
 import PageLayout from '../../components/layout/pageLayout/pageLayout';
-// import AccessLibraryModal from '../../components/commonComponent/customModal/AccessLibraryModal';
+import AccessLibraryModal from '../../components/commonComponent/customModal/AccessLibraryModal';
+import ChangePasswordProfileModal from '../../components/commonComponent/customModal/ChangePasswordProfileModal';
+import ChangePasswordOTP from '../../components/commonComponent/customModal/ChangePasswordOTP';
+import CreateNewPassword from '../../components/commonComponent/customModal/CreateNewPassword';
 // import SurrogateSelection from "../../components/commonComponent/CustomModal/SurrogateSelection";
 
 // import PauseModalSucces from "../../components/commonComponent/customModal/PauseModalSuccess";
@@ -107,7 +110,10 @@ export default function Home() {
         padding: '5vh 3vw',
       }}
     >
-      {/* <AccessLibraryModal /> */}
+      {/* <AccessLibraryModal />
+      <ChangePasswordProfileModal />
+      <ChangePasswordOTP />
+      <CreateNewPassword /> */}
       <Card content={pendingActionsData} />
       <Card content={savedItemsData} />
       <Card content={frequentActivitiesData} />
