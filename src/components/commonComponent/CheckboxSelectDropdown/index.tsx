@@ -1,4 +1,3 @@
-import './style.scss';
 import * as React from 'react';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
@@ -14,7 +13,10 @@ import {
   TextField,
   IconButton,
   Checkbox,
+  Button,
+  Box,
 } from '@mui/material';
+import './style.scss';
 
 type Props = {
   data: Array<object>;
@@ -41,41 +43,53 @@ function CheckboxSelectDropdown({ data, gridColumn }: Props) {
   };
 
   return (
-    <div className="checkbox-select-dropdown">
-      <Grid container spacing={2}>
-        {data?.map((eachItem: any, index: number) => {
-          return (
-            <Grid item xs={gridColumn} key={index}>
-              <Typography>{eachItem?.label}</Typography>
-              <Select>
-                <TextField
-                  placeholder="Search by..."
-                  InputProps={{
-                    startAdornment: (
-                      <IconButton edge="start">
-                        <SearchOutlined />
-                      </IconButton>
-                    ),
-                  }}
+    <Grid container spacing={2} className="checkbox-select-dropdown">
+      {data?.map((eachItem: any, index: number) => {
+        return (
+          <Grid item xs={gridColumn} key={index}>
+            <Typography>{eachItem?.label}</Typography>
+            <Select>
+              <TextField
+                className="search-text-field"
+                placeholder="Search by..."
+                InputProps={{
+                  startAdornment: (
+                    <IconButton edge="start">
+                      <SearchOutlined />
+                    </IconButton>
+                  ),
+                }}
+              />
+              <FormGroup className="all-option-checkbox">
+                <FormControlLabel
+                  control={<Checkbox defaultChecked />}
+                  label="All"
                 />
-                <FormGroup>
-                  <FormControlLabel
-                    control={<Checkbox defaultChecked />}
-                    label="All"
-                  />
-                </FormGroup>
-                {eachItem?.option?.map((each: any, index: number) => (
-                  <MenuItem key={index} value={each?.value}>
-                    <Checkbox checked={true} />
-                    <ListItemText primary={each?.name} />
-                  </MenuItem>
-                ))}
-              </Select>
-            </Grid>
-          );
-        })}
-      </Grid>
-    </div>
+              </FormGroup>
+              {eachItem?.option?.map((each: any, index: number) => (
+                <MenuItem
+                  key={index}
+                  value={each?.value}
+                  className="checkbox-checked"
+                >
+                  <Checkbox checked={true} />
+                  <ListItemText primary={each?.name} />
+                </MenuItem>
+              ))}
+              <div className="underline"></div>
+              <Box className="button-container">
+                <Button color="secondary" variant="outlined">
+                  Reset
+                </Button>
+                <Button color="secondary" variant="contained">
+                  Search
+                </Button>
+              </Box>
+            </Select>
+          </Grid>
+        );
+      })}
+    </Grid>
   );
 }
 
