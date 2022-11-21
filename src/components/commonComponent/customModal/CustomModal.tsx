@@ -22,6 +22,9 @@ import card_catalogue_sucess_icon from '../../../assets/icons/card_catalogue_suc
 import card_catalogue_rejecte_icon from '../../../assets/icons/modal_rejected_icon.svg';
 import info_icon from '../../../assets/images/info_icon.svg';
 import InputLabel from '@mui/material/InputLabel';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import calender_icon from '../../../assets/icons/calendar_icon.png';
+import AccessibleIcon from '@mui/icons-material/Accessible';
 
 type props = {
   openSuccess?: any;
@@ -126,9 +129,7 @@ function CustomModal({
       >
         <Stack
           py={3}
-          className={`${
-            accessLibraryModaBtn ? 'modal_container' : 'modal_container1'
-          }`}
+          className={`${successModalMsg ? 'modal_container1' : ''}`}
           px={title ? 3 : 0}
         >
           {title && (
@@ -195,33 +196,6 @@ function CustomModal({
             </DialogContent>
           )}
 
-          {/* {changePasswordTitle && (
-            <DialogContent
-              sx={{
-                paddingTop: '18px',
-                paddingBottom: '5px',
-                display: 'flex',
-                justifyContent: 'space-around',
-              }}
-            >
-              <DialogContentText
-                id="alert-dialog-slide-description"
-                fontSize={16}
-                fontWeight={600}
-                color="#1d1d1d"
-                sx={{
-                  padding: {
-                    xs: '0 13px',
-                  },
-                }}
-              >
-                {changePasswordTitle}
-              </DialogContentText>
-              <DialogContentText>
-                <Button variant="text">Close</Button>
-              </DialogContentText>
-            </DialogContent>
-          )} */}
           {changePasswordTitle && (
             <Stack
               sx={{
@@ -250,7 +224,7 @@ function CustomModal({
 
           {changePasswordTitleMsg && (
             <Stack sx={{ margin: '0 60px', textAlign: 'start' }}>
-              <Typography fontWeight={700} pb={1} fontSize={12}>
+              <Typography fontWeight={700} pb={1} fontSize={11}>
                 {changePasswordTitleMsg}
               </Typography>
             </Stack>
@@ -525,7 +499,10 @@ function CustomModal({
           </Typography>
 
           {(normalPause || SchedulePause) && (
-            <FormControl style={{ fontSize: '1px' }}>
+            <FormControl
+              style={{ fontSize: '1px' }}
+              className="modal_form_label"
+            >
               <Stack pb={1}>
                 <RadioGroup
                   color=""
@@ -588,7 +565,7 @@ function CustomModal({
                       paddingBottom: '16px',
                     }}
                   >
-                    <DatePicker
+                    {/* <DatePicker
                       className="datePicker_input"
                       toolbarPlaceholder="dd"
                       label={datepickerLabelStart}
@@ -599,9 +576,39 @@ function CustomModal({
                       renderInput={(params: any) => (
                         <TextField size="small" {...params} />
                       )}
-                    />
+                    /> */}
 
-                    <DatePicker
+                    <Grid container spacing={3}>
+                      <Grid item sm={6}>
+                        <DateTimePicker
+                          renderInput={(props: any) => (
+                            <TextField size="small" {...props} fullWidth />
+                          )}
+                          label={datepickerLabelStart}
+                          value={startDatevalue}
+                          onChange={(newValue: any) => {
+                            setStartDateValue(newValue);
+                          }}
+                          reduceAnimations={false}
+                          // components={{ OpenPickerIcon: AccessibleIcon }}
+                        />
+                      </Grid>
+                      <Grid item sm={6}>
+                        <DateTimePicker
+                          renderInput={(props: any) => (
+                            <TextField size="small" {...props} fullWidth />
+                          )}
+                          label={datepickerLabelEnd}
+                          value={endDatevalue}
+                          onChange={(newValue: any) => {
+                            setEndDateValue(newValue);
+                          }}
+                          reduceAnimations={typeof navigator !== 'undefined'}
+                        />
+                      </Grid>
+                    </Grid>
+
+                    {/* <DatePicker
                       className="datePicker_input"
                       label={datepickerLabelEnd}
                       value={endDatevalue}
@@ -611,7 +618,7 @@ function CustomModal({
                       renderInput={(params: any) => (
                         <TextField size="small" {...params} />
                       )}
-                    />
+                    /> */}
                   </Stack>
                 </LocalizationProvider>
               </Stack>
@@ -622,6 +629,7 @@ function CustomModal({
                 className="textarea_title"
                 fontWeight={600}
                 fontSize={12}
+                sx={{ marginTop: '5px', marginBottom: '5px' }}
               >
                 {textarea_title}
               </Typography>
@@ -632,8 +640,9 @@ function CustomModal({
                     aria-label="minimum height"
                     minRows={8}
                     style={{
-                      width: 520,
+                      width: 538,
                       border: `1px solid #36363624`,
+                      height: '160px',
                     }}
                   />
                 </Grid>
@@ -699,9 +708,9 @@ function CustomModal({
                 sx={{
                   fontSize: '11px',
                   textTransform: 'capitalize',
-                  border: `1px solid ${colors.ModallightGrey}`,
-                  color: '#363636',
-                  fontWeight: '600',
+                  border: `1px solid #0662B7`,
+                  color: '#0662B7',
+                  fontWeight: '500',
                 }}
               >
                 {close}
@@ -712,10 +721,11 @@ function CustomModal({
                 variant="contained"
                 sx={{
                   fontSize: '11px',
-                  marginLeft: '35px',
+                  marginLeft: '30px',
                   textTransform: 'capitalize',
                   backgroundColor: `${colors.Modalblue}`,
-                  fontWeight: '600',
+                  fontWeight: '500',
+                  padding: '6px 20px',
                 }}
                 onClick={handleSuccess}
               >
