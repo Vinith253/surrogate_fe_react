@@ -11,8 +11,9 @@ function ProgramManagement() {
       data: 'Programme Management',
       component: <ProgramManagementScreen />,
     },
-    // { id: '2', data: 'Reviewer Log', component: <ReviewerLog /> },
+
     { id: '2', data: 'History Log', component: <HistoryLog /> },
+    { id: '3', data: 'Reviewer Log', component: <ReviewerLog /> },
   ];
   return (
     <>
