@@ -11,8 +11,8 @@ import {
 } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { colors } from '../../../../../style/Color';
-import { checkTagStatus } from '../../../../../utils/tagBasedIndicator/tagStatus';
 import { programMmgt } from '../../../../../utils/Constants';
+import { ListTagStatus } from '../../../../../utils/tagBasedIndicator/listTagStatus';
 
 export interface cardDetailsType {
   surrogateProgramme: string;
@@ -59,14 +59,14 @@ function CardList({ data }: cardData) {
             width="31.5%"
             height="300px"
             sx={{
-              borderRadius: '4px',
+              borderRadius: '12px',
               ...useStyles.root,
             }}
           >
             <Card
               sx={{
                 height: '300px',
-                borderRadius: '4px',
+                borderRadius: '12px',
                 '&:hover': {
                   outline: `1.5px solid ${colors.blue}`,
                 },
@@ -79,7 +79,7 @@ function CardList({ data }: cardData) {
                     justifyContent: 'space-between',
                     alignItems: 'center',
                     borderBottom: `2px solid ${colors.lightGrey}`,
-                    padding: '0',
+                    paddingBottom: '5px',
                   }}
                 >
                   <Box
@@ -88,15 +88,15 @@ function CardList({ data }: cardData) {
                       alignItems: 'center',
                     }}
                   >
-                    <Checkbox
-                      color="secondary"
-                      // sx={{
-                      //   "& .MuiSvgIcon-root": {
-                      //     fontSize: 28,
-                      //   },
-                      // }}
-                    />
-                    <Typography sx={{ letterSpacing: '0.5px' }}>
+                    <Checkbox color="secondary" />
+                    <Typography
+                      sx={{
+                        letterSpacing: '0.0025em',
+                        fontSize: '14px',
+                        fontWeight: 400,
+                        lineHeight: '16px',
+                      }}
+                    >
                       {dataItem.surrogateProgramme}
                     </Typography>
                   </Box>
@@ -116,12 +116,12 @@ function CardList({ data }: cardData) {
                   <Box sx={{ padding: '15px 0' }}>
                     <Typography
                       sx={{
-                        color: checkTagStatus(dataItem.status).color,
-                        backgroundColor: checkTagStatus(dataItem.status)
-                          .bgColor,
-                        fontSize: '13px',
-                        padding: '1px 8px',
-                        borderRadius: '5px',
+                        color: ListTagStatus(dataItem.status).color,
+                        backgroundColor: ListTagStatus(dataItem.status).bgColor,
+                        fontSize: '12px',
+                        fontWeight: 400,
+                        padding: '1px 9px',
+                        borderRadius: '4px',
                         // textAlign: "center",
                         width: 'max-content',
                       }}
@@ -131,28 +131,47 @@ function CardList({ data }: cardData) {
                   </Box>
                   <Box sx={{ padding: '0 0px 10px 0' }}>
                     <Typography
-                      variant="subtitle2"
-                      sx={{ color: '#9F9FA0', fontSize: 'small' }}
+                      sx={{
+                        color: '#AFAEAF',
+                        fontSize: '12px',
+                        fontWeight: 500,
+                        paddingBottom: '3px',
+                      }}
                     >
                       Last Modified
                     </Typography>
                     <Typography
                       variant="subtitle1"
-                      sx={{ fontSize: '15px', fontWeight: 500, color: 'black' }}
+                      sx={{
+                        fontSize: '14px',
+                        fontWeight: 400,
+                        color: '#151515',
+                        paddingBottom: '3px',
+                      }}
                     >
                       {dataItem.lastModify}
                     </Typography>
                   </Box>
                   <Box>
                     <Typography
-                      variant="subtitle2"
-                      sx={{ color: '#9F9FA0', fontSize: 'small' }}
+                      variant="subtitle1"
+                      sx={{
+                        color: '#AFAEAF',
+                        fontSize: '12px',
+                        fontWeight: 500,
+                        paddingBottom: '2px',
+                      }}
                     >
                       Status
                     </Typography>
                     <Typography
                       variant="subtitle1"
-                      sx={{ fontSize: '14px', fontWeight: 500, color: 'black' }}
+                      sx={{
+                        fontSize: '14px',
+                        fontWeight: 400,
+                        color: '#151515',
+                        paddingBottom: '1px',
+                      }}
                     >
                       {dataItem.StatusActiveDate}
                     </Typography>
@@ -161,8 +180,9 @@ function CardList({ data }: cardData) {
                         variant="subtitle1"
                         sx={{
                           fontSize: '14px',
-                          fontWeight: 500,
-                          color: 'black',
+                          fontWeight: 400,
+                          color: '#151515',
+                          paddingBottom: '1px',
                         }}
                       >
                         {dataItem.resumeStatus}
@@ -172,11 +192,14 @@ function CardList({ data }: cardData) {
                       <Typography
                         sx={{
                           padding: '3px 0',
-                          fontSize: '13px',
+                          fontSize: '14px',
+                          fontWeight: 500,
                           textDecoration: 'underline',
                           cursor: 'pointer',
+                          color: '#0662B7',
+                          letterSpacing: '0.0125em',
                         }}
-                        color="secondary"
+                        // color="secondary"
                       >
                         {dataItem.resumeItNow}
                       </Typography>
