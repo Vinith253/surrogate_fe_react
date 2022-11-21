@@ -1,5 +1,3 @@
-import { TextField } from '@mui/material';
-import ReactApexChart from 'react-apexcharts';
 import ProgressCard from '../../../../components/commonComponent/CommonCard/ProgressCard/ProgressCard';
 import DashboardCard from '../../../../components/commonComponent/CommonCard/SalesDashbaordCard/DashboardCard';
 import ApprovalRate from '../../../../assets/icons/approval_rate_icon.svg';
@@ -20,6 +18,7 @@ import {
   statusRowHeading,
 } from '../dashboard.const';
 import FilterButton from '../../../../components/commonComponent/FilterHeader/FilterButton';
+import BarGarph from '../../../../components/commonComponent/BarGraph/BarGraph';
 
 interface IStatus {
   label: string;
@@ -250,112 +249,15 @@ export default function DsaPage() {
               ))}
             </div>
             <div className="graph-card">
-              <div className="graph-div">
-                <div>
-                  <text className="overview-text">Sales Data </text>
-                  <text className="overview-text2">- Current Day</text>
-                </div>
-                <div className="line-div" />
-                <div className="filter-graph-box">
-                  <div>
-                    <TextField
-                      id="outlined-select-currency-native"
-                      select
-                      value={currency}
-                      onChange={handleChange}
-                      SelectProps={{
-                        native: true,
-                      }}
-                      variant="outlined"
-                      inputProps={{
-                        style: {
-                          fontSize: '12px',
-                          backgroundColor: '#F3F3F3',
-                          paddingTop: '10px',
-                          paddingBottom: '10px',
-                        },
-                      }}
-                    >
-                      {currencies?.map((option) => (
-                        <option key={option.value} value={option.value}>
-                          {option.label}
-                        </option>
-                      ))}
-                    </TextField>
-                  </div>
-                  <div className="third-header">
-                    <div className={'graph-filter-box'}>
-                      <div
-                        className={graphView === 1 ? 'selectedBox' : 'hour-box'}
-                      >
-                        <li
-                          onClick={() => setGraphView(1)}
-                          className={
-                            graphView === 1
-                              ? 'selected-overview-text3'
-                              : 'overview-text3'
-                          }
-                        >
-                          Hour
-                        </li>
-                      </div>
-                      <div className="line2-div" />
-                      <div
-                        className={graphView === 2 ? 'selectedBox' : 'hour-box'}
-                      >
-                        <li
-                          onClick={() => setGraphView(2)}
-                          className={
-                            graphView === 2
-                              ? 'selected-overview-text3'
-                              : 'overview-text3'
-                          }
-                        >
-                          Day
-                        </li>
-                      </div>
-                      <div className="line2-div" />
-                      <div
-                        className={graphView === 3 ? 'selectedBox' : 'hour-box'}
-                      >
-                        <li
-                          onClick={() => setGraphView(3)}
-                          className={
-                            graphView === 3
-                              ? 'selected-overview-text3'
-                              : 'overview-text3'
-                          }
-                        >
-                          Week
-                        </li>
-                      </div>
-                      <div className="line2-div" />
-                      <div
-                        className={graphView === 4 ? 'selectedBox' : 'hour-box'}
-                      >
-                        <li
-                          onClick={() => setGraphView(4)}
-                          className={
-                            graphView === 4
-                              ? 'selected-overview-text3'
-                              : 'overview-text3'
-                          }
-                        >
-                          Month
-                        </li>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="line-div" id="chart">
-                  <ReactApexChart
-                    options={options}
-                    series={series}
-                    type="bar"
-                    height={220}
-                  />
-                </div>
-              </div>
+              <BarGarph
+              currencies={currencies}
+              handleChange={handleChange}
+              currency={currency}
+              options={options}
+              series={series}
+              graphView={graphView}
+              handleGraphView={(value:number)=>setGraphView(value)}
+              />
             </div>
           </div>
         </div>
