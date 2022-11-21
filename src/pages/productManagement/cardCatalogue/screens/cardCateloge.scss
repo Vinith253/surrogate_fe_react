@@ -2,35 +2,121 @@
   position: relative;
   margin: 0;
   padding: 0;
-  /* background-color:rgb(220, 220, 220); */
   background-color: #eceff2;
-  /* width: 90wh; */
   height: 100%;
 }
-.MuiTableRow-root{
-    padding:0;
-} 
-/* .popcard{
-    position:absolute !important ;
-    top: '20%' !important;
-    left: '60%' !important;
-    transform: 'translate(-50%, -50%)';
-    width: '400px';
-    background-color: rgb(246, 246, 250);
-    border: '2px solid #000';
-    box-shadow: 24; 
-} */
-/* .content{
-    margin: 0;
-    padding: 20px;
-    width: 100%  ;
-    display: flex  ;
-    flex-direction: row ;
-    justify-content: space-between ;
-    background-color:rgb(236, 119, 119);
+.cardHeader {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 30px 0 30px;
+}
+.body1 {
+  background-color: white;
+  margin-top: 25px;
+  padding: 0 30px;
+  .container1 {
+    display: flex;
+    gap: 10px;
+    background-color: white;
+    padding-top: 10px;
+  }
+  .img1 {
+    margin-bottom: 14px;
+  }
+  .bodyBox {
+    min-width: 500;
+    margin-top: 16px;
+    display: flex;
+    gap: 3%;
+    justify-content: space-between;
+    background-color: white;
+  }
+}
+.body1 {
+  background-color: white;
+  margin-top: 25px;
+  padding: 0 30px;
+  .container1 {
+    display: flex;
+    gap: 10px;
+    background-color: white;
+    padding-top: 10px;
+  }
+  .img1 {
+    margin-bottom: 14px;
+  }
+  .bodyBox {
+    min-width: 500;
+    margin-top: 16px;
+    display: flex;
+    gap: 3%;
+    justify-content: space-between;
+    background-color: white;
+  }
+}
+.formctrl {
+  width: 200px;
+  .select {
+    height: 40px;
+    text-align: left;
+  }
 }
 
+.boxBtn {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  padding: 24px 0;
+  background-color: white;
+}
 
-/* .css-13xfq8m-MuiTabPanel-root{
-    padding: 0 !important;
-} */
+.body2 {
+  padding: 0 30px;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .btn {
+    padding: 3px 8px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    .icon {
+      padding: 0;
+      margin-right: 8px;
+    }
+  }
+
+  .searchBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid grey;
+    border-radius: 8px;
+    padding: 5px 0;
+    .searchIcon {
+      margin-right: 15px;
+      color: grey;
+    }
+  }
+}
+.tableBox {
+  height: 400;
+  background-color: white;
+  padding: 0 32px;
+  .tableHead {
+    background-color: #eef7ff;
+    .tableCell {
+      font-weight: 800;
+    }
+  }
+  .menu {
+    padding: 10px 20px;
+    text-align: left;
+  }
+}
+
+.MuiTableRow-root {
+  padding: 0;
+}

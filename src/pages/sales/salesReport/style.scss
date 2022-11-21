@@ -1,62 +1,62 @@
 .sales-report-list {
   background-color: #eceff2;
 }
-
 .sales-report-details-container {
   background-color: #eceff2;
   min-height: 100vh;
   font-family: 'Ilisarniq';
-
   .header-container {
     background-color: #ffffff;
     padding: 20px 25px;
     border-radius: 5px;
     margin: 20px 0px;
-
     .main-header {
       font-weight: 600;
       font-size: 17px;
       margin: 10px 0px;
     }
   }
+}
+.details-card-container {
+  background-color: #ffffff;
+  border-radius: 5px;
+  .details-card-inner-container {
+    padding: 20px 25px;
+    width: 97%;
 
-  .details-card-container {
-    background-color: #ffffff;
-    border-radius: 5px;
-    margin: 20px 0px;
-
-    .details-card-inner-container {
-      padding: 20px 25px;
-      width: 97%;
-
-      .header {
-        font-style: normal;
-        font-weight: 600;
-        font-size: 14px;
-        margin: 10px 0px;
-      }
-
-      .underline {
-        border: 1px solid #f0f2f5;
-        width: 100%;
-        margin: 20px 0px;
-      }
-
-      .each-info {
-        margin-bottom: 10px;
-      }
+    .each-info {
+      margin-bottom: 10px;
     }
   }
-
-  .info-label {
-    color: #afaeaf;
-    font-size: 12px;
-    font-weight: 500;
-    margin: 0px 0px 6px 0px;
-  }
-  .info-value {
-    color: #151515;
-    font-size: 14px;
-    font-weight: 500;
-  }
 }
+
+.info-label {
+  color: #afaeaf;
+  font-size: 12px;
+  font-weight: 500;
+  margin: 0px 0px 6px 0px;
+}
+.info-value {
+  color: #151515;
+  font-size: 14px;
+  font-weight: 500;
+}
+.header {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  margin: 10px 0px;
+}
+
+.underline {
+  border: 1px solid #f0f2f5;
+  width: 100%;
+  margin: 20px 0px;
+}
+.accountHeader {
+  padding: 20px 25px;
+  width: 97%;
+}
+// .container {
+//   margin-left: 30px;
+// }

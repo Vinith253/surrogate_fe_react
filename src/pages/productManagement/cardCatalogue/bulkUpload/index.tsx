@@ -5,6 +5,7 @@ import BulkList from '../bulkUpload/bulkList/BulkList';
 import UploadCard from '../bulkUpload/uploadCard/UploadCard';
 import { bulkUpload } from '../../../../utils/Constants';
 import { useNavigate } from 'react-router-dom';
+import './index.scss';
 
 const BulkUpload = ({ flag }: any) => {
   const navigate = useNavigate();
@@ -31,32 +32,22 @@ const BulkUpload = ({ flag }: any) => {
     upload: bulkUpload.UPLOAD_CARD_PHOTO,
   };
   return (
-    <Box sx={{ width: '100%', backgroundColor: '#E3E3E3' }}>
-      <Box
-        sx={{
-          width: '100%',
-          height: 80,
-          borderRadius: '10px',
-          backgroundColor: 'white',
-          padding: '1rem 2rem',
-          display: 'flex',
-          alignItems: 'center',
-          marginTop: '2rem',
-        }}
-      >
+    <Box className="bulk-upload-container">
+      <Box className="bulk-upload-header">
         <Box sx={{ display: 'flex' }}>
           <ArrowBackIcon
             color="secondary"
-            sx={{ fontSize: '2rem', cursor: 'pointer' }}
+            className='arrowBtn'
             onClick={() => navigate(-1)}
           />
           <Box sx={{ paddingLeft: '10px' }}>
-            <Typography variant="h1" sx={{ fontSize: '1.2rem' }}>
+            <Typography variant="h1"  className="bulk-upload-head">
               {bulkUpload.BULK_UPLOAD_HEAD}
             </Typography>
             <Typography
+            className="bulk-upload-subhead"
               variant="h2"
-              sx={{ fontSize: '1rem', color: 'grey', margin: '5px 0' }}
+             
             >
               {bulkUpload.BULK_UPLOAD_SUBHEAD}
             </Typography>
@@ -64,7 +55,7 @@ const BulkUpload = ({ flag }: any) => {
         </Box>
       </Box>
       <Box
-        sx={{ backgroundColor: 'white', margin: ' 2rem', borderRadius: '10px' }}
+        className='upload-card-container'
       >
         {openUpload && (
           <UploadCard

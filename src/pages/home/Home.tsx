@@ -1,4 +1,4 @@
-import { Box, Paper, Stack } from '@mui/material';
+import { Box, Paper, Stack, Typography } from '@mui/material';
 import Card from '../../components/commonComponent/card/Card';
 import credit_rule from '../../assets/icons/credit_rule.svg';
 import card_for_approval from '../../assets/icons/card_for_approval.svg';
@@ -22,6 +22,10 @@ import SchedulePauseSuccess from '../../components/commonComponent/customModal/S
 import SurrogateSelection from '../../components/commonComponent/customModal/SurrogateSelection';
 import PageLayout from '../../components/layout/pageLayout/pageLayout';
 import { useState } from 'react';
+import AccessLibraryModal from '../../components/commonComponent/customModal/AccessLibraryModal';
+import ChangePasswordProfileModal from '../../components/commonComponent/customModal/ChangePasswordProfileModal';
+import ChangePasswordOTP from '../../components/commonComponent/customModal/ChangePasswordOTP';
+import CreateNewPassword from '../../components/commonComponent/customModal/CreateNewPassword';
 // import SurrogateSelection from "../../components/commonComponent/CustomModal/SurrogateSelection";
 
 // import PauseModalSucces from "../../components/commonComponent/customModal/PauseModalSuccess";
@@ -102,29 +106,22 @@ export default function Home() {
   );
 
   return (
-    <Box
-      // className="homeContainer"
-      sx={{
-        backgroundColor: 'white',
-        margin: ' 2rem',
-        borderRadius: '10px',
-        display: 'flex',
-        flexDirection: 'row',
-        // width: '100',
-        // height: '80vh',
-        gap: '3%',
-        padding: '5vh 3vw',
-      }}
-    >
-      <Card content={pendingAction} />
+    <Box className="main-container">
+      <Typography color="secondary" variant="h5">
+        Welcome Parithi!
+      </Typography>
+      <Box className="home-container">
+        {/* <AccessLibraryModal />
+      <ChangePasswordProfileModal />
+      <ChangePasswordOTP />
+      <CreateNewPassword /> */}
+        <Card content={pendingActionsData} />
+        <Card content={savedItemsData} />
+        <Card content={frequentActivitiesData} />
 
-      <Card content={savedItems} />
+        {/* Modals*/}
 
-      <Card content={frequentActivities} />
-
-      {/* Modals*/}
-
-      {/* <PauseModal />
+        {/* <PauseModal />
       <PauseModalSucces />
       <SchedulePause />
       <SchedulePauseSuccess />
@@ -133,7 +130,8 @@ export default function Home() {
       <SurrogateSelection />
       <RejectionModal />
       <HistoryModal/> */}
-      {/* <HistoryLogCustomModal /> */}
+        {/* <HistoryLogCustomModal /> */}
+      </Box>
     </Box>
   );
 }

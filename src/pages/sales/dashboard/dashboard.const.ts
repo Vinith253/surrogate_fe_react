@@ -262,10 +262,10 @@ export const statusRowHeading: statusRowHeadingInterface[] = [
 
 export const listRowHeading: statusRowHeadingInterface[] = [
   {
-    header1: '# ',
+    header1: '#',
     header2: 'Application#',
     header3: 'Customer Name',
-    header4: ' Mobile Number',
+    header4: 'Mobile Number',
     header5: 'Lead',
     header6: 'Surrogate Name',
     header7: 'Date & Time',
@@ -288,6 +288,12 @@ export interface rowsDataInterface {
   processedBy?: string;
   kycStatus?: string;
   status?: string;
+
+  version? :string;
+  currentStatus?:string;
+  initiatedBy?:string;
+  request?:string;
+  dateAndTime?:string;
 }
 
 export interface statusRowHeadingInterface {
@@ -325,3 +331,55 @@ export const filterHeaderData= {
     },
   ],
 };
+export const product_label = [
+  {
+    id: 1,
+    label: '#',
+    defaultChecked: true,
+  },
+  {
+    id: 2,
+    label: 'Application#',
+    defaultChecked: true,
+  },
+  {
+    id: 3,
+    label: 'Customer Name',
+    defaultChecked: true,
+  },
+  {
+    id: 4,
+    label: 'Mobile Number',
+    defaultChecked: true,
+  },
+  {
+    id: 5,
+    label: 'Lead',
+    defaultChecked: true,
+  },
+  {
+    id: 6,
+    label: 'Surrogate Name',
+    defaultChecked: true,
+  },
+  {
+    id: 7,
+    label: 'Date & Time',
+    defaultChecked: true,
+  },
+  {
+    id: 8,
+    label: 'Policy',
+    defaultChecked: true,
+  },
+  {
+    id: 9,
+    label: 'Channel',
+    defaultChecked: true,
+  },
+  {
+    id: 10,
+    label: 'Processed',
+    defaultChecked: true,
+  },
+];

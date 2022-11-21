@@ -2,8 +2,10 @@ import React from "react";
 import "../SalesDashbaordCard/card.scss";
 import { Button } from "@mui/material";
 import { ReactComponent as RightArrow } from "../../../../assets/icons/rightArrow.svg";
+import { useNavigate } from "react-router-dom";
 
 function ProgressCard(props: {
+  navPath: string;
   title:
     | string
     | number
@@ -56,6 +58,7 @@ function ProgressCard(props: {
   if (props.index == 4) {
     boxstyles = "rejected-icon-box";
   }
+  const navigate = useNavigate();
 
   return (
     <div className="value-cards">
@@ -87,6 +90,9 @@ function ProgressCard(props: {
         </div>
         <Button
           endIcon={<RightArrow style={{width:'5px', height: '10px'}}/>}
+          onClick={()=> {
+            navigate(props.navPath)
+          }}
           sx={{ fontSize: "0.9vw",color:'#0662B7',textTransform:'none'}}
         >
           More

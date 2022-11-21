@@ -2,7 +2,6 @@ import { TextField } from '@mui/material';
 import ReactApexChart from 'react-apexcharts';
 import ProgressCard from '../../../../components/commonComponent/CommonCard/ProgressCard/ProgressCard';
 import DashboardCard from '../../../../components/commonComponent/CommonCard/SalesDashbaordCard/DashboardCard';
-import FilterButton from '../../../../components/commonComponent/FilterHeader/FilterButton';
 import ApprovalRate from '../../../../assets/icons/approval_rate_icon.svg';
 import TotalApplications from '../../../../assets/icons/total_application_icon.svg';
 import Comparisions from '../../../../assets/icons/comparision_icon.svg';
@@ -20,6 +19,7 @@ import {
   salesDashboardList,
   statusRowHeading,
 } from '../dashboard.const';
+import FilterButton from '../../../../components/commonComponent/FilterHeader/FilterButton';
 
 interface IStatus {
   label: string;
@@ -89,6 +89,7 @@ export default function DsaPage() {
       lastPeriodValue: 0,
       lastYearValue: 0,
       image: InProgress,
+      navPath:'/sales/salesReport'
     },
     {
       index: 2,
@@ -97,6 +98,7 @@ export default function DsaPage() {
       lastPeriodValue: 2500,
       lastYearValue: 2500,
       image: ApprovedIcon,
+      navPath:'/sales/salesReport'
     },
     {
       index: 3,
@@ -105,6 +107,7 @@ export default function DsaPage() {
       lastPeriodValue: 2500,
       lastYearValue: 2500,
       image: Dropped,
+      navPath:'/sales/salesReport'
     },
     {
       index: 4,
@@ -113,6 +116,7 @@ export default function DsaPage() {
       lastPeriodValue: 2500,
       lastYearValue: 2500,
       image: Rejected,
+      navPath:'/sales/salesReport'
     },
   ];
 
@@ -215,15 +219,13 @@ export default function DsaPage() {
   ];
 
   return (
-    <div>
+    <>
       <div className="dsa-data-container">
         <div>
-          <FilterButton
-          filterHeaderData={filterHeaderData} 
-          />
+          <FilterButton filterHeaderData={filterHeaderData} />
           <div className="divider-line" />
           <div className="horizontal-cards">
-            {dashboardVal.map((value) => (
+            {dashboardVal?.map((value) => (
               <DashboardCard
                 title={value.title}
                 value={value.value}
@@ -235,7 +237,7 @@ export default function DsaPage() {
 
           <div className="report-cards">
             <div className="progress-card">
-              {progressValue.map((value) => (
+              {progressValue?.map((value) => (
                 <ProgressCard
                   index={value.index}
                   title={value.title}
@@ -243,6 +245,7 @@ export default function DsaPage() {
                   lastPeriodValue={value.lastPeriodValue}
                   lastYearValue={value.lastYearValue}
                   image={value.image}
+                  navPath={value.navPath}
                 />
               ))}
             </div>
@@ -273,7 +276,7 @@ export default function DsaPage() {
                         },
                       }}
                     >
-                      {currencies.map((option) => (
+                      {currencies?.map((option) => (
                         <option key={option.value} value={option.value}>
                           {option.label}
                         </option>
@@ -370,9 +373,9 @@ export default function DsaPage() {
           statusRowsHeading={statusRowHeading}
           listRowHeading={listRowHeading}
           flag="dashboard"
-          viewPath={''}
+          viewPath="/sales/salesDashboard"
         />
       </div>
-    </div>
+    </>
   );
 }

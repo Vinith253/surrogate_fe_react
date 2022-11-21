@@ -28,6 +28,7 @@ type columnType = {
   title: string;
   dataIndex: string;
   key: string;
+  onClick: any;
 };
 
 const CommonTable = (props: any) => {
@@ -71,6 +72,7 @@ const CommonTable = (props: any) => {
           </TableHead>
           <TableBody>
             {currentTableData?.map((dataItem: any) => {
+              console.log('dataItem', dataItem);
               return (
                 <TableRow
                   sx={{
@@ -78,8 +80,14 @@ const CommonTable = (props: any) => {
                   }}
                 >
                   {props.column.map((columnItem: columnType) => {
+                    console.log('columnItem', columnItem);
+                    console.log('dataItem[]', dataItem['copyIcon']);
                     return (
-                      <StyledTableCell>
+                      <StyledTableCell
+                        onClick={() =>
+                          columnItem.onClick ? columnItem.onClick() : null
+                        }
+                      >
                         {dataItem[columnItem.dataIndex]
                           ? dataItem[columnItem.dataIndex]
                           : '--'}
