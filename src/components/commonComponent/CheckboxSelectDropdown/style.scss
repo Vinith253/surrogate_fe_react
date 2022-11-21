@@ -1,2 +1,12 @@
 .checkbox-select-dropdown {
+  .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+    width: 200px !important;
+  }
+  .css-1cqo6r-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root {
+    width: 100%;
+    height: 60%;
+  }
+  .css-qd4whe-MuiButtonBase-root-MuiCheckbox-root.Mui-checked {
+    color: red;
+  }
 }
