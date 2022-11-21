@@ -124,7 +124,13 @@ function CustomModal({
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <Stack py={3} px={title ? 3 : 0}>
+        <Stack
+          py={3}
+          className={`${
+            accessLibraryModaBtn ? 'modal_container' : 'modal_container1'
+          }`}
+          px={title ? 3 : 0}
+        >
           {title && (
             <Typography
               className="modal_title"

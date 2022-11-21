@@ -20,7 +20,7 @@ import {
 } from '../../../pages/sales/dashboard/dashboard.const';
 import PaginationComp from '../Pagination/Pagination';
 import { useNavigate } from 'react-router-dom';
-import { programMmgt, tabBar } from '../../../utils/Constants';
+import { programMmgt, tabBar, tableHeader } from '../../../utils/Constants';
 import { borderTop, Stack } from '@mui/system';
 import Link from '@mui/material/Link';
 import CheckBoxModal from '../customModal/PopoverModal';
@@ -43,6 +43,7 @@ function TableComp(props: {
   const [filteredHeader, setFilterteredHeader] = useState<
     statusRowHeadingInterface[]
   >(props?.listRowHeading);
+  const [visibleHeader, setVisibleHeader] = useState(product_label);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -72,12 +73,14 @@ function TableComp(props: {
   };
 
   const handleClose = (categories: any) => {
+    setFilterteredData(props.rows);
     handleCloseSuccess(categories);
   };
 
   const handleCloseSuccess = (categories: any) => {
     setAnchorEl(null);
     const collections = {};
+    setVisibleHeader(categories);
     let newArr = props.rows;
     let updatedHeader = categories?.map(
       (item: { label: string; defaultChecked: boolean }) => {
@@ -114,63 +117,66 @@ function TableComp(props: {
               Object.assign(collections, { header10: item.label });
             }
           });
+          const array = [collections];
+          setFilterteredHeader(array);
           return item; //gets everything that was already in item, and updates "done"
         }
-        const array = [collections];
-        setFilterteredHeader(array);
         return item; // else return unmodified item
       }
     );
+    updatedListData(categories, newArr);
+  };
 
+  const updatedListData = (categories: any, newArr: rowsDataInterface[]) => {
     let updatedList = categories?.map(
       (item: { label: string; defaultChecked: boolean }) => {
         if (item.defaultChecked === false) {
-          if (item.label === '#') {
+          if (item.label === tableHeader.HEADING1) {
             newArr = newArr.map(({ id, ...rest }) => {
               return rest;
             });
           }
-          if (item.label === 'Application#') {
+          if (item.label === tableHeader.HEADING2) {
             newArr = newArr.map(({ applicationNum, ...rest }) => {
               return rest;
             });
           }
-          if (item.label === 'Customer Name') {
+          if (item.label === tableHeader.HEADING3) {
             newArr = newArr.map(({ customerName, ...rest }) => {
               return rest;
             });
           }
-          if (item.label === 'Mobile Number') {
+          if (item.label === tableHeader.HEADING4) {
             newArr = newArr.map(({ mobileNum, ...rest }) => {
               return rest;
             });
           }
-          if (item.label === 'Lead') {
+          if (item.label === tableHeader.HEADING5) {
             newArr = newArr.map(({ lead, ...rest }) => {
               return rest;
             });
           }
-          if (item.label === 'Surrogate Name') {
+          if (item.label === tableHeader.HEADING6) {
             newArr = newArr.map(({ surrogateName, ...rest }) => {
               return rest;
             });
           }
-          if (item.label === 'Date & Time') {
+          if (item.label === tableHeader.HEADING7) {
             newArr = newArr.map(({ dateTime, ...rest }) => {
               return rest;
             });
           }
-          if (item.label === 'Policy') {
+          if (item.label === tableHeader.HEADING8) {
             newArr = newArr.map(({ Policy, ...rest }) => {
               return rest;
             });
           }
-          if (item.label === 'Channel') {
+          if (item.label === tableHeader.HEADING9) {
             newArr = newArr.map(({ channelName, ...rest }) => {
               return rest;
             });
           }
-          if (item.label === 'Processed') {
+          if (item.label === tableHeader.HEADING10) {
             newArr = newArr.map(({ processedBy, ...rest }) => {
               return rest;
             });
@@ -178,6 +184,7 @@ function TableComp(props: {
           setFilterteredData(newArr);
           return item; //gets everything that was already in item, and updates "done"
         }
+        setFilterteredData(newArr);
         return item; // else return unmodified item
       }
     );
@@ -228,7 +235,7 @@ function TableComp(props: {
           <div className={graphView == 1 ? 'selectedBox' : 'filter-box'}>
             <li
               onClick={() => {
-                setFilterteredData(props.rows);
+                updatedListData(visibleHeader, props.rows);
                 setCurrentPage(1);
                 setPage(1);
                 setGraphView(1);
@@ -293,7 +300,7 @@ function TableComp(props: {
                   const currentData = props.rows.filter(function (item) {
                     return item.status === 'Approved';
                   });
-                  setFilterteredData(currentData);
+                  updatedListData(visibleHeader, currentData);
                   setCurrentPage(1);
                   setPage(1);
                   setGraphView(2);
@@ -316,7 +323,7 @@ function TableComp(props: {
                   const currentData = props.rows.filter(function (item) {
                     return item.status === 'In-Progress';
                   });
-                  setFilterteredData(currentData);
+                  updatedListData(visibleHeader, currentData);
                   setCurrentPage(1);
                   setPage(1);
                   setGraphView(3);
@@ -337,7 +344,7 @@ function TableComp(props: {
                 const currentData = props.rows.filter(function (item) {
                   return item.status === 'Rejected';
                 });
-                setFilterteredData(currentData);
+                updatedListData(visibleHeader, currentData);
                 setCurrentPage(1);
                 setPage(1);
                 setGraphView(4);
@@ -357,7 +364,7 @@ function TableComp(props: {
                   const currentData = props.rows.filter(function (item) {
                     return item.status === 'Dropped';
                   });
-                  setFilterteredData(currentData);
+                  updatedListData(visibleHeader, currentData);
                   setCurrentPage(1);
                   setPage(1);
                   setGraphView(5);
@@ -781,12 +788,17 @@ function TableComp(props: {
                       </TableCell>
                       <TableCell align="left" sx={{ borderBottom: 'none' }}>
                         {/* <div className="reset-data"> */}
-                        <Link
-                          sx={{ cursor: 'pointer', color: '#0662B7' }}
-                          onClick={() => viewAction(row)}
-                        >
-                          View
-                        </Link>
+                        {!props.flag && (
+                          <Link
+                            sx={{ cursor: 'pointer', color: '#0662B7' }}
+                            onClick={() => viewAction(row)}
+                          >
+                            View
+                          </Link>
+                        )}
+                        {props.flag && (
+                          <a href="/sales/salesReportDetails">View</a>
+                        )}
                         {/* </div> */}
                       </TableCell>
                     </TableRow>
