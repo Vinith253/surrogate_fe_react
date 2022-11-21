@@ -4,21 +4,24 @@
 
   .filters-container {
     background-color: #ffffff;
-    padding: 15px 25px;
-    margin: 25px 0px;
-  }
+    padding: 15px 30px;
+    margin: 25px 0px 30px 0px;
+    border-radius: 8px;
+    align-items: center;
 
-  .underline {
-    border: 1px solid #f0f2f5;
-    width: 100%;
-    margin: 20px 0px;
-  }
+    .underline {
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      border-bottom: 2px solid #eceff2;
+    }
 
-  .info-label {
-    color: #afaeaf;
-    font-size: 12px;
-    font-weight: 500;
-    margin: 0px 0px 6px 0px;
+    .sub-label {
+      font-size: 13px;
+      letter-spacing: 0.2;
+      color: #a3a3a5;
+      padding-bottom: 20px;
+    }
   }
 }
 

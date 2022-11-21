@@ -8,20 +8,26 @@ import {
 } from './../dashboard/dashboard.const';
 import SelectDropdown from '../../../components/commonComponent/CheckboxSelectDropdown';
 import { salesReportFilterDropdown } from './salesReport.const';
+
 import { Typography, Stack } from '@mui/material';
 
 function SalesReportList() {
   return (
-    <div className="sales-report-list">
-      <div className="filters-container">
-        <Typography>Sales Report</Typography>
-        <Stack className="info-label">
-          Lorem ipusm dolor sit amet, consectetur adipiscing elit.integer
-          senectus mattis
+    <Stack className="sales-report-list">
+      <Stack className="filters-container">
+        <Stack className="underline">
+          <Stack>
+            <Typography variant="subtitle1" sx={{ letterSpacing: 0.5 }}>
+              Sales Report
+            </Typography>
+            <Typography variant="subtitle2" className="sub-label">
+              Lorem ipusm dolor sit amet, consectetur adipiscing elit.integer
+              senectus mattis
+            </Typography>
+          </Stack>
         </Stack>
-        <div className="underline"></div>
         <SelectDropdown data={salesReportFilterDropdown} gridColumn={3} />
-      </div>
+      </Stack>
       <TableComp
         viewPath="/sales/salesReportDetails"
         rows={salesDashboardList}
@@ -29,7 +35,7 @@ function SalesReportList() {
         listRowHeading={listRowHeading}
         flag="dashboard"
       />
-    </div>
+    </Stack>
   );
 }
 
