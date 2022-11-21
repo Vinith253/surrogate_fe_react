@@ -70,6 +70,9 @@ const ReviewCard = () => {
   const goBack = () => {
     navigate(-1);
   };
+  const close = ()=>{
+    navigate('/productManagement/cardCatalogue');
+  }
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -811,7 +814,7 @@ const ReviewCard = () => {
         }}
       >
         <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <BtnOutlined onClick={goBack} title="close" />
+          <BtnOutlined onClick={close} title="close" />
         </Box>
       </Box>
     </Box>
