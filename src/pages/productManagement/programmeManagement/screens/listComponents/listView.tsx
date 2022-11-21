@@ -10,18 +10,24 @@ import {
   Stack,
   MenuItem,
   Menu,
+  IconButton,
 } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { colors } from '../../../../../style/Color';
 import { programMmgt } from '../../../../../utils/Constants';
 import { checkTagStatus } from '../../../../../utils/tagBasedIndicator/tagStatus';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import UnfoldMoreIcon from '../../../../../assets/icons/sortArrow.svg';
 export interface dataList {
   surrogateProgramme: string;
-  activeSince: string;
   lastModify: string;
   status: string;
   autoResumeForm: string;
+  StatusActiveDate: string;
+  activeSince: string;
+  id: number;
+  resumeItNow: string;
+  resumeStatus: string;
 }
 export interface dataHeaderList {
   surrogateProgramme: string;
@@ -43,15 +49,31 @@ const tableHeaderData = [
 ];
 export const ListView = ({ data }: any) => {
   const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
-  const [selected, setSelected] = React.useState<readonly string[]>([]);
+  const [selected, setSelected] = React.useState<number[]>([]);
+  const [sortingData, setSortingData] = useState(data);
+  const [ascending, setAscending] = useState<boolean>(true);
   const open = Boolean(anchorElement);
+  const filterData = () => {
+    const sort = sortingData.sort((a: dataList, b: dataList) => {
+      if (ascending) {
+        return a.surrogateProgramme < b.surrogateProgramme ? -1 : 1;
+      }
+      return a.surrogateProgramme > b.surrogateProgramme ? -1 : 1;
+    });
+    setSortingData([...sort]);
+  };
+
+  useEffect(() => {
+    filterData();
+  }, [ascending]);
+
   const handleClick = (event: React.MouseEvent<HTMLTableCellElement>) => {
     setAnchorElement(event.currentTarget);
   };
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      // const newSelected = tableData.map((n) => n.surrogateProgramme);
-      // setSelected(newSelected);
+      const newSelected = data.map((n: any) => n.id);
+      setSelected(newSelected);
       return;
     }
     setSelected([]);
@@ -59,26 +81,28 @@ export const ListView = ({ data }: any) => {
   const handleClose = () => {
     setAnchorElement(null);
   };
-  const isSelected = (name: string) => selected.indexOf(name) !== -1;
-  const handleClickCheckbox = (
-    event: React.MouseEvent<unknown>,
-    name: string
-  ) => {
-    const selectedIndex = selected.indexOf(name);
-    let newSelected: readonly string[] = [];
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
-      );
+  const isSelected = (id: number) => {
+    const res = selected.indexOf(id);
+    if ((res && res !== -1) || res === 0) {
+      return true;
+    } else {
+      return false;
     }
-    setSelected(newSelected);
+  };
+
+  const handleClickCheckbox = (id: number) => {
+    const result = isSelected(id);
+    let selectedData = selected;
+    if (result) {
+      const index = selected.indexOf(id);
+      selectedData.splice(index, 1);
+      setSelected([...selectedData]);
+    } else {
+      setSelected([...selectedData, id]);
+    }
+  };
+  const handleSortByName = () => {
+    setAscending(!ascending);
   };
   return (
     <Stack>
@@ -93,13 +117,10 @@ export const ListView = ({ data }: any) => {
                 <TableCell padding="checkbox" sx={{ padding: '5px' }}>
                   <Checkbox
                     color={'secondary'}
-                    // indeterminate={
-                    //   selected.length > 0 && selected.length < tableData.length
-                    // }
-                    // checked={
-                    //   tableData.length > 0 &&
-                    //   selected.length === tableData.length
-                    // }
+                    indeterminate={
+                      selected.length > 0 && selected.length < data.length
+                    }
+                    checked={data.length > 0 && selected.length === data.length}
                     onChange={handleSelectAllClick}
                     inputProps={{
                       'aria-label': 'select all desserts',
@@ -108,6 +129,9 @@ export const ListView = ({ data }: any) => {
                 </TableCell>
                 <TableCell sx={{ fontWeight: 800, padding: '5px' }}>
                   {items.surrogateProgramme}
+                  <IconButton onClick={() => handleSortByName()}>
+                    <img src={UnfoldMoreIcon} alt="Sort Icon" />
+                  </IconButton>
                 </TableCell>
                 <TableCell sx={{ fontWeight: 800, padding: '5px' }}>
                   {items.activeSince}
@@ -131,71 +155,71 @@ export const ListView = ({ data }: any) => {
             ))}
           </TableHead>
           <TableBody>
-            {data.map((dataItem: dataList, index: number) => {
-              const isItemSelected = isSelected(dataItem.surrogateProgramme);
-              const labelId = `enhanced-table-checkbox-${index}`;
-              return (
-                <TableRow
-                  key={index}
-                  style={
-                    index % 2
-                      ? { background: colors.white }
-                      : { background: colors.tableGrey }
-                  }
-                  sx={{ padding: '5px' }}
-                >
-                  <TableCell padding={'checkbox'} sx={{ padding: '5px' }}>
-                    <Checkbox
-                      color={'secondary'}
-                      checked={isItemSelected}
-                      inputProps={{
-                        'aria-labelledby': labelId,
-                      }}
-                      onChange={(event: any) =>
-                        handleClickCheckbox(event, dataItem.surrogateProgramme)
-                      }
-                    />
-                  </TableCell>
-                  <TableCell sx={{ padding: '5px' }}>
-                    {dataItem.surrogateProgramme}
-                  </TableCell>
-                  <TableCell
-                    sx={{
-                      color: checkTagStatus(dataItem.activeSince).color,
-                      padding: '5px',
-                    }}
-                  >
-                    {dataItem.activeSince}
-                  </TableCell>
-                  <TableCell sx={{ padding: '5px' }}>
-                    {dataItem.lastModify}
-                  </TableCell>
-                  <TableCell
-                    sx={{
-                      color: checkTagStatus(dataItem.status).color,
-                      padding: '5px',
-                    }}
-                  >
-                    {dataItem.status}
-                  </TableCell>
-                  <TableCell align="center" sx={{ padding: '5px' }}>
-                    {dataItem.autoResumeForm === ''
-                      ? '-'
-                      : dataItem.autoResumeForm}
-                  </TableCell>
-                  <TableCell
-                    id="more-button"
-                    onClick={handleClick}
-                    aria-controls={open ? 'more-menu' : undefined}
-                    aria-haspopup="true"
-                    aria-expanded={open ? 'true' : undefined}
+            {sortingData.length > 0 &&
+              sortingData.map((dataItem: dataList, index: number) => {
+                const isItemSelected = isSelected(dataItem.id);
+                console.log('isItemSelected', isItemSelected);
+                const labelId = `enhanced-table-checkbox-${index}`;
+                return (
+                  <TableRow
+                    key={index}
+                    style={
+                      index % 2
+                        ? { background: colors.white }
+                        : { background: colors.tableGrey }
+                    }
                     sx={{ padding: '5px' }}
                   >
-                    <MoreVertIcon />
-                  </TableCell>
-                </TableRow>
-              );
-            })}
+                    <TableCell padding={'checkbox'} sx={{ padding: '5px' }}>
+                      <Checkbox
+                        color={'secondary'}
+                        checked={isItemSelected}
+                        inputProps={{
+                          'aria-labelledby': labelId,
+                        }}
+                        onChange={() => handleClickCheckbox(dataItem.id)}
+                      />
+                    </TableCell>
+                    <TableCell sx={{ padding: '5px' }}>
+                      {dataItem.surrogateProgramme}
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        color: checkTagStatus(dataItem.activeSince).color,
+                        padding: '5px',
+                      }}
+                    >
+                      {dataItem.activeSince}
+                    </TableCell>
+                    <TableCell sx={{ padding: '5px' }}>
+                      {dataItem.lastModify}
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        color: checkTagStatus(dataItem.status).color,
+                        padding: '5px',
+                      }}
+                    >
+                      {dataItem.status}
+                    </TableCell>
+                    <TableCell align="center" sx={{ padding: '5px' }}>
+                      {dataItem.autoResumeForm === ''
+                        ? '-'
+                        : dataItem.autoResumeForm}
+                    </TableCell>
+                    <TableCell
+                      id="more-button"
+                      onClick={handleClick}
+                      aria-controls={open ? 'more-menu' : undefined}
+                      aria-haspopup="true"
+                      aria-expanded={open ? 'true' : undefined}
+                      sx={{ padding: '5px' }}
+                    >
+                      <MoreVertIcon />
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
           </TableBody>
         </Table>
       </TableContainer>

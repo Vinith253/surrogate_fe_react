@@ -1,4 +1,4 @@
-import { Box, Paper } from '@mui/material';
+import { Box, Paper, Stack, Typography } from '@mui/material';
 import Card from '../../components/commonComponent/card/Card';
 import credit_rule from '../../assets/icons/credit_rule.svg';
 import card_for_approval from '../../assets/icons/card_for_approval.svg';
@@ -9,6 +9,7 @@ import customer_report from '../../assets/icons/customer_report.svg';
 import performance_report from '../../assets/icons/performance_report.svg';
 import lms from '../../assets/icons/lms.svg';
 import frequentActivity from '../../assets/images/frequentActivity.svg';
+import '../home/Home.scss';
 import HistoryLogCustomModal from '../../components/commonComponent/customModal/HistoryLogCustomModal';
 import HistoryModal from '../../components/commonComponent/customModal/HistoryLogModal';
 import PauseModal from '../../components/commonComponent/customModal/PauseModal';
@@ -20,6 +21,7 @@ import SchedulePause from '../../components/commonComponent/customModal/Schedule
 import SchedulePauseSuccess from '../../components/commonComponent/customModal/SchedulePauseSuccess';
 import SurrogateSelection from '../../components/commonComponent/customModal/SurrogateSelection';
 import PageLayout from '../../components/layout/pageLayout/pageLayout';
+import { useState } from 'react';
 import AccessLibraryModal from '../../components/commonComponent/customModal/AccessLibraryModal';
 import ChangePasswordProfileModal from '../../components/commonComponent/customModal/ChangePasswordProfileModal';
 import ChangePasswordOTP from '../../components/commonComponent/customModal/ChangePasswordOTP';
@@ -97,30 +99,29 @@ export default function Home() {
       },
     ],
   };
+  const [pendingAction, setPendingAction] = useState(pendingActionsData);
+  const [savedItems, setSavedItems] = useState(savedItemsData);
+  const [frequentActivities, setFrequentActivities] = useState(
+    frequentActivitiesData
+  );
+
   return (
-    <Box
-      sx={{
-        backgroundColor: 'white',
-        margin: ' 2rem',
-        borderRadius: '10px',
-        display: 'flex',
-        // width: '100',
-        // height: '80vh',
-        gap: '3%',
-        padding: '5vh 3vw',
-      }}
-    >
-      {/* <AccessLibraryModal />
+    <Box className="main-container">
+      <Typography color="secondary" variant="h5">
+        Welcome Parithi!
+      </Typography>
+      <Box className="home-container">
+        {/* <AccessLibraryModal />
       <ChangePasswordProfileModal />
       <ChangePasswordOTP />
       <CreateNewPassword /> */}
-      <Card content={pendingActionsData} />
-      <Card content={savedItemsData} />
-      <Card content={frequentActivitiesData} />
+        <Card content={pendingActionsData} />
+        <Card content={savedItemsData} />
+        <Card content={frequentActivitiesData} />
 
-      {/* Modals*/}
+        {/* Modals*/}
 
-      {/* <PauseModal />
+        {/* <PauseModal />
       <PauseModalSucces />
       <SchedulePause />
       <SchedulePauseSuccess />
@@ -129,7 +130,8 @@ export default function Home() {
       <SurrogateSelection />
       <RejectionModal />
       <HistoryModal/> */}
-      {/* <HistoryLogCustomModal /> */}
+        {/* <HistoryLogCustomModal /> */}
+      </Box>
     </Box>
   );
 }

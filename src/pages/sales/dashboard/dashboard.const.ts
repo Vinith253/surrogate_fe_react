@@ -1,5 +1,6 @@
 import { ReactComponent as DownArrow } from "../../../assets/icons/downArrow.svg";
 import { ReactComponent as MoreFilter } from "../../../assets/icons/moreFilter.svg";
+import { tableHeader } from "../../../utils/Constants";
 
 export const salesDashboardList: rowsDataInterface[] = [
   {
@@ -262,16 +263,16 @@ export const statusRowHeading: statusRowHeadingInterface[] = [
 
 export const listRowHeading: statusRowHeadingInterface[] = [
   {
-    header1: '#',
-    header2: 'Application#',
-    header3: 'Customer Name',
-    header4: 'Mobile Number',
-    header5: 'Lead',
-    header6: 'Surrogate Name',
-    header7: 'Date & Time',
-    header8: 'Policy',
-    header9: 'Channel',
-    header10: 'Processed',
+    header1: tableHeader.HEADING1,
+    header2: tableHeader.HEADING2,
+    header3: tableHeader.HEADING3,
+    header4: tableHeader.HEADING4,
+    header5: tableHeader.HEADING5,
+    header6: tableHeader.HEADING6,
+    header7: tableHeader.HEADING7,
+    header8: tableHeader.HEADING8,
+    header9: tableHeader.HEADING9,
+    header10: tableHeader.HEADING10,
   },
 ];
 
@@ -334,52 +335,52 @@ export const filterHeaderData= {
 export const product_label = [
   {
     id: 1,
-    label: '#',
+    label: tableHeader.HEADING1,
     defaultChecked: true,
   },
   {
     id: 2,
-    label: 'Application#',
+    label: tableHeader.HEADING2,
     defaultChecked: true,
   },
   {
     id: 3,
-    label: 'Customer Name',
+    label: tableHeader.HEADING3,
     defaultChecked: true,
   },
   {
     id: 4,
-    label: 'Mobile Number',
+    label: tableHeader.HEADING4,
     defaultChecked: true,
   },
   {
     id: 5,
-    label: 'Lead',
+    label: tableHeader.HEADING5,
     defaultChecked: true,
   },
   {
     id: 6,
-    label: 'Surrogate Name',
+    label: tableHeader.HEADING6,
     defaultChecked: true,
   },
   {
     id: 7,
-    label: 'Date & Time',
+    label: tableHeader.HEADING7,
     defaultChecked: true,
   },
   {
     id: 8,
-    label: 'Policy',
+    label: tableHeader.HEADING8,
     defaultChecked: true,
   },
   {
     id: 9,
-    label: 'Channel',
+    label: tableHeader.HEADING9,
     defaultChecked: true,
   },
   {
     id: 10,
-    label: 'Processed',
+    label: tableHeader.HEADING10,
     defaultChecked: true,
   },
 ];

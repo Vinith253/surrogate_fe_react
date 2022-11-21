@@ -1,0 +1,46 @@
+.bulk-list-container {
+  padding: 2% 0;
+  .bulk-list-progress-container {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 2%;
+    .bulk-list-progress-text {
+      font-size: 1.2rem;
+    }
+  }
+  .message-container {
+    padding: 2% 0;
+    box-sizing: unset;
+    display: flex;
+    justify-content: space-between;
+    gap: 5%;
+    .message-subcontent {
+      font-size: 1rem;
+    }
+    .circular-progress {
+      width: 20px !important;
+      height: 20px !important;
+    }
+  }
+  .toggle-button-group {
+    margin: 1% 0;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
+  .success-message-container {
+    display: flex;
+    justify-content: center;
+    .success-message {
+      font-size: 18px;
+    }
+  }
+  .btn-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1%;
+    .discord-btn-text {
+      font-size: 12px;
+    }
+  }
+}

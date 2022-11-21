@@ -8,12 +8,15 @@ import {
   Typography,
 } from '@mui/material';
 import React, { useState } from 'react';
+import './AccessLibrary.scss';
 import CommonTable from '../../components/commonComponent/commonTable/CommonTable';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import PageLayout from '../../components/layout/pageLayout/pageLayout';
 import SearchIcon from '@mui/icons-material/Search';
+import CustomModal from '../../components/commonComponent/customModal/CustomModal';
 
 const AccessLibrary = () => {
+  const [accessModal, setAccessModal] = useState(false);
   const column = [
     { title: '#', dataIndex: 'id', key: 'id' },
     { title: 'Application #', dataIndex: 'application', key: 'application' },
@@ -23,9 +26,12 @@ const AccessLibrary = () => {
       key: 'customerName',
     },
     { title: 'Channel Type', dataIndex: 'channelType', key: 'channelType' },
-    { title: 'Copy Link', dataIndex: 'copyLink', key: 'copyLink' },
-    { title: '', dataIndex: 'copyIcon', key: 'copyIcon' },
+    { title: 'Copy Link', dataIndex: 'copyLink', key: 'copyLink',  },
+    { title: '', dataIndex: 'copyIcon', key: 'copyIcon' , onClick: () => onClickCopyIcon(),},
   ];
+  const onClickCopyIcon = () => {
+    setAccessModal(!accessModal);
+  };
   const data = [
     {
       id: 1,
@@ -35,6 +41,7 @@ const AccessLibrary = () => {
       copyLink:
         'https://statics.teams.cdn.office.net/evergreen-assets/safelinks/1/atp-safelinks.html',
       copyIcon: <ContentCopyIcon color="secondary" />,
+     
     },
     {
       id: 2,
@@ -44,6 +51,7 @@ const AccessLibrary = () => {
       copyLink:
         'https://statics.teams.cdn.office.net/evergreen-assets/safelinks/1/atp-safelinks.html',
       copyIcon: <ContentCopyIcon color="secondary" />,
+     
     },
     {
       id: 3,
@@ -53,6 +61,7 @@ const AccessLibrary = () => {
       copyLink:
         'https://statics.teams.cdn.office.net/evergreen-assets/safelinks/1/atp-safelinks.html',
       copyIcon: <ContentCopyIcon color="secondary" />,
+    
     },
     {
       id: 4,
@@ -62,6 +71,7 @@ const AccessLibrary = () => {
       copyLink:
         'https://statics.teams.cdn.office.net/evergreen-assets/safelinks/1/atp-safelinks.html',
       copyIcon: <ContentCopyIcon color="secondary" />,
+      
     },
     {
       id: 5,
@@ -71,6 +81,7 @@ const AccessLibrary = () => {
       copyLink:
         'https://statics.teams.cdn.office.net/evergreen-assets/safelinks/1/atp-safelinks.html',
       copyIcon: <ContentCopyIcon color="secondary" />,
+      
     },
   ];
   const [alignment, setAlignment] = useState('bank');
@@ -102,35 +113,22 @@ const AccessLibrary = () => {
     fontWeight: 400,
     color: '#AFAEAF',
   };
+  const handleClick = () => {
+    setAccessModal(!accessModal);
+  };
   return (
-    <Box sx={{ marginTop: '5vh', backgroundColor: 'white' }}>
+    <Box className="access-library-container">
       <PageLayout>
-        <Box sx={{ padding: '1rem 0' }}>
-          <Typography sx={head}>Access Library</Typography>
-          <Typography sx={subHead}>
+        <Box className="header-box">
+          <Typography className="header">Access Library</Typography>
+          <Typography className="sub-header">
             Here is where we can copy particular link of all channels
           </Typography>
         </Box>
         <Divider />
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginTop: '3vh',
-          }}
-        >
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              border: '1px solid #AFAEAF',
-              borderRadius: 1,
-              padding: '5px 10px',
-            }}
-          >
-            <SearchIcon sx={{ marginRight: '15px', color: '#AFAEAF' }} />
+        <Box className="search-container">
+          <Box className="search-box">
+            <SearchIcon className="search-icon" />
             <InputBase placeholder="Search" />
           </Box>
           <Box>
@@ -148,7 +146,27 @@ const AccessLibrary = () => {
             </ToggleButtonGroup>
           </Box>
         </Box>
-        <CommonTable column={columnItems} data={dataItems} />
+        <CommonTable
+          column={columnItems}
+          data={dataItems}
+          handle={handleClick}
+        />
+        {accessModal && (
+          <CustomModal
+            openSuccess={accessModal}
+            handleCloseSuccess={() => setAccessModal(false)}
+            successModalTitle={'Share the link'}
+            // successModalMsg={
+            //   'Your action of Scheduled Pause - Card For Card Surrogate From  DD/MM/YYYTo DD/MM/YYY is successfully sent to reviewer'
+            // }
+            accessLibraryMsg={'Here you can copy the link and share it'}
+            org_ID={'#12345'}
+            org_Name={'Ganesh Agency'}
+            channel_type={'DSA'}
+            accessLibraryModaBtn={'Link to share'}
+            accessLibraryCloseBtn={' Close'}
+          />
+        )}
       </PageLayout>
     </Box>
   );

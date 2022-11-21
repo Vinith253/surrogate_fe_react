@@ -1,0 +1,34 @@
+.access-library-container {
+  margin-top: 5vh;
+  background-color: white;
+  .header-box {
+    padding: 1rem 0;
+    .header {
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .sub-header {
+      font-size: 14px;
+      font-weight: 400;
+      color: #afaeaf;
+    }
+  }
+  .search-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 3vh;
+    .search-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid #afaeaf;
+      border-radius: 1;
+      padding: 5px 10px;
+      .search-icon {
+        margin-right: 15px;
+        color: #afaeaf;
+      }
+    }
+  }
+}
