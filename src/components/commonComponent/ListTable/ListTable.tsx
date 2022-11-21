@@ -43,7 +43,7 @@ function TableComp(props: {
   const [filteredHeader, setFilterteredHeader] = useState<
     statusRowHeadingInterface[]
   >(props?.listRowHeading);
-  const [visibleHeader, setVisibleHeader] = useState(product_label)
+  const [visibleHeader, setVisibleHeader] = useState(product_label);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -124,11 +124,10 @@ function TableComp(props: {
         return item; // else return unmodified item
       }
     );
-    updatedListData(categories , newArr);
+    updatedListData(categories, newArr);
   };
 
   const updatedListData = (categories: any, newArr: rowsDataInterface[]) => {
-
     let updatedList = categories?.map(
       (item: { label: string; defaultChecked: boolean }) => {
         if (item.defaultChecked === false) {
@@ -189,7 +188,7 @@ function TableComp(props: {
         return item; // else return unmodified item
       }
     );
-  }
+  };
 
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * rowsPerPage;
@@ -236,7 +235,7 @@ function TableComp(props: {
           <div className={graphView == 1 ? 'selectedBox' : 'filter-box'}>
             <li
               onClick={() => {
-                updatedListData(visibleHeader,props.rows)
+                updatedListData(visibleHeader, props.rows);
                 setCurrentPage(1);
                 setPage(1);
                 setGraphView(1);
@@ -301,7 +300,7 @@ function TableComp(props: {
                   const currentData = props.rows.filter(function (item) {
                     return item.status === 'Approved';
                   });
-                  updatedListData(visibleHeader,currentData)
+                  updatedListData(visibleHeader, currentData);
                   setCurrentPage(1);
                   setPage(1);
                   setGraphView(2);
@@ -324,7 +323,7 @@ function TableComp(props: {
                   const currentData = props.rows.filter(function (item) {
                     return item.status === 'In-Progress';
                   });
-                  updatedListData(visibleHeader,currentData)
+                  updatedListData(visibleHeader, currentData);
                   setCurrentPage(1);
                   setPage(1);
                   setGraphView(3);
@@ -345,7 +344,7 @@ function TableComp(props: {
                 const currentData = props.rows.filter(function (item) {
                   return item.status === 'Rejected';
                 });
-                updatedListData(visibleHeader,currentData)
+                updatedListData(visibleHeader, currentData);
                 setCurrentPage(1);
                 setPage(1);
                 setGraphView(4);
@@ -365,7 +364,7 @@ function TableComp(props: {
                   const currentData = props.rows.filter(function (item) {
                     return item.status === 'Dropped';
                   });
-                  updatedListData(visibleHeader,currentData)
+                  updatedListData(visibleHeader, currentData);
                   setCurrentPage(1);
                   setPage(1);
                   setGraphView(5);
@@ -789,12 +788,17 @@ function TableComp(props: {
                       </TableCell>
                       <TableCell align="left" sx={{ borderBottom: 'none' }}>
                         {/* <div className="reset-data"> */}
-                        <Link
-                          sx={{ cursor: 'pointer', color: '#0662B7' }}
-                          onClick={() => viewAction(row)}
-                        >
-                          View
-                        </Link>
+                        {!props.flag && (
+                          <Link
+                            sx={{ cursor: 'pointer', color: '#0662B7' }}
+                            onClick={() => viewAction(row)}
+                          >
+                            View
+                          </Link>
+                        )}
+                        {props.flag && (
+                          <a href="/sales/salesReportDetails">View</a>
+                        )}
                         {/* </div> */}
                       </TableCell>
                     </TableRow>
