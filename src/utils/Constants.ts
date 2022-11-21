@@ -36,3 +36,16 @@ export const bulkUpload = {
   UPLOAD_MISSING_CARD:"Upload missing card images to import card details into card catalog",
   UPLOAD_MISSING_PHOTO:"Upload Missing Photo"
 };
+
+export const tableHeader = {
+  HEADING1: '#',
+  HEADING2: 'Application#',
+  HEADING3: 'Customer Name',
+  HEADING4: 'Mobile Number',
+  HEADING5: 'Lead',
+  HEADING6: 'Surrogate Name',
+  HEADING7: 'Date & Time',
+  HEADING8: 'Policy',
+  HEADING9: 'Channel',
+  HEADING10: 'Processed',
+};
