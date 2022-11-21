@@ -9,13 +9,14 @@ import React, { useEffect, useState } from 'react';
 import DragDrop from '../../../../../components/commonComponent/dragDrop/DragDrop';
 import PageLayout from '../../../../../components/layout/pageLayout/pageLayout';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
+import './UploadCard.scss';
 
 function LinearProgressWithLabel(
   props: LinearProgressProps & { value: number }
 ) {
   return (
     <Box>
-      <Box sx={{ width: '100%', margin: '0.8rem 0' }}>
+      <Box className="progress-container">
         <LinearProgress
           variant="determinate"
           {...props}
@@ -23,20 +24,11 @@ function LinearProgressWithLabel(
             '& .MuiLinearProgress-bar1Determinate': {
               backgroundColor: 'green',
             },
-            backgroundColor: 'rgb(167 237 194)',
-            borderRadius: '10px',
-            height: '8px',
           }}
+          className="upload-card-progress"
         />
       </Box>
-      <Box
-        sx={{
-          minWidth: 35,
-          display: 'flex',
-          justifyContent: 'flex-end',
-          mt: 2,
-        }}
-      >
+      <Box className="upload-card-progress-text">
         <Typography variant="body2">{`${Math.round(
           props.value
         )}% Completed`}</Typography>
@@ -77,17 +69,13 @@ const UploadCard = ({ toggle, data, correction, fileName }: any) => {
   };
   return (
     <PageLayout>
-      <Box sx={{ backgroundColor: 'white' }}>
-        <Typography
-          variant="h2"
-          sx={{ fontSize: '1.2rem', fontWeight: 'bold' }}
-        >
+      <Box className="upload-card-container">
+        <Typography variant="h2" className="upload-card-head">
           {data.title}
         </Typography>
         <Typography
+          className="upload-card-subhead"
           sx={{
-            margin: '1% 0',
-            fontWeight: 'bold',
             color: progress > 0 ? '#D3D3D3' : '',
           }}
         >
