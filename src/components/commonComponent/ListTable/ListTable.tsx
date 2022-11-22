@@ -232,17 +232,19 @@ function TableComp(props: {
       )}
 
       <div style={{ display: 'flex' }}>
-        <TextField
-          className="text-field"
-          placeholder="Search by..."
-          InputProps={{
-            startAdornment: (
-              <IconButton edge="start">
-                <SearchOutlined />
-              </IconButton>
-            ),
-          }}
-        />
+        {props.flag === 'sales-report' && (
+          <TextField
+            className="text-field"
+            placeholder="Search by..."
+            InputProps={{
+              startAdornment: (
+                <IconButton edge="start">
+                  <SearchOutlined />
+                </IconButton>
+              ),
+            }}
+          />
+        )}
         <div className="third-header">
           <div className={'outer-filter-box'}>
             <div className={graphView == 1 ? 'selectedBox' : 'filter-box'}>
