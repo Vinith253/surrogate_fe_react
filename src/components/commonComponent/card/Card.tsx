@@ -14,7 +14,6 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import '../card/Card.scss';
 import edit_icon from '../../../assets/icons/edit_icon.svg';
 import delete_icon from '../../../assets/icons/delete_icon.svg';
-
 type dataType = {
   image: string;
   text_one?: string;
@@ -30,11 +29,9 @@ type cardItems = {
   mainImage?: string;
   key?: string;
 };
-
 type dummy = {
   name: string;
 };
-
 function Card({ content }: { content: cardItems }) {
   return (
     <Paper elevation={3} sx={{ width: '100%' }} className="card-container">
@@ -66,7 +63,6 @@ function Card({ content }: { content: cardItems }) {
         )}
       </Stack>
       <Divider variant="middle" />
-
       <Box>
         {content.data.map((item: any) => {
           return (
@@ -121,5 +117,4 @@ function Card({ content }: { content: cardItems }) {
     </Paper>
   );
 }
-
 export default Card;

@@ -147,7 +147,7 @@ const AccessLibrary = () => {
         <Box className="search-container">
           <Box className="search-box">
             <SearchIcon className="search-icon" />
-            <InputBase placeholder="Search by..." />
+            <InputBase placeholder="Search by ..." />
           </Box>
           <Box>
             <ToggleButtonGroup
