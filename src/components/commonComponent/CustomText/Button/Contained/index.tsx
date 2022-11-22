@@ -2,10 +2,10 @@ import * as React from 'react';
 import { Button, Typography } from '@mui/material';
 import { type } from 'os';
 
-const BtnContained = ( props:any ) => {
+const BtnContained = (props: any) => {
   return (
     <Button
-      sx={{ height: 30, width: 70 }}
+      sx={{ height: 34, minWidth: 90 }}
       variant="contained"
       color="secondary"
       onClick={props.onClick}

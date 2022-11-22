@@ -5,16 +5,15 @@ const BtnOutlined = (props: any) => {
   return (
     <Button
       onClick={props.onClick}
-      sx={{ height: 30, width: 70 }}
+      sx={{ height: 34, minWidth: 90, border: '1px solid #0662B7' }}
       variant="outlined"
     >
       <Typography
         sx={{
-          color: 'black',
+          color: '#0662B7',
           textTransform: 'capitalize',
           fontSize: 12,
           fontWeight: 'bold',
-          borderBlockColor: 'black',
         }}
       >
         {props.title}
