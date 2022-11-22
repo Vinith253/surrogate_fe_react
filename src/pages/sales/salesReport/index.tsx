@@ -6,10 +6,13 @@ import {
   salesDashboardList,
   statusRowHeading,
 } from './../dashboard/dashboard.const';
+import SalesReportNodata from '../../../assets/images/sales-report-no-data.svg';
+import BtnContained from '../../../components/commonComponent/CustomText/Button/Contained';
+import BtnOutlined from '../../../components/commonComponent/CustomText/Button/Outlined';
 import SelectDropdown from '../../../components/commonComponent/CheckboxSelectDropdown';
 import { salesReportFilterDropdown } from './salesReport.const';
 
-import { Typography, Stack } from '@mui/material';
+import { Typography, Stack, Box, Grid } from '@mui/material';
 
 function SalesReportList() {
   return (
@@ -26,15 +29,35 @@ function SalesReportList() {
             </Typography>
           </Stack>
         </Stack>
-        <SelectDropdown data={salesReportFilterDropdown} gridColumn={3} />
+        <Grid container spacing={2} className="checkbox-select-dropdown">
+          {salesReportFilterDropdown?.map((eachItem: any, index: number) => {
+            return (
+              <Grid item xs={3} key={index}>
+                <Typography>{eachItem?.label}</Typography>
+                <SelectDropdown options={eachItem?.option} />
+              </Grid>
+            );
+          })}
+        </Grid>
+        <Box className="button-container">
+          <BtnOutlined title="Reset" />
+          <BtnContained title="Search" />
+        </Box>
       </Stack>
-      <TableComp
+      <Stack className="no-data-container">
+        <img src={SalesReportNodata} className="no-data-img" />
+        <Typography variant="subtitle1" sx={{ letterSpacing: 0.5 }}>
+          Choose a preferred category to view more data/options
+        </Typography>
+      </Stack>
+
+      {/* <TableComp
         viewPath="/sales/salesReportDetails"
         rows={salesDashboardList}
         statusRowsHeading={statusRowHeading}
         listRowHeading={listRowHeading}
         flag="dashboard"
-      />
+      /> */}
     </Stack>
   );
 }

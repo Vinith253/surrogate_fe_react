@@ -19,77 +19,62 @@ import {
 import './style.scss';
 
 type Props = {
-  data: Array<object>;
-  gridColumn: number;
+  options: Array<object>;
 };
 
-function CheckboxSelectDropdown({ data, gridColumn }: Props) {
-  console.log('data', data);
-  // const ITEM_HEIGHT = 40;
-  // const ITEM_PADDING_TOP = 8;
-  // const MenuProps = {
-  //   PaperProps: {
-  //     style: {
-  //       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-  //       width: 250,
-  //     },
-  //   },
-  // };
+function CheckboxSelectDropdown({ options }: Props) {
+  const [personName, setPersonName] = React.useState<string[]>([]);
 
-  const handleChange = (event: any) => {
+  const handleChange = (event: SelectChangeEvent<typeof personName>) => {
+    console.log('value', event);
+
     const {
       target: { value },
     } = event;
+    setPersonName(
+      // On autofill we get a stringified value.
+      typeof value === 'string' ? value.split(',') : value
+    );
   };
 
   return (
-    <Grid container spacing={2} className="checkbox-select-dropdown">
-      {data?.map((eachItem: any, index: number) => {
-        return (
-          <Grid item xs={gridColumn} key={index}>
-            <Typography>{eachItem?.label}</Typography>
-            <Select>
-              <TextField
-                className="search-text-field"
-                placeholder="Search by..."
-                InputProps={{
-                  startAdornment: (
-                    <IconButton edge="start">
-                      <SearchOutlined />
-                    </IconButton>
-                  ),
-                }}
-              />
-              <FormGroup className="all-option-checkbox">
-                <FormControlLabel
-                  control={<Checkbox defaultChecked />}
-                  label="All"
-                />
-              </FormGroup>
-              {eachItem?.option?.map((each: any, index: number) => (
-                <MenuItem
-                  key={index}
-                  value={each?.value}
-                  className="checkbox-checked"
-                >
-                  <Checkbox checked={true} />
-                  <ListItemText primary={each?.name} />
-                </MenuItem>
-              ))}
-              <div className="underline"></div>
-              <Box className="button-container">
-                <Button color="secondary" variant="outlined">
-                  Reset
-                </Button>
-                <Button color="secondary" variant="contained">
-                  Search
-                </Button>
-              </Box>
-            </Select>
-          </Grid>
-        );
-      })}
-    </Grid>
+    <Select
+      labelId="demo-multiple-checkbox-label"
+      id="demo-multiple-checkbox"
+      multiple
+      value={personName}
+      onChange={handleChange}
+    >
+      <TextField
+        className="search-text-field"
+        placeholder="Search by..."
+        InputProps={{
+          startAdornment: (
+            <IconButton edge="start">
+              <SearchOutlined />
+            </IconButton>
+          ),
+        }}
+      />
+      <FormGroup className="all-option-checkbox">
+        <FormControlLabel control={<Checkbox defaultChecked />} label="All" />
+      </FormGroup>
+      {options?.map((each: any, index: number) => (
+        <MenuItem key={index} value={each?.value} className="checkbox-checked">
+          <Checkbox />
+          <ListItemText primary={each?.name} />
+        </MenuItem>
+      ))}
+      <div className="underline"></div>
+      <Box className="button-container">
+        <Button color="secondary" variant="outlined">
+          Reset
+        </Button>
+        <Button color="secondary" variant="contained">
+          Search
+        </Button>
+      </Box>
+    </Select>
   );
 }
 
