@@ -133,7 +133,7 @@ function CardList({ data }: cardData) {
                       alignItems: 'center',
                     }}
                   >
-                    <Checkbox color="secondary" />
+                    <Checkbox color="secondary" size='medium'/>
                     <Typography
                       sx={{
                         letterSpacing: '0.0025em',

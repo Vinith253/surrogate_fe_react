@@ -244,7 +244,7 @@ export const CardCatalogue = () => {
 
   const NORMAL_PAUSE = 'Pause Now';
   const SCHEDULED_PAUSE = 'Schedule Pause';
-  const [alignment, setAlignment] = useState('');
+  const [alignment, setAlignment] = useState('all');
   // const [columnItems, setColumnItems] = useState(column);
   // const [dataItems, setDataItems] = useState(data);
   const handleButtonChange = (
@@ -264,7 +264,6 @@ export const CardCatalogue = () => {
     '&.Mui-selected, &.Mui-selected:hover': {
       color: 'white',
       background: '#0662B7',
-      
     },
   }));
 
@@ -322,6 +321,7 @@ export const CardCatalogue = () => {
   };
 
   const modes = [
+    'All',
     'Salaried',
     'Doctor',
     'Teacher',
@@ -331,7 +331,7 @@ export const CardCatalogue = () => {
     'FD Based',
   ];
 
-  const [cardMode, setCardMode] = React.useState<string[]>([]);
+  const [cardMode, setCardMode] = React.useState<string[]>(['All']);
 
   const handleChange = (event: SelectChangeEvent<typeof cardMode>) => {
     const {
@@ -512,10 +512,10 @@ export const CardCatalogue = () => {
           </Box>
           <Box>
             <Button
-              sx={{textTransform:'capitalize'}}
+              sx={{ textTransform: 'capitalize' }}
               variant="contained"
               color="secondary"
-              startIcon={<AddIcon/>}
+              startIcon={<AddIcon />}
               endIcon={<ExpandMoreIcon />}
               aria-controls={openCardMenu ? 'basic-menu' : undefined}
               aria-haspopup="true"
@@ -563,12 +563,11 @@ export const CardCatalogue = () => {
             // }}
           >
             <FormControl className="formctrl">
-              <TypographyTitle title = 'Card Mode' />
+              <TypographyTitle title="Card Mode" />
               {/* <InputLabel id="demo-simple-select-label">All</InputLabel> */}
               <Select
                 // labelId="demo-multiple-checkbox-label"
                 id="demo-simple-select-label"
-                
                 multiple
                 value={cardMode}
                 onChange={handleChange}
@@ -596,26 +595,29 @@ export const CardCatalogue = () => {
               </Select> */}
             </FormControl>
             <FormControl className="formctrl">
-            <TypographyTitle title = 'Card Category' />
-              <Select className="select">
+              <TypographyTitle title="Card Category" />
+              <Select className="select" defaultValue={0}>
+                <MenuItem value={0}>All</MenuItem>
                 <MenuItem value={10}>Ten</MenuItem>
                 <MenuItem value={20}>Twenty</MenuItem>
                 <MenuItem value={30}>Thirty</MenuItem>
               </Select>
             </FormControl>
             <FormControl className="formctrl">
-            <TypographyTitle title = 'Card Status' />
+              <TypographyTitle title="Card Status" />
 
-              <Select placeholder='All' className="select">
+              <Select placeholder="All" className="select"  defaultValue={0}>
+              <MenuItem value={0}>All</MenuItem>
                 <MenuItem value={10}>Ten</MenuItem>
                 <MenuItem value={20}>Twenty</MenuItem>
                 <MenuItem value={30}>Thirty</MenuItem>
               </Select>
             </FormControl>
             <FormControl className="formctrl">
-            <TypographyTitle title = 'Choose Surrogate' />
+              <TypographyTitle title="Choose Surrogate" />
 
-              <Select className="select">
+              <Select className="select" defaultValue={0}>
+              <MenuItem value={0}>All</MenuItem>
                 <MenuItem value={10}>Ten</MenuItem>
                 <MenuItem value={20}>Twenty</MenuItem>
                 <MenuItem value={30}>Thirty</MenuItem>
@@ -769,30 +771,33 @@ export const CardCatalogue = () => {
                 <SearchIcon className='searchIcon' />
               </Box> */}
               <Box
-                sx={{
-                  width: '241px',
-                  fontSize: '12px',
-                  fontFamily: 'Ilisarniq',
-                  fontWeight: 400,
-                  lineHeight: '14px',
-                }}
+                // sx={{
+                //   width: '241px',
+                //   fontSize: '12px',
+                //   fontFamily: 'Ilisarniq',
+                //   fontWeight: 400,
+                //   lineHeight: '14px',
+                // }}
               >
                 <ToggleButtonGroup
-                //  size='small'
+                  //  size='small'
                   color="primary"
                   value={alignment}
                   exclusive
                   onChange={handleButtonChange}
                   aria-label="Platform"
+                  sx={{
+                    height: '40px'
+                  }}
                   // sx={ToggleBoxStyle}
                 >
-                  <ColorButton value="all">All</ColorButton>
-                  <Divider orientation="vertical"  />
-                  <ColorButton value="activate">Activate</ColorButton>
-                  <Divider orientation="vertical"  />
-                  <ColorButton value="deactivated">Deactivated</ColorButton>
-                  <Divider orientation="vertical"  />
-                  <ColorButton value="saved">Saved</ColorButton>
+                  <ColorButton value="all" sx={{ paddingRight: '10px'}}> All </ColorButton>
+                  {/* <Divider orientation="vertical" /> */}
+                  <ColorButton value="activate" sx={{ paddingRight: '10px'}}>Activate</ColorButton>
+                  {/* <Divider orientation="vertical" /> */}
+                  <ColorButton value="deactivated" sx={{ paddingRight: '10px'}}>Deactivated</ColorButton>
+                  {/* <Divider orientation="vertical" /> */}
+                  <ColorButton value="saved" sx={{ paddingRight: '10px'}}>Saved</ColorButton>
                 </ToggleButtonGroup>
               </Box>
             </Stack>
@@ -819,10 +824,18 @@ export const CardCatalogue = () => {
                         <TableCell>
                           <Checkbox />
                         </TableCell>
-                        <TableCell width={'20px'} align="center" className="tableCell">
+                        <TableCell
+                          width={'20px'}
+                          align="center"
+                          className="tableCell"
+                        >
                           #
                         </TableCell>
-                        <TableCell width={'160px'} align="center" className="tableCell">
+                        <TableCell
+                          width={'160px'}
+                          align="center"
+                          className="tableCell"
+                        >
                           {items.cardName}
                         </TableCell>
                         <TableCell align="center" className="tableCell">
@@ -831,10 +844,18 @@ export const CardCatalogue = () => {
                         <TableCell align="center" className="tableCell">
                           {items.businessID}
                         </TableCell>
-                        <TableCell width={'150px'} className="tableCell" align="center">
+                        <TableCell
+                          width={'150px'}
+                          className="tableCell"
+                          align="center"
+                        >
                           {items.cardMode}
                         </TableCell>
-                        <TableCell width={'150px'} className="tableCell" align="left">
+                        <TableCell
+                          width={'150px'}
+                          className="tableCell"
+                          align="left"
+                        >
                           {items.cardCategory}
                         </TableCell>
                         <TableCell className="tableCell" align="center">
@@ -906,7 +927,10 @@ export const CardCatalogue = () => {
                     horizontal: 'right',
                   }}
                 >
-                  <MenuItem onClick={handleClose} className="menu">
+                  <MenuItem onClick={() => {
+                    handleClose();
+                    navigate('/productManagement/cardCatalogue/singleupload/reviewCard');
+                  }} className="menu">
                     View
                   </MenuItem>
                   <MenuItem onClick={handleClose} className="menu">
