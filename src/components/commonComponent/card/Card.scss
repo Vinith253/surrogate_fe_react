@@ -25,7 +25,7 @@
       font-weight: 400;
     }
     .card-subhead {
-      font-size: calc(0.5px + 1vw);
+      font-size: calc(-2.5px + 1vw);
       color: #afaeaf;
     }
     .main-content {
@@ -38,11 +38,21 @@
       justify-content: center;
       align-items: center;
     }
+    .saved-items-flex {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+    }
   }
   .main-image {
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
-    padding: 1.5rem !important;
+    padding: 0.5rem !important;
+    width: 20rem;
+    img {
+      width: 100%;
+    }
   }
 }

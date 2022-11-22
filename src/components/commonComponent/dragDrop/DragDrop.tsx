@@ -52,18 +52,24 @@ const DragDrop = ({
   const onButtonClick = () => {
     inputRef?.current?.click();
   };
-  const uploadStyle = {
-    '&:hover': 'unset',
-    backgroundColor: 'black',
-    fontSize: '0.8rem',
-  };
+  // const uploadStyle = {
+  //   '&:hover': 'unset',
+  //   backgroundColor: '#0662B7',
+  //   fontSize: '0.8rem',
+  // };
   const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
-    backgroundColor: 'black',
+    // backgroundColor: '#0662B7',
     '&:hover': {
-      backgroundColor: 'black',
+      backgroundColor: '#0662B7',
     },
     marginTop: '4%',
-    fontSize: '0.2rem',
+
+    '&:disabled': {
+      backgroundColor: '#82B1DB !important',
+      color: '#FFFFFF;',
+    },
+
+    // fontSize: '0.2rem',
   }));
   return (
     <form
@@ -105,7 +111,7 @@ const DragDrop = ({
             }
             className="upload-button"
             onClick={onButtonClick}
-            sx={uploadStyle}
+            sx={{ backgroundColor: progressValue > 0 ? ' #82B1DB' : '#0662B7' }}
             disabled={progressValue > 0 ? true : false}
           >
             {buttonText}

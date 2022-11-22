@@ -361,7 +361,7 @@ export default function Layout() {
         <Box
           sx={{
             width: '100%',
-            height: '100vh',
+            // height: '100vh',
             // borderBottom: "2px solid"
           }}
         >
@@ -446,7 +446,7 @@ export default function Layout() {
           <Box
             sx={{
               width: '100%',
-              height: '90vh',
+              // height: '90vh',
             }}
           >
             <Outlet />

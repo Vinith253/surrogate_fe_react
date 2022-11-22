@@ -17,6 +17,11 @@ function LinearProgressWithLabel(
   return (
     <Box>
       <Box className="progress-container">
+        <Box className="upload-card-progress-text">
+          <Typography variant="body2">{`${Math.round(
+            props.value
+          )}% Completed`}</Typography>
+        </Box>
         <LinearProgress
           variant="determinate"
           {...props}
@@ -27,11 +32,6 @@ function LinearProgressWithLabel(
           }}
           className="upload-card-progress"
         />
-      </Box>
-      <Box className="upload-card-progress-text">
-        <Typography variant="body2">{`${Math.round(
-          props.value
-        )}% Completed`}</Typography>
       </Box>
     </Box>
   );
@@ -84,12 +84,15 @@ const UploadCard = ({ toggle, data, correction, fileName }: any) => {
         {fileName === 'xls' && (
           <Button
             variant="text"
-            color="secondary"
+            // color={progress > 0 ? ' #82B1DB' : 'secondary'}
+            style={{ color: progress > 0 ? ' #82B1DB' : '#0662B7' }}
             disabled={progress > 0 ? true : false}
             startIcon={
               <FileDownloadOutlinedIcon
-                color={progress > 0 ? 'disabled' : 'secondary'}
-                sx={{ fontSize: '1.5rem !important' }}
+                sx={{
+                  fontSize: '1.5rem !important',
+                  color: progress > 0 ? ' #82B1DB' : '#0662B7',
+                }}
               />
             }
           >

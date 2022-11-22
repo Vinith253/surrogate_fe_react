@@ -1,6 +1,7 @@
 import {
   Box,
   Grid,
+  IconButton,
   Paper,
   styled,
   Table,
@@ -13,6 +14,7 @@ import {
 } from '@mui/material';
 import { useMemo, useState } from 'react';
 import PaginationComp from '../Pagination/Pagination';
+import UnfoldMoreIcon from '../../../assets/icons/sortArrow.svg';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -29,6 +31,7 @@ type columnType = {
   dataIndex: string;
   key: string;
   onClick: any;
+  sortColumn: boolean;
 };
 
 const CommonTable = (props: any) => {
@@ -66,13 +69,21 @@ const CommonTable = (props: any) => {
           <TableHead sx={{ backgroundColor: '#EEF7FF' }}>
             <TableRow>
               {props.column.map((item: columnType) => {
-                return <StyledTableCell>{item.title}</StyledTableCell>;
+                return (
+                  <StyledTableCell>
+                    {item.title}
+                    {item.sortColumn && (
+                      <IconButton>
+                        <img src={UnfoldMoreIcon} alt="Sort Icon" />
+                      </IconButton>
+                    )}
+                  </StyledTableCell>
+                );
               })}
             </TableRow>
           </TableHead>
           <TableBody>
             {currentTableData?.map((dataItem: any) => {
-              console.log('dataItem', dataItem);
               return (
                 <TableRow
                   sx={{
@@ -80,8 +91,6 @@ const CommonTable = (props: any) => {
                   }}
                 >
                   {props.column.map((columnItem: columnType) => {
-                    console.log('columnItem', columnItem);
-                    console.log('dataItem[]', dataItem['copyIcon']);
                     return (
                       <StyledTableCell
                         onClick={() =>
