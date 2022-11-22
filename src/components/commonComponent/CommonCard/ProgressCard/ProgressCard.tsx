@@ -2,6 +2,8 @@ import React from "react";
 import "../SalesDashbaordCard/card.scss";
 import { Button } from "@mui/material";
 import { ReactComponent as RightArrow } from "../../../../assets/icons/rightArrow.svg";
+import redDown from "../../../../assets/icons/red_down.svg";
+import GreenUp from "../../../../assets/icons/green_up.svg";
 import { useNavigate } from "react-router-dom";
 
 function ProgressCard(props: {
@@ -77,7 +79,10 @@ function ProgressCard(props: {
             <text className="card-text-heading">Last Period</text>
           )}
           {props.lastPeriodValue != 0 && (
+            <div className="card-value-with-icon">
             <text className="card-text-value">{props.lastPeriodValue}</text>
+            <img src={redDown}></img>
+            </div>
           )}
         </div>
         <div className="card-text-area">
@@ -85,7 +90,10 @@ function ProgressCard(props: {
             <text className="card-text-heading">Last Year</text>
           )}
           {props.lastYearValue != 0 && (
+            <div className="card-value-with-icon">
             <text className="card-text-value">{props.lastYearValue}</text>
+            <img src={GreenUp}></img>
+            </div>
           )}
         </div>
         <Button
