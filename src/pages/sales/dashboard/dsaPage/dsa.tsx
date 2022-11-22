@@ -322,7 +322,7 @@ export default function DsaPage() {
   return (
     <>
       <div className="dsa-data-container">
-        <div>
+        <>
           <div className="filter-header">
             <div className="filter-data">
               <Typography
@@ -420,7 +420,7 @@ export default function DsaPage() {
               />
             </div>
           </div>
-        </div>
+        </>
       </div>
       <div className="diff-area" />
       <div className="list-data-box">
