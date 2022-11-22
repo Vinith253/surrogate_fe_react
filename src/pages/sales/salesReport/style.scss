@@ -2,7 +2,7 @@
   background-color: #f0f2f5;
   margin: 10px 0px;
 
-  .filters-container {
+  .container {
     background-color: #ffffff;
     padding: 0px 30px;
     margin: 25px 0px 30px 0px;
@@ -27,6 +27,21 @@
       display: flex;
       margin-left: auto;
       padding-bottom: 30px;
+    }
+
+    .icons-container {
+      display: flex;
+      justify-content: end;
+    }
+
+    .icons {
+      width: 16px;
+      margin: -20px 20px 0px 0px;
+      cursor: pointer;
+    }
+
+    .dropdown-label {
+      font-size: 14px;
     }
   }
 
