@@ -2,7 +2,7 @@
   text-align: center;
   display: flex;
 
-  .main-container {
+  .sales-main-container {
     width: 100%;
     background-color: #f0f2f5;
     min-height: 100vh;
@@ -17,6 +17,29 @@
       background-color: white;
       display: flex;
       flex-direction: column;
+
+      .filter-header {
+        display: flex;
+        margin-top: 28px;
+        margin-bottom: 28px;
+        margin-left: 32px;
+        margin-right: 32px;    
+        cursor: pointer;
+        justify-content: space-between;
+        align-items: flex-start;
+    
+        .filter-data {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+    
+        .reset-data {
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+        }
+      }
 
       .horizontal-cards {
         display: flex;

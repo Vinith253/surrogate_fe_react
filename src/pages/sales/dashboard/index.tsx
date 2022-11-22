@@ -16,7 +16,7 @@ function Dashboard() {
 
   return (
     <div className="sales-dashboard">
-      <div className="main-container">
+      <div className="sales-main-container">
             <TabBar data={TabListData} />
       </div>
     </div>

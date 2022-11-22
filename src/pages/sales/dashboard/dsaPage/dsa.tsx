@@ -12,13 +12,20 @@ import '../dashboard.scss';
 import { useState } from 'react';
 import TableComp from '../../../../components/commonComponent/ListTable/ListTable';
 import {
-  filterHeaderData,
   listRowHeading,
+  product_label,
   salesDashboardList,
+  state_label,
   statusRowHeading,
+  zonal_label,
 } from '../dashboard.const';
-import FilterButton from '../../../../components/commonComponent/FilterHeader/FilterButton';
 import BarGarph from '../../../../components/commonComponent/BarGraph/BarGraph';
+import { Button, Typography } from '@mui/material';
+import { ReactComponent as Reset } from '../../../../assets/icons/reset.svg';
+import DateTimePopOver from '../../../../components/commonComponent/DateTimePopOver';
+import CheckBoxPopOver from '../../../../components/commonComponent/CheckBoxPopOver/SingleLabel';
+import MuliLabelPopOver from '../../../../components/commonComponent/CheckBoxPopOver/MultipleLabel';
+import MoreFilterModal from '../../../../components/commonComponent/customModal/MoreFilterModal';
 
 interface IStatus {
   label: string;
@@ -88,7 +95,7 @@ export default function DsaPage() {
       lastPeriodValue: 0,
       lastYearValue: 0,
       image: InProgress,
-      navPath:'/sales/salesReport'
+      navPath: '/sales/salesReport',
     },
     {
       index: 2,
@@ -97,7 +104,7 @@ export default function DsaPage() {
       lastPeriodValue: 2500,
       lastYearValue: 2500,
       image: ApprovedIcon,
-      navPath:'/sales/salesReport'
+      navPath: '/sales/salesReport',
     },
     {
       index: 3,
@@ -106,7 +113,7 @@ export default function DsaPage() {
       lastPeriodValue: 2500,
       lastYearValue: 2500,
       image: Dropped,
-      navPath:'/sales/salesReport'
+      navPath: '/sales/salesReport',
     },
     {
       index: 4,
@@ -115,7 +122,7 @@ export default function DsaPage() {
       lastPeriodValue: 2500,
       lastYearValue: 2500,
       image: Rejected,
-      navPath:'/sales/salesReport'
+      navPath: '/sales/salesReport',
     },
   ];
 
@@ -216,12 +223,164 @@ export default function DsaPage() {
       data: [5, 10, 0, 15, 7, 18, 0, 20, 4, 8, 0, 17],
     },
   ];
+  const [dayFilterValue, setDayFilter] = useState<string>('Current Day');
+
+  const day_filter_label = [
+    {
+      id: 1,
+      label: 'Current Day',
+      onclick: () => {
+        setDayFilter('Current Day');
+      },
+    },
+    {
+      id: 2,
+      label: 'Current Week',
+      onclick: () => {
+        setDayFilter('Current Week');
+      },
+    },
+    {
+      id: 3,
+      label: 'Current Month',
+      onclick: () => {
+        setDayFilter('Current Month');
+      },
+    },
+    {
+      id: 4,
+      label: 'Current Quarter',
+      onclick: () => {
+        setDayFilter('Current Quarter');
+      },
+    },
+    {
+      id: 5,
+      label: 'Current Year',
+      onclick: () => {
+        setDayFilter('Current Year');
+      },
+    },
+    {
+      id: 6,
+      label: 'Custom Period',
+      onclick: () => {
+        setDayFilter('Custom Period');
+      },
+    },
+  ];
+
+  const surrogates_label = [
+    {
+      id: 1,
+      label: 'Payroll',
+      // onclick: (() => {setDayFilter("Current Day");})
+    },
+    {
+      id: 2,
+      label: 'Card on Card',
+      // onclick: (() => {setDayFilter("Current Week");})
+    },
+    {
+      id: 3,
+      label: 'CIBIL',
+      // onclick: (() => {setDayFilter("Current Month");})
+    },
+    {
+      id: 4,
+      label: 'AQB',
+      // onclick: (() => {setDayFilter("Current Quarter");})
+    },
+    {
+      id: 5,
+      label: 'RC',
+      // onclick: (() => {setDayFilter("Current Year");})
+    },
+  ];
+
+  const policies_label = [
+    {
+      label: 'All Main Policies',
+      data: [
+        {
+          id: 1,
+          label: 'M_Payroll_Policy',
+        },
+      ],
+    },
+    {
+      label: 'All Overwrite Policies',
+      data: [
+        {
+          id: 2,
+          label: 'OW_Pongal_21_Payroll',
+        },
+      ],
+    },
+  ];
 
   return (
     <>
       <div className="dsa-data-container">
         <div>
-          <FilterButton filterHeaderData={filterHeaderData} />
+          <div className="filter-header">
+            <div className="filter-data">
+              <Typography
+                sx={{
+                  fontSize: '1.1vw',
+                  marginRight: '24px',
+                  color: '#000',
+                  fontWeight: 'bold',
+                }}
+              >
+                Overview
+              </Typography>
+              <DateTimePopOver
+                day_filter_label={day_filter_label}
+                dayFilterValue={dayFilterValue}
+              />
+              <MuliLabelPopOver
+                surrogates_label={policies_label}
+                displayText={'All Policies'}
+                showSearch={true}
+                submit={'Select'}
+                close={'Reset'}
+              />
+              <CheckBoxPopOver
+                surrogates_label={surrogates_label}
+                displayText={'All Surrogates'}
+                showSearch={true}
+                submit={'Select'}
+                close={'Reset'}
+              />
+              <MoreFilterModal
+              product_label={product_label}
+              day_filter_label={day_filter_label}
+              dayFilterValue={dayFilterValue}
+              submit={'Apply'}
+              close={'Reset'}
+              policies_label={policies_label}
+              surrogates_label={surrogates_label}
+              state_label={state_label}
+              zonal_label={zonal_label}
+              />
+            </div>
+            <div className="reset-data">
+              <Button
+                startIcon={<Reset />}
+                sx={{
+                  fontSize: '0.9vw',
+                  marginRight: '10px',
+                  color: '#0662B7',
+                  backgroundColor: '#EEF7FF',
+                  textTransform: 'none',
+                }}
+              >
+                Reset
+              </Button>
+            </div>
+          </div>
+
           <div className="divider-line" />
           <div className="horizontal-cards">
             {dashboardVal?.map((value) => (
@@ -250,13 +409,13 @@ export default function DsaPage() {
             </div>
             <div className="graph-card">
               <BarGarph
-              currencies={currencies}
-              handleChange={handleChange}
-              currency={currency}
-              options={options}
-              series={series}
-              graphView={graphView}
-              handleGraphView={(value:number)=>setGraphView(value)}
+                currencies={currencies}
+                handleChange={handleChange}
+                currency={currency}
+                options={options}
+                series={series}
+                graphView={graphView}
+                handleGraphView={(value: number) => setGraphView(value)}
               />
             </div>
           </div>

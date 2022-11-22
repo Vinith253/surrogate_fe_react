@@ -68,9 +68,7 @@ import InputBase from '@mui/material/InputBase';
 import CustomModal from '../../../../components/commonComponent/customModal/CustomModal';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { checkTagStatus } from '../../../../utils/tagBasedIndicator/tagStatus';
-import FilterButton from '../../../../components/commonComponent/FilterHeader/FilterButton';
 import {
-  filterHeaderData,
   listRowHeading,
   salesDashboardList,
   statusRowHeading,
