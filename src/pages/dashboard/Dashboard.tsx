@@ -42,6 +42,21 @@ const currencies = [
   },
 ];
 
+const spineGraphStatus = [
+  {
+    value: 1,
+    label: 'All Surrogates',
+  },
+  {
+    value: 2,
+    label: 'Card For Card',
+  },
+  {
+    value: 3,
+    label: 'Payroll',
+  },
+];
+
 const dashboardVal = [
   {
     index: 1,
@@ -54,7 +69,7 @@ const dashboardVal = [
   {
     index: 2,
     title: 'Approval Rate(%)',
-    value: 98.6,
+    value: '98.6%',
     more: true,
     image: ApprovedRate,
     boxstyles : "progress-icon-box"
@@ -238,11 +253,17 @@ export default function Dashboard() {
 
 
   const [graphView, setGraphView] = useState<number>(1);
+  const [spineGraphView, setSpineGraphView] = useState<number>(1);
 const [currency, setCurrency] = useState<number>(1);
+const [spineGraphValue, setSpineGraph] = useState<number>(1);
 const [dayFilterValue, setDayFilter] = useState<string>("Current Day");
 
 const handleChange = (event: any) => {
   setCurrency(event.target.value);
+};
+
+const handleSpineChange = (event: any) => {
+  setSpineGraph(event.target.value);
 };
 
 
@@ -391,7 +412,7 @@ const channels_label = [
                 more={value.more}
                 image={value.image}
                 boxStyles={value.boxstyles}
-                navPath=''
+                navPath='/sales/salesReport'
               />
             ))}
           </div>
@@ -418,24 +439,25 @@ const channels_label = [
                 <div className="filter-graph-box">
                   <div>
                     <TextField
-                      id="outlined-select-currency-native"
+                      id="outlined-select-spine-native"
                       select
-                      value={currency}
-                      onChange={handleChange}
+                      value={spineGraphValue}
+                      onChange={handleSpineChange}
                       SelectProps={{
                         native: true,
                       }}
+                      sx={{width:'10vw'}}
                       variant="outlined"
                       inputProps={{
                         style: {
                           fontSize: '12px',
                           backgroundColor: '#F3F3F3',
-                          paddingTop: '10px',
-                          paddingBottom: '10px',
+                          paddingTop: '8px',
+                          paddingBottom: '12px',
                         },
                       }}
                     >
-                      {currencies.map((option) => (
+                      {spineGraphStatus.map((option) => (
                         <option key={option.value} value={option.value}>
                           {option.label}
                         </option>
@@ -445,12 +467,12 @@ const channels_label = [
                   <div className="third-header">
                     <div className={'graph-filter-box'}>
                       <div
-                        className={graphView === 1 ? 'selectedBox' : 'hour-box'}
+                        className={spineGraphView === 1 ? 'selectedBox' : 'hour-box'}
                       >
                         <li
-                          onClick={() => setGraphView(1)}
+                          onClick={() => setSpineGraphView(1)}
                           className={
-                            graphView === 1
+                            spineGraphView === 1
                               ? 'selected-overview-text3'
                               : 'overview-text3'
                           }
@@ -460,12 +482,12 @@ const channels_label = [
                       </div>
                       <div className="line2-div" />
                       <div
-                        className={graphView === 2 ? 'selectedBox' : 'hour-box'}
+                        className={spineGraphView === 2 ? 'selectedBox' : 'hour-box'}
                       >
                         <li
-                          onClick={() => setGraphView(2)}
+                          onClick={() => setSpineGraphView(2)}
                           className={
-                            graphView === 2
+                            spineGraphView === 2
                               ? 'selected-overview-text3'
                               : 'overview-text3'
                           }
@@ -475,12 +497,12 @@ const channels_label = [
                       </div>
                       <div className="line2-div" />
                       <div
-                        className={graphView === 3 ? 'selectedBox' : 'hour-box'}
+                        className={spineGraphView === 3 ? 'selectedBox' : 'hour-box'}
                       >
                         <li
-                          onClick={() => setGraphView(3)}
+                          onClick={() => setSpineGraphView(3)}
                           className={
-                            graphView === 3
+                            spineGraphView === 3
                               ? 'selected-overview-text3'
                               : 'overview-text3'
                           }
@@ -490,12 +512,12 @@ const channels_label = [
                       </div>
                       <div className="line2-div" />
                       <div
-                        className={graphView === 4 ? 'selectedBox' : 'hour-box'}
+                        className={spineGraphView === 4 ? 'selectedBox' : 'hour-box'}
                       >
                         <li
-                          onClick={() => setGraphView(4)}
+                          onClick={() => setSpineGraphView(4)}
                           className={
-                            graphView === 4
+                            spineGraphView === 4
                               ? 'selected-overview-text3'
                               : 'overview-text3'
                           }
@@ -520,7 +542,7 @@ const channels_label = [
       </Typography>
       </div>
     <div className="divider-line" />
-          <div className="horizontal-cards">
+          <div className="horizontal-cards2">
             {channelUserData.map((value) => (
               <DashboardCard
                 title={value.title}

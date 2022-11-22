@@ -22,13 +22,14 @@ export default function BarGarph(props: {
           SelectProps={{
             native: true,
           }}
+          sx={{width:'8vw'}}
           variant="outlined"
           inputProps={{
             style: {
               fontSize: '12px',
               backgroundColor: '#F3F3F3',
-              paddingTop: '10px',
-              paddingBottom: '10px',
+              paddingTop: '8px',
+              paddingBottom: '12px',
             },
           }}
         >
