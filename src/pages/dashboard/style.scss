@@ -19,6 +19,29 @@
       flex-direction: column;
       margin-top: 32px;
 
+      .filter-header {
+        display: flex;
+        margin-top: 28px;
+        margin-bottom: 28px;
+        margin-left: 32px;
+        margin-right: 32px;    
+        cursor: pointer;
+        justify-content: space-between;
+        align-items: flex-start;
+    
+        .filter-data {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+    
+        .reset-data {
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+        }
+      }
+
       .heading-text {
         align-items: flex-start;
         padding: 20px;
