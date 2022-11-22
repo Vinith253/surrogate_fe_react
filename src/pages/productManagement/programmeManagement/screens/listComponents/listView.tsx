@@ -18,6 +18,7 @@ import { programMmgt } from '../../../../../utils/Constants';
 import { checkTagStatus } from '../../../../../utils/tagBasedIndicator/tagStatus';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import UnfoldMoreIcon from '../../../../../assets/icons/sortArrow.svg';
+import CustomModal from '../../../../../components/commonComponent/customModal/CustomModal';
 export interface dataList {
   surrogateProgramme: string;
   lastModify: string;
@@ -50,6 +51,16 @@ const tableHeaderData = [
 export const ListView = ({ data }: any) => {
   const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
   const [selected, setSelected] = React.useState<number[]>([]);
+  const [showPauseModal, setShowPauseModal] = useState<boolean>(false);
+  // const [isPauseModal, setIsPauseModal] = useState<boolean>(false);
+  const [showPauseSuccessModal, setShowPauseSuccessModal] =
+    useState<boolean>(false);
+  const [showResumeModal, setShowResumeModal] = useState<boolean>(false);
+  const [showResumeSuccessModal, setShowResumeSuccessModal] =
+    useState<boolean>(false);
+  const [showScheduledPauseSuccessModal, setShowScheduledPauseSuccessModal] =
+    useState<boolean>(false);
+  const [pauseMethod, setPauseMethod] = useState('Pause Now');
   const [sortingData, setSortingData] = useState(data);
   const [ascending, setAscending] = useState<boolean>(true);
   const open = Boolean(anchorElement);
@@ -104,6 +115,40 @@ export const ListView = ({ data }: any) => {
   const handleSortByName = () => {
     setAscending(!ascending);
   };
+
+  const closeModal = () => {
+    setShowPauseModal(false);
+    setShowPauseSuccessModal(false);
+    setShowScheduledPauseSuccessModal(false);
+    setShowResumeModal(false);
+    setShowResumeSuccessModal(false);
+  };
+
+  const NORMAL_PAUSE = 'Pause Now';
+  const SCHEDULED_PAUSE = 'Schedule Pause';
+
+  const pauseMethodChange = (value: any) => {
+    setPauseMethod(value);
+  };
+
+  const successModal = () => {
+    if (pauseMethod === NORMAL_PAUSE) {
+      setShowPauseModal(false);
+      setShowPauseSuccessModal(true);
+      console.log('success');
+    }
+    if (pauseMethod === SCHEDULED_PAUSE) {
+      setShowPauseModal(false);
+      setShowScheduledPauseSuccessModal(true);
+      console.log('fail');
+    }
+  };
+
+  const resumeSuccessModal = () => {
+    setShowResumeSuccessModal(true);
+    setShowResumeModal(false);
+  };
+
   return (
     <Stack>
       <TableContainer component={Paper}>
@@ -241,13 +286,21 @@ export const ListView = ({ data }: any) => {
         }}
       >
         <MenuItem
-          onClick={handleClose}
+          // onClick={() => handleClose()}
+          onClick={() => {
+            handleClose();
+            setShowResumeModal(true);
+          }}
           style={{ padding: '10px 20px', textAlign: 'left' }}
         >
           {programMmgt.RESUME_SURROGATE}
         </MenuItem>
         <MenuItem
-          onClick={handleClose}
+          // onClick={handleClose}
+          onClick={() => {
+            handleClose();
+            setShowPauseModal(true);
+          }}
           style={{ padding: '10px 20px', textAlign: 'left' }}
         >
           {programMmgt.PAUSE_SURROGATE}
@@ -259,6 +312,77 @@ export const ListView = ({ data }: any) => {
           {programMmgt.EDIT_SCHEDULE_PAUSE}
         </MenuItem>
       </Menu>
+      {showPauseModal && (
+        <CustomModal
+          openSuccess={showPauseModal}
+          handleCloseSuccess={closeModal}
+          handleSuccess={successModal}
+          title={'Card For Card - Pause'}
+          pause_content={'You can pause it or perform a scheduled pause.'}
+          scheduledPause_content={
+            'Please choose a date range to perform a scheduled pause.'
+          }
+          textarea_title={'Add Remarks'}
+          normalPause={NORMAL_PAUSE}
+          SchedulePause={SCHEDULED_PAUSE}
+          dateRange_title={'Enter Date range'}
+          maxLength={'Maximum of 500 words'}
+          pauseMethodChecking={(arg1: string) => pauseMethodChange(arg1)}
+          close={'Close'}
+          submit={'Submit'}
+          datepickerLabelStart={'Start Date and time'}
+          datepickerLabelEnd={'End Date and time'}
+        />
+      )}
+      {showPauseSuccessModal && (
+        <CustomModal
+          openSuccess={showPauseSuccessModal}
+          handleCloseSuccess={closeModal}
+          successModalTitle={'Card For Card - Pause'}
+          successModalMsg={
+            ' Your action of pausing - Card For Card Surrogate has been successully sent to the reviewer'
+          }
+          btn={' Close'}
+        />
+      )}
+      {showScheduledPauseSuccessModal && (
+        <CustomModal
+          openSuccess={showScheduledPauseSuccessModal}
+          handleCloseSuccess={closeModal}
+          successModalTitle={'Card For Card - Scheduled Pause'}
+          successModalMsg={
+            'Your action of Scheduled Pause - Card For Card Surrogate From  DD/MM/YYYTo DD/MM/YYY is successfully sent to reviewer'
+          }
+          btn={' Close'}
+        />
+      )}
+      {showResumeModal && (
+        <CustomModal
+          openSuccess={showResumeModal}
+          handleCloseSuccess={closeModal}
+          title={'AQB - Resume Now'}
+          handleSuccess={resumeSuccessModal}
+          pause_content={
+            'You will be able to resume your paused surrogate here.'
+          }
+          textarea_title={'Add Remarks'}
+          dateRange_title={'Enter Date range'}
+          maxLength={'Maximum of 500 words'}
+          close={'Close'}
+          submit={'Submit'}
+        />
+      )}
+      {showResumeSuccessModal && (
+        <CustomModal
+          openSuccess={showResumeSuccessModal}
+          handleCloseSuccess={closeModal}
+          successModalTitle={'AQB - Resume Now'}
+          successModalMsg={
+            'Your action of Resuming - AQB Surrogate has been successfully sent to the reviewer.'
+          }
+          btn={' Close'}
+        />
+      )}
     </Stack>
   );
 };

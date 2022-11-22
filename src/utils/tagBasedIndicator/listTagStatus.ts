@@ -7,18 +7,18 @@ export const ListTagStatus = (value: string) => {
     color: '#000',
   };
   if (value === tagBasedIndicator.ACTIVE) {
-    result.color = '#1C592A';
-    result.bgColor = '#E3F3E6';
+    result.color = colors.ActiveStatusTextColor;
+    result.bgColor = colors.ActiveStatusBGColor;
     return result;
   }
   if (value === tagBasedIndicator.PAUSED) {
-    result.color = '#997F31';
-    result.bgColor = '#FBF2D7';
+    result.color = colors.PausedStatusTextColor;
+    result.bgColor = colors.PauseStatusBGColor;
     return result;
   }
   if (value === tagBasedIndicator.PAUSED_SCHEDULED) {
-    result.color = '#992D26';
-    result.bgColor = '#FCE4E5';
+    result.color = colors.ScheduledPauseTextColor;
+    result.bgColor = colors.ScheduledPausedBgColor;
     return result;
   }
   return result;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './reviewCard.scss';
+import './reviewCard.scss';;
 import {
   Stack,
   Box,
@@ -70,9 +70,9 @@ const ReviewCard = () => {
   const goBack = () => {
     navigate(-1);
   };
-  const close = () => {
+  const close = ()  =>  {
     navigate('/productManagement/cardCatalogue');
-  };
+  };;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -101,7 +101,12 @@ const ReviewCard = () => {
       <Box className="box1">
         <Box className="head">
           <Box className="headFull">
+    <Box className="reviewCard">
+      <Box className="box1">
+        <Box className="head">
+          <Box className="headFull">
             <Box onClick={goBack}>
+              <ArrowBackIcon className="headback" />
               <ArrowBackIcon className="headback" />
             </Box>
             <Box>
@@ -110,6 +115,9 @@ const ReviewCard = () => {
             </Box>
           </Box>
 
+          <Box className="headIconBox">
+            <Button className="btn">
+              <IconButton className="icon">
           <Box className="headIconBox">
             <Button className="btn">
               <IconButton className="icon">
@@ -129,14 +137,80 @@ const ReviewCard = () => {
           <Box className="bodyBox">
             <Card className="card">
               <img className="img" src={CardImage} onClick={handleOpen} />
+        <Box className="body">
+          <Box className="bodyBox">
+            <Card className="card">
+              <img className="img" src={CardImage} onClick={handleOpen} />
 
-              <Modal
+              {open && <Modal
                 keepMounted
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="keep-mounted-modal-title"
                 aria-describedby="keep-mounted-modal-description"
               >
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: '100vw',
+                    height: '100vh',
+                    flexDirection: 'column',
+                  }}
+                >
+                  <Box
+                    sx={{
+                      backgroundColor: 'white',
+                      borderRadius: '10px',
+                      padding: '20px',
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        paddingBottom: '15px',
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          fontSize: '14px',
+                          fontWeight: 500,
+                          lineHeight: '16px',
+                          color: '#231F20',
+                          letterSpacing: '0.001em',
+                        }}
+                      >
+                        Card Photo - Eterna - Platinum
+                      </Typography>
+                      <Typography
+                        sx={{
+                          fontSize: '14px',
+                          fontWeight: 500,
+                          lineHeight: '16px',
+                          color: '#0662B7',
+                          letterSpacing: '0.0125em',
+                        }}
+                        onClick={handleClose}
+                      >
+                        Close
+                      </Typography>
+                    </Box>
+                    <Box className="cardImageBox">
+                      <img
+                        style={{
+                          width: '35vw',
+                          height: '35vh',
+                        }}
+                        alt=""
+                        src={CardImage}
+                      />
+                    </Box>
+                  </Box>
+                </Box>
+              </Modal>}
                 <Box
                   sx={{
                     display: 'flex',
@@ -204,7 +278,10 @@ const ReviewCard = () => {
 
           <Box>
             <Grid container className="textGrid" spacing={5}>
+            <Grid container className="textGrid" spacing={5}>
               <Grid item xs={12} sm={6} md={4}>
+                <Box className="businessText">
+                  <TypoText color="grey" title="Business ID" />
                 <Box className="businessText">
                   <TypoText color="grey" title="Business ID" />
                   <TypoText
@@ -221,6 +298,9 @@ const ReviewCard = () => {
                 <Box>
                   <TypoText color="grey" title="Card Name" />
                   <TypoText
+                <Box>
+                  <TypoText color="grey" title="Card Name" />
+                  <TypoText
                     handleChange={handleValueChange}
                     id={'cardName'}
                     title={data?.cardName}
@@ -230,6 +310,9 @@ const ReviewCard = () => {
               </Grid>
 
               <Grid item xs={12} sm={6} md={4}>
+                <Box>
+                  <TypoText color="grey" title="Interest Rate (in%)" />
+                  <TypoText
                 <Box>
                   <TypoText color="grey" title="Interest Rate (in%)" />
                   <TypoText
@@ -245,6 +328,8 @@ const ReviewCard = () => {
               <Grid item xs={12} sm={6} md={4}>
                 <Box>
                   <TypoText color="grey" title="Card Type" />
+                <Box>
+                  <TypoText color="grey" title="Card Type" />
                   <Typography>Salaried</Typography>
                   {/* <Select
                     placeholder="Salaried"
@@ -255,6 +340,8 @@ const ReviewCard = () => {
               </Grid>
 
               <Grid item xs={12} sm={6} md={4}>
+                <Box>
+                  <TypoText color="grey" title="Card Mode" />
                 <Box>
                   <TypoText color="grey" title="Card Mode" />
                   <Typography>General Basic</Typography>
@@ -269,6 +356,8 @@ const ReviewCard = () => {
               <Grid item xs={12} sm={6} md={4}>
                 <Box>
                   <TypoText color="grey" title="Card Category" />
+                <Box>
+                  <TypoText color="grey" title="Card Category" />
                   <Typography>General</Typography>
                   {/* <Select
                     placeholder="General"
@@ -280,7 +369,10 @@ const ReviewCard = () => {
             </Grid>
 
             <Grid container className="maximumCardGrid">
+            <Grid container className="maximumCardGrid">
               <Grid item xs={12} sm={6} md={4}>
+                <Box className="textField">
+                  <TypoText color="grey" title="Maximum Card Limit" />
                 <Box className="textField">
                   <TypoText color="grey" title="Maximum Card Limit" />
                   <TypoText title={data?.maximumCardLimit} />
@@ -293,6 +385,8 @@ const ReviewCard = () => {
 
       <Box className="box2">
         <Box className="surrogateHead">
+      <Box className="box2">
+        <Box className="surrogateHead">
           <TypoText title=" Surrogate" />
           <img src={Info_Icon} />
         </Box>
@@ -300,14 +394,19 @@ const ReviewCard = () => {
 
         <Box className="surrogateBody">
           <Typography variant="body2" className="title">
+        <Box className="surrogateBody">
+          <Typography variant="body2" className="title">
             Surrogate
           </Typography>
+          <Typography className="text">
           <Typography className="text">
             Payroll,Card for Card,CIBIL,AQB
           </Typography>
         </Box>
       </Box>
 
+      <Box className="box3">
+        <Box className="channelHead">
       <Box className="box3">
         <Box className="channelHead">
           <TypoText title=" Channels" />
@@ -317,8 +416,11 @@ const ReviewCard = () => {
 
         <Box className="channelBody">
           <Typography variant="body2" className="title">
+        <Box className="channelBody">
+          <Typography variant="body2" className="title">
             Channels
           </Typography>
+          <Typography className="text">Bank,DSA,Fintech Partner</Typography>
           <Typography className="text">Bank,DSA,Fintech Partner</Typography>
         </Box>
       </Box>
