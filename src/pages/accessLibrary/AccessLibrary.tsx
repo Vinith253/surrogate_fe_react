@@ -129,7 +129,7 @@ const AccessLibrary = () => {
         <Box className="search-container">
           <Box className="search-box">
             <SearchIcon className="search-icon" />
-            <InputBase placeholder="Search" />
+            <InputBase placeholder="Search by ..." />
           </Box>
           <Box>
             <ToggleButtonGroup
@@ -138,7 +138,7 @@ const AccessLibrary = () => {
               exclusive
               onChange={handleChange}
               aria-label="Platform"
-              // sx={ToggleBoxStyle}
+              sx={{ height: '45px', padding: '5px !important'}}
             >
               <ColorButton value="bank">Bank</ColorButton>
               <ColorButton value="dsa">DSA</ColorButton>

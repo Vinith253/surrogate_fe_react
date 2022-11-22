@@ -14,7 +14,7 @@ const LabTabs = () => {
       data: 'card catalogue',
       component: <CardCatalogue />,
     },
-    { id: '2', data: 'history log', component: <HistoryLog /> },
+    // { id: '2', data: 'history log', component: <HistoryLog /> },
   ];
   return (
     <Stack sx={{ borderLeft: '3px solid blue', backgroundColor: '#eceff2' }}>

@@ -10,24 +10,23 @@ import performance_report from '../../assets/icons/performance_report.svg';
 import lms from '../../assets/icons/lms.svg';
 import frequentActivity from '../../assets/images/frequentActivity.svg';
 import '../home/Home.scss';
-import HistoryLogCustomModal from '../../components/commonComponent/customModal/HistoryLogCustomModal';
-import HistoryModal from '../../components/commonComponent/customModal/HistoryLogModal';
-import PauseModal from '../../components/commonComponent/customModal/PauseModal';
-import PauseModalSucces from '../../components/commonComponent/customModal/PauseModalSuccess';
-import RejectionModal from '../../components/commonComponent/customModal/RejectionModal';
-import ResumeModal from '../../components/commonComponent/customModal/ResumeModal';
-import ResumeModalSuccess from '../../components/commonComponent/customModal/ResumeModalSuccess';
-import SchedulePause from '../../components/commonComponent/customModal/SchedulePause';
-import SchedulePauseSuccess from '../../components/commonComponent/customModal/SchedulePauseSuccess';
-import SurrogateSelection from '../../components/commonComponent/customModal/SurrogateSelection';
-import PageLayout from '../../components/layout/pageLayout/pageLayout';
+// import HistoryLogCustomModal from '../../components/commonComponent/customModal/HistoryLogCustomModal';
+// import HistoryModal from '../../components/commonComponent/customModal/HistoryLogModal';
+// import PauseModal from '../../components/commonComponent/customModal/PauseModal';
+// import PauseModalSucces from '../../components/commonComponent/customModal/PauseModalSuccess';
+// import RejectionModal from '../../components/commonComponent/customModal/RejectionModal';
+// import ResumeModal from '../../components/commonComponent/customModal/ResumeModal';
+// import ResumeModalSuccess from '../../components/commonComponent/customModal/ResumeModalSuccess';
+// import SchedulePause from '../../components/commonComponent/customModal/SchedulePause';
+// import SchedulePauseSuccess from '../../components/commonComponent/customModal/SchedulePauseSuccess';
+// import SurrogateSelection from '../../components/commonComponent/customModal/SurrogateSelection';
+// import PageLayout from '../../components/layout/pageLayout/pageLayout';
 import { useState } from 'react';
-import AccessLibraryModal from '../../components/commonComponent/customModal/AccessLibraryModal';
-import ChangePasswordProfileModal from '../../components/commonComponent/customModal/ChangePasswordProfileModal';
-import ChangePasswordOTP from '../../components/commonComponent/customModal/ChangePasswordOTP';
-import CreateNewPassword from '../../components/commonComponent/customModal/CreateNewPassword';
+// import AccessLibraryModal from '../../components/commonComponent/customModal/AccessLibraryModal';
+// import ChangePasswordProfileModal from '../../components/commonComponent/customModal/ChangePasswordProfileModal';
+// import ChangePasswordOTP from '../../components/commonComponent/customModal/ChangePasswordOTP';
+// import CreateNewPassword from '../../components/commonComponent/customModal/CreateNewPassword';
 // import SurrogateSelection from "../../components/commonComponent/CustomModal/SurrogateSelection";
-
 // import PauseModalSucces from "../../components/commonComponent/customModal/PauseModalSuccess";
 // import RejectionModal from "../../components/commonComponent/customModal/RejectionModal";
 // import ResumeModal from "../../components/commonComponent/customModal/ResumeModal";
@@ -35,10 +34,10 @@ import CreateNewPassword from '../../components/commonComponent/customModal/Crea
 // import SchedulePause from "../../components/commonComponent/customModal/SchedulePause";
 // import SchedulePauseSuccess from "../../components/commonComponent/customModal/SchedulePauseSuccess";
 // import SurrogateSelection from "../../components/commonComponent/customModal/SurrogateSelection";
-
 export default function Home() {
   const pendingActionsData = {
     title: 'Pending Actions',
+    key: 'pendingItems',
     clipText: 'Pending',
     clipNo: 2,
     data: [
@@ -58,6 +57,7 @@ export default function Home() {
   };
   const savedItemsData = {
     title: 'Saved Items',
+    key: 'savedItems',
     clipText: 'Saved',
     clipNo: 2,
     data: [
@@ -77,6 +77,7 @@ export default function Home() {
   };
   const frequentActivitiesData = {
     title: 'Frequent Activities',
+    key: 'frequentActivities',
     clipText: '',
     clipNo: '',
     mainImage: frequentActivity,
@@ -104,7 +105,6 @@ export default function Home() {
   const [frequentActivities, setFrequentActivities] = useState(
     frequentActivitiesData
   );
-
   return (
     <Box className="main-container">
       <Typography color="secondary" variant="h5">
@@ -118,9 +118,7 @@ export default function Home() {
         <Card content={pendingActionsData} />
         <Card content={savedItemsData} />
         <Card content={frequentActivitiesData} />
-
         {/* Modals*/}
-
         {/* <PauseModal />
       <PauseModalSucces />
       <SchedulePause />
