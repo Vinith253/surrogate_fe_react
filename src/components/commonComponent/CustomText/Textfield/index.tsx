@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Box, TextField, Typography } from '@mui/material';
 
 const TypoText = (props: any) => {
-  const { handleChange, id, value } = props;
+  const { handleChange, id, value, fontSize } = props;
   return (
     <Box>
       {props.title && (
@@ -10,17 +10,19 @@ const TypoText = (props: any) => {
           sx={{
             margin: 0,
             // fontFamily:'ilisarniq',
-            fontSize: '16px',
+            fontSize: `${props.fontSize}`,
             fontWeight: 500,
-            lineHeight:'20px',
+            lineHeight: '20px',
             display: 'flex',
             justifyContent: 'flex-start',
-            color:props.color,
+            color: props.color,
           }}
           style={props.style}
           variant="body1"
           color="textPrimary"
         >
+          {props.fontSize}
+          {console.log('fontsize', props.fontSize)}
           {props.title}
         </Typography>
       )}

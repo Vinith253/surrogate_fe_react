@@ -281,7 +281,7 @@ const CreateNewCard = () => {
       </Box>
       <Box className="box3">
         <Box className="cardDetail">
-          <TypoText title="Enter Card Details " />
+          <TypoText fontSize='16px' title="Enter Card Details " />
           <img className="img" src={Info_Icon} />
           <TypographyInfo title="From here you can can add the card information" />
         </Box>
@@ -290,7 +290,7 @@ const CreateNewCard = () => {
         <Grid container className="cardDetailGrid1" spacing={5}>
           <Grid item xs={12} sm={6} md={4}>
             <Box sx={{ gap: 2 }}>
-              <TypoText title="Business ID" />
+              <TypoText fontSize='12px' title="Business ID" />
               <TypoText
                 placeholder="Business ID"
                 handleChange={handleValueChange}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './reviewCard.scss'
+import './reviewCard.scss';
 import {
   Stack,
   Box,
@@ -70,9 +70,9 @@ const ReviewCard = () => {
   const goBack = () => {
     navigate(-1);
   };
-  const close = ()=>{
+  const close = () => {
     navigate('/productManagement/cardCatalogue');
-  }
+  };
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -97,18 +97,12 @@ const ReviewCard = () => {
 
   console.log('data', data);
   return (
-    <Box
-      className='reviewCard'
-    >
-      <Box
-        className='box1'
-      >
-        <Box className='head'>
-          <Box
-            className='headFull'
-          >
+    <Box className="reviewCard">
+      <Box className="box1">
+        <Box className="head">
+          <Box className="headFull">
             <Box onClick={goBack}>
-              <ArrowBackIcon className='headback' />
+              <ArrowBackIcon className="headback" />
             </Box>
             <Box>
               <TypoText title="Eterna - Platinum (ID No. 12345678)" />
@@ -116,11 +110,9 @@ const ReviewCard = () => {
             </Box>
           </Box>
 
-          <Box className='headIconBox'>
-            <Button
-              className='btn'
-            >
-              <IconButton className='icon'>
+          <Box className="headIconBox">
+            <Button className="btn">
+              <IconButton className="icon">
                 <img
                   src={EditIcon}
                   style={{
@@ -133,16 +125,10 @@ const ReviewCard = () => {
           </Box>
         </Box>
         <Divider />
-        <Box className='body'>
-          <Box className='bodyBox'>
-            <Card
-              className='card'
-            >
-              <img
-                className='img'
-                src={CardImage}
-                onClick={handleOpen}
-              />
+        <Box className="body">
+          <Box className="bodyBox">
+            <Card className="card">
+              <img className="img" src={CardImage} onClick={handleOpen} />
 
               <Modal
                 keepMounted
@@ -151,22 +137,65 @@ const ReviewCard = () => {
                 aria-labelledby="keep-mounted-modal-title"
                 aria-describedby="keep-mounted-modal-description"
               >
-                <Box className='modal'>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: '100vw',
+                    height: '100vh',
+                    flexDirection: 'column',
+                  }}
+                >
                   <Box
-                    className='cardHead'
+                    sx={{
+                      backgroundColor: 'white',
+                      borderRadius: '10px',
+                      padding: '20px',
+                    }}
                   >
-                    <Typography className='text'>
-                      Card Photo - Eterna - Platinum
-                    </Typography>
-                    <Typography
-                      className='typo'
-                      onClick={handleClose}
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        paddingBottom: '15px',
+                      }}
                     >
-                      Close
-                    </Typography>
-                  </Box>
-                  <Box className='cardImageBox'>
-                    <img className='img' src={CardImage} />
+                      <Typography
+                        sx={{
+                          fontSize: '14px',
+                          fontWeight: 500,
+                          lineHeight: '16px',
+                          color: '#231F20',
+                          letterSpacing: '0.001em',
+                        }}
+                      >
+                        Card Photo - Eterna - Platinum
+                      </Typography>
+                      <Button
+                        sx={{
+                          fontSize: '14px',
+                          fontWeight: 500,
+                          lineHeight: '16px',
+                          color: '#0662B7',
+                          letterSpacing: '0.0125em',
+                        }}
+                        onClick={handleClose}
+                      >
+                        Close
+                      </Button>
+                    </Box>
+                    <Box className="cardImageBox">
+                      <img
+                        style={{
+                          width: '35vw',
+                          height: '35vh',
+                        }}
+                        alt=""
+                        src={CardImage}
+                      />
+                    </Box>
                   </Box>
                 </Box>
               </Modal>
@@ -174,12 +203,11 @@ const ReviewCard = () => {
           </Box>
 
           <Box>
-            <Grid container className='textGrid' spacing={5}>
+            <Grid container className="textGrid" spacing={5}>
               <Grid item xs={12} sm={6} md={4}>
-                <Box className='businessText'>
-                  <TypoText color='grey' title="Business ID" />
+                <Box className="businessText">
+                  <TypoText color="grey" title="Business ID" />
                   <TypoText
-                    
                     handleChange={handleValueChange}
                     id={'businessId'}
                     title={data?.businessId}
@@ -190,9 +218,9 @@ const ReviewCard = () => {
               </Grid>
 
               <Grid item xs={12} sm={6} md={4}>
-                <Box >
-                  <TypoText color='grey' title="Card Name" />
-                  <TypoText 
+                <Box>
+                  <TypoText color="grey" title="Card Name" />
+                  <TypoText
                     handleChange={handleValueChange}
                     id={'cardName'}
                     title={data?.cardName}
@@ -202,9 +230,9 @@ const ReviewCard = () => {
               </Grid>
 
               <Grid item xs={12} sm={6} md={4}>
-                <Box >
-                  <TypoText color='grey' title="Interest Rate (in%)" />
-                  <TypoText 
+                <Box>
+                  <TypoText color="grey" title="Interest Rate (in%)" />
+                  <TypoText
                     handleChange={handleValueChange}
                     id={'interestRate'}
                     title={data?.interestRate}
@@ -215,8 +243,8 @@ const ReviewCard = () => {
 
             <Grid container spacing={5}>
               <Grid item xs={12} sm={6} md={4}>
-                <Box >
-                  <TypoText color='grey' title="Card Type" />
+                <Box>
+                  <TypoText color="grey" title="Card Type" />
                   <Typography>Salaried</Typography>
                   {/* <Select
                     placeholder="Salaried"
@@ -227,8 +255,8 @@ const ReviewCard = () => {
               </Grid>
 
               <Grid item xs={12} sm={6} md={4}>
-                <Box >
-                  <TypoText color='grey' title="Card Mode" />
+                <Box>
+                  <TypoText color="grey" title="Card Mode" />
                   <Typography>General Basic</Typography>
                   {/* <Select
                     placeholder="General Basic"
@@ -239,8 +267,8 @@ const ReviewCard = () => {
               </Grid>
 
               <Grid item xs={12} sm={6} md={4}>
-                <Box >
-                  <TypoText color='grey' title="Card Category" />
+                <Box>
+                  <TypoText color="grey" title="Card Category" />
                   <Typography>General</Typography>
                   {/* <Select
                     placeholder="General"
@@ -251,15 +279,10 @@ const ReviewCard = () => {
               </Grid>
             </Grid>
 
-            <Grid
-              container
-              className='maximumCardGrid'
-            >
+            <Grid container className="maximumCardGrid">
               <Grid item xs={12} sm={6} md={4}>
-                <Box
-                  className='textField'
-                >
-                  <TypoText color='grey' title="Maximum Card Limit" />
+                <Box className="textField">
+                  <TypoText color="grey" title="Maximum Card Limit" />
                   <TypoText title={data?.maximumCardLimit} />
                 </Box>
               </Grid>
@@ -268,45 +291,35 @@ const ReviewCard = () => {
         </Box>
       </Box>
 
-      <Box className='box2'>
-        <Box
-          className='surrogateHead'
-        >
+      <Box className="box2">
+        <Box className="surrogateHead">
           <TypoText title=" Surrogate" />
           <img src={Info_Icon} />
         </Box>
         <Divider />
 
-        <Box
-          className='surrogateBody'
-        >
-          <Typography variant="body2" className='title'>
+        <Box className="surrogateBody">
+          <Typography variant="body2" className="title">
             Surrogate
           </Typography>
-          <Typography className='text'>
+          <Typography className="text">
             Payroll,Card for Card,CIBIL,AQB
           </Typography>
         </Box>
       </Box>
 
-      <Box className='box3'>
-        <Box
-          className='channelHead'
-        >
+      <Box className="box3">
+        <Box className="channelHead">
           <TypoText title=" Channels" />
           <img src={Info_Icon} />
         </Box>
         <Divider />
 
-        <Box
-          className='channelBody'
-        >
-          <Typography variant="body2" className='title'>
+        <Box className="channelBody">
+          <Typography variant="body2" className="title">
             Channels
           </Typography>
-          <Typography className='text'>
-            Bank,DSA,Fintech Partner
-          </Typography>
+          <Typography className="text">Bank,DSA,Fintech Partner</Typography>
         </Box>
       </Box>
 
