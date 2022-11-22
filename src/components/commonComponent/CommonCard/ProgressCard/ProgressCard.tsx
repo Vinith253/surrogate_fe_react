@@ -81,7 +81,7 @@ function ProgressCard(props: {
           {props.lastPeriodValue != 0 && (
             <div className="card-value-with-icon">
             <text className="card-text-value">{props.lastPeriodValue}</text>
-            <img src={redDown}></img>
+            <img src={redDown} style={{marginLeft:'4px', marginBottom:'2px'}}></img>
             </div>
           )}
         </div>
@@ -92,7 +92,7 @@ function ProgressCard(props: {
           {props.lastYearValue != 0 && (
             <div className="card-value-with-icon">
             <text className="card-text-value">{props.lastYearValue}</text>
-            <img src={GreenUp}></img>
+            <img src={GreenUp} style={{marginLeft:'4px', marginBottom:'2px'}}></img>
             </div>
           )}
         </div>
