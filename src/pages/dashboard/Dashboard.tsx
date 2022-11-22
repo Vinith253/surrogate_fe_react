@@ -391,6 +391,7 @@ const channels_label = [
                 more={value.more}
                 image={value.image}
                 boxStyles={value.boxstyles}
+                navPath=''
               />
             ))}
           </div>
@@ -527,6 +528,7 @@ const channels_label = [
                 more={value.more}
                 image={value.image}
                 viewAll={value.viewAll}
+                navPath=''
               />
             ))}
           </div>

@@ -189,6 +189,7 @@ function MoreFilterModal({
                     <Select
                       labelId="demo-multiple-name-label"
                       id="demo-multiple-name"
+                      size="small"
                       // value={dayFilterValue}
                       // onChange={handleChange}
                       input={<OutlinedInput label={dayFilterValue} />}
@@ -224,6 +225,7 @@ function MoreFilterModal({
                     <Select
                       labelId="demo-multiple-name-label"
                       id="demo-multiple-name"
+                      size="small"
                       // value={personName}
                       // onChange={handleChange}
                       input={<OutlinedInput label="All Policies" />}
@@ -304,7 +306,7 @@ function MoreFilterModal({
                     <Select
                       labelId="demo-multiple-name-label"
                       id="demo-multiple-name"
-                      // size="small"
+                      size="small"
                       // value={personName}
                       // onChange={handleChange}
                       input={<OutlinedInput label="All Surrogates" />}
@@ -379,7 +381,7 @@ function MoreFilterModal({
                 >
                   <Typography sx={{ fontSize: '14px' }}>State</Typography>
                   <FormControl sx={{ m: 1, width: 233 }}>
-                    <SelectDropdown options={state_label} />
+                    <SelectDropdown options={state_label} flag='morefilter' />
                   </FormControl>
                 </Box>
                 <Box
@@ -394,7 +396,7 @@ function MoreFilterModal({
                 >
                   <Typography sx={{ fontSize: '14px' }}>Zonal</Typography>
                   <FormControl sx={{ m: 1, width: 233 }}>
-                    <SelectDropdown options={zonal_label} />
+                    <SelectDropdown options={zonal_label} flag='morefilter'/>
                   </FormControl>
                 </Box>
                 <Box
@@ -409,7 +411,7 @@ function MoreFilterModal({
                 >
                   <Typography sx={{ fontSize: '14px' }}>District</Typography>
                   <FormControl sx={{ m: 1, width: 233 }}>
-                    <SelectDropdown options={zonal_label} />
+                    <SelectDropdown options={zonal_label} flag='morefilter'/>
                   </FormControl>
                 </Box>
                 <Box
@@ -424,7 +426,7 @@ function MoreFilterModal({
                 >
                   <Typography sx={{ fontSize: '14px' }}>DSA Name(s)</Typography>
                   <FormControl sx={{ m: 1, width: 233 }}>
-                    <SelectDropdown options={zonal_label} />
+                    <SelectDropdown options={zonal_label} flag='morefilter' />
                   </FormControl>
                 </Box>
                 <Box
@@ -439,7 +441,7 @@ function MoreFilterModal({
                 >
                   <Typography sx={{ fontSize: '14px' }}>F. Partner Name(s)</Typography>
                   <FormControl sx={{ m: 1, width: 233 }}>
-                    <SelectDropdown options={zonal_label} />
+                    <SelectDropdown options={zonal_label} flag='morefilter'/>
                   </FormControl>
                 </Box>
                 <Box
@@ -454,7 +456,7 @@ function MoreFilterModal({
                 >
                   <Typography sx={{ fontSize: '14px' }}>Branch Name(s)</Typography>
                   <FormControl sx={{ m: 1, width: 233 }}>
-                    <SelectDropdown options={zonal_label} />
+                    <SelectDropdown options={zonal_label} flag='morefilter'/>
                   </FormControl>
                 </Box>
               </Grid>

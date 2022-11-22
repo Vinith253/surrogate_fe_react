@@ -8,6 +8,7 @@ import "./card.scss";
 import { Button } from "@mui/material";
 import { ReactComponent as RightArrow } from "../../../../assets/icons/rightArrow.svg";
 import { ReactComponent as DownArrow } from "../../../../assets/icons/downArrow.svg";
+import { useNavigate } from "react-router-dom";
 
 function DashboardCard(props: {
   title:
@@ -31,8 +32,11 @@ function DashboardCard(props: {
   more: any;
   image: any;
   boxStyles?:any;
-  viewAll?: boolean
+  viewAll?: boolean;
+  navPath: string;
 }) {
+  const navigate = useNavigate();
+
   return (
     <div className="total-value-card">
       <div className="upper-half">
@@ -49,6 +53,9 @@ function DashboardCard(props: {
           <Button
           endIcon={<RightArrow style={{width:'5px', height: '10px'}}/>}
           sx={{ fontSize: "0.8vw",color:'#0662B7',textTransform:'none'}}
+          onClick={()=> {
+            navigate(props.navPath)
+          }}
         >
           More
         </Button>

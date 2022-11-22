@@ -67,7 +67,7 @@ export default function DsaPage() {
     {
       index: 2,
       title: 'Approval Rate (%)',
-      value: 98.6,
+      value: "98.6 %",
       more: false,
       image: ApprovalRate,
     },
@@ -357,7 +357,7 @@ export default function DsaPage() {
               product_label={product_label}
               day_filter_label={day_filter_label}
               dayFilterValue={dayFilterValue}
-              submit={'Apply'}
+              submit={'Select'}
               close={'Reset'}
               policies_label={policies_label}
               surrogates_label={surrogates_label}
@@ -389,6 +389,7 @@ export default function DsaPage() {
                 value={value.value}
                 more={value.more}
                 image={value.image}
+                navPath='/sales/salesReport'
               />
             ))}
           </div>

@@ -20,9 +20,10 @@ import './style.scss';
 
 type Props = {
   options: Array<object>;
+  flag?: string;
 };
 
-function CheckboxSelectDropdown({ options }: Props) {
+function CheckboxSelectDropdown({ options, flag }: Props) {
   const [personName, setPersonName] = React.useState<string[]>([]);
 
   const handleChange = (event: SelectChangeEvent<typeof personName>) => {
@@ -44,6 +45,7 @@ function CheckboxSelectDropdown({ options }: Props) {
       multiple
       value={personName}
       onChange={handleChange}
+      size={flag==="morefilter" ? "small" : undefined}
     >
       <TextField
         className="search-text-field"
@@ -60,10 +62,24 @@ function CheckboxSelectDropdown({ options }: Props) {
         <FormControlLabel control={<Checkbox defaultChecked />} label="All" />
       </FormGroup>
       {options?.map((each: any, index: number) => (
-        <MenuItem key={index} value={each?.value} className="checkbox-checked">
-          <Checkbox />
-          <ListItemText primary={each?.name} />
-        </MenuItem>
+        <Grid px={3}>
+        <FormControlLabel
+        label={
+          <Typography sx={{ fontSize: '14px' }}>
+           {each?.name}
+          </Typography>
+        }
+        control={
+          <Checkbox
+            color="secondary"
+          />
+        }
+      /></Grid>
+        // <MenuItem key={index} value={each?.value} className="checkbox-checked">
+          
+        //   <Checkbox />
+        //   <ListItemText primary={each?.name} />
+        // </MenuItem>
       ))}
       <div className="underline"></div>
       <Box className="button-container">
