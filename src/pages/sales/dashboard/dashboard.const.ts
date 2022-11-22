@@ -1,5 +1,3 @@
-import { ReactComponent as DownArrow } from "../../../assets/icons/downArrow.svg";
-import { ReactComponent as MoreFilter } from "../../../assets/icons/moreFilter.svg";
 import { tableHeader } from "../../../utils/Constants";
 
 export const salesDashboardList: rowsDataInterface[] = [
@@ -310,28 +308,6 @@ export interface statusRowHeadingInterface {
   header10?: string;
 }
 
-
-export const filterHeaderData= {
-  title: 'Overview',
-  details: [
-    {
-      label: 'Current Day',
-      image: DownArrow,
-    },
-    {
-      label: 'All Policies',
-      image: DownArrow,
-    },
-    {
-      label: 'All Surrogates',
-      image: DownArrow,
-    },
-    {
-      label: 'More Filters',
-      image: MoreFilter,
-    },
-  ],
-};
 export const product_label = [
   {
     id: 1,
@@ -384,3 +360,19 @@ export const product_label = [
     defaultChecked: true,
   },
 ];
+
+export const state_label =[
+  { value: 'tamilnadu', name: 'Tamilnadu' },
+  { value: 'andra', name: 'Andhra' },
+  { value: 'telungana', name: 'Telungana' },
+  { value: 'karnataka', name: 'Karnataka' },
+  { value: 'kerala', name: 'Kerala' },
+]
+
+export const zonal_label =[
+  { value: 'tamilnadu', name: 'Tamilnadu' },
+  { value: 'andra', name: 'Andhra' },
+  { value: 'telungana', name: 'Telungana' },
+  { value: 'karnataka', name: 'Karnataka' },
+  { value: 'kerala', name: 'Kerala' },
+]

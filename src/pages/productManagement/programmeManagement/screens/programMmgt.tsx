@@ -160,7 +160,7 @@ export const ProgramManagementScreen = () => {
                 padding: '0 10px',
               }}
               onClick={() => {
-                setListView(false);
+                setListView(true);
               }}
             >
               <IconButton>
@@ -169,7 +169,7 @@ export const ProgramManagementScreen = () => {
                   alt="cardIcon"
                   style={{
                     filter:
-                      listView === false
+                      listView === true
                         ? 'invert(16%) sepia(97%) saturate(2280%) hue-rotate(207deg) brightness(100%) contrast(91%)'
                         : '',
                   }}
@@ -181,7 +181,7 @@ export const ProgramManagementScreen = () => {
                 padding: '0 10px',
               }}
               onClick={() => {
-                setListView(true);
+                setListView(false);
               }}
             >
               <IconButton>
@@ -190,7 +190,7 @@ export const ProgramManagementScreen = () => {
                   alt="ListIcon"
                   style={{
                     filter:
-                      listView === true
+                      listView === false
                         ? 'invert(15%) sepia(98%) saturate(2693%) hue-rotate(209deg) brightness(97%) contrast(87%)'
                         : '',
                   }}
@@ -333,9 +333,9 @@ export const ProgramManagementScreen = () => {
       )}
       <Stack>
         {listView ? (
-          <ListView data={surrogateData} />
-        ) : (
           <CardList data={surrogateData} />
+        ) : (
+          <ListView data={surrogateData} />
         )}
       </Stack>
     </Stack>

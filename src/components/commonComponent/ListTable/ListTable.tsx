@@ -863,6 +863,7 @@ function TableComp(props: {
           anchorEl={anchorEl}
           product_label={product_label}
           id={id}
+          showSearch={true}
         />
       }
     </div>

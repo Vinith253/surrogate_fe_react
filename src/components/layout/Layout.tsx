@@ -30,6 +30,11 @@ import risk_management_icon from '../../assets/icons/risk_management_icon.svg';
 import lms_icon from '../../assets/icons/lms_icon.svg';
 import product_management_icon from '../../assets/icons/product_management_icon.svg';
 import programme_management_icon from '../../assets/icons/programme_management_icon.svg';
+import role_creation_icon from '../../assets/icons/roleCreation.svg';
+import user_creation_icon from '../../assets/icons/userCreation.svg';
+import org_structure_icon from '../../assets/icons/orgStructure.svg';
+import branch_details_icon from '../../assets/icons/branchDetails.svg';
+
 import profile_icon from '../../assets/icons/profile_icon.svg';
 import profile_arrow_icon from '../../assets/icons/profile_arrow_icon.svg';
 import Collapse from '@mui/material/Collapse';
@@ -105,7 +110,28 @@ const sideBarOptions = [
     content: 'USER MNGMT.',
     path: '/userManagement',
     image: user_managemen_icon,
-    subContent: [],
+    subContent: [
+      {
+        data: 'Role Creation',
+        path: '/userManagement/roleCreation',
+        img: role_creation_icon,
+      },
+      {
+        data: 'User Creation',
+        path: '/userManagement/userCreation',
+        img: user_creation_icon,
+      },
+      {
+        data: 'Org Structure',
+        path: '/userManagement/orgStructure',
+        img: org_structure_icon,
+      },
+      {
+        data: 'Branch Detais',
+        path: '/userManagement/branchDetails',
+        img: branch_details_icon,
+      },
+    ],
   },
   { key: 7, content: 'LMS', path: '/lms', image: lms_icon, subContent: [] },
   {
