@@ -22,10 +22,16 @@ import '../home/Home.scss';
 // import SurrogateSelection from '../../components/commonComponent/customModal/SurrogateSelection';
 // import PageLayout from '../../components/layout/pageLayout/pageLayout';
 import { useState } from 'react';
-// import AccessLibraryModal from '../../components/commonComponent/customModal/AccessLibraryModal';
-// import ChangePasswordProfileModal from '../../components/commonComponent/customModal/ChangePasswordProfileModal';
-// import ChangePasswordOTP from '../../components/commonComponent/customModal/ChangePasswordOTP';
-// import CreateNewPassword from '../../components/commonComponent/customModal/CreateNewPassword';
+import AccessLibraryModal from '../../components/commonComponent/customModal/AccessLibraryModal';
+import ChangePasswordProfileModal from '../../components/commonComponent/customModal/ChangePasswordProfileModal';
+import ChangePasswordOTP from '../../components/commonComponent/customModal/ChangePasswordOTP';
+import CreateNewPassword from '../../components/commonComponent/customModal/CreateNewPassword';
+import BulkUploadDiscard from '../../components/commonComponent/customModal/USER-MNGMT/BulkUploadDiscard';
+import RequestForDeactivation from '../../components/commonComponent/customModal/USER-MNGMT/RequestForDeactivation';
+import RequestForActivation from '../../components/commonComponent/customModal/USER-MNGMT/RequestForActivation';
+import SuccessForDeactivation from '../../components/commonComponent/customModal/USER-MNGMT/SuccessForDeactivation';
+import SuccessForActivate from '../../components/commonComponent/customModal/USER-MNGMT/SuccessForActivate';
+import SuccessForUserCreated from '../../components/commonComponent/customModal/USER-MNGMT/SuccessForUserCreated';
 // import SurrogateSelection from "../../components/commonComponent/CustomModal/SurrogateSelection";
 // import PauseModalSucces from "../../components/commonComponent/customModal/PauseModalSuccess";
 // import RejectionModal from "../../components/commonComponent/customModal/RejectionModal";
@@ -111,13 +117,21 @@ export default function Home() {
         Welcome Parithi!
       </Typography>
       <Box className="home-container">
+        {/* <BulkUploadDiscard />
+        <RequestForDeactivation />
+        <RequestForActivation />
+        <SuccessForDeactivation />
+        <SuccessForActivate />
+        <SuccessForUserCreated /> */}
+
         {/* <AccessLibraryModal />
-      <ChangePasswordProfileModal />
-      <ChangePasswordOTP />
-      <CreateNewPassword /> */}
+        <ChangePasswordProfileModal />
+        <ChangePasswordOTP />
+        <CreateNewPassword /> */}
         <Card content={pendingActionsData} />
         <Card content={savedItemsData} />
         <Card content={frequentActivitiesData} />
+
         {/* Modals*/}
         {/* <PauseModal />
       <PauseModalSucces />
