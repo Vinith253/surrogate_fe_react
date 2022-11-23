@@ -65,6 +65,7 @@ type props = {
   enterNewPassword?: string;
   confirmNewPassword?: string;
   forgotPassword?: string;
+  accessLibraryLink?: string;
 };
 function CustomModal({
   openSuccess,
@@ -103,6 +104,7 @@ function CustomModal({
   enterNewPassword,
   confirmNewPassword,
   forgotPassword,
+  accessLibraryLink,
 }: props) {
   // const classess = useStyles();
   const [pauseStatus, setPauseStatus] = useState(normalPause);
@@ -440,7 +442,7 @@ function CustomModal({
                 padding: '15px 5px',
                 margin: '20px 30px',
                 fontWeight: '400',
-                width: '550px'
+                width: '550px',
               }}
             >
               <Box sx={{ borderRight: '1px solid #151515', padding: '0 18px' }}>
@@ -657,7 +659,12 @@ function CustomModal({
                         {' '}
                         <FormControlLabel
                           control={
-                            <Checkbox checked={item.defaultChecked == true} checkedIcon={<img src={CheckedIcon} alt={CheckedIcon} />}/>
+                            <Checkbox
+                              checked={item.defaultChecked == true}
+                              checkedIcon={
+                                <img src={CheckedIcon} alt={CheckedIcon} />
+                              }
+                            />
                           }
                           label={item.label}
                         />
@@ -749,9 +756,7 @@ function CustomModal({
                     variant="outlined"
                     size="small"
                     sx={{ height: '40px' }}
-                    value={
-                      'https://www.yesbank.com/content/bbp/repositories/7...'
-                    }
+                    value={accessLibraryLink}
                     inputProps={{
                       style: {
                         fontSize: '14px',

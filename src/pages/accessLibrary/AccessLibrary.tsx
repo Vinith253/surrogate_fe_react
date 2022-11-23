@@ -17,6 +17,7 @@ import CustomModal from '../../components/commonComponent/customModal/CustomModa
 
 const AccessLibrary = () => {
   const [accessModal, setAccessModal] = useState(false);
+  const [accessLink, setAccessLink] = useState('');
   const column = [
     { title: '#', dataIndex: 'id', key: 'id', sortColumn: false },
     {
@@ -48,11 +49,12 @@ const AccessLibrary = () => {
       dataIndex: 'copyIcon',
       key: 'copyIcon',
       sortColumn: false,
-      onClick: () => onClickCopyIcon(),
+      onClick: (link: string) => onClickCopyIcon(link),
     },
   ];
-  const onClickCopyIcon = () => {
+  const onClickCopyIcon = (link: string) => {
     setAccessModal(!accessModal);
+    setAccessLink(link);
   };
   const data = [
     {
@@ -140,7 +142,7 @@ const AccessLibrary = () => {
         <Box className="header-box">
           <Typography className="header">Access Library</Typography>
           <Typography className="sub-header">
-            Here is where we can copy particular link of all channels
+            Copy a text link of any channel from here.
           </Typography>
         </Box>
         <Divider />
@@ -177,6 +179,7 @@ const AccessLibrary = () => {
             // successModalMsg={
             //   'Your action of Scheduled Pause - Card For Card Surrogate From  DD/MM/YYYTo DD/MM/YYY is successfully sent to reviewer'
             // }
+            accessLibraryLink={accessLink}
             accessLibraryMsg={'Here you can copy the link and share it'}
             org_ID={'#12345'}
             org_Name={'Ganesh Agency'}

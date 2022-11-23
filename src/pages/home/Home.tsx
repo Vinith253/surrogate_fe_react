@@ -85,18 +85,22 @@ export default function Home() {
       {
         image: sales_report,
         mainContent: 'Sales Report',
+        path: '/sales/salesReport',
       },
       {
         image: customer_report,
         mainContent: 'Customer Report',
+        path: '/sales/salesReport',
       },
       {
         image: performance_report,
         mainContent: 'Performance Report',
+        path: '/sales/salesReport',
       },
       {
         image: lms,
         mainContent: 'LMS',
+        path: '/sales/salesReport',
       },
     ],
   };

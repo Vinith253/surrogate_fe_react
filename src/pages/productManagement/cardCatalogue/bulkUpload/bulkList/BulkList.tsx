@@ -204,30 +204,6 @@ const rows2 = [
   ),
 ];
 
-function LinearProgressWithLabel(
-  props: LinearProgressProps & { value: number }
-) {
-  return (
-    <Box>
-      <Box sx={{ width: '100%', mr: 1 }}>
-        <LinearProgress variant="determinate" {...props} color="secondary" />
-      </Box>
-      <Box
-        sx={{
-          minWidth: 35,
-          display: 'flex',
-          justifyContent: 'flex-end',
-          mt: 2,
-        }}
-      >
-        <Typography variant="body2">{`${Math.round(
-          props.value
-        )}% Completed`}</Typography>
-      </Box>
-    </Box>
-  );
-}
-
 export default function BulkList(props: any) {
   const navigate = useNavigate();
   const [correctionState, setCorrectionState] = useState(false);
@@ -377,7 +353,33 @@ export default function BulkList(props: any) {
       error: false,
     },
   ];
-
+  function LinearProgressWithLabel(
+    props: LinearProgressProps & { value: number }
+  ) {
+    return (
+      <Box>
+        <Box sx={{ width: '100%', mr: 1 }}>
+          <LinearProgress
+            variant="determinate"
+            {...props}
+            // sx={{ backgroundColor: progress === 100 ? 'red' : '#0662B7;' }}
+          />
+        </Box>
+        <Box
+          sx={{
+            minWidth: 35,
+            display: 'flex',
+            justifyContent: 'flex-end',
+            mt: 2,
+          }}
+        >
+          <Typography variant="body2">{`${Math.round(
+            props.value
+          )}% Completed`}</Typography>
+        </Box>
+      </Box>
+    );
+  }
   const [columnList, setcolumnList] = useState(column);
   const [dataList, setDataList] = useState(data1);
   const [validCount, setValidCount] = useState('20');
@@ -688,8 +690,9 @@ export default function BulkList(props: any) {
             <Button variant="outlined">Cancel</Button>
             <Button
               variant="contained"
-              color="secondary"
+              // color="secondary"
               onClick={handleProceed}
+              sx={{ backgroundColor: progress > 0 ? '#82B1DB' : ' #0662B7' }}
             >
               {progress === 100 && correctionState
                 ? 'Upload card Photos'

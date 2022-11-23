@@ -94,7 +94,9 @@ const CommonTable = (props: any) => {
                     return (
                       <StyledTableCell
                         onClick={() =>
-                          columnItem.onClick ? columnItem.onClick() : null
+                          columnItem.onClick
+                            ? columnItem.onClick(dataItem.copyLink)
+                            : null
                         }
                       >
                         {dataItem[columnItem.dataIndex]
