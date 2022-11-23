@@ -6,7 +6,7 @@ import {
   salesDashboardList,
   statusRowHeading,
 } from './../dashboard/dashboard.const';
-import SalesReportNodata from '../../../assets/images/sales-report-no-data.svg';
+import SalesReportNodata from '../../../assets/images/choose-filters-to-viewdata.svg';
 import DownloadIcon from '../../../assets/icons/download.svg';
 import MailIcon from '../../../assets/icons/mail.svg';
 import BtnContained from '../../../components/commonComponent/CustomText/Button/Contained';
