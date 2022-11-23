@@ -18,7 +18,7 @@ import { Profile } from './pages/profile/Profile';
 import { BranchDetails } from './pages/userManagement/branchDetails/landingScreen';
 import { OrgStructure } from './pages/userManagement/orgStructure/landingScreen';
 import { RoleCreation } from './pages/userManagement/roleCreation/landingScreen';
-import { UserCreation } from './pages/userManagement/userCreation/landingScreen';
+import { UserCreation } from './pages/userManagement/userCreation';
 
 export default function App() {
   return (

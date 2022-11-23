@@ -10,11 +10,11 @@ import {
 export const ReviewerLog = () => {
   return (
     <TableComp
-      viewPath="/sales/salesReportDetails"
+      viewPath="/productManagement/programmeManagement/"
       rows={reviewerLogDashboardList}
       statusRowsHeading={reviewrStatusRowHeading}
       listRowHeading={reviewerListRowHeading}
-      // flag="dashboard"
+      flag="programmeManagement"
     />
   );
 };

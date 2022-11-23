@@ -12,7 +12,7 @@ import BtnContained from '../../../components/commonComponent/CustomText/Button/
 import BtnOutlined from '../../../components/commonComponent/CustomText/Button/Outlined';
 import SelectDropdown from '../../../components/commonComponent/CheckboxSelectDropdown';
 import ChooseCategoryToViewData from '../../../components/commonComponent/ChooseCategoryToViewData';
-import { salesReportFilterDropdown } from './salesReport.const';
+import { SalesReportFilterDropdown } from './salesReport.const';
 import { Typography, Stack, Box, Grid } from '@mui/material';
 
 function SalesReportList() {
@@ -31,7 +31,7 @@ function SalesReportList() {
           </Stack>
         </Stack>
         <Grid container spacing={2} className="filters-container">
-          {salesReportFilterDropdown?.map((eachItem: any, index: number) => {
+          {SalesReportFilterDropdown?.map((eachItem: any, index: number) => {
             return (
               <Grid item xs={3} key={index}>
                 <Typography className="dropdown-label">

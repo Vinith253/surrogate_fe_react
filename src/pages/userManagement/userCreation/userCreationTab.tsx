@@ -1,7 +1,7 @@
-import { Typography, Button, Menu, MenuItem } from '@mui/material';
+import { Typography, Button } from '@mui/material';
 import { Box, Stack } from '@mui/system';
-import TypographyInfo from '../../../../components/commonComponent/CustomText/Info';
-import '../style.scss';
+import TypographyInfo from '../../../components/commonComponent/CustomText/Info';
+import './style.scss';
 import AddIcon from '@mui/icons-material/Add';
 import React from 'react';
 
@@ -26,7 +26,7 @@ function UserCreationTab() {
               // variant="body1"
               color="textPrimary"
             >
-              User Creation
+              Create User
             </Typography>
             <TypographyInfo title="From here you can create access presets to assign with users in Users Creation." />
           </Box>

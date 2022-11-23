@@ -1,9 +1,17 @@
 import React from 'react';
 import './style.scss';
 import DetailsCard from './../../../components/commonComponent/DetailsCard';
-import { Stack } from '@mui/material';
+import { Stack, Box } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useNavigate } from 'react-router-dom';
 
 function SalesReportDetails() {
+  const navigate = useNavigate();
+
+  const goBack = () => {
+    navigate(-1);
+  };
+
   const personalDetails = {
     title: 'Personal Details',
     icon: true,
@@ -109,9 +117,13 @@ function SalesReportDetails() {
       },
     ],
   };
+
   return (
     <Stack className="sales-report-details-container">
       <Stack className="header-container">
+        <Box onClick={goBack}>
+          <ArrowBackIcon className="headIcon" />
+        </Box>
         <Stack className="main-header">Customer Details</Stack>
         <Stack className="info-label">
           Lorem ipusm dolor sit amet, consectetur adipiscing elit.integer
