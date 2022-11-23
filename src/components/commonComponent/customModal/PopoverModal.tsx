@@ -25,6 +25,7 @@ type props = {
   handleSelectedItem?: (e: any) => void;
   anchorEl?: any;
   id?: any;
+  showSearch?: boolean
 };
 
 function CheckBoxModal({
@@ -36,6 +37,7 @@ function CheckBoxModal({
   handleSelectedItem,
   anchorEl,
   id,
+  showSearch,
 }: props) {
   const [categories, setCategories] = useState(product_label);
   const [value, setValue] = useState('');
@@ -94,7 +96,7 @@ function CheckBoxModal({
         }}
       >
         <Stack py={2} sx={{ width: '280px' }}>
-          <TextField
+          {showSearch && <TextField
             sx={{
               paddingLeft: '16px',
               paddingRight: '16px',
@@ -111,7 +113,7 @@ function CheckBoxModal({
                 </IconButton>
               ),
             }}
-          />
+          /> }
 
           {product_label && (
             <Stack

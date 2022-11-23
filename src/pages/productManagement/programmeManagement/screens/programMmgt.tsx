@@ -1,7 +1,4 @@
 import { Button, IconButton, Stack, Typography } from '@mui/material';
-import PauseCircleFilledIcon from '@mui/icons-material/PauseCircleFilled';
-import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
-import EditIcon from '@mui/icons-material/Edit';
 import { useEffect, useState } from 'react';
 import { colors } from '../../../../style/Color';
 import { programMmgt, tabBar } from '../../../../utils/Constants';
@@ -13,8 +10,6 @@ import resumeIcon from '../../../../assets/images/resume_surrogate_icon.svg';
 import editIcon from '../../../../assets/images/edit_scheduled_pause_icon.svg';
 import pauseIcon from '../../../../assets/images/pause_surrogate_icon.svg';
 import CustomModal from '../../../../components/commonComponent/customModal/CustomModal';
-import { secureApi } from '../../../../services/xhr';
-import DataGridDemo from './listComponents/listData';
 
 const DummyTableData = [
   {
@@ -66,7 +61,7 @@ export const ProgramManagementScreen = () => {
   const [pauseMethod, setPauseMethod] = useState('Pause Now');
 
   const [surrogateData, setSurrogateData] = useState([...DummyTableData]);
-
+  console.log('pauseMethod------------', pauseMethod);
   // useEffect(() => {
   //   fetchSurrogateData();
   // }, []);
@@ -165,7 +160,7 @@ export const ProgramManagementScreen = () => {
                 padding: '0 10px',
               }}
               onClick={() => {
-                setListView(false);
+                setListView(true);
               }}
             >
               <IconButton>
@@ -174,7 +169,7 @@ export const ProgramManagementScreen = () => {
                   alt="cardIcon"
                   style={{
                     filter:
-                      listView === false
+                      listView === true
                         ? 'invert(16%) sepia(97%) saturate(2280%) hue-rotate(207deg) brightness(100%) contrast(91%)'
                         : '',
                   }}
@@ -186,7 +181,7 @@ export const ProgramManagementScreen = () => {
                 padding: '0 10px',
               }}
               onClick={() => {
-                setListView(true);
+                setListView(false);
               }}
             >
               <IconButton>
@@ -195,7 +190,7 @@ export const ProgramManagementScreen = () => {
                   alt="ListIcon"
                   style={{
                     filter:
-                      listView === true
+                      listView === false
                         ? 'invert(15%) sepia(98%) saturate(2693%) hue-rotate(209deg) brightness(97%) contrast(87%)'
                         : '',
                   }}
@@ -211,10 +206,13 @@ export const ProgramManagementScreen = () => {
             variant="contained"
             color="secondary"
             sx={{
-              padding: '3px 8px',
-              fontSize: '12px',
+              padding: '3px 10px',
+              fontSize: '14px',
+              fontWeight: 400,
               display: 'flex',
               alignItems: 'center',
+              textTransform: 'capitalize',
+              letterSpacing: '0.0025em',
             }}
             onClick={() => setShowResumeModal(true)}
           >
@@ -227,10 +225,13 @@ export const ProgramManagementScreen = () => {
             variant="contained"
             color="secondary"
             sx={{
-              padding: '3px 8px',
-              fontSize: '12px',
+              padding: '3px 10px',
+              fontSize: '14px',
+              fontWeight: 400,
               display: 'flex',
               alignItems: 'center',
+              textTransform: 'capitalize',
+              letterSpacing: '0.0025em',
             }}
             onClick={() => setShowPauseModal(true)}
           >
@@ -243,10 +244,13 @@ export const ProgramManagementScreen = () => {
             variant="contained"
             color="secondary"
             sx={{
-              padding: '3px 8px',
-              fontSize: '12px',
+              padding: '3px 10px',
+              fontSize: '14px',
+              fontWeight: 400,
               display: 'flex',
               alignItems: 'center',
+              textTransform: 'capitalize',
+              letterSpacing: '0.0025em',
             }}
           >
             <IconButton sx={{ padding: '0', marginRight: '8px' }}>
@@ -329,9 +333,9 @@ export const ProgramManagementScreen = () => {
       )}
       <Stack>
         {listView ? (
-          <ListView data={surrogateData} />
-        ) : (
           <CardList data={surrogateData} />
+        ) : (
+          <ListView data={surrogateData} />
         )}
       </Stack>
     </Stack>

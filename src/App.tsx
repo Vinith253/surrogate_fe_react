@@ -15,6 +15,10 @@ import ReviewCard from './pages/productManagement/cardCatalogue/reviewCard/revie
 import AccessLibrary from './pages/accessLibrary/AccessLibrary';
 import ReviewerLogDetails from './pages/productManagement/programmeManagement/screens/listComponents/ReviewerLogDetails';
 import { Profile } from './pages/profile/Profile';
+import { BranchDetails } from './pages/userManagement/branchDetails/landingScreen';
+import { OrgStructure } from './pages/userManagement/orgStructure/landingScreen';
+import { RoleCreation } from './pages/userManagement/roleCreation/landingScreen';
+import { UserCreation } from './pages/userManagement/userCreation/landingScreen';
 
 export default function App() {
   return (
@@ -56,6 +60,15 @@ export default function App() {
           path="/productManagement/cardCatalogue/singleupload/reviewCard"
           element={<ReviewCard />}
         />
+        <Route
+          path="/userManagement/branchDetails"
+          element={<BranchDetails />}
+        />
+        <Route path="/userManagement/orgStructure" element={<OrgStructure />} />
+
+        <Route path="/userManagement/roleCreation" element={<RoleCreation />} />
+
+        <Route path="/userManagement/userCreation" element={<UserCreation />} />
 
         <Route path="/sales/salesDashboard" element={<SalesDashboard />} />
 

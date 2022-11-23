@@ -22,7 +22,8 @@ import PaginationComp from '../Pagination/Pagination';
 import { useNavigate } from 'react-router-dom';
 import { programMmgt, tabBar, tableHeader } from '../../../utils/Constants';
 import { borderTop, Stack } from '@mui/system';
-import Link from '@mui/material/Link';
+import { SearchOutlined } from '@mui/icons-material';
+import { Link, TextField, IconButton } from '@mui/material';
 import CheckBoxModal from '../customModal/PopoverModal';
 
 function TableComp(props: {
@@ -230,188 +231,214 @@ function TableComp(props: {
         </Stack>
       )}
 
-      <div className="third-header">
-        <div className={'outer-filter-box'}>
-          <div className={graphView == 1 ? 'selectedBox' : 'filter-box'}>
-            <li
-              onClick={() => {
-                updatedListData(visibleHeader, props.rows);
-                setCurrentPage(1);
-                setPage(1);
-                setGraphView(1);
-              }}
-              className={
-                graphView == 1 ? 'selected-overview-text3' : 'overview-text3'
-              }
-            >
-              All
-            </li>
+      <div style={{ display: 'flex' }}>
+        {props.flag === 'sales-report' && (
+          <TextField
+            className="text-field"
+            placeholder="Search by..."
+            InputProps={{
+              startAdornment: (
+                <IconButton edge="start">
+                  <SearchOutlined />
+                </IconButton>
+              ),
+            }}
+          />
+        )}
+        <div className="third-header">
+          <div className={'outer-filter-box'}>
+            <div className={graphView == 1 ? 'selectedBox' : 'filter-box'}>
+              <li
+                onClick={() => {
+                  updatedListData(visibleHeader, props.rows);
+                  setCurrentPage(1);
+                  setPage(1);
+                  setGraphView(1);
+                }}
+                className={
+                  graphView == 1 ? 'selected-overview-text3' : 'overview-text3'
+                }
+              >
+                All
+              </li>
+            </div>
+            <div className="seperater-div" />
+
+            <div className="seperater-div" />
+            {!props.flag && (
+              <div className={graphView == 6 ? 'selectedBox' : 'filter-box'}>
+                <li
+                  onClick={() => {
+                    const currentData = props.rows.filter(function (item) {
+                      return item.status === 'Pending';
+                    });
+                    setFilterteredData(currentData);
+                    setCurrentPage(1);
+                    setPage(1);
+                    setGraphView(6);
+                  }}
+                  className={
+                    graphView == 6
+                      ? 'selected-overview-text3'
+                      : 'overview-text3'
+                  }
+                >
+                  Pending
+                </li>
+              </div>
+            )}
+
+            <div className="seperater-div" />
+            {!props.flag && (
+              <div className={graphView == 7 ? 'selectedBox' : 'filter-box'}>
+                <li
+                  onClick={() => {
+                    const currentData = props.rows.filter(function (item) {
+                      return item.status === 'Sent To Approver';
+                    });
+                    setFilterteredData(currentData);
+                    setCurrentPage(1);
+                    setPage(1);
+                    setGraphView(7);
+                  }}
+                  className={
+                    graphView == 7
+                      ? 'selected-overview-text3'
+                      : 'overview-text3'
+                  }
+                >
+                  Sent To Approver
+                </li>
+              </div>
+            )}
+
+            {props.flag && (
+              <div className={graphView == 2 ? 'selectedBox' : 'filter-box'}>
+                <li
+                  onClick={() => {
+                    const currentData = props.rows.filter(function (item) {
+                      return item.status === 'Approved';
+                    });
+                    updatedListData(visibleHeader, currentData);
+                    setCurrentPage(1);
+                    setPage(1);
+                    setGraphView(2);
+                  }}
+                  className={
+                    graphView == 2
+                      ? 'selected-overview-text3'
+                      : 'overview-text3'
+                  }
+                >
+                  Approved
+                </li>
+              </div>
+            )}
+
+            <div className="seperater-div" />
+
+            {props.flag && (
+              <div className={graphView == 3 ? 'selectedBox' : 'filter-box'}>
+                <li
+                  onClick={() => {
+                    const currentData = props.rows.filter(function (item) {
+                      return item.status === 'In-Progress';
+                    });
+                    updatedListData(visibleHeader, currentData);
+                    setCurrentPage(1);
+                    setPage(1);
+                    setGraphView(3);
+                  }}
+                  className={
+                    graphView == 3
+                      ? 'selected-overview-text3'
+                      : 'overview-text3'
+                  }
+                >
+                  In-Progress
+                </li>
+              </div>
+            )}
+
+            <div className="seperater-div" />
+            <div className={graphView == 4 ? 'selectedBox' : 'filter-box'}>
+              <li
+                onClick={() => {
+                  const currentData = props.rows.filter(function (item) {
+                    return item.status === 'Rejected';
+                  });
+                  updatedListData(visibleHeader, currentData);
+                  setCurrentPage(1);
+                  setPage(1);
+                  setGraphView(4);
+                }}
+                className={
+                  graphView == 4 ? 'selected-overview-text3' : 'overview-text3'
+                }
+              >
+                Rejected
+              </li>
+            </div>
+            <div className="seperater-div" />
+            {props.flag && (
+              <div className={graphView == 5 ? 'selectedBox' : 'filter-box'}>
+                <li
+                  onClick={() => {
+                    const currentData = props.rows.filter(function (item) {
+                      return item.status === 'Dropped';
+                    });
+                    updatedListData(visibleHeader, currentData);
+                    setCurrentPage(1);
+                    setPage(1);
+                    setGraphView(5);
+                  }}
+                  className={
+                    graphView == 5
+                      ? 'selected-overview-text3'
+                      : 'overview-text3'
+                  }
+                >
+                  Dropped
+                </li>
+              </div>
+            )}
           </div>
-          <div className="seperater-div" />
 
-          <div className="seperater-div" />
-          {!props.flag && (
-            <div className={graphView == 6 ? 'selectedBox' : 'filter-box'}>
-              <li
-                onClick={() => {
-                  const currentData = props.rows.filter(function (item) {
-                    return item.status === 'Pending';
-                  });
-                  setFilterteredData(currentData);
-                  setCurrentPage(1);
-                  setPage(1);
-                  setGraphView(6);
+          {(props.flag === 'dashboard' || props.flag === 'sales-report') && (
+            <div className="reset-data">
+              <Button
+                startIcon={<EditIcon />}
+                aria-describedby={id}
+                sx={{
+                  fontSize: '1vw',
+                  marginLeft: '56px',
+                  color: '#0662B7',
+                  fontWeight: '600',
+                  textTransform: 'none',
                 }}
-                className={
-                  graphView == 6 ? 'selected-overview-text3' : 'overview-text3'
-                }
+                onClick={handleClick}
               >
-                Pending
-              </li>
+                Edit Columns
+              </Button>
             </div>
           )}
-
-          <div className="seperater-div" />
-          {!props.flag && (
-            <div className={graphView == 7 ? 'selectedBox' : 'filter-box'}>
-              <li
-                onClick={() => {
-                  const currentData = props.rows.filter(function (item) {
-                    return item.status === 'Sent To Approver';
-                  });
-                  setFilterteredData(currentData);
-                  setCurrentPage(1);
-                  setPage(1);
-                  setGraphView(7);
+          {props.flag === 'dashboard' && (
+            <div className="reset-data">
+              <Button
+                endIcon={<RightArrow />}
+                sx={{
+                  fontSize: '1vw',
+                  marginLeft: '35px',
+                  color: '#0662B7',
+                  fontWeight: '600',
+                  textTransform: 'none',
                 }}
-                className={
-                  graphView == 7 ? 'selected-overview-text3' : 'overview-text3'
-                }
               >
-                Sent To Approver
-              </li>
-            </div>
-          )}
-
-          {props.flag && (
-            <div className={graphView == 2 ? 'selectedBox' : 'filter-box'}>
-              <li
-                onClick={() => {
-                  const currentData = props.rows.filter(function (item) {
-                    return item.status === 'Approved';
-                  });
-                  updatedListData(visibleHeader, currentData);
-                  setCurrentPage(1);
-                  setPage(1);
-                  setGraphView(2);
-                }}
-                className={
-                  graphView == 2 ? 'selected-overview-text3' : 'overview-text3'
-                }
-              >
-                Approved
-              </li>
-            </div>
-          )}
-
-          <div className="seperater-div" />
-
-          {props.flag && (
-            <div className={graphView == 3 ? 'selectedBox' : 'filter-box'}>
-              <li
-                onClick={() => {
-                  const currentData = props.rows.filter(function (item) {
-                    return item.status === 'In-Progress';
-                  });
-                  updatedListData(visibleHeader, currentData);
-                  setCurrentPage(1);
-                  setPage(1);
-                  setGraphView(3);
-                }}
-                className={
-                  graphView == 3 ? 'selected-overview-text3' : 'overview-text3'
-                }
-              >
-                In-Progress
-              </li>
-            </div>
-          )}
-
-          <div className="seperater-div" />
-          <div className={graphView == 4 ? 'selectedBox' : 'filter-box'}>
-            <li
-              onClick={() => {
-                const currentData = props.rows.filter(function (item) {
-                  return item.status === 'Rejected';
-                });
-                updatedListData(visibleHeader, currentData);
-                setCurrentPage(1);
-                setPage(1);
-                setGraphView(4);
-              }}
-              className={
-                graphView == 4 ? 'selected-overview-text3' : 'overview-text3'
-              }
-            >
-              Rejected
-            </li>
-          </div>
-          <div className="seperater-div" />
-          {props.flag && (
-            <div className={graphView == 5 ? 'selectedBox' : 'filter-box'}>
-              <li
-                onClick={() => {
-                  const currentData = props.rows.filter(function (item) {
-                    return item.status === 'Dropped';
-                  });
-                  updatedListData(visibleHeader, currentData);
-                  setCurrentPage(1);
-                  setPage(1);
-                  setGraphView(5);
-                }}
-                className={
-                  graphView == 5 ? 'selected-overview-text3' : 'overview-text3'
-                }
-              >
-                Dropped
-              </li>
+                Detailed Reports
+              </Button>
             </div>
           )}
         </div>
-        {props.flag === 'dashboard' && (
-          <div className="reset-data">
-            <Button
-              startIcon={<EditIcon />}
-              aria-describedby={id}
-              sx={{
-                fontSize: '1vw',
-                marginLeft: '56px',
-                color: '#0662B7',
-                fontWeight: '600',
-                textTransform: 'none',
-              }}
-              onClick={handleClick}
-            >
-              Edit Columns
-            </Button>
-          </div>
-        )}
-        {props.flag === 'dashboard' && (
-          <div className="reset-data">
-            <Button
-              endIcon={<RightArrow />}
-              sx={{
-                fontSize: '1vw',
-                marginLeft: '35px',
-                color: '#0662B7',
-                fontWeight: '600',
-                textTransform: 'none',
-              }}
-            >
-              Detailed Reports
-            </Button>
-          </div>
-        )}
       </div>
       <Grid container spacing={0}>
         <Grid item sm={props.flag ? 7 : 8}>
@@ -838,6 +865,7 @@ function TableComp(props: {
           anchorEl={anchorEl}
           product_label={product_label}
           id={id}
+          showSearch={true}
         />
       }
     </div>

@@ -13,4 +13,10 @@ export const colors = {
   Modalblack: '#1515151',
   bgGrey: '#F0F2F5',
   textGreyHeader: '#4D4E50',
+  ActiveStatusTextColor: '#1C592A',
+  ActiveStatusBGColor: '#E3F3E6',
+  PausedStatusTextColor: '#997F31',
+  PauseStatusBGColor: '#FBF2D7',
+  ScheduledPauseTextColor: '#992D26',
+  ScheduledPausedBgColor: '#FCE4E5',
 };
