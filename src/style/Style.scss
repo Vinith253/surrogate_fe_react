@@ -29,14 +29,16 @@
 
 .modal_container{
   max-width: 540px !important;
+
+  .modal_form_label .MuiFormControlLabel-label{
+    font-size: 13px !important;
+  }
 }
 .modal_container1{ 
   max-width: 450px !important;
 }
 
-.modal_form_label .MuiFormControlLabel-label{
-  font-size: 13px !important;
-}
+
 .create_newpassword{
   max-width: 460px !important;
 }
@@ -54,3 +56,7 @@
 // .css-1t1j96h-MuiPaper-root-MuiDialog-paper{
 //   max-width: none !important;
 // }
+.modal_form_label{
+  border-bottom: 2px solid #F3F3F3 !important;
+  margin-bottom: 10px !important;
+}

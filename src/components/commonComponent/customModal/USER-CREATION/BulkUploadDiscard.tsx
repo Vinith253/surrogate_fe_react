@@ -25,7 +25,7 @@ function BulkUploadDiscard() {
         discardModalMsg={
           'Want to discard corrections for error entires in the excel sheet and continue upload cards'
         }
-        yesContinueBtn={'Yes Continue'}
+        yesContinueBtn={'Yes, Continue'}
         closeBtn={'Close'}
       />
     </div>
