@@ -1,0 +1,21 @@
+.role-creation-dashboard {
+    text-align: center;
+    display: flex;
+  
+    .role-creation-main-container {
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: calc(10px + 2vmin);
+      font-family: 'Ilisarniq';
+
+      .role-header-container {
+        background-color: white;
+        display: flex;
+        justify-content: space-between;
+        padding: 24px 32px 24px 32px;
+      }
+
+    }
+}
