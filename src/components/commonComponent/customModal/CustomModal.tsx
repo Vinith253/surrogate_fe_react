@@ -27,6 +27,7 @@ import discard_icon from '../../../assets/icons/Vector1.svg';
 
 import { SvgIcon } from '@mui/material';
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
+import checkedIcon from '../../../assets/icons/check_box_square_icon.svg';
 
 type props = {
   openSuccess?: any;
@@ -773,7 +774,7 @@ function CustomModal({
                         {' '}
                         <FormControlLabel
                           control={
-                            <Checkbox checked={item.defaultChecked == true} />
+                            <Checkbox checked={item.defaultChecked} checkedIcon={<img src={checkedIcon} alt={checkedIcon}/>}/>
                           }
                           label={item.label}
                         />

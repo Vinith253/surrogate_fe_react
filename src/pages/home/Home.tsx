@@ -117,20 +117,20 @@ export default function Home() {
         Welcome Parithi!
       </Typography>
       <Box className="home-container">
-        <BulkUploadDiscard />
+        {/* <BulkUploadDiscard />
         <RequestForDeactivation />
         <RequestForActivation />
         <SuccessForDeactivation />
         <SuccessForActivate />
-        <SuccessForUserCreated />
+        <SuccessForUserCreated /> */}
 
         {/* <AccessLibraryModal />
         <ChangePasswordProfileModal />
         <ChangePasswordOTP />
         <CreateNewPassword /> */}
-        {/* <Card content={pendingActionsData} />
+        <Card content={pendingActionsData} />
         <Card content={savedItemsData} />
-        <Card content={frequentActivitiesData} /> */}
+        <Card content={frequentActivitiesData} />
 
         {/* Modals*/}
         {/* <PauseModal />
