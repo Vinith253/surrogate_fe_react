@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-
 import { Button } from '@mui/material';
-import CustomModal from './CustomModal';
+import CustomModal from '../CustomModal';
 
-function AccessLibraryModal() {
+function RequestForDeactivationOrg() {
   const [openSuccess, setOpenSuccess] = useState(false);
 
   const handleClickOpen = () => {
@@ -13,26 +12,23 @@ function AccessLibraryModal() {
   const handleCloseSuccess = () => {
     setOpenSuccess(false);
   };
-
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
-        {' '}
-        Access Library
+        Request For Deactivation Org
       </Button>
       <CustomModal
         openSuccess={openSuccess}
         handleCloseSuccess={handleCloseSuccess}
-        successModalTitle={'Share the link'}
-        accessLibraryMsg={'Here you can copy the link and share it'}
-        org_ID={'#12345'}
-        org_Name={'Ganesh Agency'}
-        channel_type={'DSA'}
-        accessLibraryModaBtn={'Link to share'}
-        accessLibraryCloseBtn={' Close'}
+        title={'Request for Deactivation'}
+        pause_content={
+          'Do you want to submit request for Deactivating Organisation?'
+        }
+        close={'Close'}
+        submit={'Submit'}
       />
     </div>
   );
 }
 
-export default AccessLibraryModal;
+export default RequestForDeactivationOrg;

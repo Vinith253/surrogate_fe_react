@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-
 import { Button } from '@mui/material';
-import CustomModal from './CustomModal';
+import CustomModal from '../CustomModal';
 
-function AccessLibraryModal() {
+function CreateOrgSuccess() {
   const [openSuccess, setOpenSuccess] = useState(false);
 
   const handleClickOpen = () => {
@@ -13,26 +12,22 @@ function AccessLibraryModal() {
   const handleCloseSuccess = () => {
     setOpenSuccess(false);
   };
-
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
-        {' '}
-        Access Library
+        Create Organisation success
       </Button>
       <CustomModal
         openSuccess={openSuccess}
         handleCloseSuccess={handleCloseSuccess}
-        successModalTitle={'Share the link'}
-        accessLibraryMsg={'Here you can copy the link and share it'}
-        org_ID={'#12345'}
-        org_Name={'Ganesh Agency'}
-        channel_type={'DSA'}
-        accessLibraryModaBtn={'Link to share'}
-        accessLibraryCloseBtn={' Close'}
+        successModalTitle={'Create Organisation'}
+        successModalMsg={
+          'Your request for creating new organisation is succesfully sent to the reviewer'
+        }
+        btn={' Close'}
       />
     </div>
   );
 }
 
-export default AccessLibraryModal;
+export default CreateOrgSuccess;
