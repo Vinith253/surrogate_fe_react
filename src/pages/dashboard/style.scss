@@ -19,6 +19,29 @@
       flex-direction: column;
       margin-top: 32px;
 
+      .filter-header {
+        display: flex;
+        margin-top: 28px;
+        margin-bottom: 28px;
+        margin-left: 32px;
+        margin-right: 32px;    
+        cursor: pointer;
+        justify-content: space-between;
+        align-items: flex-start;
+    
+        .filter-data {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+    
+        .reset-data {
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+        }
+      }
+
       .heading-text {
         align-items: flex-start;
         padding: 20px;
@@ -29,7 +52,12 @@
 
       .horizontal-cards {
         display: flex;
-        height: 22vh;
+        margin-left: 40px;
+        margin-right: 40px;
+      }
+
+      .horizontal-cards2 {
+        display: flex;
         margin-left: 40px;
         margin-right: 40px;
         margin-bottom: 32px;
@@ -42,7 +70,7 @@
       }
 
       .progress-icon-box {
-        width: 2.7vw;
+        width: 3vw;
         height: 5.5vh;
         background-color: #3d8597;
         justify-content: center;
@@ -54,7 +82,7 @@
       }
 
       .approval-icon-box {
-        width: 2.7vw;
+        width: 3vw;
         height: 5.5vh;
         background-color: #2e562e;
         justify-content: center;
@@ -66,7 +94,7 @@
       }
 
       .dropped-icon-box {
-        width: 2.7vw;
+        width: 3vw;
         height: 5.5vh;
         background-color: #957f3e;
         justify-content: center;
@@ -78,7 +106,7 @@
       }
 
       .rejected-icon-box {
-        width: 2.7vw;
+        width: 3vw;
         height: 5.5vh;
         background-color: #8d3529;
         justify-content: center;
@@ -91,12 +119,12 @@
 
       .report-cards {
         display: flex;
-        height: 70vh;
+        // height: 70vh;
         margin: 40px;
 
         .graph-card {
           width: 50%;
-          // background-color: red;
+
           .graph-div {
             border: 1px solid #d8d9db;
             border-radius: 10px;
@@ -120,7 +148,7 @@
             }
 
             .overview-text2 {
-              font-size: 16px;
+              font-size: 14px;
               color: black;
             }
             .filter-graph-box {
@@ -135,7 +163,7 @@
 
                 .line2-div {
                   border: 0.5px solid #8a8b8c;
-                  height: 3vh;
+                  height: 2vh;
                 }
               }
 
@@ -146,6 +174,7 @@
                 display: flex;
                 align-items: center;
                 border-radius: 3px;
+                height: 30px;
 
                 .hour-box {
                   color: black;
@@ -160,7 +189,7 @@
                 .selectedBox {
                   font-size: 12px;
                   background-color: #0662b7;
-                  height: 5vh;
+                  height: 30px;
                   display: flex;
                   align-items: center;
                   padding-left: 10px;

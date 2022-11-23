@@ -26,7 +26,7 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      height: 6vh;
+      height: 40px;
       justify-content: space-between;
 
       .card-text-heading {
@@ -44,8 +44,8 @@
   }
 
   .lower-div {
-    height: 5vh;
     display: flex;
+    height: 50px;
     justify-content: flex-end;
     align-items: center;
     padding-right: 15px;
@@ -62,7 +62,7 @@
 }
 
 .value-cards {
-  border: 1px solid #d8d9db;
+  border: 1px solid #F0F2F5;
   border-radius: 10px;
   margin-top: 30px;
   margin-right: 20px;
@@ -76,7 +76,7 @@
     display: flex;
 
     .progress-icon-box {
-      width: 2.7vw;
+      width: 3vw;
       height: 5.5vh;
       background-color: #3d8597;
       justify-content: center;
@@ -87,7 +87,7 @@
     }
 
     .approval-icon-box {
-      width: 2.7vw;
+      width: 3vw;
       height: 5.5vh;
       background-color: #2e562e;
       justify-content: center;
@@ -98,7 +98,7 @@
     }
 
     .dropped-icon-box {
-      width: 2.7vw;
+      width: 3vw;
       height: 5.5vh;
       background-color: #957f3e;
       justify-content: center;
@@ -109,7 +109,7 @@
     }
 
     .rejected-icon-box {
-      width: 2.7vw;
+      width: 3vw;
       height: 5.5vh;
       background-color: #8d3529;
       justify-content: center;
@@ -123,7 +123,7 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      height: 6vh;
+      height: 40px;
       justify-content: space-between;
 
       .card-text-heading {
@@ -136,6 +136,10 @@
         font-size: 16px;
         color: black;
         font-weight: bold;
+      }
+      .card-value-with-icon{
+        display: flex;
+        flex-direction: row;
       }
     }
   }
@@ -151,7 +155,7 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      height: 6vh;
+      height: 40px;
       justify-content: space-between;
 
       .card-text-heading {

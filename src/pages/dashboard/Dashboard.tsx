@@ -1,6 +1,5 @@
 import DashboardCard from "../../components/commonComponent/CommonCard/SalesDashbaordCard/DashboardCard";
-import FilterButton from "../../components/commonComponent/FilterHeader/FilterButton";
-import { filterHeaderData, listRowHeading, salesDashboardList, statusRowHeading } from "../sales/dashboard/dashboard.const";
+import { listRowHeading, product_label, salesDashboardList, state_label, statusRowHeading, zonal_label } from "../sales/dashboard/dashboard.const";
 import './style.scss';
 import ApprovedIcon from '../../assets/icons/approved_icon.svg';
 import InProgress from '../../assets/icons/in_progress_icon.svg';
@@ -13,8 +12,12 @@ import UserIcon from '../../assets/icons/users_icon.svg';
 import { useState } from "react";
 import TableComp from "../../components/commonComponent/ListTable/ListTable";
 import BarGarph from "../../components/commonComponent/BarGraph/BarGraph";
-import { TextField, Typography } from "@mui/material";
+import { Button, TextField, Typography } from "@mui/material";
 import ReactApexChart from "react-apexcharts";
+import CheckBoxPopOver from "../../components/commonComponent/CheckBoxPopOver/SingleLabel";
+import DateTimePopOver from "../../components/commonComponent/DateTimePopOver";
+import { ReactComponent as Reset } from '../../assets/icons/reset.svg';
+import MoreFilterModal from "../../components/commonComponent/customModal/MoreFilterModal";
 
 const currencies = [
   {
@@ -39,6 +42,21 @@ const currencies = [
   },
 ];
 
+const spineGraphStatus = [
+  {
+    value: 1,
+    label: 'All Surrogates',
+  },
+  {
+    value: 2,
+    label: 'Card For Card',
+  },
+  {
+    value: 3,
+    label: 'Payroll',
+  },
+];
+
 const dashboardVal = [
   {
     index: 1,
@@ -51,7 +69,7 @@ const dashboardVal = [
   {
     index: 2,
     title: 'Approval Rate(%)',
-    value: 98.6,
+    value: '98.6%',
     more: true,
     image: ApprovedRate,
     boxstyles : "progress-icon-box"
@@ -171,7 +189,7 @@ const spineGraphSeries= [{
 }, {
   name: 'Payroll',
   data: [11, 32, 45, 32, 34, 52, 41]
-}]
+}];
 
 const spineGraphOptions: {} = {
   colors: ['#5D3BBD', '#F37B21'],
@@ -194,7 +212,7 @@ const spineGraphOptions: {} = {
       format: 'dd/MM/yy HH:mm'
     },
   },
-}
+};
 
 const channelUserData = [
   {
@@ -232,20 +250,160 @@ const channelUserData = [
 ];
 
 export default function Dashboard() {
+
+
   const [graphView, setGraphView] = useState<number>(1);
+  const [spineGraphView, setSpineGraphView] = useState<number>(1);
 const [currency, setCurrency] = useState<number>(1);
+const [spineGraphValue, setSpineGraph] = useState<number>(1);
+const [dayFilterValue, setDayFilter] = useState<string>("Current Day");
 
 const handleChange = (event: any) => {
   setCurrency(event.target.value);
 };
 
+const handleSpineChange = (event: any) => {
+  setSpineGraph(event.target.value);
+};
+
+
+const day_filter_label = [
+  {
+    id: 1,
+    label:  "Current Day",
+    onclick: (() => {setDayFilter("Current Day");})
+  },
+  {
+    id: 2,
+    label: "Current Week",
+    onclick: (() => {setDayFilter("Current Week");})
+  },
+  {
+    id: 3,
+    label: "Current Month",
+    onclick: (() => {setDayFilter("Current Month");})
+  },
+  {
+    id: 4,
+    label: "Current Quarter",
+    onclick: (() => {setDayFilter("Current Quarter");})
+  },
+  {
+    id: 5,
+    label: "Current Year",
+    onclick: (() => {setDayFilter("Current Year");})
+  },
+  {
+    id: 6,
+    label: "Custom Period",
+    onclick: (() => {setDayFilter("Custom Period");})
+  },
+];
+
+const surrogates_label = [
+  {
+    id: 1,
+    label: 'Payroll',
+    // onclick: (() => {setDayFilter("Current Day");})
+  },
+  {
+    id: 2,
+    label: 'Card on Card',
+    // onclick: (() => {setDayFilter("Current Week");})
+  },
+  {
+    id: 3,
+    label: 'CIBIL',
+    // onclick: (() => {setDayFilter("Current Month");})
+  },
+  {
+    id: 4,
+    label: 'AQB',
+    // onclick: (() => {setDayFilter("Current Quarter");})
+  },
+  {
+    id: 5,
+    label: 'RC',
+    // onclick: (() => {setDayFilter("Current Year");})
+  },
+];
+const channels_label = [
+  {
+    id: 1,
+    label: 'Bank',
+  },
+  {
+    id: 2,
+    label: 'DSA',
+  },
+  {
+    id: 3,
+    label: 'Fintech Partners',
+  },
+];
+
   return (
     <div className="App">
     <div className="main-dashboard">
     <div className="dashboard-container">
-          <FilterButton
-          filterHeaderData={filterHeaderData} 
-          />
+          <div className="filter-header">
+            <div className="filter-data">
+              <Typography
+                sx={{
+                  fontSize: '1.1vw',
+                  marginRight: '24px',
+                  color: '#000',
+                  fontWeight: 'bold',
+                }}
+              >
+                Overview
+              </Typography>
+              <DateTimePopOver
+                day_filter_label={day_filter_label}
+                dayFilterValue={dayFilterValue}
+              />
+              <CheckBoxPopOver
+                surrogates_label={channels_label}
+                displayText={'All Channels'}
+                showSearch={true}
+                submit={'Select'}
+                close={'Reset'}
+              />
+              <CheckBoxPopOver
+                surrogates_label={surrogates_label}
+                displayText={'All Surrogates'}
+                showSearch={true}
+                submit={'Select'}
+                close={'Reset'}
+              />
+               <MoreFilterModal
+              product_label={product_label}
+              day_filter_label={day_filter_label}
+              dayFilterValue={dayFilterValue}
+              submit={'Apply'}
+              close={'Reset'}
+              policies_label={channels_label}
+              surrogates_label={surrogates_label}
+              state_label={state_label}
+              zonal_label={zonal_label}
+              flag="main-dashboard"
+              />
+            </div>
+            <div className="reset-data">
+              <Button
+                startIcon={<Reset />}
+                sx={{
+                  fontSize: '0.9vw',
+                  marginRight: '10px',
+                  color: '#0662B7',
+                  backgroundColor: '#EEF7FF',
+                  textTransform: 'none',
+                }}
+              >
+                Reset
+              </Button>
+            </div>
+          </div>
             <div className="divider-line" />
           <div className="horizontal-cards">
             {dashboardVal.map((value) => (
@@ -255,6 +413,7 @@ const handleChange = (event: any) => {
                 more={value.more}
                 image={value.image}
                 boxStyles={value.boxstyles}
+                navPath='/sales/salesReport'
               />
             ))}
           </div>
@@ -271,7 +430,7 @@ const handleChange = (event: any) => {
              />
             </div>
 
-            {/* <div className="graph-card">
+            <div className="graph-card">
               <div className="graph-div">
                 <div>
                   <text className="overview-text">Surrogate Wise Data </text>
@@ -281,24 +440,25 @@ const handleChange = (event: any) => {
                 <div className="filter-graph-box">
                   <div>
                     <TextField
-                      id="outlined-select-currency-native"
+                      id="outlined-select-spine-native"
                       select
-                      value={currency}
-                      onChange={handleChange}
+                      value={spineGraphValue}
+                      onChange={handleSpineChange}
                       SelectProps={{
                         native: true,
                       }}
+                      sx={{width:'10vw'}}
                       variant="outlined"
                       inputProps={{
                         style: {
                           fontSize: '12px',
                           backgroundColor: '#F3F3F3',
-                          paddingTop: '10px',
-                          paddingBottom: '10px',
+                          paddingTop: '8px',
+                          paddingBottom: '12px',
                         },
                       }}
                     >
-                      {currencies.map((option) => (
+                      {spineGraphStatus.map((option) => (
                         <option key={option.value} value={option.value}>
                           {option.label}
                         </option>
@@ -308,12 +468,12 @@ const handleChange = (event: any) => {
                   <div className="third-header">
                     <div className={'graph-filter-box'}>
                       <div
-                        className={graphView === 1 ? 'selectedBox' : 'hour-box'}
+                        className={spineGraphView === 1 ? 'selectedBox' : 'hour-box'}
                       >
                         <li
-                          onClick={() => setGraphView(1)}
+                          onClick={() => setSpineGraphView(1)}
                           className={
-                            graphView === 1
+                            spineGraphView === 1
                               ? 'selected-overview-text3'
                               : 'overview-text3'
                           }
@@ -323,12 +483,12 @@ const handleChange = (event: any) => {
                       </div>
                       <div className="line2-div" />
                       <div
-                        className={graphView === 2 ? 'selectedBox' : 'hour-box'}
+                        className={spineGraphView === 2 ? 'selectedBox' : 'hour-box'}
                       >
                         <li
-                          onClick={() => setGraphView(2)}
+                          onClick={() => setSpineGraphView(2)}
                           className={
-                            graphView === 2
+                            spineGraphView === 2
                               ? 'selected-overview-text3'
                               : 'overview-text3'
                           }
@@ -338,12 +498,12 @@ const handleChange = (event: any) => {
                       </div>
                       <div className="line2-div" />
                       <div
-                        className={graphView === 3 ? 'selectedBox' : 'hour-box'}
+                        className={spineGraphView === 3 ? 'selectedBox' : 'hour-box'}
                       >
                         <li
-                          onClick={() => setGraphView(3)}
+                          onClick={() => setSpineGraphView(3)}
                           className={
-                            graphView === 3
+                            spineGraphView === 3
                               ? 'selected-overview-text3'
                               : 'overview-text3'
                           }
@@ -353,12 +513,12 @@ const handleChange = (event: any) => {
                       </div>
                       <div className="line2-div" />
                       <div
-                        className={graphView === 4 ? 'selectedBox' : 'hour-box'}
+                        className={spineGraphView === 4 ? 'selectedBox' : 'hour-box'}
                       >
                         <li
-                          onClick={() => setGraphView(4)}
+                          onClick={() => setSpineGraphView(4)}
                           className={
-                            graphView === 4
+                            spineGraphView === 4
                               ? 'selected-overview-text3'
                               : 'overview-text3'
                           }
@@ -373,7 +533,7 @@ const handleChange = (event: any) => {
                 <ReactApexChart options={spineGraphOptions} series={spineGraphSeries} type="area" height={220} />
                 </div>
               </div>
-            </div> */}
+            </div>
           </div>
     </div>
     <div className="dashboard-container">
@@ -383,7 +543,7 @@ const handleChange = (event: any) => {
       </Typography>
       </div>
     <div className="divider-line" />
-          <div className="horizontal-cards">
+          <div className="horizontal-cards2">
             {channelUserData.map((value) => (
               <DashboardCard
                 title={value.title}
@@ -391,6 +551,7 @@ const handleChange = (event: any) => {
                 more={value.more}
                 image={value.image}
                 viewAll={value.viewAll}
+                navPath=''
               />
             ))}
           </div>
