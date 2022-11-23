@@ -36,6 +36,7 @@ type props = {
   surrogates_label?: Array<any>;
   state_label: Array<object>;
   zonal_label: Array<object>;
+  flag?: string;
 };
 
 function MoreFilterModal({
@@ -51,7 +52,8 @@ function MoreFilterModal({
   policies_label,
   surrogates_label,
   state_label,
-  zonal_label
+  zonal_label,
+  flag
 }: props) {
   const [categories, setCategories] = useState(product_label);
   const [value, setValue] = useState('');
@@ -192,7 +194,7 @@ function MoreFilterModal({
                       size="small"
                       // value={dayFilterValue}
                       // onChange={handleChange}
-                      input={<OutlinedInput label={dayFilterValue} />}
+                      input={<OutlinedInput label={dayFilterValue} sx={{paddingBottom:'10px'}} />}
                       // inputProps={{ 'aria-label': 'Without label' }}
                     >
                       {day_filter_label?.map((value) => (
@@ -207,7 +209,71 @@ function MoreFilterModal({
                     </Select>
                   </FormControl>
                 </Box>
-                <Box
+                {flag === "main-dashboard" ?  <Box
+                  sx={{
+                    height: '70px',
+                    justifyContent: 'space-between',
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    padding: '12px',
+                  }}
+                >
+                  <Typography sx={{ fontSize: '14px' }}>Channels</Typography>
+                  <FormControl sx={{ m: 1, width: 233 }}>
+                    <InputLabel id="demo-multiple-name-label">
+                      All Channels
+                    </InputLabel>
+                    <Select
+                      labelId="demo-multiple-name-label"
+                      id="demo-multiple-name"
+                      size="small"
+                      // value={personName}
+                      // onChange={handleChange}
+                      input={<OutlinedInput label="All Channels" sx={{paddingBottom:'10px'}} />}
+                    >
+                      {policies_label && (
+                        <Stack px={2}>
+                          <FormGroup>
+                            <Grid>
+                              <FormControlLabel
+                                label={
+                                  <Typography sx={{ fontSize: '14px' }}>
+                                    All Surrogates
+                                  </Typography>
+                                }
+                                control={<Checkbox color="secondary" />}
+                              />
+                              {policies_label?.map((item: any, index) => {
+                                return (
+                                  <Grid item key={item.id}>
+                                    {' '}
+                                    <Box
+                                      sx={{
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        ml: 3,
+                                      }}
+                                    >
+                                      <FormControlLabel
+                                        label={
+                                          <Typography sx={{ fontSize: '14px' }}>
+                                            {item.label}
+                                          </Typography>
+                                        }
+                                        control={<Checkbox color="secondary" />}
+                                      />
+                                    </Box>
+                                  </Grid>
+                                );
+                              })}
+                            </Grid>
+                          </FormGroup>
+                        </Stack>
+                      )}
+                    </Select>
+                  </FormControl>
+                </Box> :  <Box
                   sx={{
                     height: '70px',
                     justifyContent: 'space-between',
@@ -228,7 +294,7 @@ function MoreFilterModal({
                       size="small"
                       // value={personName}
                       // onChange={handleChange}
-                      input={<OutlinedInput label="All Policies" />}
+                      input={<OutlinedInput label="All Policies" sx={{paddingBottom:'10px'}}/>}
                     >
                       <Stack px={2}>
                         <FormGroup>
@@ -287,7 +353,8 @@ function MoreFilterModal({
                       </Stack>
                     </Select>
                   </FormControl>
-                </Box>
+                </Box> }
+               
                 <Box
                   sx={{
                     height: '70px',
@@ -309,7 +376,7 @@ function MoreFilterModal({
                       size="small"
                       // value={personName}
                       // onChange={handleChange}
-                      input={<OutlinedInput label="All Surrogates" />}
+                      input={<OutlinedInput label="All Surrogates" sx={{paddingBottom:'10px'}}/>}
                     >
                       {surrogates_label && (
                         <Stack px={2}>
