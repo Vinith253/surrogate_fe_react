@@ -50,40 +50,43 @@ function CheckboxSelectDropdown({ options, flag }: Props) {
         onChange={handleChange}
         size={flag === 'morefilter' ? 'small' : undefined}
       >
-        <TextField
-          className="search-text-field"
-          placeholder="Search by..."
-          InputProps={{
-            startAdornment: (
-              <IconButton edge="start">
-                <SearchOutlined />
-              </IconButton>
-            ),
-          }}
-        />
-        <FormGroup className="all-option-checkbox">
-          <FormControlLabel control={<Checkbox defaultChecked />} label="All" />
-        </FormGroup>
-        {options?.map((each: any, index: number) => (
-          <Grid px={3} key={index}>
+        <Stack className="checkbox-dropdown-options">
+          <TextField
+            className="search-text-field"
+            placeholder="Search by..."
+            InputProps={{
+              startAdornment: (
+                <IconButton edge="start">
+                  <SearchOutlined />
+                </IconButton>
+              ),
+            }}
+          />
+          <Stack className="all-option-checkbox">
             <FormControlLabel
-              label={
-                <Typography sx={{ fontSize: '14px' }}>{each?.name}</Typography>
-              }
+              label={<Typography sx={{ fontSize: '14px' }}>All</Typography>}
               control={<Checkbox color="secondary" />}
             />
-          </Grid>
-          // <MenuItem key={index} value={each?.value} className="checkbox-checked">
+          </Stack>
 
-          //   <Checkbox />
-          //   <ListItemText primary={each?.name} />
-          // </MenuItem>
-        ))}
-        <div className="underline"></div>
-        <Box className="button-container">
-          <BtnOutlined title="Reset" BtnHeight={32} BtnWidth={70} />
-          <BtnContained title="Select" BtnHeight={32} BtnWidth={70} />
-        </Box>
+          {options?.map((each: any, index: number) => (
+            <Grid px={3} key={index}>
+              <FormControlLabel
+                label={
+                  <Typography sx={{ fontSize: '14px' }}>
+                    {each?.name}
+                  </Typography>
+                }
+                control={<Checkbox color="secondary" className="each-option" />}
+              />
+            </Grid>
+          ))}
+          <div className="underline"></div>
+          <Box className="button-container">
+            <BtnOutlined title="Reset" BtnHeight={32} BtnWidth={70} />
+            <BtnContained title="Select" BtnHeight={32} BtnWidth={70} />
+          </Box>
+        </Stack>
       </Select>
     </Stack>
   );
