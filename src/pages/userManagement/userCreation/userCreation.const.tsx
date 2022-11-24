@@ -1,4 +1,4 @@
-export const SalesReportFilterDropdown: salesReportFilterInterface[] = [
+export const UserCreationFilterDropdown: userCreationFilterInterface[] = [
   {
     label: 'State',
     option: [
@@ -40,36 +40,18 @@ export const SalesReportFilterDropdown: salesReportFilterInterface[] = [
     ],
   },
   {
-    label: 'Period',
-    option: [{ value: 'all', name: 'All' }],
-  },
-  {
-    label: 'Channel',
+    label: 'Reporting Head',
     option: [
-      { value: 'bank', name: 'Bank' },
-      { value: 'dsa', name: 'DSA' },
-      { value: 'fintech partners', name: 'Fintech Partners' },
+      { value: 'tamilnadu', name: 'Tamilnadu' },
+      { value: 'andra', name: 'Andhra' },
+      { value: 'telungana', name: 'Telungana' },
+      { value: 'karnataka', name: 'Karnataka' },
+      { value: 'kerala', name: 'Kerala' },
     ],
-  },
-  {
-    label: 'Surrogate',
-    option: [{ value: 'all', name: 'All' }],
-  },
-  {
-    label: 'Policies',
-    option: [{ value: 'all', name: 'All' }],
-  },
-  {
-    label: 'KYC Status',
-    option: [{ value: 'all', name: 'All' }],
-  },
-  {
-    label: 'Application Status',
-    option: [{ value: 'all', name: 'All' }],
   },
 ];
 
-export interface salesReportFilterInterface {
+export interface userCreationFilterInterface {
   label?: string;
   option?: Array<object>;
 }

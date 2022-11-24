@@ -111,13 +111,13 @@ export const Profile = () => {
           sx={{ backgroundColor: colors.white, margin: '30px 0' }}
           className="profile-details-container"
         >
-          <DetailsCard data={personalDetails} gridColumn={2} />
+          <DetailsCard data={personalDetails} gridColumn={2} infoIcon={false} />
         </Stack>
         <Stack
           sx={{ backgroundColor: colors.white }}
           className="profile-details-container"
         >
-          <DetailsCard data={contactDetails} gridColumn={2} />
+          <DetailsCard data={contactDetails} gridColumn={2} infoIcon={false} />
         </Stack>
         <Stack
           sx={{
