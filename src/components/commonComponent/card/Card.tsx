@@ -14,6 +14,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import '../card/Card.scss';
 import edit_icon from '../../../assets/icons/edit_icon.svg';
 import delete_icon from '../../../assets/icons/delete_icon.svg';
+import { useNavigate } from 'react-router-dom';
 type dataType = {
   image: string;
   text_one?: string;
@@ -28,11 +29,14 @@ type cardItems = {
   data: dataType;
   mainImage?: string;
   key?: string;
+  path?: string;
 };
-type dummy = {
-  name: string;
-};
+
 function Card({ content }: { content: cardItems }) {
+  const navigate = useNavigate();
+  const handlePath = (value: any) => {
+    navigate(value);
+  };
   return (
     <Paper elevation={3} sx={{ width: '100%' }} className="card-container">
       <Stack
@@ -91,12 +95,15 @@ function Card({ content }: { content: cardItems }) {
                 </Box>
               )}
               {content.key !== 'savedItems' && (
-                <Box className="flex-class">
+                <Box
+                  className="flex-class"
+                  onClick={() => handlePath(item.path)}
+                >
                   <ArrowForwardIosIcon color="secondary" />
                 </Box>
               )}
               {content.key === 'savedItems' && (
-                <Box sx={{ display: 'flex', flexDirection: 'row'}}>
+                <Box className="saved-items-flex">
                   <IconButton>
                     <img src={delete_icon} />
                   </IconButton>

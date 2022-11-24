@@ -124,6 +124,7 @@ const ReviewCard = () => {
           </Box>
         </Box>
         <Divider />
+
         <Box className="body">
           <Box className="bodyBox">
             <Card className="card">
@@ -320,6 +321,7 @@ const ReviewCard = () => {
           <Typography variant="body2" className="title">
             Channels
           </Typography>
+          <Typography className="text">Bank,DSA,Fintech Partner</Typography>
           <Typography className="text">Bank,DSA,Fintech Partner</Typography>
         </Box>
       </Box>

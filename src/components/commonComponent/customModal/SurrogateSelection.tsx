@@ -22,8 +22,8 @@ function SurrogateSelection() {
         handleCloseSuccess={handleCloseSuccess}
         title={'Surrogate Selection'}
         pause_content={'You can assign or remove surrogate.'}
-        normalPause={'Assign Surrogate'}
-        SchedulePause={'Remove Surrogate'}
+        radioValuOne={'Assign Surrogate'}
+        radioValuTwo={'Remove Surrogate'}
         close={'Close'}
         submit={'Assign'}
         product_label={product_label}

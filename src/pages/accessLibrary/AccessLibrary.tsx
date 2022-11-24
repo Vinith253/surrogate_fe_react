@@ -17,20 +17,44 @@ import CustomModal from '../../components/commonComponent/customModal/CustomModa
 
 const AccessLibrary = () => {
   const [accessModal, setAccessModal] = useState(false);
+  const [accessLink, setAccessLink] = useState('');
   const column = [
-    { title: '#', dataIndex: 'id', key: 'id' },
-    { title: 'Application #', dataIndex: 'application', key: 'application' },
+    { title: '#', dataIndex: 'id', key: 'id', sortColumn: false },
+    {
+      title: 'Application #',
+      dataIndex: 'application',
+      key: 'application',
+      sortColumn: true,
+    },
     {
       title: 'Customer Name',
       dataIndex: 'customerName',
       key: 'customerName',
+      sortColumn: false,
     },
-    { title: 'Channel Type', dataIndex: 'channelType', key: 'channelType' },
-    { title: 'Copy Link', dataIndex: 'copyLink', key: 'copyLink',  },
-    { title: '', dataIndex: 'copyIcon', key: 'copyIcon' , onClick: () => onClickCopyIcon(),},
+    {
+      title: 'Channel Type',
+      dataIndex: 'channelType',
+      key: 'channelType',
+      sortColumn: false,
+    },
+    {
+      title: 'Copy Link',
+      dataIndex: 'copyLink',
+      key: 'copyLink',
+      sortColumn: false,
+    },
+    {
+      title: '',
+      dataIndex: 'copyIcon',
+      key: 'copyIcon',
+      sortColumn: false,
+      onClick: (link: string) => onClickCopyIcon(link),
+    },
   ];
-  const onClickCopyIcon = () => {
+  const onClickCopyIcon = (link: string) => {
     setAccessModal(!accessModal);
+    setAccessLink(link);
   };
   const data = [
     {
@@ -41,7 +65,6 @@ const AccessLibrary = () => {
       copyLink:
         'https://statics.teams.cdn.office.net/evergreen-assets/safelinks/1/atp-safelinks.html',
       copyIcon: <ContentCopyIcon color="secondary" />,
-     
     },
     {
       id: 2,
@@ -51,7 +74,6 @@ const AccessLibrary = () => {
       copyLink:
         'https://statics.teams.cdn.office.net/evergreen-assets/safelinks/1/atp-safelinks.html',
       copyIcon: <ContentCopyIcon color="secondary" />,
-     
     },
     {
       id: 3,
@@ -61,7 +83,6 @@ const AccessLibrary = () => {
       copyLink:
         'https://statics.teams.cdn.office.net/evergreen-assets/safelinks/1/atp-safelinks.html',
       copyIcon: <ContentCopyIcon color="secondary" />,
-    
     },
     {
       id: 4,
@@ -71,7 +92,6 @@ const AccessLibrary = () => {
       copyLink:
         'https://statics.teams.cdn.office.net/evergreen-assets/safelinks/1/atp-safelinks.html',
       copyIcon: <ContentCopyIcon color="secondary" />,
-      
     },
     {
       id: 5,
@@ -81,7 +101,6 @@ const AccessLibrary = () => {
       copyLink:
         'https://statics.teams.cdn.office.net/evergreen-assets/safelinks/1/atp-safelinks.html',
       copyIcon: <ContentCopyIcon color="secondary" />,
-      
     },
   ];
   const [alignment, setAlignment] = useState('bank');
@@ -98,6 +117,7 @@ const AccessLibrary = () => {
     backgroundColor: ' rgb(240, 240, 240)',
     border: ' rgb(240, 240, 240) 1px ',
     color: 'black',
+
     '&.Mui-selected, &.Mui-selected:hover': {
       color: 'white',
       backgroundColor: '#1976d2',
@@ -122,7 +142,7 @@ const AccessLibrary = () => {
         <Box className="header-box">
           <Typography className="header">Access Library</Typography>
           <Typography className="sub-header">
-            Here is where we can copy particular link of all channels
+            Copy a text link of any channel from here.
           </Typography>
         </Box>
         <Divider />
@@ -138,7 +158,7 @@ const AccessLibrary = () => {
               exclusive
               onChange={handleChange}
               aria-label="Platform"
-              sx={{ height: '45px', padding: '5px !important'}}
+              sx={{ padding: '5px !important', height: '45px' }}
             >
               <ColorButton value="bank">Bank</ColorButton>
               <ColorButton value="dsa">DSA</ColorButton>
@@ -159,6 +179,7 @@ const AccessLibrary = () => {
             // successModalMsg={
             //   'Your action of Scheduled Pause - Card For Card Surrogate From  DD/MM/YYYTo DD/MM/YYY is successfully sent to reviewer'
             // }
+            accessLibraryLink={accessLink}
             accessLibraryMsg={'Here you can copy the link and share it'}
             org_ID={'#12345'}
             org_Name={'Ganesh Agency'}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../../../style/Style.scss';
-import { Button, Icon, Stack, Typography } from '@mui/material';
+import { Button, Stack, Typography } from '@mui/material';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -9,7 +9,6 @@ import TextareaAutosize from '@mui/material/TextareaAutosize';
 import TextField from '@mui/material/TextField';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
@@ -24,23 +23,22 @@ import info_icon from '../../../assets/images/info_icon.svg';
 import InputLabel from '@mui/material/InputLabel';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import discard_icon from '../../../assets/icons/Vector1.svg';
-
-import { SvgIcon } from '@mui/material';
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
 import checkedIcon from '../../../assets/icons/check_box_square_icon.svg';
-import { borderBottom } from '@mui/system';
+import MenuItem from '@mui/material/MenuItem';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 type props = {
   openSuccess?: any;
   handleCloseSuccess?: () => void;
-  normalPause?: string;
+  radioValuOne?: string;
   title?: String;
   successModalTitle?: string;
   rejectedModaltitle?: string;
   successModalMsg?: string;
   rejectedModalMsg?: string;
   pause_content?: string;
-  SchedulePause?: string;
+  radioValuTwo?: string;
   datepickerLabelStart?: string;
   datepickerLabelEnd?: string;
   scheduledPause_content?: string;
@@ -67,23 +65,30 @@ type props = {
   enterNewPassword?: string;
   confirmNewPassword?: string;
   forgotPassword?: string;
+  accessLibraryLink?: string;
   yesContinueBtn?: string;
   closeBtn?: string;
   discardModalTitle?: string;
   discardModalMsg?: string;
+  duplicateRoleCloseBtn?: string;
+  duplicate_role_content?: string;
+  existingRoleItem?: Array<string>;
+  employeeDetailsRowOne?: any;
+  employeeDetailsRowTwo?: any;
+  employeeDetailsRowThree?: any;
 };
 
 function CustomModal({
   openSuccess,
   handleCloseSuccess,
-  normalPause,
+  radioValuOne,
   title,
   successModalTitle,
   rejectedModaltitle,
   successModalMsg,
   rejectedModalMsg,
   pause_content,
-  SchedulePause,
+  radioValuTwo,
   datepickerLabelStart,
   datepickerLabelEnd,
   scheduledPause_content,
@@ -110,24 +115,22 @@ function CustomModal({
   enterNewPassword,
   confirmNewPassword,
   forgotPassword,
+  accessLibraryLink,
   yesContinueBtn,
   closeBtn,
   discardModalTitle,
   discardModalMsg,
+  duplicateRoleCloseBtn,
+  duplicate_role_content,
+  existingRoleItem,
+  employeeDetailsRowOne,
+  employeeDetailsRowTwo,
+  employeeDetailsRowThree,
 }: props) {
-  // const classess = useStyles();
-
-  const [pauseStatus, setPauseStatus] = useState(normalPause);
+  const [pauseStatus, setPauseStatus] = useState(radioValuOne);
   const [startDatevalue, setStartDateValue] = useState(null);
   const [endDatevalue, setEndDateValue] = useState(null);
-
-  function DateIcon(props: any) {
-    return (
-      <SvgIcon {...props}>
-        <path d="../../../assets/icons/calendar_icon.png" />
-      </SvgIcon>
-    );
-  }
+  const [existingRole, setexistingRole] = React.useState('');
 
   useEffect(() => {
     if (pauseStatus) {
@@ -137,6 +140,10 @@ function CustomModal({
 
   const pauseValue = (value: any) => {
     setPauseStatus(value);
+  };
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setexistingRole(event.target.value);
   };
 
   return (
@@ -150,7 +157,9 @@ function CustomModal({
         fullWidth={
           title == 'Request for Activation' ||
           title == 'Request for Deactivation' ||
-          title == 'Add Organisation'
+          title == 'Add Organisation' ||
+          title == 'Duplicate Role' ||
+          title == 'Employee Details'
             ? true
             : false
         }
@@ -215,6 +224,156 @@ function CustomModal({
             >
               {accessLibraryCloseBtn}
             </Button>
+          )}
+
+          {duplicateRoleCloseBtn && (
+            <Button
+              variant="text"
+              color="secondary"
+              sx={{
+                position: 'absolute',
+                right: '10px',
+                top: '15px',
+                textTransform: 'capitalize',
+              }}
+              onClick={handleCloseSuccess}
+            >
+              {duplicateRoleCloseBtn}
+            </Button>
+          )}
+
+          {duplicate_role_content && (
+            <Typography
+              className="duplicate_role_content"
+              color={'#171717'}
+              fontWeight={500}
+              sx={{ paddingTop: '14px', fontSize: '12px' }}
+            >
+              {' '}
+              {duplicate_role_content}
+            </Typography>
+          )}
+
+          {existingRoleItem && (
+            <FormControl sx={{ minWidth: 120 }} size="small">
+              <InputLabel id="demo-select-small">
+                Choose existing role for duplication
+              </InputLabel>
+
+              <Select
+                // labelId="demo-select-small"
+                id="demo-select-small"
+                value={existingRole}
+                onChange={handleChange}
+              >
+                {existingRoleItem.map((value: any) => (
+                  <MenuItem value={value}>{value}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          )}
+
+          {(employeeDetailsRowOne ||
+            employeeDetailsRowTwo ||
+            employeeDetailsRowThree) && (
+            <Stack>
+              {employeeDetailsRowOne && (
+                <Box sx={{ marginBottom: '10px' }}>
+                  <Grid container spacing={2} mt={1}>
+                    {employeeDetailsRowOne.map((item: any) => (
+                      <Grid md={4} item>
+                        <Typography
+                          sx={{
+                            fontSize: '12px',
+                            color: '#AFAEAF',
+                            marginBottom: '5px',
+                            fontWeight: '500',
+                          }}
+                        >
+                          {item.Key}
+                        </Typography>
+                        <Typography
+                          sx={{
+                            fontSize: '14px',
+                            color: '#151515',
+                            fontWeight: '400',
+                          }}
+                        >
+                          {item.value}
+                        </Typography>
+                      </Grid>
+                    ))}
+                  </Grid>
+                </Box>
+              )}
+
+              {employeeDetailsRowTwo && (
+                <Box
+                  sx={{
+                    borderTop: '2px solid #E9EAEB',
+                    borderBottom: '2px solid #E9EAEB',
+                    marginTop: '8px',
+                    paddingBottom: '12px',
+                  }}
+                >
+                  <Grid container spacing={2} mt={1}>
+                    {employeeDetailsRowTwo.map((item: any) => (
+                      <Grid md={4} item>
+                        <Typography
+                          sx={{
+                            fontSize: '12px',
+                            color: '#AFAEAF',
+                            marginBottom: '5px',
+                            fontWeight: '500',
+                          }}
+                        >
+                          {item.Key}
+                        </Typography>
+                        <Typography
+                          sx={{
+                            fontSize: '14px',
+                            color: '#151515',
+                            fontWeight: '400',
+                          }}
+                        >
+                          {item.value}
+                        </Typography>
+                      </Grid>
+                    ))}
+                  </Grid>
+                </Box>
+              )}
+
+              {employeeDetailsRowThree && (
+                <Box>
+                  <Grid container spacing={2} mt={1}>
+                    {employeeDetailsRowThree.map((item: any) => (
+                      <Grid md={4} item>
+                        <Typography
+                          sx={{
+                            fontSize: '12px',
+                            color: '#AFAEAF',
+                            marginBottom: '5px',
+                            fontWeight: '500',
+                          }}
+                        >
+                          {item.Key}
+                        </Typography>
+                        <Typography
+                          sx={{
+                            fontSize: '14px',
+                            color: '#151515',
+                            fontWeight: '400',
+                          }}
+                        >
+                          {item.value}
+                        </Typography>
+                      </Grid>
+                    ))}
+                  </Grid>
+                </Box>
+              )}
+            </Stack>
           )}
 
           {successModalTitle && (
@@ -515,23 +674,6 @@ function CustomModal({
             </Typography>
           )}
 
-          {/* {discardModalMsg && (
-            <Typography
-              fontWeight={700}
-              align={'center'}
-              pb={0}
-              fontSize={12}
-              sx={{
-                padding: {
-                  xs: '0 13px',
-                  sm: '0 70px',
-                },
-              }}
-            >
-              {discardModalMsg}
-            </Typography>
-          )} */}
-
           {accessLibraryMsg && (
             <Typography
               align="center"
@@ -596,34 +738,37 @@ function CustomModal({
             </Typography>
           )}
 
-          {(normalPause || SchedulePause) && (
-            <FormControl className={`${normalPause ? 'modal_form_label' : ''}`}>
+          {(radioValuOne || radioValuTwo) && (
+            <FormControl
+              className={`${
+                radioValuOne == 'DSA' ? 'modal_form_label' : 'radio-btnlabel'
+              }`}
+            >
               <Stack pb={1}>
                 <RadioGroup
                   color=""
                   row
                   aria-labelledby="demo-radio-buttons-group-label"
-                  value={pauseStatus ? pauseStatus : normalPause}
+                  value={pauseStatus ? pauseStatus : radioValuOne}
                   name="radio-buttons-group"
                   onChange={(e) => pauseValue(e.target.value)}
                 >
                   <FormControlLabel
-                    style={{ fontSize: '1px' }}
-                    value={normalPause}
+                    value={radioValuOne}
                     control={<Radio color="secondary" />}
-                    label={normalPause}
+                    label={radioValuOne}
                   />
                   <FormControlLabel
-                    value={SchedulePause}
+                    value={radioValuTwo}
                     control={<Radio color="secondary" />}
-                    label={SchedulePause}
+                    label={radioValuTwo}
                   />
                 </RadioGroup>
               </Stack>
             </FormControl>
           )}
 
-          {pauseStatus === SchedulePause &&
+          {pauseStatus === radioValuTwo &&
             datepickerLabelStart &&
             datepickerLabelEnd && (
               <Stack>
@@ -764,6 +909,7 @@ function CustomModal({
                 borderBottom: `1px solid #36363624`,
                 marginBottom: '20px',
               }}
+              className={'radio-btnlabel'}
             >
               <FormGroup sx={{ paddingTop: '10px' }}>
                 <Grid container>
@@ -913,9 +1059,7 @@ function CustomModal({
                     variant="outlined"
                     size="small"
                     sx={{ height: '40px' }}
-                    value={
-                      'https://www.yesbank.com/content/bbp/repositories/7...'
-                    }
+                    value={accessLibraryLink}
                     inputProps={{
                       style: {
                         fontSize: '14px',
@@ -948,5 +1092,4 @@ function CustomModal({
     </Stack>
   );
 }
-
 export default CustomModal;

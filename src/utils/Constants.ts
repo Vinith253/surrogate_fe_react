@@ -20,24 +20,34 @@ export const tagBasedIndicator = {
 };
 
 export const bulkUpload = {
-  BULK_UPLOAD_HEAD: 'Bulk Upload - Card Catalogue',
-  BULK_UPLOAD_SUBHEAD: ` From here you can manage all your card's information`,
+  BULK_UPLOAD_CARD_CATALOGUE_HEAD: 'Bulk Upload - Card Catalogue',
+  BULK_UPLOAD_CARD_CATALOGUE_SUBHEAD: ` From here you can manage all your card's information`,
+  BULK_UPLOAD_ORG_HEAD: 'Bulk Upload - Organisation Details',
+  BULK_UPLOAD_ORG_SUBHEAD: ` From here you can manage all your card's information`,
   DOWNLOAD_SAMPLE: 'Download Sample',
   UPLOAD_CARD_DETAILS: 'Upload card details sheet',
+  UPLOAD_DOCUMENTS: 'Upload the documents',
   DOWNLOAD_SAMPLE_CSV_XLS: ` Download a sample .csv or .xls file and compare it to your import file
     to ensure that is ready to import`,
+    DOWNLOAD_ERROR_CSV_XLS: ` Download a Error file for correction .csv or .xls file and compare it to your import file
+    to ensure that is ready to import`,
   UPLOAD_FILE: ' Upload file',
+  UPLOAD_DOCUMENT:'Upload Document',
   DRAG_AND_DROP: 'Drag & Drop your file',
   SUPPORTED_FORMATS: 'Supported formats .csv .xls(max. 2mb)',
   CORRECTION_FILE: 'Correction File',
   DOWNLOAD_ERROR_FILE: 'Download Error File',
+  DOWNLOAD_CORRECTION_FILE: 'Download Correction File',
   UPLOAD_CORRECTION_FILE: 'Upload correction File',
   UPLOAD_CARD: 'Upload Card Photo',
+  UPLOAD_SUPPORT_DOCUMENTS:'Upload Support Documents',
   SUPPORTED_FORMATS_JPG: 'Supported formats .jpg .png (max. 2mb)',
   UPLOAD_CARD_PHOTO: 'Upload Card Photo',
   UPLOAD_MISSING_CARD:
     'Upload missing card images to import card details into card catalog',
   UPLOAD_MISSING_PHOTO: 'Upload Missing Photo',
+  UPLOAD_MISSING_DOCUMENT:'Upload Missing Document(s)',
+  ORG_UPLOAD_MISSING_PARA:'Upload missing support documents to import Organisation details into Org. Structure.'
 };
 
 export const tableHeader = {
