@@ -5,10 +5,16 @@
   padding: 20px;
   background-color: #ffffff;
 
+  .text-field {
+    .css-176f598-MuiInputBase-root-MuiOutlinedInput-root {
+      height: 42px;
+    }
+    width: 400px !important;
+  }
   .third-header {
     display: flex;
     flex-direction: row;
-    margin-bottom: 26px;
+    margin-bottom: 20px;
     width: 100%;
     justify-content: flex-end;
 

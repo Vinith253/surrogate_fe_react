@@ -1,0 +1,13 @@
+.no-data-container {
+  background-color: #ffffff;
+  padding: 90px 0px;
+  border-radius: 8px;
+  text-align: center;
+
+  .no-data-img {
+    width: 25%;
+    display: flex;
+    margin: auto;
+    padding-bottom: 15px;
+  }
+}

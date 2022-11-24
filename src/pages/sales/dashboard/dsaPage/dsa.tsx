@@ -67,7 +67,7 @@ export default function DsaPage() {
     {
       index: 2,
       title: 'Approval Rate (%)',
-      value: 98.6,
+      value: '98.6 %',
       more: false,
       image: ApprovalRate,
     },
@@ -322,7 +322,7 @@ export default function DsaPage() {
   return (
     <>
       <div className="dsa-data-container">
-        <div>
+        <>
           <div className="filter-header">
             <div className="filter-data">
               <Typography
@@ -354,15 +354,15 @@ export default function DsaPage() {
                 close={'Reset'}
               />
               <MoreFilterModal
-              product_label={product_label}
-              day_filter_label={day_filter_label}
-              dayFilterValue={dayFilterValue}
-              submit={'Apply'}
-              close={'Reset'}
-              policies_label={policies_label}
-              surrogates_label={surrogates_label}
-              state_label={state_label}
-              zonal_label={zonal_label}
+                product_label={product_label}
+                day_filter_label={day_filter_label}
+                dayFilterValue={dayFilterValue}
+                submit={'Select'}
+                close={'Reset'}
+                policies_label={policies_label}
+                surrogates_label={surrogates_label}
+                state_label={state_label}
+                zonal_label={zonal_label}
               />
             </div>
             <div className="reset-data">
@@ -389,6 +389,7 @@ export default function DsaPage() {
                 value={value.value}
                 more={value.more}
                 image={value.image}
+                navPath="/sales/salesReport"
               />
             ))}
           </div>
@@ -419,7 +420,7 @@ export default function DsaPage() {
               />
             </div>
           </div>
-        </div>
+        </>
       </div>
       <div className="diff-area" />
       <div className="list-data-box">
@@ -434,7 +435,7 @@ export default function DsaPage() {
           statusRowsHeading={statusRowHeading}
           listRowHeading={listRowHeading}
           flag="dashboard"
-          viewPath="/sales/salesDashboard"
+          viewPath="/sales/salesReportDetails"
         />
       </div>
     </>
