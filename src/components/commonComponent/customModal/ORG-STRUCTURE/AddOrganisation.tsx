@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from '@mui/material';
-import CustomModal from './CustomModal';
+import CustomModal from '../CustomModal';
 
 function AddOrganisation() {
   const [openSuccess, setOpenSuccess] = useState(false);
@@ -28,8 +28,8 @@ function AddOrganisation() {
         pause_content={'Select Channel type to add Organisation'}
         close={'Close'}
         submit={'Proceed'}
-        normalPause={'DSA'}
-        SchedulePause={'Fintech'}
+        radioValuOne={'DSA'}
+        radioValuTwo={'Fintech'}
         pauseMethodChecking={(arg1: string) => pauseMethodChange(arg1)}
       />
     </div>

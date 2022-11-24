@@ -37,26 +37,20 @@ const BulkUpload = ({ flag }: any) => {
         <Box sx={{ display: 'flex' }}>
           <ArrowBackIcon
             color="secondary"
-            className='arrowBtn'
+            className="arrowBtn"
             onClick={() => navigate(-1)}
           />
           <Box sx={{ paddingLeft: '10px' }}>
-            <Typography variant="h1"  className="bulk-upload-head">
-              {bulkUpload.BULK_UPLOAD_HEAD}
+            <Typography variant="h1" className="bulk-upload-head">
+              {bulkUpload.BULK_UPLOAD_CARD_CATALOGUE_HEAD}
             </Typography>
-            <Typography
-            className="bulk-upload-subhead"
-              variant="h2"
-             
-            >
-              {bulkUpload.BULK_UPLOAD_SUBHEAD}
+            <Typography className="bulk-upload-subhead" variant="h2">
+              {bulkUpload.BULK_UPLOAD_CARD_CATALOGUE_SUBHEAD}
             </Typography>
           </Box>
         </Box>
       </Box>
-      <Box
-        className='upload-card-container'
-      >
+      <Box className="upload-card-container">
         {openUpload && (
           <UploadCard
             toggle={(arg1: boolean, arg2: string) => handleToggle(arg1, arg2)}

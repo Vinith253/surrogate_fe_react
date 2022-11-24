@@ -34,8 +34,6 @@ import PaginationComp from '../../../../../components/commonComponent/Pagination
 import BulkUpload from '..';
 import CustomModal from '../../../../../components/commonComponent/customModal/CustomModal';
 import CommonTable from '../../../../../components/commonComponent/commonTable/CommonTable';
-import './BulkList.scss';
-import { AddBoxRounded } from '@mui/icons-material';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -206,30 +204,6 @@ const rows2 = [
   ),
 ];
 
-function LinearProgressWithLabel(
-  props: LinearProgressProps & { value: number }
-) {
-  return (
-    <Box>
-      <Box sx={{ width: '100%', mr: 1 }}>
-        <LinearProgress variant="determinate" {...props} color="secondary" />
-      </Box>
-      <Box
-        sx={{
-          minWidth: 35,
-          display: 'flex',
-          justifyContent: 'flex-end',
-          mt: 2,
-        }}
-      >
-        <Typography variant="body2">{`${Math.round(
-          props.value
-        )}% Completed`}</Typography>
-      </Box>
-    </Box>
-  );
-}
-
 export default function BulkList(props: any) {
   const navigate = useNavigate();
   const [correctionState, setCorrectionState] = useState(false);
@@ -239,6 +213,7 @@ export default function BulkList(props: any) {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
   const [imageUpload, setImageUpload] = useState(true);
+  const [uploadProgress, setUploadProgress] = useState(0);
 
   const column = [
     { title: '#', dataIndex: 'id', key: 'id' },
@@ -380,6 +355,39 @@ export default function BulkList(props: any) {
     },
   ];
 
+  const handleUploadProgress = (value: number) => {
+    setUploadProgress(value);
+    console.log(value, 'handle upload progress');
+  };
+
+  function LinearProgressWithLabel(
+    props: LinearProgressProps & { value: number }
+  ) {
+    return (
+      <Box>
+        <Box sx={{ width: '100%', mr: 1 }}>
+          <LinearProgress
+            variant="determinate"
+            {...props}
+            color={progress === 100 && !correctionState ? 'error' : 'secondary'}
+            // sx={{ color: progress === 100 ? 'red' : '#0662B7;' }}
+          />
+        </Box>
+        <Box
+          sx={{
+            minWidth: 35,
+            display: 'flex',
+            justifyContent: 'flex-end',
+            mt: 2,
+          }}
+        >
+          <Typography variant="body2">{`${Math.round(
+            props.value
+          )}% Completed`}</Typography>
+        </Box>
+      </Box>
+    );
+  }
   const [columnList, setcolumnList] = useState(column);
   const [dataList, setDataList] = useState(data1);
   const [validCount, setValidCount] = useState('20');
@@ -485,9 +493,15 @@ export default function BulkList(props: any) {
 
   return (
     <PageLayout>
-      <AddBoxRounded className="bulk-list-container">
-        <Box className="bulk-list-progress-container">
-          <Typography className="bulk-list-progress-text">
+      <Box sx={{ padding: '2% 0' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            paddingBottom: '2%',
+          }}
+        >
+          <Typography sx={{ fontSize: '1.2rem' }}>
             {progress === 100 ? 'Validated' : 'Validating Uploaded Document...'}
           </Typography>
           <CloseIcon color="secondary" />
@@ -498,25 +512,33 @@ export default function BulkList(props: any) {
           value={progress}
           sx={progressBar}
         />
-      </AddBoxRounded>
+      </Box>
       <Divider />
-      <Box className="message-container">
+      <Box
+        sx={{
+          padding: '2% 0',
+          boxSizing: 'unset',
+          display: 'flex',
+          justifyContent: 'space-between',
+          gap: '5%',
+        }}
+      >
         <Box
           sx={{
             display: 'flex',
             gap: '5%',
           }}
         >
-          <Typography variant="h6" className="message-subcontent">
+          <Typography variant="h6" sx={{ fontSize: '1rem' }}>
             File Name:{progress === 100 && 'arantic'}
           </Typography>
-          <Typography variant="h6" className="message-subcontent">
+          <Typography variant="h6" sx={{ fontSize: '1rem' }}>
             Record Found: {progress === 100 && '25'}
           </Typography>
-          <Typography variant="h6" className="message-subcontent">
+          <Typography variant="h6" sx={{ fontSize: '1rem' }}>
             Valid Records: {progress === 100 && validCount}
           </Typography>
-          <Typography variant="h6" className="message-subcontent">
+          <Typography variant="h6" sx={{ fontSize: '1rem' }}>
             Error Found: {progress === 100 && errorCount}
           </Typography>
         </Box>
@@ -524,7 +546,10 @@ export default function BulkList(props: any) {
           <Alert
             severity="warning"
             icon={
-              <CircularProgress color="inherit" className="circular-progress" />
+              <CircularProgress
+                color="inherit"
+                sx={{ width: '20px !important', height: '20px !important' }}
+              />
             }
           >
             validating the uploaded documents
@@ -538,7 +563,14 @@ export default function BulkList(props: any) {
         )}
       </Box>
       <Divider />
-      <Box className="toggle-button-group">
+      <Box
+        sx={{
+          margin: '1% 0',
+          display: 'flex',
+          justifyContent: 'flex-end',
+          width: '100%',
+        }}
+      >
         <ToggleButtonGroup
           color="primary"
           value={alignment}
@@ -624,8 +656,8 @@ export default function BulkList(props: any) {
         </Box>
       )}
       {progress === 100 && correctionState && (
-        <Box className="success-message-container">
-          <Typography className="success-message">
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Typography sx={{ fontSize: '18px' }}>
             *No error found in the uploaded file*
           </Typography>
         </Box>
@@ -657,17 +689,21 @@ export default function BulkList(props: any) {
           data={props.fileCheck === 'xls' ? uploadData : imageCardData}
           fileName={props.fileCheck}
           correction={handleCorrection}
+          uploadProgressValue={(arg: number) => handleUploadProgress(arg)}
         />
       )}
       {/* {imageUpload && <BulkUpload />} */}
       {progress === 100 && (
         <>
-          <Box className="btn-container">
+          <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: '1%' }}>
             <Button variant="outlined">Cancel</Button>
             <Button
               variant="contained"
-              color="secondary"
+              // color="secondary"
               onClick={handleProceed}
+              sx={{
+                backgroundColor: uploadProgress > 0 ? '#82B1DB' : ' #0662B7',
+              }}
             >
               {progress === 100 && correctionState
                 ? 'Upload card Photos'
@@ -675,8 +711,10 @@ export default function BulkList(props: any) {
             </Button>
           </Box>
           <Box
-            className="btn-container"
             sx={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              gap: '1%',
               marginTop: '1%',
             }}
           >
@@ -684,7 +722,7 @@ export default function BulkList(props: any) {
               variant="text"
               color="secondary"
               onClick={handleProceed}
-              className="discord-btn-text"
+              sx={{ fontSize: '12px' }}
             >
               {`Discord Error entries and Continue >`}
             </Button>

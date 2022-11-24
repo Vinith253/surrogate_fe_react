@@ -159,7 +159,7 @@ export const ListView = ({ data }: any) => {
           >
             {tableHeaderData.map((items: dataHeaderList, index: number) => (
               <TableRow key={index} sx={{ padding: '5px' }}>
-                <TableCell padding="checkbox" sx={{ padding: '5px' }}>
+                <TableCell sx={{ padding: '5px' }}>
                   <Checkbox
                     color={'secondary'}
                     indeterminate={
@@ -323,8 +323,8 @@ export const ListView = ({ data }: any) => {
             'Please choose a date range to perform a scheduled pause.'
           }
           textarea_title={'Add Remarks'}
-          normalPause={NORMAL_PAUSE}
-          SchedulePause={SCHEDULED_PAUSE}
+          radioValuOne={NORMAL_PAUSE}
+          radioValuTwo={SCHEDULED_PAUSE}
           dateRange_title={'Enter Date range'}
           maxLength={'Maximum of 500 words'}
           pauseMethodChecking={(arg1: string) => pauseMethodChange(arg1)}

@@ -40,7 +40,7 @@ import {
   OutlinedInput,
   ListItemText,
 } from '@mui/material';
-import TypographyTitle from '../../../../components/commonComponent/CustomText/Typography';
+import TypographySubTitle from '../../../../components/commonComponent/CustomText/Typography';
 // import OutlinedInput from '@mui/material/OutlinedInput';
 // import ListItemText from '@mui/material/ListItemText';
 import Surrogate_icon from '../../../../assets/icons/surrogates_selection_icon.svg';
@@ -75,6 +75,7 @@ import {
 } from '../../../../pages/sales/dashboard/dashboard.const';
 import TablePagination from '@mui/material/TablePagination';
 import { Height } from '@mui/icons-material';
+import TypoText from '../../../../components/commonComponent/CustomText/Textfield';
 
 // const columns: GridColDef[] = [
 //   { field: 'id', headerName: 'ID', width: 70 },
@@ -540,7 +541,7 @@ export const CardCatalogue = () => {
 
         <Box className="body1">
           <Box className="container1">
-            <TypographyHead title="Card List" />
+            <TypoText title="Card List" />
             <img className="img1" src={Info_Icon} />
             <TypographyInfo
               title="From here, you filter the card by its mode, status, category and
@@ -561,7 +562,7 @@ export const CardCatalogue = () => {
             // }}
           >
             <FormControl className="formctrl">
-              <TypographyTitle title="Card Mode" />
+              <TypographySubTitle title="Card Mode" />
               {/* <InputLabel id="demo-simple-select-label">All</InputLabel> */}
               <Select
                 // labelId="demo-multiple-checkbox-label"
@@ -580,20 +581,9 @@ export const CardCatalogue = () => {
                   </MenuItem>
                 ))}
               </Select>
-
-              {/* <Select
-                id="demo-simple-select"
-                value={age}
-                onChange={handleAdd}
-                className='select'
-              >
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </Select> */}
             </FormControl>
             <FormControl className="formctrl">
-              <TypographyTitle title="Card Category" />
+              <TypographySubTitle title="Card Category" />
               <Select className="select" defaultValue={0}>
                 <MenuItem value={0}>All</MenuItem>
                 <MenuItem value={10}>Ten</MenuItem>
@@ -602,20 +592,20 @@ export const CardCatalogue = () => {
               </Select>
             </FormControl>
             <FormControl className="formctrl">
-              <TypographyTitle title="Card Status" />
+              <TypographySubTitle title="Card Status" />
 
-              <Select placeholder="All" className="select"  defaultValue={0}>
-              <MenuItem value={0}>All</MenuItem>
+              <Select placeholder="All" className="select" defaultValue={0}>
+                <MenuItem value={0}>All</MenuItem>
                 <MenuItem value={10}>Ten</MenuItem>
                 <MenuItem value={20}>Twenty</MenuItem>
                 <MenuItem value={30}>Thirty</MenuItem>
               </Select>
             </FormControl>
             <FormControl className="formctrl">
-              <TypographyTitle title="Choose Surrogate" />
+              <TypographySubTitle title="Choose Surrogate" />
 
               <Select className="select" defaultValue={0}>
-              <MenuItem value={0}>All</MenuItem>
+                <MenuItem value={0}>All</MenuItem>
                 <MenuItem value={10}>Ten</MenuItem>
                 <MenuItem value={20}>Twenty</MenuItem>
                 <MenuItem value={30}>Thirty</MenuItem>
@@ -769,13 +759,13 @@ export const CardCatalogue = () => {
                 <SearchIcon className='searchIcon' />
               </Box> */}
               <Box
-                // sx={{
-                //   width: '241px',
-                //   fontSize: '12px',
-                //   fontFamily: 'Ilisarniq',
-                //   fontWeight: 400,
-                //   lineHeight: '14px',
-                // }}
+              // sx={{
+              //   width: '241px',
+              //   fontSize: '12px',
+              //   fontFamily: 'Ilisarniq',
+              //   fontWeight: 400,
+              //   lineHeight: '14px',
+              // }}
               >
                 <ToggleButtonGroup
                   //  size='small'
@@ -785,17 +775,29 @@ export const CardCatalogue = () => {
                   onChange={handleButtonChange}
                   aria-label="Platform"
                   sx={{
-                    height: '40px'
+                    height: '40px',
                   }}
                   // sx={ToggleBoxStyle}
                 >
-                  <ColorButton value="all" sx={{ paddingRight: '10px'}}> All </ColorButton>
+                  <ColorButton value="all" sx={{ paddingRight: '10px' }}>
+                    {' '}
+                    All{' '}
+                  </ColorButton>
                   {/* <Divider orientation="vertical" /> */}
-                  <ColorButton value="activate" sx={{ paddingRight: '10px'}}>Activate</ColorButton>
+                  <ColorButton value="activate" sx={{ paddingRight: '10px' }}>
+                    Activate
+                  </ColorButton>
                   {/* <Divider orientation="vertical" /> */}
-                  <ColorButton value="deactivated" sx={{ paddingRight: '10px'}}>Deactivated</ColorButton>
+                  <ColorButton
+                    value="deactivated"
+                    sx={{ paddingRight: '10px' }}
+                  >
+                    Deactivated
+                  </ColorButton>
                   {/* <Divider orientation="vertical" /> */}
-                  <ColorButton value="saved" sx={{ paddingRight: '10px'}}>Saved</ColorButton>
+                  <ColorButton value="saved" sx={{ paddingRight: '10px' }}>
+                    Saved
+                  </ColorButton>
                 </ToggleButtonGroup>
               </Box>
             </Stack>
@@ -925,10 +927,15 @@ export const CardCatalogue = () => {
                     horizontal: 'right',
                   }}
                 >
-                  <MenuItem onClick={() => {
-                    handleClose();
-                    navigate('/productManagement/cardCatalogue/singleupload/reviewCard');
-                  }} className="menu">
+                  <MenuItem
+                    onClick={() => {
+                      handleClose();
+                      navigate(
+                        '/productManagement/cardCatalogue/singleupload/reviewCard'
+                      );
+                    }}
+                    className="menu"
+                  >
                     View
                   </MenuItem>
                   <MenuItem onClick={handleClose} className="menu">
@@ -986,8 +993,8 @@ export const CardCatalogue = () => {
           title={'Surrogate Selection'}
           handleSuccess={handleSurrogateSubmit}
           pause_content={'You can assign or remove surrogate.'}
-          normalPause={'Assign Surrogate'}
-          SchedulePause={'Remove Surrogate'}
+          radioValuOne={'Assign Surrogate'}
+          radioValuTwo={'Remove Surrogate'}
           close={'Close'}
           submit={'Assign'}
           pauseMethodChecking={surrogateMethodChange}
@@ -1054,8 +1061,8 @@ export const CardCatalogue = () => {
             'Please choose a date range to perform a scheduled pause.'
           }
           textarea_title={'Add Remarks'}
-          normalPause={NORMAL_PAUSE}
-          SchedulePause={SCHEDULED_PAUSE}
+          radioValuOne={NORMAL_PAUSE}
+          radioValuTwo={SCHEDULED_PAUSE}
           dateRange_title={'Enter Date range'}
           maxLength={'Maximum of 500 words'}
           pauseMethodChecking={pauseMethodChange}

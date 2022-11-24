@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Button } from '@mui/material';
-import CustomModal from './CustomModal';
+import CustomModal from '../CustomModal';
 
-function ResumeModalSuccess() {
+function SuccessForRoleCreated() {
   const [openSuccess, setOpenSuccess] = useState(false);
 
   const handleClickOpen = () => {
@@ -15,14 +15,14 @@ function ResumeModalSuccess() {
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
-        Resume modal Success
+        Role created success
       </Button>
       <CustomModal
         openSuccess={openSuccess}
         handleCloseSuccess={handleCloseSuccess}
-        successModalTitle={'AQB - Resume Now'}
+        successModalTitle={'Role Created Successfully'}
         successModalMsg={
-          'Your action of Resuming - AQB Surrogate has been successfully sent to the reviewer.'
+          'Your request for creating new role is successfully sent to the Reviewer'
         }
         btn={' Close'}
       />
@@ -30,4 +30,4 @@ function ResumeModalSuccess() {
   );
 }
 
-export default ResumeModalSuccess;
+export default SuccessForRoleCreated;

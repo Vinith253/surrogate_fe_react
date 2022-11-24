@@ -10,8 +10,7 @@ import {
   MenuItem,
 } from '@mui/material';
 
-const TypographyTitle = (props: any) => {
-  console.log('title', props);
+const TypographySubTitle = (props: any) => {
   return (
     <Typography
       sx={{
@@ -31,4 +30,4 @@ const TypographyTitle = (props: any) => {
     </Typography>
   );
 };
-export default TypographyTitle;
+export default TypographySubTitle;
