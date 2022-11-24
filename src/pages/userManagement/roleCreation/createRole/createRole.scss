@@ -1,0 +1,39 @@
+.create-header-container {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 24px 32px 24px 32px;
+    margin-top: 32px;
+  }
+
+  .divide {
+    height: 32px;
+    background-color: #eceff2;
+  }
+
+  .second-header-container {
+    background-color: white;
+    justify-content: space-between;
+    padding: 24px 32px 24px 32px;
+    margin-top: 32px;
+
+    .divider-style { 
+        margin-top: 26px;
+        margin-bottom: 30px;
+    }
+
+    .checkbox-divider-style {
+        margin-top: 26px;
+        height: 2px;
+        border-color: #F0F2F5;
+    }
+
+    .textfield-text-style {
+        font-size: 12px;
+        font-weight: 500;
+        display: 'flex';
+        justify-content: 'flex-start';
+        color: '#151515';
+        margin-bottom: 2px,
+      }
+  }
