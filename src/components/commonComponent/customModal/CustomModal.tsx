@@ -65,6 +65,7 @@ type props = {
   enterNewPassword?: string;
   confirmNewPassword?: string;
   forgotPassword?: string;
+  accessLibraryLink?: string;
   yesContinueBtn?: string;
   closeBtn?: string;
   discardModalTitle?: string;
@@ -114,6 +115,7 @@ function CustomModal({
   enterNewPassword,
   confirmNewPassword,
   forgotPassword,
+  accessLibraryLink,
   yesContinueBtn,
   closeBtn,
   discardModalTitle,
@@ -1057,9 +1059,7 @@ function CustomModal({
                     variant="outlined"
                     size="small"
                     sx={{ height: '40px' }}
-                    value={
-                      'https://www.yesbank.com/content/bbp/repositories/7...'
-                    }
+                    value={accessLibraryLink}
                     inputProps={{
                       style: {
                         fontSize: '14px',
@@ -1092,5 +1092,4 @@ function CustomModal({
     </Stack>
   );
 }
-
 export default CustomModal;

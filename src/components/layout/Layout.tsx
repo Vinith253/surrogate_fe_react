@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Badge,
   Box,
   Divider,
   IconButton,
@@ -8,8 +9,20 @@ import {
   ListItemIcon,
   ListItemText,
 } from '@mui/material';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
-import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
+import {
+  styled,
+  useTheme,
+  Theme,
+  CSSObject,
+  withStyles,
+} from '@mui/material/styles';
 // import Box from "@mui/material/Box";
 import MuiDrawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -40,6 +53,7 @@ import profile_arrow_icon from '../../assets/icons/profile_arrow_icon.svg';
 import Collapse from '@mui/material/Collapse';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import './Layout.scss';
 
 const drawerWidth = 300;
 
@@ -214,11 +228,13 @@ const Drawer = styled(MuiDrawer, {
 export default function Layout() {
   const theme = useTheme();
   const navigate = useNavigate();
+  const location = useLocation();
   const [open, setOpen] = React.useState(true);
   const [openIndex, setOpenIndex] = React.useState(0);
   const [openList, setOpenList] = React.useState(false);
   const [checkIndex, setCheckIndex] = React.useState(0);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [menuItemIndex, setMenuItemIndex] = React.useState(0);
 
   const openMenu = Boolean(anchorEl);
 
@@ -252,6 +268,15 @@ export default function Layout() {
   const listStyle = {
     display: 'block',
   };
+  const badgeStyle = {
+    '& .MuiBadge-badge': {
+      // width: 8,
+      // height: 13,
+      // borderRadius: '50%',
+      fontSize: '10px',
+    },
+  };
+
   // const handleClose = () => {};
   return (
     <main>
@@ -290,23 +315,51 @@ export default function Layout() {
                 onClick={() => setCheckIndex(text.key)}
               >
                 {text.subContent.length === 0 && (
-                  <Link to={text.path}>
-                    <ListItemButton
+                  // <Link to={text.path}>
+                  <ListItemButton
+                    sx={{
+                      minHeight: 48,
+                      justifyContent: open ? 'initial' : 'center',
+                      px: 2.5,
+                    }}
+                    component={NavLink}
+                    to={text.path}
+                    classes={({ isActive }: any) =>
+                      isActive ? 'active' : 'inactive'
+                    }
+                    // onClick={() => setMenuItemIndex(text.key)}
+                    // style={{
+                    //   backgroundColor:
+                    //     menuItemIndex === index + 1 ? '#0662B7' : '',
+                    // }}
+                  >
+                    <ListItemIcon
                       sx={{
-                        minHeight: 48,
-                        justifyContent: open ? 'initial' : 'center',
-                        px: 2.5,
+                        minWidth: 0,
+                        mr: open ? 3 : 'auto',
+                        justifyContent: 'center',
                       }}
                     >
-                      <ListItemIcon
-                        sx={{
-                          minWidth: 0,
-                          mr: open ? 3 : 'auto',
-                          justifyContent: 'center',
-                        }}
+                      <img src={text.image} alt="" />
+                    </ListItemIcon>
+                    {text.content === 'HOME' && (
+                      <Badge
+                        badgeContent={2}
+                        color="error"
+                        sx={badgeStyle}
+                        overlap="circular"
                       >
-                        <img src={text.image} alt="" />
-                      </ListItemIcon>
+                        <ListItemText
+                          primary={text.content}
+                          sx={{
+                            opacity: open ? 1 : 0,
+                            padding: '0 0.5rem',
+                            color: 'white',
+                          }}
+                        />
+                      </Badge>
+                    )}
+                    {text.content !== 'HOME' && (
                       <ListItemText
                         primary={text.content}
                         sx={{
@@ -315,8 +368,9 @@ export default function Layout() {
                           color: 'white',
                         }}
                       />
-                    </ListItemButton>
-                  </Link>
+                    )}
+                  </ListItemButton>
+                  // </Link>
                 )}
                 {text.subContent.length > 0 && (
                   <>
@@ -356,10 +410,17 @@ export default function Layout() {
                             <List
                               component="div"
                               disablePadding
-                              sx={{ padding: '0 2.6rem' }}
+                              // sx={{ padding: '0 2.6rem' }}
                             >
                               <Link to={subData.path}>
-                                <ListItemButton sx={{ pl: 4 }}>
+                                <ListItemButton
+                                  sx={{ pl: 4 }}
+                                  component={NavLink}
+                                  to={subData.path}
+                                  classes={({ isActive }: any) =>
+                                    isActive ? 'active' : 'inactive'
+                                  }
+                                >
                                   <ListItemIcon sx={{ width: '2.5rem' }}>
                                     <img src={subData.img} alt="" />
                                   </ListItemIcon>
@@ -387,7 +448,7 @@ export default function Layout() {
         <Box
           sx={{
             width: '100%',
-            height: '100vh',
+            // height: '100vh',
             // borderBottom: "2px solid"
           }}
         >
@@ -472,7 +533,7 @@ export default function Layout() {
           <Box
             sx={{
               width: '100%',
-              height: '90vh',
+              // height: '90vh',
             }}
           >
             <Outlet />
