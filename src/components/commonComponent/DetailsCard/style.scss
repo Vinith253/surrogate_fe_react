@@ -13,7 +13,16 @@
       font-style: normal;
       font-weight: 600;
       font-size: 14px;
+      display: flex;
       margin: 10px 0px;
+
+      .info-icon {
+        margin: -2px 15px 0px 25px;
+      }
+
+      .margins {
+        margin-top: 1px;
+      }
     }
     .underline {
       border: 1px solid #f0f2f5;

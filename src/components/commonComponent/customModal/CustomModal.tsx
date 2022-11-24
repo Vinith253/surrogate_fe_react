@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../../../style/Style.scss';
-import { Button, Stack, Typography } from '@mui/material';
+import { Button, Icon, Stack, Typography } from '@mui/material';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -23,10 +23,12 @@ import card_catalogue_rejecte_icon from '../../../assets/icons/modal_rejected_ic
 import info_icon from '../../../assets/images/info_icon.svg';
 import InputLabel from '@mui/material/InputLabel';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import calender_icon from '../../../assets/icons/calendar_icon.png';
-import AccessibleIcon from '@mui/icons-material/Accessible';
-import { fontSize } from '@mui/system';
-import CheckedIcon from '../../../assets/icons/check_box_square_icon.svg';
+import discard_icon from '../../../assets/icons/Vector1.svg';
+
+import { SvgIcon } from '@mui/material';
+import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
+import checkedIcon from '../../../assets/icons/check_box_square_icon.svg';
+import { borderBottom } from '@mui/system';
 
 type props = {
   openSuccess?: any;
@@ -65,7 +67,12 @@ type props = {
   enterNewPassword?: string;
   confirmNewPassword?: string;
   forgotPassword?: string;
+  yesContinueBtn?: string;
+  closeBtn?: string;
+  discardModalTitle?: string;
+  discardModalMsg?: string;
 };
+
 function CustomModal({
   openSuccess,
   handleCloseSuccess,
@@ -103,35 +110,64 @@ function CustomModal({
   enterNewPassword,
   confirmNewPassword,
   forgotPassword,
+  yesContinueBtn,
+  closeBtn,
+  discardModalTitle,
+  discardModalMsg,
 }: props) {
   // const classess = useStyles();
+
   const [pauseStatus, setPauseStatus] = useState(normalPause);
   const [startDatevalue, setStartDateValue] = useState(null);
   const [endDatevalue, setEndDateValue] = useState(null);
+
+  function DateIcon(props: any) {
+    return (
+      <SvgIcon {...props}>
+        <path d="../../../assets/icons/calendar_icon.png" />
+      </SvgIcon>
+    );
+  }
+
   useEffect(() => {
     if (pauseStatus) {
       pauseMethodChecking(pauseStatus);
     }
   }, [pauseStatus]);
+
   const pauseValue = (value: any) => {
     setPauseStatus(value);
   };
+
   return (
-    <Stack className="App">
+    <Stack className="Modal">
       <Dialog
         open={openSuccess}
         onClose={handleCloseSuccess}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
+        sx={{ maxWidth: 'unset' }}
+        fullWidth={
+          title == 'Request for Activation' ||
+          title == 'Request for Deactivation' ||
+          title == 'Add Organisation'
+            ? true
+            : false
+        }
       >
         <Stack
           py={3}
-          className={`${successModalMsg ? 'modal_container1' : ''}`}
+          className={`${
+            successModalMsg || discardModalMsg
+              ? 'modal_container1'
+              : ProceedBtn == 'Update'
+              ? 'create_newpassword'
+              : 'request_Activation_modal'
+          }`}
           px={title ? 3 : 0}
         >
           {title && (
             <Typography
-              className="modal_title"
               component="h1"
               pt={0}
               pb={2}
@@ -143,7 +179,8 @@ function CustomModal({
               {title}
             </Typography>
           )}
-          {(successModalTitle || rejectedModaltitle) && (
+
+          {(successModalTitle || rejectedModaltitle || discardModalMsg) && (
             <Box
               sx={{
                 display: 'flex',
@@ -154,7 +191,9 @@ function CustomModal({
               }}
               component="img"
               src={
-                successModalTitle
+                discardModalMsg
+                  ? discard_icon
+                  : successModalTitle
                   ? card_catalogue_sucess_icon
                   : card_catalogue_rejecte_icon
               }
@@ -162,6 +201,7 @@ function CustomModal({
               width={45}
             ></Box>
           )}
+
           {accessLibraryCloseBtn && (
             <Button
               variant="text"
@@ -176,7 +216,28 @@ function CustomModal({
               {accessLibraryCloseBtn}
             </Button>
           )}
+
           {successModalTitle && (
+            <DialogContent sx={{ paddingTop: '18px', paddingBottom: '5px' }}>
+              <DialogContentText
+                id="alert-dialog-slide-description"
+                align={'center'}
+                fontSize={16}
+                fontWeight={600}
+                color="#1d1d1d"
+                sx={{
+                  padding: {
+                    xs: '0 13px',
+                  },
+                  marginBottom: '5px',
+                }}
+              >
+                {successModalTitle}
+              </DialogContentText>
+            </DialogContent>
+          )}
+
+          {discardModalTitle && (
             <DialogContent sx={{ paddingTop: '18px', paddingBottom: '5px' }}>
               <DialogContentText
                 id="alert-dialog-slide-description"
@@ -190,10 +251,11 @@ function CustomModal({
                   },
                 }}
               >
-                {successModalTitle}
+                {discardModalTitle}
               </DialogContentText>
             </DialogContent>
           )}
+
           {changePasswordTitle && (
             <Stack
               sx={{
@@ -219,6 +281,7 @@ function CustomModal({
               </Button>
             </Stack>
           )}
+
           {changePasswordTitleMsg && (
             <Stack sx={{ margin: '0 60px', textAlign: 'start' }}>
               <Typography fontWeight={700} pb={1} fontSize={11}>
@@ -226,6 +289,7 @@ function CustomModal({
               </Typography>
             </Stack>
           )}
+
           {enterNewPassword && (
             <Stack sx={{ margin: '0 60px' }}>
               <InputLabel
@@ -237,12 +301,13 @@ function CustomModal({
               <TextField
                 variant="outlined"
                 size="small"
-                sx={{ height: '40px', width: '340px', fontSize: '14px' }}
+                sx={{ height: '40px', fontSize: '14px' }}
                 id="outlined-password-input"
                 label="Password"
                 type="password"
                 autoComplete="current-password"
               />
+
               <InputLabel
                 htmlFor="outlined-adornment-amount"
                 sx={{ marginTop: '20px' }}
@@ -252,7 +317,7 @@ function CustomModal({
               <TextField
                 variant="outlined"
                 size="small"
-                sx={{ height: '40px', width: '340px', fontSize: '14px' }}
+                sx={{ height: '40px', fontSize: '14px' }}
                 id="outlined-password-input"
                 label="Password"
                 type="password"
@@ -272,6 +337,7 @@ function CustomModal({
               </Typography>
             </Stack>
           )}
+
           {resentOTP && (
             <Box
               sx={{
@@ -312,6 +378,7 @@ function CustomModal({
               ></TextField>
             </Box>
           )}
+
           {resentOTP && (
             <Stack
               sx={{
@@ -335,15 +402,16 @@ function CustomModal({
                 fullWidth
                 variant="outlined"
                 size="small"
-                sx={{ height: '40px', width: '340px', fontSize: '14px' }}
+                sx={{ height: '40px', fontSize: '14px' }}
                 value={'Ashwin@yesbank.com'}
               ></TextField>
               {/* )} */}
+
               <Button
                 variant="contained"
                 onClick={handleCloseSuccess}
                 style={{
-                  width: '340px',
+                  // width: '340px',
                   height: '48px',
                   fontSize: '12px',
                   marginTop: '30px',
@@ -355,13 +423,14 @@ function CustomModal({
               </Button>
             </Stack>
           )}
+
           {(ProceedBtn === 'Verify' || ProceedBtn === 'Update') && (
             <Stack sx={{ margin: '0 60px' }}>
               <Button
                 variant="contained"
                 onClick={handleCloseSuccess}
                 style={{
-                  width: '340px',
+                  // width: '340px',
                   height: '48px',
                   fontSize: '12px',
                   marginTop: '10px',
@@ -373,6 +442,7 @@ function CustomModal({
               </Button>
             </Stack>
           )}
+
           {resentOTPmsg && (
             <Stack sx={{ flexDirection: 'row', margin: '0 60px' }}>
               <Box
@@ -388,6 +458,7 @@ function CustomModal({
               </Typography>
             </Stack>
           )}
+
           {rejectedModaltitle && (
             <DialogContent sx={{ paddingTop: '18px', paddingBottom: '5px' }}>
               <DialogContentText
@@ -406,7 +477,45 @@ function CustomModal({
               </DialogContentText>
             </DialogContent>
           )}
+
           {successModalMsg && (
+            <Typography
+              fontWeight={400}
+              align={'center'}
+              pb={0}
+              fontSize={12}
+              sx={{
+                padding: {
+                  xs: '0 13px',
+                  sm: '0 70px',
+                },
+                marginBottom: '10px',
+                color: '#656769',
+              }}
+            >
+              {successModalMsg}
+            </Typography>
+          )}
+
+          {discardModalMsg && (
+            <Typography
+              fontWeight={400}
+              align={'center'}
+              pb={0}
+              fontSize={12}
+              sx={{
+                padding: {
+                  xs: '0 13px',
+                  sm: '0 60px',
+                },
+                color: '#656769',
+              }}
+            >
+              {discardModalMsg}
+            </Typography>
+          )}
+
+          {/* {discardModalMsg && (
             <Typography
               fontWeight={700}
               align={'center'}
@@ -419,9 +528,10 @@ function CustomModal({
                 },
               }}
             >
-              {successModalMsg}
+              {discardModalMsg}
             </Typography>
-          )}
+          )} */}
+
           {accessLibraryMsg && (
             <Typography
               align="center"
@@ -440,7 +550,7 @@ function CustomModal({
                 padding: '15px 5px',
                 margin: '20px 30px',
                 fontWeight: '400',
-                width: '550px'
+                width: '550px',
               }}
             >
               <Box sx={{ borderRight: '1px solid #151515', padding: '0 18px' }}>
@@ -454,6 +564,7 @@ function CustomModal({
               </Box>
             </Stack>
           )}
+
           {rejectedModalMsg && (
             <Typography
               fontWeight={700}
@@ -470,22 +581,23 @@ function CustomModal({
               {rejectedModalMsg}
             </Typography>
           )}
-          <Typography
-            className="pause_content"
-            pb={1}
-            pt={2}
-            fontSize={12}
-            color={'#171717'}
-            fontWeight={500}
-          >
-            {' '}
-            {pause_content}
-          </Typography>
-          {(normalPause || SchedulePause) && (
-            <FormControl
-              style={{ fontSize: '1px' }}
-              className="modal_form_label"
+
+          {pause_content && (
+            <Typography
+              className="pause_content"
+              pb={1}
+              pt={2}
+              fontSize={13}
+              color={'#171717'}
+              fontWeight={500}
             >
+              {' '}
+              {pause_content}
+            </Typography>
+          )}
+
+          {(normalPause || SchedulePause) && (
+            <FormControl className={`${normalPause ? 'modal_form_label' : ''}`}>
               <Stack pb={1}>
                 <RadioGroup
                   color=""
@@ -510,6 +622,7 @@ function CustomModal({
               </Stack>
             </FormControl>
           )}
+
           {pauseStatus === SchedulePause &&
             datepickerLabelStart &&
             datepickerLabelEnd && (
@@ -518,7 +631,7 @@ function CustomModal({
                   className="pause_content"
                   pb={1}
                   pt={3}
-                  fontSize={12}
+                  fontSize={13}
                   color={'#171717'}
                   fontWeight={500}
                   style={{ borderTop: `1px solid #36363624` }}
@@ -526,6 +639,7 @@ function CustomModal({
                   {' '}
                   {scheduledPause_content}
                 </Typography>
+
                 <Typography
                   className="textarea_title"
                   fontWeight={600}
@@ -535,6 +649,7 @@ function CustomModal({
                 >
                   {dateRange_title}
                 </Typography>
+
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <Stack
                     className="Modal_datepicker"
@@ -545,23 +660,19 @@ function CustomModal({
                       paddingBottom: '16px',
                     }}
                   >
-                    {/* <DatePicker
-                      className="datePicker_input"
-                      toolbarPlaceholder="dd"
-                      label={datepickerLabelStart}
-                      value={startDatevalue}
-                      onChange={(newValue: any) => {
-                        setStartDateValue(newValue);
-                      }}
-                      renderInput={(params: any) => (
-                        <TextField size="small" {...params} />
-                      )}
-                    /> */}
                     <Grid container spacing={3}>
-                      <Grid item sm={6}>
+                      <Grid item sm={6} className="datepicker_icon">
                         <DateTimePicker
                           renderInput={(props: any) => (
-                            <TextField size="small" {...props} fullWidth />
+                            <TextField
+                              size="small"
+                              {...props}
+                              fullWidth
+                              inputProps={{
+                                ...props.inputProps,
+                                placeholder: 'Start Date and time',
+                              }}
+                            />
                           )}
                           label={datepickerLabelStart}
                           value={startDatevalue}
@@ -569,13 +680,23 @@ function CustomModal({
                             setStartDateValue(newValue);
                           }}
                           reduceAnimations={false}
-                          // components={{ OpenPickerIcon: AccessibleIcon }}
+                          components={{
+                            OpenPickerIcon: CalendarTodayOutlinedIcon,
+                          }}
                         />
                       </Grid>
-                      <Grid item sm={6}>
+                      <Grid item sm={6} className="datepicker_icon">
                         <DateTimePicker
                           renderInput={(props: any) => (
-                            <TextField size="small" {...props} fullWidth />
+                            <TextField
+                              size="small"
+                              {...props}
+                              fullWidth
+                              inputProps={{
+                                ...props.inputProps,
+                                placeholder: 'End Date and time',
+                              }}
+                            />
                           )}
                           label={datepickerLabelEnd}
                           value={endDatevalue}
@@ -583,20 +704,12 @@ function CustomModal({
                             setEndDateValue(newValue);
                           }}
                           reduceAnimations={typeof navigator !== 'undefined'}
+                          components={{
+                            OpenPickerIcon: CalendarTodayOutlinedIcon,
+                          }}
                         />
                       </Grid>
                     </Grid>
-                    {/* <DatePicker
-                      className="datePicker_input"
-                      label={datepickerLabelEnd}
-                      value={endDatevalue}
-                      onChange={(newValue: any) => {
-                        setEndDateValue(newValue);
-                      }}
-                      renderInput={(params: any) => (
-                        <TextField size="small" {...params} />
-                      )}
-                    /> */}
                   </Stack>
                 </LocalizationProvider>
               </Stack>
@@ -611,6 +724,7 @@ function CustomModal({
               >
                 {textarea_title}
               </Typography>
+
               <Grid container>
                 <Grid container xs={12}>
                   <TextareaAutosize
@@ -624,6 +738,7 @@ function CustomModal({
                   />
                 </Grid>
               </Grid>
+
               <Stack
                 sx={{
                   display: 'flex',
@@ -641,6 +756,7 @@ function CustomModal({
               </Stack>
             </Stack>
           )}
+
           {product_label && (
             <Stack
               sx={{
@@ -657,7 +773,12 @@ function CustomModal({
                         {' '}
                         <FormControlLabel
                           control={
-                            <Checkbox checked={item.defaultChecked == true} checkedIcon={<img src={CheckedIcon} alt={CheckedIcon} />}/>
+                            <Checkbox
+                              checked={item.defaultChecked}
+                              checkedIcon={
+                                <img src={checkedIcon} alt={checkedIcon} />
+                              }
+                            />
                           }
                           label={item.label}
                         />
@@ -668,6 +789,7 @@ function CustomModal({
               </FormGroup>
             </Stack>
           )}
+
           <Stack
             className="modal_buttons"
             sx={{
@@ -680,11 +802,12 @@ function CustomModal({
                 onClick={handleCloseSuccess}
                 variant="outlined"
                 sx={{
-                  fontSize: '11px',
+                  fontSize: '13px',
                   textTransform: 'capitalize',
                   border: `1px solid #0662B7`,
                   color: '#0662B7',
                   fontWeight: '500',
+                  padding: '5px 21px',
                 }}
               >
                 {close}
@@ -694,7 +817,7 @@ function CustomModal({
               <Button
                 variant="contained"
                 sx={{
-                  fontSize: '11px',
+                  fontSize: '13px',
                   marginLeft: '30px',
                   textTransform: 'capitalize',
                   backgroundColor: `${colors.Modalblue}`,
@@ -730,6 +853,47 @@ function CustomModal({
               </Button>
             </Box>
           )}
+
+          {yesContinueBtn && (
+            <Stack
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                margin: '10px  20px 0 20px',
+                justifyContent: 'center',
+              }}
+            >
+              <Stack sx={{ margin: '10px' }}>
+                <Button
+                  variant="outlined"
+                  sx={{
+                    width: '150px',
+                    fontSize: '13px',
+                    textTransform: 'capitalize',
+                    color: ' #0662B7',
+                    border: '1px solid  #0662B7',
+                  }}
+                  onClick={handleCloseSuccess}
+                >
+                  {closeBtn}
+                </Button>
+              </Stack>
+              <Stack sx={{ margin: '10px' }}>
+                <Button
+                  variant="contained"
+                  sx={{
+                    width: '160px',
+                    fontSize: '13px',
+                    textTransform: 'capitalize',
+                    background: '#0662B7',
+                  }}
+                >
+                  {yesContinueBtn}
+                </Button>
+              </Stack>
+            </Stack>
+          )}
+
           {accessLibraryModaBtn && (
             <Stack sx={{ margin: '0 30px' }}>
               <Typography
@@ -784,4 +948,5 @@ function CustomModal({
     </Stack>
   );
 }
+
 export default CustomModal;

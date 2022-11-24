@@ -24,9 +24,6 @@ function AccessLibraryModal() {
         openSuccess={openSuccess}
         handleCloseSuccess={handleCloseSuccess}
         successModalTitle={'Share the link'}
-        // successModalMsg={
-        //   'Your action of Scheduled Pause - Card For Card Surrogate From  DD/MM/YYYTo DD/MM/YYY is successfully sent to reviewer'
-        // }
         accessLibraryMsg={'Here you can copy the link and share it'}
         org_ID={'#12345'}
         org_Name={'Ganesh Agency'}

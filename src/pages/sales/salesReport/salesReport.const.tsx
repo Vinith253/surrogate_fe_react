@@ -1,4 +1,4 @@
-export const salesReportFilterDropdown: salesReportFilterInterface[] = [
+export const SalesReportFilterDropdown: salesReportFilterInterface[] = [
   {
     label: 'State',
     option: [

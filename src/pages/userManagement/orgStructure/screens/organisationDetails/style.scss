@@ -1,0 +1,124 @@
+.organisationContainer {
+  .organisationHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px;
+    background-color: white;
+    border-radius: 8px;
+    .organizationPara {
+      padding-top: 8px;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 14px;
+      letter-spacing: 0.004em;
+      color: #afaeaf;
+    }
+    .organizationBtn {
+      background-color: #0662b7 !important;
+      font-weight: 500 !important;
+      font-size: 14px !important;
+      line-height: 16px !important;
+      text-align: center !important;
+      letter-spacing: 0.0125em !important;
+      text-transform: capitalize;
+      padding: 10px 20px;
+      .icon {
+        padding: 0 !important;
+        margin-right: 15px;
+      }
+    }
+  }
+  //comman style started
+  .organizationTitle {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.0015em;
+    color: #151515;
+  }
+  .organisation-checkbox-select-dropdown {
+    padding: 20px 30px 10px 30px;
+    background-color: white;
+    display: flex;
+    // justify-content: space-between;
+    .css-1cqo6r-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root {
+      width: 100%;
+      height: 55%;
+    }
+    .select-dropdown {
+      width: 20% !important;
+      margin-right: 25px !important;
+    }
+  }
+  .organisationResetBtn {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    padding: 0px 30px 30px 30px;
+    background-color: white;
+  }
+  //common style end
+
+  .organisationListHeader {
+    margin: 30px 0;
+    .organisationList {
+      padding: 25px 30px 0 25px;
+      background-color: white;
+      border-radius: 8px;
+      .organisationContent {
+        display: flex;
+        align-items: center !important;
+        flex-direction: row;
+        padding-bottom: 20px;
+      }
+      .Info-Icon {
+        padding: 0 10px 0 15px;
+      }
+    }
+  }
+
+  .organisationTableContainer {
+    padding: 20px 30px 0px 25px;
+    background-color: white;
+    border-radius: 8px;
+    .organisationHeaderContainer {
+      border: '2px solid red' !important;
+      .organisationHeaderTable {
+        display: flex !important;
+        justify-content: space-between !important;
+        flex-direction: row !important;
+        align-items: center !important;
+      }
+    }
+    .tableNavbar {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 0;
+    }
+    .organisation-search-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      // width: 55%;
+      .organisation-search-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #afaeaf;
+        border-radius: 6px;
+        padding: 5px 10px;
+        width: 35%;
+        .organisation-search-icon {
+          margin-right: 15px;
+          color: #afaeaf;
+        }
+      }
+    }
+  }
+  .tableOrganisation {
+    margin: 30px 0;
+  }
+}

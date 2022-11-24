@@ -3,7 +3,11 @@ export interface tabList {
   data: string;
   component: JSX.Element;
 }
-
+export interface stackButtonInterface {
+  title: string;
+  onClick?: string;
+}
+export interface buttonGroupInterface extends Array<stackButtonInterface> {}
 export interface dataList extends Array<tabList> {}
 
 export interface toggleFunctionType {
