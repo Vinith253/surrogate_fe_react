@@ -7,8 +7,11 @@ import {
   Stack,
   InputBase,
   styled,
+  Checkbox,
+  Menu,
+  MenuItem,
 } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { colors } from '../../../../../style/Color';
 import './style.scss';
 import plus from '../../../../../assets/icons/plusIcon.svg';
@@ -21,7 +24,12 @@ import mail_icon from '../../../../../assets/icons/mail_icon.svg';
 import active_icon from '../../../../../assets/icons/active.svg';
 import DeActive_icon from '../../../../../assets/icons/DeActive.svg';
 import SearchIcon from '@mui/icons-material/Search';
-import StackButton from '../../../../../components/commonComponent/StackButton/stackButton';
+import GroupButton from '../../../../../components/commonComponent/GroupButton/GroupButton';
+import ListTable from '../../../../../components/commonComponent/commonListTable/commonListTable';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import UnfoldMoreIcon from '../../../../../assets/icons/sortArrow.svg';
+import { checkTagStatus } from '../../../../../utils/tagBasedIndicator/tagStatus';
+
 export const organisationFilterDropdown: salesReportFilterInterface[] = [
   {
     label: 'Org Type',
@@ -60,7 +68,7 @@ export interface salesReportFilterInterface {
   option?: Array<object>;
 }
 
-export const stackButtonData = [
+export const GroupButtonData = [
   {
     title: 'All',
   },
@@ -75,25 +83,266 @@ export const stackButtonData = [
   },
 ];
 
-export const OrganisationDetails = () => {
-  const [alignment, setAlignment] = useState('All');
-  const ColorButton = styled(ToggleButton)(({ theme }) => ({
-    backgroundColor: ' rgb(240, 240, 240)',
-    border: ' rgb(240, 240, 240) 1px ',
-    color: 'black',
-    '&.Mui-selected, &.Mui-selected:hover': {
-      color: 'white',
-      backgroundColor: '#1976d2',
-    },
-  }));
-  // const [selectedStatus, setSeletedStatus] = React.useState(data[0]);
+export const data = [
+  {
+    id: 1,
+    orgId: '#12345',
+    orgName: 'EFG',
+    orgType: 'DSA',
+    startDate: '22/2/2022',
+    state: 'Telungana',
+    status: 'Active',
+  },
+  {
+    id: 2,
+    orgId: '#65789',
+    orgName: 'EFG',
+    orgType: 'DSA',
+    startDate: '22/2/2022',
+    state: 'Telungana',
+    status: 'Deactivated',
+  },
+  {
+    id: 3,
+    orgId: '#90987',
+    orgName: 'EFG',
+    orgType: 'DSA',
+    startDate: '22/2/2022',
+    state: 'Telungana',
+    status: 'Saved',
+  },
+  {
+    id: 4,
+    orgId: '#87654',
+    orgName: 'EFG',
+    orgType: 'DSA',
+    startDate: '22/2/2022',
+    state: 'Telungana',
+    status: 'Active',
+  },
+  {
+    id: 5,
+    orgId: '#76523',
+    orgName: 'EFG',
+    orgType: 'DSA',
+    startDate: '22/2/2022',
+    state: 'Telungana',
+    status: 'Saved',
+  },
+  {
+    id: 6,
+    orgId: '#89654',
+    orgName: 'EFG',
+    orgType: 'DSA',
+    startDate: '22/2/2022',
+    state: 'Telungana',
+    status: 'Active',
+  },
+];
 
-  const handleChange = (
-    event: React.MouseEvent<HTMLElement>,
-    value: string
-  ) => {
-    setAlignment(value);
+export const OrganisationDetails = () => {
+  const [selected, setSelected] = React.useState<number[]>([]);
+  const [ascending, setAscending] = useState<boolean>(true);
+  const [sortingData, setSortingData] = useState(data);
+  const [idSorting, setIdSorting] = useState<boolean>(true);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const openCardMenu = Boolean(anchorEl);
+
+  const handleCardMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
   };
+  const handleCardMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const addOrganisationOpen = () => {
+    setAnchorEl(null);
+  };
+
+  const organisationOpen = () => {
+    setAnchorEl(null);
+  };
+
+  const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.checked) {
+      const newSelected = data.map((n: any) => n.id);
+      setSelected(newSelected);
+      return;
+    }
+    setSelected([]);
+  };
+  const isSelected = (id: number) => {
+    const res = selected.indexOf(id);
+    if ((res && res !== -1) || res === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+  const handleClickCheckbox = (id: number) => {
+    const result = isSelected(id);
+    let selectedData = selected;
+    if (result) {
+      const index = selected.indexOf(id);
+      selectedData.splice(index, 1);
+      setSelected([...selectedData]);
+    } else {
+      setSelected([...selectedData, id]);
+    }
+  };
+
+  const handleSortByName = () => {
+    setAscending(!ascending);
+  };
+
+  const handleSortById = () => {
+    setIdSorting(!idSorting);
+  };
+  const column = [
+    {
+      title: '',
+      dataIndex: 'id',
+      key: 'checkBox',
+      width: '70px',
+      headerRender: () => {
+        return (
+          <Checkbox
+            color={'secondary'}
+            indeterminate={selected.length > 0 && selected.length < data.length}
+            checked={data.length > 0 && selected.length === data.length}
+            onChange={handleSelectAllClick}
+            inputProps={{
+              'aria-label': 'select all desserts',
+            }}
+          />
+        );
+      },
+      render: (_: string, row: any, index: number) => {
+        const isItemSelected = isSelected(row.id);
+        console.log('isItemSelected', isItemSelected);
+        const labelId = `enhanced-table-checkbox-${index}`;
+        return (
+          <Checkbox
+            color={'secondary'}
+            checked={isItemSelected}
+            inputProps={{
+              'aria-labelledby': labelId,
+            }}
+            onChange={() => handleClickCheckbox(row.id)}
+          />
+        );
+      },
+    },
+    {
+      title: '#',
+      dataIndex: 'id',
+      key: 'id',
+      width: '70px',
+      render: (text: string) => {
+        return <Stack>{text}</Stack>;
+      },
+    },
+    {
+      title: 'Org.ID',
+      dataIndex: 'orgId',
+      key: 'orgId',
+      headerRender: (text: string) => {
+        return (
+          <Stack
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              flexDirection: 'row',
+            }}
+          >
+            <>{text}</>
+            <IconButton onClick={() => handleSortById()}>
+              <img src={UnfoldMoreIcon} alt="Sort Icon" />
+            </IconButton>
+          </Stack>
+        );
+      },
+    },
+    {
+      title: 'Org.Name',
+      dataIndex: 'orgName',
+      key: 'orgName',
+    },
+    { title: 'Org.Type', dataIndex: 'orgType', key: 'orgType' },
+    { title: 'Start Date', dataIndex: 'startDate', key: 'startDate' },
+    { title: 'State', dataIndex: 'state', key: 'state' },
+    {
+      title: 'Status',
+      dataIndex: 'status',
+      key: 'status',
+      headerRender: (text: string) => {
+        return (
+          <Stack
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              flexDirection: 'row',
+            }}
+          >
+            <>{text}</>
+            <IconButton onClick={() => handleSortByName()}>
+              <img src={UnfoldMoreIcon} alt="Sort Icon" />
+            </IconButton>
+          </Stack>
+        );
+      },
+      render: (text: string) => {
+        return (
+          <Stack
+            sx={{
+              color: text ? checkTagStatus(text).color : '',
+            }}
+          >
+            {text}
+          </Stack>
+        );
+      },
+    },
+    {
+      title: 'More',
+      dataIndex: 'id',
+      key: 'more',
+      render: () => {
+        return (
+          <Stack>
+            <MoreVertIcon />
+          </Stack>
+        );
+      },
+    },
+  ];
+  const filterData = () => {
+    const sort = sortingData.sort((a: any, b: any) => {
+      if (ascending) {
+        return a.status < b.status ? -1 : 1;
+      }
+      return a.status > b.status ? -1 : 1;
+    });
+    setSortingData([...sort]);
+  };
+  const idFilterData = () => {
+    const sort = sortingData.sort((a: any, b: any) => {
+      if (idSorting) {
+        return a.orgId < b.orgId ? -1 : 1;
+      }
+      return a.orgId > b.orgId ? -1 : 1;
+    });
+    setSortingData([...sort]);
+  };
+  useEffect(() => {
+    filterData();
+  }, [ascending]);
+
+  useEffect(() => {
+    idFilterData();
+  }, [idSorting]);
   return (
     <Box className="organisationContainer">
       <Box className="organisationHeader">
@@ -106,12 +355,34 @@ export const OrganisationDetails = () => {
           </Typography>
         </Box>
         <Box>
-          <Button variant="contained" className="organizationBtn">
+          <Button
+            variant="contained"
+            className="organizationBtn"
+            aria-controls={openCardMenu ? 'basic-menu' : undefined}
+            aria-haspopup="true"
+            aria-expanded={openCardMenu ? 'true' : undefined}
+            onClick={handleCardMenuClick}
+            id="basic-button"
+          >
             <IconButton className="icon">
               <img src={plus} alt="resumeIcon" />
             </IconButton>
             Add Organisation
           </Button>
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={openCardMenu}
+            onClose={handleCardMenuClose}
+            MenuListProps={{
+              'aria-labelledby': 'basic-button',
+            }}
+          >
+            <MenuItem onClick={addOrganisationOpen}>Add Organisation</MenuItem>
+            <MenuItem onClick={organisationOpen}>
+              Organisation Bulk Upload
+            </MenuItem>
+          </Menu>
         </Box>
       </Box>
 
@@ -247,74 +518,15 @@ export const OrganisationDetails = () => {
               <InputBase placeholder="Search" />
             </Box>
             <Box>
-              <StackButton data={stackButtonData} />
+              <GroupButton data={GroupButtonData} />
             </Box>
-            {/* <Box>
-              <ToggleButtonGroup
-                color="primary"
-                value={alignment}
-                exclusive
-                onChange={handleChange}
-                aria-label="Platform"
-                sx={{
-                  height: '45px',
-                  // padding: '0px 8px',
-                }}
-              >
-                <ColorButton
-                  value="All"
-                  sx={{
-                    fontSize: '12px',
-                    textTransform: 'capitalize',
-                    padding: '0px 8px',
-                  }}
-                >
-                  All
-                </ColorButton>
-                <ColorButton
-                  value="Activate"
-                  sx={{
-                    fontSize: '12px',
-                    textTransform: 'capitalize',
-                    padding: '0px 8px',
-                  }}
-                >
-                  Activate
-                </ColorButton>
-                <ColorButton
-                  value="Deactivated"
-                  sx={{
-                    fontSize: '12px',
-                    textTransform: 'capitalize',
-                    padding: '0px 8px',
-                  }}
-                >
-                  Deactivated
-                </ColorButton>
-                <ColorButton
-                  value="Saved"
-                  sx={{
-                    fontSize: '12px',
-                    textTransform: 'capitalize',
-                    padding: '0px 8px',
-                  }}
-                >
-                  Saved
-                </ColorButton>
-              </ToggleButtonGroup>
-            </Box> */}
           </Box>
         </Stack>
-        {/* <TableComp
-          // viewPath="/sales/salesReportDetails"
-          rows={reviewerLogDashboardList}
-          statusRowsHeading={reviewrStatusRowHeading}
-          listRowHeading={reviewerListRowHeading}
-          flag="orgStructure"
-        /> */}
-      </Box>
 
-      {/* <Stack className="tableOrganisation">fr</Stack> */}
+        <Stack>
+          <ListTable column={column} data={sortingData} />
+        </Stack>
+      </Box>
     </Box>
   );
 };

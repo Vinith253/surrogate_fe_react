@@ -30,10 +30,10 @@ import PhotoCamera from '@mui/icons-material/PhotoCamera';
 // import { Divider } from "@material-ui/core";
 // import CadActions from "@mui/material/CardActions";
 // import CardContent from "@mui/material/CardContent";
-import CheckBox from '../../../../components/commonComponent/CheckBox/checkBox';
 import TypoText from '../../../../components/commonComponent/CustomText/Textfield';
 import TypographyInfo from '../../../../components/commonComponent/CustomText/Info';
 import { useNavigate } from 'react-router-dom';
+import { CheckBox } from '@mui/icons-material';
 
 const CreateNewCard = () => {
   // const uploadRef = useRef<any>();
@@ -92,8 +92,6 @@ const CreateNewCard = () => {
   //     return result;
   //   });
   // }
-
-  
 
   const handleValueChange = (e: any, id: string) => {
     const value = e?.target?.value ?? '';
@@ -169,8 +167,6 @@ const CreateNewCard = () => {
     }));
   };
 
-  
-
   const AddAdditionalList = () => {
     let newVal = { value: '' };
     setDataObj((prev) => ({
@@ -204,36 +200,31 @@ const CreateNewCard = () => {
     }));
   };
 
-  const removeReward = (index:number) => {
+  const removeReward = (index: number) => {
     let newData = dataObj?.rewardDescription ?? [];
     newData.splice(index, 1);
-    setDataObj((prev)=>({
-      ...prev, rewardDescription:newData,
+    setDataObj((prev) => ({
+      ...prev,
+      rewardDescription: newData,
     }));
-
   };
-  const removeKeyBenefits = (index:number) => {
+  const removeKeyBenefits = (index: number) => {
     let newData = dataObj?.keyBenefits ?? [];
     newData.splice(index, 1);
-    setDataObj((prev)=>({
-      ...prev, keyBenefits:newData,
+    setDataObj((prev) => ({
+      ...prev,
+      keyBenefits: newData,
     }));
-
   };
 
-  const removeAdditionalBenefits = (index:number) => {
+  const removeAdditionalBenefits = (index: number) => {
     let newData = dataObj?.additionalBenefits ?? [];
     newData.splice(index, 1);
-    setDataObj((prev)=>({
-      ...prev, additionalBenefits:newData,
+    setDataObj((prev) => ({
+      ...prev,
+      additionalBenefits: newData,
     }));
   };
-
-
-
-
-
-
 
   return (
     <Box className="singleCard">
@@ -796,10 +787,9 @@ const CreateNewCard = () => {
                 />
               </Box>
               <Box className="newText">
-                {dataObj.rewardDescription.length > 1 &&
-                removeClick.reward ? (
+                {dataObj.rewardDescription.length > 1 && removeClick.reward ? (
                   <Button
-                    onClick={()=>removeReward(index)}
+                    onClick={() => removeReward(index)}
                     color="secondary"
                     startIcon={<RemoveCircleOutlineIcon />}
                   >
@@ -842,10 +832,9 @@ const CreateNewCard = () => {
                 />
               </Box>
               <Box className="newText">
-                {dataObj.keyBenefits.length > 1 &&
-                removeClick.keyBenefits ? (
+                {dataObj.keyBenefits.length > 1 && removeClick.keyBenefits ? (
                   <Button
-                  onClick={() => removeKeyBenefits(index)}
+                    onClick={() => removeKeyBenefits(index)}
                     color="secondary"
                     startIcon={<RemoveCircleOutlineIcon />}
                   >
@@ -887,10 +876,10 @@ const CreateNewCard = () => {
               />
             </Box>
             <Box className="newText">
-              { dataObj.additionalBenefits.length > 1 &&
-               removeClick.additionalBenefits ? (
+              {dataObj.additionalBenefits.length > 1 &&
+              removeClick.additionalBenefits ? (
                 <Button
-                onClick={() => removeAdditionalBenefits(index)}
+                  onClick={() => removeAdditionalBenefits(index)}
                   color="secondary"
                   startIcon={<RemoveCircleOutlineIcon />}
                 >

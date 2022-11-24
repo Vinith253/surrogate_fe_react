@@ -14,7 +14,6 @@ import {
   Divider,
 } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
-import CheckBox from '../../../../components/commonComponent/CheckBox/checkBox';
 import BtnOutlined from '../../../../components/commonComponent/CustomText/Button/Outlined';
 // import EditIcon from '@mui/icons-material/Edit';
 // import EditIcon from '../../../../assets/images/edit_scheduled_pause_icon.svg'
