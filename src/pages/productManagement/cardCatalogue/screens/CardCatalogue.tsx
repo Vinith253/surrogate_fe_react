@@ -581,7 +581,6 @@ export const CardCatalogue = () => {
                   </MenuItem>
                 ))}
               </Select>
-
             </FormControl>
             <FormControl className="formctrl">
               <TypographySubTitle title="Card Category" />
@@ -595,8 +594,8 @@ export const CardCatalogue = () => {
             <FormControl className="formctrl">
               <TypographySubTitle title="Card Status" />
 
-              <Select placeholder="All" className="select"  defaultValue={0}>
-              <MenuItem value={0}>All</MenuItem>
+              <Select placeholder="All" className="select" defaultValue={0}>
+                <MenuItem value={0}>All</MenuItem>
                 <MenuItem value={10}>Ten</MenuItem>
                 <MenuItem value={20}>Twenty</MenuItem>
                 <MenuItem value={30}>Thirty</MenuItem>
@@ -606,7 +605,7 @@ export const CardCatalogue = () => {
               <TypographySubTitle title="Choose Surrogate" />
 
               <Select className="select" defaultValue={0}>
-              <MenuItem value={0}>All</MenuItem>
+                <MenuItem value={0}>All</MenuItem>
                 <MenuItem value={10}>Ten</MenuItem>
                 <MenuItem value={20}>Twenty</MenuItem>
                 <MenuItem value={30}>Thirty</MenuItem>
@@ -760,13 +759,13 @@ export const CardCatalogue = () => {
                 <SearchIcon className='searchIcon' />
               </Box> */}
               <Box
-                // sx={{
-                //   width: '241px',
-                //   fontSize: '12px',
-                //   fontFamily: 'Ilisarniq',
-                //   fontWeight: 400,
-                //   lineHeight: '14px',
-                // }}
+              // sx={{
+              //   width: '241px',
+              //   fontSize: '12px',
+              //   fontFamily: 'Ilisarniq',
+              //   fontWeight: 400,
+              //   lineHeight: '14px',
+              // }}
               >
                 <ToggleButtonGroup
                   //  size='small'
@@ -776,17 +775,29 @@ export const CardCatalogue = () => {
                   onChange={handleButtonChange}
                   aria-label="Platform"
                   sx={{
-                    height: '40px'
+                    height: '40px',
                   }}
                   // sx={ToggleBoxStyle}
                 >
-                  <ColorButton value="all" sx={{ paddingRight: '10px'}}> All </ColorButton>
+                  <ColorButton value="all" sx={{ paddingRight: '10px' }}>
+                    {' '}
+                    All{' '}
+                  </ColorButton>
                   {/* <Divider orientation="vertical" /> */}
-                  <ColorButton value="activate" sx={{ paddingRight: '10px'}}>Activate</ColorButton>
+                  <ColorButton value="activate" sx={{ paddingRight: '10px' }}>
+                    Activate
+                  </ColorButton>
                   {/* <Divider orientation="vertical" /> */}
-                  <ColorButton value="deactivated" sx={{ paddingRight: '10px'}}>Deactivated</ColorButton>
+                  <ColorButton
+                    value="deactivated"
+                    sx={{ paddingRight: '10px' }}
+                  >
+                    Deactivated
+                  </ColorButton>
                   {/* <Divider orientation="vertical" /> */}
-                  <ColorButton value="saved" sx={{ paddingRight: '10px'}}>Saved</ColorButton>
+                  <ColorButton value="saved" sx={{ paddingRight: '10px' }}>
+                    Saved
+                  </ColorButton>
                 </ToggleButtonGroup>
               </Box>
             </Stack>
@@ -916,10 +927,15 @@ export const CardCatalogue = () => {
                     horizontal: 'right',
                   }}
                 >
-                  <MenuItem onClick={() => {
-                    handleClose();
-                    navigate('/productManagement/cardCatalogue/singleupload/reviewCard');
-                  }} className="menu">
+                  <MenuItem
+                    onClick={() => {
+                      handleClose();
+                      navigate(
+                        '/productManagement/cardCatalogue/singleupload/reviewCard'
+                      );
+                    }}
+                    className="menu"
+                  >
                     View
                   </MenuItem>
                   <MenuItem onClick={handleClose} className="menu">
@@ -977,8 +993,8 @@ export const CardCatalogue = () => {
           title={'Surrogate Selection'}
           handleSuccess={handleSurrogateSubmit}
           pause_content={'You can assign or remove surrogate.'}
-          normalPause={'Assign Surrogate'}
-          SchedulePause={'Remove Surrogate'}
+          radioValuOne={'Assign Surrogate'}
+          radioValuTwo={'Remove Surrogate'}
           close={'Close'}
           submit={'Assign'}
           pauseMethodChecking={surrogateMethodChange}
@@ -1045,8 +1061,8 @@ export const CardCatalogue = () => {
             'Please choose a date range to perform a scheduled pause.'
           }
           textarea_title={'Add Remarks'}
-          normalPause={NORMAL_PAUSE}
-          SchedulePause={SCHEDULED_PAUSE}
+          radioValuOne={NORMAL_PAUSE}
+          radioValuTwo={SCHEDULED_PAUSE}
           dateRange_title={'Enter Date range'}
           maxLength={'Maximum of 500 words'}
           pauseMethodChecking={pauseMethodChange}

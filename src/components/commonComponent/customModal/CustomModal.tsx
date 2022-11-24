@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../../../style/Style.scss';
-import { Button, Icon, Stack, Typography } from '@mui/material';
+import { Button, Stack, Typography } from '@mui/material';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -9,7 +9,6 @@ import TextareaAutosize from '@mui/material/TextareaAutosize';
 import TextField from '@mui/material/TextField';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
@@ -24,25 +23,22 @@ import info_icon from '../../../assets/images/info_icon.svg';
 import InputLabel from '@mui/material/InputLabel';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import discard_icon from '../../../assets/icons/Vector1.svg';
-
-import { SvgIcon } from '@mui/material';
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
 import checkedIcon from '../../../assets/icons/check_box_square_icon.svg';
-import { borderBottom } from '@mui/system';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 type props = {
   openSuccess?: any;
   handleCloseSuccess?: () => void;
-  normalPause?: string;
+  radioValuOne?: string;
   title?: String;
   successModalTitle?: string;
   rejectedModaltitle?: string;
   successModalMsg?: string;
   rejectedModalMsg?: string;
   pause_content?: string;
-  SchedulePause?: string;
+  radioValuTwo?: string;
   datepickerLabelStart?: string;
   datepickerLabelEnd?: string;
   scheduledPause_content?: string;
@@ -85,14 +81,14 @@ type props = {
 function CustomModal({
   openSuccess,
   handleCloseSuccess,
-  normalPause,
+  radioValuOne,
   title,
   successModalTitle,
   rejectedModaltitle,
   successModalMsg,
   rejectedModalMsg,
   pause_content,
-  SchedulePause,
+  radioValuTwo,
   datepickerLabelStart,
   datepickerLabelEnd,
   scheduledPause_content,
@@ -131,9 +127,7 @@ function CustomModal({
   employeeDetailsRowTwo,
   employeeDetailsRowThree,
 }: props) {
-  // const classess = useStyles();
-
-  const [pauseStatus, setPauseStatus] = useState(normalPause);
+  const [pauseStatus, setPauseStatus] = useState(radioValuOne);
   const [startDatevalue, setStartDateValue] = useState(null);
   const [endDatevalue, setEndDateValue] = useState(null);
   const [existingRole, setexistingRole] = React.useState('');
@@ -150,7 +144,6 @@ function CustomModal({
 
   const handleChange = (event: SelectChangeEvent) => {
     setexistingRole(event.target.value);
-    console.log('event');
   };
 
   return (
@@ -271,7 +264,6 @@ function CustomModal({
                 // labelId="demo-select-small"
                 id="demo-select-small"
                 value={existingRole}
-                // label="existingRole"
                 onChange={handleChange}
               >
                 {existingRoleItem.map((value: any) => (
@@ -682,23 +674,6 @@ function CustomModal({
             </Typography>
           )}
 
-          {/* {discardModalMsg && (
-            <Typography
-              fontWeight={700}
-              align={'center'}
-              pb={0}
-              fontSize={12}
-              sx={{
-                padding: {
-                  xs: '0 13px',
-                  sm: '0 70px',
-                },
-              }}
-            >
-              {discardModalMsg}
-            </Typography>
-          )} */}
-
           {accessLibraryMsg && (
             <Typography
               align="center"
@@ -763,34 +738,37 @@ function CustomModal({
             </Typography>
           )}
 
-          {(normalPause || SchedulePause) && (
-            <FormControl className={`${normalPause ? 'modal_form_label' : ''}`}>
+          {(radioValuOne || radioValuTwo) && (
+            <FormControl
+              className={`${
+                radioValuOne == 'DSA' ? 'modal_form_label' : 'radio-btnlabel'
+              }`}
+            >
               <Stack pb={1}>
                 <RadioGroup
                   color=""
                   row
                   aria-labelledby="demo-radio-buttons-group-label"
-                  value={pauseStatus ? pauseStatus : normalPause}
+                  value={pauseStatus ? pauseStatus : radioValuOne}
                   name="radio-buttons-group"
                   onChange={(e) => pauseValue(e.target.value)}
                 >
                   <FormControlLabel
-                    style={{ fontSize: '1px' }}
-                    value={normalPause}
+                    value={radioValuOne}
                     control={<Radio color="secondary" />}
-                    label={normalPause}
+                    label={radioValuOne}
                   />
                   <FormControlLabel
-                    value={SchedulePause}
+                    value={radioValuTwo}
                     control={<Radio color="secondary" />}
-                    label={SchedulePause}
+                    label={radioValuTwo}
                   />
                 </RadioGroup>
               </Stack>
             </FormControl>
           )}
 
-          {pauseStatus === SchedulePause &&
+          {pauseStatus === radioValuTwo &&
             datepickerLabelStart &&
             datepickerLabelEnd && (
               <Stack>
@@ -931,6 +909,7 @@ function CustomModal({
                 borderBottom: `1px solid #36363624`,
                 marginBottom: '20px',
               }}
+              className={'radio-btnlabel'}
             >
               <FormGroup sx={{ paddingTop: '10px' }}>
                 <Grid container>
