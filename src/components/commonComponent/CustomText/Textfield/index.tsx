@@ -8,9 +8,9 @@ const TypoText = (props: any) => {
       {props.title && (
         <Typography
           sx={{
-            margin: 0,
+            marginBottom: '5px',
             // fontFamily:'ilisarniq',
-            fontSize: `${props.fontSize}`,
+            fontSize: '16px',
             fontWeight: 500,
             lineHeight: '20px',
             display: 'flex',
@@ -21,8 +21,7 @@ const TypoText = (props: any) => {
           variant="body1"
           color="textPrimary"
         >
-          {props.fontSize}
-          {console.log('fontsize', props.fontSize)}
+          
           {props.title}
         </Typography>
       )}
@@ -36,6 +35,7 @@ const TypoText = (props: any) => {
           size="small"
           onChange={(e) => handleChange(e, id)}
           value={value}
+          sx={{fontSize:'14px',fontWeight:'400'}}
         >
           {props.placeholder}
         </TextField>
