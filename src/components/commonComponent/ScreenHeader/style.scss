@@ -1,0 +1,16 @@
+.headFull {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction:column;
+    gap: 8px;
+
+    .upperhead{
+        display: flex;
+        flex-direction: row;
+      }
+      .headback {
+        color: #0078ef;
+        cursor: pointer;
+      }
+      
+  }

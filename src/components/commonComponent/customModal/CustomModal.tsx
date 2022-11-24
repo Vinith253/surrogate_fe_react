@@ -28,6 +28,7 @@ import discard_icon from '../../../assets/icons/Vector1.svg';
 import { SvgIcon } from '@mui/material';
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
 import checkedIcon from '../../../assets/icons/check_box_square_icon.svg';
+import { borderBottom } from '@mui/system';
 
 type props = {
   openSuccess?: any;
@@ -137,7 +138,7 @@ function CustomModal({
   const pauseValue = (value: any) => {
     setPauseStatus(value);
   };
-  console.log('yescontinue', yesContinueBtn);
+
   return (
     <Stack className="Modal">
       <Dialog
@@ -148,7 +149,8 @@ function CustomModal({
         sx={{ maxWidth: 'unset' }}
         fullWidth={
           title == 'Request for Activation' ||
-          title == 'Request for Deactivation'
+          title == 'Request for Deactivation' ||
+          title == 'Add Organisation'
             ? true
             : false
         }
@@ -595,10 +597,7 @@ function CustomModal({
           )}
 
           {(normalPause || SchedulePause) && (
-            <FormControl
-              style={{ fontSize: '1px' }}
-              className="modal_form_label"
-            >
+            <FormControl className={`${normalPause ? 'modal_form_label' : ''}`}>
               <Stack pb={1}>
                 <RadioGroup
                   color=""
@@ -774,7 +773,12 @@ function CustomModal({
                         {' '}
                         <FormControlLabel
                           control={
-                            <Checkbox checked={item.defaultChecked} checkedIcon={<img src={checkedIcon} alt={checkedIcon}/>}/>
+                            <Checkbox
+                              checked={item.defaultChecked}
+                              checkedIcon={
+                                <img src={checkedIcon} alt={checkedIcon} />
+                              }
+                            />
                           }
                           label={item.label}
                         />

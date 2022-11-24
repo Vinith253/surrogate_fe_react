@@ -19,6 +19,7 @@ import { BranchDetails } from './pages/userManagement/branchDetails/landingScree
 import { OrgStructure } from './pages/userManagement/orgStructure/landingScreen';
 import { RoleCreation } from './pages/userManagement/roleCreation/landingScreen';
 import { UserCreation } from './pages/userManagement/userCreation';
+import { CreateRole } from './pages/userManagement/roleCreation/createRole/createRole';
 
 export default function App() {
   return (
@@ -67,6 +68,10 @@ export default function App() {
         <Route path="/userManagement/orgStructure" element={<OrgStructure />} />
 
         <Route path="/userManagement/roleCreation" element={<RoleCreation />} />
+        <Route
+          path="/userManagement/roleCreation/createRole"
+          element={<CreateRole />}
+        />
 
         <Route path="/userManagement/userCreation" element={<UserCreation />} />
 
