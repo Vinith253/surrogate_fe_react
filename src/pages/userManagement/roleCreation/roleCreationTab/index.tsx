@@ -14,7 +14,6 @@ import {
   Divider,
 } from '@mui/material';
 import { Box, Stack } from '@mui/system';
-import TypographyInfo from '../../../../components/commonComponent/CustomText/Info';
 import '../style.scss';
 import AddIcon from '@mui/icons-material/Add';
 import React, { useState } from 'react';
@@ -23,6 +22,9 @@ import { roleCreationHeaderList, rows } from './rolecreation.const';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useNavigate } from 'react-router-dom';
 import { ScreenHeader } from '../../../../components/commonComponent/ScreenHeader/ScreenHeader';
+import DuplicateRoleModal from '../../../../components/commonComponent/customModal/DuplicateRoleModal';
+import { duplicate_role } from '../../../sales/dashboard/dashboard.const';
+import { duplicateRoleData, moduleControlData } from '../createRole/createrole.const';
 
 function RoleCreationTab() {
   const navigate = useNavigate();
@@ -32,6 +34,7 @@ function RoleCreationTab() {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [currentPage, setCurrentPage] = useState(1);
   const [filteredData, setFilterteredData] = useState(rows);
+  const [duplicateRole, openDulicateRole] = useState(false);
 
   const handleCardMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -80,6 +83,13 @@ function RoleCreationTab() {
     setCurrentPage(1);
   };
 
+  const handleDuplicateNext = (roleValue: string) => {
+    console.log("roleValue", roleValue)
+    navigate('/userManagement/roleCreation/createRole', {
+      state: { roleName:roleValue, data: duplicateRoleData },
+    });
+  }
+
   return (
     <Stack>
       <Stack>
@@ -113,13 +123,14 @@ function RoleCreationTab() {
             >
               <MenuItem
                 onClick={() => {
-                  // handleClose();
-                  navigate('/userManagement/roleCreation/createRole');
+                  navigate('/userManagement/roleCreation/createRole', {
+                    state: { roleName:'',  data: {...moduleControlData}  },
+                  });
                 }}
               >
                 Create New Role
               </MenuItem>
-              <MenuItem onClick={() => {}}>Duplicate Role</MenuItem>
+              <MenuItem onClick={()=>{openDulicateRole(true)}}>Duplicate Role</MenuItem>
             </Menu>
           </Box>
         </Box>
@@ -267,6 +278,15 @@ function RoleCreationTab() {
           </Box>
         </Box>
       </Stack>
+      {
+        <DuplicateRoleModal
+        openSuccess={duplicateRole}
+        handleClose={()=> openDulicateRole(false)}
+        btn={'Next'}
+        handleCloseSuccess={handleDuplicateNext}
+        data={duplicate_role}
+        />
+      }
     </Stack>
   );
 }

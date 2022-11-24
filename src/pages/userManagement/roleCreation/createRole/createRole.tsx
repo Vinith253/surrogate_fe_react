@@ -4,13 +4,16 @@ import './createRole.scss';
 import { ScreenHeader } from '../../../../components/commonComponent/ScreenHeader/ScreenHeader';
 import { AccordianLayover } from '../../../../components/commonComponent/CustomAccordian/Accordian';
 import { FooterButton } from '../../../../components/commonComponent/FooterButton/FooterButton';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CustomModal from '../../../../components/commonComponent/customModal/CustomModal';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { duplicateRoleData, moduleControlData } from './createrole.const';
 
 export const CreateRole = () => {
-  const [createRoleSelection, setCreateRoleSelection] =
-  useState(false);
+  const { state } = useLocation();
+  const [createRoleSelection, setCreateRoleSelection] = useState(false);
+  const [roleName, setRoleName] = useState('');
+  const [displayCategories, setDisplayCategories] = useState<any>(state.roleName.length > 0 ? duplicateRoleData : moduleControlData);
   const navigate = useNavigate();
 
   const goBack = () => {
@@ -19,6 +22,15 @@ export const CreateRole = () => {
   const handleSubmitClick = () => {
     setCreateRoleSelection(true)
   }
+
+  useEffect(() => {
+    console.log("useeffectt")
+    if (state) {
+      setRoleName(state.roleName)
+    }
+  }, [state]);
+
+
   return (
     <Stack>
       <Stack>
@@ -53,17 +65,19 @@ export const CreateRole = () => {
                   padding: '15px',
                 },
               }}
-              // onChange={(e) => handleChange(e, id)}
-              // value={value}
+              onChange={(e) => setRoleName(e.target.value)}
+              value={roleName}
             >
-              "Enter Role Name"
+              {roleName}
             </TextField>
           </Box>
         </Box>
         <Box className="second-header-container">
           <Typography>Module Access Control</Typography>
           <Divider className="checkbox-divider-style" />
-          <AccordianLayover />
+          <AccordianLayover 
+          data={displayCategories}
+          />
         </Box>
         <Box className="divide"></Box>
        <FooterButton
