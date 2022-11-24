@@ -8,6 +8,7 @@ import {
   InputBase,
   styled,
 } from '@mui/material';
+import { useNavigate } from 'react-router-dom'; 
 import React, { useState } from 'react';
 import { colors } from '../../../../../style/Color';
 import './style.scss';
@@ -22,6 +23,7 @@ import active_icon from '../../../../../assets/icons/active.svg';
 import DeActive_icon from '../../../../../assets/icons/DeActive.svg';
 import SearchIcon from '@mui/icons-material/Search';
 import StackButton from '../../../../../components/commonComponent/StackButton/stackButton';
+import { Onboarding } from '../Onboarding/onboarding';
 export const organisationFilterDropdown: salesReportFilterInterface[] = [
   {
     label: 'Org Type',
@@ -76,6 +78,8 @@ export const stackButtonData = [
 ];
 
 export const OrganisationDetails = () => {
+  const navigate = useNavigate();
+
   const [alignment, setAlignment] = useState('All');
   const ColorButton = styled(ToggleButton)(({ theme }) => ({
     backgroundColor: ' rgb(240, 240, 240)',
@@ -94,6 +98,13 @@ export const OrganisationDetails = () => {
   ) => {
     setAlignment(value);
   };
+
+  const moveto=()=>{
+    navigate("/userManagement/orgStructure/screens/Onboarding/onboarding")
+  }
+
+
+
   return (
     <Box className="organisationContainer">
       <Box className="organisationHeader">
@@ -106,7 +117,7 @@ export const OrganisationDetails = () => {
           </Typography>
         </Box>
         <Box>
-          <Button variant="contained" className="organizationBtn">
+          <Button onClick={moveto} variant="contained" className="organizationBtn">
             <IconButton className="icon">
               <img src={plus} alt="resumeIcon" />
             </IconButton>
