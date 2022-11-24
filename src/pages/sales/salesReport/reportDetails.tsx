@@ -1,9 +1,17 @@
 import React from 'react';
 import './style.scss';
 import DetailsCard from './../../../components/commonComponent/DetailsCard';
-import { Stack } from '@mui/material';
+import { Stack, Box } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useNavigate } from 'react-router-dom';
 
 function SalesReportDetails() {
+  const navigate = useNavigate();
+
+  const goBack = () => {
+    navigate(-1);
+  };
+
   const personalDetails = {
     title: 'Personal Details',
     icon: true,
@@ -109,19 +117,23 @@ function SalesReportDetails() {
       },
     ],
   };
+
   return (
     <Stack className="sales-report-details-container">
       <Stack className="header-container">
-        <Stack className="main-header">Customer Details</Stack>
+        <Stack className="main-header">
+          {/* <ArrowBackIcon onClick={goBack} className="headIcon" /> */}
+          Customer Details
+        </Stack>
         <Stack className="info-label">
           Lorem ipusm dolor sit amet, consectetur adipiscing elit.integer
           senectus mattis
         </Stack>
       </Stack>
-      <DetailsCard data={personalDetails} gridColumn={4} />
-      <DetailsCard data={channelDetails} gridColumn={4} />
-      <DetailsCard data={applicationDetails} gridColumn={4} />
-      <DetailsCard data={remarkDetails} gridColumn={4} />
+      <DetailsCard data={personalDetails} gridColumn={4} infoIcon={true} />
+      <DetailsCard data={channelDetails} gridColumn={4} infoIcon={true} />
+      <DetailsCard data={applicationDetails} gridColumn={4} infoIcon={true} />
+      <DetailsCard data={remarkDetails} gridColumn={4} infoIcon={true} />
     </Stack>
   );
 }
