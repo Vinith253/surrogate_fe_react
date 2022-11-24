@@ -23,7 +23,7 @@ function DetailsCard({ data, gridColumn, infoIcon }: Props) {
             {record?.title || '--'}
             {infoIcon && (
               <>
-                <img src={info_icon} className="info-icon" />
+                <img src={info_icon} className="info-icon" alt="info_icon" />
                 <div className="info-label margins">
                   View a customer’s key personal information here.
                 </div>
