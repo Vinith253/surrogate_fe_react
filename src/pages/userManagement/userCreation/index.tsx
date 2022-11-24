@@ -12,7 +12,7 @@ import ChooseCategoryToViewData from '../../../components/commonComponent/Choose
 import BtnOutlined from '../../../components/commonComponent/CustomText/Button/Outlined';
 import './style.scss';
 
-export const UserCreation = () => {
+const UserCreation = () => {
   const [isFiltered, setIsFiltered] = useState(false);
   const TabListData: dataList = [
     {
@@ -68,3 +68,5 @@ export const UserCreation = () => {
     </div>
   );
 };
+
+export default UserCreation;
