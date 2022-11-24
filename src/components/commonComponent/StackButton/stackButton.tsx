@@ -9,9 +9,6 @@ type props = {
 
 const StackButton = ({ data }: props) => {
   const [activeIndex, setActiveIndex] = React.useState<number>(0);
-  //   const [selectedStatus, setSeletedStatus] = React.useState(
-  //     props?.selectedOption || null
-  //   );
 
   const onClickAction = (item: any, index: number) => {
     setActiveIndex(index);

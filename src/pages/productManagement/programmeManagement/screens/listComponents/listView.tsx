@@ -159,7 +159,7 @@ export const ListView = ({ data }: any) => {
           >
             {tableHeaderData.map((items: dataHeaderList, index: number) => (
               <TableRow key={index} sx={{ padding: '5px' }}>
-                <TableCell padding="checkbox" sx={{ padding: '5px' }}>
+                <TableCell sx={{ padding: '5px' }}>
                   <Checkbox
                     color={'secondary'}
                     indeterminate={
