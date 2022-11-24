@@ -40,7 +40,7 @@ import {
   OutlinedInput,
   ListItemText,
 } from '@mui/material';
-import TypographyTitle from '../../../../components/commonComponent/CustomText/Typography';
+import TypographySubTitle from '../../../../components/commonComponent/CustomText/Typography';
 // import OutlinedInput from '@mui/material/OutlinedInput';
 // import ListItemText from '@mui/material/ListItemText';
 import Surrogate_icon from '../../../../assets/icons/surrogates_selection_icon.svg';
@@ -75,6 +75,7 @@ import {
 } from '../../../../pages/sales/dashboard/dashboard.const';
 import TablePagination from '@mui/material/TablePagination';
 import { Height } from '@mui/icons-material';
+import TypoText from '../../../../components/commonComponent/CustomText/Textfield';
 
 // const columns: GridColDef[] = [
 //   { field: 'id', headerName: 'ID', width: 70 },
@@ -540,7 +541,7 @@ export const CardCatalogue = () => {
 
         <Box className="body1">
           <Box className="container1">
-            <TypographyHead title="Card List" />
+            <TypoText title="Card List" />
             <img className="img1" src={Info_Icon} />
             <TypographyInfo
               title="From here, you filter the card by its mode, status, category and
@@ -561,7 +562,7 @@ export const CardCatalogue = () => {
             // }}
           >
             <FormControl className="formctrl">
-              <TypographyTitle title="Card Mode" />
+              <TypographySubTitle title="Card Mode" />
               {/* <InputLabel id="demo-simple-select-label">All</InputLabel> */}
               <Select
                 // labelId="demo-multiple-checkbox-label"
@@ -581,19 +582,9 @@ export const CardCatalogue = () => {
                 ))}
               </Select>
 
-              {/* <Select
-                id="demo-simple-select"
-                value={age}
-                onChange={handleAdd}
-                className='select'
-              >
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </Select> */}
             </FormControl>
             <FormControl className="formctrl">
-              <TypographyTitle title="Card Category" />
+              <TypographySubTitle title="Card Category" />
               <Select className="select" defaultValue={0}>
                 <MenuItem value={0}>All</MenuItem>
                 <MenuItem value={10}>Ten</MenuItem>
@@ -602,7 +593,7 @@ export const CardCatalogue = () => {
               </Select>
             </FormControl>
             <FormControl className="formctrl">
-              <TypographyTitle title="Card Status" />
+              <TypographySubTitle title="Card Status" />
 
               <Select placeholder="All" className="select"  defaultValue={0}>
               <MenuItem value={0}>All</MenuItem>
@@ -612,7 +603,7 @@ export const CardCatalogue = () => {
               </Select>
             </FormControl>
             <FormControl className="formctrl">
-              <TypographyTitle title="Choose Surrogate" />
+              <TypographySubTitle title="Choose Surrogate" />
 
               <Select className="select" defaultValue={0}>
               <MenuItem value={0}>All</MenuItem>

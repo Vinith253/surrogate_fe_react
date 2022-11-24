@@ -22,10 +22,26 @@ import '../home/Home.scss';
 // import SurrogateSelection from '../../components/commonComponent/customModal/SurrogateSelection';
 // import PageLayout from '../../components/layout/pageLayout/pageLayout';
 import { useState } from 'react';
-// import AccessLibraryModal from '../../components/commonComponent/customModal/AccessLibraryModal';
-// import ChangePasswordProfileModal from '../../components/commonComponent/customModal/ChangePasswordProfileModal';
-// import ChangePasswordOTP from '../../components/commonComponent/customModal/ChangePasswordOTP';
-// import CreateNewPassword from '../../components/commonComponent/customModal/CreateNewPassword';
+import AccessLibraryModal from '../../components/commonComponent/customModal/AccessLibraryModal';
+import ChangePasswordProfileModal from '../../components/commonComponent/customModal/ChangePasswordProfileModal';
+import ChangePasswordOTP from '../../components/commonComponent/customModal/ChangePasswordOTP';
+import CreateNewPassword from '../../components/commonComponent/customModal/CreateNewPassword';
+import BulkUploadDiscard from '../../components/commonComponent/customModal/USER-CREATION/BulkUploadDiscard';
+import RequestForDeactivation from '../../components/commonComponent/customModal/USER-CREATION/RequestForDeactivation';
+import RequestForActivation from '../../components/commonComponent/customModal/USER-CREATION/RequestForActivation';
+import SuccessForDeactivation from '../../components/commonComponent/customModal/USER-CREATION/SuccessForDeactivation';
+import SuccessForActivate from '../../components/commonComponent/customModal/USER-CREATION/SuccessForActivate';
+import SuccessForUserCreated from '../../components/commonComponent/customModal/USER-CREATION/SuccessForUserCreated';
+import AddOrganisation from '../../components/commonComponent/customModal/AddOrganisation';
+import HistoryModal from '../../components/commonComponent/customModal/HistoryLogModal';
+import PauseModal from '../../components/commonComponent/customModal/PauseModal';
+import RequestForDeactivationOrg from '../../components/commonComponent/customModal/ORG-STRUCTURE/RequestForDeactivationOrg';
+import RequestForActivationOrg from '../../components/commonComponent/customModal/ORG-STRUCTURE/RequestForActivationOrg';
+import SuccessForActivationOrg from '../../components/commonComponent/customModal/ORG-STRUCTURE/SuccessForActivationOrg';
+import SuccessDeactivationOrg from '../../components/commonComponent/customModal/ORG-STRUCTURE/SuccessDeactivationOrg';
+import OrgUploadSuccess from '../../components/commonComponent/customModal/ORG-STRUCTURE/OrgUploadSuccess';
+import CreateOrgSuccess from '../../components/commonComponent/customModal/ORG-STRUCTURE/CreateOrgSuccess';
+import CancelBulkUploadDiscard from '../../components/commonComponent/customModal/ORG-STRUCTURE/CancelBulkUploadDiscard';
 // import SurrogateSelection from "../../components/commonComponent/CustomModal/SurrogateSelection";
 // import PauseModalSucces from "../../components/commonComponent/customModal/PauseModalSuccess";
 // import RejectionModal from "../../components/commonComponent/customModal/RejectionModal";
@@ -115,24 +131,46 @@ export default function Home() {
         Welcome Parithi!
       </Typography>
       <Box className="home-container">
+        {/*ORG-STRUCTURE*/}
+        {/* <Stack> */}
+        {/* <RequestForActivationOrg />
+          <SuccessForActivationOrg />
+          <RequestForDeactivationOrg />
+          <SuccessDeactivationOrg />
+          <OrgUploadSuccess />
+          <CreateOrgSuccess />
+          <CancelBulkUploadDiscard />
+          <HistoryModal /> */}
+        {/* </Stack> */}
+
+        {/*USER-CREATION*/}
+        {/* <Stack> */}
+        {/* <RequestForActivation />
+          <SuccessForActivate />
+          <RequestForDeactivation />
+          <SuccessForDeactivation />
+          <SuccessForUserCreated />
+          <BulkUploadDiscard /> */}
+        {/* </Stack> */}
+
+        {/* <PauseModal /> */}
+
+        {/* <HistoryModal /> */}
+        {/* <BulkUploadDiscard />
+        <RequestForDeactivation />
+        <RequestForActivation />
+        <SuccessForDeactivation />
+        <SuccessForActivate />
+        <SuccessForUserCreated /> */}
+
         {/* <AccessLibraryModal />
-      <ChangePasswordProfileModal />
-      <ChangePasswordOTP />
-      <CreateNewPassword /> */}
+        <ChangePasswordProfileModal />
+        <ChangePasswordOTP />
+        <CreateNewPassword /> */}
+
         <Card content={pendingActionsData} />
         <Card content={savedItemsData} />
         <Card content={frequentActivitiesData} />
-        {/* Modals*/}
-        {/* <PauseModal />
-      <PauseModalSucces />
-      <SchedulePause />
-      <SchedulePauseSuccess />
-      <ResumeModal />
-      <ResumeModalSuccess />
-      <SurrogateSelection />
-      <RejectionModal />
-      <HistoryModal/> */}
-        {/* <HistoryLogCustomModal /> */}
       </Box>
     </Box>
   );

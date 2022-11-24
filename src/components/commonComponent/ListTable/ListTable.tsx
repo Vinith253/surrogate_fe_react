@@ -199,10 +199,13 @@ function TableComp(props: {
 
   const navigate = useNavigate();
   const viewAction = (param: any) => {
-    console.log('param', param);
-    navigate(`/productManagement/programmeManagement/${param.id}`, {
-      state: { ...param },
-    });
+    if (props.flag === 'programmeManagement') {
+      navigate(`${props.viewPath}${param.id}`, {
+        state: { ...param },
+      });
+    } else {
+      navigate(`${props.viewPath}`);
+    }
   };
 
   return (
@@ -814,19 +817,12 @@ function TableComp(props: {
                           kycStatus(row?.status, GreenDot, '#6AB06E')}
                       </TableCell>
                       <TableCell align="left" sx={{ borderBottom: 'none' }}>
-                        {/* <div className="reset-data"> */}
-                        {!props.flag && (
-                          <Link
-                            sx={{ cursor: 'pointer', color: '#0662B7' }}
-                            onClick={() => viewAction(row)}
-                          >
-                            View
-                          </Link>
-                        )}
-                        {props.flag && (
-                          <a href="/sales/salesReportDetails">View</a>
-                        )}
-                        {/* </div> */}
+                        <Link
+                          sx={{ cursor: 'pointer', color: '#0662B7' }}
+                          onClick={() => viewAction(row)}
+                        >
+                          View
+                        </Link>
                       </TableCell>
                     </TableRow>
                   ))}

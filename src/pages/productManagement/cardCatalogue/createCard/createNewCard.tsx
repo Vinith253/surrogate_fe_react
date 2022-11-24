@@ -21,6 +21,7 @@ import BtnText from '../../../../components/commonComponent/CustomText/Button/Te
 // import Checkbox from "@mui/material/Checkbox";
 // import InfoIcon from '@mui/icons-material/Info';
 import Info_Icon from '../../../../assets/images/info_icon.svg';
+import Upload_Img from '../../../../assets/images/uploadImg.png'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
@@ -269,7 +270,8 @@ const CreateNewCard = () => {
               component="label"
             >
               {/* <input hidden accept="image/*" type="file" /> */}
-              <FileUploadIcon />
+              {/* <FileUploadIcon /> */}
+              <img src={Upload_Img} />
             </IconButton>
 
             <Button color="secondary">

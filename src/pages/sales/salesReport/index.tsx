@@ -6,14 +6,13 @@ import {
   salesDashboardList,
   statusRowHeading,
 } from './../dashboard/dashboard.const';
-import SalesReportNodata from '../../../assets/images/sales-report-no-data.svg';
 import DownloadIcon from '../../../assets/icons/download.svg';
 import MailIcon from '../../../assets/icons/mail.svg';
 import BtnContained from '../../../components/commonComponent/CustomText/Button/Contained';
 import BtnOutlined from '../../../components/commonComponent/CustomText/Button/Outlined';
 import SelectDropdown from '../../../components/commonComponent/CheckboxSelectDropdown';
-import { salesReportFilterDropdown } from './salesReport.const';
-
+import ChooseCategoryToViewData from '../../../components/commonComponent/ChooseCategoryToViewData';
+import { SalesReportFilterDropdown } from './salesReport.const';
 import { Typography, Stack, Box, Grid } from '@mui/material';
 
 function SalesReportList() {
@@ -27,13 +26,12 @@ function SalesReportList() {
               Sales Report
             </Typography>
             <Typography variant="subtitle2" className="sub-label">
-              Lorem ipusm dolor sit amet, consectetur adipiscing elit.integer
-              senectus mattis
+              Copy a specific link of any channel from here.
             </Typography>
           </Stack>
         </Stack>
-        <Grid container spacing={2} className="checkbox-select-dropdown">
-          {salesReportFilterDropdown?.map((eachItem: any, index: number) => {
+        <Grid container spacing={2} className="filters-container">
+          {SalesReportFilterDropdown?.map((eachItem: any, index: number) => {
             return (
               <Grid item xs={3} key={index}>
                 <Typography className="dropdown-label">
@@ -56,8 +54,8 @@ function SalesReportList() {
             <Typography variant="subtitle1" sx={{ letterSpacing: 0.5 }}>
               Sales Data
               <Typography className="icons-container">
-                <img src={DownloadIcon} className="icons" />
-                <img src={MailIcon} className="icons" />
+                <img src={DownloadIcon} alt="" className="icons" />
+                <img src={MailIcon} alt="" className="icons" />
               </Typography>
             </Typography>
             <Typography variant="subtitle2" className="sub-label"></Typography>
@@ -71,12 +69,7 @@ function SalesReportList() {
           />
         </Stack>
       ) : (
-        <Stack className="no-data-container">
-          <img src={SalesReportNodata} className="no-data-img" />
-          <Typography variant="subtitle1" sx={{ letterSpacing: 0.5 }}>
-            Choose a preferred category to view more data/options
-          </Typography>
-        </Stack>
+        <ChooseCategoryToViewData />
       )}
     </Stack>
   );
