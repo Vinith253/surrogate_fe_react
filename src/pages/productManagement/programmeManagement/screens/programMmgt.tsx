@@ -271,8 +271,8 @@ export const ProgramManagementScreen = () => {
             'Please choose a date range to perform a scheduled pause.'
           }
           textarea_title={'Add Remarks'}
-          normalPause={NORMAL_PAUSE}
-          SchedulePause={SCHEDULED_PAUSE}
+          radioValuOne={NORMAL_PAUSE}
+          radioValuTwo={SCHEDULED_PAUSE}
           dateRange_title={'Enter Date range'}
           maxLength={'Maximum of 500 words'}
           pauseMethodChecking={(arg1: string) => pauseMethodChange(arg1)}

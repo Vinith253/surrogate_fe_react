@@ -13,16 +13,14 @@ import '../home/Home.scss';
 // import HistoryLogCustomModal from '../../components/commonComponent/customModal/HistoryLogCustomModal';
 // import HistoryModal from '../../components/commonComponent/customModal/HistoryLogModal';
 // import PauseModal from '../../components/commonComponent/customModal/PauseModal';
-// import PauseModalSucces from '../../components/commonComponent/customModal/PauseModalSuccess';
+
 // import RejectionModal from '../../components/commonComponent/customModal/RejectionModal';
 // import ResumeModal from '../../components/commonComponent/customModal/ResumeModal';
 // import ResumeModalSuccess from '../../components/commonComponent/customModal/ResumeModalSuccess';
-// import SchedulePause from '../../components/commonComponent/customModal/SchedulePause';
-// import SchedulePauseSuccess from '../../components/commonComponent/customModal/SchedulePauseSuccess';
 // import SurrogateSelection from '../../components/commonComponent/customModal/SurrogateSelection';
 // import PageLayout from '../../components/layout/pageLayout/pageLayout';
 import { useState } from 'react';
-import AccessLibraryModal from '../../components/commonComponent/customModal/AccessLibraryModal';
+
 import ChangePasswordProfileModal from '../../components/commonComponent/customModal/ChangePasswordProfileModal';
 import ChangePasswordOTP from '../../components/commonComponent/customModal/ChangePasswordOTP';
 import CreateNewPassword from '../../components/commonComponent/customModal/CreateNewPassword';
@@ -32,9 +30,9 @@ import RequestForActivation from '../../components/commonComponent/customModal/U
 import SuccessForDeactivation from '../../components/commonComponent/customModal/USER-CREATION/SuccessForDeactivation';
 import SuccessForActivate from '../../components/commonComponent/customModal/USER-CREATION/SuccessForActivate';
 import SuccessForUserCreated from '../../components/commonComponent/customModal/USER-CREATION/SuccessForUserCreated';
-import AddOrganisation from '../../components/commonComponent/customModal/AddOrganisation';
+import AddOrganisation from '../../components/commonComponent/customModal/ORG-STRUCTURE/AddOrganisation';
 import HistoryModal from '../../components/commonComponent/customModal/HistoryLogModal';
-import PauseModal from '../../components/commonComponent/customModal/PauseModal';
+
 import RequestForDeactivationOrg from '../../components/commonComponent/customModal/ORG-STRUCTURE/RequestForDeactivationOrg';
 import RequestForActivationOrg from '../../components/commonComponent/customModal/ORG-STRUCTURE/RequestForActivationOrg';
 import SuccessForActivationOrg from '../../components/commonComponent/customModal/ORG-STRUCTURE/SuccessForActivationOrg';
@@ -42,14 +40,11 @@ import SuccessDeactivationOrg from '../../components/commonComponent/customModal
 import OrgUploadSuccess from '../../components/commonComponent/customModal/ORG-STRUCTURE/OrgUploadSuccess';
 import CreateOrgSuccess from '../../components/commonComponent/customModal/ORG-STRUCTURE/CreateOrgSuccess';
 import CancelBulkUploadDiscard from '../../components/commonComponent/customModal/ORG-STRUCTURE/CancelBulkUploadDiscard';
-// import SurrogateSelection from "../../components/commonComponent/CustomModal/SurrogateSelection";
-// import PauseModalSucces from "../../components/commonComponent/customModal/PauseModalSuccess";
-// import RejectionModal from "../../components/commonComponent/customModal/RejectionModal";
-// import ResumeModal from "../../components/commonComponent/customModal/ResumeModal";
-// import ResumeModalSuccess from "../../components/commonComponent/customModal/ResumeModalSuccess";
-// import SchedulePause from "../../components/commonComponent/customModal/SchedulePause";
-// import SchedulePauseSuccess from "../../components/commonComponent/customModal/SchedulePauseSuccess";
-// import SurrogateSelection from "../../components/commonComponent/customModal/SurrogateSelection";
+import SuccessForRoleCreated from '../../components/commonComponent/customModal/ROLE-CREATION/SuccessForRoleCreated';
+import DuplicateRole from '../../components/commonComponent/customModal/ROLE-CREATION/DuplicateRole';
+import EmployeeDetails from '../../components/commonComponent/customModal/ROLE-CREATION/EmployeeDetails';
+import SuccessAuthorizationLevel from '../../components/commonComponent/customModal/ROLE-CREATION/SuccessAuthorizationLevel';
+
 export default function Home() {
   const pendingActionsData = {
     title: 'Pending Actions',
@@ -101,18 +96,22 @@ export default function Home() {
       {
         image: sales_report,
         mainContent: 'Sales Report',
+        path: '/sales/salesReport',
       },
       {
         image: customer_report,
         mainContent: 'Customer Report',
+        path: '/sales/salesReport',
       },
       {
         image: performance_report,
         mainContent: 'Performance Report',
+        path: '/sales/salesReport',
       },
       {
         image: lms,
         mainContent: 'LMS',
+        path: '/sales/salesReport',
       },
     ],
   };
@@ -128,16 +127,26 @@ export default function Home() {
       </Typography>
       <Box className="home-container">
         {/*ORG-STRUCTURE*/}
-        {/* <Stack> */}
-        {/* <RequestForActivationOrg />
+        {/* <AddOrganisation /> */}
+        {/* <Stack>
+          <RequestForActivationOrg />
           <SuccessForActivationOrg />
           <RequestForDeactivationOrg />
           <SuccessDeactivationOrg />
           <OrgUploadSuccess />
           <CreateOrgSuccess />
           <CancelBulkUploadDiscard />
-          <HistoryModal /> */}
-        {/* </Stack> */}
+          <HistoryModal />
+          <AddOrganisation />
+        </Stack> */}
+
+        {/* ROLE_CREATION */}
+        {/* <Stack>
+          <SuccessForRoleCreated />
+          <DuplicateRole />
+          <EmployeeDetails />
+          <SuccessAuthorizationLevel />
+        </Stack> */}
 
         {/*USER-CREATION*/}
         {/* <Stack> */}
@@ -149,8 +158,6 @@ export default function Home() {
           <BulkUploadDiscard /> */}
         {/* </Stack> */}
 
-        {/* <PauseModal /> */}
-
         {/* <HistoryModal /> */}
         {/* <BulkUploadDiscard />
         <RequestForDeactivation />
@@ -159,6 +166,7 @@ export default function Home() {
         <SuccessForActivate />
         <SuccessForUserCreated /> */}
 
+        {/* PROFILE-MODAL */}
         {/* <AccessLibraryModal />
         <ChangePasswordProfileModal />
         <ChangePasswordOTP />
