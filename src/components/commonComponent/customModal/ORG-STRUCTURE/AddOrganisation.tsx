@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from '@mui/material';
-import CustomModal from './CustomModal';
+import CustomModal from '../CustomModal';
 
 function AddOrganisation() {
   const [openSuccess, setOpenSuccess] = useState(false);
