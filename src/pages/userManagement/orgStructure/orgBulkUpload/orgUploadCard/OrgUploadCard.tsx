@@ -9,7 +9,7 @@ import React, { useEffect, useState } from 'react';
 import DragDrop from '../../../../../components/commonComponent/dragDrop/DragDrop';
 import PageLayout from '../../../../../components/layout/pageLayout/pageLayout';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
-import './UploadCard.scss';
+import './OrgUploadCard.scss';
 
 function LinearProgressWithLabel(
   props: LinearProgressProps & { value: number }
@@ -36,7 +36,7 @@ function LinearProgressWithLabel(
     </Box>
   );
 }
-const UploadCard = ({
+const OrgUploadCard = ({
   toggle,
   data,
   correction,
@@ -54,7 +54,7 @@ const UploadCard = ({
             toggle(true, fileName);
             if (
               data.title === 'Correction File' ||
-              data.title === 'Upload Card Photo'
+              data.title === 'Upload Missing Document(s)'
             ) {
               correction();
             }
@@ -120,4 +120,4 @@ const UploadCard = ({
   );
 };
 
-export default UploadCard;
+export default OrgUploadCard;
