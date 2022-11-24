@@ -29,6 +29,8 @@ import { SvgIcon } from '@mui/material';
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
 import checkedIcon from '../../../assets/icons/check_box_square_icon.svg';
 import { borderBottom } from '@mui/system';
+import MenuItem from '@mui/material/MenuItem';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 type props = {
   openSuccess?: any;
@@ -72,6 +74,12 @@ type props = {
   closeBtn?: string;
   discardModalTitle?: string;
   discardModalMsg?: string;
+  duplicateRoleCloseBtn?: string;
+  duplicate_role_content?: string;
+  existingRoleItem?: Array<string>;
+  employeeDetailsRowOne?: any;
+  employeeDetailsRowTwo?: any;
+  employeeDetailsRowThree?: any;
 };
 
 function CustomModal({
@@ -116,20 +124,19 @@ function CustomModal({
   closeBtn,
   discardModalTitle,
   discardModalMsg,
+  duplicateRoleCloseBtn,
+  duplicate_role_content,
+  existingRoleItem,
+  employeeDetailsRowOne,
+  employeeDetailsRowTwo,
+  employeeDetailsRowThree,
 }: props) {
   // const classess = useStyles();
 
   const [pauseStatus, setPauseStatus] = useState(normalPause);
   const [startDatevalue, setStartDateValue] = useState(null);
   const [endDatevalue, setEndDateValue] = useState(null);
-
-  function DateIcon(props: any) {
-    return (
-      <SvgIcon {...props}>
-        <path d="../../../assets/icons/calendar_icon.png" />
-      </SvgIcon>
-    );
-  }
+  const [existingRole, setexistingRole] = React.useState('');
 
   useEffect(() => {
     if (pauseStatus) {
@@ -139,6 +146,11 @@ function CustomModal({
 
   const pauseValue = (value: any) => {
     setPauseStatus(value);
+  };
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setexistingRole(event.target.value);
+    console.log('event');
   };
 
   return (
@@ -152,7 +164,9 @@ function CustomModal({
         fullWidth={
           title == 'Request for Activation' ||
           title == 'Request for Deactivation' ||
-          title == 'Add Organisation'
+          title == 'Add Organisation' ||
+          title == 'Duplicate Role' ||
+          title == 'Employee Details'
             ? true
             : false
         }
@@ -217,6 +231,157 @@ function CustomModal({
             >
               {accessLibraryCloseBtn}
             </Button>
+          )}
+
+          {duplicateRoleCloseBtn && (
+            <Button
+              variant="text"
+              color="secondary"
+              sx={{
+                position: 'absolute',
+                right: '10px',
+                top: '15px',
+                textTransform: 'capitalize',
+              }}
+              onClick={handleCloseSuccess}
+            >
+              {duplicateRoleCloseBtn}
+            </Button>
+          )}
+
+          {duplicate_role_content && (
+            <Typography
+              className="duplicate_role_content"
+              color={'#171717'}
+              fontWeight={500}
+              sx={{ paddingTop: '14px', fontSize: '12px' }}
+            >
+              {' '}
+              {duplicate_role_content}
+            </Typography>
+          )}
+
+          {existingRoleItem && (
+            <FormControl sx={{ minWidth: 120 }} size="small">
+              <InputLabel id="demo-select-small">
+                Choose existing role for duplication
+              </InputLabel>
+
+              <Select
+                // labelId="demo-select-small"
+                id="demo-select-small"
+                value={existingRole}
+                // label="existingRole"
+                onChange={handleChange}
+              >
+                {existingRoleItem.map((value: any) => (
+                  <MenuItem value={value}>{value}</MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          )}
+
+          {(employeeDetailsRowOne ||
+            employeeDetailsRowTwo ||
+            employeeDetailsRowThree) && (
+            <Stack>
+              {employeeDetailsRowOne && (
+                <Box sx={{ marginBottom: '10px' }}>
+                  <Grid container spacing={2} mt={1}>
+                    {employeeDetailsRowOne.map((item: any) => (
+                      <Grid md={4} item>
+                        <Typography
+                          sx={{
+                            fontSize: '12px',
+                            color: '#AFAEAF',
+                            marginBottom: '5px',
+                            fontWeight: '500',
+                          }}
+                        >
+                          {item.Key}
+                        </Typography>
+                        <Typography
+                          sx={{
+                            fontSize: '14px',
+                            color: '#151515',
+                            fontWeight: '400',
+                          }}
+                        >
+                          {item.value}
+                        </Typography>
+                      </Grid>
+                    ))}
+                  </Grid>
+                </Box>
+              )}
+
+              {employeeDetailsRowTwo && (
+                <Box
+                  sx={{
+                    borderTop: '2px solid #E9EAEB',
+                    borderBottom: '2px solid #E9EAEB',
+                    marginTop: '8px',
+                    paddingBottom: '12px',
+                  }}
+                >
+                  <Grid container spacing={2} mt={1}>
+                    {employeeDetailsRowTwo.map((item: any) => (
+                      <Grid md={4} item>
+                        <Typography
+                          sx={{
+                            fontSize: '12px',
+                            color: '#AFAEAF',
+                            marginBottom: '5px',
+                            fontWeight: '500',
+                          }}
+                        >
+                          {item.Key}
+                        </Typography>
+                        <Typography
+                          sx={{
+                            fontSize: '14px',
+                            color: '#151515',
+                            fontWeight: '400',
+                          }}
+                        >
+                          {item.value}
+                        </Typography>
+                      </Grid>
+                    ))}
+                  </Grid>
+                </Box>
+              )}
+
+              {employeeDetailsRowThree && (
+                <Box>
+                  <Grid container spacing={2} mt={1}>
+                    {employeeDetailsRowThree.map((item: any) => (
+                      <Grid md={4} item>
+                        <Typography
+                          sx={{
+                            fontSize: '12px',
+                            color: '#AFAEAF',
+                            marginBottom: '5px',
+                            fontWeight: '500',
+                          }}
+                        >
+                          {item.Key}
+                        </Typography>
+                        <Typography
+                          sx={{
+                            fontSize: '14px',
+                            color: '#151515',
+                            fontWeight: '400',
+                          }}
+                        >
+                          {item.value}
+                        </Typography>
+                      </Grid>
+                    ))}
+                  </Grid>
+                </Box>
+              )}
+            </Stack>
           )}
 
           {successModalTitle && (
