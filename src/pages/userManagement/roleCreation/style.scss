@@ -17,5 +17,20 @@
         padding: 24px 32px 24px 32px;
       }
 
+      .tableBox {
+        height: 400;
+        background-color: white;
+        padding: 32px;
+        .tableHead {
+          font-size: 14px;
+          font-weight: bold;
+          background-color: #eef7ff;
+        }
+        .menu {
+          padding: 10px 20px;
+          text-align: left;
+        }
+      }
+
     }
 }
