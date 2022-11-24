@@ -1,28 +1,34 @@
 import { Box, Typography, Stack } from '@mui/material';
-import TypographyInfo from '../CustomText/Info';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { useNavigate } from 'react-router-dom';
+import info_icon from '../../../assets/images/info_icon.svg';
+import DownloadIcon from '../../../assets/icons/download_icon.svg';
+import MailIcon from '../../../assets/icons/mail_icon.svg';
 import './style.scss';
 
 function HeaderWithInfo(props: {
-  title: string;
+  header: string;
   info: string;
-  showBackButton: boolean;
+  isInfoEnabled: boolean;
+  isDownloadEnabled: boolean;
 }) {
-  const navigate = useNavigate();
-  const goBack = () => {
-    navigate(-1);
-  };
   return (
-    <Box className="header-with-info-container">
-      <Box className="main-header">
-        {props.showBackButton && (
-          <ArrowBackIcon onClick={goBack} className="go-back-icon" />
+    <Stack className="header-with-info-container">
+      <Box className="header">
+        {props?.header || '--'}
+        {props?.isInfoEnabled && (
+          <>
+            <img src={info_icon} className="info-icon" alt="info_icon" />
+            <Stack className="info-label margins">{props?.info ?? '--'}</Stack>
+          </>
         )}
-        <Typography>{props.title}</Typography>
       </Box>
-      <TypographyInfo title={props.info} />
-    </Box>
+      {props?.isDownloadEnabled && (
+        <Typography className="icons-container">
+          <img src={DownloadIcon} alt="" className="icons" />
+          <img src={MailIcon} alt="" className="icons" />
+        </Typography>
+      )}
+      <Typography className="underline"></Typography>
+    </Stack>
   );
 }
 

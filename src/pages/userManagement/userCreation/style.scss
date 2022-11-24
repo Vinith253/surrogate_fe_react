@@ -13,28 +13,18 @@
     margin: 30px 0px;
     border-radius: 8px;
 
-    .underline {
-      border-top: none;
-      border-left: none;
-      border-right: none;
-      margin: 15px 0px;
-      border-bottom: 2px solid #eceff2;
+    .filters-container {
+      margin-top: 0px;
+
+      .dropdown-label {
+        font-size: 13px;
+      }
     }
 
     .button-container {
       display: flex;
       gap: 16px;
       margin-left: auto;
-    }
-
-    .icons-container {
-      display: flex;
-      justify-content: end;
-      .icons {
-        width: 16px;
-        margin: -20px 20px 0px 0px;
-        cursor: pointer;
-      }
     }
   }
 }

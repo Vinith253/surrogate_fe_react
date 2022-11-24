@@ -6,8 +6,8 @@ import {
   salesDashboardList,
   statusRowHeading,
 } from './../dashboard/dashboard.const';
-import DownloadIcon from '../../../assets/icons/download.svg';
-import MailIcon from '../../../assets/icons/mail.svg';
+import DownloadIcon from '../../../assets/icons/download_icon.svg';
+import MailIcon from '../../../assets/icons/mail_icon.svg';
 import BtnContained from '../../../components/commonComponent/CustomText/Button/Contained';
 import BtnOutlined from '../../../components/commonComponent/CustomText/Button/Outlined';
 import SelectDropdown from '../../../components/commonComponent/CheckboxSelectDropdown';
