@@ -11,8 +11,6 @@ import {
   Menu,
   MenuItem,
 } from '@mui/material';
-import { useNavigate } from 'react-router-dom'; 
-import React, { useState } from 'react';
 import React, { useEffect, useState } from 'react';
 import { colors } from '../../../../../style/Color';
 import './style.scss';
@@ -26,15 +24,11 @@ import mail_icon from '../../../../../assets/icons/mail_icon.svg';
 import active_icon from '../../../../../assets/icons/active.svg';
 import DeActive_icon from '../../../../../assets/icons/DeActive.svg';
 import SearchIcon from '@mui/icons-material/Search';
-import StackButton from '../../../../../components/commonComponent/StackButton/stackButton';
-import { Onboarding } from '../Onboarding/onboarding';
-export const organisationFilterDropdown: salesReportFilterInterface[] = [
 import GroupButton from '../../../../../components/commonComponent/GroupButton/GroupButton';
 import ListTable from '../../../../../components/commonComponent/commonListTable/commonListTable';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import UnfoldMoreIcon from '../../../../../assets/icons/sortArrow.svg';
 import { checkTagStatus } from '../../../../../utils/tagBasedIndicator/tagStatus';
-
 export const organisationFilterDropdown: salesReportFilterInterface[] = [
   {
     label: 'Org Type',
@@ -67,12 +61,10 @@ export const organisationFilterDropdown: salesReportFilterInterface[] = [
     ],
   },
 ];
-
 export interface salesReportFilterInterface {
   label?: string;
   option?: Array<object>;
 }
-
 export const GroupButtonData = [
   {
     title: 'All',
@@ -87,7 +79,6 @@ export const GroupButtonData = [
     title: 'Saved',
   },
 ];
-
 export const data = [
   {
     id: 1,
@@ -144,40 +135,25 @@ export const data = [
     status: 'Active',
   },
 ];
-
 export const OrganisationDetails = () => {
-  const navigate = useNavigate();
-
-  const [alignment, setAlignment] = useState('All');
-  const ColorButton = styled(ToggleButton)(({ theme }) => ({
-    backgroundColor: ' rgb(240, 240, 240)',
-    border: ' rgb(240, 240, 240) 1px ',
-    color: 'black',
-    '&.Mui-selected, &.Mui-selected:hover': {
-      color: 'white',
-      backgroundColor: '#1976d2',
   const [selected, setSelected] = React.useState<number[]>([]);
   const [ascending, setAscending] = useState<boolean>(true);
   const [sortingData, setSortingData] = useState(data);
   const [idSorting, setIdSorting] = useState<boolean>(true);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const openCardMenu = Boolean(anchorEl);
-
   const handleCardMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
   const handleCardMenuClose = () => {
     setAnchorEl(null);
   };
-
   const addOrganisationOpen = () => {
     setAnchorEl(null);
   };
-
   const organisationOpen = () => {
     setAnchorEl(null);
   };
-
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       const newSelected = data.map((n: any) => n.id);
@@ -205,11 +181,9 @@ export const OrganisationDetails = () => {
       setSelected([...selectedData, id]);
     }
   };
-
   const handleSortByName = () => {
     setAscending(!ascending);
   };
-
   const handleSortById = () => {
     setIdSorting(!idSorting);
   };
@@ -351,17 +325,9 @@ export const OrganisationDetails = () => {
     });
     setSortingData([...sort]);
   };
-
-  const moveto=()=>{
-    navigate("/userManagement/orgStructure/screens/Onboarding/onboarding")
-  }
-
-
-
   useEffect(() => {
     filterData();
   }, [ascending]);
-
   useEffect(() => {
     idFilterData();
   }, [idSorting]);
@@ -377,7 +343,6 @@ export const OrganisationDetails = () => {
           </Typography>
         </Box>
         <Box>
-          <Button onClick={moveto} variant="contained" className="organizationBtn">
           <Button
             variant="contained"
             className="organizationBtn"
@@ -408,7 +373,6 @@ export const OrganisationDetails = () => {
           </Menu>
         </Box>
       </Box>
-
       <Box className="organisationListHeader">
         <Box className="organisationList">
           <Box
@@ -452,7 +416,6 @@ export const OrganisationDetails = () => {
           <BtnContained title="Search" />
         </Box>
       </Box>
-
       <Box className="organisationTableContainer">
         <Stack
           className="organisationHeaderContainer"
@@ -487,7 +450,6 @@ export const OrganisationDetails = () => {
             </Stack>
           </Stack>
         </Stack>
-
         <Stack className="tableNavbar">
           <Stack
             sx={{
@@ -543,63 +505,8 @@ export const OrganisationDetails = () => {
             <Box>
               <GroupButton data={GroupButtonData} />
             </Box>
-            {/* <Box>
-              <ToggleButtonGroup
-                color="primary"
-                value={alignment}
-                exclusive
-                onChange={handleChange}
-                aria-label="Platform"
-                sx={{
-                  height: '45px',
-                  // padding: '0px 8px',
-                }}
-              >
-                <ColorButton
-                  value="All"
-                  sx={{
-                    fontSize: '12px',
-                    textTransform: 'capitalize',
-                    padding: '0px 8px',
-                  }}
-                >
-                  All
-                </ColorButton>
-                <ColorButton
-                  value="Activate"
-                  sx={{
-                    fontSize: '12px',
-                    textTransform: 'capitalize',
-                    padding: '0px 8px',
-                  }}
-                >
-                  Activate
-                </ColorButton>
-                <ColorButton
-                  value="Deactivated"
-                  sx={{
-                    fontSize: '12px',
-                    textTransform: 'capitalize',
-                    padding: '0px 8px',
-                  }}
-                >
-                  Deactivated
-                </ColorButton>
-                <ColorButton
-                  value="Saved"
-                  sx={{
-                    fontSize: '12px',
-                    textTransform: 'capitalize',
-                    padding: '0px 8px',
-                  }}
-                >
-                  Saved
-                </ColorButton>
-              </ToggleButtonGroup>
-            </Box> */}
           </Box>
         </Stack>
-
         <Stack>
           <ListTable column={column} data={sortingData} />
         </Stack>
