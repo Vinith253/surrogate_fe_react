@@ -14,7 +14,6 @@ import {
   Divider,
 } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
-import CheckBox from '../../../../components/commonComponent/CheckBox/checkBox';
 import BtnOutlined from '../../../../components/commonComponent/CustomText/Button/Outlined';
 // import EditIcon from '@mui/icons-material/Edit';
 // import EditIcon from '../../../../assets/images/edit_scheduled_pause_icon.svg'
@@ -130,75 +129,77 @@ const ReviewCard = () => {
             <Card className="card">
               <img className="img" src={CardImage} onClick={handleOpen} />
 
-              {open && <Modal
-                keepMounted
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="keep-mounted-modal-title"
-                aria-describedby="keep-mounted-modal-description"
-              >
-                <Box
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: '100vw',
-                    height: '100vh',
-                    flexDirection: 'column',
-                  }}
+              {open && (
+                <Modal
+                  keepMounted
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="keep-mounted-modal-title"
+                  aria-describedby="keep-mounted-modal-description"
                 >
                   <Box
                     sx={{
-                      backgroundColor: 'white',
-                      borderRadius: '10px',
-                      padding: '20px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      width: '100vw',
+                      height: '100vh',
+                      flexDirection: 'column',
                     }}
                   >
                     <Box
                       sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        paddingBottom: '15px',
+                        backgroundColor: 'white',
+                        borderRadius: '10px',
+                        padding: '20px',
                       }}
                     >
-                      <Typography
+                      <Box
                         sx={{
-                          fontSize: '14px',
-                          fontWeight: 500,
-                          lineHeight: '16px',
-                          color: '#231F20',
-                          letterSpacing: '0.001em',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          paddingBottom: '15px',
                         }}
                       >
-                        Card Photo - Eterna - Platinum
-                      </Typography>
-                      <Typography
-                        sx={{
-                          fontSize: '14px',
-                          fontWeight: 500,
-                          lineHeight: '16px',
-                          color: '#0662B7',
-                          letterSpacing: '0.0125em',
-                        }}
-                        onClick={handleClose}
-                      >
-                        Close
-                      </Typography>
-                    </Box>
-                    <Box className="cardImageBox">
-                      <img
-                        style={{
-                          width: '35vw',
-                          height: '35vh',
-                        }}
-                        alt=""
-                        src={CardImage}
-                      />
+                        <Typography
+                          sx={{
+                            fontSize: '14px',
+                            fontWeight: 500,
+                            lineHeight: '16px',
+                            color: '#231F20',
+                            letterSpacing: '0.001em',
+                          }}
+                        >
+                          Card Photo - Eterna - Platinum
+                        </Typography>
+                        <Typography
+                          sx={{
+                            fontSize: '14px',
+                            fontWeight: 500,
+                            lineHeight: '16px',
+                            color: '#0662B7',
+                            letterSpacing: '0.0125em',
+                          }}
+                          onClick={handleClose}
+                        >
+                          Close
+                        </Typography>
+                      </Box>
+                      <Box className="cardImageBox">
+                        <img
+                          style={{
+                            width: '35vw',
+                            height: '35vh',
+                          }}
+                          alt=""
+                          src={CardImage}
+                        />
+                      </Box>
                     </Box>
                   </Box>
-                </Box>
-              </Modal>}
+                </Modal>
+              )}
             </Card>
           </Box>
 

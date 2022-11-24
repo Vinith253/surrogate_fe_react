@@ -8,8 +8,10 @@ import {
   InputBase,
   styled,
   Checkbox,
+  Menu,
+  MenuItem,
 } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { colors } from '../../../../../style/Color';
 import './style.scss';
 import plus from '../../../../../assets/icons/plusIcon.svg';
@@ -22,7 +24,7 @@ import mail_icon from '../../../../../assets/icons/mail_icon.svg';
 import active_icon from '../../../../../assets/icons/active.svg';
 import DeActive_icon from '../../../../../assets/icons/DeActive.svg';
 import SearchIcon from '@mui/icons-material/Search';
-import StackButton from '../../../../../components/commonComponent/StackButton/stackButton';
+import GroupButton from '../../../../../components/commonComponent/GroupButton/GroupButton';
 import ListTable from '../../../../../components/commonComponent/commonListTable/commonListTable';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import UnfoldMoreIcon from '../../../../../assets/icons/sortArrow.svg';
@@ -66,7 +68,7 @@ export interface salesReportFilterInterface {
   option?: Array<object>;
 }
 
-export const stackButtonData = [
+export const GroupButtonData = [
   {
     title: 'All',
   },
@@ -81,8 +83,86 @@ export const stackButtonData = [
   },
 ];
 
+export const data = [
+  {
+    id: 1,
+    orgId: '#12345',
+    orgName: 'EFG',
+    orgType: 'DSA',
+    startDate: '22/2/2022',
+    state: 'Telungana',
+    status: 'Active',
+  },
+  {
+    id: 2,
+    orgId: '#65789',
+    orgName: 'EFG',
+    orgType: 'DSA',
+    startDate: '22/2/2022',
+    state: 'Telungana',
+    status: 'Deactivated',
+  },
+  {
+    id: 3,
+    orgId: '#90987',
+    orgName: 'EFG',
+    orgType: 'DSA',
+    startDate: '22/2/2022',
+    state: 'Telungana',
+    status: 'Saved',
+  },
+  {
+    id: 4,
+    orgId: '#87654',
+    orgName: 'EFG',
+    orgType: 'DSA',
+    startDate: '22/2/2022',
+    state: 'Telungana',
+    status: 'Active',
+  },
+  {
+    id: 5,
+    orgId: '#76523',
+    orgName: 'EFG',
+    orgType: 'DSA',
+    startDate: '22/2/2022',
+    state: 'Telungana',
+    status: 'Saved',
+  },
+  {
+    id: 6,
+    orgId: '#89654',
+    orgName: 'EFG',
+    orgType: 'DSA',
+    startDate: '22/2/2022',
+    state: 'Telungana',
+    status: 'Active',
+  },
+];
+
 export const OrganisationDetails = () => {
   const [selected, setSelected] = React.useState<number[]>([]);
+  const [ascending, setAscending] = useState<boolean>(true);
+  const [sortingData, setSortingData] = useState(data);
+  const [idSorting, setIdSorting] = useState<boolean>(true);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const openCardMenu = Boolean(anchorEl);
+
+  const handleCardMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleCardMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const addOrganisationOpen = () => {
+    setAnchorEl(null);
+  };
+
+  const organisationOpen = () => {
+    setAnchorEl(null);
+  };
+
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       const newSelected = data.map((n: any) => n.id);
@@ -110,63 +190,14 @@ export const OrganisationDetails = () => {
       setSelected([...selectedData, id]);
     }
   };
-  const data = [
-    {
-      id: 1,
-      orgId: '#12345',
-      orgName: 'EFG',
-      orgType: 'DSA',
-      startDate: '22/2/2022',
-      state: 'Telungana',
-      status: 'Active',
-    },
-    {
-      id: 2,
-      orgId: '#12345',
-      orgName: 'EFG',
-      orgType: 'DSA',
-      startDate: '22/2/2022',
-      state: 'Telungana',
-      status: 'Deactivated',
-    },
-    {
-      id: 3,
-      orgId: '#12345',
-      orgName: 'EFG',
-      orgType: 'DSA',
-      startDate: '22/2/2022',
-      state: 'Telungana',
-      status: 'Saved',
-    },
-    {
-      id: 4,
-      orgId: '#12345',
-      orgName: 'EFG',
-      orgType: 'DSA',
-      startDate: '22/2/2022',
-      state: 'Telungana',
-      status: 'Active',
-    },
-    {
-      id: 5,
-      orgId: '#12345',
-      orgName: 'EFG',
-      orgType: 'DSA',
-      startDate: '22/2/2022',
-      state: 'Telungana',
-      status: 'Saved',
-    },
-    {
-      id: 6,
-      orgId: '#12345',
-      orgName: 'EFG',
-      orgType: 'DSA',
-      startDate: '22/2/2022',
-      state: 'Telungana',
-      status: 'Active',
-    },
-  ];
 
+  const handleSortByName = () => {
+    setAscending(!ascending);
+  };
+
+  const handleSortById = () => {
+    setIdSorting(!idSorting);
+  };
   const column = [
     {
       title: '',
@@ -203,6 +234,15 @@ export const OrganisationDetails = () => {
       },
     },
     {
+      title: '#',
+      dataIndex: 'id',
+      key: 'id',
+      width: '70px',
+      render: (text: string) => {
+        return <Stack>{text}</Stack>;
+      },
+    },
+    {
       title: 'Org.ID',
       dataIndex: 'orgId',
       key: 'orgId',
@@ -217,14 +257,11 @@ export const OrganisationDetails = () => {
             }}
           >
             <>{text}</>
-            <IconButton>
+            <IconButton onClick={() => handleSortById()}>
               <img src={UnfoldMoreIcon} alt="Sort Icon" />
             </IconButton>
           </Stack>
         );
-      },
-      render: (text: string) => {
-        return <div>{text}</div>;
       },
     },
     {
@@ -250,7 +287,7 @@ export const OrganisationDetails = () => {
             }}
           >
             <>{text}</>
-            <IconButton>
+            <IconButton onClick={() => handleSortByName()}>
               <img src={UnfoldMoreIcon} alt="Sort Icon" />
             </IconButton>
           </Stack>
@@ -281,6 +318,31 @@ export const OrganisationDetails = () => {
       },
     },
   ];
+  const filterData = () => {
+    const sort = sortingData.sort((a: any, b: any) => {
+      if (ascending) {
+        return a.status < b.status ? -1 : 1;
+      }
+      return a.status > b.status ? -1 : 1;
+    });
+    setSortingData([...sort]);
+  };
+  const idFilterData = () => {
+    const sort = sortingData.sort((a: any, b: any) => {
+      if (idSorting) {
+        return a.orgId < b.orgId ? -1 : 1;
+      }
+      return a.orgId > b.orgId ? -1 : 1;
+    });
+    setSortingData([...sort]);
+  };
+  useEffect(() => {
+    filterData();
+  }, [ascending]);
+
+  useEffect(() => {
+    idFilterData();
+  }, [idSorting]);
   return (
     <Box className="organisationContainer">
       <Box className="organisationHeader">
@@ -293,12 +355,34 @@ export const OrganisationDetails = () => {
           </Typography>
         </Box>
         <Box>
-          <Button variant="contained" className="organizationBtn">
+          <Button
+            variant="contained"
+            className="organizationBtn"
+            aria-controls={openCardMenu ? 'basic-menu' : undefined}
+            aria-haspopup="true"
+            aria-expanded={openCardMenu ? 'true' : undefined}
+            onClick={handleCardMenuClick}
+            id="basic-button"
+          >
             <IconButton className="icon">
               <img src={plus} alt="resumeIcon" />
             </IconButton>
             Add Organisation
           </Button>
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={openCardMenu}
+            onClose={handleCardMenuClose}
+            MenuListProps={{
+              'aria-labelledby': 'basic-button',
+            }}
+          >
+            <MenuItem onClick={addOrganisationOpen}>Add Organisation</MenuItem>
+            <MenuItem onClick={organisationOpen}>
+              Organisation Bulk Upload
+            </MenuItem>
+          </Menu>
         </Box>
       </Box>
 
@@ -434,13 +518,13 @@ export const OrganisationDetails = () => {
               <InputBase placeholder="Search" />
             </Box>
             <Box>
-              <StackButton data={stackButtonData} />
+              <GroupButton data={GroupButtonData} />
             </Box>
           </Box>
         </Stack>
 
         <Stack>
-          <ListTable column={column} data={data} />
+          <ListTable column={column} data={sortingData} />
         </Stack>
       </Box>
     </Box>

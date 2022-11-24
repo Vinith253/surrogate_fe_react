@@ -15,16 +15,16 @@ import { useMemo, useState } from 'react';
 import { colors } from '../../../style/Color';
 import PaginationComp from '../Pagination/Pagination';
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    // backgroundColor: theme.palette.common.white ,
-    color: theme.palette.common.black,
-    fontWeight: 'bold',
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
+// const StyledTableCell = styled(TableCell)(({ theme }) => ({
+//   [`&.${tableCellClasses.head}`]: {
+//     // backgroundColor: theme.palette.common.white ,
+//     color: theme.palette.common.black,
+//     fontWeight: 'bold',
+//   },
+//   [`&.${tableCellClasses.body}`]: {
+//     fontSize: 14,
+//   },
+// }));
 
 type columnType = {
   title: string;

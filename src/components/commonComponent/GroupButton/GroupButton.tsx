@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { Box, Button, ButtonGroup } from '@mui/material';
 import { stackButtonInterface } from '../../../interface/Types';
-import '../StackButton/stackButtonStyle.scss';
+import './groupButtonStyle.scss';
 type props = {
   data?: Array<stackButtonInterface>;
   //   onChange?: void | undefined;
 };
 
-const StackButton = ({ data }: props) => {
+const GroupButton = ({ data }: props) => {
   const [activeIndex, setActiveIndex] = React.useState<number>(0);
 
   const onClickAction = (item: any, index: number) => {
@@ -43,4 +43,4 @@ const StackButton = ({ data }: props) => {
     </Box>
   );
 };
-export default StackButton;
+export default GroupButton;
