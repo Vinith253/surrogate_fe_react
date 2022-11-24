@@ -17,8 +17,6 @@ import '../home/Home.scss';
 // import RejectionModal from '../../components/commonComponent/customModal/RejectionModal';
 // import ResumeModal from '../../components/commonComponent/customModal/ResumeModal';
 // import ResumeModalSuccess from '../../components/commonComponent/customModal/ResumeModalSuccess';
-// import SchedulePause from '../../components/commonComponent/customModal/SchedulePause';
-// import SchedulePauseSuccess from '../../components/commonComponent/customModal/SchedulePauseSuccess';
 // import SurrogateSelection from '../../components/commonComponent/customModal/SurrogateSelection';
 // import PageLayout from '../../components/layout/pageLayout/pageLayout';
 import { useState } from 'react';
@@ -125,6 +123,7 @@ export default function Home() {
       </Typography>
       <Box className="home-container">
         {/*ORG-STRUCTURE*/}
+        {/* <AddOrganisation /> */}
         {/* <Stack>
           <RequestForActivationOrg />
           <SuccessForActivationOrg />

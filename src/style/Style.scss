@@ -1,26 +1,22 @@
-
-
 .modal_container {
   max-width: 540px !important;
-
-  .modal_form_label .MuiFormControlLabel-label{
-    font-size: 13px !important;
-  }
 }
-.modal_container1{ 
-  max-width: 450px !important;
+.modal_form_label,
+.radio-btnlabel .MuiFormControlLabel-label {
+  font-size: 13px !important;
 }
+// .modal_container1 {
+//   max-width: 450px !important;
+// }
 
-
-.create_newpassword{
+.create_newpassword {
   max-width: 460px !important;
 }
-.datepicker_icon svg{
-  color: #0662B7 !important;
+.datepicker_icon svg {
+  color: #0662b7 !important;
 }
 
-
-.modal_form_label{
-  // border-bottom: 2px solid #F3F3F3 !important;
+.modal_form_label {
+  border-bottom: 2px solid #f3f3f3 !important;
   margin-bottom: 10px !important;
 }
