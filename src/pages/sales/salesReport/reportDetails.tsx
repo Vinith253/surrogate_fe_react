@@ -121,19 +121,19 @@ function SalesReportDetails() {
   return (
     <Stack className="sales-report-details-container">
       <Stack className="header-container">
-        <Box onClick={goBack}>
-          <ArrowBackIcon className="headIcon" />
-        </Box>
-        <Stack className="main-header">Customer Details</Stack>
+        <Stack className="main-header">
+          {/* <ArrowBackIcon onClick={goBack} className="headIcon" /> */}
+          Customer Details
+        </Stack>
         <Stack className="info-label">
           Lorem ipusm dolor sit amet, consectetur adipiscing elit.integer
           senectus mattis
         </Stack>
       </Stack>
-      <DetailsCard data={personalDetails} gridColumn={4} />
-      <DetailsCard data={channelDetails} gridColumn={4} />
-      <DetailsCard data={applicationDetails} gridColumn={4} />
-      <DetailsCard data={remarkDetails} gridColumn={4} />
+      <DetailsCard data={personalDetails} gridColumn={4} infoIcon={true} />
+      <DetailsCard data={channelDetails} gridColumn={4} infoIcon={true} />
+      <DetailsCard data={applicationDetails} gridColumn={4} infoIcon={true} />
+      <DetailsCard data={remarkDetails} gridColumn={4} infoIcon={true} />
     </Stack>
   );
 }

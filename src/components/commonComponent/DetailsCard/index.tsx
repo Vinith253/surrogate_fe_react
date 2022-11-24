@@ -1,6 +1,7 @@
 import React from 'react';
 import './style.scss';
 import { Grid } from '@mui/material';
+import info_icon from '../../../assets/images/info_icon.svg';
 
 type Props = {
   data: {
@@ -8,16 +9,28 @@ type Props = {
     details: Array<object>;
   };
   gridColumn: number;
+  infoIcon: boolean;
 };
 
-function DetailsCard({ data, gridColumn }: Props) {
+function DetailsCard({ data, gridColumn, infoIcon }: Props) {
   const record = data ?? ({} as any);
 
   return (
     <div className="details-card-container">
       {Object.keys(record).length > 0 ? (
         <div className="details-card-inner-container">
-          <div className="header">{record?.title || '--'}</div>
+          <div className="header">
+            {record?.title || '--'}
+            {infoIcon && (
+              <>
+                <img src={info_icon} className="info-icon" />
+                <div className="info-label margins">
+                  View a customer’s key personal information here.
+                </div>
+              </>
+            )}
+          </div>
+
           <div className="underline"></div>
           <Grid
             container

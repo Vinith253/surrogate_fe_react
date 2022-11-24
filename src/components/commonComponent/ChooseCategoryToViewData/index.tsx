@@ -1,5 +1,5 @@
 import React from 'react';
-import SalesReportNodata from '../../../assets/images/choose-filters-no-data.svg';
+import SalesReportNodata from '../../../assets/images/choose_filters_no_data.svg';
 import { Stack, Typography } from '@mui/material';
 import './style.scss';
 
