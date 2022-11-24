@@ -1,0 +1,44 @@
+.authorisation-list {
+  background-color: #f0f2f5;
+
+  .container {
+    background-color: #ffffff;
+    // padding: 20px 30px 30px 30px;
+    margin: 30px 0px;
+    border-radius: 8px;
+  }
+
+  .cardHeader {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    // padding: 20px 30px 20px 30px;
+  }
+}
+
+
+
+// .noDataContainer {
+//   background-color: rgb(158, 65, 65);
+//   padding: '10px';
+//   border-radius: 8px;
+//   align-items: center;
+//   justify-content: center;
+//   height: '25%';
+//   width: '100%';
+// }
+.no-data-container {
+  background-color: #ffffff;
+  padding: 90px 0px;
+  border-radius: 8px;
+  text-align: center;
+  justify-content: center;
+
+  .no-data-img {
+    height: '100px';
+    width: 25%;
+    display: flex;
+    margin: auto;
+    padding-bottom: 15px;
+  }
+}

@@ -2,6 +2,7 @@ import { dataList } from "../../../../interface/Types";
 import { TabBar } from "../../../../components/commonComponent/customTab/CustomTab";
 import RoleCreationTab from "../roleCreationTab";
 import '../style.scss';
+import { AuthorisationLevel } from "../screens/AuthorisationLevel";
 
 export const RoleCreation = () => {
   const TabListData: dataList = [
@@ -10,8 +11,8 @@ export const RoleCreation = () => {
       data: 'Role Creation',
       component:  <RoleCreationTab />,
     },
-    { id: '2', data: 'Authorization Level', component: <RoleCreationTab /> },
-    { id: '3', data: 'History Log', component: <RoleCreationTab /> },
+    { id: '2', data: 'Authorization Level', component: <AuthorisationLevel /> },
+    // { id: '3', data: 'History Log', component: <RoleCreationTab /> },
   ];
 
   return (
@@ -21,4 +22,4 @@ export const RoleCreation = () => {
       </div>
     </div>
   );
-}
+};
