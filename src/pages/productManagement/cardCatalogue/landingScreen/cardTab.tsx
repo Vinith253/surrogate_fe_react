@@ -13,6 +13,7 @@ const LabTabs = () => {
       id: '1',
       data: 'card catalogue',
       component: <CardCatalogue />,
+      isDisabled: false,
     },
     // { id: '2', data: 'history log', component: <HistoryLog /> },
   ];
@@ -21,6 +22,6 @@ const LabTabs = () => {
       <TabBar data={TabListData} />
     </Stack>
   );
-}
+};
 
 export default LabTabs;

@@ -468,8 +468,7 @@ import TypographySubTitle from '../../../../components/commonComponent/CustomTex
 
 //             )
 //           })}
-          
-          
+
 //         </Box>
 
 //         <Box
@@ -509,7 +508,7 @@ import TypographySubTitle from '../../../../components/commonComponent/CustomTex
 //                     </Box>
 //                   </Box>
 //                 )}
-               
+
 //                 <Grid container sx={{ marginBottom: '20px' }} spacing={5}>
 //                   <Grid item xs={12} sm={6} md={4}>
 //                     <Box sx={{ gap: 2 }}>
@@ -1170,15 +1169,19 @@ export const OrgStructure = () => {
       id: '1',
       data: 'Organisation Details',
       component: <OrganisationDetails />,
+      isDisabled: false,
     },
 
-    { id: '2', data: 'History Log', component: <HistoryLog /> },
+    {
+      id: '2',
+      data: 'History Log',
+      component: <HistoryLog />,
+      isDisabled: false,
+    },
   ];
   return (
     <>
       <TabBar data={TabListData} />
     </>
   );
-}
-  
- 
+};

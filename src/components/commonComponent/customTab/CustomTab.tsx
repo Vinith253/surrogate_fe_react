@@ -30,6 +30,7 @@ export const TabBar = ({ data }: { data: dataList }) => {
                 <Tab
                   className="tabBar"
                   key={index}
+                  disabled={item?.isDisabled ?? false}
                   label={<span>{item.data}</span>}
                   value={item.id}
                 ></Tab>

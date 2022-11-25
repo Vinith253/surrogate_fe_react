@@ -20,8 +20,9 @@ import { OrgStructure } from './pages/userManagement/orgStructure/landingScreen'
 import { Onboarding } from './pages/userManagement/orgStructure/screens/Onboarding/onboarding';
 import { RoleCreation } from './pages/userManagement/roleCreation/landingScreen';
 import OrgBulkUpload from './pages/userManagement/orgStructure/orgBulkUpload';
-import { UserCreation } from './pages/userManagement/userCreation';
+import UserCreation from './pages/userManagement/userCreation';
 import { CreateRole } from './pages/userManagement/roleCreation/createRole/createRole';
+import CreateUser from './pages/userManagement/userCreation/createUser';
 
 export default function App() {
   return (
@@ -83,6 +84,11 @@ export default function App() {
         />
 
         <Route path="/userManagement/userCreation" element={<UserCreation />} />
+
+        <Route
+          path="/userManagement/userCreation/createUser"
+          element={<CreateUser />}
+        />
 
         <Route path="/sales/salesDashboard" element={<SalesDashboard />} />
 

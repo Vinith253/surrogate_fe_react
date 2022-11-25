@@ -10,10 +10,21 @@ function ProgramManagement() {
       id: '1',
       data: 'Programme Management',
       component: <ProgramManagementScreen />,
+      isDisabled: false,
     },
 
-    { id: '2', data: 'History Log', component: <HistoryLog /> },
-    { id: '3', data: 'Reviewer Log', component: <ReviewerLog /> },
+    {
+      id: '2',
+      data: 'History Log',
+      component: <HistoryLog />,
+      isDisabled: false,
+    },
+    {
+      id: '3',
+      data: 'Reviewer Log',
+      component: <ReviewerLog />,
+      isDisabled: false,
+    },
   ];
   return (
     <>
