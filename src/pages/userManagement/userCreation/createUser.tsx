@@ -1,27 +1,40 @@
-import { Typography, Button } from '@mui/material';
+import React, { useState } from 'react';
+import { Typography, TextField, Checkbox, Radio, Grid } from '@mui/material';
 import { Box, Stack } from '@mui/system';
-import TypographyInfo from '../../../components/commonComponent/CustomText/Info';
 import './style.scss';
-import AddIcon from '@mui/icons-material/Add';
 import Steppers from '../../../components/commonComponent/Steppers';
+import { useNavigate } from 'react-router-dom';
+import HeaderWithInfo from '../../../components/commonComponent/HeaderWithInfo';
+import ActiveStepperIcon from '../../../assets/icons/active_stepper_icon.svg';
+import CompletedStepperIcon from '../../../assets/icons/completed_stepper_icon.svg';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import DisabledStepperIcon from '../../../assets/icons/disabled_stepper_icon.svg';
+import SelectDropdown from '../../../components/commonComponent/CheckboxSelectDropdown';
+import {
+  PersonalDetails,
+  EmploymentDetails,
+  DropdownFields,
+  ChannelDetails,
+  RoleDetails,
+} from './userCreation.const';
+import { FooterButton } from '../../../components/commonComponent/FooterButton/FooterButton';
 import { ScreenHeader } from '../../../components/commonComponent/ScreenHeader/ScreenHeader';
-import React from 'react';
 
 function CreateUser() {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const openCardMenu = Boolean(anchorEl);
+  const [isPersonalDetails, setIsPersonalDetails] = useState(true);
+  const [isPermission, setIsPermission] = useState(false);
 
-  const handleCardMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
+  console.log('isPermission', isPermission);
+  const navigate = useNavigate();
+  const goBack = () => {
+    navigate(-1);
   };
-  const handleCardMenuClose = () => {
-    setAnchorEl(null);
+  const handleSubmitClick = () => {
+    // setCreateRoleSelection(true);
   };
-
-  const steps = ['Personal Details', 'Permissions'];
 
   return (
-    <Stack>
+    <Stack className="create-user-main-container">
       <Box className="create-user-container">
         <ScreenHeader
           title="Create User"
@@ -29,8 +42,151 @@ function CreateUser() {
           showBackButton={true}
         />
         <Stack className="underline"></Stack>
-        {/* <Steppers steps={steps} /> */}
+        <Stack className="stepper-container">
+          <Box style={{ textAlign: 'center' }}>
+            <img src={ActiveStepperIcon} alt="" className="stepper-icons" />
+            <Stack className="stepper-label">Personal Details</Stack>
+          </Box>
+          <Stack className="stepper-line"></Stack>
+          <Box style={{ textAlign: 'center' }}>
+            <img
+              src={DisabledStepperIcon}
+              alt=""
+              className="stepper-icons"
+              onClick={() => setIsPermission(true)}
+            />
+            <Stack className="stepper-label">Permissions</Stack>
+          </Box>
+        </Stack>
       </Box>
+      {isPermission ? (
+        <Stack>permission</Stack>
+      ) : (
+        <>
+          <Stack className="container">
+            <HeaderWithInfo
+              header="Personal Details"
+              isInfoEnabled={true}
+              info="From here, you can add the user’s personal details"
+              isDownloadEnabled={false}
+            />
+            <Stack className="form-container">
+              <Grid container spacing={2}>
+                {PersonalDetails?.map((eachItem: any, index: number) => {
+                  return (
+                    <Grid item xs={4} key={index}>
+                      <Typography className="each-field-label">
+                        {eachItem?.label}
+                      </Typography>
+                      <TextField />
+                    </Grid>
+                  );
+                })}
+              </Grid>
+            </Stack>
+          </Stack>
+          <Stack className="container">
+            <HeaderWithInfo
+              header="Employement Details"
+              isInfoEnabled={true}
+              info="From here, you can add the user’s personal details"
+              isDownloadEnabled={false}
+            />
+            <Stack className="form-container">
+              <Grid container spacing={2}>
+                {EmploymentDetails?.map((eachItem: any, index: number) => {
+                  return (
+                    <Grid item xs={4} key={index}>
+                      <Typography className="each-field-label">
+                        {eachItem?.label}
+                      </Typography>
+                      <TextField />
+                    </Grid>
+                  );
+                })}
+              </Grid>
+            </Stack>
+          </Stack>
+          <Stack className="container">
+            <HeaderWithInfo
+              header="Channel Accessible Details"
+              isInfoEnabled={true}
+              info="From here, you can add the user’s personal details"
+              isDownloadEnabled={false}
+            />
+            <Stack className="form-container">
+              <Typography className="each-field-label">
+                Select Channel
+              </Typography>
+              <Grid container spacing={2}>
+                {ChannelDetails?.map((eachItem: any, index: number) => {
+                  return (
+                    <Grid item xs={2} key={index} className="checkbox-label">
+                      <FormControlLabel
+                        control={<Checkbox />}
+                        label={eachItem?.label}
+                      />
+                    </Grid>
+                  );
+                })}
+              </Grid>
+            </Stack>
+          </Stack>
+          <Stack className="container">
+            <HeaderWithInfo
+              header="Level - State, Zonal, District, Branch"
+              isInfoEnabled={true}
+              info="From here, you can add the user’s personal details"
+              isDownloadEnabled={false}
+            />
+            <Stack className="form-container">
+              <Grid container spacing={2}>
+                {DropdownFields?.map((eachItem: any, index: number) => {
+                  return (
+                    <Grid item xs={4} key={index}>
+                      <Typography className="each-field-label">
+                        {eachItem?.label}
+                      </Typography>
+                      <SelectDropdown options={eachItem?.option} />
+                    </Grid>
+                  );
+                })}
+              </Grid>
+            </Stack>
+          </Stack>
+          <Stack className="container">
+            <HeaderWithInfo
+              header="Role Details"
+              isInfoEnabled={true}
+              info="From here, you can add the user’s personal details"
+              isDownloadEnabled={false}
+            />
+            <Stack className="form-container">
+              <Typography className="each-field-label">
+                Role Access Type
+              </Typography>
+              <Grid container spacing={2}>
+                {RoleDetails?.map((eachItem: any, index: number) => {
+                  return (
+                    <Grid item xs={2} key={index} className="checkbox-label">
+                      <FormControlLabel
+                        control={<Radio />}
+                        label={eachItem?.label}
+                      />
+                    </Grid>
+                  );
+                })}
+              </Grid>
+            </Stack>
+          </Stack>
+        </>
+      )}
+      <FooterButton
+        cancel="Close"
+        submit="Submit"
+        handleSubmitClick={handleSubmitClick}
+        handleCancelClick={goBack}
+      />
     </Stack>
   );
 }
