@@ -1,4 +1,4 @@
-import { Box, Paper, Stack, Typography } from '@mui/material';
+import { Box, Button, Paper, Stack, Typography } from '@mui/material';
 import Card from '../../components/commonComponent/card/Card';
 import credit_rule from '../../assets/icons/credit_rule.svg';
 import card_for_approval from '../../assets/icons/card_for_approval.svg';
@@ -44,6 +44,7 @@ import SuccessForRoleCreated from '../../components/commonComponent/customModal/
 import DuplicateRole from '../../components/commonComponent/customModal/ROLE-CREATION/DuplicateRole';
 import EmployeeDetails from '../../components/commonComponent/customModal/ROLE-CREATION/EmployeeDetails';
 import SuccessAuthorizationLevel from '../../components/commonComponent/customModal/ROLE-CREATION/SuccessAuthorizationLevel';
+import { Link } from 'react-router-dom';
 
 export default function Home() {
   const pendingActionsData = {
@@ -171,7 +172,7 @@ export default function Home() {
         <ChangePasswordProfileModal />
         <ChangePasswordOTP />
         <CreateNewPassword /> */}
-
+        <Link to={'/userManagement/roleCreation/userdetails'}>Click</Link>
         <Card content={pendingActionsData} />
         <Card content={savedItemsData} />
         <Card content={frequentActivitiesData} />
