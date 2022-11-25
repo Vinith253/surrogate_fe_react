@@ -27,14 +27,12 @@ import {
   Typography,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import UploadCard from '../uploadCard/UploadCard';
 import { bulkUpload } from '../../../../../utils/Constants';
 import { useNavigate } from 'react-router-dom';
 import PaginationComp from '../../../../../components/commonComponent/Pagination/Pagination';
-import BulkUpload from '..';
 import CustomModal from '../../../../../components/commonComponent/customModal/CustomModal';
 import CommonTable from '../../../../../components/commonComponent/commonTable/CommonTable';
-import { FooterButton } from '../../../../../components/commonComponent/FooterButton/FooterButton';
+import UserUploadCard from '../userUploadCard/UserUploadCard';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -205,7 +203,7 @@ const rows2 = [
   ),
 ];
 
-export default function BulkList(props: any) {
+export default function UserBulkList(props: any) {
   const navigate = useNavigate();
   const [correctionState, setCorrectionState] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -215,143 +213,132 @@ export default function BulkList(props: any) {
   const [currentPage, setCurrentPage] = useState(1);
   const [imageUpload, setImageUpload] = useState(true);
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [openDiscard, setOpenDiscard] = useState(false);
+  const [openContinueDiscard, setOpenContinueDiscard] = useState(false);
+  const [userBulkSuccessPopup, setUserBulkSuccessPopup] = useState(false);
 
   const column = [
     { title: '#', dataIndex: 'id', key: 'id' },
-    { title: 'Card Name', dataIndex: 'cardName', key: 'cardName' },
+    { title: 'Company Name', dataIndex: 'companyName', key: 'companyName' },
+    {
+      title: 'Company Registration No.',
+      dataIndex: 'companyRegNo',
+      key: 'companyRegNo',
+    },
     {
       title: 'Surrogate Name',
       dataIndex: 'surrogateName',
       key: 'surrogateName',
     },
-    { title: 'Card Mode', dataIndex: 'cardMode', key: 'cardMode' },
-    { title: 'Card Type', dataIndex: 'cardType', key: 'cardType' },
-    { title: 'Interest Rate', dataIndex: 'interestRate', key: 'interestRate' },
-    { title: 'Extra Card', dataIndex: 'extraCard', key: 'extraCard' },
-    { title: 'CIBIL Score', dataIndex: 'cibilScore', key: 'cibilScore' },
-    { title: 'Salary Limit', dataIndex: 'salaryLimit', key: 'salaryLimit' },
+    {
+      title: 'Cities Of Operation',
+      dataIndex: 'cityOperation',
+      key: 'cityOperation',
+    },
+    { title: 'Telephone No.', dataIndex: 'teleNo', key: 'teleNo' },
+    { title: 'Email ID', dataIndex: 'email', key: 'email' },
   ];
   const data1 = [
     {
       id: 1,
-      cardName: 'Premier',
-      surrogateName: 'Card-For-Card',
-      cardMode: 'Business',
-      cardType: 'Travel',
-      interestRate: '12%',
-      extraCard: 'Applicable',
-      cibilScore: 700,
-      salaryLimit: '30,000',
+      companyName: 'Premier',
+      companyRegNo: '9336252729',
+      surrogateName: 'ABC Company',
+      cityOperation: 'Pan India',
+      teleNo: '432-1678-900',
+      email: 'contact@gmail.com',
       error: false,
     },
     {
       id: 2,
-      cardName: 'Premier',
+      companyName: 'ABC Company',
+      companyRegNo: '9636832729',
       surrogateName: 'Payroll',
-      cardMode: 'Business',
-      cardType: 'Travel',
-      interestRate: '12%',
-      extraCard: 'Non-Applicable',
-      cibilScore: 700,
-      salaryLimit: '40,000',
+      cityOperation: 'Pan India',
+      teleNo: '432-1678-900',
+      email: 'contact@gmail.com',
       error: true,
     },
     {
       id: 3,
-      cardName: 'Premier',
+      companyName: 'ABC Company',
+      companyRegNo: '9336252729',
       surrogateName: 'Card-For-Card',
-      cardMode: 'Business',
-      cardType: 'Travel',
-      interestRate: '12%',
-      extraCard: 'Applicable',
-      cibilScore: 700,
-      salaryLimit: '30,000',
+      cityOperation: 'Pan India',
+      teleNo: '432-1678-900',
+      email: 'contact@gmail.com',
       error: false,
     },
     {
       id: 4,
-      cardName: 'Premier',
+      companyName: 'ABC Company',
+      companyRegNo: '9336892729',
       surrogateName: 'CIBIL',
-      cardMode: 'Business',
-      cardType: 'Travel',
-      interestRate: '12%',
-      extraCard: 'Non-Applicable',
-      cibilScore: 700,
-      salaryLimit: '20,000',
+      cityOperation: 'Pan India',
+      teleNo: '432-1678-900',
+      email: 'contact@gmail.com',
       error: true,
     },
     {
       id: 5,
-      cardName: 'Premier',
+      companyName: 'ABC Company',
+      companyRegNo: '9336252729',
       surrogateName: 'Payroll',
-      cardMode: 'Business',
-      cardType: 'Travel',
-      interestRate: '12%',
-      extraCard: 'Applicable',
-      cibilScore: 700,
-      salaryLimit: '30,000',
+      cityOperation: 'Pan India',
+      teleNo: '432-1678-900',
+      email: 'contact@gmail.com',
       error: false,
     },
   ];
   const data2 = [
     {
       id: 1,
-      cardName: 'Premier',
-      surrogateName: 'Card-For-Card',
-      cardMode: 'Business',
-      cardType: 'Travel',
-      interestRate: '12%',
-      extraCard: 'Applicable',
-      cibilScore: 700,
-      salaryLimit: '30,000',
+      companyName: 'Premier',
+      companyRegNo: '9336252729',
+      surrogateName: 'ABC Company',
+      cityOperation: 'Pan India',
+      teleNo: '432-1678-900',
+      email: 'contact@gmail.com',
       error: false,
     },
     {
       id: 2,
-      cardName: 'Premier',
+      companyName: 'ABC Company',
+      companyRegNo: '9636832729',
       surrogateName: 'Payroll',
-      cardMode: 'Business',
-      cardType: 'Travel',
-      interestRate: '12%',
-      extraCard: 'Non-Applicable',
-      cibilScore: 700,
-      salaryLimit: '40,000',
+      cityOperation: 'Pan India',
+      teleNo: '432-1678-900',
+      email: 'contact@gmail.com',
       error: false,
     },
     {
       id: 3,
-      cardName: 'Premier',
+      companyName: 'ABC Company',
+      companyRegNo: '9336252729',
       surrogateName: 'Card-For-Card',
-      cardMode: 'Business',
-      cardType: 'Travel',
-      interestRate: '12%',
-      extraCard: 'Applicable',
-      cibilScore: 700,
-      salaryLimit: '30,000',
+      cityOperation: 'Pan India',
+      teleNo: '432-1678-900',
+      email: 'contact@gmail.com',
       error: false,
     },
     {
       id: 4,
-      cardName: 'Premier',
+      companyName: 'ABC Company',
+      companyRegNo: '9336892729',
       surrogateName: 'CIBIL',
-      cardMode: 'Business',
-      cardType: 'Travel',
-      interestRate: '12%',
-      extraCard: 'Non-Applicable',
-      cibilScore: 700,
-      salaryLimit: '20,000',
+      cityOperation: 'Pan India',
+      teleNo: '432-1678-900',
+      email: 'contact@gmail.com',
       error: false,
     },
     {
       id: 5,
-      cardName: 'Premier',
+      companyName: 'ABC Company',
+      companyRegNo: '9336252729',
       surrogateName: 'Payroll',
-      cardMode: 'Business',
-      cardType: 'Travel',
-      interestRate: '12%',
-      extraCard: 'Applicable',
-      cibilScore: 700,
-      salaryLimit: '30,000',
+      cityOperation: 'Pan India',
+      teleNo: '432-1678-900',
+      email: 'contact@gmail.com',
       error: false,
     },
   ];
@@ -430,7 +417,11 @@ export default function BulkList(props: any) {
     setCorrectionState(true);
   };
   const handleProceed = () => {
-    props.toggle(false, 'image');
+    if (correctionState) {
+      setUserBulkSuccessPopup(!userBulkSuccessPopup);
+    }
+
+    // props.toggle(false, 'image');
   };
   let count = 2;
   let rows = correctionState ? rows2 : rows1;
@@ -461,8 +452,16 @@ export default function BulkList(props: any) {
     setAlignment(value);
   };
   const closeModal = () => {
-    setImageUpload(false);
-    navigate('/productManagement/cardCatalogue');
+    setUserBulkSuccessPopup(false);
+    // setImageUpload(false);
+    // navigate('/productManagement/cardCatalogue');
+  };
+  const handleDiscard = () => {
+    setOpenDiscard(true);
+  };
+  const handleContinue = () => {
+    setOpenDiscard(!openDiscard);
+    setOpenContinueDiscard(!openContinueDiscard);
   };
   const progressBar = {
     borderRadius: '10px',
@@ -479,17 +478,17 @@ export default function BulkList(props: any) {
   }));
   const uploadData = {
     title: bulkUpload.CORRECTION_FILE,
-    para: bulkUpload.DOWNLOAD_SAMPLE_CSV_XLS,
-    downloadSample: bulkUpload.DOWNLOAD_ERROR_FILE,
+    para: bulkUpload.DOWNLOAD_ERROR_CSV_XLS,
+    downloadSample: bulkUpload.DOWNLOAD_CORRECTION_FILE,
     supportedFormats: bulkUpload.SUPPORTED_FORMATS,
     upload: bulkUpload.UPLOAD_CORRECTION_FILE,
   };
   const imageCardData = {
-    title: bulkUpload.UPLOAD_CARD,
-    para: bulkUpload.UPLOAD_MISSING_CARD,
+    title: bulkUpload.UPLOAD_MISSING_DOCUMENT,
+    para: bulkUpload.ORG_UPLOAD_MISSING_PARA,
     supportedFormats: bulkUpload.SUPPORTED_FORMATS_JPG,
     // downloadSample: bulkUpload.DOWNLOAD_ERROR_FILE,
-    upload: bulkUpload.UPLOAD_MISSING_PHOTO,
+    upload: bulkUpload.UPLOAD_MISSING_DOCUMENT,
   };
 
   const currentTableData = useMemo(() => {
@@ -691,7 +690,7 @@ export default function BulkList(props: any) {
         </Grid>
       )} */}
       {count > 0 && progress === 100 && !correctionState && (
-        <UploadCard
+        <UserUploadCard
           toggle={(arg1: boolean, arg2: string) => props.toggle(arg1, arg2)}
           data={props.fileCheck === 'xls' ? uploadData : imageCardData}
           fileName={props.fileCheck}
@@ -702,8 +701,6 @@ export default function BulkList(props: any) {
       {/* {imageUpload && <BulkUpload />} */}
       {progress === 100 && (
         <>
-          {/* <Box sx={{ position: 'fixed', bottom: 0 }}> */}
-          {/* <FooterButton cancel="Cancel" submit="Procees" /> */}
           <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: '1%' }}>
             <Button variant="outlined">Cancel</Button>
             <Button
@@ -711,11 +708,12 @@ export default function BulkList(props: any) {
               // color="secondary"
               onClick={handleProceed}
               sx={{
-                backgroundColor: correctionState ? '#82B1DB' : ' #0662B7',
+                backgroundColor: correctionState ? ' #0662B7' : '#82B1DB',
               }}
+              // disabled={true}
             >
               {progress === 100 && correctionState
-                ? 'Upload card Photos'
+                ? 'Submit to reviewer'
                 : 'Proceed'}
             </Button>
           </Box>
@@ -730,27 +728,51 @@ export default function BulkList(props: any) {
             <Button
               variant="text"
               color="secondary"
-              onClick={handleProceed}
+              onClick={handleDiscard}
               sx={{ fontSize: '12px' }}
             >
               {`Discord Error entries and Continue >`}
             </Button>
           </Box>
-          {/* </Box> */}
-          {imageUpload &&
-            correctionState &&
-            progress === 100 &&
-            props.fileCheck === 'image' && (
-              <CustomModal
-                openSuccess={imageUpload}
-                handleCloseSuccess={closeModal}
-                successModalTitle={'Card Catalogue is Uploaded Successfully'}
-                successModalMsg={
-                  '  Card Catalogue has been successully sent to the reviewer'
-                }
-                btn={' Close'}
-              />
-            )}
+          {
+            <CustomModal
+              openSuccess={userBulkSuccessPopup}
+              handleCloseSuccess={closeModal}
+              successModalTitle={'User Details Uploaded Successfully'}
+              successModalMsg={
+                '  Organisation has been successully sent to the reviewer'
+              }
+              btn={' Close'}
+            />
+          }
+          {
+            <CustomModal
+              openSuccess={openDiscard}
+              handleCloseSuccess={() => setOpenDiscard(!openDiscard)}
+              handleSuccess={handleContinue}
+              successModalTitle={'Do You want to discard?'}
+              discardModalMsg={
+                'Want to discard corrections for error entires in the excel sheet and continue upload cards'
+              }
+              yesContinueBtn={'Yes, Continue'}
+              closeBtn={'Close'}
+            />
+          }
+          {
+            <CustomModal
+              openSuccess={openContinueDiscard}
+              handleCloseSuccess={() =>
+                setOpenContinueDiscard(!openContinueDiscard)
+              }
+              handleSuccess={() => setOpenContinueDiscard(false)}
+              successModalTitle={'Do You want to Cancel Bulk upload?'}
+              discardModalMsg={
+                'Want to discard corrections for error entires in the excel sheet and continue upload cards'
+              }
+              yesContinueBtn={'Yes, Continue'}
+              closeBtn={'Close'}
+            />
+          }
         </>
       )}
     </PageLayout>
