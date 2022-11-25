@@ -13,6 +13,17 @@ import { useMemo, useState } from 'react';
 import { colors } from '../../../style/Color';
 import PaginationComp from '../Pagination/Pagination';
 
+// const StyledTableCell = styled(TableCell)(({ theme }) => ({
+//   [`&.${tableCellClasses.head}`]: {
+//     // backgroundColor: theme.palette.common.white ,
+//     color: theme.palette.common.black,
+//     fontWeight: 'bold',
+//   },
+//   [`&.${tableCellClasses.body}`]: {
+//     fontSize: 14,
+//   },
+// }));
+
 type columnType = {
   title: string;
   dataIndex: string;
@@ -22,27 +33,22 @@ type columnType = {
   render?: any;
   width?: any;
 };
-
 type columnArr = columnType[];
-
 type dataProps = {
   column: columnArr;
   isItemSelected: any;
 };
-
 const CommonTable = (props: any) => {
   const { column, isItemSelected }: dataProps = props;
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
-
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
     newPage: number
   ) => {
     setPage(newPage);
   };
-
   const handleChangeRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -59,7 +65,6 @@ const CommonTable = (props: any) => {
     const lastPageIndex = firstPageIndex + rowsPerPage;
     return props.data.slice(firstPageIndex, lastPageIndex);
   }, [currentPage, rowsPerPage, props.data]);
-
   const renderColoumn = (
     dataItem: any,
     columnItem: columnType,
@@ -77,7 +82,6 @@ const CommonTable = (props: any) => {
     }
     return '--';
   };
-
   return (
     <Box>
       <TableContainer component={Paper} sx={{ margin: '2% 0' }}>
@@ -172,5 +176,4 @@ const CommonTable = (props: any) => {
     </Box>
   );
 };
-
 export default CommonTable;

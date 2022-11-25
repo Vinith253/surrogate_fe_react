@@ -73,11 +73,9 @@ export const ListView = ({ data }: any) => {
     });
     setSortingData([...sort]);
   };
-
   useEffect(() => {
     filterData();
   }, [ascending]);
-
   const handleClick = (event: React.MouseEvent<HTMLTableCellElement>) => {
     setAnchorElement(event.currentTarget);
   };
@@ -100,7 +98,6 @@ export const ListView = ({ data }: any) => {
       return false;
     }
   };
-
   const handleClickCheckbox = (id: number) => {
     const result = isSelected(id);
     let selectedData = selected;
@@ -115,7 +112,6 @@ export const ListView = ({ data }: any) => {
   const handleSortByName = () => {
     setAscending(!ascending);
   };
-
   const closeModal = () => {
     setShowPauseModal(false);
     setShowPauseSuccessModal(false);
@@ -123,14 +119,11 @@ export const ListView = ({ data }: any) => {
     setShowResumeModal(false);
     setShowResumeSuccessModal(false);
   };
-
   const NORMAL_PAUSE = 'Pause Now';
   const SCHEDULED_PAUSE = 'Schedule Pause';
-
   const pauseMethodChange = (value: any) => {
     setPauseMethod(value);
   };
-
   const successModal = () => {
     if (pauseMethod === NORMAL_PAUSE) {
       setShowPauseModal(false);
@@ -143,12 +136,10 @@ export const ListView = ({ data }: any) => {
       console.log('fail');
     }
   };
-
   const resumeSuccessModal = () => {
     setShowResumeSuccessModal(true);
     setShowResumeModal(false);
   };
-
   return (
     <Stack>
       <TableContainer component={Paper}>

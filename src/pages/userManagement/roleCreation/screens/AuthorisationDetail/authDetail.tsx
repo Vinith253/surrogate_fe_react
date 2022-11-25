@@ -8,7 +8,6 @@ import { ListTagStatus } from '../../../../../utils/tagBasedIndicator/listTagSta
 import active_icon from '../../../../../assets/icons/active_icon.svg';
 import question_icon from '../../../../../assets/icons/questionMark_icon.svg';
 import close_icon from '../../../../../assets/icons/close_icon.svg';
-
 import { tagBasedIndicator } from '../../../../../utils/Constants';
 import BtnContained from '../../../../../components/commonComponent/CustomText/Button/Contained';
 export const authDetailHeader = [
@@ -29,12 +28,10 @@ export const authDetailHeader = [
     details: '12 Jul,22 09:40 Am',
   },
 ];
-
 export const AuthDetail = () => {
   //   const dataItem = tagBasedIndicator.WAITING_FOR_APPROVAL;
   const dataItem = tagBasedIndicator.CLOSED;
   //   const dataItem = tagBasedIndicator.ACTIVE;
-
   return (
     <Stack className="authDetailContainer">
       <Stack className="authDetailContainerHeaderMain">
@@ -83,7 +80,6 @@ export const AuthDetail = () => {
                       style={{ marginRight: '8px' }}
                     />
                   )}
-
                   {dataItem}
                 </Typography>
               </Box>
@@ -131,7 +127,6 @@ export const AuthDetail = () => {
               Module Access Control
             </Typography>
           </Stack>
-
           {authorisation_user_data.map((items: any, index: number) => {
             return (
               <Stack key={index}>
@@ -187,7 +182,6 @@ export const AuthDetail = () => {
                               </Typography>
                             </Stack>
                           </Stack>
-
                           <Stack className="modelAccessControlModelCount">
                             <Stack className="count">
                               <Typography className="modelAccessControlModelnumber">
@@ -205,7 +199,6 @@ export const AuthDetail = () => {
           })}
         </Stack>
       </Stack>
-
       <Box
         sx={{
           marginTop: '10px',

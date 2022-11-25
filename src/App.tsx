@@ -114,6 +114,11 @@ export default function App() {
         />
         {/* Catch all */}
         <Route path="*" element={<NotFoundPage />} />
+
+        <Route
+          path="/userManagement/roleCreation/authorisationDetails"
+          element={<AuthDetail />}
+        />
       </Route>
     </Routes>
   );
