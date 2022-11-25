@@ -106,28 +106,4 @@ export interface roleCreationHeaderList {
       '21/05/2022',
       ''
     ),
-    createData(
-      2,
-      'Executive',
-      'XYZ',
-      'ABC',
-      '21/05/2022',
-      ''
-    ),
-    createData(
-      2,
-      'Executive',
-      'XYZ',
-      'ABC',
-      '21/05/2022',
-      ''
-    ),
-    createData(
-      2,
-      'Executive',
-      'XYZ',
-      'ABC',
-      '21/05/2022',
-      ''
-    ),
   ];
