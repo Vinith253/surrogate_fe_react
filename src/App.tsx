@@ -23,6 +23,7 @@ import OrgBulkUpload from './pages/userManagement/orgStructure/orgBulkUpload';
 import UserCreation from './pages/userManagement/userCreation';
 import { CreateRole } from './pages/userManagement/roleCreation/createRole/createRole';
 import CreateUser from './pages/userManagement/userCreation/createUser';
+import { UserDetails } from './pages/userManagement/roleCreation/UserDetails/UserDetails';
 
 export default function App() {
   return (
@@ -70,7 +71,10 @@ export default function App() {
         />
         <Route path="/userManagement/orgStructure" element={<OrgStructure />} />
 
-        <Route path="/userManagement/orgStructure/screens/Onboarding/onboarding" element={<Onboarding />} />
+        <Route
+          path="/userManagement/orgStructure/screens/Onboarding/onboarding"
+          element={<Onboarding />}
+        />
 
         <Route
           path="/userManagement/orgStructure/bulkUpload"
@@ -98,6 +102,11 @@ export default function App() {
           element={<SalesReportDetails />}
         />
         <Route path="/accessLibrary" element={<AccessLibrary />} />
+
+        <Route
+          path="/userManagement/roleCreation/userdetails"
+          element={<UserDetails />}
+        />
 
         {/* Catch all */}
         <Route path="*" element={<NotFoundPage />} />
