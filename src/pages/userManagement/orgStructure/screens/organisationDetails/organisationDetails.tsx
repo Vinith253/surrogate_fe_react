@@ -29,6 +29,7 @@ import ListTable from '../../../../../components/commonComponent/commonListTable
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import UnfoldMoreIcon from '../../../../../assets/icons/sortArrow.svg';
 import { checkTagStatus } from '../../../../../utils/tagBasedIndicator/tagStatus';
+import { useNavigate} from 'react-router-dom';
 export const organisationFilterDropdown: salesReportFilterInterface[] = [
   {
     label: 'Org Type',
@@ -136,6 +137,7 @@ export const data = [
   },
 ];
 export const OrganisationDetails = () => {
+  const navigate = useNavigate();
   const [selected, setSelected] = React.useState<number[]>([]);
   const [ascending, setAscending] = useState<boolean>(true);
   const [sortingData, setSortingData] = useState(data);
@@ -149,7 +151,8 @@ export const OrganisationDetails = () => {
     setAnchorEl(null);
   };
   const addOrganisationOpen = () => {
-    setAnchorEl(null);
+    // setAnchorEl(null);
+    navigate("/userManagement/orgStructure/screens/Onboarding/onboarding")
   };
   const organisationOpen = () => {
     setAnchorEl(null);
