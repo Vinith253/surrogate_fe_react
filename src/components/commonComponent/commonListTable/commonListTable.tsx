@@ -77,6 +77,7 @@ const CommonTable = (props: any) => {
           style={{
             width: '100%',
             borderBottom: 'none',
+            overflowX: 'auto',
           }}
           aria-label="customized table"
         >
