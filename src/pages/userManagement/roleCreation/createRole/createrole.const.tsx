@@ -18,6 +18,7 @@ export const moduleControlData = [
         isChecked:false,
         data:[
             {
+                id:1,
                 innerTitle:'Product Management',
                 isSwitched:false,
                 items:[
@@ -25,7 +26,7 @@ export const moduleControlData = [
                         id: 1,
                         label: 'View Programme Management',
                         isChecked:false,
-                        isDisabled:false
+                        isDisabled:true
                     },
                     {
                         id: 2,
@@ -36,6 +37,7 @@ export const moduleControlData = [
                 ]
             },
             {
+                id:2,
                 innerTitle:'Credit Rule',
                 isSwitched:false,
                 items:[
@@ -43,7 +45,7 @@ export const moduleControlData = [
                         id: 1,
                         label: 'View Credit Rule',
                         isChecked:false,
-                        isDisabled:false
+                        isDisabled:true
                     },
                     {
                         id: 2,
@@ -72,6 +74,7 @@ export const moduleControlData = [
                 ]
             },
             {
+                id:3,
                 innerTitle:'Card Catalog',
                 isSwitched:false,
                 items:[
@@ -79,7 +82,7 @@ export const moduleControlData = [
                         id: 1,
                         label: 'View Card',
                         isChecked:false,
-                        isDisabled:false
+                        isDisabled:true
                     },
                     {
                         id: 2,
@@ -110,6 +113,7 @@ export const moduleControlData = [
         isChecked:false,
         data:[
             {
+                id:1,
                 innerTitle:'Dashboard',
                 isSwitched:false,
                 items:[
@@ -117,11 +121,12 @@ export const moduleControlData = [
                         id: 1,
                         label: 'View Sales Dashboard',
                         isChecked:false,
-                        isDisabled:false
+                        isDisabled:true
                     },
                 ]
             },
             {
+                id:2,
                 innerTitle:'Performance Reports',
                 isSwitched:false,
                 items:[
@@ -129,7 +134,7 @@ export const moduleControlData = [
                         id: 1,
                         label: 'View Performance Report',
                         isChecked:false,
-                        isDisabled:false
+                        isDisabled:true
                     },
                     {
                         id: 2,
@@ -140,6 +145,7 @@ export const moduleControlData = [
                 ]
             },
             {
+                id:3,
                 innerTitle:'Customer Reports',
                 isSwitched:false,
                 items:[
@@ -147,7 +153,7 @@ export const moduleControlData = [
                         id: 1,
                         label: 'View Customer Reports',
                         isChecked:false,
-                        isDisabled:false
+                        isDisabled:true
                     },
                     {
                         id: 2,
@@ -172,6 +178,7 @@ export const moduleControlData = [
         isChecked:false,
         data:[
             {
+                id:1,
                 innerTitle:'Dashboard',
                 isSwitched:false,
                 items:[
@@ -179,7 +186,7 @@ export const moduleControlData = [
                         id: 1,
                         label: 'View Dashboard',
                         isChecked:false,
-                        isDisabled:false
+                        isDisabled:true
                     },
                     {
                         id: 2,
@@ -196,6 +203,7 @@ export const moduleControlData = [
                 ]
             },
             {
+                id:2,
                 innerTitle:'LMS Rule & Re-Targeting',
                 isSwitched:false,
                 items:[
@@ -203,7 +211,7 @@ export const moduleControlData = [
                         id: 1,
                         label: 'Create LMS Rule',
                         isChecked:false,
-                        isDisabled:false
+                        isDisabled:true
                     },
                     {
                         id: 2,
@@ -222,6 +230,7 @@ export const moduleControlData = [
         isChecked:false,
         data:[
             {
+                id:1,
                 innerTitle:'Customer Report',
                 isSwitched:false,
                 items:[
@@ -229,7 +238,7 @@ export const moduleControlData = [
                         id: 1,
                         label: 'View Customer Report',
                         isChecked:false,
-                        isDisabled:false
+                        isDisabled:true
                     },
                     {
                         id: 2,
@@ -254,6 +263,7 @@ export const moduleControlData = [
         isChecked:false,
         data:[
             {
+                id:1,
                 innerTitle:'Access Library',
                 isSwitched:false,
                 items:[
@@ -261,7 +271,7 @@ export const moduleControlData = [
                         id: 1,
                         label: 'View Access Library',
                         isChecked:false,
-                        isDisabled:false
+                        isDisabled:true
                     },
                     {
                         id: 2,
@@ -297,6 +307,7 @@ export const duplicateRoleData = [
         isChecked:true,
         data:[
             {
+                id:1,
                 innerTitle:'Product Management',
                 isSwitched:true,
                 items:[
@@ -310,11 +321,12 @@ export const duplicateRoleData = [
                         id: 2,
                         label: 'Pass & Resume Surrogate',
                         isChecked:true,
-                        isDisabled:true
+                        isDisabled:false,
                     },
                 ]
             },
             {
+                id:2,
                 innerTitle:'Credit Rule',
                 isSwitched:true,
                 items:[
@@ -328,29 +340,30 @@ export const duplicateRoleData = [
                         id: 2,
                         label: 'Create Credit Rule',
                         isChecked:true,
-                        isDisabled:true
+                        isDisabled:false
                     },
                     {
                         id: 3,
                         label: 'View Operational Pincode',
                         isChecked:true,
-                        isDisabled:true
+                        isDisabled:false
                     },
                     {
                         id: 4,
                         label: 'Edit Operational Pincode',
                         isChecked:true,
-                        isDisabled:true
+                        isDisabled:false
                     },
                     {
                         id: 5,
                         label: 'BRE Back Test',
                         isChecked:true,
-                        isDisabled:true
+                        isDisabled:false
                     },
                 ]
             },
             {
+                id:3,
                 innerTitle:'Card Catalog',
                 isSwitched:true,
                 items:[
@@ -364,19 +377,19 @@ export const duplicateRoleData = [
                         id: 2,
                         label: 'Bulk Card Upload',
                         isChecked:true,
-                        isDisabled:true
+                        isDisabled:false
                     },
                     {
                         id: 3,
                         label: 'Activate/Deactivate',
                         isChecked:true,
-                        isDisabled:true
+                        isDisabled:false
                     },
                     {
                         id: 4,
                         label: 'Assign Surrogate',
                         isChecked:true,
-                        isDisabled:true
+                        isDisabled:false
                     },
                 ]
             },
@@ -389,6 +402,7 @@ export const duplicateRoleData = [
         isChecked:true,
         data:[
             {
+                id:1,
                 innerTitle:'Dashboard',
                 isSwitched:true,
                 items:[
@@ -401,6 +415,7 @@ export const duplicateRoleData = [
                 ]
             },
             {
+                id:2,
                 innerTitle:'Performance Reports',
                 isSwitched:true,
                 items:[
@@ -414,11 +429,12 @@ export const duplicateRoleData = [
                         id: 2,
                         label: 'Download/email report',
                         isChecked:true,
-                        isDisabled:true
+                        isDisabled:false
                     },
                 ]
             },
             {
+                id:3,
                 innerTitle:'Customer Reports',
                 isSwitched:true,
                 items:[
@@ -432,7 +448,7 @@ export const duplicateRoleData = [
                         id: 2,
                         label: 'Download/email report',
                         isChecked:true,
-                        isDisabled:true
+                        isDisabled:false
                     },
                 ]
             },
@@ -451,6 +467,7 @@ export const duplicateRoleData = [
         isChecked:true,
         data:[
             {
+                id:1,
                 innerTitle:'Dashboard',
                 isSwitched:true,
                 items:[
@@ -464,17 +481,18 @@ export const duplicateRoleData = [
                         id: 2,
                         label: 'Download/Email Customer Data',
                         isChecked:true,
-                        isDisabled:true
+                        isDisabled:false
                     },
                     {
                         id: 3,
                         label: 'Re-Target Application',
                         isChecked:true,
-                        isDisabled:true
+                        isDisabled:false
                     },
                 ]
             },
             {
+                id:2,
                 innerTitle:'LMS Rule & Re-Targeting',
                 isSwitched:true,
                 items:[
@@ -488,7 +506,7 @@ export const duplicateRoleData = [
                         id: 2,
                         label: 'Re-Target',
                         isChecked:true,
-                        isDisabled:true
+                        isDisabled:false
                     },
                 ]
             },
@@ -501,6 +519,7 @@ export const duplicateRoleData = [
         isChecked:true,
         data:[
             {
+                id:1,
                 innerTitle:'Customer Report',
                 isSwitched:true,
                 items:[
@@ -533,6 +552,7 @@ export const duplicateRoleData = [
         isChecked:true,
         data:[
             {
+                id:1,
                 innerTitle:'Access Library',
                 isSwitched:true,
                 items:[
@@ -553,3 +573,26 @@ export const duplicateRoleData = [
         ]
     },
 ]
+
+
+
+export const viewPageDetails = {
+    details: [
+      {
+        label: 'Initater',
+        value: 'Parithi',
+      },
+      {
+        label: 'Initiated Date',
+        value: '12 Jul,22 09:40 Am',
+      },
+      {
+        label: 'Approver',
+        value: 'Ganesh',
+      },
+      {
+        label: 'Approved Date',
+        value: '12 Jul,22 09:40 Am',
+      },
+    ],
+  };

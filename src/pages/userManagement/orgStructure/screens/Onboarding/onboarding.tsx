@@ -13,6 +13,7 @@ import {
   Grid,
   Divider,
 } from '@mui/material';
+import './onboarding.scss';
 import dayjs, { Dayjs } from 'dayjs';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -23,13 +24,14 @@ import TypoText from '../../../../../components/commonComponent/CustomText/Textf
 import TypographyInfo from '../../../../../components/commonComponent/CustomText/Info';
 import CheckBoxModal from '../../../../../components/commonComponent/customModal/PopoverModal';
 import { CheckBox } from '@mui/icons-material';
-import Upload_Img from '../../../../../assets/images/uploadImg.png';
+import Upload_Img from '../../../../../assets/images/uploadImg.svg';
 import AddIcon from '@mui/icons-material/Add';
 import BtnContained from '../../../../../components/commonComponent/CustomText/Button/Contained';
 import BtnOutlined from '../../../../../components/commonComponent/CustomText/Button/Outlined';
 import BtnText from '../../../../../components/commonComponent/CustomText/Button/Text';
 import TypographySubTitle from '../../../../../components/commonComponent/CustomText/Typography';
-
+import { UploadDetails } from './uploadDetails';
+import { Upload } from './upload'
 
 export const Onboarding = () => {
   const [value, setValue] = React.useState<Dayjs | null>(dayjs('DD/MM/YYYY'));
@@ -57,31 +59,31 @@ export const Onboarding = () => {
     //   keyContact: true,
     // }));
   };
-   const removeKeyContact = (index:number)=>{
-    let newData= data.keyContact ?? [];
-    newData.splice(index,1);
-    setData((prev)=>({
-      ...prev, keyContact:newData,
-    }));
-
-   }
-
-   const AddProprietor=()=>{
-    let newVal = {value:''}
-    setData((prev)=>({
+  const removeKeyContact = (index: number) => {
+    let newData = data.keyContact ?? [];
+    newData.splice(index, 1);
+    setData((prev) => ({
       ...prev,
-      proprietor:[...prev.proprietor,newVal]
-    }))
-   }
-
-   const removeProprietor = (index:number)=>{
-    let newData= data.proprietor ?? [];
-    newData.splice(index,1);
-    setData((prev)=>({
-      ...prev, proprietor:newData,
+      keyContact: newData,
     }));
+  };
 
-   }
+  const AddProprietor = () => {
+    let newVal = { value: '' };
+    setData((prev) => ({
+      ...prev,
+      proprietor: [...prev.proprietor, newVal],
+    }));
+  };
+
+  const removeProprietor = (index: number) => {
+    let newData = data.proprietor ?? [];
+    newData.splice(index, 1);
+    setData((prev) => ({
+      ...prev,
+      proprietor: newData,
+    }));
+  };
 
   return (
     <Stack>
@@ -99,11 +101,11 @@ export const Onboarding = () => {
           >
             <TypographyInfo title="Onboard your partners here" />
 
-            <Button sx={{ backgroundColor: '#E6E7E7' }}>ID.NO 123456</Button>
+            {/* <Button sx={{ backgroundColor: '#E6E7E7' }}>ID.NO 123456</Button> */}
           </Box>
         </Box>
 
-        <Box
+        {/* <Box
           sx={{ backgroundColor: 'white', marginTop: '25px', padding: '20px' }}
         >
           <TypoText title="Fintech Partners Onboarding" />
@@ -118,7 +120,7 @@ export const Onboarding = () => {
 
             <Button sx={{ backgroundColor: '#E6E7E7' }}>ID.NO 123456</Button>
           </Box>
-        </Box>
+        </Box> */}
 
         <Box
           sx={{ backgroundColor: 'white', marginTop: '25px', padding: '20px' }}
@@ -127,7 +129,10 @@ export const Onboarding = () => {
             <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
               <TypoText title="Surrogate" />
               <img src={Info_Icon} />
-              <TypographyInfo title="Choose a surrogate for your partners here" />
+              <TypographyInfo
+                title="Choose a surrogate for your partners here"
+               
+              />
             </Box>
             <Divider sx={{ marginY: '20px' }} />
             <Box sx={{ width: '90%' }}>
@@ -269,7 +274,7 @@ export const Onboarding = () => {
                     setValue(newValue);
                   }}
                   renderInput={(params) => (
-                    <TextField size="small" {...params} fullWidth />
+                    <TextField  size="small" {...params} fullWidth />
                   )}
                 />
               </LocalizationProvider>
@@ -372,10 +377,10 @@ export const Onboarding = () => {
             </Box>
           </Box>
           <Divider sx={{ marginY: '20px' }} />
-          {data.proprietor.map((item,index)=>{
-            return(
+          {data.proprietor.map((item, index) => {
+            return (
               <Box>
-          {index !== 0 && (
+                {index !== 0 && (
                   <Box>
                     <Divider sx={{ marginY: '20px' }} />
                     <Box
@@ -385,109 +390,111 @@ export const Onboarding = () => {
                       }}
                     >
                       <TypoText title={`Key Contact Person ${index + 1}`} />
-                      <Button onClick={() => removeProprietor(index)} startIcon={<HighlightOffIcon />}>Remove</Button>
+                      <Button
+                        onClick={() => removeProprietor(index)}
+                        startIcon={<HighlightOffIcon />}
+                      >
+                        Remove
+                      </Button>
                     </Box>
                   </Box>
                 )}
-            <Grid container sx={{ marginBottom: '20px' }} spacing={5}>
-              <Grid item xs={12} sm={6} md={4}>
-                <Box sx={{ gap: 2 }}>
-                  <TypographySubTitle title="Name" />
-                  <TypoText placeholder="Enter Name" id="businessId" />
-                </Box>
-              </Grid>
+                <Grid container sx={{ marginBottom: '20px' }} spacing={5}>
+                  <Grid item xs={12} sm={6} md={4}>
+                    <Box sx={{ gap: 2 }}>
+                      <TypographySubTitle title="Name" />
+                      <TypoText placeholder="Enter Name" id="businessId" />
+                    </Box>
+                  </Grid>
 
-              <Grid item xs={12} sm={6} md={4}>
-                <Box sx={{ gap: 2 }}>
-                  <TypographySubTitle title="Mobile No" />
-                  <TypoText placeholder="Enter Mobile No" id="businessId" />
-                </Box>
-              </Grid>
+                  <Grid item xs={12} sm={6} md={4}>
+                    <Box sx={{ gap: 2 }}>
+                      <TypographySubTitle title="Mobile No" />
+                      <TypoText placeholder="Enter Mobile No" id="businessId" />
+                    </Box>
+                  </Grid>
 
-              <Grid item xs={12} sm={6} md={4}>
-                <Box sx={{ gap: 2 }}>
-                  <TypographySubTitle title="E-mail ID" />
-                  <TypoText placeholder="Enter E-mail ID" id="businessId" />
-                </Box>
-              </Grid>
-            </Grid>
+                  <Grid item xs={12} sm={6} md={4}>
+                    <Box sx={{ gap: 2 }}>
+                      <TypographySubTitle title="E-mail ID" />
+                      <TypoText placeholder="Enter E-mail ID" id="businessId" />
+                    </Box>
+                  </Grid>
+                </Grid>
 
-            <Grid container sx={{ marginBottom: '20px' }} spacing={5}>
-              <Grid item xs={12} sm={6} md={4}>
-                <FormControl className="formctrl">
-                  <TypographySubTitle title="Gender" />
-                  <Select
-                    sx={{ height: '40px', width: '280px' }}
-                    defaultValue={0}
-                  >
-                    <MenuItem value={0}>Select Gender</MenuItem>
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-              <Grid item xs={12} sm={6} md={4}>
-                <FormControl className="formctrl">
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <TypographySubTitle title="Date of Birth" />
-                    <DatePicker
-                      disableFuture
-                      // label="Responsive"
-                      openTo="year"
-                      views={['year', 'month', 'day']}
-                      value={value}
-                      onChange={(newValue) => {
-                        setValue(newValue);
-                      }}
-                      renderInput={(params) => (
-                        <TextField size="small" {...params} fullWidth />
-                      )}
-                    />
-                  </LocalizationProvider>
-                </FormControl>
-              </Grid>
-              <Grid item xs={12} sm={6} md={4}>
-                <FormControl className="formctrl">
-                  <TypographySubTitle title="User Role" />
-                  <Select
-                    sx={{ height: '40px', width: '280px' }}
-                    defaultValue={0}
-                    fullWidth
-                  >
-                    <MenuItem value={0}>Select Role</MenuItem>
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-            </Grid>
+                <Grid container sx={{ marginBottom: '20px' }} spacing={5}>
+                  <Grid item xs={12} sm={6} md={4}>
+                    <FormControl className="formctrl">
+                      <TypographySubTitle title="Gender" />
+                      <Select
+                        sx={{ height: '40px', width: '280px' }}
+                        defaultValue={0}
+                      >
+                        <MenuItem value={0}>Select Gender</MenuItem>
+                        <MenuItem value={10}>Ten</MenuItem>
+                        <MenuItem value={20}>Twenty</MenuItem>
+                        <MenuItem value={30}>Thirty</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={12} sm={6} md={4}>
+                    <FormControl sx={{width:'280px'}} className="formctrl">
+                      <LocalizationProvider  dateAdapter={AdapterDayjs}>
+                        <TypographySubTitle title="Date of Birth" />
+                        <DatePicker
+                  disableFuture
+                  // label="Responsive"
+                  openTo="year"
+                  views={['year', 'month', 'day']}
+                  value={value}
+                  onChange={(newValue) => {
+                    setValue(newValue);
+                  }}
+                  renderInput={(params) => (
+                    <TextField sx={{borderColor:'black'}} size="small" {...params} fullWidth />
+                  )}
+                />
+                      </LocalizationProvider>
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={12} sm={6} md={4}>
+                    <FormControl className="formctrl">
+                      <TypographySubTitle title="User Role" />
+                      <Select
+                        sx={{ height: '40px', width: '280px' }}
+                        defaultValue={0}
+                        fullWidth
+                      >
+                        <MenuItem value={0}>Select Role</MenuItem>
+                        <MenuItem value={10}>Ten</MenuItem>
+                        <MenuItem value={20}>Twenty</MenuItem>
+                        <MenuItem value={30}>Thirty</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                </Grid>
 
-            <Grid container sx={{ marginBottom: '20px' }} spacing={5}>
-              <Grid item xs={12} sm={6} md={4}>
-                <Box sx={{ gap: 2 }}>
-                  <TypographySubTitle title="Designation" />
-                  <TypoText
-                    placeholder="Enter Company Registration No."
-                    id="businessId"
-                  />
-                </Box>
-              </Grid>
+                <Grid container sx={{ marginBottom: '20px' }} spacing={5}>
+                  <Grid item xs={12} sm={6} md={4}>
+                    <Box sx={{ gap: 2 }}>
+                      <TypographySubTitle title="Designation" />
+                      <TypoText
+                        placeholder="Enter Company Registration No."
+                        id="businessId"
+                      />
+                    </Box>
+                  </Grid>
 
-              <Grid item xs={12} sm={6} md={4}>
-                <Box sx={{ gap: 2 }}>
-                  <TypographySubTitle title="Address" />
-                  <TypoText placeholder="Enter Address" id="businessId" />
-                </Box>
-              </Grid>
-            </Grid>
-          </Box>
-
-            )
+                  <Grid item xs={12} sm={6} md={4}>
+                    <Box sx={{ gap: 2 }}>
+                      <TypographySubTitle title="Address" />
+                      <TypoText placeholder="Enter Address" id="businessId" />
+                    </Box>
+                  </Grid>
+                </Grid>
+              </Box>
+            );
           })}
-          
-          
         </Box>
 
         <Box
@@ -523,11 +530,16 @@ export const Onboarding = () => {
                       }}
                     >
                       <TypoText title={`Key Contact Person ${index + 1}`} />
-                      <Button onClick={() => removeKeyContact(index)} startIcon={<HighlightOffIcon />}>Remove</Button>
+                      <Button
+                        onClick={() => removeKeyContact(index)}
+                        startIcon={<HighlightOffIcon />}
+                      >
+                        Remove
+                      </Button>
                     </Box>
                   </Box>
                 )}
-               
+
                 <Grid container sx={{ marginBottom: '20px' }} spacing={5}>
                   <Grid item xs={12} sm={6} md={4}>
                     <Box sx={{ gap: 2 }}>
@@ -642,312 +654,8 @@ export const Onboarding = () => {
             </Box>
           </Box>
           <Divider sx={{ marginY: '20px' }} />
-          <Box>
-            <Box sx={{ marginBottom: '20px', width: '280px' }}>
-              <TypographySubTitle title="Registration Number (MSMED)" />
-              <TypoText
-                placeholder="Enter Registration Number"
-                id="businessId"
-              />
-            </Box>
-
-            <Box sx={{ display: 'flex', gap: 3, marginBottom: '20px' }}>
-              <Box sx={{ width: '280px' }}>
-                <TypographySubTitle title="TIN Number" />
-                <TypoText placeholder="Enter TIN Number" id="businessId" />
-              </Box>
-              <Box
-                sx={{
-                  width: '423px',
-                  display: 'flex',
-                  border: '2px dashed ',
-                  borderColor: '#D2D2D3',
-                  backgroundColor: '#F3F3F3',
-                  borderRadius: '4px',
-                  height: '45px',
-                  marginTop: '14px',
-                }}
-              >
-                <Box sx={{ display: 'flex' }}>
-                  <Button>
-                    <img src={Upload_Img} />
-                  </Button>
-                </Box>
-                <Box sx={{ paddingY: '3px' }}>
-                  <Typography
-                    sx={{
-                      fontWeight: '400',
-                      fontSize: '12px',
-                      lineHeight: '16px',
-                      color: '#0662B7',
-                    }}
-                  >
-                    Attach Copy Of TIN Number
-                  </Typography>
-                  <Typography
-                    sx={{
-                      fontSize: '10px',
-                      fontWeight: '400',
-                      letterSpacing: '0.004em',
-                      color: 'grey',
-                    }}
-                  >
-                    Upload file in PDF/JPEG/PNG formats with a maximum file size
-                    2MB
-                  </Typography>
-                </Box>
-              </Box>
-            </Box>
-
-            <Box sx={{ display: 'flex', gap: 3, marginBottom: '20px' }}>
-              <Box sx={{ width: '280px' }}>
-                <TypographySubTitle title="GST Number" />
-                <TypoText placeholder="Enter GST Number" id="businessId" />
-              </Box>
-              <Box
-                sx={{
-                  width: '423px',
-                  display: 'flex',
-                  border: '2px dashed ',
-                  borderColor: '#D2D2D3',
-                  backgroundColor: '#F3F3F3',
-                  borderRadius: '4px',
-                  height: '45px',
-                  marginTop: '14px',
-                }}
-              >
-                <Box sx={{ display: 'flex' }}>
-                  <Button>
-                    <img src={Upload_Img} />
-                  </Button>
-                </Box>
-                <Box sx={{ paddingY: '3px' }}>
-                  <Typography
-                    sx={{
-                      fontWeight: '400',
-                      fontSize: '12px',
-                      lineHeight: '16px',
-                      color: '#0662B7',
-                    }}
-                  >
-                    Attach Copy Of GST Number
-                  </Typography>
-                  <Typography
-                    sx={{
-                      fontSize: '10px',
-                      fontWeight: '400',
-                      letterSpacing: '0.004em',
-                      color: 'grey',
-                    }}
-                  >
-                    Upload file in PDF/JPEG/PNG formats with a maximum file size
-                    2MB
-                  </Typography>
-                </Box>
-              </Box>
-            </Box>
-
-            <Box sx={{ display: 'flex', gap: 3, marginBottom: '20px' }}>
-              <Box sx={{ width: '280px' }}>
-                <TypographySubTitle title="PAN Number" />
-                <TypoText placeholder="Enter PAN Number" id="businessId" />
-              </Box>
-              <Box
-                sx={{
-                  width: '423px',
-                  display: 'flex',
-                  border: '2px dashed ',
-                  borderColor: '#D2D2D3',
-                  backgroundColor: '#F3F3F3',
-                  borderRadius: '4px',
-                  height: '45px',
-                  marginTop: '14px',
-                }}
-              >
-                <Box sx={{ display: 'flex' }}>
-                  <Button>
-                    <img src={Upload_Img} />
-                  </Button>
-                </Box>
-                <Box sx={{ paddingY: '3px' }}>
-                  <Typography
-                    sx={{
-                      fontWeight: '400',
-                      fontSize: '12px',
-                      lineHeight: '16px',
-                      color: '#0662B7',
-                    }}
-                  >
-                    Attach Copy Of PAN Number
-                  </Typography>
-                  <Typography
-                    sx={{
-                      fontSize: '10px',
-                      fontWeight: '400',
-                      letterSpacing: '0.004em',
-                      color: 'grey',
-                    }}
-                  >
-                    Upload file in PDF/JPEG/PNG formats with a maximum file size
-                    2MB
-                  </Typography>
-                </Box>
-              </Box>
-            </Box>
-
-            <Box sx={{ display: 'flex', gap: 3, marginBottom: '20px' }}>
-              <Box sx={{ width: '280px' }}>
-                <TypographySubTitle title="Shop & Establishment" />
-                <TypoText
-                  placeholder="Enter Shop & Establishment"
-                  id="businessId"
-                />
-              </Box>
-              <Box
-                sx={{
-                  width: '423px',
-                  display: 'flex',
-                  border: '2px dashed ',
-                  borderColor: '#D2D2D3',
-                  backgroundColor: '#F3F3F3',
-                  borderRadius: '4px',
-                  height: '45px',
-                  marginTop: '14px',
-                }}
-              >
-                <Box sx={{ display: 'flex' }}>
-                  <Button>
-                    <img src={Upload_Img} />
-                  </Button>
-                </Box>
-                <Box sx={{ paddingY: '3px' }}>
-                  <Typography
-                    sx={{
-                      fontWeight: '400',
-                      fontSize: '12px',
-                      lineHeight: '16px',
-                      color: '#0662B7',
-                    }}
-                  >
-                    Attach Copy Of shop & Establishment
-                  </Typography>
-                  <Typography
-                    sx={{
-                      fontSize: '10px',
-                      fontWeight: '400',
-                      letterSpacing: '0.004em',
-                      color: 'grey',
-                    }}
-                  >
-                    Upload file in PDF/JPEG/PNG formats with a maximum file size
-                    2MB
-                  </Typography>
-                </Box>
-              </Box>
-            </Box>
-
-            <Box sx={{ display: 'flex', gap: 3, marginBottom: '20px' }}>
-              <Box sx={{ width: '280px' }}>
-                <TypographySubTitle title="ESIC Registration No" />
-                <TypoText
-                  placeholder="Enter ESIC Registration No"
-                  id="businessId"
-                />
-              </Box>
-              <Box
-                sx={{
-                  width: '423px',
-                  display: 'flex',
-                  border: '2px dashed ',
-                  borderColor: '#D2D2D3',
-                  backgroundColor: '#F3F3F3',
-                  borderRadius: '4px',
-                  height: '45px',
-                  marginTop: '14px',
-                }}
-              >
-                <Box sx={{ display: 'flex' }}>
-                  <Button>
-                    <img src={Upload_Img} />
-                  </Button>
-                </Box>
-                <Box sx={{ paddingY: '3px' }}>
-                  <Typography
-                    sx={{
-                      fontWeight: '400',
-                      fontSize: '12px',
-                      lineHeight: '16px',
-                      color: '#0662B7',
-                    }}
-                  >
-                    Attach Copy Of ESIC Registration No
-                  </Typography>
-                  <Typography
-                    sx={{
-                      fontSize: '10px',
-                      fontWeight: '400',
-                      letterSpacing: '0.004em',
-                      color: 'grey',
-                    }}
-                  >
-                    Upload file in PDF/JPEG/PNG formats with a maximum file size
-                    2MB
-                  </Typography>
-                </Box>
-              </Box>
-            </Box>
-
-            <Box sx={{ display: 'flex', gap: 3, marginBottom: '20px' }}>
-              <Box sx={{ width: '280px' }}>
-                <TypographySubTitle title="PF Registration No" />
-                <TypoText
-                  placeholder="Enter PF Registration No"
-                  id="businessId"
-                />
-              </Box>
-              <Box
-                sx={{
-                  width: '423px',
-                  display: 'flex',
-                  border: '2px dashed ',
-                  borderColor: '#D2D2D3',
-                  backgroundColor: '#F3F3F3',
-                  borderRadius: '4px',
-                  height: '45px',
-                  marginTop: '14px',
-                }}
-              >
-                <Box sx={{ display: 'flex' }}>
-                  <Button>
-                    <img src={Upload_Img} />
-                  </Button>
-                </Box>
-                <Box sx={{ paddingY: '3px' }}>
-                  <Typography
-                    sx={{
-                      fontWeight: '400',
-                      fontSize: '12px',
-                      lineHeight: '16px',
-                      color: '#0662B7',
-                    }}
-                  >
-                    Attach Copy Of PF Registration No
-                  </Typography>
-                  <Typography
-                    sx={{
-                      fontSize: '10px',
-                      fontWeight: '400',
-                      letterSpacing: '0.004em',
-                      color: 'grey',
-                    }}
-                  >
-                    Upload file in PDF/JPEG/PNG formats with a maximum file size
-                    2MB
-                  </Typography>
-                </Box>
-              </Box>
-            </Box>
-          </Box>
+          <UploadDetails />
+          
         </Box>
 
         <Box
@@ -1067,12 +775,16 @@ export const Onboarding = () => {
               </Grid>
             </Grid>
 
-            <Box sx={{ display: 'flex', gap: 3, marginBottom: '20px' }}>
+            <Box sx={{ display: 'flex', gap: 5, marginBottom: '20px' }}>
               <Box sx={{ width: '280px' }}>
                 <TypographySubTitle title="MICR Code (9 digits)" />
                 <TypoText placeholder="Enter MICR Code" id="businessId" />
               </Box>
-              <Box
+              <Box>
+              <Upload title='Attach Copy of Cancelled Cheque' />
+
+              </Box>
+              {/* <Box
                 sx={{
                   width: '423px',
                   display: 'flex',
@@ -1112,7 +824,7 @@ export const Onboarding = () => {
                     2MB
                   </Typography>
                 </Box>
-              </Box>
+              </Box> */}
             </Box>
           </Box>
         </Box>
@@ -1173,5 +885,5 @@ export const Onboarding = () => {
         </Box>
       </Box>
     </Stack>
-    )
-}
+  );
+};

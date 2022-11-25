@@ -1,7 +1,7 @@
 import { Box, Button } from '@mui/material';
 import './style.scss';
 
-export const FooterButton = (props: { cancel: string; submit: string, handleSubmitClick: any, handleCancelClick: any }) => {
+export const FooterButton = (props: { cancel?: string; submit?: string, handleSubmitClick?: any, handleCancelClick?: any }) => {
   return (
       <Box className="boxBtn">
          {props.cancel && <Button

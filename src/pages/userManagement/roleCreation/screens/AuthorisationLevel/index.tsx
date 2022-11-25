@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   MenuItem,
   Checkbox,
@@ -27,6 +27,7 @@ import {
   TextField,
   OutlinedInput,
   ListItemText,
+  Link,
 } from '@mui/material';
 import TypographyInfo from '../../../../../components/commonComponent/CustomText/Info';
 import AddIcon from '@mui/icons-material/Add';
@@ -41,14 +42,15 @@ import {
 } from './authorisation.const';
 import '../../style.scss';
 import { ScreenHeader } from '../../../../../components/commonComponent/ScreenHeader/ScreenHeader';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import PaginationComp from '../../../../../components/commonComponent/Pagination/Pagination';
 import GreenDot from '../../../../../assets/icons/greendot.svg';
 import DroppedDot from '../../../../../assets/icons/droppeddot.svg';
 import FailureDot from '../../../../../assets/icons/failuredot.svg';
 import ProgressDot from '../../../../../assets/icons/progressdot.svg';
+import ChooseCategoryToViewData from '../../../../../components/commonComponent/ChooseCategoryToViewData';
+import UnfoldMoreIcon from '../../../../../assets/icons/sortArrow.svg';
 
-export const AuthorisationLevel = () => {
+export const AuthorisationLevel = (props: any) => {
   const navigate = useNavigate();
 
   const tableHeaderData: authorisationDataInterface[] = [
@@ -70,9 +72,16 @@ export const AuthorisationLevel = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [currentPage, setCurrentPage] = useState(1);
+  const [ascending, setAscending] = useState<boolean>(true);
+  const [sortingData, setSortingData] = useState(authorisationRows);
+
+  useEffect(() => {
+    filterData();
+  }, [ascending]);
 
   const handleCardMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     console.log('----- button clicked');
+    navigate('/userManagement/roleCreation/authorisationDetails');
   };
 
   const menuOpen = Boolean(anchorElement);
@@ -110,33 +119,59 @@ export const AuthorisationLevel = () => {
     _textColor: string
   ) {
     return (
-      <div className="status-box">
-        <div className="dotIcon">
-          <img src={imageDot} alt={'status-icon'} />
-        </div>
-        <div>
+      <Box
+        style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}
+      >
+        <Box className="dotIcon">
+          <img
+            src={imageDot}
+            alt={'status-icon'}
+            style={{ marginTop: '5px' }}
+          />
+        </Box>
+        <Box>
           <Typography
-            sx={{ fontWeight: 'bold', color: _textColor, fontSize: '14px' }}
+            sx={{
+              fontWeight: 'bold',
+              color: _textColor,
+              fontSize: '14px',
+              marginLeft: '10px',
+            }}
           >
             {status}
           </Typography>
-          <Typography
-            sx={{ fontWeight: 'bold', color: 'grey', fontSize: '10px' }}
-          >
-            22/02/022 - 7.30 PM
-          </Typography>
-        </div>
-      </div>
+        </Box>
+      </Box>
     );
   }
+
+  const viewAction = (viewPath: string, param: any) => {
+    navigate(`${viewPath}${param.id}`, {
+      state: { ...param },
+    });
+  };
+
+  const handleSortByName = () => {
+    setAscending(!ascending);
+  };
+
+  const filterData = () => {
+    const sort = sortingData.sort((a, b) => {
+      if (ascending) {
+        return a.version < b.version ? -1 : 1;
+      }
+      return a.version > b.version ? -1 : 1;
+    });
+    setSortingData([...sort]);
+  };
 
   return (
     <Stack>
       <Stack>
         <Box className="role-header-container">
           <ScreenHeader
-            title="Card Catalogue"
-            info="Manage card information from here"
+            title="Authorization Level"
+            info="From here, you can assign authorization to users."
             showBackButton={false}
           />
 
@@ -145,183 +180,225 @@ export const AuthorisationLevel = () => {
               sx={{ textTransform: 'capitalize' }}
               variant="contained"
               color="secondary"
-              startIcon={<EditOutlinedIcon />}
+              startIcon={<AddIcon />}
               aria-haspopup="true"
               onClick={handleCardMenuClick}
               id="basic-button"
             >
-              Edit Authorisation Level{' '}
+              {`Add Authorisation `}
             </Button>
           </Box>
         </Box>
 
-        <Box sx={{ marginTop: 4 }}>
-          <Box
-            sx={{
-              paddingX: 4,
-              backgroundColor: 'white',
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              paddingY: 2,
-            }}
-          >
-            <Typography>
-              Various organisations along with basic details.
-            </Typography>
+        {authorisationData?.length > 0 && (
+          <Box>
+            <Box sx={{ marginTop: 4 }}>
+              <Box
+                sx={{
+                  paddingX: 4,
+                  backgroundColor: 'white',
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  paddingY: 2,
+                }}
+              >
+                <Typography>
+                  Various organisations along with basic details.
+                </Typography>
+              </Box>
+            </Box>
+            <Divider />
           </Box>
-        </Box>
-        <Divider />
+        )}
 
-        <Box className="tableBox">
-          <TableContainer component={Paper}>
-            <Table size="small" aria-label="Table">
-              <TableHead className="tableHead">
-                {tableHeaderData.map(
-                  (items: authorisationDataInterface, index: number) => (
-                    <TableRow key={index}>
-                      <TableCell
-                        width={'50px'}
-                        align="center"
-                        className="tableCell"
-                      >
-                        id
-                      </TableCell>
-                      {/* <TableCell width={'235px'} className="tableCell">
+        {authorisationData?.length > 0 ? (
+          <Box className="tableBox">
+            <TableContainer component={Paper}>
+              <Table size="small" aria-label="Table">
+                <TableHead className="tableHead">
+                  {tableHeaderData.map(
+                    (items: authorisationDataInterface, index: number) => (
+                      <TableRow key={index}>
+                        <TableCell
+                          width={'50px'}
+                          height={'45px'}
+                          align="center"
+                          className="tableCell"
+                        >
+                          #
+                        </TableCell>
+                        {/* <TableCell width={'235px'} className="tableCell">
                         {items.id}
                       </TableCell> */}
-                      <TableCell width={'235px'} className="tableCell">
-                        {items.version}
-                      </TableCell>
-                      <TableCell width={'235px'} className="tableCell">
-                        {items.initiatedBy}
-                      </TableCell>
-                      <TableCell width={'235px'} className="tableCell">
-                        {items.approvedBy}
-                      </TableCell>
-                      <TableCell width={'235px'} className="tableCell">
-                        {items.date}
-                      </TableCell>
-                      <TableCell width={'235px'} className="tableCell">
-                        {items.currentStatus}
-                      </TableCell>
-                      <TableCell
-                        width={'235px'}
-                        align="right"
-                        className="tableCell"
-                      >
-                        {items.actions}
-                      </TableCell>
-                    </TableRow>
-                  )
-                )}
-              </TableHead>
+                        <TableCell width={'235px'} className="tableCell">
+                          {items.version}
+                          <IconButton onClick={() => handleSortByName()}>
+                            <img src={UnfoldMoreIcon} alt="Sort Icon" />
+                          </IconButton>
+                        </TableCell>
+                        <TableCell width={'235px'} className="tableCell">
+                          {items.initiatedBy}
+                        </TableCell>
+                        <TableCell width={'235px'} className="tableCell">
+                          {items.approvedBy}
+                        </TableCell>
+                        <TableCell width={'235px'} className="tableCell">
+                          {items.date}
+                        </TableCell>
+                        <TableCell width={'250px'} className="tableCell">
+                          {items.currentStatus}
+                        </TableCell>
+                        <TableCell
+                          width={'235px'}
+                          align="center"
+                          className="tableCell"
+                        >
+                          {items.actions}
+                        </TableCell>
+                      </TableRow>
+                    )
+                  )}
+                </TableHead>
 
-              <TableBody>
-                {authorisationData.map((row) => (
-                  <TableRow key={row.id}>
-                    <TableCell align="center" width={'50px'}>
-                      {row.id}
-                    </TableCell>
-                    <TableCell align="left" width={'235px'}>
-                      {row.version}
-                    </TableCell>
-                    <TableCell align="left" width={'235px'}>
-                      {row.initiatedBy}
-                    </TableCell>
-                    <TableCell align="left" width={'235px'}>
-                      {row.approvedBy}
-                    </TableCell>
-                    <TableCell align="left" width={'235px'}>
-                      {row.date}
-                    </TableCell>
-                    <TableCell align="left" width={'235px'}>
-                      {row.currentStatus}
-                    </TableCell>
-                    <TableCell
-                      component="th"
-                      scope="row"
-                      sx={{ borderBottom: 'none' }}
-                    >
-                      {row?.currentStatus && row?.currentStatus?.includes('Success') &&
-                        kycStatus(row?.currentStatus, GreenDot, '#6AB06E')}
-                      {row?.currentStatus && row?.currentStatus?.includes('Progress') &&
-                        kycStatus(row.currentStatus, ProgressDot, '#F37B21')}
-                      {row?.currentStatus && row?.currentStatus?.includes('Failure') &&
-                        kycStatus(row?.currentStatus, FailureDot, '#E63946')}
-                      {row?.currentStatus && row?.currentStatus.includes('Dropped') &&
-                        kycStatus(row?.currentStatus, DroppedDot, '#992D26')}
-                    </TableCell>
-                    <TableCell align="right">
-                      <Box
-                        id="more-button"
-                        onClick={handleClick}
-                        aria-controls={menuOpen ? 'more-menu' : undefined}
-                        aria-haspopup="true"
-                        aria-expanded={menuOpen ? 'true' : undefined}
-                      >
-                        <IconButton aria-label="settings">
-                          <MoreVertIcon />
-                        </IconButton>
-                      </Box>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-              <Menu
-                id="more-menu"
-                anchorEl={anchorElement}
-                open={menuOpen}
-                MenuListProps={{
-                  'aria-labelledby': 'more-button',
-                }}
-                onClose={handleClose}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                // transformOrigin={{
-                //   vertical: 'top',
-                //   horizontal: 'right',
-                // }}
-              >
-                <MenuItem
-                  onClick={() => {
-                    handleClose();
-                    // navigate('/productManagement/cardCatalogue/singleupload/reviewCard');
+                <TableBody>
+                  {authorisationData?.length > 0 &&
+                    authorisationData.map((row) => (
+                      <TableRow key={row.id}>
+                        <TableCell
+                          align="center"
+                          height={'50px'}
+                          width={'50px'}
+                          sx={{ borderBottom: 'none' }}
+                        >
+                          {row?.id}
+                        </TableCell>
+                        <TableCell
+                          align="left"
+                          width={'235px'}
+                          sx={{ borderBottom: 'none' }}
+                        >
+                          {row?.version}
+                        </TableCell>
+                        <TableCell
+                          align="left"
+                          width={'235px'}
+                          sx={{ borderBottom: 'none' }}
+                        >
+                          {row?.initiatedBy}
+                        </TableCell>
+                        <TableCell
+                          align="left"
+                          width={'235px'}
+                          sx={{ borderBottom: 'none' }}
+                        >
+                          {row?.approvedBy}
+                        </TableCell>
+                        <TableCell
+                          align="left"
+                          width={'235px'}
+                          sx={{ borderBottom: 'none' }}
+                        >
+                          {row?.date}
+                        </TableCell>
+                        {/* <TableCell align="left" width={'235px'}>
+                          {row?.currentStatus}
+                        </TableCell> */}
+                        <TableCell
+                          width={'250px'}
+                          sx={{ borderBottom: 'none' }}
+                        >
+                          {row?.currentStatus &&
+                            row?.currentStatus?.includes('Active') &&
+                            kycStatus(row?.currentStatus, GreenDot, '#6AB06E')}
+                          {row?.currentStatus &&
+                            row?.currentStatus?.includes(
+                              'Waiting for Approval'
+                            ) &&
+                            kycStatus(
+                              row.currentStatus,
+                              ProgressDot,
+                              '#F37B21'
+                            )}
+                          {row?.currentStatus &&
+                            row?.currentStatus?.includes('Closed') &&
+                            kycStatus(
+                              row?.currentStatus,
+                              FailureDot,
+                              '#E63946'
+                            )}
+                        </TableCell>
+                        <TableCell align="center" sx={{ borderBottom: 'none' }}>
+                          <Link
+                            sx={{ cursor: 'pointer', color: '#0662B7' }}
+                            underline="none"
+                            onClick={() => viewAction('', row)}
+                          >
+                            View
+                          </Link>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                </TableBody>
+                <Menu
+                  id="more-menu"
+                  anchorEl={anchorElement}
+                  open={menuOpen}
+                  MenuListProps={{
+                    'aria-labelledby': 'more-button',
                   }}
-                  className="menu"
+                  onClose={handleClose}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  // transformOrigin={{
+                  //   vertical: 'top',
+                  //   horizontal: 'right',
+                  // }}
                 >
-                  View
-                </MenuItem>
-                <MenuItem onClick={handleClose} className="menu">
-                  Edit
-                </MenuItem>
-              </Menu>
-            </Table>
-          </TableContainer>
+                  <MenuItem
+                    onClick={() => {
+                      handleClose();
+                      // navigate('/productManagement/cardCatalogue/singleupload/reviewCard');
+                    }}
+                    className="menu"
+                  >
+                    View
+                  </MenuItem>
+                  <MenuItem onClick={handleClose} className="menu">
+                    Edit
+                  </MenuItem>
+                </Menu>
+              </Table>
+            </TableContainer>
 
-          <PaginationComp
-            rows={filteredData}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            handleChangePage={handleChangePage}
-            handleChangeRowsPerPage={handleChangeRowsPerPage}
-            onPageChange={onPageChange}
-            onLastClick={() => {
-              setPage(Math.ceil(filteredData.length / rowsPerPage));
-              setCurrentPage(Math.ceil(filteredData.length / rowsPerPage));
-            }}
-            onFirstClick={() => {
-              setPage(1);
-              setCurrentPage(1);
-            }}
-            lastButtonDisabled={
-              page == Math.ceil(filteredData.length / rowsPerPage)
-            }
-          />
-        </Box>
+            <PaginationComp
+              rows={filteredData}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              handleChangePage={handleChangePage}
+              handleChangeRowsPerPage={handleChangeRowsPerPage}
+              onPageChange={onPageChange}
+              onLastClick={() => {
+                setPage(Math.ceil(filteredData.length / rowsPerPage));
+                setCurrentPage(Math.ceil(filteredData.length / rowsPerPage));
+              }}
+              onFirstClick={() => {
+                setPage(1);
+                setCurrentPage(1);
+              }}
+              lastButtonDisabled={
+                page == Math.ceil(filteredData.length / rowsPerPage)
+              }
+            />
+          </Box>
+        ) : (
+          <Box sx={{ margin: '60px 0' }}>
+            <ChooseCategoryToViewData />
+          </Box>
+        )}
 
         {/* <Box 
         sx={{
