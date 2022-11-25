@@ -354,7 +354,7 @@ export const AuthorisationLevel = () => {
             />
           </Box>
         ) : (
-          <Box sx={{ margin: '60px 0' }}>
+          <Box sx = {{ margin: '60px 0' }}>
             <ChooseCategoryToViewData />
           </Box>
         )}
