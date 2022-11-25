@@ -22,6 +22,7 @@ import { UserCreationFilterDropdown } from './userCreation.const';
 import active_icon from '../../../assets/icons/active.svg';
 import UnfoldMoreIcon from '../../../assets/icons/sortArrow.svg';
 import DeActive_icon from '../../../assets/icons/DeActive.svg';
+import CustomIconButton from '../../../components/commonComponent/CustomIconButton';
 import ChooseCategoryToViewData from '../../../components/commonComponent/ChooseCategoryToViewData';
 import ListTable from '../../../components/commonComponent/commonListTable/commonListTable';
 import BtnOutlined from '../../../components/commonComponent/CustomText/Button/Outlined';
@@ -219,9 +220,9 @@ const UserCreation = () => {
       },
     },
     {
-      title: 'Org.ID',
-      dataIndex: 'orgId',
-      key: 'orgId',
+      title: 'Employee ID',
+      dataIndex: 'empId',
+      key: 'empId',
       headerRender: (text: string) => {
         return (
           <Stack
@@ -241,13 +242,22 @@ const UserCreation = () => {
       },
     },
     {
-      title: 'Org.Name',
-      dataIndex: 'orgName',
-      key: 'orgName',
+      title: 'Name',
+      dataIndex: 'name',
+      key: 'name',
     },
-    { title: 'Org.Type', dataIndex: 'orgType', key: 'orgType' },
-    { title: 'Start Date', dataIndex: 'startDate', key: 'startDate' },
+    { title: 'Mobile Number', dataIndex: 'mobilenumber', key: 'mobilenumber' },
+    { title: 'Email ID', dataIndex: 'emailId', key: 'emailId' },
     { title: 'State', dataIndex: 'state', key: 'state' },
+    { title: 'Zonal', dataIndex: 'zonal', key: 'zonal' },
+    {
+      title: 'Reporting Head',
+      dataIndex: 'reportingHead',
+      key: 'reportingHead',
+    },
+    { title: 'User Role', dataIndex: 'userRole', key: 'userRole' },
+    { title: 'Branch', dataIndex: 'branch', key: 'branch' },
+    { title: 'Designation', dataIndex: 'designation', key: 'designation' },
     {
       title: 'Status',
       dataIndex: 'status',
@@ -300,13 +310,18 @@ const UserCreation = () => {
       title: 'All',
     },
     {
-      title: 'Activate',
+      title: 'Active',
     },
     {
       title: 'Deactivated',
     },
+  ];
+
+  const customIconBtns = [
+    { label: 'Activate User', icon: active_icon },
     {
-      title: 'Saved',
+      label: 'Deactivate User',
+      icon: DeActive_icon,
     },
   ];
 
@@ -344,63 +359,23 @@ const UserCreation = () => {
           info=""
           isDownloadEnabled={true}
         />
-        <Stack className="tableNavbar">
-          <Stack
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              flexDirection: 'row',
-              width: '30%',
-            }}
-          >
-            <Button
-              variant="contained"
-              color="secondary"
-              sx={{
-                padding: '0px 10px',
-                fontSize: '14px',
-                fontWeight: 400,
-                display: 'flex',
-                alignItems: 'center',
-                textTransform: 'capitalize',
-                letterSpacing: '0.0025em',
-              }}
-            >
-              <IconButton sx={{ padding: '0', marginRight: '8px' }}>
-                <img src={active_icon} alt="resumeIcon" />
-              </IconButton>
-              Active Org
-            </Button>
-            <Button
-              variant="contained"
-              color="secondary"
-              sx={{
-                padding: '0px 10px',
-                fontSize: '14px',
-                fontWeight: 400,
-                display: 'flex',
-                alignItems: 'center',
-                textTransform: 'capitalize',
-                letterSpacing: '0.0025em',
-                marginLeft: '15px',
-              }}
-            >
-              <IconButton sx={{ padding: '0', marginRight: '8px' }}>
-                <img src={DeActive_icon} alt="resumeIcon" />
-              </IconButton>
-              Deactivate Org
-            </Button>
+        <Box style={{ marginTop: '20px', display: 'flex' }}>
+          {customIconBtns?.map((eachBtn: any) => {
+            return <CustomIconButton data={eachBtn} />;
+          })}
+
+          <Stack className="table-search-filters">
+            <Box className="search-container">
+              <Box className="search-box">
+                <SearchIcon className="search-icon" />
+                <InputBase placeholder="Search" />
+              </Box>
+              <Box>
+                <GroupButton data={GroupButtonData} />
+              </Box>
+            </Box>
           </Stack>
-          <Box className="organisation-search-container">
-            <Box className="organisation-search-box">
-              <SearchIcon className="organisation-search-icon" />
-              <InputBase placeholder="Search" />
-            </Box>
-            <Box>
-              <GroupButton data={GroupButtonData} />
-            </Box>
-          </Box>
-        </Stack>
+        </Box>
 
         <Stack>
           <ListTable column={column} data={sortingData} />
