@@ -406,20 +406,36 @@ export default function Layout() {
                       text.subContent.length > 0 &&
                       text.subContent.map((subData) => {
                         return (
-                          <Collapse in={openList} timeout="auto" unmountOnExit>
-                            <List
-                              component="div"
-                              disablePadding
-                              // sx={{ padding: '0 2.6rem' }}
+                          <ListItemButton
+                            component={NavLink}
+                            to={subData.path}
+                            classes={({ isActive }: any) =>
+                              isActive ? 'active' : 'inactive'
+                            }
+                            sx={{ padding: '0' }}
+                          >
+                            <Collapse
+                              in={openList}
+                              timeout="auto"
+                              unmountOnExit
+                              sx={{
+                                padding: '0 2.6rem',
+                                // backgroundColor: 'green',
+                              }}
                             >
-                              <Link to={subData.path}>
+                              <List
+                                component="div"
+                                disablePadding
+                                // sx={{ padding: '0 2.6rem' }}
+                              >
+                                {/* <Link to={subData.path}> */}
                                 <ListItemButton
                                   sx={{ pl: 4 }}
-                                  component={NavLink}
-                                  to={subData.path}
-                                  classes={({ isActive }: any) =>
-                                    isActive ? 'active' : 'inactive'
-                                  }
+                                  // component={NavLink}
+                                  // to={subData.path}
+                                  // classes={({ isActive }: any) =>
+                                  //   isActive ? 'active' : 'inactive'
+                                  // }
                                 >
                                   <ListItemIcon sx={{ width: '2.5rem' }}>
                                     <img src={subData.img} alt="" />
@@ -433,9 +449,10 @@ export default function Layout() {
                                     }}
                                   />
                                 </ListItemButton>
-                              </Link>
-                            </List>
-                          </Collapse>
+                                {/* </Link> */}
+                              </List>
+                            </Collapse>
+                          </ListItemButton>
                         );
                       })}
                   </>

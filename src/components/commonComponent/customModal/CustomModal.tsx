@@ -1033,6 +1033,7 @@ function CustomModal({
                     textTransform: 'capitalize',
                     background: '#0662B7',
                   }}
+                  onClick={handleSuccess}
                 >
                   {yesContinueBtn}
                 </Button>
