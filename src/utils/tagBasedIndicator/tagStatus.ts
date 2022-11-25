@@ -11,14 +11,14 @@ export const checkTagStatus = (value: string) => {
     result.bgColor = colors.lightGreen;
     return result;
   }
-  if (value === tagBasedIndicator.ACTIVE) {
-    result.color = '#32A64D';
-    result.bgColor = colors.lightGreen;
+  if (value === tagBasedIndicator.PAUSED) {
+    result.color = '#F37B21';
+    result.bgColor = '';
     return result;
   }
   if (value === tagBasedIndicator.DEACTIVATE) {
     result.color = '#D02127';
-    result.bgColor = colors.lightGreen;
+    result.bgColor = '';
     return result;
   }
   if (value === tagBasedIndicator.SAVED) {

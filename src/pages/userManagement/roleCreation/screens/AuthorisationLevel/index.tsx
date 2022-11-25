@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   MenuItem,
   Checkbox,
@@ -27,6 +27,7 @@ import {
   TextField,
   OutlinedInput,
   ListItemText,
+  Link,
 } from '@mui/material';
 import TypographyInfo from '../../../../../components/commonComponent/CustomText/Info';
 import AddIcon from '@mui/icons-material/Add';
@@ -41,15 +42,15 @@ import {
 } from './authorisation.const';
 import '../../style.scss';
 import { ScreenHeader } from '../../../../../components/commonComponent/ScreenHeader/ScreenHeader';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import PaginationComp from '../../../../../components/commonComponent/Pagination/Pagination';
 import GreenDot from '../../../../../assets/icons/greendot.svg';
 import DroppedDot from '../../../../../assets/icons/droppeddot.svg';
 import FailureDot from '../../../../../assets/icons/failuredot.svg';
 import ProgressDot from '../../../../../assets/icons/progressdot.svg';
 import ChooseCategoryToViewData from '../../../../../components/commonComponent/ChooseCategoryToViewData';
+import UnfoldMoreIcon from '../../../../../assets/icons/sortArrow.svg';
 
-export const AuthorisationLevel = () => {
+export const AuthorisationLevel = (props: any) => {
   const navigate = useNavigate();
 
   const tableHeaderData: authorisationDataInterface[] = [
@@ -71,9 +72,16 @@ export const AuthorisationLevel = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [currentPage, setCurrentPage] = useState(1);
+  const [ascending, setAscending] = useState<boolean>(true);
+  const [sortingData, setSortingData] = useState(authorisationRows);
+
+  useEffect(() => {
+    filterData();
+  }, [ascending]);
 
   const handleCardMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     console.log('----- button clicked');
+    navigate('/userManagement/roleCreation/authorisationDetails');
   };
 
   const menuOpen = Boolean(anchorElement);
@@ -111,25 +119,51 @@ export const AuthorisationLevel = () => {
     _textColor: string
   ) {
     return (
-      <div className="status-box">
-        <div className="dotIcon">
-          <img src={imageDot} alt={'status-icon'} />
-        </div>
-        <div>
+      <Box
+        style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}
+      >
+        <Box className="dotIcon">
+          <img
+            src={imageDot}
+            alt={'status-icon'}
+            style={{ marginTop: '5px' }}
+          />
+        </Box>
+        <Box>
           <Typography
-            sx={{ fontWeight: 'bold', color: _textColor, fontSize: '14px' }}
+            sx={{
+              fontWeight: 'bold',
+              color: _textColor,
+              fontSize: '14px',
+              marginLeft: '10px',
+            }}
           >
             {status}
           </Typography>
-          <Typography
-            sx={{ fontWeight: 'bold', color: 'grey', fontSize: '10px' }}
-          >
-            22/02/022 - 7.30 PM
-          </Typography>
-        </div>
-      </div>
+        </Box>
+      </Box>
     );
   }
+
+  const viewAction = (viewPath: string, param: any) => {
+    navigate(`${viewPath}${param.id}`, {
+      state: { ...param },
+    });
+  };
+
+  const handleSortByName = () => {
+    setAscending(!ascending);
+  };
+
+  const filterData = () => {
+    const sort = sortingData.sort((a, b) => {
+      if (ascending) {
+        return a.version < b.version ? -1 : 1;
+      }
+      return a.version > b.version ? -1 : 1;
+    });
+    setSortingData([...sort]);
+  };
 
   return (
     <Stack>
@@ -146,25 +180,17 @@ export const AuthorisationLevel = () => {
               sx={{ textTransform: 'capitalize' }}
               variant="contained"
               color="secondary"
-              startIcon={
-                authorisationData?.length === 0 ? (
-                  <AddIcon />
-                ) : (
-                  <EditOutlinedIcon />
-                )
-              }
+              startIcon={<AddIcon />}
               aria-haspopup="true"
               onClick={handleCardMenuClick}
               id="basic-button"
             >
-              {authorisationData?.length === 0
-                ? `Add Authorisation `
-                : `Edit Authorisation Level `}
+              {`Add Authorisation `}
             </Button>
           </Box>
         </Box>
 
-        {authorisationData?.length === 0 && (
+        {authorisationData?.length > 0 && (
           <Box>
             <Box sx={{ marginTop: 4 }}>
               <Box
@@ -187,7 +213,7 @@ export const AuthorisationLevel = () => {
           </Box>
         )}
 
-        {authorisationData?.length === 0 ? (
+        {authorisationData?.length > 0 ? (
           <Box className="tableBox">
             <TableContainer component={Paper}>
               <Table size="small" aria-label="Table">
@@ -197,16 +223,20 @@ export const AuthorisationLevel = () => {
                       <TableRow key={index}>
                         <TableCell
                           width={'50px'}
+                          height={'45px'}
                           align="center"
                           className="tableCell"
                         >
-                          id
+                          #
                         </TableCell>
                         {/* <TableCell width={'235px'} className="tableCell">
                         {items.id}
                       </TableCell> */}
                         <TableCell width={'235px'} className="tableCell">
                           {items.version}
+                          <IconButton onClick={() => handleSortByName()}>
+                            <img src={UnfoldMoreIcon} alt="Sort Icon" />
+                          </IconButton>
                         </TableCell>
                         <TableCell width={'235px'} className="tableCell">
                           {items.initiatedBy}
@@ -217,12 +247,12 @@ export const AuthorisationLevel = () => {
                         <TableCell width={'235px'} className="tableCell">
                           {items.date}
                         </TableCell>
-                        <TableCell width={'235px'} className="tableCell">
+                        <TableCell width={'250px'} className="tableCell">
                           {items.currentStatus}
                         </TableCell>
                         <TableCell
                           width={'235px'}
-                          align="right"
+                          align="center"
                           className="tableCell"
                         >
                           {items.actions}
@@ -236,66 +266,77 @@ export const AuthorisationLevel = () => {
                   {authorisationData?.length > 0 &&
                     authorisationData.map((row) => (
                       <TableRow key={row.id}>
-                        <TableCell align="center" width={'50px'}>
+                        <TableCell
+                          align="center"
+                          height={'50px'}
+                          width={'50px'}
+                          sx={{ borderBottom: 'none' }}
+                        >
                           {row?.id}
                         </TableCell>
-                        <TableCell align="left" width={'235px'}>
+                        <TableCell
+                          align="left"
+                          width={'235px'}
+                          sx={{ borderBottom: 'none' }}
+                        >
                           {row?.version}
                         </TableCell>
-                        <TableCell align="left" width={'235px'}>
+                        <TableCell
+                          align="left"
+                          width={'235px'}
+                          sx={{ borderBottom: 'none' }}
+                        >
                           {row?.initiatedBy}
                         </TableCell>
-                        <TableCell align="left" width={'235px'}>
+                        <TableCell
+                          align="left"
+                          width={'235px'}
+                          sx={{ borderBottom: 'none' }}
+                        >
                           {row?.approvedBy}
                         </TableCell>
-                        <TableCell align="left" width={'235px'}>
+                        <TableCell
+                          align="left"
+                          width={'235px'}
+                          sx={{ borderBottom: 'none' }}
+                        >
                           {row?.date}
                         </TableCell>
-                        <TableCell align="left" width={'235px'}>
+                        {/* <TableCell align="left" width={'235px'}>
                           {row?.currentStatus}
-                        </TableCell>
+                        </TableCell> */}
                         <TableCell
-                          component="th"
-                          scope="row"
+                          width={'250px'}
                           sx={{ borderBottom: 'none' }}
                         >
                           {row?.currentStatus &&
-                            row?.currentStatus?.includes('Success') &&
+                            row?.currentStatus?.includes('Active') &&
                             kycStatus(row?.currentStatus, GreenDot, '#6AB06E')}
                           {row?.currentStatus &&
-                            row?.currentStatus?.includes('Progress') &&
+                            row?.currentStatus?.includes(
+                              'Waiting for Approval'
+                            ) &&
                             kycStatus(
                               row.currentStatus,
                               ProgressDot,
                               '#F37B21'
                             )}
                           {row?.currentStatus &&
-                            row?.currentStatus?.includes('Failure') &&
+                            row?.currentStatus?.includes('Closed') &&
                             kycStatus(
                               row?.currentStatus,
                               FailureDot,
                               '#E63946'
                             )}
-                          {row?.currentStatus &&
-                            row?.currentStatus.includes('Dropped') &&
-                            kycStatus(
-                              row?.currentStatus,
-                              DroppedDot,
-                              '#992D26'
-                            )}
                         </TableCell>
-                        <TableCell align="right">
-                          <Box
-                            id="more-button"
-                            onClick={handleClick}
-                            aria-controls={menuOpen ? 'more-menu' : undefined}
-                            aria-haspopup="true"
-                            aria-expanded={menuOpen ? 'true' : undefined}
+                        <TableCell align="center" sx={{ borderBottom: 'none' }}>
+                          <Link
+                            sx={{ cursor: 'pointer', color: '#0662B7' }}
+                            underline="none"
+                            onClick={() => viewAction('', row)}
                           >
-                            <IconButton aria-label="settings">
-                              <MoreVertIcon />
-                            </IconButton>
-                          </Box>
+                            View
+                          </Link>
                         </TableCell>
                       </TableRow>
                     ))}
