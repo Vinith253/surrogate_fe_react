@@ -1,0 +1,38 @@
+.header-with-info-container {
+  .header {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    display: flex;
+    color: #151515;
+    margin: 10px 0px;
+
+    .info-icon {
+      margin: 0px 8px 0px 15px;
+    }
+
+    .info-label {
+      color: #656769;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .margins {
+      margin-top: 2px;
+    }
+  }
+  .underline {
+    margin: 15px 0px 5px 0px;
+    border-bottom: 2px solid #f0f2f5;
+  }
+
+  .icons-container {
+    display: flex;
+    justify-content: end;
+    .icons {
+      width: 23px;
+      margin: -27px 20px 0px 0px;
+      cursor: pointer;
+    }
+  }
+}

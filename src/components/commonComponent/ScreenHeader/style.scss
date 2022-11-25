@@ -1,16 +1,23 @@
-.headFull {
-    display: flex;
-    justify-content: flex-start;
-    flex-direction:column;
-    gap: 8px;
+.header-container {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 3px;
 
-    .upperhead{
-        display: flex;
-        flex-direction: row;
-      }
-      .headback {
-        color: #0078ef;
-        cursor: pointer;
-      }
-      
+  .main-header {
+    display: flex;
+    flex-direction: row;
+    color: #151515;
   }
+
+  .go-back-icon {
+    color: #0078ef;
+    cursor: pointer;
+    margin: 0px 10px 0px 0px;
+  }
+
+  .css-uxb4hx-MuiTypography-root {
+    margin: 0px;
+    color: #9facb8;
+  }
+}

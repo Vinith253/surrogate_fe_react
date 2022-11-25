@@ -1,16 +1,10 @@
 .user-creation-main-container {
-  width: 100%;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  font-family: 'Ilisarniq';
-
   .user-header-container {
     background-color: white;
     display: flex;
     justify-content: space-between;
     padding: 24px 32px 24px 32px;
+    border-radius: 8px;
   }
 
   .container {
@@ -19,12 +13,12 @@
     margin: 30px 0px;
     border-radius: 8px;
 
-    .underline {
-      border-top: none;
-      border-left: none;
-      border-right: none;
-      margin: 15px 0px;
-      border-bottom: 2px solid #eceff2;
+    .filters-container {
+      margin-top: 0px;
+
+      .dropdown-label {
+        font-size: 13px;
+      }
     }
 
     .button-container {
@@ -33,14 +27,46 @@
       margin-left: auto;
     }
 
-    .icons-container {
+    .table-search-filters {
       display: flex;
-      justify-content: end;
-      .icons {
-        width: 16px;
-        margin: -20px 20px 0px 0px;
-        cursor: pointer;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      margin-left: auto;
+      .search-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        // width: 55%;
+        .search-box {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border: 1px solid #afaeaf;
+          border-radius: 6px;
+          padding: 5px 10px;
+          width: 35%;
+          .search-icon {
+            margin-right: 15px;
+            color: #afaeaf;
+          }
+        }
       }
     }
+  }
+}
+
+.create-user-container {
+  background-color: #ffffff;
+  padding: 20px 30px 30px 30px;
+  margin: 30px 0px;
+  border-radius: 8px;
+
+  .underline {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    margin: 15px 0px;
+    border-bottom: 2px solid #eceff2;
   }
 }
