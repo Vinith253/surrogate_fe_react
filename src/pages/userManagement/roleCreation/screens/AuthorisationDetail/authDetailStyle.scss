@@ -81,6 +81,13 @@
           flex-direction: row;
           justify-content: space-between;
           padding: 15px;
+          .modelAccessControlModuleName {
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 16px;
+            letter-spacing: 0.0025em;
+            color: #151515;
+          }
         }
         .modelAccessControlContainerTableData {
           display: flex;

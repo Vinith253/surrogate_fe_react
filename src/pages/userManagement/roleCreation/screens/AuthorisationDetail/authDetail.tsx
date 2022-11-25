@@ -1,11 +1,4 @@
-import {
-  Stack,
-  Box,
-  Button,
-  IconButton,
-  Typography,
-  Alert,
-} from '@mui/material';
+import { Stack, Box, Button, IconButton, Typography } from '@mui/material';
 import React from 'react';
 import { ScreenHeader } from '../../../../../components/commonComponent/ScreenHeader/ScreenHeader';
 import '../AuthorisationDetail/authDetailStyle.scss';
@@ -17,6 +10,7 @@ import question_icon from '../../../../../assets/icons/questionMark_icon.svg';
 import close_icon from '../../../../../assets/icons/close_icon.svg';
 
 import { tagBasedIndicator } from '../../../../../utils/Constants';
+import BtnContained from '../../../../../components/commonComponent/CustomText/Button/Contained';
 export const authDetailHeader = [
   {
     title: 'Initiated By',
@@ -37,7 +31,10 @@ export const authDetailHeader = [
 ];
 
 export const AuthDetail = () => {
-  const dataItem = 'Active';
+  //   const dataItem = tagBasedIndicator.WAITING_FOR_APPROVAL;
+  const dataItem = tagBasedIndicator.CLOSED;
+  //   const dataItem = tagBasedIndicator.ACTIVE;
+
   return (
     <Stack className="authDetailContainer">
       <Stack className="authDetailContainerHeaderMain">
@@ -141,7 +138,9 @@ export const AuthDetail = () => {
                 <Stack className="modelAccessControlContainerTable">
                   <Stack className="modelAccessControlContainerTableHeader">
                     <Stack sx={{ width: '50%' }}>
-                      <Typography>{items.module_name}</Typography>
+                      <Typography className="modelAccessControlModuleName">
+                        {items.module_name}
+                      </Typography>
                     </Stack>
                     <Stack
                       sx={{
@@ -151,10 +150,16 @@ export const AuthDetail = () => {
                         width: '50%',
                       }}
                     >
-                      <Typography sx={{ width: '48%' }}>
+                      <Typography
+                        sx={{ width: '48%' }}
+                        className="modelAccessControlModuleName"
+                      >
                         {items.reviewer}
                       </Typography>
-                      <Typography sx={{ width: '48%' }}>
+                      <Typography
+                        sx={{ width: '48%' }}
+                        className="modelAccessControlModuleName"
+                      >
                         {items.approver}
                       </Typography>
                     </Stack>
@@ -200,6 +205,29 @@ export const AuthDetail = () => {
           })}
         </Stack>
       </Stack>
+
+      <Box
+        sx={{
+          marginTop: '10px',
+          backgroundColor: 'white',
+          position: 'fixed',
+          bottom: 0,
+          right: 0,
+          width: '100%',
+          borderTop: '2px solid #f3f3f3 ',
+        }}
+      >
+        <Box
+          sx={{
+            display: 'flex',
+            gap: 2,
+            justifyContent: 'flex-end',
+            padding: '15px',
+          }}
+        >
+          <BtnContained title="Close" />
+        </Box>
+      </Box>
     </Stack>
   );
 };
