@@ -29,6 +29,7 @@ import ListTable from '../../../../../components/commonComponent/commonListTable
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import UnfoldMoreIcon from '../../../../../assets/icons/sortArrow.svg';
 import { checkTagStatus } from '../../../../../utils/tagBasedIndicator/tagStatus';
+
 export const organisationFilterDropdown: salesReportFilterInterface[] = [
   {
     label: 'Org Type',
@@ -61,10 +62,12 @@ export const organisationFilterDropdown: salesReportFilterInterface[] = [
     ],
   },
 ];
+
 export interface salesReportFilterInterface {
   label?: string;
   option?: Array<object>;
 }
+
 export const GroupButtonData = [
   {
     title: 'All',
@@ -79,6 +82,7 @@ export const GroupButtonData = [
     title: 'Saved',
   },
 ];
+
 export const data = [
   {
     id: 1,
@@ -135,6 +139,7 @@ export const data = [
     status: 'Active',
   },
 ];
+
 export const OrganisationDetails = () => {
   const [selected, setSelected] = React.useState<number[]>([]);
   const [ascending, setAscending] = useState<boolean>(true);
@@ -142,18 +147,22 @@ export const OrganisationDetails = () => {
   const [idSorting, setIdSorting] = useState<boolean>(true);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const openCardMenu = Boolean(anchorEl);
+
   const handleCardMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
   const handleCardMenuClose = () => {
     setAnchorEl(null);
   };
+
   const addOrganisationOpen = () => {
     setAnchorEl(null);
   };
+
   const organisationOpen = () => {
     setAnchorEl(null);
   };
+
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       const newSelected = data.map((n: any) => n.id);
@@ -181,9 +190,11 @@ export const OrganisationDetails = () => {
       setSelected([...selectedData, id]);
     }
   };
+
   const handleSortByName = () => {
     setAscending(!ascending);
   };
+
   const handleSortById = () => {
     setIdSorting(!idSorting);
   };
@@ -328,6 +339,7 @@ export const OrganisationDetails = () => {
   useEffect(() => {
     filterData();
   }, [ascending]);
+
   useEffect(() => {
     idFilterData();
   }, [idSorting]);
@@ -373,6 +385,7 @@ export const OrganisationDetails = () => {
           </Menu>
         </Box>
       </Box>
+
       <Box className="organisationListHeader">
         <Box className="organisationList">
           <Box
@@ -416,6 +429,7 @@ export const OrganisationDetails = () => {
           <BtnContained title="Search" />
         </Box>
       </Box>
+
       <Box className="organisationTableContainer">
         <Stack
           className="organisationHeaderContainer"
@@ -450,6 +464,7 @@ export const OrganisationDetails = () => {
             </Stack>
           </Stack>
         </Stack>
+
         <Stack className="tableNavbar">
           <Stack
             sx={{
@@ -507,6 +522,7 @@ export const OrganisationDetails = () => {
             </Box>
           </Box>
         </Stack>
+
         <Stack>
           <ListTable column={column} data={sortingData} />
         </Stack>

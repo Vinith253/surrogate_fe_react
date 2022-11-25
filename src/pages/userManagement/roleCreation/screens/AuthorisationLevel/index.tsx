@@ -1,20 +1,12 @@
 import React, { useState } from 'react';
 import {
   MenuItem,
-  Checkbox,
   Typography,
   Box,
-  Tab,
   Stack,
   Button,
-  ToggleButtonGroup,
-  ToggleButton,
-  Icon,
   IconButton,
   Divider,
-  InputLabel,
-  FormControl,
-  SelectChangeEvent,
   Table,
   TableContainer,
   TableBody,
@@ -23,10 +15,6 @@ import {
   TableCell,
   Paper,
   Menu,
-  Select,
-  TextField,
-  OutlinedInput,
-  ListItemText,
 } from '@mui/material';
 import TypographyInfo from '../../../../../components/commonComponent/CustomText/Info';
 import AddIcon from '@mui/icons-material/Add';
@@ -72,9 +60,9 @@ export const AuthorisationLevel = () => {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const handleCardMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    console.log('----- button clicked');
-  };
+  // const handleCardMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  //   console.log('----- button clicked');
+  // };
 
   const menuOpen = Boolean(anchorElement);
   const handleClick = (event: React.MouseEvent<HTMLTableCellElement>) => {
@@ -154,8 +142,10 @@ export const AuthorisationLevel = () => {
                 )
               }
               aria-haspopup="true"
-              onClick={handleCardMenuClick}
               id="basic-button"
+              onClick={() => {
+                navigate('/userManagement/roleCreation/authorisationDetails');
+              }}
             >
               {authorisationData?.length === 0
                 ? `Add Authorisation `
@@ -354,7 +344,7 @@ export const AuthorisationLevel = () => {
             />
           </Box>
         ) : (
-          <Box sx = {{ margin: '60px 0' }}>
+          <Box sx={{ margin: '60px 0' }}>
             <ChooseCategoryToViewData />
           </Box>
         )}

@@ -152,14 +152,22 @@ export const ListView = ({ data }: any) => {
   return (
     <Stack>
       <TableContainer component={Paper}>
-        <Table aria-label="Table">
+        <Table
+          aria-label="Table"
+          sx={{
+            borderBottom: 'none',
+          }}
+        >
           <TableHead
             style={{ background: colors.tableHeaderLightBlue }}
             sx={{ padding: '5px' }}
           >
             {tableHeaderData.map((items: dataHeaderList, index: number) => (
-              <TableRow key={index} sx={{ padding: '5px' }}>
-                <TableCell sx={{ padding: '5px' }}>
+              <TableRow
+                key={index}
+                style={{ padding: '5px', borderBottom: 'none' }}
+              >
+                <TableCell sx={{ padding: '5px', borderBottom: 'none' }}>
                   <Checkbox
                     color={'secondary'}
                     indeterminate={
@@ -172,28 +180,38 @@ export const ListView = ({ data }: any) => {
                     }}
                   />
                 </TableCell>
-                <TableCell sx={{ fontWeight: 800, padding: '5px' }}>
+                <TableCell
+                  sx={{ fontWeight: 800, padding: '5px', borderBottom: 'none' }}
+                >
                   {items.surrogateProgramme}
                   <IconButton onClick={() => handleSortByName()}>
                     <img src={UnfoldMoreIcon} alt="Sort Icon" />
                   </IconButton>
                 </TableCell>
-                <TableCell sx={{ fontWeight: 800, padding: '5px' }}>
+                <TableCell
+                  sx={{ fontWeight: 800, padding: '5px', borderBottom: 'none' }}
+                >
                   {items.activeSince}
                 </TableCell>
-                <TableCell sx={{ fontWeight: 800, padding: '5px' }}>
+                <TableCell
+                  sx={{ fontWeight: 800, padding: '5px', borderBottom: 'none' }}
+                >
                   {items.lastModify}
                 </TableCell>
-                <TableCell sx={{ fontWeight: 800, padding: '5px' }}>
+                <TableCell
+                  sx={{ fontWeight: 800, padding: '5px', borderBottom: 'none' }}
+                >
                   {items.status}
                 </TableCell>
                 <TableCell
-                  sx={{ fontWeight: 800, padding: '5px' }}
+                  sx={{ fontWeight: 800, padding: '5px', borderBottom: 'none' }}
                   align="center"
                 >
                   {items.autoResumeForm}
                 </TableCell>
-                <TableCell sx={{ fontWeight: 800, padding: '5px' }}>
+                <TableCell
+                  sx={{ fontWeight: 800, padding: '5px', borderBottom: 'none' }}
+                >
                   {items.more}
                 </TableCell>
               </TableRow>
@@ -208,14 +226,17 @@ export const ListView = ({ data }: any) => {
                 return (
                   <TableRow
                     key={index}
+                    sx={{ padding: '5px', borderBottom: 'none' }}
                     style={
-                      index % 2
-                        ? { background: colors.white }
-                        : { background: colors.tableGrey }
+                      isItemSelected === true
+                        ? { background: colors.tableGrey }
+                        : { background: colors.white }
                     }
-                    sx={{ padding: '5px' }}
                   >
-                    <TableCell padding={'checkbox'} sx={{ padding: '5px' }}>
+                    <TableCell
+                      padding={'checkbox'}
+                      sx={{ padding: '5px', borderBottom: 'none' }}
+                    >
                       <Checkbox
                         color={'secondary'}
                         checked={isItemSelected}
@@ -225,29 +246,34 @@ export const ListView = ({ data }: any) => {
                         onChange={() => handleClickCheckbox(dataItem.id)}
                       />
                     </TableCell>
-                    <TableCell sx={{ padding: '5px' }}>
+                    <TableCell sx={{ padding: '5px', borderBottom: 'none' }}>
                       {dataItem.surrogateProgramme}
                     </TableCell>
                     <TableCell
                       sx={{
                         color: checkTagStatus(dataItem.activeSince).color,
                         padding: '5px',
+                        borderBottom: 'none',
                       }}
                     >
                       {dataItem.activeSince}
                     </TableCell>
-                    <TableCell sx={{ padding: '5px' }}>
+                    <TableCell sx={{ padding: '5px', borderBottom: 'none' }}>
                       {dataItem.lastModify}
                     </TableCell>
                     <TableCell
                       sx={{
                         color: checkTagStatus(dataItem.status).color,
                         padding: '5px',
+                        borderBottom: 'none',
                       }}
                     >
                       {dataItem.status}
                     </TableCell>
-                    <TableCell align="center" sx={{ padding: '5px' }}>
+                    <TableCell
+                      align="center"
+                      sx={{ padding: '5px', borderBottom: 'none' }}
+                    >
                       {dataItem.autoResumeForm === ''
                         ? '-'
                         : dataItem.autoResumeForm}
@@ -258,7 +284,7 @@ export const ListView = ({ data }: any) => {
                       aria-controls={open ? 'more-menu' : undefined}
                       aria-haspopup="true"
                       aria-expanded={open ? 'true' : undefined}
-                      sx={{ padding: '5px' }}
+                      sx={{ padding: '5px', borderBottom: 'none' }}
                     >
                       <MoreVertIcon />
                     </TableCell>

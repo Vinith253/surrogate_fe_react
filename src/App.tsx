@@ -24,6 +24,7 @@ import UserCreation from './pages/userManagement/userCreation';
 import { CreateRole } from './pages/userManagement/roleCreation/createRole/createRole';
 import CreateUser from './pages/userManagement/userCreation/createUser';
 import { UserDetails } from './pages/userManagement/roleCreation/UserDetails/UserDetails';
+import { AuthDetail } from './pages/userManagement/roleCreation/screens/AuthorisationDetail/authDetail';
 
 export default function App() {
   return (
@@ -107,7 +108,10 @@ export default function App() {
           path="/userManagement/roleCreation/userdetails"
           element={<UserDetails />}
         />
-
+        <Route
+          path="/userManagement/roleCreation/authorisationDetails"
+          element={<AuthDetail />}
+        />
         {/* Catch all */}
         <Route path="*" element={<NotFoundPage />} />
       </Route>
