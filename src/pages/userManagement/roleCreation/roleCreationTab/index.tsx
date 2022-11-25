@@ -99,7 +99,7 @@ function RoleCreationTab() {
 
   const handleDuplicateNext = (roleValue: string) => {
     navigate('/userManagement/roleCreation/createRole', {
-      state: { roleName:roleValue, data: duplicateRoleData },
+      state: { roleName:`${roleValue} Copy`, data: duplicateRoleData },
     });
   }
 
@@ -163,7 +163,7 @@ function RoleCreationTab() {
               Various organisations along with basic details.
             </Typography>
           </Box>
-          <Divider />
+          <Divider sx={{backgroundColor:'#F0F2F5'}}/>
           <Box className="tableBox">
             <TableContainer component={Paper}>
               <Table size="small" aria-label="Table">
