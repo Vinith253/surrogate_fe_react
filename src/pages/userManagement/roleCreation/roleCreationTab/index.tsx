@@ -59,9 +59,23 @@ function RoleCreationTab() {
   const handleClick = (event: React.MouseEvent<HTMLTableCellElement>) => {
     setAnchorElement(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorElement(null);
+  }
+  const handleViewClose = () => {
+    setAnchorElement(null);
+    navigate('/userManagement/roleCreation/createRole', {
+      state: { roleName:'Head', data: duplicateRoleData, isView : true },
+    });
   };
+
+  const handleEditClose = () => {
+    setAnchorElement(null);
+    navigate('/userManagement/roleCreation/createRole', {
+      state: { roleName:'Executive', data: duplicateRoleData, isView : false },
+    });
+  }
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
@@ -84,7 +98,6 @@ function RoleCreationTab() {
   };
 
   const handleDuplicateNext = (roleValue: string) => {
-    console.log("roleValue", roleValue)
     navigate('/userManagement/roleCreation/createRole', {
       state: { roleName:roleValue, data: duplicateRoleData },
     });
@@ -241,16 +254,13 @@ function RoleCreationTab() {
                   // }}
                 >
                   <MenuItem
-                    onClick={() => {
-                      handleClose();
-                      // navigate('/productManagement/cardCatalogue/singleupload/reviewCard');
-                    }}
+                    onClick={handleViewClose}
                     className="menu"
                   >
-                    View
+                    View Role
                   </MenuItem>
-                  <MenuItem onClick={handleClose} className="menu">
-                    Edit
+                  <MenuItem onClick={handleEditClose} className="menu">
+                    Edit Role
                   </MenuItem>
                 </Menu>
               </Table>
@@ -281,7 +291,7 @@ function RoleCreationTab() {
       {
         <DuplicateRoleModal
         openSuccess={duplicateRole}
-        handleClose={()=> openDulicateRole(false)}
+        handleClose={()=> {openDulicateRole(false); handleCardMenuClose()}}
         btn={'Next'}
         handleCloseSuccess={handleDuplicateNext}
         data={duplicate_role}
