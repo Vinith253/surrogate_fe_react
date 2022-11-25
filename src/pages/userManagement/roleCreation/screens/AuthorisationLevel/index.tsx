@@ -47,6 +47,7 @@ import GreenDot from '../../../../../assets/icons/greendot.svg';
 import DroppedDot from '../../../../../assets/icons/droppeddot.svg';
 import FailureDot from '../../../../../assets/icons/failuredot.svg';
 import ProgressDot from '../../../../../assets/icons/progressdot.svg';
+import ChooseCategoryToViewData from '../../../../../components/commonComponent/ChooseCategoryToViewData';
 
 export const AuthorisationLevel = () => {
   const navigate = useNavigate();
@@ -135,8 +136,8 @@ export const AuthorisationLevel = () => {
       <Stack>
         <Box className="role-header-container">
           <ScreenHeader
-            title="Card Catalogue"
-            info="Manage card information from here"
+            title="Authorization Level"
+            info="From here, you can assign authorization to users."
             showBackButton={false}
           />
 
@@ -145,183 +146,218 @@ export const AuthorisationLevel = () => {
               sx={{ textTransform: 'capitalize' }}
               variant="contained"
               color="secondary"
-              startIcon={<EditOutlinedIcon />}
+              startIcon={
+                authorisationData?.length === 0 ? (
+                  <AddIcon />
+                ) : (
+                  <EditOutlinedIcon />
+                )
+              }
               aria-haspopup="true"
               onClick={handleCardMenuClick}
               id="basic-button"
             >
-              Edit Authorisation Level{' '}
+              {authorisationData?.length === 0
+                ? `Add Authorisation `
+                : `Edit Authorisation Level `}
             </Button>
           </Box>
         </Box>
 
-        <Box sx={{ marginTop: 4 }}>
-          <Box
-            sx={{
-              paddingX: 4,
-              backgroundColor: 'white',
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              paddingY: 2,
-            }}
-          >
-            <Typography>
-              Various organisations along with basic details.
-            </Typography>
+        {authorisationData?.length === 0 && (
+          <Box>
+            <Box sx={{ marginTop: 4 }}>
+              <Box
+                sx={{
+                  paddingX: 4,
+                  backgroundColor: 'white',
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  paddingY: 2,
+                }}
+              >
+                <Typography>
+                  Various organisations along with basic details.
+                </Typography>
+              </Box>
+            </Box>
+            <Divider />
           </Box>
-        </Box>
-        <Divider />
+        )}
 
-        <Box className="tableBox">
-          <TableContainer component={Paper}>
-            <Table size="small" aria-label="Table">
-              <TableHead className="tableHead">
-                {tableHeaderData.map(
-                  (items: authorisationDataInterface, index: number) => (
-                    <TableRow key={index}>
-                      <TableCell
-                        width={'50px'}
-                        align="center"
-                        className="tableCell"
-                      >
-                        id
-                      </TableCell>
-                      {/* <TableCell width={'235px'} className="tableCell">
+        {authorisationData?.length === 0 ? (
+          <Box className="tableBox">
+            <TableContainer component={Paper}>
+              <Table size="small" aria-label="Table">
+                <TableHead className="tableHead">
+                  {tableHeaderData.map(
+                    (items: authorisationDataInterface, index: number) => (
+                      <TableRow key={index}>
+                        <TableCell
+                          width={'50px'}
+                          align="center"
+                          className="tableCell"
+                        >
+                          id
+                        </TableCell>
+                        {/* <TableCell width={'235px'} className="tableCell">
                         {items.id}
                       </TableCell> */}
-                      <TableCell width={'235px'} className="tableCell">
-                        {items.version}
-                      </TableCell>
-                      <TableCell width={'235px'} className="tableCell">
-                        {items.initiatedBy}
-                      </TableCell>
-                      <TableCell width={'235px'} className="tableCell">
-                        {items.approvedBy}
-                      </TableCell>
-                      <TableCell width={'235px'} className="tableCell">
-                        {items.date}
-                      </TableCell>
-                      <TableCell width={'235px'} className="tableCell">
-                        {items.currentStatus}
-                      </TableCell>
-                      <TableCell
-                        width={'235px'}
-                        align="right"
-                        className="tableCell"
-                      >
-                        {items.actions}
-                      </TableCell>
-                    </TableRow>
-                  )
-                )}
-              </TableHead>
+                        <TableCell width={'235px'} className="tableCell">
+                          {items.version}
+                        </TableCell>
+                        <TableCell width={'235px'} className="tableCell">
+                          {items.initiatedBy}
+                        </TableCell>
+                        <TableCell width={'235px'} className="tableCell">
+                          {items.approvedBy}
+                        </TableCell>
+                        <TableCell width={'235px'} className="tableCell">
+                          {items.date}
+                        </TableCell>
+                        <TableCell width={'235px'} className="tableCell">
+                          {items.currentStatus}
+                        </TableCell>
+                        <TableCell
+                          width={'235px'}
+                          align="right"
+                          className="tableCell"
+                        >
+                          {items.actions}
+                        </TableCell>
+                      </TableRow>
+                    )
+                  )}
+                </TableHead>
 
-              <TableBody>
-                {authorisationData.map((row) => (
-                  <TableRow key={row.id}>
-                    <TableCell align="center" width={'50px'}>
-                      {row.id}
-                    </TableCell>
-                    <TableCell align="left" width={'235px'}>
-                      {row.version}
-                    </TableCell>
-                    <TableCell align="left" width={'235px'}>
-                      {row.initiatedBy}
-                    </TableCell>
-                    <TableCell align="left" width={'235px'}>
-                      {row.approvedBy}
-                    </TableCell>
-                    <TableCell align="left" width={'235px'}>
-                      {row.date}
-                    </TableCell>
-                    <TableCell align="left" width={'235px'}>
-                      {row.currentStatus}
-                    </TableCell>
-                    <TableCell
-                      component="th"
-                      scope="row"
-                      sx={{ borderBottom: 'none' }}
-                    >
-                      {row?.currentStatus && row?.currentStatus?.includes('Success') &&
-                        kycStatus(row?.currentStatus, GreenDot, '#6AB06E')}
-                      {row?.currentStatus && row?.currentStatus?.includes('Progress') &&
-                        kycStatus(row.currentStatus, ProgressDot, '#F37B21')}
-                      {row?.currentStatus && row?.currentStatus?.includes('Failure') &&
-                        kycStatus(row?.currentStatus, FailureDot, '#E63946')}
-                      {row?.currentStatus && row?.currentStatus.includes('Dropped') &&
-                        kycStatus(row?.currentStatus, DroppedDot, '#992D26')}
-                    </TableCell>
-                    <TableCell align="right">
-                      <Box
-                        id="more-button"
-                        onClick={handleClick}
-                        aria-controls={menuOpen ? 'more-menu' : undefined}
-                        aria-haspopup="true"
-                        aria-expanded={menuOpen ? 'true' : undefined}
-                      >
-                        <IconButton aria-label="settings">
-                          <MoreVertIcon />
-                        </IconButton>
-                      </Box>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-              <Menu
-                id="more-menu"
-                anchorEl={anchorElement}
-                open={menuOpen}
-                MenuListProps={{
-                  'aria-labelledby': 'more-button',
-                }}
-                onClose={handleClose}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                // transformOrigin={{
-                //   vertical: 'top',
-                //   horizontal: 'right',
-                // }}
-              >
-                <MenuItem
-                  onClick={() => {
-                    handleClose();
-                    // navigate('/productManagement/cardCatalogue/singleupload/reviewCard');
+                <TableBody>
+                  {authorisationData?.length > 0 &&
+                    authorisationData.map((row) => (
+                      <TableRow key={row.id}>
+                        <TableCell align="center" width={'50px'}>
+                          {row?.id}
+                        </TableCell>
+                        <TableCell align="left" width={'235px'}>
+                          {row?.version}
+                        </TableCell>
+                        <TableCell align="left" width={'235px'}>
+                          {row?.initiatedBy}
+                        </TableCell>
+                        <TableCell align="left" width={'235px'}>
+                          {row?.approvedBy}
+                        </TableCell>
+                        <TableCell align="left" width={'235px'}>
+                          {row?.date}
+                        </TableCell>
+                        <TableCell align="left" width={'235px'}>
+                          {row?.currentStatus}
+                        </TableCell>
+                        <TableCell
+                          component="th"
+                          scope="row"
+                          sx={{ borderBottom: 'none' }}
+                        >
+                          {row?.currentStatus &&
+                            row?.currentStatus?.includes('Success') &&
+                            kycStatus(row?.currentStatus, GreenDot, '#6AB06E')}
+                          {row?.currentStatus &&
+                            row?.currentStatus?.includes('Progress') &&
+                            kycStatus(
+                              row.currentStatus,
+                              ProgressDot,
+                              '#F37B21'
+                            )}
+                          {row?.currentStatus &&
+                            row?.currentStatus?.includes('Failure') &&
+                            kycStatus(
+                              row?.currentStatus,
+                              FailureDot,
+                              '#E63946'
+                            )}
+                          {row?.currentStatus &&
+                            row?.currentStatus.includes('Dropped') &&
+                            kycStatus(
+                              row?.currentStatus,
+                              DroppedDot,
+                              '#992D26'
+                            )}
+                        </TableCell>
+                        <TableCell align="right">
+                          <Box
+                            id="more-button"
+                            onClick={handleClick}
+                            aria-controls={menuOpen ? 'more-menu' : undefined}
+                            aria-haspopup="true"
+                            aria-expanded={menuOpen ? 'true' : undefined}
+                          >
+                            <IconButton aria-label="settings">
+                              <MoreVertIcon />
+                            </IconButton>
+                          </Box>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                </TableBody>
+                <Menu
+                  id="more-menu"
+                  anchorEl={anchorElement}
+                  open={menuOpen}
+                  MenuListProps={{
+                    'aria-labelledby': 'more-button',
                   }}
-                  className="menu"
+                  onClose={handleClose}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  // transformOrigin={{
+                  //   vertical: 'top',
+                  //   horizontal: 'right',
+                  // }}
                 >
-                  View
-                </MenuItem>
-                <MenuItem onClick={handleClose} className="menu">
-                  Edit
-                </MenuItem>
-              </Menu>
-            </Table>
-          </TableContainer>
+                  <MenuItem
+                    onClick={() => {
+                      handleClose();
+                      // navigate('/productManagement/cardCatalogue/singleupload/reviewCard');
+                    }}
+                    className="menu"
+                  >
+                    View
+                  </MenuItem>
+                  <MenuItem onClick={handleClose} className="menu">
+                    Edit
+                  </MenuItem>
+                </Menu>
+              </Table>
+            </TableContainer>
 
-          <PaginationComp
-            rows={filteredData}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            handleChangePage={handleChangePage}
-            handleChangeRowsPerPage={handleChangeRowsPerPage}
-            onPageChange={onPageChange}
-            onLastClick={() => {
-              setPage(Math.ceil(filteredData.length / rowsPerPage));
-              setCurrentPage(Math.ceil(filteredData.length / rowsPerPage));
-            }}
-            onFirstClick={() => {
-              setPage(1);
-              setCurrentPage(1);
-            }}
-            lastButtonDisabled={
-              page == Math.ceil(filteredData.length / rowsPerPage)
-            }
-          />
-        </Box>
+            <PaginationComp
+              rows={filteredData}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              handleChangePage={handleChangePage}
+              handleChangeRowsPerPage={handleChangeRowsPerPage}
+              onPageChange={onPageChange}
+              onLastClick={() => {
+                setPage(Math.ceil(filteredData.length / rowsPerPage));
+                setCurrentPage(Math.ceil(filteredData.length / rowsPerPage));
+              }}
+              onFirstClick={() => {
+                setPage(1);
+                setCurrentPage(1);
+              }}
+              lastButtonDisabled={
+                page == Math.ceil(filteredData.length / rowsPerPage)
+              }
+            />
+          </Box>
+        ) : (
+          <Box sx={{ margin: '60px 0' }}>
+            <ChooseCategoryToViewData />
+          </Box>
+        )}
 
         {/* <Box 
         sx={{
