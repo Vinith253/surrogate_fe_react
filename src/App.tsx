@@ -17,6 +17,7 @@ import ReviewerLogDetails from './pages/productManagement/programmeManagement/sc
 import { Profile } from './pages/profile/Profile';
 import { BranchDetails } from './pages/userManagement/branchDetails/landingScreen';
 import { OrgStructure } from './pages/userManagement/orgStructure/landingScreen';
+import { Onboarding } from './pages/userManagement/orgStructure/screens/Onboarding/onboarding';
 import { RoleCreation } from './pages/userManagement/roleCreation/landingScreen';
 import OrgBulkUpload from './pages/userManagement/orgStructure/orgBulkUpload';
 import UserCreation from './pages/userManagement/userCreation';
@@ -68,6 +69,8 @@ export default function App() {
           element={<BranchDetails />}
         />
         <Route path="/userManagement/orgStructure" element={<OrgStructure />} />
+
+        <Route path="/userManagement/orgStructure/screens/Onboarding/onboarding" element={<Onboarding />} />
 
         <Route
           path="/userManagement/orgStructure/bulkUpload"

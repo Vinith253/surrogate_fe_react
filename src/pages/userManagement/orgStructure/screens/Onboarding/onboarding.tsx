@@ -18,12 +18,12 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import Info_Icon from '../../../../assets/images/info_icon.svg';
+import Info_Icon from '../../../../../assets/images/info_icon.svg';
 import TypoText from '../../../../../components/commonComponent/CustomText/Textfield';
 import TypographyInfo from '../../../../../components/commonComponent/CustomText/Info';
 import CheckBoxModal from '../../../../../components/commonComponent/customModal/PopoverModal';
 import { CheckBox } from '@mui/icons-material';
-import Upload_Img from '../../../../assets/images/uploadImg.png';
+import Upload_Img from '../../../../../assets/images/uploadImg.png';
 import AddIcon from '@mui/icons-material/Add';
 import BtnContained from '../../../../../components/commonComponent/CustomText/Button/Contained';
 import BtnOutlined from '../../../../../components/commonComponent/CustomText/Button/Outlined';
@@ -98,6 +98,23 @@ export const Onboarding = () => {
             }}
           >
             <TypographyInfo title="Onboard your partners here" />
+
+            <Button sx={{ backgroundColor: '#E6E7E7' }}>ID.NO 123456</Button>
+          </Box>
+        </Box>
+
+        <Box
+          sx={{ backgroundColor: 'white', marginTop: '25px', padding: '20px' }}
+        >
+          <TypoText title="Fintech Partners Onboarding" />
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}
+          >
+            <TypographyInfo title="Onboard your fintech partners here" />
 
             <Button sx={{ backgroundColor: '#E6E7E7' }}>ID.NO 123456</Button>
           </Box>

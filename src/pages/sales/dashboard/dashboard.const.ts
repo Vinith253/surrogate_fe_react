@@ -376,3 +376,11 @@ export const zonal_label =[
   { value: 'karnataka', name: 'Karnataka' },
   { value: 'kerala', name: 'Kerala' },
 ]
+
+
+export const duplicate_role =[
+  { value: 'head', name: 'Head' },
+  { value: 'executive', name: 'Executive' },
+  { value: 'underwritingManager', name: 'Underwriting Manager' },
+  { value: 'manager', name: 'Manager' },
+]
