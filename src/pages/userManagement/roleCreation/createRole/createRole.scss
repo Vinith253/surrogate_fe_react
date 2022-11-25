@@ -1,9 +1,37 @@
+.upper-head-container {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 32px;
+}
+
+.underline {
+  border: 1px solid #f0f2f5;
+  width: 100%;
+  margin: 0px 0px 24px 0px;
+}
+.info-label {
+  color: #afaeaf;
+  font-size: 12px;
+  font-weight: 500;
+  margin: 0px 0px 6px 0px;
+}
+.info-value {
+  color: #151515;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.viewpage-detail {
+  padding: 0px 32px 24px 32px;
+}
+
 .create-header-container {
     background-color: white;
     display: flex;
     justify-content: space-between;
-    padding: 24px 32px 24px 32px;
-    margin-top: 32px;
+    padding: 24px 32px 20px 32px;
   }
 
   .divide {

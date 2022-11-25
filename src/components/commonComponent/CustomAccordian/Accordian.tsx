@@ -38,15 +38,54 @@ const CustomAccordion = styled(Accordion)(({ theme }) => {
 
 type props = {
   data: Array<any>;
+  isViewPage: boolean;
 };
 
-export const AccordianLayover = ({ data }: props) => {
+export const AccordianLayover = ({ data, isViewPage }: props) => {
   const [categories, setCategories] = useState(data);
 
   const handleCheckboxClick = (index: number, id: number, checked: boolean) => {
     let updatedList = categories?.map((item) => {
       if (item.id === id) {
         return { ...item, isChecked: !item.isChecked }; //gets everything that was already in item, and updates "done"
+      }
+      return item; // else return unmodified item
+    });
+    setCategories(updatedList);
+  };
+
+  const handleSubModuleSwitch = (index: number, id: number, checked: boolean, index2: number, id2: number) => {
+    let updatedList = categories.map((item:any) => {
+      if (item.id === id) {
+        let data = item.data.map((item2:any) => {
+          if(item2.id === id2){
+            return { ...item2, isSwitched: !item2.isSwitched }; //gets everything that was already in item, and updates "done"
+          }
+          return item2;
+        })
+        return {...item, data: data};
+      }
+      return item; // else return unmodified item
+    });
+    setCategories(updatedList);
+  };
+
+  const handleSubModuleCheckbox =(index: number, id: number, checked: boolean, id2: number ,  id3: number) => {
+    let updatedList = categories.map((item:any) => {
+      if (item.id === id) {
+        let data = item.data.map((item2:any) => {
+          if(item2.id === id2){
+              let items = item2.items.map((item3:any) => {
+                if(item3.id === id3){
+                  return { ...item3, isChecked: !item3.isChecked }; //gets everything that was already in item, and updates "done"
+                }
+                return item3;
+              })
+            return { ...item2, items: items }; //gets everything that was already in item, and updates "done"
+          }
+          return item2;
+        })
+        return {...item, data: data};
       }
       return item; // else return unmodified item
     });
@@ -89,6 +128,7 @@ export const AccordianLayover = ({ data }: props) => {
                   }}
                 >
                   <FormControlLabel
+                  disabled={isViewPage}
                     onClick={(event) => event.stopPropagation()}
                     onFocus={(event) => event.stopPropagation()}
                     label={
@@ -112,9 +152,9 @@ export const AccordianLayover = ({ data }: props) => {
             {item.isExpanded && (
               <AccordionDetails>
                 <Grid container spacing={4}>
-                  {item?.data?.map((item: any, index: any) => {
+                  {item?.data?.map((item2: any, index2: any) => {
                     return (
-                      <Grid xs={4} item key={index}>
+                      <Grid xs={4} item key={item2.id}>
                         <Box
                           sx={{
                             boxShadow: '0px 1px 2px 1px rgba(21, 21, 21, 0.1)',
@@ -127,13 +167,16 @@ export const AccordianLayover = ({ data }: props) => {
                             <FormControlLabel
                               control={
                                 <Switch
-                                  // defaultChecked
-                                  checked={item.isSwitched}
+                                  checked={item2.isSwitched}
+                                  disabled={isViewPage}
                                   color="secondary"
                                   sx={{ marginLeft: '26px' }}
+                                  onChange={(e) =>
+                                     handleSubModuleSwitch(index,item.id, e.target.checked, index2, item2.id)
+                                  }
                                 />
                               }
-                              label={item.innerTitle}
+                              label={item2.innerTitle}
                             />
                             <Divider
                               sx={{
@@ -142,9 +185,9 @@ export const AccordianLayover = ({ data }: props) => {
                               }}
                             />
 
-                            {item?.items?.map((item: any, index: any) => {
+                            {item2?.items?.map((item3: any, index: any) => {
                               return (
-                                <Grid item key={item.id}>
+                                <Grid item key={item3.id}>
                                   {' '}
                                   <Box
                                     sx={{
@@ -157,16 +200,16 @@ export const AccordianLayover = ({ data }: props) => {
                                       sx={{ marginBottom: '5px' }}
                                       label={
                                         <Typography sx={{ fontSize: '14px' }}>
-                                          {item.label}
+                                          {item3.label}
                                         </Typography>
                                       }
                                       control={
                                         <Checkbox
-                                          //   onChange={(e) =>
-                                          //     handleCheckboxClick(index,item.id, e.target.checked)
-                                          //   }
-                                          disabled={item.isDisabled}
-                                          checked={item.isChecked}
+                                            onChange={(e) =>
+                                              handleSubModuleCheckbox(index,item.id, e.target.checked, item2.id , item3.id)
+                                            }
+                                          disabled={isViewPage}
+                                          checked={item3.isChecked}
                                           color="secondary"
                                         />
                                       }
