@@ -42,7 +42,6 @@ import {
 } from './authorisation.const';
 import '../../style.scss';
 import { ScreenHeader } from '../../../../../components/commonComponent/ScreenHeader/ScreenHeader';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import PaginationComp from '../../../../../components/commonComponent/Pagination/Pagination';
 import GreenDot from '../../../../../assets/icons/greendot.svg';
 import DroppedDot from '../../../../../assets/icons/droppeddot.svg';
@@ -82,6 +81,7 @@ export const AuthorisationLevel = (props: any) => {
 
   const handleCardMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     console.log('----- button clicked');
+    navigate('/userManagement/roleCreation/authorisationDetails');
   };
 
   const menuOpen = Boolean(anchorElement);
@@ -180,21 +180,12 @@ export const AuthorisationLevel = (props: any) => {
               sx={{ textTransform: 'capitalize' }}
               variant="contained"
               color="secondary"
-              startIcon={
-                // authorisationData?.length === 0 ? (
-                  <AddIcon />
-                // ) : (
-                //   <EditOutlinedIcon />
-                // )
-              }
+              startIcon={<AddIcon />}
               aria-haspopup="true"
               onClick={handleCardMenuClick}
               id="basic-button"
             >
-              {/* {authorisationData?.length === 0
-                ? `Add Authorisation `
-                : } */}
-                {`Edit Authorisation Level `}
+              {`Add Authorisation `}
             </Button>
           </Box>
         </Box>

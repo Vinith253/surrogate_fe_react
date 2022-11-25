@@ -54,6 +54,8 @@ export const authorisation_user_data = [
   {
     module_id: 1,
     module_name: "Product Management",
+    reviewer: 'Reviewer',
+    approver: 'Approver',
     sub_module: [
       {
         sub_module_id: 1,
@@ -93,6 +95,8 @@ export const authorisation_user_data = [
   {
     module_id: 2,
     module_name: "User Management",
+    reviewer: 'Reviewer',
+    approver: 'Approver',
     sub_module: [
       {
         sub_module_id: 4,
@@ -135,6 +139,8 @@ export const authorisation_user_data = [
   {
     module_id: 3,
     module_name: "LMS",
+    reviewer: 'Reviewer',
+    approver: 'Approver',
     sub_module: [
       {
         sub_module_id: 8,
@@ -150,6 +156,8 @@ export const authorisation_user_data = [
   {
     module_id: 4,
     module_name: "Risk Management",
+    reviewer: 'Reviewer',
+    approver: 'Approver',
     sub_module: [
       {
         sub_module_id: 9,
