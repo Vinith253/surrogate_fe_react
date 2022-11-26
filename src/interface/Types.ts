@@ -2,7 +2,7 @@ export interface tabList {
   id: string;
   data: string;
   component: JSX.Element;
-  isDisabled: boolean;
+  isDisabled?: boolean;
 }
 export interface stackButtonInterface {
   title: string;
