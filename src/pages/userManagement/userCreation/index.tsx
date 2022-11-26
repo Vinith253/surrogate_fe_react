@@ -6,13 +6,10 @@ import {
   Typography,
   Stack,
   Box,
-  Button,
   Checkbox,
   IconButton,
   InputBase,
   Grid,
-  Menu,
-  MenuItem,
 } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import SearchIcon from '@mui/icons-material/Search';
@@ -21,14 +18,15 @@ import SelectDropdown from '../../../components/commonComponent/CheckboxSelectDr
 import BtnContained from '../../../components/commonComponent/CustomText/Button/Contained';
 import HeaderWithInfo from '../../../components/commonComponent/HeaderWithInfo';
 import { UserCreationFilterDropdown } from './userCreation.const';
-import active_icon from '../../../assets/icons/active.svg';
+import activeIcon from '../../../assets/icons/active.svg';
 import UnfoldMoreIcon from '../../../assets/icons/sortArrow.svg';
-import DeActive_icon from '../../../assets/icons/DeActive.svg';
+import deActiveIcon from '../../../assets/icons/DeActive.svg';
 import CustomIconButton from '../../../components/commonComponent/CustomIconButton';
 import ChooseCategoryToViewData from '../../../components/commonComponent/ChooseCategoryToViewData';
 import ListTable from '../../../components/commonComponent/commonListTable/commonListTable';
 import BtnOutlined from '../../../components/commonComponent/CustomText/Button/Outlined';
 import { checkTagStatus } from '../../../utils/tagBasedIndicator/tagStatus';
+import Popover from '../../../components/commonComponent/Popover';
 import './style.scss';
 
 const data = [
@@ -88,14 +86,33 @@ const data = [
   },
 ];
 
-const UserCreation = () => {
+function UserCreation() {
   const [isFiltered, setIsFiltered] = useState(false);
   const [selected, setSelected] = React.useState<number[]>([]);
   const [ascending, setAscending] = useState<boolean>(true);
   const [sortingData, setSortingData] = useState(data);
   const [idSorting, setIdSorting] = useState<boolean>(true);
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const openCardMenu = Boolean(anchorEl);
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+    null
+  );
+
+  const userListMoreMenu = [
+    { label: 'View', routePath: '' },
+    { label: 'Edit', routePath: '' },
+    { label: 'Activate User', routePath: '' },
+    { label: 'Deactivate User', routePath: '' },
+  ];
+
+  const onMoreClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
@@ -104,17 +121,6 @@ const UserCreation = () => {
       return;
     }
     setSelected([]);
-  };
-
-  const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
-  const menuOpen = Boolean(anchorElement);
-
-  const handleClick = (event: React.MouseEvent<HTMLTableCellElement>) => {
-    setAnchorElement(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorElement(null);
   };
 
   const isSelected = (id: number) => {
@@ -311,38 +317,19 @@ const UserCreation = () => {
       key: 'more',
       render: () => {
         return (
-          <Stack onClick={handleClick}>
-            <MoreVertIcon />
-            {/* <Menu
-              id="more-menu"
-              anchorEl={anchorElement}
-              open={menuOpen}
-              MenuListProps={{
-                'aria-labelledby': 'more-button',
+          <Stack className="more-btn">
+            {/* <MoreVertIcon
+              onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
+                onMoreClick(event);
               }}
-              onClose={handleClose}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              // transformOrigin={{
-              //   vertical: 'top',
-              //   horizontal: 'right',
-              // }}
-            >
-              <MenuItem
-                onClick={() => {
-                  handleClose();
-                  // navigate('/productManagement/cardCatalogue/singleupload/reviewCard');
-                }}
-                className="menu"
-              >
-                View
-              </MenuItem>
-              <MenuItem onClick={handleClose} className="menu">
-                Edit
-              </MenuItem>
-            </Menu> */}
+            /> */}
+            <Popover
+              id={id}
+              open={open}
+              anchorEl={anchorEl}
+              handleClose={handleClose}
+              options={userListMoreMenu}
+            />
           </Stack>
         );
       },
@@ -362,10 +349,10 @@ const UserCreation = () => {
   ];
 
   const customIconBtns = [
-    { label: 'Activate User', icon: active_icon, isDisabled: false },
+    { label: 'Activate User', icon: activeIcon, isDisabled: false },
     {
       label: 'Deactivate User',
-      icon: DeActive_icon,
+      icon: deActiveIcon,
       isDisabled: true,
     },
   ];
@@ -442,6 +429,6 @@ const UserCreation = () => {
       )}
     </div>
   );
-};
+}
 
 export default UserCreation;

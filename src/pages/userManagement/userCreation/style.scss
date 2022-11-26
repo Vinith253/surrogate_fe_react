@@ -27,6 +27,19 @@
       margin-left: auto;
     }
 
+    .more-btn {
+      width: 30px;
+      height: 30px;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .more-btn:hover {
+      border-radius: 50%;
+      background-color: #f3f3f3;
+    }
+
     .table-search-filters {
       display: flex;
       flex-direction: row;
@@ -37,7 +50,6 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        // width: 55%;
         .search-box {
           display: flex;
           justify-content: center;
@@ -51,76 +63,6 @@
             color: #afaeaf;
           }
         }
-      }
-    }
-  }
-}
-
-.create-user-main-container {
-  .create-user-container {
-    background-color: #ffffff;
-    padding: 20px 30px 30px 30px;
-    margin: 30px 0px 0px 0px;
-    border-radius: 8px;
-
-    .stepper-container {
-      display: flex;
-      margin: auto;
-      flex-direction: row;
-      width: fit-content;
-      margin-top: 25px;
-
-      .stepper-line {
-        width: 200px;
-        margin-top: 12px;
-        border-top: 2px solid #afaeaf;
-      }
-
-      .stepper-label {
-        font-size: 14px;
-        color: #151515;
-      }
-
-      .stepper-icons {
-        width: 25px;
-      }
-    }
-
-    .underline {
-      border-top: none;
-      border-left: none;
-      border-right: none;
-      margin: 18px 0px;
-      border-bottom: 2px solid #eceff2;
-    }
-  }
-
-  .container {
-    background-color: #ffffff;
-    padding: 20px 30px 30px 30px;
-    margin: 30px 0px 0px 0px;
-    border-radius: 8px;
-
-    .form-container {
-      margin-top: 20px;
-      display: flex;
-
-      .each-field-label {
-        font-size: 13px;
-      }
-
-      .checkbox-label {
-        .css-gsv0eb-MuiTypography-root {
-          font-size: 15px;
-        }
-      }
-
-      .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
-        width: 100%;
-      }
-
-      .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
-        height: 13px;
       }
     }
   }

@@ -22,7 +22,7 @@ import { RoleCreation } from './pages/userManagement/roleCreation/landingScreen'
 import OrgBulkUpload from './pages/userManagement/orgStructure/orgBulkUpload';
 import UserCreation from './pages/userManagement/userCreation';
 import { CreateRole } from './pages/userManagement/roleCreation/createRole/createRole';
-import CreateUser from './pages/userManagement/userCreation/createUser';
+import CreateUser from './pages/userManagement/userCreation/singleUserUpload/createUser';
 import { UserDetails } from './pages/userManagement/roleCreation/UserDetails/UserDetails';
 import UserBulkUpload from './pages/userManagement/userCreation/userBulkUpload';
 import { AuthDetail } from './pages/userManagement/roleCreation/screens/AuthorisationDetail/authDetail';

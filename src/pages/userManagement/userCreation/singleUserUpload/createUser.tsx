@@ -2,23 +2,23 @@ import React, { useState } from 'react';
 import { Typography, TextField, Checkbox, Radio, Grid } from '@mui/material';
 import { Box, Stack } from '@mui/system';
 import './style.scss';
-import Steppers from '../../../components/commonComponent/Steppers';
+import Steppers from '../../../../components/commonComponent/Steppers';
 import { useNavigate } from 'react-router-dom';
-import HeaderWithInfo from '../../../components/commonComponent/HeaderWithInfo';
-import ActiveStepperIcon from '../../../assets/icons/active_stepper_icon.svg';
-import CompletedStepperIcon from '../../../assets/icons/completed_stepper_icon.svg';
+import HeaderWithInfo from '../../../../components/commonComponent/HeaderWithInfo';
+import ActiveStepperIcon from '../../../../assets/icons/active_stepper_icon.svg';
+import CompletedStepperIcon from '../../../../assets/icons/completed_stepper_icon.svg';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import DisabledStepperIcon from '../../../assets/icons/disabled_stepper_icon.svg';
-import SelectDropdown from '../../../components/commonComponent/CheckboxSelectDropdown';
+import DisabledStepperIcon from '../../../../assets/icons/disabled_stepper_icon.svg';
+import SelectDropdown from '../../../../components/commonComponent/CheckboxSelectDropdown';
 import {
   PersonalDetails,
   EmploymentDetails,
   DropdownFields,
   ChannelDetails,
   RoleDetails,
-} from './userCreation.const';
-import { FooterButton } from '../../../components/commonComponent/FooterButton/FooterButton';
-import { ScreenHeader } from '../../../components/commonComponent/ScreenHeader/ScreenHeader';
+} from './../userCreation.const';
+import { FooterButton } from '../../../../components/commonComponent/FooterButton/FooterButton';
+import { ScreenHeader } from '../../../../components/commonComponent/ScreenHeader/ScreenHeader';
 
 function CreateUser() {
   const [isPersonalDetails, setIsPersonalDetails] = useState(true);
