@@ -52,17 +52,20 @@ export const UserCreationFilterDropdown: userCreationFilterInterface[] = [
 ];
 
 export const PersonalDetails: personalDetailsInterface[] = [
-  { label: 'Employee Id' },
-  { label: 'Employee Name' },
-  { label: 'Email Id' },
-  { label: 'Mobile Number' },
+  { label: 'Employee Id', placeHolder: 'Enter Employee Id' },
+  { label: 'Employee Name', placeHolder: 'Enter Employee Name' },
+  { label: 'Email Id', placeHolder: 'Enter Email Id' },
+  { label: 'Mobile Number', placeHolder: 'Mobile Number' },
 ];
 
 export const EmploymentDetails: employmentDetailsInterface[] = [
-  { label: 'Date of Joining' },
-  { label: 'Designation' },
-  { label: 'Reporting Head' },
-  { label: 'Optional Reporting Head' },
+  { label: 'Date of Joining', placeHolder: 'DD/MM/YYYY' },
+  { label: 'Designation', placeHolder: 'Enter Designation' },
+  { label: 'Reporting Head', placeHolder: 'Enter Reporting Head' },
+  {
+    label: 'Optional Reporting Head',
+    placeHolder: 'Enter Reporting Head (optional)',
+  },
 ];
 
 export const DropdownFields: dropdownFieldsInterface[] = [
@@ -123,12 +126,37 @@ export const ChannelDetails: channelDetailsInterface[] = [
 export const RoleDetails: roleDetailsInterface[] = [
   {
     label: 'Initiator',
+    value: 'initiator',
   },
   {
     label: 'Reviewer',
+    value: 'reviewer',
   },
   {
     label: 'Approver',
+    value: 'approver',
+  },
+];
+
+export const RoleAccessFrom: roleAccessFromInterface[] = [
+  {
+    label: 'Role Presets',
+    value: 'rolePresets',
+  },
+  {
+    label: 'other Existing users permission',
+    value: 'other',
+  },
+];
+
+export const ReviewerApproverAllocation: reviewerApproverInterface[] = [
+  {
+    label: 'Yes, I will assign',
+    value: 'I',
+  },
+  {
+    label: 'User will assign in their end',
+    value: 'User',
   },
 ];
 
@@ -139,10 +167,12 @@ export interface userCreationFilterInterface {
 
 export interface personalDetailsInterface {
   label?: string;
+  placeHolder?: string;
 }
 
 export interface employmentDetailsInterface {
   label?: string;
+  placeHolder?: string;
 }
 export interface dropdownFieldsInterface {
   label?: string;
@@ -155,4 +185,15 @@ export interface channelDetailsInterface {
 
 export interface roleDetailsInterface {
   label?: string;
+  value?: string;
+}
+
+export interface roleAccessFromInterface {
+  label?: string;
+  value?: string;
+}
+
+export interface reviewerApproverInterface {
+  label?: string;
+  value?: string;
 }

@@ -27,6 +27,8 @@ import ListTable from '../../../components/commonComponent/commonListTable/commo
 import BtnOutlined from '../../../components/commonComponent/CustomText/Button/Outlined';
 import { checkTagStatus } from '../../../utils/tagBasedIndicator/tagStatus';
 import Popover from '../../../components/commonComponent/Popover';
+import ActionModal from '../../../components/commonComponent/customModal/CustomModal';
+import SuccessModal from '../../../components/commonComponent/customModal/CustomModal';
 import './style.scss';
 
 const data = [
@@ -88,6 +90,9 @@ const data = [
 
 function UserCreation() {
   const [isFiltered, setIsFiltered] = useState(false);
+  const [selectedRecord, setSelectedRecord] = useState({});
+  const [isActionModalOpen, setActionModalOpen] = useState(false);
+  const [isSuccessModalOpen, setSuccessModalOpen] = useState(false);
   const [selected, setSelected] = React.useState<number[]>([]);
   const [ascending, setAscending] = useState<boolean>(true);
   const [sortingData, setSortingData] = useState(data);
@@ -96,14 +101,7 @@ function UserCreation() {
     null
   );
 
-  const userListMoreMenu = [
-    { label: 'View', routePath: '' },
-    { label: 'Edit', routePath: '' },
-    { label: 'Activate User', routePath: '' },
-    { label: 'Deactivate User', routePath: '' },
-  ];
-
-  const onMoreClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -111,8 +109,21 @@ function UserCreation() {
     setAnchorEl(null);
   };
 
+  const userListMoreMenu = [
+    { label: 'View', routePath: '' },
+    { label: 'Edit', routePath: '' },
+    { label: 'Activate User', routePath: '' },
+    { label: 'Deactivate User', routePath: '' },
+  ];
+
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
+
+  const openActionModal = (record: any) => {
+    console.log('record', record);
+    setSelectedRecord(record);
+    setActionModalOpen(true);
+  };
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
@@ -216,7 +227,7 @@ function UserCreation() {
       },
       render: (_: string, row: any, index: number) => {
         const isItemSelected = isSelected(row.id);
-        console.log('isItemSelected', isItemSelected);
+
         const labelId = `enhanced-table-checkbox-${index}`;
         return (
           <Checkbox
@@ -313,22 +324,23 @@ function UserCreation() {
     },
     {
       title: 'More',
-      dataIndex: 'id',
+      dataIndex: 'status',
       key: 'more',
-      render: () => {
+      render: (_: string, row: any, index: number) => {
         return (
           <Stack className="more-btn">
-            {/* <MoreVertIcon
-              onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
-                onMoreClick(event);
+            <MoreVertIcon
+              onClick={(event: any) => {
+                handleClick(event);
               }}
-            /> */}
+            />
             <Popover
               id={id}
               open={open}
               anchorEl={anchorEl}
               handleClose={handleClose}
               options={userListMoreMenu}
+              openActionModal={() => openActionModal(row)}
             />
           </Stack>
         );
@@ -358,7 +370,11 @@ function UserCreation() {
   ];
 
   const onClickButton = (eachBtn: any) => {
-    console.log(eachBtn);
+    // console.log(eachBtn);
+  };
+
+  const handleSubmit = () => {
+    setSuccessModalOpen(true);
   };
 
   return (
@@ -427,6 +443,26 @@ function UserCreation() {
       ) : (
         <ChooseCategoryToViewData />
       )}
+
+      <ActionModal
+        openSuccess={isActionModalOpen}
+        handleCloseSuccess={() => setActionModalOpen(false)}
+        handleSuccess={handleSubmit}
+        title={'Request for Activation'}
+        pause_content={'Do you want to submit request for activating user?'}
+        close={'Close'}
+        submit={'Submit'}
+      />
+
+      <SuccessModal
+        openSuccess={isSuccessModalOpen}
+        handleCloseSuccess={() => setSuccessModalOpen(false)}
+        successModalTitle={'Request - Activate User'}
+        successModalMsg={
+          'Your request for activating user is successfully sent to the Reviewer.'
+        }
+        btn={' Close'}
+      />
     </div>
   );
 }

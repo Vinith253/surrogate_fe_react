@@ -5,11 +5,22 @@ import { useNavigate } from 'react-router-dom';
 function PopoverContainer(props: {
   id: any;
   handleClose: Function;
+  openActionModal?: Function;
   anchorEl: any;
   open: boolean;
   options: any;
 }) {
   const navigate = useNavigate();
+
+  const callRoutePath = (eachItem: any) => {
+    if (eachItem?.routePath !== '') navigate(eachItem?.routePath);
+    else if (
+      eachItem?.label === 'Activate User' ||
+      eachItem?.label === 'Deactivate User'
+    )
+      props?.openActionModal !== undefined && props?.openActionModal();
+  };
+
   return (
     <Popover
       className="popover-container"
@@ -28,7 +39,7 @@ function PopoverContainer(props: {
             sx={{ p: 2 }}
             key={index}
             onClick={() => {
-              eachItem?.routePath && navigate(eachItem?.routePath);
+              callRoutePath(eachItem);
             }}
           >
             {eachItem?.label}

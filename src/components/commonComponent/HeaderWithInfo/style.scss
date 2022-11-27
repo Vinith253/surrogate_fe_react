@@ -5,7 +5,7 @@
     font-size: 16px;
     display: flex;
     color: #151515;
-    margin: 10px 0px;
+    margin: 10px 0px 5px 0px;
 
     .info-icon {
       margin: 0px 8px 0px 15px;
@@ -22,7 +22,7 @@
     }
   }
   .underline {
-    margin: 10px 0px 5px 0px;
+    margin: 15px 0px 5px 0px;
     border-bottom: 2px solid #f0f2f5;
   }
 
@@ -30,7 +30,7 @@
     display: flex;
     justify-content: end;
     .icons {
-      width: 23px;
+      width: 25px;
       margin: -27px 20px 0px 0px;
       cursor: pointer;
     }
