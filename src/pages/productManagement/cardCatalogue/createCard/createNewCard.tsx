@@ -13,6 +13,7 @@ import {
   Card,
   Grid,
   Divider,
+  Checkbox
 } from '@mui/material';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import BtnContained from '../../../../components/commonComponent/CustomText/Button/Contained';
@@ -309,7 +310,7 @@ const CreateNewCard = () => {
             <Box>
               <TypoText title="Interest Rate (in%)" />
               <TypoText
-                placeholder="Interest Rate (in%)"
+                placeholder="Interest Rate in%"
                 handleChange={handleValueChange}
                 id="interestRate"
                 value={dataObj?.interestRate}
@@ -385,37 +386,37 @@ const CreateNewCard = () => {
         <Grid container className="chooseSurrogateGrid">
           <Grid item xs={12} sm={6} md={2}>
             <Box className="box">
-              <CheckBox />
+              <Checkbox />
               <Typography className="text">Payroll</Typography>
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={2}>
             <Box className="box">
-              <CheckBox />
+              <Checkbox />
               <Typography className="text">Card For Card</Typography>
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={2}>
             <Box className="box">
-              <CheckBox />
+              <Checkbox />
               <Typography className="text">CIBIL</Typography>
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={2}>
             <Box className="box">
-              <CheckBox />
+              <Checkbox />
               <Typography className="text">AQB</Typography>
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={2}>
             <Box className="box">
-              <CheckBox />
+              <Checkbox />
               <Typography className="text">Pre-Approved</Typography>
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={2}>
             <Box className="box">
-              <CheckBox />
+              <Checkbox />
               <Typography className="text">Secured</Typography>
             </Box>
           </Grid>
@@ -439,19 +440,19 @@ const CreateNewCard = () => {
         <Grid container className="chooseChannelGrid">
           <Grid item>
             <Box className="box">
-              <CheckBox />
+              <Checkbox />
               <Typography className="text">Bank</Typography>
             </Box>
           </Grid>
           <Grid item>
             <Box className="box">
-              <CheckBox />
+              <Checkbox />
               <Typography className="text">DSA</Typography>
             </Box>
           </Grid>
           <Grid item>
             <Box className="box">
-              <CheckBox />
+              <Checkbox />
               <Typography className="text">Fintech Partner</Typography>
             </Box>
           </Grid>
@@ -542,15 +543,15 @@ const CreateNewCard = () => {
 
         <Box className="benefitsBox">
           <Box className="box">
-            <CheckBox />
+            <Checkbox />
             <Typography className="text">Currency Markup Charges</Typography>
           </Box>
           <Box className="box">
-            <CheckBox />
+            <Checkbox />
             <Typography className="text">Airmiles</Typography>
           </Box>
           <Box className="box">
-            <CheckBox />
+            <Checkbox />
             <Typography className="text">Cashbacks</Typography>
           </Box>
         </Box>
