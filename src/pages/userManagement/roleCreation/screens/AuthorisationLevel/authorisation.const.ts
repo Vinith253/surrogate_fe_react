@@ -29,23 +29,23 @@ function createData(
 export const authorisationRows = [
   createData('1', 'v 1.0.0', 'Vinith', 'Vinith', '22/02/2022', 'Active'),
   createData('2', 'v 1.0.0', 'Vinith', 'Vinith', '22/02/2022', 'Active'),
-  createData('3', 'v 1.0.0', 'Vinith', 'Vinith', '22/02/2022', 'Active'),
+  createData('3', 'v 1.0.0', 'Vinith', 'Vinith', '22/02/2022', 'Closed'),
   createData('4', 'v 1.0.0', 'Vinith', 'Vinith', '22/02/2022', 'Active'),
   createData('5', 'v 1.0.0', 'Vinith', 'Vinith', '22/02/2022', 'Active'),
-  createData('6', 'v 1.0.0', 'Vinith', 'Vinith', '22/02/2022', 'Active'),
+  createData('6', 'v 1.0.0', 'Vinith', 'Vinith', '22/02/2022', 'Waiting for Approval'),
   createData('7', 'v 1.0.0', 'Vinith', 'Vinith', '22/02/2022', 'Active'),
-  createData('8', 'v 1.0.0', 'Vinith', 'Vinith', '22/02/2022', 'Active'),
+  createData('8', 'v 1.0.0', 'Vinith', 'Vinith', '22/02/2022', 'Closed'),
   createData('9', 'v 1.0.0', 'Vinith', 'Vinith', '22/02/2022', 'Active'),
-  createData('10', 'v 1.0.0', 'Vinith', 'Vinith', '22/02/2022', 'Active'),
+  createData('10', 'v 1.0.0', 'Vinith', 'Vinith', '22/02/2022', 'Closed'),
   createData('11', 'v 1.0.0', 'Vinith', 'Vinith', '22/02/2022', 'Active'),
-  createData('12', 'v 1.0.0', 'Vinith', 'Vinith', '22/02/2022', 'Active'),
+  createData('12', 'v 1.0.0', 'Vinith', 'Vinith', '22/02/2022', 'Closed'),
   createData('13', 'v 1.0.0', 'Vinith', 'Vinith', '22/02/2022', 'Active'),
   createData('14', 'v 1.0.0', 'Vinith', 'Vinith', '22/02/2022', 'Active'),
   createData('15', 'v 1.0.0', 'Vinith', 'Vinith', '22/02/2022', 'Active'),
-  createData('16', 'v 1.0.0', 'Vinith', 'Vinith', '22/02/2022', 'Active'),
+  createData('16', 'v 1.0.0', 'Vinith', 'Vinith', '22/02/2022', 'Closed'),
   createData('17', 'v 1.0.0', 'Vinith', 'Vinith', '22/02/2022', 'Active'),
   createData('18', 'v 1.0.0', 'Vinith', 'Vinith', '22/02/2022', 'Active'),
-  createData('19', 'v 1.0.0', 'Vinith', 'Vinith', '22/02/2022', 'Active'),
+  createData('19', 'v 1.0.0', 'Vinith', 'Vinith', '22/02/2022', 'Closed'),
   createData('20', 'v 1.0.0', 'Vinith', 'Vinith', '22/02/2022', 'Active'),
 ];
 
@@ -54,6 +54,8 @@ export const authorisation_user_data = [
   {
     module_id: 1,
     module_name: "Product Management",
+    reviewer: 'Reviewer',
+    approver: 'Approver',
     sub_module: [
       {
         sub_module_id: 1,
@@ -83,16 +85,19 @@ export const authorisation_user_data = [
         sub_module_id: 3,
         sub_module_name: "Card Catalog",
         sub_module_data: {
-          initiator_data: [{ user_id: 1, user_name: "Parithi" }],
+          initiator_data: [{ user_id: 1, user_name: "Ashwin" }],
           reviewer_data: [{ user_id: 2, user_name: "Ashwin" }],
           approver_data: [{ user_id: 3, user_name: "Ganesh" }],
         },
       },
+      
     ],
   },
   {
     module_id: 2,
     module_name: "User Management",
+    reviewer: 'Reviewer',
+    approver: 'Approver',
     sub_module: [
       {
         sub_module_id: 4,
@@ -135,6 +140,8 @@ export const authorisation_user_data = [
   {
     module_id: 3,
     module_name: "LMS",
+    reviewer: 'Reviewer',
+    approver: 'Approver',
     sub_module: [
       {
         sub_module_id: 8,
@@ -150,6 +157,8 @@ export const authorisation_user_data = [
   {
     module_id: 4,
     module_name: "Risk Management",
+    reviewer: 'Reviewer',
+    approver: 'Approver',
     sub_module: [
       {
         sub_module_id: 9,

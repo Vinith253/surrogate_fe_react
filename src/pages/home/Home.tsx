@@ -172,6 +172,7 @@ export default function Home() {
         <ChangePasswordProfileModal />
         <ChangePasswordOTP />
         <CreateNewPassword /> */}
+        <HistoryModal />
         <Link to={'/userManagement/roleCreation/userdetails'}>Click</Link>
         <Card content={pendingActionsData} />
         <Card content={savedItemsData} />

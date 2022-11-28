@@ -59,6 +59,15 @@ export const AccordianLayover = ({ data, isViewPage }: props) => {
       if (item.id === id) {
         let data = item.data.map((item2:any) => {
           if(item2.id === id2){
+            if(!item2.isSwitched){
+              item2.items[0].isChecked = true;
+              item2.items[0].isDisabled = true;
+            }else if(item2.isSwitched){
+              var items = item2.items.map((item3:any) => {
+              return { ...item3, isChecked: false, isDisabled: false}; 
+            })
+            return { ...item2 , items:items, isSwitched: !item2.isSwitched}
+          }
             return { ...item2, isSwitched: !item2.isSwitched }; //gets everything that was already in item, and updates "done"
           }
           return item2;
@@ -74,7 +83,7 @@ export const AccordianLayover = ({ data, isViewPage }: props) => {
     let updatedList = categories.map((item:any) => {
       if (item.id === id) {
         let data = item.data.map((item2:any) => {
-          if(item2.id === id2){
+          if(item2.id === id2 && item2.isSwitched){
               let items = item2.items.map((item3:any) => {
                 if(item3.id === id3){
                   return { ...item3, isChecked: !item3.isChecked }; //gets everything that was already in item, and updates "done"
@@ -96,16 +105,66 @@ export const AccordianLayover = ({ data, isViewPage }: props) => {
     <FormGroup>
       {categories?.map((item: any, index) => {
         return (
-          <CustomAccordion onClick={(event) => event.stopPropagation()}>
+          <>
+          {!item.isExpanded ? 
+           <Grid container item key={item.id} className="grid-style">
+           {' '}
+           <Box
+             sx={{
+               display: 'flex',
+               flexDirection: 'column',
+               width:'100%',
+               height:'48px',
+               justifyContent:'center',
+               backgroundColor: item.isChecked ? '#F3F3F4' : 'white',
+             }}
+           >
+             <FormControlLabel
+             sx={{ paddingLeft: '18px', }}
+             disabled={isViewPage}
+               label={
+                 <Typography sx={{ fontSize: '14px' }}>
+                   {item.label}
+                 </Typography>
+               }
+               control={
+                 <Checkbox
+                   onChange={(e) =>
+                     handleCheckboxClick(index, item.id, e.target.checked)
+                   }
+                   checked={item.isChecked}
+                   color="secondary"
+                 />
+               }
+             />
+            <Divider sx={{border: item.isChecked ? '1px solid white' : '1px solid #F3F3F4', marginTop:'3px'}} />
+           </Box>
+         </Grid>
+          :
+          <CustomAccordion
+          sx={{
+              '&:before': {
+                  border: 'none',
+                  backgroundColor: item.isChecked ? '#F3F3F4' : 'white',
+              },
+          }}
+          expanded={item.isChecked}
+          >
             <AccordionSummary
               sx={{
                 '.css-o4b71y-MuiAccordionSummary-content': {
                   margin: '0',
                   backgroundColor: item.isChecked ? '#F3F3F4' : 'white',
+                  borderBottom:  item.isChecked ? '1px solid white' : '1px solid #F3F3F4',
                 },
                 padding: '0',
                 '.css-1kua6lf-MuiPaper-root-MuiAccordion-root': {
                   backgroundColor: item.isChecked ? '#F3F3F4' : 'white',
+                },
+                backgroundColor: item.isChecked ? '#F3F3F4' : 'white',
+                borderBottom: item.isChecked ? '1px solid white' : '1px solid #F3F3F4',
+                '.css-o4b71y-MuiAccordionSummary-content.Mui-expanded': {
+                  border:'none'
                 },
               }}
               expandIcon={
@@ -125,12 +184,11 @@ export const AccordianLayover = ({ data, isViewPage }: props) => {
                     display: 'flex',
                     flexDirection: 'column',
                     padding: '8px',
+                    width:'100%'
                   }}
                 >
                   <FormControlLabel
-                  disabled={isViewPage}
-                    onClick={(event) => event.stopPropagation()}
-                    onFocus={(event) => event.stopPropagation()}
+                    disabled={isViewPage}
                     label={
                       <Typography sx={{ fontSize: '14px' }}>
                         {item.label}
@@ -199,7 +257,7 @@ export const AccordianLayover = ({ data, isViewPage }: props) => {
                                     <FormControlLabel
                                       sx={{ marginBottom: '5px' }}
                                       label={
-                                        <Typography sx={{ fontSize: '14px' }}>
+                                        <Typography sx={{ fontSize: '14px', color:(isViewPage || item3.isDisabled) ? '#AFAEAF' : 'black'}}>
                                           {item3.label}
                                         </Typography>
                                       }
@@ -208,7 +266,7 @@ export const AccordianLayover = ({ data, isViewPage }: props) => {
                                             onChange={(e) =>
                                               handleSubModuleCheckbox(index,item.id, e.target.checked, item2.id , item3.id)
                                             }
-                                          disabled={isViewPage}
+                                          disabled={isViewPage || item3.isDisabled}
                                           checked={item3.isChecked}
                                           color="secondary"
                                         />
@@ -226,7 +284,8 @@ export const AccordianLayover = ({ data, isViewPage }: props) => {
                 </Grid>
               </AccordionDetails>
             )}
-          </CustomAccordion>
+          </CustomAccordion> }
+          </>
         );
       })}
     </FormGroup>

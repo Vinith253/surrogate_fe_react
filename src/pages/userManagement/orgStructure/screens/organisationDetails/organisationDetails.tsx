@@ -11,7 +11,7 @@ import {
   Menu,
   MenuItem,
 } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
 import { colors } from '../../../../../style/Color';
 import './style.scss';
 import plus from '../../../../../assets/icons/plusIcon.svg';
@@ -29,7 +29,8 @@ import ListTable from '../../../../../components/commonComponent/commonListTable
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import UnfoldMoreIcon from '../../../../../assets/icons/sortArrow.svg';
 import { checkTagStatus } from '../../../../../utils/tagBasedIndicator/tagStatus';
-import { useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import CustomModal from '../../../../../components/commonComponent/customModal/CustomModal';
 export const organisationFilterDropdown: salesReportFilterInterface[] = [
   {
     label: 'Org Type',
@@ -138,13 +139,29 @@ export const data = [
 ];
 export const OrganisationDetails = () => {
   const navigate = useNavigate();
-  const [selected, setSelected] = React.useState<number[]>([]);
+  const [selected, setSelected] = useState<number[]>([]);
   const [ascending, setAscending] = useState<boolean>(true);
   const [sortingData, setSortingData] = useState(data);
   const [idSorting, setIdSorting] = useState<boolean>(true);
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  const [activateModal, setActivateModal] = useState<boolean>(false);
+  const [deactivateModal, setDeactivateModal] = useState<boolean>(false);
+  const [activateSuccessModal, setActivateSuccessModal] =
+    useState<boolean>(false);
+  const [deactivateSuccessModal, setDeactivateSuccessModal] =
+    useState<boolean>(false);
+
   const openCardMenu = Boolean(anchorEl);
-  const handleCardMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+
+  useEffect(() => {
+    filterData();
+  }, [ascending]);
+  useEffect(() => {
+    idFilterData();
+  }, [idSorting]);
+
+  const handleCardMenuClick = (event: MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
   const handleCardMenuClose = () => {
@@ -152,12 +169,12 @@ export const OrganisationDetails = () => {
   };
   const addOrganisationOpen = () => {
     // setAnchorEl(null);
-    navigate("/userManagement/orgStructure/screens/Onboarding/onboarding")
+    navigate('/userManagement/orgStructure/screens/Onboarding/onboarding');
   };
   const organisationOpen = () => {
     setAnchorEl(null);
   };
-  const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSelectAllClick = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       const newSelected = data.map((n: any) => n.id);
       setSelected(newSelected);
@@ -328,12 +345,7 @@ export const OrganisationDetails = () => {
     });
     setSortingData([...sort]);
   };
-  useEffect(() => {
-    filterData();
-  }, [ascending]);
-  useEffect(() => {
-    idFilterData();
-  }, [idSorting]);
+
   return (
     <Box className="organisationContainer">
       <Box className="organisationHeader">
@@ -474,11 +486,12 @@ export const OrganisationDetails = () => {
                 textTransform: 'capitalize',
                 letterSpacing: '0.0025em',
               }}
+              onClick={() => setActivateModal(!activateModal)}
             >
               <IconButton sx={{ padding: '0', marginRight: '8px' }}>
                 <img src={active_icon} alt="resumeIcon" />
               </IconButton>
-              Active Org
+              Activate Org
             </Button>
             <Button
               variant="contained"
@@ -493,6 +506,7 @@ export const OrganisationDetails = () => {
                 letterSpacing: '0.0025em',
                 marginLeft: '15px',
               }}
+              onClick={() => setDeactivateModal(!deactivateModal)}
             >
               <IconButton sx={{ padding: '0', marginRight: '8px' }}>
                 <img src={DeActive_icon} alt="resumeIcon" />
@@ -514,6 +528,64 @@ export const OrganisationDetails = () => {
           <ListTable column={column} data={sortingData} />
         </Stack>
       </Box>
+
+      {activateModal && (
+        <CustomModal
+          openSuccess={activateModal}
+          handleSuccess={() => {
+            setActivateModal(false);
+            setActivateSuccessModal(true);
+          }}
+          handleCloseSuccess={() => {
+            setActivateModal(false);
+          }}
+          title={'Request for Activation'}
+          pause_content={'Do you want to submit request for activating user?'}
+          close={'Close'}
+          submit={'Submit'}
+        />
+      )}
+
+      {activateSuccessModal && (
+        <CustomModal
+          openSuccess={activateSuccessModal}
+          handleCloseSuccess={() => setActivateSuccessModal(false)}
+          successModalTitle={'Request - Activate User'}
+          successModalMsg={
+            'Your request for activating user is successfully sent to the Reviewer.'
+          }
+          btn={' Close'}
+        />
+      )}
+
+      {deactivateModal && (
+        <CustomModal
+          openSuccess={deactivateModal}
+          handleSuccess={() => {
+            setDeactivateModal(false);
+            setDeactivateSuccessModal(true);
+          }}
+          handleCloseSuccess={() => {
+            setDeactivateModal(false);
+          }}
+          title={'Request for Deactivation'}
+          pause_content={'Do you want to submit request for deactivating user?'}
+          close={'Close'}
+          submit={'Submit'}
+        />
+      )}
+
+      {deactivateSuccessModal && (
+        <CustomModal
+          openSuccess={deactivateSuccessModal}
+          handleCloseSuccess={() => setDeactivateSuccessModal(false)}
+          successModalTitle={'Request - Deactivate User'}
+          successModalMsg={
+            'Your request for deactivating user is successfully sent to the Reviewer.'
+          }
+          btn={' Close'}
+        />
+      )}
     </Box>
   );
 };

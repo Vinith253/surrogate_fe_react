@@ -6,7 +6,6 @@ import {
   Typography,
   Stack,
   Box,
-  Button,
   Checkbox,
   IconButton,
   InputBase,
@@ -19,14 +18,17 @@ import SelectDropdown from '../../../components/commonComponent/CheckboxSelectDr
 import BtnContained from '../../../components/commonComponent/CustomText/Button/Contained';
 import HeaderWithInfo from '../../../components/commonComponent/HeaderWithInfo';
 import { UserCreationFilterDropdown } from './userCreation.const';
-import active_icon from '../../../assets/icons/active.svg';
+import activeIcon from '../../../assets/icons/active.svg';
 import UnfoldMoreIcon from '../../../assets/icons/sortArrow.svg';
-import DeActive_icon from '../../../assets/icons/DeActive.svg';
+import deActiveIcon from '../../../assets/icons/DeActive.svg';
 import CustomIconButton from '../../../components/commonComponent/CustomIconButton';
 import ChooseCategoryToViewData from '../../../components/commonComponent/ChooseCategoryToViewData';
 import ListTable from '../../../components/commonComponent/commonListTable/commonListTable';
 import BtnOutlined from '../../../components/commonComponent/CustomText/Button/Outlined';
 import { checkTagStatus } from '../../../utils/tagBasedIndicator/tagStatus';
+import Popover from '../../../components/commonComponent/Popover';
+import ActionModal from '../../../components/commonComponent/customModal/CustomModal';
+import SuccessModal from '../../../components/commonComponent/customModal/CustomModal';
 import './style.scss';
 
 const data = [
@@ -86,14 +88,42 @@ const data = [
   },
 ];
 
-const UserCreation = () => {
+function UserCreation() {
   const [isFiltered, setIsFiltered] = useState(false);
+  const [selectedRecord, setSelectedRecord] = useState({});
+  const [isActionModalOpen, setActionModalOpen] = useState(false);
+  const [isSuccessModalOpen, setSuccessModalOpen] = useState(false);
   const [selected, setSelected] = React.useState<number[]>([]);
   const [ascending, setAscending] = useState<boolean>(true);
   const [sortingData, setSortingData] = useState(data);
   const [idSorting, setIdSorting] = useState<boolean>(true);
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const openCardMenu = Boolean(anchorEl);
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+    null
+  );
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const userListMoreMenu = [
+    { label: 'View', routePath: '/userManagement/userCreation/viewUser' },
+    { label: 'Edit', routePath: '' },
+    { label: 'Activate User', routePath: '' },
+    { label: 'Deactivate User', routePath: '' },
+  ];
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
+
+  const openActionModal = (record: any) => {
+    console.log('record', record);
+    setSelectedRecord(record);
+    setActionModalOpen(true);
+  };
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
@@ -103,6 +133,7 @@ const UserCreation = () => {
     }
     setSelected([]);
   };
+
   const isSelected = (id: number) => {
     const res = selected.indexOf(id);
     if ((res && res !== -1) || res === 0) {
@@ -196,7 +227,7 @@ const UserCreation = () => {
       },
       render: (_: string, row: any, index: number) => {
         const isItemSelected = isSelected(row.id);
-        console.log('isItemSelected', isItemSelected);
+
         const labelId = `enhanced-table-checkbox-${index}`;
         return (
           <Checkbox
@@ -293,12 +324,24 @@ const UserCreation = () => {
     },
     {
       title: 'More',
-      dataIndex: 'id',
+      dataIndex: 'status',
       key: 'more',
-      render: () => {
+      render: (_: string, row: any, index: number) => {
         return (
-          <Stack>
-            <MoreVertIcon />
+          <Stack className="more-btn">
+            <MoreVertIcon
+              onClick={(event: any) => {
+                handleClick(event);
+              }}
+            />
+            <Popover
+              id={id}
+              open={open}
+              anchorEl={anchorEl}
+              handleClose={handleClose}
+              options={userListMoreMenu}
+              openActionModal={() => openActionModal(row)}
+            />
           </Stack>
         );
       },
@@ -318,12 +361,21 @@ const UserCreation = () => {
   ];
 
   const customIconBtns = [
-    { label: 'Activate User', icon: active_icon },
+    { label: 'Activate User', icon: activeIcon, isDisabled: false },
     {
       label: 'Deactivate User',
-      icon: DeActive_icon,
+      icon: deActiveIcon,
+      isDisabled: true,
     },
   ];
+
+  const onClickButton = (eachBtn: any) => {
+    // console.log(eachBtn);
+  };
+
+  const handleSubmit = () => {
+    setSuccessModalOpen(true);
+  };
 
   return (
     <div className="user-creation-main-container">
@@ -352,51 +404,67 @@ const UserCreation = () => {
           <BtnContained title="Search" onClick={() => setIsFiltered(true)} />
         </Box>
       </Stack>
-      <Stack className="container">
-        <HeaderWithInfo
-          header="Branch Details"
-          isInfoEnabled={false}
-          info=""
-          isDownloadEnabled={true}
-        />
-        <Box style={{ marginTop: '20px', display: 'flex' }}>
-          {customIconBtns?.map((eachBtn: any) => {
-            return <CustomIconButton data={eachBtn} />;
-          })}
 
-          <Stack className="table-search-filters">
-            <Box className="search-container">
-              <Box className="search-box">
-                <SearchIcon className="search-icon" />
-                <InputBase placeholder="Search" />
-              </Box>
-              <Box>
-                <GroupButton data={GroupButtonData} />
-              </Box>
-            </Box>
-          </Stack>
-        </Box>
-
-        <Stack>
-          <ListTable column={column} data={sortingData} />
-        </Stack>
-      </Stack>
-      {/* {isFiltered ? (
+      {isFiltered ? (
         <Stack className="container">
-          <Typography variant="subtitle1" sx={{ letterSpacing: 0.5 }}>
-            Branch Details
-            <Typography className="icons-container">
-              <img src={DownloadIcon} alt="" className="icons" />
-              <img src={MailIcon} alt="" className="icons" />
-            </Typography>
-          </Typography>
-          <Stack className="underline"> </Stack>
+          <HeaderWithInfo
+            header="Branch Details"
+            isInfoEnabled={false}
+            info=""
+            isDownloadEnabled={true}
+          />
+          <Box style={{ marginTop: '20px', display: 'flex' }}>
+            {customIconBtns?.map((eachBtn: any) => {
+              return (
+                <CustomIconButton
+                  data={eachBtn}
+                  onClick={() => onClickButton(eachBtn)}
+                />
+              );
+            })}
+
+            <Stack className="table-search-filters">
+              <Box className="search-container">
+                <Box className="search-box">
+                  <SearchIcon className="search-icon" />
+                  <InputBase placeholder="Search" />
+                </Box>
+                <Box>
+                  <GroupButton data={GroupButtonData} />
+                </Box>
+              </Box>
+            </Stack>
+          </Box>
+
+          <Stack>
+            <ListTable column={column} data={sortingData} />
+          </Stack>
         </Stack>
       ) : (
         <ChooseCategoryToViewData />
-      )} */}
+      )}
+
+      <ActionModal
+        openSuccess={isActionModalOpen}
+        handleCloseSuccess={() => setActionModalOpen(false)}
+        handleSuccess={handleSubmit}
+        title={'Request for Activation'}
+        pause_content={'Do you want to submit request for activating user?'}
+        close={'Close'}
+        submit={'Submit'}
+      />
+
+      <SuccessModal
+        openSuccess={isSuccessModalOpen}
+        handleCloseSuccess={() => setSuccessModalOpen(false)}
+        successModalTitle={'Request - Activate User'}
+        successModalMsg={
+          'Your request for activating user is successfully sent to the Reviewer.'
+        }
+        btn={' Close'}
+      />
     </div>
   );
-};
+}
 
 export default UserCreation;

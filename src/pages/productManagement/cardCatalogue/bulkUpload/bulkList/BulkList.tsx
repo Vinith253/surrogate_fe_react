@@ -34,6 +34,7 @@ import PaginationComp from '../../../../../components/commonComponent/Pagination
 import BulkUpload from '..';
 import CustomModal from '../../../../../components/commonComponent/customModal/CustomModal';
 import CommonTable from '../../../../../components/commonComponent/commonTable/CommonTable';
+import { FooterButton } from '../../../../../components/commonComponent/FooterButton/FooterButton';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -369,7 +370,13 @@ export default function BulkList(props: any) {
           <LinearProgress
             variant="determinate"
             {...props}
-            color={progress === 100 && !correctionState ? 'error' : 'secondary'}
+            color={
+              progress !== 100
+                ? 'secondary'
+                : correctionState
+                ? 'success'
+                : 'error'
+            }
             // sx={{ color: progress === 100 ? 'red' : '#0662B7;' }}
           />
         </Box>
@@ -695,6 +702,8 @@ export default function BulkList(props: any) {
       {/* {imageUpload && <BulkUpload />} */}
       {progress === 100 && (
         <>
+          {/* <Box sx={{ position: 'fixed', bottom: 0 }}> */}
+          {/* <FooterButton cancel="Cancel" submit="Procees" /> */}
           <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: '1%' }}>
             <Button variant="outlined">Cancel</Button>
             <Button
@@ -702,7 +711,7 @@ export default function BulkList(props: any) {
               // color="secondary"
               onClick={handleProceed}
               sx={{
-                backgroundColor: uploadProgress > 0 ? '#82B1DB' : ' #0662B7',
+                backgroundColor: correctionState ? '#82B1DB' : ' #0662B7',
               }}
             >
               {progress === 100 && correctionState
@@ -727,6 +736,7 @@ export default function BulkList(props: any) {
               {`Discord Error entries and Continue >`}
             </Button>
           </Box>
+          {/* </Box> */}
           {imageUpload &&
             correctionState &&
             progress === 100 &&

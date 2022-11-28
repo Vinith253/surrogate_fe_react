@@ -1,26 +1,34 @@
 import React from 'react';
-import { Typography, Button } from '@mui/material';
+import { Button } from '@mui/material';
 import { Box, Stack } from '@mui/system';
-import TypographyInfo from '../../../components/commonComponent/CustomText/Info';
-import './style.scss';
 import AddIcon from '@mui/icons-material/Add';
 import { ScreenHeader } from '../../../components/commonComponent/ScreenHeader/ScreenHeader';
-import { useNavigate } from 'react-router-dom';
+import Popover from '../../../components/commonComponent/Popover';
+import './style.scss';
 
 function UserCreationTab() {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+    null
+  );
 
-  const openCardMenu = Boolean(anchorEl);
-
-  const navigate = useNavigate();
-
-  const handleCardMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleCardMenuClose = () => {
+  const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
+
+  const createUserMenu = [
+    {
+      label: 'Single User Upload',
+      routePath: '/userManagement/userCreation/createUser',
+    },
+    { label: 'Bulk User Upload', routePath: '' },
+  ];
 
   return (
     <Stack>
@@ -30,21 +38,23 @@ function UserCreationTab() {
           info="From here you can create access presets to assign with users in Users Creation."
           showBackButton={false}
         />
-        <Box>
-          <Button
-            sx={{ textTransform: 'capitalize' }}
-            variant="contained"
-            color="secondary"
-            startIcon={<AddIcon />}
-            aria-controls={openCardMenu ? 'basic-menu' : undefined}
-            aria-haspopup="true"
-            aria-expanded={openCardMenu ? 'true' : undefined}
-            onClick={() => navigate('/userManagement/userCreation/createUser')}
-            id="basic-button"
-          >
-            Add New User
-          </Button>
-        </Box>
+        <Button
+          sx={{ textTransform: 'capitalize' }}
+          variant="contained"
+          color="secondary"
+          startIcon={<AddIcon />}
+          id="basic-button"
+          onClick={handleClick}
+        >
+          Add New User
+        </Button>
+        <Popover
+          id={id}
+          open={open}
+          anchorEl={anchorEl}
+          handleClose={handleClose}
+          options={createUserMenu}
+        />
       </Box>
     </Stack>
   );
