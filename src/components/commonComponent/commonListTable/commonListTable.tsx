@@ -110,7 +110,7 @@ const CommonTable = (props: any) => {
             {currentTableData?.map((dataItem: any, index: number) => {
               return (
                 <TableRow
-                  sx={{ padding: '5px' }}
+                  sx={{ padding: '5px', height: '48px' }}
                   style={
                     isItemSelected === true
                       ? { background: colors.tableGrey }
