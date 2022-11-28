@@ -10,32 +10,8 @@ import DragDrop from '../../../../../components/commonComponent/dragDrop/DragDro
 import PageLayout from '../../../../../components/layout/pageLayout/pageLayout';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import './OrgUploadCard.scss';
+import CustomModal from '../../../../../components/commonComponent/customModal/CustomModal';
 
-function LinearProgressWithLabel(
-  props: LinearProgressProps & { value: number }
-) {
-  return (
-    <Box>
-      <Box className="progress-container">
-        <Box className="upload-card-progress-text">
-          <Typography variant="body2">{`${Math.round(
-            props.value
-          )}% Completed`}</Typography>
-        </Box>
-        <LinearProgress
-          variant="determinate"
-          {...props}
-          sx={{
-            '& .MuiLinearProgress-bar1Determinate': {
-              backgroundColor: 'green',
-            },
-          }}
-          className="upload-card-progress"
-        />
-      </Box>
-    </Box>
-  );
-}
 const OrgUploadCard = ({
   toggle,
   data,
@@ -45,6 +21,7 @@ const OrgUploadCard = ({
 }: any) => {
   const [progress, setProgress] = useState(0);
   const [progressBar, setProgressBar] = useState(0);
+  const [openDiscard, setOpenDiscard] = useState(false);
   useEffect(() => {
     const timer = setInterval(() => {
       // uploadProgressValue(progress);
@@ -71,7 +48,47 @@ const OrgUploadCard = ({
       clearInterval(timer);
     };
   }, [progressBar]);
-
+  const handleDiscard = () => {
+    setOpenDiscard(true);
+  };
+  const footerStyle = {
+    backgroundColor: 'white',
+    marginTop: '24px',
+    padding: '20px 32px',
+    position: 'fixed',
+    bottom: 0,
+    right: 0,
+    width: ' 100%',
+    // borderTop: ' 1px solid black',
+    boxShadow:
+      '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
+  };
+  function LinearProgressWithLabel(
+    props: LinearProgressProps & { value: number }
+  ) {
+    return (
+      <Box>
+        <Box className="progress-container">
+          <Box className="upload-card-progress-text">
+            <Typography variant="body2">{`${Math.round(
+              props.value
+            )}% Completed`}</Typography>
+          </Box>
+          <LinearProgress
+            variant="determinate"
+            {...props}
+            // sx={{
+            //   '& .MuiLinearProgress-bar1Determinate': {
+            //     backgroundColor: 'green',
+            //   },
+            // }}
+            color={progress === 100 ? 'success' : 'secondary'}
+            className="upload-card-progress"
+          />
+        </Box>
+      </Box>
+    );
+  }
   const handleProgress = (value: number) => {
     setProgressBar(value);
   };
@@ -116,6 +133,56 @@ const OrgUploadCard = ({
         />
         <LinearProgressWithLabel variant="determinate" value={progress} />
       </Box>
+      {fileName === 'image' && (
+        <Box sx={footerStyle}>
+          {/* <Box sx={{ position: 'fixed', bottom: 0 }}> */}
+          {/* <FooterButton cancel="Cancel" submit="Procees" /> */}
+          <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: '1%' }}>
+            <Button variant="outlined">Cancel</Button>
+            <Button
+              variant="contained"
+              // color="secondary"
+              // onClick={handleProceed}
+              sx={{
+                backgroundColor: '#82B1DB',
+              }}
+            >
+              {'Proceed'}
+            </Button>
+          </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              gap: '1%',
+              marginTop: '1%',
+            }}
+          >
+            <Button
+              variant="text"
+              color="secondary"
+              onClick={handleDiscard}
+              sx={{ fontSize: '12px' }}
+            >
+              {`Discord Error entries and Continue >`}
+            </Button>
+          </Box>
+          {/* </Box> */}
+        </Box>
+      )}
+      {
+        <CustomModal
+          openSuccess={openDiscard}
+          handleCloseSuccess={() => setOpenDiscard(!openDiscard)}
+          handleSuccess={() => setOpenDiscard(!openDiscard)}
+          successModalTitle={'Do You want to discard?'}
+          discardModalMsg={
+            'Want to discard corrections for error entires in the excel sheet and continue upload cards'
+          }
+          yesContinueBtn={'Yes, Continue'}
+          closeBtn={'Close'}
+        />
+      }
     </PageLayout>
   );
 };

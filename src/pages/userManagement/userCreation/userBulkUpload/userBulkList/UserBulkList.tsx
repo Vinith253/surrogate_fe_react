@@ -342,7 +342,18 @@ export default function UserBulkList(props: any) {
       error: false,
     },
   ];
-
+  const footerStyle = {
+    backgroundColor: 'white',
+    marginTop: '24px',
+    padding: '20px 32px',
+    position: 'fixed',
+    bottom: 0,
+    right: 0,
+    width: ' 100%',
+    // borderTop: ' 1px solid black',
+    boxShadow:
+      '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
+  };
   const handleUploadProgress = (value: number) => {
     setUploadProgress(value);
     console.log(value, 'handle upload progress');
@@ -701,80 +712,84 @@ export default function UserBulkList(props: any) {
       {/* {imageUpload && <BulkUpload />} */}
       {progress === 100 && (
         <>
-          <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: '1%' }}>
-            <Button variant="outlined">Cancel</Button>
-            <Button
-              variant="contained"
-              // color="secondary"
-              onClick={handleProceed}
+          <Box sx={footerStyle}>
+            <Box
+              sx={{ display: 'flex', justifyContent: 'flex-end', gap: '1%' }}
+            >
+              <Button variant="outlined">Cancel</Button>
+              <Button
+                variant="contained"
+                // color="secondary"
+                onClick={handleProceed}
+                sx={{
+                  backgroundColor: correctionState ? ' #0662B7' : '#82B1DB',
+                }}
+                // disabled={true}
+              >
+                {progress === 100 && correctionState
+                  ? 'Submit to reviewer'
+                  : 'Proceed'}
+              </Button>
+            </Box>
+            <Box
               sx={{
-                backgroundColor: correctionState ? ' #0662B7' : '#82B1DB',
+                display: 'flex',
+                justifyContent: 'flex-end',
+                gap: '1%',
+                marginTop: '1%',
               }}
-              // disabled={true}
             >
-              {progress === 100 && correctionState
-                ? 'Submit to reviewer'
-                : 'Proceed'}
-            </Button>
+              <Button
+                variant="text"
+                color="secondary"
+                onClick={handleDiscard}
+                sx={{ fontSize: '12px' }}
+              >
+                {`Discord Error entries and Continue >`}
+              </Button>
+            </Box>
           </Box>
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'flex-end',
-              gap: '1%',
-              marginTop: '1%',
-            }}
-          >
-            <Button
-              variant="text"
-              color="secondary"
-              onClick={handleDiscard}
-              sx={{ fontSize: '12px' }}
-            >
-              {`Discord Error entries and Continue >`}
-            </Button>
-          </Box>
-          {
-            <CustomModal
-              openSuccess={userBulkSuccessPopup}
-              handleCloseSuccess={closeModal}
-              successModalTitle={'User Details Uploaded Successfully'}
-              successModalMsg={
-                '  Organisation has been successully sent to the reviewer'
-              }
-              btn={' Close'}
-            />
-          }
-          {
-            <CustomModal
-              openSuccess={openDiscard}
-              handleCloseSuccess={() => setOpenDiscard(!openDiscard)}
-              handleSuccess={handleContinue}
-              successModalTitle={'Do You want to discard?'}
-              discardModalMsg={
-                'Want to discard corrections for error entires in the excel sheet and continue upload cards'
-              }
-              yesContinueBtn={'Yes, Continue'}
-              closeBtn={'Close'}
-            />
-          }
-          {
-            <CustomModal
-              openSuccess={openContinueDiscard}
-              handleCloseSuccess={() =>
-                setOpenContinueDiscard(!openContinueDiscard)
-              }
-              handleSuccess={() => setOpenContinueDiscard(false)}
-              successModalTitle={'Do You want to Cancel Bulk upload?'}
-              discardModalMsg={
-                'Want to discard corrections for error entires in the excel sheet and continue upload cards'
-              }
-              yesContinueBtn={'Yes, Continue'}
-              closeBtn={'Close'}
-            />
-          }
         </>
       )}
+      {
+        <CustomModal
+          openSuccess={userBulkSuccessPopup}
+          handleCloseSuccess={closeModal}
+          successModalTitle={'User Details Uploaded Successfully'}
+          successModalMsg={
+            '  Organisation has been successully sent to the reviewer'
+          }
+          btn={' Close'}
+        />
+      }
+      {
+        <CustomModal
+          openSuccess={openDiscard}
+          handleCloseSuccess={() => setOpenDiscard(!openDiscard)}
+          handleSuccess={handleContinue}
+          successModalTitle={'Do You want to discard?'}
+          discardModalMsg={
+            'Want to discard corrections for error entires in the excel sheet and continue upload cards'
+          }
+          yesContinueBtn={'Yes, Continue'}
+          closeBtn={'Close'}
+        />
+      }
+      {
+        <CustomModal
+          openSuccess={openContinueDiscard}
+          handleCloseSuccess={() =>
+            setOpenContinueDiscard(!openContinueDiscard)
+          }
+          handleSuccess={() => setOpenContinueDiscard(false)}
+          successModalTitle={'Do You want to Cancel Bulk upload?'}
+          discardModalMsg={
+            'Want to discard corrections for error entires in the excel sheet and continue upload cards'
+          }
+          yesContinueBtn={'Yes, Continue'}
+          closeBtn={'Close'}
+        />
+      }
     </PageLayout>
   );
 }
