@@ -36,10 +36,17 @@ type columnType = {
 type columnArr = columnType[];
 type dataProps = {
   column: columnArr;
-  isItemSelected: any;
+  isItemSelected?: any;
+  selectedKey?: string;
 };
+
+const indexKey = 'index';
 const CommonTable = (props: any) => {
-  const { column, isItemSelected }: dataProps = props;
+  const {
+    column,
+    isItemSelected = null,
+    selectedKey = indexKey,
+  }: dataProps = props;
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
@@ -82,6 +89,25 @@ const CommonTable = (props: any) => {
     }
     return '--';
   };
+
+  const selectedRow = (data: any, index: number) => {
+    const defaultStyle = { background: colors.white };
+    const selected = { background: colors.tableGrey };
+    if (isItemSelected) {
+      if (selectedKey === indexKey) {
+        if (isItemSelected.includes(index)) {
+          return selected;
+        }
+        return defaultStyle;
+      }
+      if (isItemSelected.includes(data[selectedKey])) {
+        return selected;
+      }
+      return defaultStyle;
+    }
+    return defaultStyle;
+  };
+
   return (
     <Box>
       <TableContainer component={Paper} sx={{ margin: '2% 0' }}>
@@ -123,11 +149,7 @@ const CommonTable = (props: any) => {
               return (
                 <TableRow
                   sx={{ padding: '5px' }}
-                  style={
-                    isItemSelected === true
-                      ? { background: colors.tableGrey }
-                      : { background: colors.white }
-                  }
+                  style={selectedRow(dataItem, index)}
                 >
                   {column.map((columnItem: columnType) => {
                     return (
