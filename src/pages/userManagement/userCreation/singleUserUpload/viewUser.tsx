@@ -21,7 +21,7 @@ function ViewUser() {
   };
 
   const handleSubmitClick = () => {
-    isPermission ? setIsUserCreated(true) : setIsPermission(true);
+    // isPermission ? setIsUserCreated(true) : setIsPermission(true);
   };
 
   const personalDetails = {
@@ -171,6 +171,13 @@ function ViewUser() {
       <DetailsCard data={channelAccessibleDetails} gridColumn={3} />
       <DetailsCard data={locationDetails} gridColumn={3} />
       <DetailsCard data={roleDetails} gridColumn={3} />
+      <FooterButton
+        cancel="Close"
+        submit="Next"
+        handleSubmitClick={handleSubmitClick}
+        handleCancelClick={goBack}
+        // handleSaveasDraftClick={handleSaveasDraftClick}
+      />
     </Stack>
   );
 }
