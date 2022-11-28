@@ -109,10 +109,10 @@ export default function App() {
         />
         <Route path="/accessLibrary" element={<AccessLibrary />} />
 
-        {/* <Route
+        <Route
           path="/userManagement/roleCreation/userdetails"
           element={<UserDetails />}
-        /> */}
+        />
 
         {/* Catch all */}
         <Route path="*" element={<NotFoundPage />} />
