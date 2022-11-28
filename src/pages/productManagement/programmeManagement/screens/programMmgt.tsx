@@ -209,7 +209,7 @@ export const ProgramManagementScreen = () => {
             disabled={btnActive}
             sx={{
               padding: '3px 10px',
-              fontSize: '14px',
+              fontSize: '1vw',
               fontWeight: 400,
               display: 'flex',
               alignItems: 'center',
@@ -239,7 +239,7 @@ export const ProgramManagementScreen = () => {
             disabled={btnActive}
             sx={{
               padding: '3px 10px',
-              fontSize: '14px',
+              fontSize: '1vw',
               fontWeight: 400,
               display: 'flex',
               alignItems: 'center',
@@ -269,7 +269,7 @@ export const ProgramManagementScreen = () => {
             disabled={btnActive}
             sx={{
               padding: '3px 10px',
-              fontSize: '14px',
+              fontSize: '1vw',
               fontWeight: 400,
               display: 'flex',
               alignItems: 'center',
