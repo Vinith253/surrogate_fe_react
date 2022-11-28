@@ -678,6 +678,7 @@ export const CardCatalogue = () => {
                 className="btn"
                 variant="contained"
                 color="secondary"
+                
                 // sx={{
                 //   padding: '3px 8px',
                 //   fontSize: '12px',
@@ -698,6 +699,7 @@ export const CardCatalogue = () => {
                 Resume card
               </Button>
               <Button
+              
                 variant="contained"
                 color="secondary"
                 className="btn"
@@ -775,27 +777,28 @@ export const CardCatalogue = () => {
                   onChange={handleButtonChange}
                   aria-label="Platform"
                   sx={{
+                    
                     height: '40px',
                   }}
                   // sx={ToggleBoxStyle}
                 >
-                  <ColorButton value="all" sx={{ paddingRight: '10px' }}>
-                    {' '}
-                    All{' '}
+                  <ColorButton value="all" sx={{ paddingRight: '10px',textTransform:'capitalize' }}>
+                    
+                    All
                   </ColorButton>
                   {/* <Divider orientation="vertical" /> */}
-                  <ColorButton value="activate" sx={{ paddingRight: '10px' }}>
+                  <ColorButton value="activate" sx={{textTransform:'capitalize', paddingRight: '10px' }}>
                     Activate
                   </ColorButton>
                   {/* <Divider orientation="vertical" /> */}
                   <ColorButton
                     value="deactivated"
-                    sx={{ paddingRight: '10px' }}
+                    sx={{textTransform:'capitalize', paddingRight: '10px' }}
                   >
                     Deactivated
                   </ColorButton>
                   {/* <Divider orientation="vertical" /> */}
-                  <ColorButton value="saved" sx={{ paddingRight: '10px' }}>
+                  <ColorButton value="saved" sx={{textTransform:'capitalize', paddingRight: '10px' }}>
                     Saved
                   </ColorButton>
                 </ToggleButtonGroup>
