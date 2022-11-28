@@ -7,8 +7,9 @@ const TypographyInfo = (props: any) => {
       sx={{
         fontSize: '12px',
         fontWeight: '400',
+        alignItems: 'center',
         // padding: 1,
-        // marginBottom: 'unset',
+        marginBottom: '2px',
       }}
       color="textSecondary"
       paragraph

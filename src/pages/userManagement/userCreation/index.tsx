@@ -11,6 +11,8 @@ import {
   IconButton,
   InputBase,
   Grid,
+  Menu,
+  MenuItem,
 } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import SearchIcon from '@mui/icons-material/Search';
@@ -103,6 +105,18 @@ const UserCreation = () => {
     }
     setSelected([]);
   };
+
+  const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
+  const menuOpen = Boolean(anchorElement);
+
+  const handleClick = (event: React.MouseEvent<HTMLTableCellElement>) => {
+    setAnchorElement(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorElement(null);
+  };
+
   const isSelected = (id: number) => {
     const res = selected.indexOf(id);
     if ((res && res !== -1) || res === 0) {
@@ -297,8 +311,38 @@ const UserCreation = () => {
       key: 'more',
       render: () => {
         return (
-          <Stack>
+          <Stack onClick={handleClick}>
             <MoreVertIcon />
+            {/* <Menu
+              id="more-menu"
+              anchorEl={anchorElement}
+              open={menuOpen}
+              MenuListProps={{
+                'aria-labelledby': 'more-button',
+              }}
+              onClose={handleClose}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              // transformOrigin={{
+              //   vertical: 'top',
+              //   horizontal: 'right',
+              // }}
+            >
+              <MenuItem
+                onClick={() => {
+                  handleClose();
+                  // navigate('/productManagement/cardCatalogue/singleupload/reviewCard');
+                }}
+                className="menu"
+              >
+                View
+              </MenuItem>
+              <MenuItem onClick={handleClose} className="menu">
+                Edit
+              </MenuItem>
+            </Menu> */}
           </Stack>
         );
       },
@@ -318,12 +362,17 @@ const UserCreation = () => {
   ];
 
   const customIconBtns = [
-    { label: 'Activate User', icon: active_icon },
+    { label: 'Activate User', icon: active_icon, isDisabled: false },
     {
       label: 'Deactivate User',
       icon: DeActive_icon,
+      isDisabled: true,
     },
   ];
+
+  const onClickButton = (eachBtn: any) => {
+    console.log(eachBtn);
+  };
 
   return (
     <div className="user-creation-main-container">
@@ -352,49 +401,45 @@ const UserCreation = () => {
           <BtnContained title="Search" onClick={() => setIsFiltered(true)} />
         </Box>
       </Stack>
-      <Stack className="container">
-        <HeaderWithInfo
-          header="Branch Details"
-          isInfoEnabled={false}
-          info=""
-          isDownloadEnabled={true}
-        />
-        <Box style={{ marginTop: '20px', display: 'flex' }}>
-          {customIconBtns?.map((eachBtn: any) => {
-            return <CustomIconButton data={eachBtn} />;
-          })}
 
-          <Stack className="table-search-filters">
-            <Box className="search-container">
-              <Box className="search-box">
-                <SearchIcon className="search-icon" />
-                <InputBase placeholder="Search" />
-              </Box>
-              <Box>
-                <GroupButton data={GroupButtonData} />
-              </Box>
-            </Box>
-          </Stack>
-        </Box>
-
-        <Stack>
-          <ListTable column={column} data={sortingData} />
-        </Stack>
-      </Stack>
-      {/* {isFiltered ? (
+      {isFiltered ? (
         <Stack className="container">
-          <Typography variant="subtitle1" sx={{ letterSpacing: 0.5 }}>
-            Branch Details
-            <Typography className="icons-container">
-              <img src={DownloadIcon} alt="" className="icons" />
-              <img src={MailIcon} alt="" className="icons" />
-            </Typography>
-          </Typography>
-          <Stack className="underline"> </Stack>
+          <HeaderWithInfo
+            header="Branch Details"
+            isInfoEnabled={false}
+            info=""
+            isDownloadEnabled={true}
+          />
+          <Box style={{ marginTop: '20px', display: 'flex' }}>
+            {customIconBtns?.map((eachBtn: any) => {
+              return (
+                <CustomIconButton
+                  data={eachBtn}
+                  onClick={() => onClickButton(eachBtn)}
+                />
+              );
+            })}
+
+            <Stack className="table-search-filters">
+              <Box className="search-container">
+                <Box className="search-box">
+                  <SearchIcon className="search-icon" />
+                  <InputBase placeholder="Search" />
+                </Box>
+                <Box>
+                  <GroupButton data={GroupButtonData} />
+                </Box>
+              </Box>
+            </Stack>
+          </Box>
+
+          <Stack>
+            <ListTable column={column} data={sortingData} />
+          </Stack>
         </Stack>
       ) : (
         <ChooseCategoryToViewData />
-      )} */}
+      )}
     </div>
   );
 };

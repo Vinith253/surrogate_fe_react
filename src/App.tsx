@@ -24,6 +24,8 @@ import UserCreation from './pages/userManagement/userCreation';
 import { CreateRole } from './pages/userManagement/roleCreation/createRole/createRole';
 import CreateUser from './pages/userManagement/userCreation/createUser';
 import { UserDetails } from './pages/userManagement/roleCreation/UserDetails/UserDetails';
+import UserBulkUpload from './pages/userManagement/userCreation/userBulkUpload';
+import { AuthDetail } from './pages/userManagement/roleCreation/screens/AuthorisationDetail/authDetail';
 
 export default function App() {
   return (
@@ -93,6 +95,10 @@ export default function App() {
           path="/userManagement/userCreation/createUser"
           element={<CreateUser />}
         />
+        <Route
+          path="/userManagement/userCreation/bulkUpload"
+          element={<UserBulkUpload />}
+        />
 
         <Route path="/sales/salesDashboard" element={<SalesDashboard />} />
 
@@ -110,6 +116,11 @@ export default function App() {
 
         {/* Catch all */}
         <Route path="*" element={<NotFoundPage />} />
+
+        <Route
+          path="/userManagement/roleCreation/authorisationDetails"
+          element={<AuthDetail />}
+        />
       </Route>
     </Routes>
   );

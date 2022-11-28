@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Button } from '@mui/material';
+import { Typography, Menu, MenuItem, Button } from '@mui/material';
 import { Box, Stack } from '@mui/system';
 import TypographyInfo from '../../../components/commonComponent/CustomText/Info';
 import './style.scss';
@@ -39,11 +39,31 @@ function UserCreationTab() {
             aria-controls={openCardMenu ? 'basic-menu' : undefined}
             aria-haspopup="true"
             aria-expanded={openCardMenu ? 'true' : undefined}
-            onClick={() => navigate('/userManagement/userCreation/createUser')}
             id="basic-button"
+            onClick={handleCardMenuClick}
           >
             Add New User
           </Button>
+          <Menu
+            className="add-user-menu-container"
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={openCardMenu}
+            onClose={handleCardMenuClose}
+            MenuListProps={{
+              'aria-labelledby': 'basic-button',
+            }}
+          >
+            <MenuItem
+              style={{ fontSize: '13px' }}
+              onClick={() =>
+                navigate('/userManagement/userCreation/createUser')
+              }
+            >
+              Single User Upload
+            </MenuItem>
+            <MenuItem style={{ fontSize: '13px' }}>Bulk User Upload</MenuItem>
+          </Menu>
         </Box>
       </Box>
     </Stack>
