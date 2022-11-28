@@ -48,9 +48,9 @@ export const Upload = (props:any) => {
             borderColor: '#D2D2D3',
             backgroundColor: progress !== 100 ? '#f3f3f3': danger?'#FDF1F2':'#F1F9F3',
             borderRadius: '4px',
-            height: '50px',
-            marginTop: '10px',
-            paddingY:'2px'
+            height: '52px',
+            marginTop: '8px',
+            paddingY:'5px'
           }}
         >
           <Box sx={{ display: 'flex' }}>
@@ -83,8 +83,8 @@ export const Upload = (props:any) => {
               <LinearProgress
                 variant="determinate"
                 value={progress}
-                // color={'success'}
-                sx={{color: progress !== 100 ? 'green': danger?'red':'#8BCD9A'}}
+                color={'secondary'}
+                sx={{color: progress !== 100 ? 'secondary': danger?'#E63946':'#8BCD9A'}}
               />
             </Box> )}
             
