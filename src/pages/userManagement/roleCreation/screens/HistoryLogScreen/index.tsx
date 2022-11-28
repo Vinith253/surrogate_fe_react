@@ -45,6 +45,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import UnfoldMoreIcon from '../../../../../assets/icons/sortArrow.svg';
 import { checkTagStatus } from '../../../../../utils/tagBasedIndicator/tagStatus';
 import ListTable from '../../../../../components/commonComponent/commonListTable/commonListTable';
+import HistoryLogCustomModal from '../../../../../components/commonComponent/customModal/HistoryLogCustomModal';
 
 const tableHeaderData: historyLogAuthenticationInterface[] = [
   {
@@ -81,12 +82,67 @@ export const HistoryLog = (props: any) => {
     useState<historyLogRoleCreationInterface[]>(ruleCreationLogData);
   const [selectedStatus, setSelectedStatus] = useState<String>('Role Creation');
   const [versionSorting, setVersionSorting] = useState<boolean>(true);
+  const [showHistoryModal, setShowHistoryModal] = useState<boolean>(false);
 
   const menuOpen = Boolean(anchorElement);
 
   const handleClick = (event: React.MouseEvent<HTMLTableCellElement>) => {
     setAnchorElement(event.currentTarget);
   };
+
+  const tableData = [
+    {
+      versionNumber: 'V1.1.5',
+      surrogateName: 'Card For Card',
+      requestStatus: 'Approved',
+      currentStatus: 'Active',
+      initiater: 'Rajesh Kumar',
+      dateAndTime: '10 Aug,2022 10:00',
+      reviewer: 'Ganesh',
+      dateAndTimeReview: '12 Aug,2022 10:00',
+      approver: 'Ganesh',
+      dateAndTimeapprover: '12 Aug,2022 10:00',
+      reasonRejection: [
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Faucibus in ipsum aliquam cursus. Ac mattis lectus eleifend scelerisque Vitae quis praesent tempus ut',
+        'Accumsan diam a vulputate ultrices turpis viverra rhoncus donec ultricies. In dui  ultricies in curabitur quis et. Justo velit    massa sed morbi nunc, sit magna.',
+        'Facilisi est morbi sollicitudin ornare a. Ullamcorper semper fac.',
+      ],
+    },
+    {
+      versionNumber: 'V1.2.5',
+      surrogateName: 'Card For Card',
+      requestStatus: 'Rejected',
+      currentStatus: 'Active',
+      initiater: 'Ganesh',
+      dateAndTime: '10 Aug,2022 10:00',
+      reviewer: 'Ganesh',
+      dateAndTimeReview: '12 Aug,2022 10:00',
+      approver: 'Ganesh',
+      dateAndTimeapprover: '12 Aug,2022 10:00',
+      reasonRejection: [
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Faucibus in ipsum aliquam cursus. Ac mattis lectus eleifend scelerisque Vitae quis praesent tempus ut',
+        'Accumsan diam a vulputate ultrices turpis viverra rhoncus donec ultricies. In dui  ultricies in curabitur quis et. Justo velit    massa sed morbi nunc, sit magna.',
+        'Facilisi est morbi sollicitudin ornare a. Ullamcorper semper fac.',
+      ],
+    },
+    {
+      versionNumber: 'V1.3.5',
+      surrogateName: 'Card For Card',
+      requestStatus: 'Rejected',
+      currentStatus: 'Active',
+      initiater: 'Ganesh',
+      dateAndTime: '10 Aug,2022 10:00',
+      reviewer: 'Ganesh',
+      dateAndTimeReview: '12 Aug,2022 10:00',
+      approver: 'Ganesh',
+      dateAndTimeapprover: '12 Aug,2022 10:00',
+      reasonRejection: [
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Faucibus in ipsum aliquam cursus. Ac mattis lectus eleifend scelerisque Vitae quis praesent tempus ut',
+        'Accumsan diam a vulputate ultrices turpis viverra rhoncus donec ultricies. In dui  ultricies in curabitur quis et. Justo velit    massa sed morbi nunc, sit magna.',
+        'Facilisi est morbi sollicitudin ornare a. Ullamcorper semper fac.',
+      ],
+    },
+  ];
 
   const column = [
     {
@@ -176,22 +232,20 @@ export const HistoryLog = (props: any) => {
               // }}
             >
               <MenuItem
-                onClick={() => {
-                  handleClose();
-                  navigate('/userManagement/roleCreation/historyLogDetail');
-                }}
+                onClick={() => setShowHistoryModal(true)}
                 className="menu"
               >
-                View
+                History Log
               </MenuItem>
               <MenuItem
                 onClick={() => {
                   handleClose();
                   // navigate('/productManagement/cardCatalogue/singleupload/reviewCard');
+                  navigate('/userManagement/roleCreation/historyLogDetail');
                 }}
                 className="menu"
               >
-                Edit
+                View Role
               </MenuItem>
             </Menu>
           </Stack>
@@ -216,6 +270,9 @@ export const HistoryLog = (props: any) => {
 
   const handleClose = () => {
     setAnchorElement(null);
+  };
+  const closeModal = () => {
+    setShowHistoryModal(false);
   };
 
   return (
@@ -244,6 +301,16 @@ export const HistoryLog = (props: any) => {
           <Stack> </Stack>
         )}
       </Stack>
+      {showHistoryModal && (
+        <HistoryLogCustomModal
+          title={'Card for Card Surrogate - History Log'}
+          closeBtn={'Close'}
+          tableData={tableData}
+          handleCloseSuccess={closeModal}
+          openSuccess={showHistoryModal}
+          viewMoreDetails={'view more details'}
+        />
+      )}
     </Stack>
   );
 };

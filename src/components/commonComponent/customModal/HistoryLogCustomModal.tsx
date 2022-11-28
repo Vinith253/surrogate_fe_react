@@ -23,7 +23,7 @@ type props = {
   title: string;
   closeBtn: string;
   tableData: Array<any>;
-  handleClickOpen: () => void;
+  handleClickOpen?: () => void;
   handleCloseSuccess: () => void;
   openSuccess: boolean;
   viewMoreDetails: string;
@@ -48,9 +48,9 @@ export default function HistoryLogCustomModal({
   return (
     <>
       <Stack className="App">
-        <Button variant="outlined" onClick={handleClickOpen}>
+        {/* <Button variant="outlined" onClick={handleClickOpen}>
           Pause modal
-        </Button>
+        </Button> */}
         <Dialog
           open={openSuccess}
           onClose={handleCloseSuccess}
