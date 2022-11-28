@@ -37,7 +37,6 @@ export const AuthDetail = () => {
   const { state } = useLocation();
   const [edit, setEdit] = useState(false);
   const navigate = useNavigate();
-
   useEffect(() => {
     if (state === 'editMode') {
       setEdit(!edit);

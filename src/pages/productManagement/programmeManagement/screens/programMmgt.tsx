@@ -61,6 +61,7 @@ export const ProgramManagementScreen = () => {
   const [pauseMethod, setPauseMethod] = useState('Pause Now');
 
   const [surrogateData, setSurrogateData] = useState([...DummyTableData]);
+  const [btnActive, setBtnActive] = useState(true);
   console.log('pauseMethod------------', pauseMethod);
   // useEffect(() => {
   //   fetchSurrogateData();
@@ -205,6 +206,7 @@ export const ProgramManagementScreen = () => {
           <Button
             variant="contained"
             color="secondary"
+            disabled={btnActive}
             sx={{
               padding: '3px 10px',
               fontSize: '14px',
@@ -217,13 +219,24 @@ export const ProgramManagementScreen = () => {
             onClick={() => setShowResumeModal(true)}
           >
             <IconButton sx={{ padding: '0', marginRight: '8px' }}>
-              <img src={resumeIcon} alt="resumeIcon" />
+              <img
+                src={resumeIcon}
+                alt="resumeIcon"
+                style={{
+                  filter:
+                    btnActive === true
+                      ? 'invert(100%) sepia(13%) saturate(7%) hue-rotate(300deg) brightness(89%) contrast(99%)'
+                      : 'invert(100%) sepia(0%) saturate(0%) hue-rotate(108deg) brightness(102%) contrast(102%)',
+                  opacity: btnActive === true ? '0.3' : '1',
+                }}
+              />
             </IconButton>
             {programMmgt.RESUME_SURROGATE}
           </Button>
           <Button
             variant="contained"
             color="secondary"
+            disabled={btnActive}
             sx={{
               padding: '3px 10px',
               fontSize: '14px',
@@ -236,13 +249,24 @@ export const ProgramManagementScreen = () => {
             onClick={() => setShowPauseModal(true)}
           >
             <IconButton sx={{ padding: '0', marginRight: '8px' }}>
-              <img src={pauseIcon} alt="resumeIcon" />
+              <img
+                src={pauseIcon}
+                alt="resumeIcon"
+                style={{
+                  filter:
+                    btnActive === true
+                      ? 'invert(100%) sepia(13%) saturate(7%) hue-rotate(300deg) brightness(89%) contrast(99%)'
+                      : 'invert(100%) sepia(0%) saturate(0%) hue-rotate(108deg) brightness(102%) contrast(102%)',
+                  opacity: btnActive === true ? '0.3' : '1',
+                }}
+              />
             </IconButton>
             {programMmgt.PAUSE_SURROGATE}
           </Button>
           <Button
             variant="contained"
             color="secondary"
+            disabled={btnActive}
             sx={{
               padding: '3px 10px',
               fontSize: '14px',
@@ -254,7 +278,17 @@ export const ProgramManagementScreen = () => {
             }}
           >
             <IconButton sx={{ padding: '0', marginRight: '8px' }}>
-              <img src={editIcon} alt="resumeIcon" />
+              <img
+                src={editIcon}
+                alt="resumeIcon"
+                style={{
+                  filter:
+                    btnActive === true
+                      ? 'invert(100%) sepia(13%) saturate(7%) hue-rotate(300deg) brightness(89%) contrast(99%)'
+                      : 'invert(100%) sepia(0%) saturate(0%) hue-rotate(108deg) brightness(102%) contrast(102%)',
+                  opacity: btnActive === true ? '0.3' : '1',
+                }}
+              />
             </IconButton>
             {programMmgt.EDIT_SCHEDULE_PAUSE}
           </Button>

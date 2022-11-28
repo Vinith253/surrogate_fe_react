@@ -248,11 +248,7 @@ const ReviewCard = () => {
                 <Box>
                   <TypoText color="grey" title="Card Type" />
                   <Typography>Salaried</Typography>
-                  {/* <Select
-                    placeholder="Salaried"
-                    variant="outlined"
-                    size="small"
-                  /> */}
+                  
                 </Box>
               </Grid>
 
@@ -260,11 +256,6 @@ const ReviewCard = () => {
                 <Box>
                   <TypoText color="grey" title="Card Mode" />
                   <Typography>General Basic</Typography>
-                  {/* <Select
-                    placeholder="General Basic"
-                    variant="outlined"
-                    size="small"
-                  /> */}
                 </Box>
               </Grid>
 
