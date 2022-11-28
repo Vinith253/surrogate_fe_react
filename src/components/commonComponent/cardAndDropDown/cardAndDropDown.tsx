@@ -35,9 +35,7 @@ const CardAndDropDown = ({
               displayEmpty
               inputProps={{ 'aria-label': 'Without label' }}
             >
-              <MenuItem value="">
-                <em>0</em>
-              </MenuItem>
+              <MenuItem value="">0</MenuItem>
               <MenuItem value={10}>1</MenuItem>
               <MenuItem value={20}>2</MenuItem>
               <MenuItem value={30}>3</MenuItem>

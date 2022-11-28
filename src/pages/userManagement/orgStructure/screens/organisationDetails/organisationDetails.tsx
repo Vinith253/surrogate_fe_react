@@ -156,6 +156,7 @@ export const OrganisationDetails = () => {
     useState<boolean>(false);
 
   const [isItem, setIsItem] = useState<boolean>(false);
+  const [btnActive, setBtnActive] = useState(true);
 
   const openCardMenu = Boolean(anchorEl);
 
@@ -494,6 +495,7 @@ export const OrganisationDetails = () => {
             <Button
               variant="contained"
               color="secondary"
+              disabled={btnActive}
               sx={{
                 padding: '0px 10px',
                 fontSize: '14px',
@@ -506,13 +508,24 @@ export const OrganisationDetails = () => {
               onClick={() => setActivateModal(!activateModal)}
             >
               <IconButton sx={{ padding: '0', marginRight: '8px' }}>
-                <img src={active_icon} alt="resumeIcon" />
+                <img
+                  src={active_icon}
+                  alt="resumeIcon"
+                  style={{
+                    filter:
+                      btnActive === true
+                        ? 'invert(100%) sepia(13%) saturate(7%) hue-rotate(300deg) brightness(89%) contrast(99%)'
+                        : 'invert(100%) sepia(0%) saturate(0%) hue-rotate(108deg) brightness(102%) contrast(102%)',
+                    opacity: btnActive === true ? '0.3' : '1',
+                  }}
+                />
               </IconButton>
               Activate Org
             </Button>
             <Button
               variant="contained"
               color="secondary"
+              disabled={btnActive}
               sx={{
                 padding: '0px 10px',
                 fontSize: '14px',
@@ -526,7 +539,17 @@ export const OrganisationDetails = () => {
               onClick={() => setDeactivateModal(!deactivateModal)}
             >
               <IconButton sx={{ padding: '0', marginRight: '8px' }}>
-                <img src={DeActive_icon} alt="resumeIcon" />
+                <img
+                  src={DeActive_icon}
+                  alt="resumeIcon"
+                  style={{
+                    filter:
+                      btnActive === true
+                        ? 'invert(100%) sepia(13%) saturate(7%) hue-rotate(300deg) brightness(89%) contrast(99%)'
+                        : 'invert(100%) sepia(0%) saturate(0%) hue-rotate(108deg) brightness(102%) contrast(102%)',
+                    opacity: btnActive === true ? '0.3' : '1',
+                  }}
+                />
               </IconButton>
               Deactivate Org
             </Button>
