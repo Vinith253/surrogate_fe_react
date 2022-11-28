@@ -199,7 +199,14 @@ export const AuthDetail = () => {
                     return (
                       <Stack className="modelAccessControlContainerTableData">
                         <Stack sx={{ width: '50%' }}>
-                          <Typography className="modelAccessControlModelName">
+                          <Typography
+                            className="modelAccessControlModelName"
+                            onClick={() =>
+                              navigate(
+                                '/userManagement/roleCreation/userdetails'
+                              )
+                            }
+                          >
                             {items.sub_module_name}
                           </Typography>
                         </Stack>
