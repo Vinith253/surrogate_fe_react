@@ -110,7 +110,7 @@ function UserCreation() {
   };
 
   const userListMoreMenu = [
-    { label: 'View', routePath: '' },
+    { label: 'View', routePath: '/userManagement/userCreation/viewUser' },
     { label: 'Edit', routePath: '' },
     { label: 'Activate User', routePath: '' },
     { label: 'Deactivate User', routePath: '' },

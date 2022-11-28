@@ -23,6 +23,7 @@ import OrgBulkUpload from './pages/userManagement/orgStructure/orgBulkUpload';
 import UserCreation from './pages/userManagement/userCreation';
 import { CreateRole } from './pages/userManagement/roleCreation/createRole/createRole';
 import CreateUser from './pages/userManagement/userCreation/singleUserUpload/createUser';
+import ViewUser from './pages/userManagement/userCreation/singleUserUpload/viewUser';
 import { UserDetails } from './pages/userManagement/roleCreation/UserDetails/UserDetails';
 import UserBulkUpload from './pages/userManagement/userCreation/userBulkUpload';
 import { AuthDetail } from './pages/userManagement/roleCreation/screens/AuthorisationDetail/authDetail';
@@ -95,6 +96,12 @@ export default function App() {
           path="/userManagement/userCreation/createUser"
           element={<CreateUser />}
         />
+
+        <Route
+          path="/userManagement/userCreation/viewUser"
+          element={<ViewUser />}
+        />
+
         <Route
           path="/userManagement/userCreation/bulkUpload"
           element={<UserBulkUpload />}

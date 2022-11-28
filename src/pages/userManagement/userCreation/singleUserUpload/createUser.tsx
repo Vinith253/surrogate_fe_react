@@ -9,7 +9,6 @@ import {
 } from '@mui/material';
 import { Box, Stack } from '@mui/system';
 import './style.scss';
-import Steppers from '../../../../components/commonComponent/Steppers';
 import { useNavigate } from 'react-router-dom';
 import HeaderWithInfo from '../../../../components/commonComponent/HeaderWithInfo';
 import FirstActiveStepperIcon from '../../../../assets/icons/first_stepper_icon.svg';
@@ -17,8 +16,8 @@ import SecondActiveStepperIcon from '../../../../assets/icons/second_active_step
 import SecondDisabledStepperIcon from '../../../../assets/icons/second_disabled_stepper.svg';
 import CompletedStepperIcon from '../../../../assets/icons/completed_stepper_icon.svg';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
 import SelectDropdown from '../../../../components/commonComponent/CheckboxSelectDropdown';
+import SuccessModal from '../../../../components/commonComponent/customModal/CustomModal';
 import {
   PersonalDetails,
   EmploymentDetails,
@@ -32,14 +31,13 @@ import dayjs, { Dayjs } from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
 import { FooterButton } from '../../../../components/commonComponent/FooterButton/FooterButton';
 import { ScreenHeader } from '../../../../components/commonComponent/ScreenHeader/ScreenHeader';
 
 function CreateUser() {
-  const [isPersonalDetails, setIsPersonalDetails] = useState(true);
   const [value, setValue] = React.useState<Dayjs | null>(dayjs('DD/MM/YYYY'));
   const [isPermission, setIsPermission] = useState(false);
+  const [isUserCreated, setIsUserCreated] = useState(false);
 
   const navigate = useNavigate();
   const goBack = () => {
@@ -47,7 +45,7 @@ function CreateUser() {
   };
 
   const handleSubmitClick = () => {
-    setIsPermission(true);
+    isPermission ? setIsUserCreated(true) : setIsPermission(true);
   };
 
   return (
@@ -66,7 +64,11 @@ function CreateUser() {
               alt=""
               className="stepper-icons"
             />
-            <Stack className="stepper-line"></Stack>
+            <Stack
+              className={
+                isPermission ? 'enabled-stepper-line' : 'disabled-stepper-line'
+              }
+            ></Stack>
             <img
               src={
                 isPermission
@@ -107,7 +109,7 @@ function CreateUser() {
               </Typography>
               <Grid container spacing={2}>
                 <RadioGroup
-                  defaultValue="initiator"
+                  defaultValue="rolePresets"
                   name="radio-buttons-group"
                   className="radio-group-container"
                 >
@@ -124,7 +126,25 @@ function CreateUser() {
                   })}
                 </RadioGroup>
               </Grid>
+              <Stack className="form-container">
+                <Grid container spacing={2}>
+                  <Grid item xs={4}>
+                    <Typography className="each-field-label">
+                      Select User Role
+                    </Typography>
+                    <SelectDropdown options={[]} />
+                  </Grid>
+                </Grid>
+              </Stack>
             </Stack>
+          </Stack>
+          <Stack className="container">
+            <HeaderWithInfo
+              header="Permission"
+              isInfoEnabled={true}
+              info="From here, you can add the user’s personal details"
+              isDownloadEnabled={false}
+            />
           </Stack>
           <Stack className="container">
             <HeaderWithInfo
@@ -139,7 +159,7 @@ function CreateUser() {
               </Typography>
               <Grid container spacing={2}>
                 <RadioGroup
-                  defaultValue="initiator"
+                  defaultValue="user"
                   name="radio-buttons-group"
                   className="radio-group-container"
                 >
@@ -325,6 +345,17 @@ function CreateUser() {
         handleCancelClick={goBack}
         // handleSaveasDraftClick={handleSaveasDraftClick}
       />
+      {isUserCreated && (
+        <SuccessModal
+          openSuccess={isUserCreated}
+          handleCloseSuccess={() => setIsUserCreated(false)}
+          successModalTitle={'User Created Successfully'}
+          successModalMsg={
+            'Your request for creating new user is successfully sent to the Reviewer.'
+          }
+          btn={' Close'}
+        />
+      )}
     </Stack>
   );
 }
