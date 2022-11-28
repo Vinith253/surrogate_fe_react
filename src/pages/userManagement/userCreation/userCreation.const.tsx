@@ -562,7 +562,37 @@ export const ReviewerApproverList = [
       {
         name: 'Credit Rule',
         reviewerList: [{ reviewerName: '' }],
-        approverList: [{ approverName: '' }, { approverName: '' }],
+        approverList: [{ approverName: '' }],
+      },
+    ],
+  },
+  {
+    moduleName: 'Sales',
+    subModules: [
+      {
+        name: 'Customer reports',
+        reviewerList: [{ reviewerName: '' }],
+        approverList: [{ approverName: '' }],
+      },
+      {
+        name: 'Performance Report',
+        reviewerList: [{ reviewerName: '' }],
+        approverList: [{ approverName: '' }],
+      },
+    ],
+  },
+  {
+    moduleName: 'User Management',
+    subModules: [
+      {
+        name: 'Role Creation',
+        reviewerList: [{ reviewerName: '' }],
+        approverList: [{ approverName: '' }],
+      },
+      {
+        name: 'User Creation',
+        reviewerList: [{ reviewerName: '' }],
+        approverList: [{ approverName: '' }],
       },
     ],
   },
