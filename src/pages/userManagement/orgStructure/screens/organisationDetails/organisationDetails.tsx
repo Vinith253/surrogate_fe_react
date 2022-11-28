@@ -47,7 +47,7 @@ export const organisationFilterDropdown: salesReportFilterInterface[] = [
     option: [
       { value: 'tamilnadu', name: 'Tamilnadu' },
       { value: 'andra', name: 'Andhra' },
-      { value: 'telungana', name: 'Telungana' },
+      { value: 'Chennai', name: 'Chennai' },
       { value: 'karnataka', name: 'Karnataka' },
       { value: 'kerala', name: 'Kerala' },
     ],
@@ -100,7 +100,7 @@ export const data = [
     orgName: 'EFG',
     orgType: 'DSA',
     startDate: '22/2/2022',
-    state: 'Telungana',
+    state: 'Bangalore',
     status: 'Deactivated',
   },
   {
@@ -109,7 +109,7 @@ export const data = [
     orgName: 'EFG',
     orgType: 'DSA',
     startDate: '22/2/2022',
-    state: 'Telungana',
+    state: 'Bangalore',
     status: 'Saved',
   },
   {
@@ -118,7 +118,7 @@ export const data = [
     orgName: 'EFG',
     orgType: 'DSA',
     startDate: '22/2/2022',
-    state: 'Telungana',
+    state: 'Madurai',
     status: 'Active',
   },
   {
@@ -127,7 +127,7 @@ export const data = [
     orgName: 'EFG',
     orgType: 'DSA',
     startDate: '22/2/2022',
-    state: 'Telungana',
+    state: 'Pondicherry',
     status: 'Saved',
   },
   {
@@ -136,7 +136,7 @@ export const data = [
     orgName: 'EFG',
     orgType: 'DSA',
     startDate: '22/2/2022',
-    state: 'Telungana',
+    state: 'Bangalore',
     status: 'Active',
   },
 ];
@@ -148,13 +148,14 @@ export const OrganisationDetails = () => {
   const [sortingData, setSortingData] = useState(data);
   const [idSorting, setIdSorting] = useState<boolean>(true);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-
   const [activateModal, setActivateModal] = useState<boolean>(false);
   const [deactivateModal, setDeactivateModal] = useState<boolean>(false);
   const [activateSuccessModal, setActivateSuccessModal] =
     useState<boolean>(false);
   const [deactivateSuccessModal, setDeactivateSuccessModal] =
     useState<boolean>(false);
+
+  const [isItem, setIsItem] = useState<boolean>(false);
 
   const openCardMenu = Boolean(anchorEl);
 
@@ -236,6 +237,7 @@ export const OrganisationDetails = () => {
       },
       render: (_: string, row: any, index: number) => {
         const isItemSelected = isSelected(row.id);
+        setIsItem(isItemSelected);
         console.log('isItemSelected', isItemSelected);
         const labelId = `enhanced-table-checkbox-${index}`;
         return (
@@ -288,11 +290,10 @@ export const OrganisationDetails = () => {
     },
     { title: 'Org.Type', dataIndex: 'orgType', key: 'orgType' },
     { title: 'Start Date', dataIndex: 'startDate', key: 'startDate' },
-    { title: 'State', dataIndex: 'state', key: 'state' },
     {
-      title: 'Status',
-      dataIndex: 'status',
-      key: 'status',
+      title: 'State',
+      dataIndex: 'state',
+      key: 'state',
       headerRender: (text: string) => {
         return (
           <Stack
@@ -310,6 +311,12 @@ export const OrganisationDetails = () => {
           </Stack>
         );
       },
+    },
+    {
+      title: 'Status',
+      dataIndex: 'status',
+      key: 'status',
+
       render: (text: string) => {
         return (
           <Stack
@@ -338,9 +345,9 @@ export const OrganisationDetails = () => {
   const filterData = () => {
     const sort = sortingData.sort((a: any, b: any) => {
       if (ascending) {
-        return a.status < b.status ? -1 : 1;
+        return a.state < b.state ? -1 : 1;
       }
-      return a.status > b.status ? -1 : 1;
+      return a.state > b.state ? -1 : 1;
     });
     setSortingData([...sort]);
   };
@@ -536,7 +543,12 @@ export const OrganisationDetails = () => {
         </Stack>
 
         <Stack>
-          <ListTable column={column} data={sortingData} />
+          <ListTable
+            column={column}
+            data={sortingData}
+            isItemSelected={selected}
+            selectedKey="id"
+          />
         </Stack>
       </Box>
 
