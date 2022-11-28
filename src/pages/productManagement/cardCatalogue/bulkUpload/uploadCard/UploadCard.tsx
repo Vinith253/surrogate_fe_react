@@ -60,13 +60,13 @@ const UploadCard = ({
           </Box>
           <LinearProgress
             variant="determinate"
-            color={progress === 100 ? 'success' : 'secondary'}
+            // color={progress === 100 ? 'success' : 'secondary'}
             {...props}
-            // sx={{
-            //   '& .MuiLinearProgress-bar1Determinate': {
-            //     backgroundColor: progress === 100 ?'green':'',
-            //   },
-            // }}
+            sx={{
+              '& .MuiLinearProgress-bar1Determinate': {
+                backgroundColor: progress === 100 ? 'green' : '',
+              },
+            }}
             className="upload-card-progress"
           />
         </Box>

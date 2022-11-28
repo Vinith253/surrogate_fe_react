@@ -77,12 +77,12 @@ const OrgUploadCard = ({
           <LinearProgress
             variant="determinate"
             {...props}
-            // sx={{
-            //   '& .MuiLinearProgress-bar1Determinate': {
-            //     backgroundColor: 'green',
-            //   },
-            // }}
-            color={progress === 100 ? 'success' : 'secondary'}
+            sx={{
+              '& .MuiLinearProgress-bar1Determinate': {
+                backgroundColor: 'green',
+              },
+            }}
+            // color={progress === 100 ? 'success' : 'secondary'}
             className="upload-card-progress"
           />
         </Box>
