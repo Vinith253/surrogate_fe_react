@@ -18,6 +18,7 @@ import { Profile } from './pages/profile/Profile';
 import { BranchDetails } from './pages/userManagement/branchDetails/landingScreen';
 import { OrgStructure } from './pages/userManagement/orgStructure/landingScreen';
 import { Onboarding } from './pages/userManagement/orgStructure/screens/Onboarding/onboarding';
+import { OrgReview } from './pages/userManagement/orgStructure/screens/OrgReview/OrgReview';
 import { RoleCreation } from './pages/userManagement/roleCreation/landingScreen';
 import OrgBulkUpload from './pages/userManagement/orgStructure/orgBulkUpload';
 import UserCreation from './pages/userManagement/userCreation';
@@ -74,6 +75,11 @@ export default function App() {
         <Route
           path="/userManagement/orgStructure/screens/Onboarding/onboarding"
           element={<Onboarding />}
+        />
+
+        <Route
+          path="/userManagement/orgStructure/screens/OrgReview/OrgReview"
+          element={<OrgReview />}
         />
 
         <Route

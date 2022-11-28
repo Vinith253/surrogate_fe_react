@@ -8,10 +8,12 @@ const TypographyInfo = (props: any) => {
         fontSize: '12px',
         fontWeight: '400',
         alignItems: 'center',
+        paddingTop:'2px',
         // padding: 1,
         marginBottom: '2px',
       }}
-      color="textSecondary"
+      color="#9FACB8"
+      
       paragraph
     >
       {props.title}
