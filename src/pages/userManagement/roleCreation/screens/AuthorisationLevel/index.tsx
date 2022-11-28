@@ -49,10 +49,8 @@ import FailureDot from '../../../../../assets/icons/failuredot.svg';
 import ProgressDot from '../../../../../assets/icons/progressdot.svg';
 import ChooseCategoryToViewData from '../../../../../components/commonComponent/ChooseCategoryToViewData';
 import UnfoldMoreIcon from '../../../../../assets/icons/sortArrow.svg';
-
 export const AuthorisationLevel = (props: any) => {
   const navigate = useNavigate();
-
   const tableHeaderData: authorisationDataInterface[] = [
     {
       id: 'ID',
@@ -64,7 +62,6 @@ export const AuthorisationLevel = (props: any) => {
       actions: 'Actions',
     },
   ];
-
   const [authorisationData, setAuthorisationData] = useState(authorisationRows);
   const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
   const [filteredData, setFilterteredData] =
@@ -74,37 +71,31 @@ export const AuthorisationLevel = (props: any) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [ascending, setAscending] = useState<boolean>(true);
   const [sortingData, setSortingData] = useState(authorisationRows);
-
   useEffect(() => {
     filterData();
   }, [ascending]);
-
   const handleCardMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    console.log('----- button clicked');
-    navigate('/userManagement/roleCreation/authorisationDetails');
+    navigate('/userManagement/roleCreation/authorisationDetails', {
+      state: 'editMode',
+    });
   };
-
   const menuOpen = Boolean(anchorElement);
   const handleClick = (event: React.MouseEvent<HTMLTableCellElement>) => {
     setAnchorElement(event.currentTarget);
   };
-
   const handleClose = () => {
     setAnchorElement(null);
   };
-
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
     newPage: number
   ) => {
     setPage(newPage);
   };
-
   const onPageChange = (event: React.ChangeEvent<unknown>, page: number) => {
     setPage(page);
     setCurrentPage(page);
   };
-
   const handleChangeRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -112,7 +103,6 @@ export const AuthorisationLevel = (props: any) => {
     setPage(0);
     setCurrentPage(1);
   };
-
   function kycStatus(
     status: string,
     imageDot: string | undefined,
@@ -144,17 +134,14 @@ export const AuthorisationLevel = (props: any) => {
       </Box>
     );
   }
-
-  const viewAction = (viewPath: string, param: any) => {
-    navigate(`${viewPath}${param.id}`, {
-      state: { ...param },
+  const viewAction = (status: any) => {
+    navigate('/userManagement/roleCreation/authorisationDetails', {
+      state: status,
     });
   };
-
   const handleSortByName = () => {
     setAscending(!ascending);
   };
-
   const filterData = () => {
     const sort = sortingData.sort((a, b) => {
       if (ascending) {
@@ -164,7 +151,6 @@ export const AuthorisationLevel = (props: any) => {
     });
     setSortingData([...sort]);
   };
-
   return (
     <Stack>
       <Stack>
@@ -174,7 +160,6 @@ export const AuthorisationLevel = (props: any) => {
             info="From here, you can assign authorization to users."
             showBackButton={false}
           />
-
           <Box>
             <Button
               sx={{ textTransform: 'capitalize' }}
@@ -189,7 +174,6 @@ export const AuthorisationLevel = (props: any) => {
             </Button>
           </Box>
         </Box>
-
         {authorisationData?.length > 0 && (
           <Box>
             <Box sx={{ marginTop: 4 }}>
@@ -212,7 +196,6 @@ export const AuthorisationLevel = (props: any) => {
             <Divider />
           </Box>
         )}
-
         {authorisationData?.length > 0 ? (
           <Box className="tableBox">
             <TableContainer component={Paper}>
@@ -261,7 +244,6 @@ export const AuthorisationLevel = (props: any) => {
                     )
                   )}
                 </TableHead>
-
                 <TableBody>
                   {authorisationData?.length > 0 &&
                     authorisationData.map((row) => (
@@ -333,7 +315,7 @@ export const AuthorisationLevel = (props: any) => {
                           <Link
                             sx={{ cursor: 'pointer', color: '#0662B7' }}
                             underline="none"
-                            onClick={() => viewAction('', row)}
+                            onClick={() => viewAction(row.currentStatus)}
                           >
                             View
                           </Link>
@@ -373,7 +355,6 @@ export const AuthorisationLevel = (props: any) => {
                 </Menu>
               </Table>
             </TableContainer>
-
             <PaginationComp
               rows={filteredData}
               rowsPerPage={rowsPerPage}
@@ -399,7 +380,6 @@ export const AuthorisationLevel = (props: any) => {
             <ChooseCategoryToViewData />
           </Box>
         )}
-
         {/* <Box 
         sx={{
           backgroundColor: colors.white,
