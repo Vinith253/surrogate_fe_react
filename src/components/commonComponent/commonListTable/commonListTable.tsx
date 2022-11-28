@@ -108,7 +108,6 @@ const CommonTable = (props: any) => {
           </TableHead>
           <TableBody>
             {currentTableData?.map((dataItem: any, index: number) => {
-              console.log('dataItem', dataItem);
               return (
                 <TableRow
                   sx={{ padding: '5px' }}
@@ -119,8 +118,6 @@ const CommonTable = (props: any) => {
                   }
                 >
                   {column.map((columnItem: columnType) => {
-                    console.log('columnItem', columnItem);
-                    console.log('dataItem[]', dataItem['copyIcon']);
                     return (
                       <TableCell
                         sx={{

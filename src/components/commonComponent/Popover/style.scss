@@ -1,0 +1,21 @@
+.popover-container {
+  .css-1bb0p3x-MuiTypography-root {
+    font-size: 14px;
+    padding: 12px 12px;
+    color: #151515;
+    cursor: pointer;
+    font-weight: 400;
+  }
+  .css-3bmhjh-MuiPaper-root-MuiPopover-paper {
+    left: 1333px !important;
+  }
+
+  .css-1bb0p3x-MuiTypography-root:hover {
+    background-color: #f0f2f5;
+  }
+
+  .css-3bmhjh-MuiPaper-root-MuiPopover-paper {
+    box-shadow: 0px 5px 5px -3px #f2f2f3, 0px 8px 10px 1px #f2f2f3,
+      0px 3px 14px 2px #f2f2f3;
+  }
+}
