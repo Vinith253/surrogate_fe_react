@@ -83,7 +83,7 @@ export const AccordianLayover = ({ data, isViewPage }: props) => {
     let updatedList = categories.map((item:any) => {
       if (item.id === id) {
         let data = item.data.map((item2:any) => {
-          if(item2.id === id2){
+          if(item2.id === id2 && item2.isSwitched){
               let items = item2.items.map((item3:any) => {
                 if(item3.id === id3){
                   return { ...item3, isChecked: !item3.isChecked }; //gets everything that was already in item, and updates "done"
@@ -113,7 +113,6 @@ export const AccordianLayover = ({ data, isViewPage }: props) => {
              sx={{
                display: 'flex',
                flexDirection: 'column',
-              //  borderBottom: item.isChecked ? '1px solid white' : '1px solid #e6e6e7',
                width:'100%',
                height:'48px',
                justifyContent:'center',
@@ -123,8 +122,6 @@ export const AccordianLayover = ({ data, isViewPage }: props) => {
              <FormControlLabel
              sx={{ paddingLeft: '18px', }}
              disabled={isViewPage}
-              //  onClick={(event) => event.stopPropagation()}
-              //  onFocus={(event) => event.stopPropagation()}
                label={
                  <Typography sx={{ fontSize: '14px' }}>
                    {item.label}
@@ -151,6 +148,7 @@ export const AccordianLayover = ({ data, isViewPage }: props) => {
                   backgroundColor: item.isChecked ? '#F3F3F4' : 'white',
               },
           }}
+          expanded={item.isChecked}
           >
             <AccordionSummary
               sx={{
@@ -186,11 +184,11 @@ export const AccordianLayover = ({ data, isViewPage }: props) => {
                     display: 'flex',
                     flexDirection: 'column',
                     padding: '8px',
+                    width:'100%'
                   }}
                 >
                   <FormControlLabel
                     disabled={isViewPage}
-                    // onFocus={(event) => event.stopPropagation()}
                     label={
                       <Typography sx={{ fontSize: '14px' }}>
                         {item.label}
@@ -259,7 +257,7 @@ export const AccordianLayover = ({ data, isViewPage }: props) => {
                                     <FormControlLabel
                                       sx={{ marginBottom: '5px' }}
                                       label={
-                                        <Typography sx={{ fontSize: '14px' }}>
+                                        <Typography sx={{ fontSize: '14px', color:(isViewPage || item3.isDisabled) ? '#AFAEAF' : 'black'}}>
                                           {item3.label}
                                         </Typography>
                                       }
