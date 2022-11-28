@@ -1,0 +1,48 @@
+.approver-reviewer-container {
+  margin: 15px 0px;
+
+  .header {
+    height: 48px;
+    background-color: #cbe0f5;
+    font-size: 14px;
+    color: #151515;
+    justify-content: center;
+    padding: 0px 15px;
+  }
+
+  .sub-modules-headers {
+    height: 48px;
+    background-color: #edf6fc;
+    font-size: 14px;
+    color: #151515;
+    justify-content: center;
+    padding: 0px 15px;
+  }
+
+  .each-sub-module {
+    height: auto;
+    font-size: 14px;
+    color: #151515;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #d7d8d8;
+
+    .css-mhc70k-MuiGrid-root {
+      margin: 0px;
+    }
+
+    .css-1cqo6r-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root {
+      height: 46px;
+      width: 100% !important;
+      border: 1px solid #ffffff;
+    }
+
+    // .css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+    //   border-width: 0px;
+    // }
+
+    .each-field {
+      height: 52px;
+    }
+  }
+}

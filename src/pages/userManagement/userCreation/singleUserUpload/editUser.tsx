@@ -38,7 +38,7 @@ import { FooterButton } from '../../../../components/commonComponent/FooterButto
 import { ScreenHeader } from '../../../../components/commonComponent/ScreenHeader/ScreenHeader';
 import ReviewerApproverTable from '../../../../components/commonComponent/ReviewerApproverTable';
 
-function CreateUser() {
+function EditUser() {
   const [value, setValue] = React.useState<Dayjs | null>(dayjs('DD/MM/YYYY'));
   const [isPermission, setIsPermission] = useState(false);
   const [isUserCreated, setIsUserCreated] = useState(false);
@@ -70,7 +70,7 @@ function CreateUser() {
     <Stack className="create-user-main-container">
       <Box className="create-user-container">
         <ScreenHeader
-          title="Create User"
+          title="Edit User"
           info="From here you can create access presets to assign with users in Users Creation."
           showBackButton={true}
         />
@@ -384,4 +384,4 @@ function CreateUser() {
   );
 }
 
-export default CreateUser;
+export default EditUser;

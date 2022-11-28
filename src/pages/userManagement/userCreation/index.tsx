@@ -34,58 +34,60 @@ import './style.scss';
 const data = [
   {
     id: 1,
-    orgId: '#12345',
-    orgName: 'EFG',
-    orgType: 'DSA',
-    startDate: '22/2/2022',
+    empId: '#12345',
+    name: 'EFG',
+    mobileNumber: '878979879',
+    emailId: 'abc',
     state: 'Telungana',
+    zonal: 'Telungana',
     status: 'Active',
   },
   {
     id: 2,
-    orgId: '#65789',
-    orgName: 'EFG',
-    orgType: 'DSA',
-    startDate: '22/2/2022',
+    empId: '#65789',
+    name: 'EFG',
+    mobileNumber: '878979999',
+    emailId: 'abc',
     state: 'Telungana',
+    zonal: 'Telungana',
     status: 'Deactivated',
   },
-  {
-    id: 3,
-    orgId: '#90987',
-    orgName: 'EFG',
-    orgType: 'DSA',
-    startDate: '22/2/2022',
-    state: 'Telungana',
-    status: 'Saved',
-  },
-  {
-    id: 4,
-    orgId: '#87654',
-    orgName: 'EFG',
-    orgType: 'DSA',
-    startDate: '22/2/2022',
-    state: 'Telungana',
-    status: 'Active',
-  },
-  {
-    id: 5,
-    orgId: '#76523',
-    orgName: 'EFG',
-    orgType: 'DSA',
-    startDate: '22/2/2022',
-    state: 'Telungana',
-    status: 'Saved',
-  },
-  {
-    id: 6,
-    orgId: '#89654',
-    orgName: 'EFG',
-    orgType: 'DSA',
-    startDate: '22/2/2022',
-    state: 'Telungana',
-    status: 'Active',
-  },
+  // {
+  //   id: 3,
+  //   orgId: '#90987',
+  //   orgName: 'EFG',
+  //   orgType: 'DSA',
+  //   startDate: '22/2/2022',
+  //   state: 'Telungana',
+  //   status: 'Saved',
+  // },
+  // {
+  //   id: 4,
+  //   orgId: '#87654',
+  //   orgName: 'EFG',
+  //   orgType: 'DSA',
+  //   startDate: '22/2/2022',
+  //   state: 'Telungana',
+  //   status: 'Active',
+  // },
+  // {
+  //   id: 5,
+  //   orgId: '#76523',
+  //   orgName: 'EFG',
+  //   orgType: 'DSA',
+  //   startDate: '22/2/2022',
+  //   state: 'Telungana',
+  //   status: 'Saved',
+  // },
+  // {
+  //   id: 6,
+  //   orgId: '#89654',
+  //   orgName: 'EFG',
+  //   orgType: 'DSA',
+  //   startDate: '22/2/2022',
+  //   state: 'Telungana',
+  //   status: 'Active',
+  // },
 ];
 
 function UserCreation() {
@@ -111,7 +113,7 @@ function UserCreation() {
 
   const userListMoreMenu = [
     { label: 'View', routePath: '/userManagement/userCreation/viewUser' },
-    { label: 'Edit', routePath: '' },
+    { label: 'Edit', routePath: '/userManagement/userCreation/editUser' },
     { label: 'Activate User', routePath: '' },
     { label: 'Deactivate User', routePath: '' },
   ];
@@ -277,7 +279,7 @@ function UserCreation() {
       dataIndex: 'name',
       key: 'name',
     },
-    { title: 'Mobile Number', dataIndex: 'mobilenumber', key: 'mobilenumber' },
+    { title: 'Mobile Number', dataIndex: 'mobileNumber', key: 'mobileNumber' },
     { title: 'Email ID', dataIndex: 'emailId', key: 'emailId' },
     { title: 'State', dataIndex: 'state', key: 'state' },
     { title: 'Zonal', dataIndex: 'zonal', key: 'zonal' },
@@ -374,7 +376,13 @@ function UserCreation() {
   };
 
   const handleSubmit = () => {
+    setActionModalOpen(false);
     setSuccessModalOpen(true);
+  };
+
+  const showSuceesModal = () => {
+    setAnchorEl(null);
+    setSuccessModalOpen(false);
   };
 
   return (
@@ -423,7 +431,7 @@ function UserCreation() {
               );
             })}
 
-            <Stack className="table-search-filters">
+            <Stack className="user-list-table-search-filters">
               <Box className="search-container">
                 <Box className="search-box">
                   <SearchIcon className="search-icon" />
@@ -456,7 +464,7 @@ function UserCreation() {
 
       <SuccessModal
         openSuccess={isSuccessModalOpen}
-        handleCloseSuccess={() => setSuccessModalOpen(false)}
+        handleCloseSuccess={showSuceesModal}
         successModalTitle={'Request - Activate User'}
         successModalMsg={
           'Your request for activating user is successfully sent to the Reviewer.'

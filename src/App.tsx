@@ -28,6 +28,8 @@ import UserBulkUpload from './pages/userManagement/userCreation/userBulkUpload';
 import { AuthDetail } from './pages/userManagement/roleCreation/screens/AuthorisationDetail/authDetail';
 import { HistoryLogDetailScreen } from './pages/userManagement/roleCreation/screens/HistoryLogDetailScreen';
 import CreateUser from './pages/userManagement/userCreation/singleUserUpload/createUser';
+import EditUser from './pages/userManagement/userCreation/singleUserUpload/editUser';
+import ViewUser from './pages/userManagement/userCreation/singleUserUpload/viewUser';
 
 export default function App() {
   return (
@@ -102,6 +104,17 @@ export default function App() {
           path="/userManagement/userCreation/createUser"
           element={<CreateUser />}
         />
+
+        <Route
+          path="/userManagement/userCreation/editUser"
+          element={<EditUser />}
+        />
+
+        <Route
+          path="/userManagement/userCreation/viewUser"
+          element={<ViewUser />}
+        />
+
         <Route
           path="/userManagement/userCreation/bulkUpload"
           element={<UserBulkUpload />}
