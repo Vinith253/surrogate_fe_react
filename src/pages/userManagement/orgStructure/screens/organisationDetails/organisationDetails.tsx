@@ -63,10 +63,12 @@ export const organisationFilterDropdown: salesReportFilterInterface[] = [
     ],
   },
 ];
+
 export interface salesReportFilterInterface {
   label?: string;
   option?: Array<object>;
 }
+
 export const GroupButtonData = [
   {
     title: 'All',
@@ -81,6 +83,7 @@ export const GroupButtonData = [
     title: 'Saved',
   },
 ];
+
 export const data = [
   {
     id: 1,
@@ -137,6 +140,7 @@ export const data = [
     status: 'Active',
   },
 ];
+
 export const OrganisationDetails = () => {
   const navigate = useNavigate();
   const [selected, setSelected] = useState<number[]>([]);
@@ -167,10 +171,12 @@ export const OrganisationDetails = () => {
   const handleCardMenuClose = () => {
     setAnchorEl(null);
   };
+
   const addOrganisationOpen = () => {
     // setAnchorEl(null);
     navigate('/userManagement/orgStructure/screens/Onboarding/onboarding');
   };
+
   const organisationOpen = () => {
     setAnchorEl(null);
   };
@@ -201,9 +207,11 @@ export const OrganisationDetails = () => {
       setSelected([...selectedData, id]);
     }
   };
+
   const handleSortByName = () => {
     setAscending(!ascending);
   };
+
   const handleSortById = () => {
     setIdSorting(!idSorting);
   };
@@ -345,7 +353,6 @@ export const OrganisationDetails = () => {
     });
     setSortingData([...sort]);
   };
-
   return (
     <Box className="organisationContainer">
       <Box className="organisationHeader">
@@ -388,6 +395,7 @@ export const OrganisationDetails = () => {
           </Menu>
         </Box>
       </Box>
+
       <Box className="organisationListHeader">
         <Box className="organisationList">
           <Box
@@ -431,6 +439,7 @@ export const OrganisationDetails = () => {
           <BtnContained title="Search" />
         </Box>
       </Box>
+
       <Box className="organisationTableContainer">
         <Stack
           className="organisationHeaderContainer"
@@ -465,6 +474,7 @@ export const OrganisationDetails = () => {
             </Stack>
           </Stack>
         </Stack>
+
         <Stack className="tableNavbar">
           <Stack
             sx={{
@@ -524,6 +534,7 @@ export const OrganisationDetails = () => {
             </Box>
           </Box>
         </Stack>
+
         <Stack>
           <ListTable column={column} data={sortingData} />
         </Stack>

@@ -1,0 +1,32 @@
+.cardAndDropDownContainer {
+  .dropDownContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+  }
+  .count {
+    background: #e6e7e7;
+    border: 1px solid #afaeaf;
+    border-radius: 4px;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    .modelAccessControlModelnumber {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 16px;
+      text-align: center;
+      letter-spacing: 0.0025em;
+      color: #656769;
+    }
+  }
+  .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
+    padding: 7px 35px !important;
+  }
+  // .css-1uqfj74-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root {
+  //   padding: 5px !important;
+  // }
+}
