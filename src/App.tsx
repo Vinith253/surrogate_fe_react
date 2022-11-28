@@ -22,11 +22,11 @@ import { RoleCreation } from './pages/userManagement/roleCreation/landingScreen'
 import OrgBulkUpload from './pages/userManagement/orgStructure/orgBulkUpload';
 import UserCreation from './pages/userManagement/userCreation';
 import { CreateRole } from './pages/userManagement/roleCreation/createRole/createRole';
-import CreateUser from './pages/userManagement/userCreation/singleUserUpload/createUser';
-import ViewUser from './pages/userManagement/userCreation/singleUserUpload/viewUser';
 import { UserDetails } from './pages/userManagement/roleCreation/UserDetails/UserDetails';
 import UserBulkUpload from './pages/userManagement/userCreation/userBulkUpload';
 import { AuthDetail } from './pages/userManagement/roleCreation/screens/AuthorisationDetail/authDetail';
+import { HistoryLogDetailScreen } from './pages/userManagement/roleCreation/screens/HistoryLogDetailScreen';
+import CreateUser from './pages/userManagement/userCreation/singleUserUpload/createUser';
 
 export default function App() {
   return (
@@ -96,12 +96,6 @@ export default function App() {
           path="/userManagement/userCreation/createUser"
           element={<CreateUser />}
         />
-
-        <Route
-          path="/userManagement/userCreation/viewUser"
-          element={<ViewUser />}
-        />
-
         <Route
           path="/userManagement/userCreation/bulkUpload"
           element={<UserBulkUpload />}
@@ -116,10 +110,15 @@ export default function App() {
         />
         <Route path="/accessLibrary" element={<AccessLibrary />} />
 
-        {/* <Route
+        <Route
           path="/userManagement/roleCreation/userdetails"
           element={<UserDetails />}
-        /> */}
+        />
+
+        <Route
+          path="/userManagement/roleCreation/historyLogDetail"
+          element={<HistoryLogDetailScreen />}
+        />
 
         {/* Catch all */}
         <Route path="*" element={<NotFoundPage />} />
@@ -132,3 +131,4 @@ export default function App() {
     </Routes>
   );
 }
+
