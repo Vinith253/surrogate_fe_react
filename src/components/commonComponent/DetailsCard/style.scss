@@ -5,30 +5,14 @@
 
   .details-card-inner-container {
     padding: 20px 25px;
-    width: 97%;
     .each-info {
       margin-bottom: 10px;
     }
-    .header {
-      font-style: normal;
-      font-weight: 600;
-      font-size: 14px;
-      display: flex;
-      margin: 10px 0px;
 
-      .info-icon {
-        margin: -2px 15px 0px 25px;
-      }
+    .details-card {
+      margin-top: 0px;
+    }
 
-      .margins {
-        margin-top: 1px;
-      }
-    }
-    .underline {
-      border: 1px solid #f0f2f5;
-      width: 100%;
-      margin: 20px 0px;
-    }
     .info-label {
       color: #afaeaf;
       font-size: 12px;

@@ -130,10 +130,10 @@ function SalesReportDetails() {
           senectus mattis
         </Stack>
       </Stack>
-      <DetailsCard data={personalDetails} gridColumn={4} infoIcon={true} />
-      <DetailsCard data={channelDetails} gridColumn={4} infoIcon={true} />
-      <DetailsCard data={applicationDetails} gridColumn={4} infoIcon={true} />
-      <DetailsCard data={remarkDetails} gridColumn={4} infoIcon={true} />
+      <DetailsCard data={personalDetails} gridColumn={4} />
+      <DetailsCard data={channelDetails} gridColumn={4} />
+      <DetailsCard data={applicationDetails} gridColumn={4} />
+      <DetailsCard data={remarkDetails} gridColumn={4} />
     </Stack>
   );
 }

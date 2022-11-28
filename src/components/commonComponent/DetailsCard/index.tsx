@@ -1,7 +1,8 @@
 import React from 'react';
 import './style.scss';
-import { Grid } from '@mui/material';
+import { Grid, Stack } from '@mui/material';
 import info_icon from '../../../assets/images/info_icon.svg';
+import HeaderWithInfo from '../../commonComponent/HeaderWithInfo';
 
 type Props = {
   data: {
@@ -9,50 +10,48 @@ type Props = {
     details: Array<object>;
   };
   gridColumn: number;
-  infoIcon: boolean;
 };
 
-function DetailsCard({ data, gridColumn, infoIcon }: Props) {
+function DetailsCard({ data, gridColumn }: Props) {
   const record = data ?? ({} as any);
 
   return (
-    <div className="details-card-container">
+    <Stack className="details-card-container">
       {Object.keys(record).length > 0 ? (
-        <div className="details-card-inner-container">
-          <div className="header">
-            {record?.title || '--'}
-            {infoIcon && (
-              <>
-                <img src={info_icon} className="info-icon" alt="info_icon" />
-                <div className="info-label margins">
-                  View a customer’s key personal information here.
-                </div>
-              </>
-            )}
-          </div>
+        <Stack className="details-card-inner-container">
+          <HeaderWithInfo
+            header={record?.title || '--'}
+            isInfoEnabled={true}
+            info="From here, you can add the user’s personal details"
+            isDownloadEnabled={false}
+          />
 
-          <div className="underline"></div>
           <Grid
             container
             rowSpacing={2}
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+            className="details-card"
           >
             {record?.details?.map((eachItem: any, index: number) => {
               return (
                 <Grid item xs={gridColumn} key={index}>
-                  <div className="each-info">
-                    <div className="info-label">{eachItem?.label ?? '--'}</div>
-                    <div className="info-value">{eachItem?.value ?? '--'}</div>
-                  </div>
+                  <Stack className="each-info">
+                    <Stack className="info-label">
+                      {eachItem?.label ?? '--'}
+                    </Stack>
+                    <Stack className="info-value">
+                      {eachItem?.value ?? '--'}
+                    </Stack>
+                  </Stack>
                 </Grid>
               );
             })}
           </Grid>
-        </div>
+        </Stack>
       ) : (
-        <div className="no-data-container">No Data</div>
+        <Stack className="no-data-container">No Data</Stack>
       )}
-    </div>
+    </Stack>
   );
 }
 export default DetailsCard;
