@@ -12,6 +12,7 @@ function SuccessForDeactivation() {
   const handleCloseSuccess = () => {
     setOpenSuccess(false);
   };
+
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
@@ -24,7 +25,7 @@ function SuccessForDeactivation() {
         successModalMsg={
           'Your request for deactivating user is successfully sent to the Reviewer.'
         }
-        btn={' Close'}
+        btn={'Close'}
       />
     </div>
   );

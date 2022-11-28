@@ -12,6 +12,18 @@ import {
 import { useMemo, useState } from 'react';
 import { colors } from '../../../style/Color';
 import PaginationComp from '../Pagination/Pagination';
+
+// const StyledTableCell = styled(TableCell)(({ theme }) => ({
+//   [`&.${tableCellClasses.head}`]: {
+//     // backgroundColor: theme.palette.common.white ,
+//     color: theme.palette.common.black,
+//     fontWeight: 'bold',
+//   },
+//   [`&.${tableCellClasses.body}`]: {
+//     fontSize: 14,
+//   },
+// }));
+
 type columnType = {
   title: string;
   dataIndex: string;
@@ -24,10 +36,17 @@ type columnType = {
 type columnArr = columnType[];
 type dataProps = {
   column: columnArr;
-  isItemSelected: any;
+  isItemSelected?: any;
+  selectedKey?: string;
 };
+
+const indexKey = 'index';
 const CommonTable = (props: any) => {
-  const { column, isItemSelected }: dataProps = props;
+  const {
+    column,
+    isItemSelected = null,
+    selectedKey = indexKey,
+  }: dataProps = props;
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
@@ -70,6 +89,25 @@ const CommonTable = (props: any) => {
     }
     return '--';
   };
+
+  const selectedRow = (data: any, index: number) => {
+    const defaultStyle = { background: colors.white };
+    const selected = { background: colors.tableGrey };
+    if (isItemSelected) {
+      if (selectedKey === indexKey) {
+        if (isItemSelected.includes(index)) {
+          return selected;
+        }
+        return defaultStyle;
+      }
+      if (isItemSelected.includes(data[selectedKey])) {
+        return selected;
+      }
+      return defaultStyle;
+    }
+    return defaultStyle;
+  };
+
   return (
     <Box>
       <TableContainer component={Paper} sx={{ margin: '2% 0' }}>
@@ -77,6 +115,7 @@ const CommonTable = (props: any) => {
           style={{
             width: '100%',
             borderBottom: 'none',
+            overflowX: 'auto',
           }}
           aria-label="customized table"
         >
@@ -107,19 +146,12 @@ const CommonTable = (props: any) => {
           </TableHead>
           <TableBody>
             {currentTableData?.map((dataItem: any, index: number) => {
-              console.log('dataItem', dataItem);
               return (
                 <TableRow
                   sx={{ padding: '5px' }}
-                  style={
-                    isItemSelected === true
-                      ? { background: colors.tableGrey }
-                      : { background: colors.white }
-                  }
+                  style={selectedRow(dataItem, index)}
                 >
                   {column.map((columnItem: columnType) => {
-                    console.log('columnItem', columnItem);
-                    console.log('dataItem[]', dataItem['copyIcon']);
                     return (
                       <TableCell
                         sx={{

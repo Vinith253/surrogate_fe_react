@@ -3,6 +3,7 @@ import { TabBar } from '../../../../components/commonComponent/customTab/CustomT
 import RoleCreationTab from '../roleCreationTab';
 import '../style.scss';
 import { AuthorisationLevel } from '../screens/AuthorisationLevel';
+import { HistoryLog } from '../screens/HistoryLogScreen';
 
 export const RoleCreation = () => {
   const TabListData: dataList = [
@@ -18,12 +19,12 @@ export const RoleCreation = () => {
       component: <AuthorisationLevel />,
       isDisabled: false,
     },
-    // {
-    //   id: '3',
-    //   data: 'History Log',
-    //   component: <RoleCreationTab />,
-    //   isDisabled: false,
-    // },
+    {
+      id: '3',
+      data: 'History Log',
+      component: <HistoryLog />,
+      isDisabled: false,
+    },
   ];
 
   return (

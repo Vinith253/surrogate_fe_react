@@ -44,7 +44,6 @@ import SuccessForRoleCreated from '../../components/commonComponent/customModal/
 import DuplicateRole from '../../components/commonComponent/customModal/ROLE-CREATION/DuplicateRole';
 import EmployeeDetails from '../../components/commonComponent/customModal/ROLE-CREATION/EmployeeDetails';
 import SuccessAuthorizationLevel from '../../components/commonComponent/customModal/ROLE-CREATION/SuccessAuthorizationLevel';
-import { Link } from 'react-router-dom';
 
 export default function Home() {
   const pendingActionsData = {
@@ -172,7 +171,7 @@ export default function Home() {
         <ChangePasswordProfileModal />
         <ChangePasswordOTP />
         <CreateNewPassword /> */}
-        <Link to={'/userManagement/roleCreation/userdetails'}>Click</Link>
+
         <Card content={pendingActionsData} />
         <Card content={savedItemsData} />
         <Card content={frequentActivitiesData} />

@@ -105,7 +105,7 @@ const ReviewCard = () => {
             </Box>
             <Box>
               <TypoText title="Eterna - Platinum (ID No. 12345678)" />
-              <TypographyInfo title="From here you ca add your new card" />
+              <TypographyInfo title="From here you can add your new card" />
             </Box>
           </Box>
 
@@ -248,11 +248,7 @@ const ReviewCard = () => {
                 <Box>
                   <TypoText color="grey" title="Card Type" />
                   <Typography>Salaried</Typography>
-                  {/* <Select
-                    placeholder="Salaried"
-                    variant="outlined"
-                    size="small"
-                  /> */}
+                  
                 </Box>
               </Grid>
 
@@ -260,11 +256,6 @@ const ReviewCard = () => {
                 <Box>
                   <TypoText color="grey" title="Card Mode" />
                   <Typography>General Basic</Typography>
-                  {/* <Select
-                    placeholder="General Basic"
-                    variant="outlined"
-                    size="small"
-                  /> */}
                 </Box>
               </Grid>
 
@@ -297,6 +288,7 @@ const ReviewCard = () => {
         <Box className="surrogateHead">
           <TypoText title=" Surrogate" />
           <img src={Info_Icon} />
+          <TypographyInfo title='Lorem ipsum dolor sit amet consectetur. Urna. ' />
         </Box>
         <Divider />
 
@@ -314,6 +306,7 @@ const ReviewCard = () => {
         <Box className="channelHead">
           <TypoText title=" Channels" />
           <img src={Info_Icon} />
+          <TypographyInfo title='Lorem ipsum dolor sit amet consectetur. Urna.'  />
         </Box>
         <Divider />
 
@@ -321,7 +314,6 @@ const ReviewCard = () => {
           <Typography variant="body2" className="title">
             Channels
           </Typography>
-          <Typography className="text">Bank,DSA,Fintech Partner</Typography>
           <Typography className="text">Bank,DSA,Fintech Partner</Typography>
         </Box>
       </Box>

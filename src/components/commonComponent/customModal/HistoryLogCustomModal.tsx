@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import Collapse from "@mui/material/Collapse";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import React, { useState } from 'react';
+import Collapse from '@mui/material/Collapse';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import {
   Button,
   Stack,
@@ -16,15 +16,15 @@ import {
   Dialog,
   List,
   ListItem,
-} from "@mui/material";
+} from '@mui/material';
 // import "../../../style/Style.css";
-import { modalStyle } from "../../../style/ModalStyle/ModalStyle";
+import { modalStyle } from '../../../style/ModalStyle/ModalStyle';
 type props = {
   title: string;
   closeBtn: string;
-  tableData:Array<any>;
-  handleClickOpen: ()=>void;
-  handleCloseSuccess: ()=>void;
+  tableData: Array<any>;
+  handleClickOpen?: () => void;
+  handleCloseSuccess: () => void;
   openSuccess: boolean;
   viewMoreDetails: string;
 };
@@ -48,24 +48,24 @@ export default function HistoryLogCustomModal({
   return (
     <>
       <Stack className="App">
-        <Button variant="outlined" onClick={handleClickOpen}>
+        {/* <Button variant="outlined" onClick={handleClickOpen}>
           Pause modal
-        </Button>
+        </Button> */}
         <Dialog
           open={openSuccess}
           onClose={handleCloseSuccess}
           aria-labelledby="parent-modal-title"
           aria-describedby="parent-modal-description"
         >
-          <Stack py={2} style={{ width: "540px" }} px={2}>
+          <Stack py={2} style={{ width: '540px' }} px={2}>
             <Stack
               sx={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                borderBottom: "1px solid #E9EAEB",
-                paddingBottom: "10px",
-                marginBottom: "16px",
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                borderBottom: '1px solid #E9EAEB',
+                paddingBottom: '10px',
+                marginBottom: '16px',
               }}
             >
               <Typography
@@ -78,20 +78,20 @@ export default function HistoryLogCustomModal({
                 {title}
               </Typography>
               <Typography
-                sx={{ color: "#0662B7", fontSize: "11px", cursor: "pointer" }}
+                sx={{ color: '#0662B7', fontSize: '11px', cursor: 'pointer' }}
                 onClick={handleCloseSuccess}
               >
                 {closeBtn}
               </Typography>
             </Stack>
             <Table aria-label="collapsible table">
-              <TableHead sx={{ padding: "4px 14px" }}>
-                <TableRow sx={{ backgroundColor: "#CBE0F5" }}>
+              <TableHead sx={{ padding: '4px 14px' }}>
+                <TableRow sx={{ backgroundColor: '#CBE0F5' }}>
                   <TableCell
                     sx={{
-                      fontSize: "10px",
-                      padding: "0px 5px",
-                      fontWeight: "600",
+                      fontSize: '10px',
+                      padding: '0px 5px',
+                      fontWeight: '600',
                     }}
                   >
                     Version Number
@@ -110,33 +110,33 @@ export default function HistoryLogCustomModal({
               </TableHead>
               {tableData.map((item: any, index: any) => {
                 return (
-                  <TableBody sx={{ padding: "0px" }}>
+                  <TableBody sx={{ padding: '0px' }}>
                     <TableRow
                       sx={{
                         borderRight: `${
-                          open === index ? `1px solid #D7D8D8` : ""
+                          open === index ? `1px solid #D7D8D8` : ''
                         }`,
                         borderLeft: `${
-                          open === index ? `1px solid #D7D8D8` : ""
+                          open === index ? `1px solid #D7D8D8` : ''
                         }`,
-                        background: `${open === index ? `#F2FAFF` : ""}`,
+                        background: `${open === index ? `#F2FAFF` : ''}`,
                       }}
                     >
                       <TableCell sx={modalStyle.modalTabelRow}>
                         {item.versionNumber}
                       </TableCell>
                       <TableCell sx={modalStyle.modalTabelRow}>
-                        {open === index ? "" : item.surrogateName}
+                        {open === index ? '' : item.surrogateName}
                       </TableCell>
                       <TableCell sx={modalStyle.modalTabelRow}>
-                        {open === index ? "" : item.requestStatus}
+                        {open === index ? '' : item.requestStatus}
                       </TableCell>
                       <TableCell sx={modalStyle.modalTabelRow}>
-                        {open === index ? "" : item.currentStatus}
+                        {open === index ? '' : item.currentStatus}
                       </TableCell>
-                      <TableCell sx={{ padding: "5px" }}>
+                      <TableCell sx={{ padding: '5px' }}>
                         <IconButton
-                          sx={{ padding: "0px" }}
+                          sx={{ padding: '0px' }}
                           aria-label="expand row"
                           size="small"
                           onClick={() => handleOpen(index)}
@@ -152,8 +152,8 @@ export default function HistoryLogCustomModal({
                     <TableRow>
                       <TableCell
                         style={{
-                          padding: "0px 5px",
-                          border: "1px solid #D7D8D8",
+                          padding: '0px 5px',
+                          border: '1px solid #D7D8D8',
                         }}
                         colSpan={6}
                       >
@@ -163,7 +163,7 @@ export default function HistoryLogCustomModal({
                           unmountOnExit
                         >
                           <Grid container>
-                            <Grid xs={6} sm={3} sx={{ margin: "10px 0px" }}>
+                            <Grid xs={6} sm={3} sx={{ margin: '10px 0px' }}>
                               <Typography sx={modalStyle.modalTableKey}>
                                 Version Number
                               </Typography>
@@ -171,7 +171,7 @@ export default function HistoryLogCustomModal({
                                 {item.versionNumber}
                               </Typography>
                             </Grid>
-                            <Grid xs={6} sm={3} sx={{ margin: "10px 0px" }}>
+                            <Grid xs={6} sm={3} sx={{ margin: '10px 0px' }}>
                               <Typography sx={modalStyle.modalTableKey}>
                                 Surrogate Name
                               </Typography>
@@ -179,7 +179,7 @@ export default function HistoryLogCustomModal({
                                 {item.surrogateName}
                               </Typography>
                             </Grid>
-                            <Grid xs={6} sm={3} sx={{ margin: "10px 0px" }}>
+                            <Grid xs={6} sm={3} sx={{ margin: '10px 0px' }}>
                               <Typography sx={modalStyle.modalTableKey}>
                                 Request Status
                               </Typography>
@@ -187,7 +187,7 @@ export default function HistoryLogCustomModal({
                                 {item.requestStatus}
                               </Typography>
                             </Grid>
-                            <Grid xs={6} sm={3} sx={{ margin: "10px 0px" }}>
+                            <Grid xs={6} sm={3} sx={{ margin: '10px 0px' }}>
                               <Typography sx={modalStyle.modalTableKey}>
                                 Current Status
                               </Typography>
@@ -195,7 +195,7 @@ export default function HistoryLogCustomModal({
                                 {item.currentStatus}
                               </Typography>
                             </Grid>
-                            <Grid xs={6} sm={3} sx={{ margin: "10px 0px" }}>
+                            <Grid xs={6} sm={3} sx={{ margin: '10px 0px' }}>
                               <Typography sx={modalStyle.modalTableKey}>
                                 Initiater
                               </Typography>
@@ -203,7 +203,7 @@ export default function HistoryLogCustomModal({
                                 {item.initiater}
                               </Typography>
                             </Grid>
-                            <Grid xs={6} sm={3} sx={{ margin: "10px 0px" }}>
+                            <Grid xs={6} sm={3} sx={{ margin: '10px 0px' }}>
                               <Typography sx={modalStyle.modalTableKey}>
                                 Date and Time
                               </Typography>
@@ -211,7 +211,7 @@ export default function HistoryLogCustomModal({
                                 {item.dateAndTime}
                               </Typography>
                             </Grid>
-                            <Grid xs={6} sm={3} sx={{ margin: "10px 0px" }}>
+                            <Grid xs={6} sm={3} sx={{ margin: '10px 0px' }}>
                               <Typography sx={modalStyle.modalTableKey}>
                                 Reviewer
                               </Typography>
@@ -219,7 +219,7 @@ export default function HistoryLogCustomModal({
                                 {item.reviewer}
                               </Typography>
                             </Grid>
-                            <Grid xs={6} sm={3} sx={{ margin: "10px 0px" }}>
+                            <Grid xs={6} sm={3} sx={{ margin: '10px 0px' }}>
                               <Typography sx={modalStyle.modalTableKey}>
                                 Date and Time
                               </Typography>
@@ -227,7 +227,7 @@ export default function HistoryLogCustomModal({
                                 {item.dateAndTimeReview}
                               </Typography>
                             </Grid>
-                            <Grid xs={6} sm={3} sx={{ margin: "10px 0px" }}>
+                            <Grid xs={6} sm={3} sx={{ margin: '10px 0px' }}>
                               <Typography sx={modalStyle.modalTableKey}>
                                 Approver
                               </Typography>
@@ -235,7 +235,7 @@ export default function HistoryLogCustomModal({
                                 {item.approver}
                               </Typography>
                             </Grid>
-                            <Grid xs={6} sm={3} sx={{ margin: "10px 0px" }}>
+                            <Grid xs={6} sm={3} sx={{ margin: '10px 0px' }}>
                               <Typography sx={modalStyle.modalTableKey}>
                                 Date and Time
                               </Typography>
@@ -243,40 +243,41 @@ export default function HistoryLogCustomModal({
                                 {item.dateAndTimeapprover}
                               </Typography>
                             </Grid>
-                            <Grid xs={12} sx={{ margin: "10px 0px" }}>
+                            <Grid xs={12} sx={{ margin: '10px 0px' }}>
                               <Typography sx={modalStyle.modalTableKey}>
                                 Changes
                               </Typography>
                               <List>
-                                <ListItem
-                                  sx={{ fontSize: "10px", padding: "3px 16px" }}
-                                >
-                                  1.Lorem ipsum dolor sit amet, consectetur
-                                  adipiscing elit. Faucibus in ipsum aliquam
-                                  cursus. Ac mattis lectus eleifend scelerisque.
-                                  Vitae quis praesent tempus ut.
-                                </ListItem>
-                                <ListItem
-                                  sx={{ fontSize: "10px", padding: "3px 16px" }}
-                                >
-                                  2.Accumsan diam a vulputate ultrices turpis
-                                  viverra rhoncus donec ultricies. In dui
-                                  ultricies in curabitur quis et. Justo velit
-                                  massa sed morbi nunc, sit magna.
-                                </ListItem>
-                                <ListItem
-                                  sx={{ fontSize: "10px", padding: "3px 16px" }}
-                                >
-                                  3.Facilisi est morbi sollicitudin ornare a.
-                                  Ullamcorper semper fac.
-                                </ListItem>
+                                {item?.reasonRejection?.map(
+                                  (item: any, index: number) => {
+                                    return (
+                                      <ListItem
+                                        sx={{
+                                          fontSize: '10px',
+                                          padding: '3px 16px',
+                                        }}
+                                      >
+                                        <Stack
+                                          sx={{
+                                            display: 'flex',
+                                            flexDirection: 'row',
+                                          }}
+                                        >
+                                          <Stack>{`${index + 1}. `}</Stack>
+                                          <Stack>{item}</Stack>
+                                        </Stack>
+                                      </ListItem>
+                                    );
+                                  }
+                                )}
                               </List>
                               <Typography
                                 sx={{
-                                  fontSize: "10px",
-                                  float: "right",
-                                  color: "#0662B7",
-                                  fontWeight: "500",
+                                  fontSize: '10px',
+                                  float: 'right',
+                                  color: '#0662B7',
+                                  fontWeight: '500',
+                                  cursor: 'pointer',
                                 }}
                               >
                                 {viewMoreDetails}

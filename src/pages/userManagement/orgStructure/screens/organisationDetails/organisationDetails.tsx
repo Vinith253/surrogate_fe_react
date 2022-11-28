@@ -47,7 +47,7 @@ export const organisationFilterDropdown: salesReportFilterInterface[] = [
     option: [
       { value: 'tamilnadu', name: 'Tamilnadu' },
       { value: 'andra', name: 'Andhra' },
-      { value: 'telungana', name: 'Telungana' },
+      { value: 'Chennai', name: 'Chennai' },
       { value: 'karnataka', name: 'Karnataka' },
       { value: 'kerala', name: 'Kerala' },
     ],
@@ -63,10 +63,12 @@ export const organisationFilterDropdown: salesReportFilterInterface[] = [
     ],
   },
 ];
+
 export interface salesReportFilterInterface {
   label?: string;
   option?: Array<object>;
 }
+
 export const GroupButtonData = [
   {
     title: 'All',
@@ -81,6 +83,7 @@ export const GroupButtonData = [
     title: 'Saved',
   },
 ];
+
 export const data = [
   {
     id: 1,
@@ -97,7 +100,7 @@ export const data = [
     orgName: 'EFG',
     orgType: 'DSA',
     startDate: '22/2/2022',
-    state: 'Telungana',
+    state: 'Bangalore',
     status: 'Deactivated',
   },
   {
@@ -106,7 +109,7 @@ export const data = [
     orgName: 'EFG',
     orgType: 'DSA',
     startDate: '22/2/2022',
-    state: 'Telungana',
+    state: 'Bangalore',
     status: 'Saved',
   },
   {
@@ -115,7 +118,7 @@ export const data = [
     orgName: 'EFG',
     orgType: 'DSA',
     startDate: '22/2/2022',
-    state: 'Telungana',
+    state: 'Madurai',
     status: 'Active',
   },
   {
@@ -124,7 +127,7 @@ export const data = [
     orgName: 'EFG',
     orgType: 'DSA',
     startDate: '22/2/2022',
-    state: 'Telungana',
+    state: 'Pondicherry',
     status: 'Saved',
   },
   {
@@ -133,10 +136,11 @@ export const data = [
     orgName: 'EFG',
     orgType: 'DSA',
     startDate: '22/2/2022',
-    state: 'Telungana',
+    state: 'Bangalore',
     status: 'Active',
   },
 ];
+
 export const OrganisationDetails = () => {
   const navigate = useNavigate();
   const [selected, setSelected] = useState<number[]>([]);
@@ -144,13 +148,15 @@ export const OrganisationDetails = () => {
   const [sortingData, setSortingData] = useState(data);
   const [idSorting, setIdSorting] = useState<boolean>(true);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-
   const [activateModal, setActivateModal] = useState<boolean>(false);
   const [deactivateModal, setDeactivateModal] = useState<boolean>(false);
   const [activateSuccessModal, setActivateSuccessModal] =
     useState<boolean>(false);
   const [deactivateSuccessModal, setDeactivateSuccessModal] =
     useState<boolean>(false);
+
+  const [isItem, setIsItem] = useState<boolean>(false);
+  const [btnActive, setBtnActive] = useState(true);
 
   const openCardMenu = Boolean(anchorEl);
 
@@ -167,10 +173,12 @@ export const OrganisationDetails = () => {
   const handleCardMenuClose = () => {
     setAnchorEl(null);
   };
+
   const addOrganisationOpen = () => {
     // setAnchorEl(null);
     navigate('/userManagement/orgStructure/screens/Onboarding/onboarding');
   };
+
   const organisationOpen = () => {
     setAnchorEl(null);
   };
@@ -201,9 +209,11 @@ export const OrganisationDetails = () => {
       setSelected([...selectedData, id]);
     }
   };
+
   const handleSortByName = () => {
     setAscending(!ascending);
   };
+
   const handleSortById = () => {
     setIdSorting(!idSorting);
   };
@@ -228,6 +238,7 @@ export const OrganisationDetails = () => {
       },
       render: (_: string, row: any, index: number) => {
         const isItemSelected = isSelected(row.id);
+        setIsItem(isItemSelected);
         console.log('isItemSelected', isItemSelected);
         const labelId = `enhanced-table-checkbox-${index}`;
         return (
@@ -280,11 +291,10 @@ export const OrganisationDetails = () => {
     },
     { title: 'Org.Type', dataIndex: 'orgType', key: 'orgType' },
     { title: 'Start Date', dataIndex: 'startDate', key: 'startDate' },
-    { title: 'State', dataIndex: 'state', key: 'state' },
     {
-      title: 'Status',
-      dataIndex: 'status',
-      key: 'status',
+      title: 'State',
+      dataIndex: 'state',
+      key: 'state',
       headerRender: (text: string) => {
         return (
           <Stack
@@ -302,6 +312,12 @@ export const OrganisationDetails = () => {
           </Stack>
         );
       },
+    },
+    {
+      title: 'Status',
+      dataIndex: 'status',
+      key: 'status',
+
       render: (text: string) => {
         return (
           <Stack
@@ -330,9 +346,9 @@ export const OrganisationDetails = () => {
   const filterData = () => {
     const sort = sortingData.sort((a: any, b: any) => {
       if (ascending) {
-        return a.status < b.status ? -1 : 1;
+        return a.state < b.state ? -1 : 1;
       }
-      return a.status > b.status ? -1 : 1;
+      return a.state > b.state ? -1 : 1;
     });
     setSortingData([...sort]);
   };
@@ -345,7 +361,6 @@ export const OrganisationDetails = () => {
     });
     setSortingData([...sort]);
   };
-
   return (
     <Box className="organisationContainer">
       <Box className="organisationHeader">
@@ -388,6 +403,7 @@ export const OrganisationDetails = () => {
           </Menu>
         </Box>
       </Box>
+
       <Box className="organisationListHeader">
         <Box className="organisationList">
           <Box
@@ -431,6 +447,7 @@ export const OrganisationDetails = () => {
           <BtnContained title="Search" />
         </Box>
       </Box>
+
       <Box className="organisationTableContainer">
         <Stack
           className="organisationHeaderContainer"
@@ -465,6 +482,7 @@ export const OrganisationDetails = () => {
             </Stack>
           </Stack>
         </Stack>
+
         <Stack className="tableNavbar">
           <Stack
             sx={{
@@ -477,6 +495,7 @@ export const OrganisationDetails = () => {
             <Button
               variant="contained"
               color="secondary"
+              disabled={btnActive}
               sx={{
                 padding: '0px 10px',
                 fontSize: '14px',
@@ -489,13 +508,24 @@ export const OrganisationDetails = () => {
               onClick={() => setActivateModal(!activateModal)}
             >
               <IconButton sx={{ padding: '0', marginRight: '8px' }}>
-                <img src={active_icon} alt="resumeIcon" />
+                <img
+                  src={active_icon}
+                  alt="resumeIcon"
+                  style={{
+                    filter:
+                      btnActive === true
+                        ? 'invert(100%) sepia(13%) saturate(7%) hue-rotate(300deg) brightness(89%) contrast(99%)'
+                        : 'invert(100%) sepia(0%) saturate(0%) hue-rotate(108deg) brightness(102%) contrast(102%)',
+                    opacity: btnActive === true ? '0.3' : '1',
+                  }}
+                />
               </IconButton>
               Activate Org
             </Button>
             <Button
               variant="contained"
               color="secondary"
+              disabled={btnActive}
               sx={{
                 padding: '0px 10px',
                 fontSize: '14px',
@@ -509,7 +539,17 @@ export const OrganisationDetails = () => {
               onClick={() => setDeactivateModal(!deactivateModal)}
             >
               <IconButton sx={{ padding: '0', marginRight: '8px' }}>
-                <img src={DeActive_icon} alt="resumeIcon" />
+                <img
+                  src={DeActive_icon}
+                  alt="resumeIcon"
+                  style={{
+                    filter:
+                      btnActive === true
+                        ? 'invert(100%) sepia(13%) saturate(7%) hue-rotate(300deg) brightness(89%) contrast(99%)'
+                        : 'invert(100%) sepia(0%) saturate(0%) hue-rotate(108deg) brightness(102%) contrast(102%)',
+                    opacity: btnActive === true ? '0.3' : '1',
+                  }}
+                />
               </IconButton>
               Deactivate Org
             </Button>
@@ -524,8 +564,14 @@ export const OrganisationDetails = () => {
             </Box>
           </Box>
         </Stack>
+
         <Stack>
-          <ListTable column={column} data={sortingData} />
+          <ListTable
+            column={column}
+            data={sortingData}
+            isItemSelected={selected}
+            selectedKey="id"
+          />
         </Stack>
       </Box>
 
