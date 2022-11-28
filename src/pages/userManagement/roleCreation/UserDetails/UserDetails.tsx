@@ -9,6 +9,7 @@ import LMS from './LMS';
 import RiskManagement from './RiskManagement';
 import { ScreenHeader } from '../../../../components/commonComponent/ScreenHeader/ScreenHeader';
 import { Box, Stack } from '@mui/material';
+import { authorisation_user_data } from '../screens/AuthorisationLevel/authorisation.const';
 
 export const UserDetails = () => {
   const TabListData: dataList = [
@@ -35,7 +36,7 @@ export const UserDetails = () => {
 
   return (
     <Stack>
-      <Stack>
+      <Stack sx={{ paddingTop: '30px' }}>
         <Box className="role-header-container">
           <ScreenHeader
             title="Authorization Level"

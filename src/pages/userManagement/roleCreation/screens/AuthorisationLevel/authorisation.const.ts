@@ -85,7 +85,7 @@ export const authorisation_user_data = [
         sub_module_id: 3,
         sub_module_name: "Card Catalog",
         sub_module_data: {
-          initiator_data: [{ user_id: 1, user_name: "Parithi" }],
+          initiator_data: [{ user_id: 1, user_name: "Ashwin" }],
           reviewer_data: [{ user_id: 2, user_name: "Ashwin" }],
           approver_data: [{ user_id: 3, user_name: "Ganesh" }],
         },
