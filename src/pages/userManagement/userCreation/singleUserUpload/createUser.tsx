@@ -26,18 +26,23 @@ import {
   RoleDetails,
   RoleAccessFrom,
   ReviewerApproverAllocation,
+  PermissionsList,
+  ReviewerApproverList,
 } from './../userCreation.const';
 import dayjs, { Dayjs } from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { AccordianLayover } from '../../../../components/commonComponent/CustomAccordian/Accordian';
 import { FooterButton } from '../../../../components/commonComponent/FooterButton/FooterButton';
 import { ScreenHeader } from '../../../../components/commonComponent/ScreenHeader/ScreenHeader';
+import ReviewerApproverTable from '../../../../components/commonComponent/ReviewerApproverTable';
 
 function CreateUser() {
   const [value, setValue] = React.useState<Dayjs | null>(dayjs('DD/MM/YYYY'));
   const [isPermission, setIsPermission] = useState(false);
   const [isUserCreated, setIsUserCreated] = useState(false);
+  const [isAdminReviewApproved, setIsAdminReviewApproved] = useState(false);
 
   const navigate = useNavigate();
   const goBack = () => {
@@ -46,6 +51,14 @@ function CreateUser() {
 
   const handleSubmitClick = () => {
     isPermission ? setIsUserCreated(true) : setIsPermission(true);
+  };
+
+  const changeReviewerApproverOptions = (event: any) => {
+    if (event.target.value === 'yes,I') {
+      setIsAdminReviewApproved(true);
+    } else {
+      setIsAdminReviewApproved(false);
+    }
   };
 
   return (
@@ -145,6 +158,7 @@ function CreateUser() {
               info="From here, you can add the user’s personal details"
               isDownloadEnabled={false}
             />
+            <AccordianLayover data={PermissionsList} isViewPage={false} />
           </Stack>
           <Stack className="container">
             <HeaderWithInfo
@@ -159,9 +173,9 @@ function CreateUser() {
               </Typography>
               <Grid container spacing={2}>
                 <RadioGroup
-                  defaultValue="user"
                   name="radio-buttons-group"
                   className="radio-group-container"
+                  onChange={changeReviewerApproverOptions}
                 >
                   {ReviewerApproverAllocation?.map(
                     (eachItem: any, index: number) => {
@@ -183,6 +197,11 @@ function CreateUser() {
                   )}
                 </RadioGroup>
               </Grid>
+              {isAdminReviewApproved && (
+                <Stack>
+                  <ReviewerApproverTable data={ReviewerApproverList} />
+                </Stack>
+              )}
             </Stack>
           </Stack>
         </>
