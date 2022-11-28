@@ -106,136 +106,132 @@
           }
         }
       }
-                .modal{
-                    position: absolute;
-                    // top: 20%;
-                    // right: 40%;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    width: 540px;
-                    height: 380px;
-                    border: 2px solid #000;
-                    box-shadow: 60px;
-                    padding: 0 16px 0 16px;
+      .modal {
+        position: absolute;
+        // top: 20%;
+        // right: 40%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 540px;
+        height: 380px;
+        border: 2px solid #000;
+        box-shadow: 60px;
+        padding: 0 16px 0 16px;
 
-                  
-                    .cardHead{
-                        display: flex;
-                          justify-content: space-between;
-                          padding: 16px;
-                          .text{
-                            font-size: 14px;
-                             font-weight: 400
-                          }
-                          .typo{
-                            color: #0662B7;
-                             cursor: pointer;
-                          }
-                    }
-                    .cardImageBox{
-                        margin: auto;
-                        .img{
-                            width:500px;
-                             height:300px;
-                        }
-                    }
-                }
-                
-                }
-            }
-
-      .textGrid {
-        padding: 16px 0;
-        .businessText {
+        .cardHead {
           display: flex;
-          flex-direction: column;
-          width: 350px;
+          justify-content: space-between;
+          padding: 16px;
+          .text {
+            font-size: 14px;
+            font-weight: 400;
+          }
+          .typo {
+            color: #0662b7;
+            cursor: pointer;
+          }
         }
-      }
-      .maximumCardGrid {
-        margin-top: 16px;
-        .textField {
-          display: flex;
-          flex-direction: column;
-          width: 92%;
+        .cardImageBox {
+          margin: auto;
+          .img {
+            width: 500px;
+            height: 300px;
+          }
         }
       }
     }
-  
-
-  .box2 {
-    margin-top: 24px;
-    background-color: white;
-    padding: 24px;
-    .surrogateHead {
-      display: flex;
-      justify-content: flex-start;
-      gap: 8px;
-      padding-bottom: 16px;
-    }
-    .surrogateBody {
-      padding-top: 16px;
-      display: flex;
-      flex-direction: column;
-      .title {
-        font-size: 14px;
-        color: grey;
-      }
-      .text {
-        font-size: 16px;
-        font-weight: 500;
-      }
-    }
   }
 
-  .box3 {
-    margin-top: 24px;
-    background-color: white;
-    padding: 24px;
-    .channelHead {
-      display: flex;
-      justify-content: flex-start;
-      gap: 8px;
-      padding-bottom: 16px;
-    }
-    .channelBody {
-      padding-top: 16px;
+  .textGrid {
+    padding: 16px 0;
+    .businessText {
       display: flex;
       flex-direction: column;
-      .title {
-        font-size: 14px;
-        color: grey;
-      }
-      .text {
-        font-size: 16px;
-        font-weight: 500;
-      }
+      width: 350px;
     }
   }
-
-  .box4 {
-    margin-top: 24px;
-    background-color: white;
-    padding: 24px;
-    .eligibilityHead {
-      display: flex;
-      justify-content: flex-start;
-      gap: 8px;
-      padding-bottom: 16px;
-    }
-    .eligibilityBody {
-      padding-top: 16px;
+  .maximumCardGrid {
+    margin-top: 16px;
+    .textField {
       display: flex;
       flex-direction: column;
-      .title {
-        font-size: 14px;
-        color: grey;
-      }
-      .text {
-        font-size: 16px;
-        font-weight: 500;
-      }
+      width: 92%;
     }
   }
+}
 
+.box2 {
+  margin-top: 24px;
+  background-color: white;
+  padding: 24px;
+  .surrogateHead {
+    display: flex;
+    justify-content: flex-start;
+    gap: 8px;
+    padding-bottom: 16px;
+  }
+  .surrogateBody {
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    .title {
+      font-size: 14px;
+      color: grey;
+    }
+    .text {
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
+}
+
+.box3 {
+  margin-top: 24px;
+  background-color: white;
+  padding: 24px;
+  .channelHead {
+    display: flex;
+    justify-content: flex-start;
+    gap: 8px;
+    padding-bottom: 16px;
+  }
+  .channelBody {
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    .title {
+      font-size: 14px;
+      color: grey;
+    }
+    .text {
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
+}
+
+.box4 {
+  margin-top: 24px;
+  background-color: white;
+  padding: 24px;
+  .eligibilityHead {
+    display: flex;
+    justify-content: flex-start;
+    gap: 8px;
+    padding-bottom: 16px;
+  }
+  .eligibilityBody {
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    .title {
+      font-size: 14px;
+      color: grey;
+    }
+    .text {
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
+}

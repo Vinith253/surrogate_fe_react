@@ -26,7 +26,7 @@ export const moduleControlData = [
                         id: 1,
                         label: 'View Programme Management',
                         isChecked:false,
-                        isDisabled:true
+                        isDisabled:false
                     },
                     {
                         id: 2,
@@ -45,7 +45,7 @@ export const moduleControlData = [
                         id: 1,
                         label: 'View Credit Rule',
                         isChecked:false,
-                        isDisabled:true
+                        isDisabled:false
                     },
                     {
                         id: 2,
@@ -82,7 +82,7 @@ export const moduleControlData = [
                         id: 1,
                         label: 'View Card',
                         isChecked:false,
-                        isDisabled:true
+                        isDisabled:false
                     },
                     {
                         id: 2,
@@ -121,7 +121,7 @@ export const moduleControlData = [
                         id: 1,
                         label: 'View Sales Dashboard',
                         isChecked:false,
-                        isDisabled:true
+                        isDisabled:false
                     },
                 ]
             },
@@ -134,7 +134,7 @@ export const moduleControlData = [
                         id: 1,
                         label: 'View Performance Report',
                         isChecked:false,
-                        isDisabled:true
+                        isDisabled:false
                     },
                     {
                         id: 2,
@@ -153,7 +153,7 @@ export const moduleControlData = [
                         id: 1,
                         label: 'View Customer Reports',
                         isChecked:false,
-                        isDisabled:true
+                        isDisabled:false
                     },
                     {
                         id: 2,
@@ -186,7 +186,7 @@ export const moduleControlData = [
                         id: 1,
                         label: 'View Dashboard',
                         isChecked:false,
-                        isDisabled:true
+                        isDisabled:false
                     },
                     {
                         id: 2,
@@ -211,7 +211,7 @@ export const moduleControlData = [
                         id: 1,
                         label: 'Create LMS Rule',
                         isChecked:false,
-                        isDisabled:true
+                        isDisabled:false
                     },
                     {
                         id: 2,
@@ -238,7 +238,7 @@ export const moduleControlData = [
                         id: 1,
                         label: 'View Customer Report',
                         isChecked:false,
-                        isDisabled:true
+                        isDisabled:false
                     },
                     {
                         id: 2,
@@ -271,7 +271,7 @@ export const moduleControlData = [
                         id: 1,
                         label: 'View Access Library',
                         isChecked:false,
-                        isDisabled:true
+                        isDisabled:false
                     },
                     {
                         id: 2,

@@ -18,14 +18,16 @@ import { Profile } from './pages/profile/Profile';
 import { BranchDetails } from './pages/userManagement/branchDetails/landingScreen';
 import { OrgStructure } from './pages/userManagement/orgStructure/landingScreen';
 import { Onboarding } from './pages/userManagement/orgStructure/screens/Onboarding/onboarding';
+import { OrgReview } from './pages/userManagement/orgStructure/screens/OrgReview/OrgReview';
 import { RoleCreation } from './pages/userManagement/roleCreation/landingScreen';
 import OrgBulkUpload from './pages/userManagement/orgStructure/orgBulkUpload';
 import UserCreation from './pages/userManagement/userCreation';
 import { CreateRole } from './pages/userManagement/roleCreation/createRole/createRole';
-import CreateUser from './pages/userManagement/userCreation/createUser';
 import { UserDetails } from './pages/userManagement/roleCreation/UserDetails/UserDetails';
 import UserBulkUpload from './pages/userManagement/userCreation/userBulkUpload';
 import { AuthDetail } from './pages/userManagement/roleCreation/screens/AuthorisationDetail/authDetail';
+import { HistoryLogDetailScreen } from './pages/userManagement/roleCreation/screens/HistoryLogDetailScreen';
+import CreateUser from './pages/userManagement/userCreation/singleUserUpload/createUser';
 
 export default function App() {
   return (
@@ -79,6 +81,11 @@ export default function App() {
         />
 
         <Route
+          path="/userManagement/orgStructure/screens/OrgReview/OrgReview"
+          element={<OrgReview />}
+        />
+
+        <Route
           path="/userManagement/orgStructure/bulkUpload"
           element={<OrgBulkUpload />}
         />
@@ -117,6 +124,11 @@ export default function App() {
           path="/userManagement/roleCreation/authorisationDetails"
           element={<AuthDetail />}
         />
+        <Route
+          path="/userManagement/roleCreation/historyLogDetail"
+          element={<HistoryLogDetailScreen />}
+        />
+
         {/* Catch all */}
         <Route path="*" element={<NotFoundPage />} />
 

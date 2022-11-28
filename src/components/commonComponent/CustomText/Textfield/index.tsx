@@ -19,7 +19,7 @@ const TypoText = (props: any) => {
           }}
           style={props.style}
           variant="body1"
-          color="textPrimary"
+          // color="textPrimary"
         >
           
           {props.title}

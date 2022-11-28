@@ -1,5 +1,5 @@
 import { Stack, Box, Button, IconButton, Typography } from '@mui/material';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScreenHeader } from '../../../../../components/commonComponent/ScreenHeader/ScreenHeader';
 import '../AuthorisationDetail/authDetailStyle.scss';
 import Edit_icon from '../../../../../assets/icons/edit_scheduled_pause_icon.svg';
@@ -10,6 +10,10 @@ import question_icon from '../../../../../assets/icons/questionMark_icon.svg';
 import close_icon from '../../../../../assets/icons/close_icon.svg';
 import { tagBasedIndicator } from '../../../../../utils/Constants';
 import BtnContained from '../../../../../components/commonComponent/CustomText/Button/Contained';
+import { useLocation, useNavigate } from 'react-router-dom';
+import CardAndDropDown from '../../../../../components/commonComponent/cardAndDropDown/cardAndDropDown';
+import BtnOutlined from '../../../../../components/commonComponent/CustomText/Button/Outlined';
+
 export const authDetailHeader = [
   {
     title: 'Initiated By',
@@ -28,96 +32,128 @@ export const authDetailHeader = [
     details: '12 Jul,22 09:40 Am',
   },
 ];
+
 export const AuthDetail = () => {
-  //   const dataItem = tagBasedIndicator.WAITING_FOR_APPROVAL;
-  const dataItem = tagBasedIndicator.CLOSED;
-  //   const dataItem = tagBasedIndicator.ACTIVE;
+  const { state } = useLocation();
+  const [edit, setEdit] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (state === 'editMode') {
+      setEdit(!edit);
+    }
+  }, []);
+
   return (
     <Stack className="authDetailContainer">
       <Stack className="authDetailContainerHeaderMain">
         <Stack className="authDetailHeaderContainer">
-          <Stack className="authDetailHeaderSubContainer">
-            <Stack className="authDetailHeaderTitle">
-              <ScreenHeader
-                title="View Authorization level/ V 0.09"
-                info="From here you can create access presets to assign with users in Users creation."
-                showBackButton={true}
-              />
-            </Stack>
-            <Stack className="authDetailHeaderStatus">
-              <Box>
-                <Typography
-                  sx={{
-                    color: ListTagStatus(dataItem).color,
-                    backgroundColor: ListTagStatus(dataItem).bgColor,
-                    fontSize: '12px',
-                    fontWeight: 400,
-                    padding: '3px 10px',
-                    borderRadius: '4px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    width: 'max-content',
-                  }}
-                >
-                  {dataItem === tagBasedIndicator.ACTIVE && (
-                    <img
-                      src={active_icon}
-                      alt="active"
-                      style={{ marginRight: '8px' }}
-                    />
-                  )}
-                  {dataItem === tagBasedIndicator.WAITING_FOR_APPROVAL && (
-                    <img
-                      src={question_icon}
-                      alt="active"
-                      style={{ marginRight: '8px' }}
-                    />
-                  )}
-                  {dataItem === tagBasedIndicator.CLOSED && (
-                    <img
-                      src={close_icon}
-                      alt="active"
-                      style={{ marginRight: '8px' }}
-                    />
-                  )}
-                  {dataItem}
-                </Typography>
-              </Box>
-              <Button
-                variant="text"
-                className="authDetailHeaderButton"
-                sx={{ color: '#0662B7', fontSize: '14px' }}
-              >
-                <IconButton>
-                  <img
-                    src={Edit_icon}
-                    alt=""
-                    style={{
-                      filter:
-                        'invert(26%) sepia(97%) saturate(1278%) hue-rotate(190deg) brightness(92%) contrast(101%)',
-                    }}
+          {edit ? (
+            <>
+              <Stack className="authDetailHeaderSubContainer">
+                <Stack className="authDetailHeaderTitle">
+                  <ScreenHeader
+                    title="CreateAuthorization level/ V 0.01"
+                    info="From here you can create access presets to assign with users in Users creation."
+                    showBackButton={true}
                   />
-                </IconButton>
-                Edit Authorization Level
-              </Button>
-            </Stack>
-          </Stack>
-          <Stack>
-            <Stack className="authDetailHeaderSubContainerDetails">
-              {authDetailHeader.map((items: any, index: number) => {
-                return (
-                  <Stack>
-                    <Typography className="authDetailHeaderSubContainerDetailsTitle">
-                      {items.title}
+                </Stack>
+              </Stack>
+            </>
+          ) : (
+            <>
+              <Stack
+                className="authDetailHeaderSubContainer"
+                sx={{
+                  borderBottom: '2px solid #f0f2f5',
+                  paddingBottom: '24px',
+                }}
+              >
+                <Stack className="authDetailHeaderTitle">
+                  <ScreenHeader
+                    title="View Authorization level/ V 0.09"
+                    info="From here you can create access presets to assign with users in Users creation."
+                    showBackButton={true}
+                  />
+                </Stack>
+
+                <Stack className="authDetailHeaderStatus">
+                  <Box>
+                    <Typography
+                      sx={{
+                        color: ListTagStatus(state).color,
+                        backgroundColor: ListTagStatus(state).bgColor,
+                        fontSize: '12px',
+                        fontWeight: 400,
+                        padding: '3px 10px',
+                        borderRadius: '4px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        width: 'max-content',
+                      }}
+                    >
+                      {state === tagBasedIndicator.ACTIVE && (
+                        <img
+                          src={active_icon}
+                          alt="active"
+                          style={{ marginRight: '8px' }}
+                        />
+                      )}
+                      {state === tagBasedIndicator.WAITING_FOR_APPROVAL && (
+                        <img
+                          src={question_icon}
+                          alt="active"
+                          style={{ marginRight: '8px' }}
+                        />
+                      )}
+                      {state === tagBasedIndicator.CLOSED && (
+                        <img
+                          src={close_icon}
+                          alt="active"
+                          style={{ marginRight: '8px' }}
+                        />
+                      )}
+                      {state}
                     </Typography>
-                    <Typography className="authDetailHeaderSubContainerDetailsPara">
-                      {items.details}
-                    </Typography>
-                  </Stack>
-                );
-              })}
-            </Stack>
-          </Stack>
+                  </Box>
+                  <Button
+                    variant="text"
+                    className="authDetailHeaderButton"
+                    sx={{ color: '#0662B7', fontSize: '14px' }}
+                    onClick={() => setEdit(true)}
+                  >
+                    <IconButton>
+                      <img
+                        src={Edit_icon}
+                        alt=""
+                        style={{
+                          filter:
+                            'invert(26%) sepia(97%) saturate(1278%) hue-rotate(190deg) brightness(92%) contrast(101%)',
+                        }}
+                      />
+                    </IconButton>
+                    Edit Authorization Level
+                  </Button>
+                </Stack>
+              </Stack>
+              <Stack>
+                <Stack className="authDetailHeaderSubContainerDetails">
+                  {authDetailHeader.map((items: any, index: number) => {
+                    return (
+                      <Stack>
+                        <Typography className="authDetailHeaderSubContainerDetailsTitle">
+                          {items.title}
+                        </Typography>
+                        <Typography className="authDetailHeaderSubContainerDetailsPara">
+                          {items.details}
+                        </Typography>
+                      </Stack>
+                    );
+                  })}
+                </Stack>
+              </Stack>
+            </>
+          )}
         </Stack>
       </Stack>
       <Stack className="modelAccessControlContainer">
@@ -176,18 +212,22 @@ export const AuthDetail = () => {
                           }}
                         >
                           <Stack className="modelAccessControlModelCount">
-                            <Stack className="count">
-                              <Typography className="modelAccessControlModelnumber">
-                                {items.sub_module_data.reviewer_data.length}
-                              </Typography>
-                            </Stack>
+                            <CardAndDropDown
+                              value={
+                                items?.sub_module_data?.reviewer_data?.length ??
+                                0
+                              }
+                              showDropDown={edit}
+                            />
                           </Stack>
                           <Stack className="modelAccessControlModelCount">
-                            <Stack className="count">
-                              <Typography className="modelAccessControlModelnumber">
-                                {items.sub_module_data.approver_data.length}
-                              </Typography>
-                            </Stack>
+                            <CardAndDropDown
+                              value={
+                                items?.sub_module_data?.approver_data?.length ??
+                                0
+                              }
+                              showDropDown={edit}
+                            />
                           </Stack>
                         </Stack>
                       </Stack>
@@ -215,10 +255,19 @@ export const AuthDetail = () => {
             display: 'flex',
             gap: 2,
             justifyContent: 'flex-end',
-            padding: '15px',
+            padding: '10px 30px',
           }}
         >
-          <BtnContained title="Close" />
+          {edit ? (
+            <>
+              <BtnOutlined title="Cancel" onClick={() => navigate(-1)} />
+              <BtnContained title="Submit" onClick={() => navigate(-1)} />
+            </>
+          ) : (
+            <>
+              <BtnContained title="Close" onClick={() => navigate(-1)} />
+            </>
+          )}
         </Box>
       </Box>
     </Stack>

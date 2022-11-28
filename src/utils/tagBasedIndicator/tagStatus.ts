@@ -1,3 +1,4 @@
+import { off } from 'process';
 import { colors } from '../../style/Color';
 import { tagBasedIndicator } from '../Constants';
 
@@ -6,12 +7,12 @@ export const checkTagStatus = (value: string) => {
     bgColor: '#fff',
     color: '#000',
   };
-  if (value === tagBasedIndicator.ACTIVE) {
+  if (value === tagBasedIndicator.ACTIVE || value.includes('Approved')) {
     result.color = '#32A64D';
     result.bgColor = colors.lightGreen;
     return result;
   }
-  if (value === tagBasedIndicator.PAUSED) {
+  if (value === tagBasedIndicator.PAUSED || value.includes('Pending')) {
     result.color = '#F37B21';
     result.bgColor = '';
     return result;
@@ -34,6 +35,9 @@ export const checkTagStatus = (value: string) => {
   if (value === tagBasedIndicator.INACTIVE) {
     result.color = '#E63946';
     return result;
+  }
+  if (value.includes('Rejected')) {
+    result.color = '#992D26';
   }
   return result;
 };

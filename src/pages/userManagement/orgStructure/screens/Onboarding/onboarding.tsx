@@ -12,8 +12,10 @@ import {
   Card,
   Grid,
   Divider,
+  Checkbox
 } from '@mui/material';
 import './onboarding.scss';
+import { useNavigate } from 'react-router-dom'; 
 import dayjs, { Dayjs } from 'dayjs';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -26,6 +28,7 @@ import CheckBoxModal from '../../../../../components/commonComponent/customModal
 import { CheckBox } from '@mui/icons-material';
 import Upload_Img from '../../../../../assets/images/uploadImg.svg';
 import AddIcon from '@mui/icons-material/Add';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import BtnContained from '../../../../../components/commonComponent/CustomText/Button/Contained';
 import BtnOutlined from '../../../../../components/commonComponent/CustomText/Button/Outlined';
 import BtnText from '../../../../../components/commonComponent/CustomText/Button/Text';
@@ -34,7 +37,31 @@ import { UploadDetails } from './uploadDetails';
 import { Upload } from './upload'
 
 export const Onboarding = () => {
+  const navigate = useNavigate();
   const [value, setValue] = React.useState<Dayjs | null>(dayjs('DD/MM/YYYY'));
+
+  let objValue = {
+    supplierCompany: '',
+    workAddress: '',
+    country: '',
+    state: '',
+    city: '',
+    citiesOfOperations: '',
+    telephoneNo: '',
+    emailID: '',
+    yearOfInc: '',
+    natureOfBusiness: '',
+    natureOfCompany: '',
+    clarityOnCompany: '',
+    companyRegistrationNo: '',
+    majorProducts: '',
+    descriptionOfItems: '',
+    
+    rewardDescription: [{ value: ' ' }],
+    keyBenefits: [{ value: ' ' }],
+    additionalBenefits: [{ value: ' ' }],
+    welcomeBenefits: [{ value: '' }],
+  };
 
   let obj = {
     proprietor: [{ value: ' ' }],
@@ -42,6 +69,7 @@ export const Onboarding = () => {
   };
 
   const [data, setData] = useState(obj);
+  const [dataObjValue, setDataObjValue] = useState(objValue);
   const [removeClick, setRemoveClick] = useState({
     keyContact: false,
     proprietor: false,
@@ -85,11 +113,20 @@ export const Onboarding = () => {
     }));
   };
 
+  const handleSubmitClick = (record: any) => {
+    navigate('/userManagement/orgStructure/screens/OrgReview/OrgReview')
+    // , {
+    //   state: { record: dataObjValue },
+    // });
+  };
+
+
+
   return (
     <Stack>
       <Box sx={{ backgroundColor: '#E6E7E7' }}>
         <Box
-          sx={{ backgroundColor: 'white', marginTop: '25px', padding: '20px' }}
+          sx={{ backgroundColor: 'white', marginTop: '25px', padding: '20px 30px',borderRadius:'5px' }}
         >
           <TypoText title="DSA Onboarding" />
           <Box
@@ -123,7 +160,7 @@ export const Onboarding = () => {
         </Box> */}
 
         <Box
-          sx={{ backgroundColor: 'white', marginTop: '25px', padding: '20px' }}
+          sx={{ backgroundColor: 'white', marginTop: '25px', padding: '20px 30px',borderRadius:'5px' }}
         >
           <Box>
             <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
@@ -138,7 +175,7 @@ export const Onboarding = () => {
             <Box sx={{ width: '90%' }}>
               <Typography
                 sx={{
-                  marginBottom: '15px',
+                  marginBottom: '10px',
                   fontSize: '14px',
                   fontWeight: '500',
                 }}
@@ -146,38 +183,38 @@ export const Onboarding = () => {
                 Select Surrogate
               </Typography>
               <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Box sx={{ display: 'flex' }}>
-                  <CheckBox />
+                <Box sx={{ display: 'flex',alignItems:'center' }}>
+                  <Checkbox color='secondary' />
                   <Typography sx={{ fontSize: '14px', fontWeight: '400' }}>
                     Payroll
                   </Typography>
                 </Box>
-                <Box sx={{ display: 'flex' }}>
-                  <CheckBox />
+                <Box sx={{ display: 'flex',alignItems:'center'  }}>
+                  <Checkbox color='secondary' />
                   <Typography sx={{ fontSize: '14px', fontWeight: '400' }}>
                     Card For Card
                   </Typography>
                 </Box>
-                <Box sx={{ display: 'flex' }}>
-                  <CheckBox />
+                <Box sx={{ display: 'flex',alignItems:'center'  }}>
+                  <Checkbox color='secondary' />
                   <Typography sx={{ fontSize: '14px', fontWeight: '400' }}>
                     CIBIL
                   </Typography>
                 </Box>
-                <Box sx={{ display: 'flex' }}>
-                  <CheckBox />
+                <Box sx={{ display: 'flex',alignItems:'center'  }}>
+                  <Checkbox color='secondary' />
                   <Typography sx={{ fontSize: '14px', fontWeight: '400' }}>
                     AQB
                   </Typography>
                 </Box>
-                <Box sx={{ display: 'flex' }}>
-                  <CheckBox />
+                <Box sx={{ display: 'flex',alignItems:'center'  }}>
+                  <Checkbox color='secondary' />
                   <Typography sx={{ fontSize: '14px', fontWeight: '400' }}>
                     Pre-Approved
                   </Typography>
                 </Box>
-                <Box sx={{ display: 'flex' }}>
-                  <CheckBox />
+                <Box sx={{ display: 'flex',alignItems:'center'  }}>
+                  <Checkbox color='secondary' />
                   <Typography sx={{ fontSize: '14px', fontWeight: '400' }}>
                     Secured
                   </Typography>
@@ -188,7 +225,7 @@ export const Onboarding = () => {
         </Box>
 
         <Box
-          sx={{ backgroundColor: 'white', marginTop: '25px', padding: '20px' }}
+          sx={{ backgroundColor: 'white', marginTop: '25px', padding: '20px 30px',borderRadius:'5px' }}
         >
           <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
             <TypoText title="Supplier Profile" />
@@ -215,7 +252,7 @@ export const Onboarding = () => {
             <Grid item xs={12} sm={6} md={4}>
               <Box sx={{ gap: 2 }}>
                 <TypographySubTitle title="Country" />
-                <TypoText placeholder="State & Country" id="businessId" />
+                <TypoText placeholder="Country" id="businessId" />
               </Box>
             </Grid>
           </Grid>
@@ -224,7 +261,7 @@ export const Onboarding = () => {
             <Grid item xs={12} sm={6} md={4}>
               <Box sx={{ gap: 2 }}>
                 <TypographySubTitle title="State" />
-                <TypoText placeholder="State & Country" id="businessId" />
+                <TypoText placeholder="State" id="businessId" />
               </Box>
             </Grid>
 
@@ -265,11 +302,13 @@ export const Onboarding = () => {
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <TypographySubTitle title="Year of inc./ in Business Since" />
                 <DatePicker
-                  disableFuture
-                  // label="Responsive"
+                //   disableFuture
+                toolbarPlaceholder='DD/MM/YYYY'
+                //   label="DD/MM/YYYY"
                   openTo="year"
                   views={['year', 'month', 'day']}
                   value={value}
+                  
                   onChange={(newValue) => {
                     setValue(newValue);
                   }}
@@ -286,7 +325,8 @@ export const Onboarding = () => {
               <FormControl className="formctrl">
                 <TypographySubTitle title="Nature of Business" />
                 <Select
-                  sx={{ height: '40px', width: '280px' }}
+                fullWidth
+                  sx={{ height: '40px',width:'280px'}}
                   defaultValue={0}
                 >
                   <MenuItem value={0}>Select</MenuItem>
@@ -300,7 +340,7 @@ export const Onboarding = () => {
               <FormControl className="formctrl">
                 <TypographySubTitle title="Nature of Company" />
                 <Select
-                  sx={{ height: '40px', width: '280px' }}
+                  sx={{ height: '40px',width:'280px' }}
                   defaultValue={0}
                 >
                   <MenuItem value={0}>Select</MenuItem>
@@ -314,7 +354,7 @@ export const Onboarding = () => {
               <FormControl className="formctrl">
                 <TypographySubTitle title="Clarity on Company" />
                 <Select
-                  sx={{ height: '40px', width: '280px' }}
+                  sx={{ height: '40px',width:'280px' }}
                   defaultValue={0}
                   fullWidth
                 >
@@ -358,7 +398,7 @@ export const Onboarding = () => {
         </Box>
 
         <Box
-          sx={{ backgroundColor: 'white', marginTop: '25px', padding: '20px' }}
+          sx={{ backgroundColor: 'white', marginTop: '25px', padding: '20px 30px',borderRadius:'5px' }}
         >
           <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
             <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
@@ -368,8 +408,9 @@ export const Onboarding = () => {
             </Box>
             <Box>
               <Button
+              color='secondary'
                 sx={{ textTransform: 'capitalize' }}
-                startIcon={<AddIcon />}
+                startIcon={<AddCircleOutlineIcon />}
                 onClick={AddProprietor}
               >
                 Add New Person
@@ -391,6 +432,7 @@ export const Onboarding = () => {
                     >
                       <TypoText title={`Key Contact Person ${index + 1}`} />
                       <Button
+                      color='secondary'
                         onClick={() => removeProprietor(index)}
                         startIcon={<HighlightOffIcon />}
                       >
@@ -427,7 +469,7 @@ export const Onboarding = () => {
                     <FormControl className="formctrl">
                       <TypographySubTitle title="Gender" />
                       <Select
-                        sx={{ height: '40px', width: '280px' }}
+                        sx={{ height: '40px',width:'280px' }}
                         defaultValue={0}
                       >
                         <MenuItem value={0}>Select Gender</MenuItem>
@@ -461,7 +503,7 @@ export const Onboarding = () => {
                     <FormControl className="formctrl">
                       <TypographySubTitle title="User Role" />
                       <Select
-                        sx={{ height: '40px', width: '280px' }}
+                        sx={{ height: '40px',width:'280px' }}
                         defaultValue={0}
                         fullWidth
                       >
@@ -498,7 +540,7 @@ export const Onboarding = () => {
         </Box>
 
         <Box
-          sx={{ backgroundColor: 'white', marginTop: '25px', padding: '20px' }}
+          sx={{ backgroundColor: 'white', marginTop: '25px', padding: '20px 30px',borderRadius:'5px' }}
         >
           <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
             <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
@@ -508,8 +550,9 @@ export const Onboarding = () => {
             </Box>
             <Box>
               <Button
+              color='secondary'
                 sx={{ textTransform: 'capitalize' }}
-                startIcon={<AddIcon />}
+                startIcon={<AddCircleOutlineIcon />}
                 onClick={AddKeyContact}
               >
                 Add New Person
@@ -530,7 +573,7 @@ export const Onboarding = () => {
                       }}
                     >
                       <TypoText title={`Key Contact Person ${index + 1}`} />
-                      <Button
+                      <Button color='secondary'
                         onClick={() => removeKeyContact(index)}
                         startIcon={<HighlightOffIcon />}
                       >
@@ -571,7 +614,7 @@ export const Onboarding = () => {
                     <FormControl className="formctrl">
                       <TypographySubTitle title="User Role" />
                       <Select
-                        sx={{ height: '40px', width: '280px' }}
+                        sx={{ height: '40px',width:'280px' }}
                         defaultValue={0}
                       >
                         <MenuItem value={0}>Select Role</MenuItem>
@@ -579,12 +622,12 @@ export const Onboarding = () => {
                         <MenuItem value={20}>Twenty</MenuItem>
                         <MenuItem value={30}>Thirty</MenuItem>
                       </Select>
-                      <Box sx={{ display: 'flex', paddingTop: '8px', gap: 1 }}>
+                      <Box sx={{ display: 'flex', paddingTop: '8px', gap: 1,width:'400px' }}>
                         <img
                           style={{ width: '13px', height: '13px' }}
                           src={Info_Icon}
                         />
-                        <Typography sx={{ fontSize: '8px', fontWeight: '400' }}>
+                        <Typography sx={{ fontSize: '9px', fontWeight: '400', }}>
                           Please Assign Super Admin role if needed.
                         </Typography>
                       </Box>
@@ -636,7 +679,7 @@ export const Onboarding = () => {
         </Box>
 
         <Box
-          sx={{ backgroundColor: 'white', marginTop: '25px', padding: '20px' }}
+          sx={{ backgroundColor: 'white', marginTop: '25px', padding: '20px 30px',borderRadius:'5px' }}
         >
           <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
             <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
@@ -644,14 +687,7 @@ export const Onboarding = () => {
               <img src={Info_Icon} />
               <TypographyInfo title="Add key regulatory requirement(s) for your partner here." />
             </Box>
-            <Box>
-              <Button
-                sx={{ textTransform: 'capitalize' }}
-                startIcon={<AddIcon />}
-              >
-                Add New Person
-              </Button>
-            </Box>
+            
           </Box>
           <Divider sx={{ marginY: '20px' }} />
           <UploadDetails />
@@ -659,7 +695,7 @@ export const Onboarding = () => {
         </Box>
 
         <Box
-          sx={{ backgroundColor: 'white', marginTop: '25px', padding: '20px' }}
+          sx={{ backgroundColor: 'white', marginTop: '25px', padding: '20px 30px',borderRadius:'5px' }}
         >
           <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
             <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
@@ -701,7 +737,7 @@ export const Onboarding = () => {
         </Box>
 
         <Box
-          sx={{ backgroundColor: 'white', marginTop: '25px', padding: '20px' }}
+          sx={{ backgroundColor: 'white', marginTop: '25px', padding: '20px 30px',borderRadius:'5px' }}
         >
           <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
             <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
@@ -717,7 +753,7 @@ export const Onboarding = () => {
                 <FormControl className="formctrl">
                   <TypographySubTitle title="Bank Name" />
                   <Select
-                    sx={{ height: '40px', width: '280px' }}
+                    sx={{ height: '40px',width:'280px' }}
                     defaultValue={0}
                   >
                     <MenuItem value={0}>Choose Bank</MenuItem>
@@ -833,8 +869,9 @@ export const Onboarding = () => {
           sx={{
             backgroundColor: 'white',
             marginTop: '25px',
-            padding: '20px',
+            padding: '20px 30px',
             marginBottom: '100px',
+            borderRadius:'5px'
           }}
         >
           <Box>
@@ -846,8 +883,8 @@ export const Onboarding = () => {
             <Divider sx={{ marginY: '20px' }} />
             <Box sx={{ width: '90%' }}>
               <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Box sx={{ display: 'flex', gap: 1 }}>
-                  <CheckBox />
+                <Box sx={{ display: 'flex', gap: 1,alignItems:'center'  }}>
+                  <Checkbox color='secondary' />
                   <Typography sx={{ fontSize: '14px', fontWeight: '400' }}>
                     All information I have provided is true and accurate.
                   </Typography>
@@ -865,7 +902,7 @@ export const Onboarding = () => {
             bottom: 0,
             right: 0,
             width: '100%',
-            borderTop: '1px solid black',
+            borderTop: '1px solid #e9edf5',
           }}
         >
           <Box
@@ -880,7 +917,7 @@ export const Onboarding = () => {
 
             <BtnText title="Save as draft" />
 
-            <BtnContained title="Submit" />
+            <BtnContained onClick={handleSubmitClick}  title="Submit" />
           </Box>
         </Box>
       </Box>

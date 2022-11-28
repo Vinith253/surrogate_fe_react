@@ -75,8 +75,9 @@ export const AuthorisationLevel = (props: any) => {
     filterData();
   }, [ascending]);
   const handleCardMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    console.log('----- button clicked');
-    // navigate('/userManagement/roleCreation/authorisationDetails');
+    navigate('/userManagement/roleCreation/authorisationDetails', {
+      state: 'editMode',
+    });
   };
   const menuOpen = Boolean(anchorElement);
   const handleClick = (event: React.MouseEvent<HTMLTableCellElement>) => {
@@ -133,8 +134,10 @@ export const AuthorisationLevel = (props: any) => {
       </Box>
     );
   }
-  const viewAction = () => {
-    navigate('/userManagement/roleCreation/authorisationDetails');
+  const viewAction = (status: any) => {
+    navigate('/userManagement/roleCreation/authorisationDetails', {
+      state: status,
+    });
   };
   const handleSortByName = () => {
     setAscending(!ascending);
@@ -312,7 +315,7 @@ export const AuthorisationLevel = (props: any) => {
                           <Link
                             sx={{ cursor: 'pointer', color: '#0662B7' }}
                             underline="none"
-                            onClick={() => viewAction()}
+                            onClick={() => viewAction(row.currentStatus)}
                           >
                             View
                           </Link>

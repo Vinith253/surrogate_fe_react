@@ -17,7 +17,7 @@ export const tagBasedIndicator = {
   INACTIVE: 'InActive',
   DEACTIVATE: 'Deactivated',
   SAVED: 'Saved',
-  WAITING_FOR_APPROVAL: 'Waiting for approval',
+  WAITING_FOR_APPROVAL: 'Waiting for Approval',
   CLOSED: 'Closed',
 };
 
@@ -26,16 +26,16 @@ export const bulkUpload = {
   BULK_UPLOAD_CARD_CATALOGUE_SUBHEAD: ` From here you can manage all your card's information`,
   BULK_UPLOAD_ORG_HEAD: 'Bulk Upload - Organisation Details',
   BULK_UPLOAD_ORG_SUBHEAD: ` From here you can manage all your card's information`,
-  BULK_UPLOAD_USER_HEAD:'Bulk Upload - User Creation',
+  BULK_UPLOAD_USER_HEAD: 'Bulk Upload - User Creation',
   DOWNLOAD_SAMPLE: 'Download Sample',
   UPLOAD_CARD_DETAILS: 'Upload card details sheet',
   UPLOAD_DOCUMENTS: 'Upload the documents',
-  UPLOAD_USER_SHEET:'Upload user details sheet',
+  UPLOAD_USER_SHEET: 'Upload user details sheet',
   DOWNLOAD_SAMPLE_CSV_XLS: ` Download a sample .csv or .xls file and compare it to your import file
     to ensure that is ready to import`,
-    DOWNLOAD_SAMPLE_FILE: ` Download a sample file and compare it to your import file
-    to ensure that is ready to import`, 
-    DOWNLOAD_ERROR_CSV_XLS: ` Download a Error file for correction .csv or .xls file and compare it to your import file
+  DOWNLOAD_SAMPLE_FILE: ` Download a sample file and compare it to your import file
+    to ensure that is ready to import`,
+  DOWNLOAD_ERROR_CSV_XLS: ` Download a Error file for correction .csv or .xls file and compare it to your import file
     to ensure that is ready to import`,
   UPLOAD_FILE: ' Upload file',
   UPLOAD_DOCUMENT: 'Upload Document',

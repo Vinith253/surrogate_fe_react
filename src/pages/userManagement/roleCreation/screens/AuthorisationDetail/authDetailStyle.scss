@@ -1,128 +1,126 @@
 .authDetailContainer {
-    padding-top: 30px;
-    .authDetailContainerHeaderMain {
-      background-color: white;
-      border-radius: 8px;
-      .authDetailHeaderContainer {
-        margin: 24px 32px 24px 32px;
-        .authDetailHeaderSubContainer {
-          padding-bottom: 24px;
-          border-bottom: 2px solid #f0f2f5;
+  padding-top: 30px;
+  .authDetailContainerHeaderMain {
+    background-color: white;
+    border-radius: 8px;
+    .authDetailHeaderContainer {
+      margin: 24px 32px 24px 32px;
+      .authDetailHeaderSubContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        .authDetailHeaderTitle {
           display: flex;
-          flex-direction: row;
           justify-content: space-between;
           align-items: center;
-          .authDetailHeaderTitle {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-          }
-          .authDetailHeaderStatus {
-            display: flex;
-            align-items: center;
-            flex-direction: row;
-            .authDetailHeaderButton {
-              font-weight: 500 !important;
-              font-size: 14px !important;
-              line-height: 16px !important;
-              letter-spacing: 0.0125em !important;
-              text-transform: capitalize !important;
-            }
+        }
+        .authDetailHeaderStatus {
+          display: flex;
+          align-items: center;
+          flex-direction: row;
+          .authDetailHeaderButton {
+            font-weight: 500 !important;
+            font-size: 14px !important;
+            line-height: 16px !important;
+            letter-spacing: 0.0125em !important;
+            text-transform: capitalize !important;
+            margin-left: 15px;
           }
         }
-        .authDetailHeaderSubContainerDetails {
-          padding-top: 24px;
+      }
+      .authDetailHeaderSubContainerDetails {
+        padding-top: 24px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        .authDetailHeaderSubContainerDetailsTitle {
+          font-weight: 500;
+          font-size: 12px;
+          line-height: 14px;
+          letter-spacing: 0.004em;
+          color: #afaeaf;
+        }
+        .authDetailHeaderSubContainerDetailsPara {
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 16px;
+          letter-spacing: 0.0025em;
+          color: #151515;
+          padding-top: 8px;
+        }
+      }
+    }
+  }
+  .modelAccessControlContainer {
+    margin: 30px 0 50px 0;
+    .modelAccessControlSubContainer {
+      background-color: white;
+      border-radius: 8px;
+      padding: 30px 32px 30px 32px;
+      .modelAccessControlContainerTitle {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+        letter-spacing: 0.0015em;
+        color: #151515;
+        margin-bottom: 30px;
+      }
+      .modelAccessControlContainerTable {
+        background: #ffffff;
+        border: 1px solid #f0f2f5;
+        box-shadow: 0px 1px 2px 1px rgba(21, 21, 21, 0.1);
+        border-radius: 4px;
+        .modelAccessControlContainerTableHeader {
+          background: #f3f3f4;
+          border-bottom: 1px solid #f0f2f5;
+          border-radius: 4px;
           display: flex;
           flex-direction: row;
-          align-items: center;
           justify-content: space-between;
-          .authDetailHeaderSubContainerDetailsTitle {
-            font-weight: 500;
-            font-size: 12px;
-            line-height: 14px;
-            letter-spacing: 0.004em;
-            color: #afaeaf;
-          }
-          .authDetailHeaderSubContainerDetailsPara {
+          padding: 15px;
+          .modelAccessControlModuleName {
             font-weight: 400;
             font-size: 14px;
             line-height: 16px;
             letter-spacing: 0.0025em;
             color: #151515;
-            padding-top: 8px;
           }
         }
-      }
-    }
-    .modelAccessControlContainer {
-      margin: 30px 0;
-      .modelAccessControlSubContainer {
-        background-color: white;
-        border-radius: 8px;
-        padding: 30px 32px 30px 32px;
-        .modelAccessControlContainerTitle {
-          font-weight: 500;
-          font-size: 16px;
-          line-height: 20px;
-          letter-spacing: 0.0015em;
-          color: #151515;
-          margin-bottom: 30px;
-        }
-        .modelAccessControlContainerTable {
-          background: #ffffff;
-          border: 1px solid #f0f2f5;
-          box-shadow: 0px 1px 2px 1px rgba(21, 21, 21, 0.1);
-          border-radius: 4px;
-          .modelAccessControlContainerTableHeader {
-            background: #f3f3f4;
-            border-bottom: 1px solid #f0f2f5;
-            border-radius: 4px;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            padding: 15px;
-            .modelAccessControlModuleName {
-              font-weight: 400;
-              font-size: 14px;
-              line-height: 16px;
-              letter-spacing: 0.0025em;
-              color: #151515;
-            }
+        .modelAccessControlContainerTableData {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          padding: 20px 15px;
+          .modelAccessControlModelName {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 16px;
+            letter-spacing: 0.0125em;
+            text-decoration-line: underline;
+            color: #0662b7;
+            cursor: pointer;
           }
-          .modelAccessControlContainerTableData {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 15px;
-            .modelAccessControlModelName {
-              font-weight: 500;
-              font-size: 14px;
-              line-height: 16px;
-              letter-spacing: 0.0125em;
-              text-decoration-line: underline;
-              color: #0662b7;
-              cursor: pointer;
-            }
-            .modelAccessControlModelCount {
-              width: 48%;
-              .count {
-                background: #e6e7e7;
-                border: 1px solid #afaeaf;
-                border-radius: 4px;
-                padding: 6px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 30%;
-                .modelAccessControlModelnumber {
-                  font-weight: 400;
-                  font-size: 14px;
-                  line-height: 16px;
-                  text-align: center;
-                  letter-spacing: 0.0025em;
-                  color: #656769;
-                }
+          .modelAccessControlModelCount {
+            width: 48%;
+            .count {
+              background: #e6e7e7;
+              border: 1px solid #afaeaf;
+              border-radius: 4px;
+              padding: 6px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              width: 30%;
+              .modelAccessControlModelnumber {
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 16px;
+                text-align: center;
+                letter-spacing: 0.0025em;
+                color: #656769;
               }
             }
           }
@@ -130,3 +128,4 @@
       }
     }
   }
+}
