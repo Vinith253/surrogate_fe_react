@@ -133,7 +133,10 @@ export default function App() {
           path="/userManagement/roleCreation/userdetails"
           element={<UserDetails />}
         />
-
+        <Route
+          path="/userManagement/roleCreation/authorisationDetails"
+          element={<AuthDetail />}
+        />
         <Route
           path="/userManagement/roleCreation/historyLogDetail"
           element={<HistoryLogDetailScreen />}
