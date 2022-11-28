@@ -533,13 +533,13 @@ export const duplicateRoleData = [
                         id: 2,
                         label: 'Refer approval',
                         isChecked:true,
-                        isDisabled:true
+                        isDisabled:false
                     },
                     {
                         id: 3,
                         label: 'Forced Action',
                         isChecked:true,
-                        isDisabled:true
+                        isDisabled:false
                     },
                 ]
             },
@@ -566,7 +566,7 @@ export const duplicateRoleData = [
                         id: 2,
                         label: 'Copy Links',
                         isChecked:true,
-                        isDisabled:true
+                        isDisabled:false
                     },
                 ]
             },
