@@ -24,8 +24,9 @@ const TypographySubTitle = (props: any) => {
       }}
       style={props.style}
       variant="body1"
-      color="textPrimary"
+      color={props.color}
     >
+      
       {props.title}
     </Typography>
   );
