@@ -29,10 +29,22 @@
   .icons-container {
     display: flex;
     justify-content: end;
-    .icons {
-      width: 25px;
-      margin: -27px 20px 0px 0px;
+    .each-icon {
+      width: 35px;
+      height: 35px;
+      display: flex;
+      margin: -22px 15px 0px 0px;
       cursor: pointer;
+
+      .icons {
+        margin: auto;
+        width: 17px;
+      }
+    }
+
+    .each-icon:hover {
+      background-color: #f3f3f3;
+      border-radius: 50%;
     }
   }
 }
