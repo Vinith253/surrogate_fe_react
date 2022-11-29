@@ -10,7 +10,16 @@ export const FooterButton = (props: {
   handleSaveasDraftClick?: any;
 }) => {
   return (
-    <Box className="boxBtn">
+    <Box className="boxBtn" 
+    sx={{
+      marginTop: '20px',
+      backgroundColor: 'white',
+      position: 'fixed',
+      bottom: 0,
+      right: 0,
+      width: '100%',
+      borderTop: '1px solid #e9edf5',
+    }}>
       {props.cancel && (
         <Button
           color="secondary"

@@ -133,7 +133,11 @@ export const AccordianLayover = ({ data, isViewPage }: props) => {
                      handleCheckboxClick(index, item.id, e.target.checked)
                    }
                    checked={item.isChecked}
-                   color="secondary"
+                   sx={{
+                    '&.Mui-checked': {
+                      color: isViewPage ? '#82B1DB' : '#0662B7',
+                    },
+                  }}
                  />
                }
              />
@@ -200,7 +204,11 @@ export const AccordianLayover = ({ data, isViewPage }: props) => {
                           handleCheckboxClick(index, item.id, e.target.checked)
                         }
                         checked={item.isChecked}
-                        color="secondary"
+                        sx={{
+                          '&.Mui-checked': {
+                            color: isViewPage ? '#82B1DB' : '#0662B7',
+                          },
+                        }}
                       />
                     }
                   />
@@ -268,7 +276,11 @@ export const AccordianLayover = ({ data, isViewPage }: props) => {
                                             }
                                           disabled={isViewPage || item3.isDisabled}
                                           checked={item3.isChecked}
-                                          color="secondary"
+                                          sx={{
+                                            '&.Mui-checked': {
+                                              color: isViewPage || item3.isDisabled ? '#82B1DB' : '#0662B7',
+                                            },
+                                          }}
                                         />
                                       }
                                     />
