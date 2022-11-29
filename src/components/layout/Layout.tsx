@@ -140,11 +140,11 @@ const sideBarOptions = [
         path: '/userManagement/orgStructure',
         img: org_structure_icon,
       },
-      {
-        data: 'Branch Detais',
-        path: '/userManagement/branchDetails',
-        img: branch_details_icon,
-      },
+      // {
+      //   data: 'Branch Details',
+      //   path: '/userManagement/branchDetails',
+      //   img: branch_details_icon,
+      // },
     ],
   },
   { key: 7, content: 'LMS', path: '/lms', image: lms_icon, subContent: [] },
