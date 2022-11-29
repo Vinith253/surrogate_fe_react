@@ -215,16 +215,9 @@ function ViewUser() {
               </Grid>
             </Grid>
             <Stack className="underline"></Stack>
-          </Stack>
-          <Stack className="container">
-            <HeaderWithInfo
-              header="Permissions"
-              isInfoEnabled={true}
-              info="From here, you can add the user’s personal details"
-              isDownloadEnabled={false}
-            />
             <AccordianLayover data={viewPermissionsList} isViewPage={true} />
           </Stack>
+
           <Stack className="container">
             <HeaderWithInfo
               header="Reviewer & Approver allocation"
