@@ -154,7 +154,8 @@ export const OrganisationDetails = () => {
     useState<boolean>(false);
   const [deactivateSuccessModal, setDeactivateSuccessModal] =
     useState<boolean>(false);
-
+  const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorElement);
   const [isItem, setIsItem] = useState<boolean>(false);
   const [btnActive, setBtnActive] = useState(true);
 
@@ -217,6 +218,12 @@ export const OrganisationDetails = () => {
 
   const handleSortById = () => {
     setIdSorting(!idSorting);
+  };
+  const handleClose = () => {
+    setAnchorElement(null);
+  };
+  const handleClick = (event: React.MouseEvent<HTMLTableCellElement>) => {
+    setAnchorElement(event.currentTarget);
   };
   const column = [
     {
@@ -337,9 +344,54 @@ export const OrganisationDetails = () => {
       key: 'more',
       render: () => {
         return (
-          <Stack>
-            <MoreVertIcon />
-          </Stack>
+          <>
+            <Stack
+              id="more-button"
+              onClick={handleClick}
+              aria-controls={open ? 'more-menu' : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? 'true' : undefined}
+              sx={{ padding: '5px', borderBottom: 'none' }}
+            >
+              <MoreVertIcon />
+            </Stack>
+            <Menu
+              id="more-menu"
+              anchorEl={anchorElement}
+              open={open}
+              MenuListProps={{
+                'aria-labelledby': 'more-button',
+              }}
+              onClose={handleClose}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+            >
+              <MenuItem
+                // onClick={() => handleClose()}
+                onClick={() => {
+                  handleClose();
+                }}
+                style={{ padding: '10px 20px', textAlign: 'left' }}
+              >
+                View Org.
+              </MenuItem>
+              <MenuItem
+                // onClick={handleClose}
+                onClick={() => {
+                  handleClose();
+                }}
+                style={{ padding: '10px 20px', textAlign: 'left' }}
+              >
+                Edit Org.
+              </MenuItem>
+            </Menu>
+          </>
         );
       },
     },
@@ -499,7 +551,7 @@ export const OrganisationDetails = () => {
               disabled={btnActive}
               sx={{
                 padding: '0px 10px',
-                fontSize: '14px',
+                fontSize: '1vw',
                 fontWeight: 400,
                 display: 'flex',
                 alignItems: 'center',
@@ -529,7 +581,7 @@ export const OrganisationDetails = () => {
               disabled={btnActive}
               sx={{
                 padding: '0px 10px',
-                fontSize: '14px',
+                fontSize: '1vw',
                 fontWeight: 400,
                 display: 'flex',
                 alignItems: 'center',
