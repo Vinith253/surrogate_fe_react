@@ -53,16 +53,16 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 function createData(
-  id: number,
-  cardName: string,
-  surrogateName: string,
-  cardMode: string,
-  cardType: string,
-  interestRate: string,
-  extraCard: string,
-  CIBIL: number,
-  salary: string,
-  error: boolean
+  id?: number,
+  cardName?: string,
+  surrogateName?: string,
+  cardMode?: string,
+  cardType?: string,
+  interestRate?: string,
+  extraCard?: string,
+  CIBIL?: number,
+  salary?: string,
+  error?: boolean
 ) {
   return {
     id,
@@ -290,59 +290,71 @@ export default function UserBulkList(props: any) {
       error: false,
     },
   ];
-  const data2 = [
-    {
-      id: 1,
-      companyName: 'Premier',
-      companyRegNo: '9336252729',
-      surrogateName: 'ABC Company',
-      cityOperation: 'Pan India',
-      teleNo: '432-1678-900',
-      email: 'contact@gmail.com',
-      error: false,
-    },
-    {
-      id: 2,
-      companyName: 'ABC Company',
-      companyRegNo: '9636832729',
-      surrogateName: 'Payroll',
-      cityOperation: 'Pan India',
-      teleNo: '432-1678-900',
-      email: 'contact@gmail.com',
-      error: false,
-    },
-    {
-      id: 3,
-      companyName: 'ABC Company',
-      companyRegNo: '9336252729',
-      surrogateName: 'Card-For-Card',
-      cityOperation: 'Pan India',
-      teleNo: '432-1678-900',
-      email: 'contact@gmail.com',
-      error: false,
-    },
-    {
-      id: 4,
-      companyName: 'ABC Company',
-      companyRegNo: '9336892729',
-      surrogateName: 'CIBIL',
-      cityOperation: 'Pan India',
-      teleNo: '432-1678-900',
-      email: 'contact@gmail.com',
-      error: false,
-    },
-    {
-      id: 5,
-      companyName: 'ABC Company',
-      companyRegNo: '9336252729',
-      surrogateName: 'Payroll',
-      cityOperation: 'Pan India',
-      teleNo: '432-1678-900',
-      email: 'contact@gmail.com',
-      error: false,
-    },
-  ];
-
+  const data2 = [{}];
+  // const data2 = [
+  //   {
+  //     id: 1,
+  //     companyName: 'Premier',
+  //     companyRegNo: '9336252729',
+  //     surrogateName: 'ABC Company',
+  //     cityOperation: 'Pan India',
+  //     teleNo: '432-1678-900',
+  //     email: 'contact@gmail.com',
+  //     error: false,
+  //   },
+  //   {
+  //     id: 2,
+  //     companyName: 'ABC Company',
+  //     companyRegNo: '9636832729',
+  //     surrogateName: 'Payroll',
+  //     cityOperation: 'Pan India',
+  //     teleNo: '432-1678-900',
+  //     email: 'contact@gmail.com',
+  //     error: false,
+  //   },
+  //   {
+  //     id: 3,
+  //     companyName: 'ABC Company',
+  //     companyRegNo: '9336252729',
+  //     surrogateName: 'Card-For-Card',
+  //     cityOperation: 'Pan India',
+  //     teleNo: '432-1678-900',
+  //     email: 'contact@gmail.com',
+  //     error: false,
+  //   },
+  //   {
+  //     id: 4,
+  //     companyName: 'ABC Company',
+  //     companyRegNo: '9336892729',
+  //     surrogateName: 'CIBIL',
+  //     cityOperation: 'Pan India',
+  //     teleNo: '432-1678-900',
+  //     email: 'contact@gmail.com',
+  //     error: false,
+  //   },
+  //   {
+  //     id: 5,
+  //     companyName: 'ABC Company',
+  //     companyRegNo: '9336252729',
+  //     surrogateName: 'Payroll',
+  //     cityOperation: 'Pan India',
+  //     teleNo: '432-1678-900',
+  //     email: 'contact@gmail.com',
+  //     error: false,
+  //   },
+  // ];
+  const footerStyle = {
+    backgroundColor: 'white',
+    marginTop: '24px',
+    padding: '20px 32px',
+    position: 'fixed',
+    bottom: 0,
+    right: 0,
+    width: ' 100%',
+    // borderTop: ' 1px solid black',
+    boxShadow:
+      '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
+  };
   const handleUploadProgress = (value: number) => {
     setUploadProgress(value);
     console.log(value, 'handle upload progress');
@@ -383,7 +395,7 @@ export default function UserBulkList(props: any) {
     );
   }
   const [columnList, setcolumnList] = useState(column);
-  const [dataList, setDataList] = useState(data1);
+  const [dataList, setDataList] = useState<any>(data1);
   const [validCount, setValidCount] = useState('20');
   const [errorCount, setErrorCount] = useState('02');
 
@@ -701,80 +713,84 @@ export default function UserBulkList(props: any) {
       {/* {imageUpload && <BulkUpload />} */}
       {progress === 100 && (
         <>
-          <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: '1%' }}>
-            <Button variant="outlined">Cancel</Button>
-            <Button
-              variant="contained"
-              // color="secondary"
-              onClick={handleProceed}
+          <Box sx={footerStyle}>
+            <Box
+              sx={{ display: 'flex', justifyContent: 'flex-end', gap: '1%' }}
+            >
+              <Button variant="outlined">Cancel</Button>
+              <Button
+                variant="contained"
+                // color="secondary"
+                onClick={handleProceed}
+                sx={{
+                  backgroundColor: correctionState ? ' #0662B7' : '#82B1DB',
+                }}
+                // disabled={true}
+              >
+                {progress === 100 && correctionState
+                  ? 'Submit to reviewer'
+                  : 'Proceed'}
+              </Button>
+            </Box>
+            <Box
               sx={{
-                backgroundColor: correctionState ? ' #0662B7' : '#82B1DB',
+                display: 'flex',
+                justifyContent: 'flex-end',
+                gap: '1%',
+                marginTop: '1%',
               }}
-              // disabled={true}
             >
-              {progress === 100 && correctionState
-                ? 'Submit to reviewer'
-                : 'Proceed'}
-            </Button>
+              <Button
+                variant="text"
+                color="secondary"
+                onClick={handleDiscard}
+                sx={{ fontSize: '12px' }}
+              >
+                {!correctionState && `Discord Error entries and Continue >`}
+              </Button>
+            </Box>
           </Box>
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'flex-end',
-              gap: '1%',
-              marginTop: '1%',
-            }}
-          >
-            <Button
-              variant="text"
-              color="secondary"
-              onClick={handleDiscard}
-              sx={{ fontSize: '12px' }}
-            >
-              {`Discord Error entries and Continue >`}
-            </Button>
-          </Box>
-          {
-            <CustomModal
-              openSuccess={userBulkSuccessPopup}
-              handleCloseSuccess={closeModal}
-              successModalTitle={'User Details Uploaded Successfully'}
-              successModalMsg={
-                '  Organisation has been successully sent to the reviewer'
-              }
-              btn={' Close'}
-            />
-          }
-          {
-            <CustomModal
-              openSuccess={openDiscard}
-              handleCloseSuccess={() => setOpenDiscard(!openDiscard)}
-              handleSuccess={handleContinue}
-              successModalTitle={'Do You want to discard?'}
-              discardModalMsg={
-                'Want to discard corrections for error entires in the excel sheet and continue upload cards'
-              }
-              yesContinueBtn={'Yes, Continue'}
-              closeBtn={'Close'}
-            />
-          }
-          {
-            <CustomModal
-              openSuccess={openContinueDiscard}
-              handleCloseSuccess={() =>
-                setOpenContinueDiscard(!openContinueDiscard)
-              }
-              handleSuccess={() => setOpenContinueDiscard(false)}
-              successModalTitle={'Do You want to Cancel Bulk upload?'}
-              discardModalMsg={
-                'Want to discard corrections for error entires in the excel sheet and continue upload cards'
-              }
-              yesContinueBtn={'Yes, Continue'}
-              closeBtn={'Close'}
-            />
-          }
         </>
       )}
+      {
+        <CustomModal
+          openSuccess={userBulkSuccessPopup}
+          handleCloseSuccess={closeModal}
+          successModalTitle={'User Details Uploaded Successfully'}
+          successModalMsg={
+            '  Organisation has been successully sent to the reviewer'
+          }
+          btn={' Close'}
+        />
+      }
+      {
+        <CustomModal
+          openSuccess={openDiscard}
+          handleCloseSuccess={() => setOpenDiscard(!openDiscard)}
+          handleSuccess={handleContinue}
+          successModalTitle={'Do You want to discard?'}
+          discardModalMsg={
+            'Want to discard corrections for error entires in the excel sheet and continue upload cards'
+          }
+          yesContinueBtn={'Yes, Continue'}
+          closeBtn={'Close'}
+        />
+      }
+      {
+        <CustomModal
+          openSuccess={openContinueDiscard}
+          handleCloseSuccess={() =>
+            setOpenContinueDiscard(!openContinueDiscard)
+          }
+          handleSuccess={() => setOpenContinueDiscard(false)}
+          successModalTitle={'Do You want to Cancel Bulk upload?'}
+          discardModalMsg={
+            'Want to discard corrections for error entires in the excel sheet and continue upload cards'
+          }
+          yesContinueBtn={'Yes, Continue'}
+          closeBtn={'Close'}
+        />
+      }
     </PageLayout>
   );
 }

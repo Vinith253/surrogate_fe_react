@@ -101,7 +101,7 @@ const CommonTable = (props: any) => {
                       >
                         {dataItem[columnItem.dataIndex]
                           ? dataItem[columnItem.dataIndex]
-                          : '--'}
+                          : ''}
                       </StyledTableCell>
                     );
                   })}
