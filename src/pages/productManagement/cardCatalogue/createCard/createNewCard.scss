@@ -104,18 +104,16 @@
             gap: 16px;
             .img{
                 margin-bottom: 14px;
-
             }
         }
         .chooseSurrogateGrid{
             display: flex;
-            justify-content: space-between;
+            justify-content: space-evenly;
             margin-top: 16px;
             .box{
                 display: flex;
                 .text{
                     padding-top: 8px
-
                 }
             }
         }
@@ -164,6 +162,7 @@
         }
         .eligibilityGrid2{
             margin-top: 16px;
+            gap: 16px;
             .c4c{
                 display: flex;
                  flex-direction: column;

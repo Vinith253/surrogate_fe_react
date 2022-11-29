@@ -41,12 +41,12 @@ import {
   ListItemText,
 } from '@mui/material';
 import TypographySubTitle from '../../../../components/commonComponent/CustomText/Typography';
-// import OutlinedInput from '@mui/material/OutlinedInput';
-// import ListItemText from '@mui/material/ListItemText';
-import Surrogate_icon from '../../../../assets/icons/surrogates_selection_icon.svg';
-import Pause_icon from '../../../../assets/icons/pause_card_icon.svg';
-import Edit_icon from '../../../../assets/icons/edit_scheduled_pause_icon.svg';
-import Resume_icon from '../../../../assets/icons/resume_card_icon.svg';
+import Surrogate_icon from '../../../../assets/images/surrogateIcon.svg';
+import Pause_icon from '../../../../assets/images/pauseIcon.svg';
+import Edit_icon from '../../../../assets/images/editIcon.svg';
+import Resume_icon from '../../../../assets/images/resumeIcon.svg';
+import Email_Icon from '../../../../assets/images/emailIcon.svg';
+import Download_Icon from '../../../../assets/images/downloadIcon.svg';
 import TotalApplications from '../../../../assets/icons/total_application_icon.svg';
 import Comparisions from '../../../../assets/icons/comparision_icon.svg';
 import AddIcon from '@mui/icons-material/Add';
@@ -543,10 +543,7 @@ export const CardCatalogue = () => {
           <Box className="container1">
             <TypoText title="Card List" />
             <img className="img1" src={Info_Icon} />
-            <TypographyInfo
-              title="From here, you filter the card by its mode, status, category and
-                surrogate"
-            />
+            <TypographyInfo title="Filter cards by mode/status/category/surrogate here." />
           </Box>
           <Divider />
 
@@ -624,10 +621,10 @@ export const CardCatalogue = () => {
             //   backgroundColor: 'white',
             // }}
           >
-            <Button color="secondary" variant="outlined">
+            <Button sx={{textTransform:'capitalize'}} color="secondary" variant="outlined">
               Reset
             </Button>
-            <Button color="secondary" variant="contained">
+            <Button sx={{textTransform:'capitalize'}} color="secondary" variant="contained">
               Search
             </Button>
           </Box>
@@ -654,11 +651,11 @@ export const CardCatalogue = () => {
                 justifyContent: 'space-around',
               }}
             >
-              <Button sx={{ color: '#0662B7', padding: 0, borderRadius: 50 }}>
-                <DownloadIcon />
+              <Button>
+                <img src={Download_Icon} alt="d" />
               </Button>
-              <Button sx={{ color: '#0662B7', padding: 0, borderRadius: 50 }}>
-                <MailOutlineIcon />
+              <Button>
+                <img src={Email_Icon} alt="email" />
               </Button>
             </Box>
           </Box>
@@ -678,7 +675,6 @@ export const CardCatalogue = () => {
                 className="btn"
                 variant="contained"
                 color="secondary"
-                
                 // sx={{
                 //   padding: '3px 8px',
                 //   fontSize: '12px',
@@ -699,7 +695,6 @@ export const CardCatalogue = () => {
                 Resume card
               </Button>
               <Button
-              
                 variant="contained"
                 color="secondary"
                 className="btn"
@@ -777,28 +772,35 @@ export const CardCatalogue = () => {
                   onChange={handleButtonChange}
                   aria-label="Platform"
                   sx={{
-                    
                     height: '40px',
                   }}
                   // sx={ToggleBoxStyle}
                 >
-                  <ColorButton value="all" sx={{ paddingRight: '10px',textTransform:'capitalize' }}>
-                    
+                  <ColorButton
+                    value="all"
+                    sx={{ paddingRight: '10px', textTransform: 'capitalize' }}
+                  >
                     All
                   </ColorButton>
                   {/* <Divider orientation="vertical" /> */}
-                  <ColorButton value="activate" sx={{textTransform:'capitalize', paddingRight: '10px' }}>
+                  <ColorButton
+                    value="activate"
+                    sx={{ textTransform: 'capitalize', paddingRight: '10px' }}
+                  >
                     Activate
                   </ColorButton>
                   {/* <Divider orientation="vertical" /> */}
                   <ColorButton
                     value="deactivated"
-                    sx={{textTransform:'capitalize', paddingRight: '10px' }}
+                    sx={{ textTransform: 'capitalize', paddingRight: '10px' }}
                   >
                     Deactivated
                   </ColorButton>
                   {/* <Divider orientation="vertical" /> */}
-                  <ColorButton value="saved" sx={{textTransform:'capitalize', paddingRight: '10px' }}>
+                  <ColorButton
+                    value="saved"
+                    sx={{ textTransform: 'capitalize', paddingRight: '10px' }}
+                  >
                     Saved
                   </ColorButton>
                 </ToggleButtonGroup>
@@ -879,7 +881,7 @@ export const CardCatalogue = () => {
                       // sx={{ padding:0,border:0 }}
                     >
                       <TableCell align="center" padding="checkbox">
-                        <Checkbox />
+                        <Checkbox color='secondary' />
                       </TableCell>
                       <TableCell align="center">{row.id}</TableCell>
                       <TableCell align="center">{row.cardName}</TableCell>

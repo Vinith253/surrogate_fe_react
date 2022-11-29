@@ -133,10 +133,10 @@ export const Onboarding = () => {
     //   state: { record: dataObjValue },
     // });
   };
-  
-//   const goBack = () => {
-//     navigate(-1);
-//   };
+
+  //   const goBack = () => {
+  //     navigate(-1);
+  //   };
 
   useEffect(() => {
     console.log('viewMode', viewMode);
@@ -192,9 +192,9 @@ export const Onboarding = () => {
                 justifyContent: 'space-between',
               }}
             >
-              <Box sx={{ display: 'flex',gap:1 }}>
-                <Box onClick={()=>navigate(-1)}>
-                  <ArrowBackIcon sx={{color:'#0078EF'}} />
+              <Box sx={{ display: 'flex', gap: 1 }}>
+                <Box onClick={() => navigate(-1)}>
+                  <ArrowBackIcon sx={{ color: '#0078EF' }} />
                 </Box>
                 <Box>
                   <TypoText title="View - Anand Agency - DSA" />
@@ -202,9 +202,14 @@ export const Onboarding = () => {
                 </Box>
               </Box>
               <Box>
-                <Button sx={{ backgroundColor: '#E6E7E7',height:'30px' }}>ID.NO 123456</Button>
-                <Button sx={{textTransform:'capitalize',backgroundColor:'white'}}  onClick={() => setViewMode('edit')}>
-                  <IconButton sx={{heigght:'30px'}}>
+                <Button sx={{ backgroundColor: '#E6E7E7', height: '30px' }}>
+                  ID.NO 123456
+                </Button>
+                <Button
+                  sx={{ textTransform: 'capitalize', backgroundColor: 'white' }}
+                  onClick={() => setViewMode('edit')}
+                >
+                  <IconButton sx={{ heigght: '30px' }}>
                     <img
                       src={EditIcon}
                       style={{
@@ -436,13 +441,9 @@ export const Onboarding = () => {
           <Grid container sx={{ marginBottom: '20px' }} spacing={5}>
             {viewMode === 'add' ? (
               <Grid item xs={12} sm={6} md={4}>
-                <FormControl className="formctrl">
+                <FormControl fullWidth>
                   <TypographySubTitle title="Nature of Business" />
-                  <Select
-                    fullWidth
-                    sx={{ height: '40px', width: '350px' }}
-                    defaultValue={0}
-                  >
+                  <Select fullWidth sx={{ height: '40px' }} defaultValue={0}>
                     <MenuItem value={0}>Select</MenuItem>
                     <MenuItem value={10}>Ten</MenuItem>
                     <MenuItem value={20}>Twenty</MenuItem>
@@ -460,12 +461,9 @@ export const Onboarding = () => {
             )}
             {viewMode === 'add' ? (
               <Grid item xs={12} sm={6} md={4}>
-                <FormControl className="formctrl">
+                <FormControl fullWidth>
                   <TypographySubTitle title="Nature of Company" />
-                  <Select
-                    sx={{ height: '40px', width: '350px' }}
-                    defaultValue={0}
-                  >
+                  <Select sx={{ height: '40px' }} defaultValue={0}>
                     <MenuItem value={0}>Select</MenuItem>
                     <MenuItem value={10}>Ten</MenuItem>
                     <MenuItem value={20}>Twenty</MenuItem>
@@ -483,13 +481,9 @@ export const Onboarding = () => {
             )}
             {viewMode === 'add' ? (
               <Grid item xs={12} sm={6} md={4}>
-                <FormControl className="formctrl">
+                <FormControl fullWidth>
                   <TypographySubTitle title="Clarity on Company" />
-                  <Select
-                    sx={{ height: '40px', width: '350px' }}
-                    defaultValue={0}
-                    fullWidth
-                  >
+                  <Select sx={{ height: '40px' }} defaultValue={0}>
                     <MenuItem value={0}>Select</MenuItem>
                     <MenuItem value={10}>Ten</MenuItem>
                     <MenuItem value={20}>Twenty</MenuItem>
@@ -641,12 +635,9 @@ export const Onboarding = () => {
                 <Grid container sx={{ marginBottom: '20px' }} spacing={5}>
                   {viewMode === 'add' && (
                     <Grid item xs={12} sm={6} md={4}>
-                      <FormControl className="formctrl">
+                      <FormControl fullWidth>
                         <TypographySubTitle title="Gender" />
-                        <Select
-                          sx={{ height: '40px', width: '350px' }}
-                          defaultValue={0}
-                        >
+                        <Select sx={{ height: '40px' }} defaultValue={0}>
                           <MenuItem value={0}>Select Gender</MenuItem>
                           <MenuItem value={10}>Ten</MenuItem>
                           <MenuItem value={20}>Twenty</MenuItem>
@@ -657,7 +648,7 @@ export const Onboarding = () => {
                   )}
                   {viewMode === 'add' ? (
                     <Grid item xs={12} sm={6} md={4}>
-                      <FormControl sx={{ width: '350px' }} className="formctrl">
+                      <FormControl fullWidth>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                           <TypographySubTitle title="Date of Birth" />
                           <DatePicker
@@ -691,10 +682,10 @@ export const Onboarding = () => {
                   )}
                   {viewMode === 'add' ? (
                     <Grid item xs={12} sm={6} md={4}>
-                      <FormControl className="formctrl">
+                      <FormControl fullWidth>
                         <TypographySubTitle title="User Role" />
                         <Select
-                          sx={{ height: '40px', width: '350px' }}
+                          sx={{ height: '40px' }}
                           defaultValue={0}
                           fullWidth
                         >
@@ -847,12 +838,9 @@ export const Onboarding = () => {
                 <Grid container sx={{ marginBottom: '20px' }} spacing={5}>
                   {viewMode === 'add' && (
                     <Grid item xs={12} sm={6} md={4}>
-                      <FormControl className="formctrl">
+                      <FormControl fullWidth>
                         <TypographySubTitle title="User Role" />
-                        <Select
-                          sx={{ height: '40px', width: '350px' }}
-                          defaultValue={0}
-                        >
+                        <Select sx={{ height: '40px' }} defaultValue={0}>
                           <MenuItem value={0}>Select Role</MenuItem>
                           <MenuItem value={10}>Ten</MenuItem>
                           <MenuItem value={20}>Twenty</MenuItem>
@@ -939,6 +927,33 @@ export const Onboarding = () => {
             );
           })}
         </Box>
+
+        {viewMode === 'add' && (
+          <Box
+            sx={{
+              backgroundColor: 'white',
+              marginTop: '25px',
+              padding: '20px 30px',
+              borderRadius: '5px',
+            }}
+          >
+            {viewMode === 'add' ? (
+              <Box>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+                    <TypoText title="Regulatory Requirement" />
+                    <img src={Info_Icon} />
+                    <TypographyInfo title="Add key regulatory requirement(s) for your partner here." />
+                  </Box>
+                </Box>
+                <Divider sx={{ marginY: '20px' }} />
+                <UploadDetails />
+              </Box>
+            ) : (
+              <OrgReview />
+            )}
+          </Box>
+        )}
 
         {viewMode === 'edit' && (
           <Box
@@ -1118,12 +1133,9 @@ export const Onboarding = () => {
             <Grid container sx={{ marginBottom: '20px' }} spacing={5}>
               {viewMode === 'add' ? (
                 <Grid item xs={12} sm={6} md={4}>
-                  <FormControl className="formctrl">
+                  <FormControl fullWidth>
                     <TypographySubTitle title="Bank Name" />
-                    <Select
-                      sx={{ height: '40px', width: '350px' }}
-                      defaultValue={0}
-                    >
+                    <Select sx={{ height: '40px' }} defaultValue={0}>
                       <MenuItem value={0}>Choose Bank</MenuItem>
                       <MenuItem value={10}>Ten</MenuItem>
                       <MenuItem value={20}>Twenty</MenuItem>
@@ -1217,56 +1229,15 @@ export const Onboarding = () => {
             </Grid>
 
             {viewMode === 'add' && (
-              <Box sx={{ display: 'flex', gap: 5, marginBottom: '20px' }}>
-                <Box sx={{ width: '350px' }}>
-                  <TypographySubTitle title="MICR Code (9 digits)" />
-                  <TypoText placeholder="Enter MICR Code" id="businessId" />
-                </Box>
-                <Box>
-                  <Upload title="Attach Copy of Cancelled Cheque" />
-                </Box>
-                {/* <Box
-                sx={{
-                  width: '423px',
-                  display: 'flex',
-                  border: '2px dashed ',
-                  borderColor: '#D2D2D3',
-                  backgroundColor: '#F3F3F3',
-                  borderRadius: '4px',
-                  height: '45px',
-                  marginTop: '14px',
-                }}
-              >
-                <Box sx={{ display: 'flex' }}>
-                  <Button>
-                    <img src={Upload_Img} />
-                  </Button>
-                </Box>
-                <Box sx={{ paddingY: '3px' }}>
-                  <Typography
-                    sx={{
-                      fontWeight: '400',
-                      fontSize: '12px',
-                      lineHeight: '16px',
-                      color: '#0662B7',
-                    }}
-                  >
-                    Attach Copy Of PF Registration No
-                  </Typography>
-                  <Typography
-                    sx={{
-                      fontSize: '10px',
-                      fontWeight: '400',
-                      letterSpacing: '0.004em',
-                      color: 'grey',
-                    }}
-                  >
-                    Upload file in PDF/JPEG/PNG formats with a maximum file size
-                    2MB
-                  </Typography>
-                </Box>
-              </Box> */}
+              <Box sx={{ display: 'flex', gap: 3, marginBottom: '20px' }}>
+              <Box sx={{ width: '280px' }}>
+                <TypographySubTitle title="MICR Code (9 digits)" />
+                <TypoText placeholder="Enter MICR Code" id="businessId" />
               </Box>
+              <Upload title='Attach Copy of Cancelled Cheque'  />
+            </Box>
+                
+              
             )}
           </Box>
         </Box>
@@ -1405,7 +1376,7 @@ Koratur, chennai - 600100"
                     <TypoText color="#151515" title="File Name : Abcd12345" />
                   </Box>
                   {/* <Card className="card"> */}
-                  <Card sx={{width:'19vw',height:'20vh'}} >
+                  <Card sx={{ width: '19vw', height: '20vh' }}>
                     <img src={ViewDoc} onClick={handleOpen} />
 
                     {open && (
