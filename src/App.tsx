@@ -30,6 +30,7 @@ import { HistoryLogDetailScreen } from './pages/userManagement/roleCreation/scre
 import CreateUser from './pages/userManagement/userCreation/singleUserUpload/createUser';
 import EditUser from './pages/userManagement/userCreation/singleUserUpload/editUser';
 import ViewUser from './pages/userManagement/userCreation/singleUserUpload/viewUser';
+import { OrgHistoryLogDetails } from './pages/userManagement/orgStructure/screens/historyLog/historyLogDetails/historyLogDetails';
 
 export default function App() {
   return (
@@ -148,6 +149,10 @@ export default function App() {
         <Route
           path="/userManagement/roleCreation/authorisationDetails"
           element={<AuthDetail />}
+        />
+        <Route
+          path="/userManagement/orgcreation/orgHistoryLogDetail"
+          element={<OrgHistoryLogDetails />}
         />
       </Route>
     </Routes>

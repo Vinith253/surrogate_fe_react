@@ -7,24 +7,30 @@ export const checkTagStatus = (value: string) => {
     bgColor: '#fff',
     color: '#000',
   };
-  if (value === tagBasedIndicator.ACTIVE || value.includes('Approved')) {
+  if (
+    value === tagBasedIndicator.ACTIVE ||
+    value === tagBasedIndicator.APPROVED
+  ) {
     result.color = '#32A64D';
     result.bgColor = colors.lightGreen;
     return result;
   }
-  if (value === tagBasedIndicator.PAUSED || value.includes('Pending')) {
+  if (
+    value === tagBasedIndicator.PAUSED ||
+    value.includes('Pending') ||
+    value === tagBasedIndicator.WAITING_FOR_APPROVAL ||
+    value === tagBasedIndicator.SAVED
+  ) {
     result.color = '#F37B21';
-    result.bgColor = '';
+    result.bgColor = colors.PauseStatusBGColor;
     return result;
   }
-  if (value === tagBasedIndicator.DEACTIVATE) {
+  if (
+    value === tagBasedIndicator.DEACTIVATE ||
+    value === tagBasedIndicator.REJECTED
+  ) {
     result.color = '#D02127';
-    result.bgColor = '';
-    return result;
-  }
-  if (value === tagBasedIndicator.SAVED) {
-    result.color = '#F37B21';
-    result.bgColor = '';
+    result.bgColor = colors.ScheduledPausedBgColor;
     return result;
   }
   if (value === tagBasedIndicator.PAUSED_SCHEDULED) {
