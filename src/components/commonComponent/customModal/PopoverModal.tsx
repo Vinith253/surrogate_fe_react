@@ -25,7 +25,7 @@ type props = {
   handleSelectedItem?: (e: any) => void;
   anchorEl?: any;
   id?: any;
-  showSearch?: boolean
+  showSearch?: boolean;
 };
 
 function CheckBoxModal({
@@ -41,26 +41,25 @@ function CheckBoxModal({
 }: props) {
   const [categories, setCategories] = useState(product_label);
   const [value, setValue] = useState('');
-  var count=0;
+  var count = 0;
 
-  const handleChange =
-  (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
-    if(value.length >= 3){
+    if (value.length >= 3) {
       const filtered: React.SetStateAction<any[] | undefined> = [];
-      categories?.map((str)=> { 
-        if(str.label.toLowerCase().includes(value)){
+      categories?.map((str) => {
+        if (str.label.toLowerCase().includes(value)) {
           filtered.push(str);
         }
-        });
+      });
 
       setCategories(filtered);
     } else {
-     setCategories(product_label);
+      setCategories(product_label);
     }
   };
 
-  const handleCheckboxClick = (index: number,id:number, checked: boolean) => {
+  const handleCheckboxClick = (index: number, id: number, checked: boolean) => {
     let updatedList = categories?.map((item) => {
       if (item.id === id) {
         return { ...item, defaultChecked: !item.defaultChecked }; //gets everything that was already in item, and updates "done"
@@ -79,8 +78,11 @@ function CheckBoxModal({
     setCategories(updatedList);
   };
 
-;
-  const error = categories?.filter((v) => {if(v.defaultChecked === true){ count++}});
+  const error = categories?.filter((v) => {
+    if (v.defaultChecked === true) {
+      count++;
+    }
+  });
   const e = count >= 7;
 
   return (
@@ -89,31 +91,33 @@ function CheckBoxModal({
         id={id}
         open={openSuccess}
         anchorEl={anchorEl}
-        onClose={() => console.log("clicked")}
+        onClose={() => console.log('clicked')}
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'left',
         }}
       >
         <Stack py={2} sx={{ width: '280px' }}>
-          {showSearch && <TextField
-            sx={{
-              paddingLeft: '16px',
-              paddingRight: '16px',
-              input: { color: '#AFAEAF', fontSize: '14px', padding: '10px' },
-            }}
-            id="standard-bare"
-            variant="outlined"
-            placeholder="Search by..."
-            onChange={handleChange}
-            InputProps={{
-              startAdornment: (
-                <IconButton edge="start">
-                  <SearchOutlined />
-                </IconButton>
-              ),
-            }}
-          /> }
+          {showSearch && (
+            <TextField
+              sx={{
+                paddingLeft: '16px',
+                paddingRight: '16px',
+                input: { color: '#AFAEAF', fontSize: '14px', padding: '10px' },
+              }}
+              id="standard-bare"
+              variant="outlined"
+              placeholder="Search by..."
+              onChange={handleChange}
+              InputProps={{
+                startAdornment: (
+                  <IconButton edge="start">
+                    <SearchOutlined />
+                  </IconButton>
+                ),
+              }}
+            />
+          )}
 
           {product_label && (
             <Stack
@@ -140,9 +144,13 @@ function CheckBoxModal({
                           control={
                             <Checkbox
                               onChange={(e) =>
-                                handleCheckboxClick(index,item.id, e.target.checked)
+                                handleCheckboxClick(
+                                  index,
+                                  item.id,
+                                  e.target.checked
+                                )
                               }
-                              checked={item.defaultChecked === true}
+                              checked={false}
                               color="secondary"
                             />
                           }

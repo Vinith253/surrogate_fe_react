@@ -131,6 +131,7 @@ function CustomModal({
   const [startDatevalue, setStartDateValue] = useState(null);
   const [endDatevalue, setEndDateValue] = useState(null);
   const [existingRole, setexistingRole] = React.useState('');
+  const [checked, setChecked] = React.useState(false);
 
   useEffect(() => {
     if (pauseStatus) {
@@ -144,6 +145,10 @@ function CustomModal({
 
   const handleChange = (event: SelectChangeEvent) => {
     setexistingRole(event.target.value);
+  };
+
+  const checkedHHandleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked(event.target.checked);
   };
 
   return (
@@ -920,10 +925,11 @@ function CustomModal({
                         <FormControlLabel
                           control={
                             <Checkbox
-                              checked={item.defaultChecked}
+                              value={checked}
                               checkedIcon={
                                 <img src={checkedIcon} alt={checkedIcon} />
                               }
+                              onChange={checkedHHandleChange}
                             />
                           }
                           label={item.label}
@@ -972,7 +978,7 @@ function CustomModal({
                 }}
                 onClick={handleSuccess}
               >
-                {submit}{' '}
+                {pauseStatus == 'Remove Surrogate' ? 'Remove' : submit}
               </Button>
             )}
           </Stack>
@@ -993,6 +999,7 @@ function CustomModal({
                   height: '3em',
                   fontSize: '12px',
                   backgroundColor: `${colors.Modalblue}`,
+                  textTransform: 'capitalize',
                 }}
               >
                 {btn}

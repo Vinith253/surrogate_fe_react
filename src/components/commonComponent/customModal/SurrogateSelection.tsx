@@ -38,17 +38,17 @@ const product_label = [
   {
     id: 1,
     label: 'Payroll',
-    defaultChecked: true,
+    defaultChecked: false,
   },
   {
     id: 2,
     label: 'Car For Card',
-    defaultChecked: true,
+    defaultChecked: false,
   },
   {
     id: 3,
     label: 'CIBIL',
-    defaultChecked: true,
+    defaultChecked: false,
   },
   {
     id: 4,
