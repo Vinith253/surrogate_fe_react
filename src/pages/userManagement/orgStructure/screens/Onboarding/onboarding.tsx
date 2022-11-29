@@ -940,6 +940,29 @@ export const Onboarding = () => {
           })}
         </Box>
 
+        {viewMode === 'add' && (
+          <Box
+          sx={{
+            backgroundColor: 'white',
+            marginTop: '25px',
+            padding: '20px 30px',
+            borderRadius: '5px',
+          }}
+        >
+            {viewMode === 'add' ? 
+            (<Box>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+              <TypoText title="Regulatory Requirement" />
+              <img src={Info_Icon} />
+              <TypographyInfo title="Add key regulatory requirement(s) for your partner here." />
+            </Box>
+          </Box>
+          <Divider sx={{ marginY: '20px' }} />
+          <UploadDetails /></Box>) : (<OrgReview/>)}
+        </Box>
+        )}
+
         {viewMode === 'edit' && (
           <Box
             sx={{
