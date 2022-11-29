@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Stack } from '@mui/system';
+import { Box, Stack, Grid, Button } from '@mui/material';
 import './style.scss';
 import { useNavigate } from 'react-router-dom';
 import HeaderWithInfo from '../../../../components/commonComponent/HeaderWithInfo';
@@ -10,6 +10,13 @@ import CompletedStepperIcon from '../../../../assets/icons/completed_stepper_ico
 import { FooterButton } from '../../../../components/commonComponent/FooterButton/FooterButton';
 import { ScreenHeader } from '../../../../components/commonComponent/ScreenHeader/ScreenHeader';
 import DetailsCard from '../../../../components/commonComponent/DetailsCard';
+import {
+  ReviewerApproverList,
+  viewPermissionsList,
+} from './../userCreation.const';
+import { AccordianLayover } from '../../../../components/commonComponent/CustomAccordian/Accordian';
+import ReviewerApproverTable from '../../../../components/commonComponent/ReviewerApproverTable';
+import { ReactComponent as EditRole } from '../../../../assets/icons/edit_role.svg';
 
 function ViewUser() {
   const [isPermission, setIsPermission] = useState(false);
@@ -21,7 +28,7 @@ function ViewUser() {
   };
 
   const handleSubmitClick = () => {
-    // isPermission ? setIsUserCreated(true) : setIsPermission(true);
+    isPermission ? setIsUserCreated(true) : setIsPermission(true);
   };
 
   const personalDetails = {
@@ -123,11 +130,25 @@ function ViewUser() {
   return (
     <Stack className="create-user-main-container">
       <Box className="create-user-container">
-        <ScreenHeader
-          title="View User details - Ganesh (#12345)"
-          info="From here you can create access presets to assign with users in Users Creation."
-          showBackButton={true}
-        />
+        <Box style={{ display: 'flex' }}>
+          <ScreenHeader
+            title="View User details - Ganesh (#12345)"
+            info="From here you can create access presets to assign with users in Users Creation."
+            showBackButton={true}
+          />
+          <Box style={{ marginLeft: 'auto' }}>
+            <Button
+              sx={{ textTransform: 'capitalize' }}
+              color="secondary"
+              startIcon={<EditRole />}
+              aria-haspopup="true"
+              onClick={() => navigate('/userManagement/userCreation/editUser')}
+              id="basic-button"
+            >
+              Edit User Details
+            </Button>
+          </Box>
+        </Box>
         <Stack className="underline"></Stack>
         <Stack className="stepper-container">
           <Stack className="steppers">
@@ -166,18 +187,96 @@ function ViewUser() {
           </Stack>
         </Stack>
       </Box>
-      <DetailsCard data={personalDetails} gridColumn={3} />
-      <DetailsCard data={employementDetails} gridColumn={3} />
-      <DetailsCard data={channelAccessibleDetails} gridColumn={3} />
-      <DetailsCard data={locationDetails} gridColumn={3} />
-      <DetailsCard data={roleDetails} gridColumn={3} />
-      <FooterButton
-        cancel="Close"
-        submit="Next"
-        handleSubmitClick={handleSubmitClick}
-        handleCancelClick={goBack}
-        // handleSaveasDraftClick={handleSaveasDraftClick}
-      />
+      {isPermission ? (
+        <>
+          <Stack className="container">
+            <HeaderWithInfo
+              header="Permission allocation"
+              isInfoEnabled={true}
+              info="From here, you can add the user’s personal details"
+              isDownloadEnabled={false}
+            />
+            <Grid
+              container
+              rowSpacing={2}
+              columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+            >
+              <Grid item xs={3}>
+                <Stack className="each-info">
+                  <Stack className="info-label">Copy Role Access from</Stack>
+                  <Stack className="info-value">Role Presets</Stack>
+                </Stack>
+              </Grid>
+              <Grid item xs={3}>
+                <Stack className="each-info">
+                  <Stack className="info-label">User Role</Stack>
+                  <Stack className="info-value">Role 1 (Edited)</Stack>
+                </Stack>
+              </Grid>
+            </Grid>
+            <Stack className="underline"></Stack>
+          </Stack>
+          <Stack className="container">
+            <HeaderWithInfo
+              header="Permissions"
+              isInfoEnabled={true}
+              info="From here, you can add the user’s personal details"
+              isDownloadEnabled={false}
+            />
+            <AccordianLayover data={viewPermissionsList} isViewPage={true} />
+          </Stack>
+          <Stack className="container">
+            <HeaderWithInfo
+              header="Reviewer & Approver allocation"
+              isInfoEnabled={true}
+              info="From here, you can add the user’s personal details"
+              isDownloadEnabled={false}
+            />
+            <Grid
+              container
+              rowSpacing={2}
+              columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+            >
+              <Grid item xs={3}>
+                <Stack className="each-info">
+                  <Stack className="info-label">
+                    Reviewer & Approver allocation
+                  </Stack>
+                  <Stack className="info-value">Yes, I will assign</Stack>
+                </Stack>
+              </Grid>
+            </Grid>
+            <Stack className="underline" style={{ margin: '0px' }}></Stack>
+
+            <Stack>
+              <ReviewerApproverTable data={ReviewerApproverList} mode="view" />
+            </Stack>
+          </Stack>
+        </>
+      ) : (
+        <Stack>
+          <DetailsCard data={personalDetails} gridColumn={3} />
+          <DetailsCard data={employementDetails} gridColumn={3} />
+          <DetailsCard data={channelAccessibleDetails} gridColumn={3} />
+          <DetailsCard data={locationDetails} gridColumn={3} />
+          <DetailsCard data={roleDetails} gridColumn={3} />
+        </Stack>
+      )}
+      {isPermission ? (
+        <FooterButton
+          cancel="Close"
+          handleCancelClick={goBack}
+          // handleSaveasDraftClick={handleSaveasDraftClick}
+        />
+      ) : (
+        <FooterButton
+          cancel="Close"
+          submit="Next"
+          handleSubmitClick={handleSubmitClick}
+          handleCancelClick={goBack}
+          // handleSaveasDraftClick={handleSaveasDraftClick}
+        />
+      )}
     </Stack>
   );
 }

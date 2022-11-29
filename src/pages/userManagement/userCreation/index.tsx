@@ -10,6 +10,7 @@ import {
   IconButton,
   InputBase,
   Grid,
+  TextField,
 } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import SearchIcon from '@mui/icons-material/Search';
@@ -406,6 +407,10 @@ function UserCreation() {
               </Grid>
             );
           })}
+          <Grid item xs={3}>
+            <Typography className="dropdown-label">Reporting Head</Typography>
+            <TextField placeholder={'Enter Reporting Head'} />
+          </Grid>
         </Grid>
         <Box className="button-container">
           <BtnOutlined title="Reset" onClick={() => setIsFiltered(false)} />
