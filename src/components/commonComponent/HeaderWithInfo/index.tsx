@@ -1,7 +1,7 @@
 import { Box, Typography, Stack } from '@mui/material';
 import info_icon from '../../../assets/images/info_icon.svg';
-import DownloadIcon from '../../../assets/icons/download_icon.svg';
-import MailIcon from '../../../assets/icons/mail_icon.svg';
+import DownloadIcon from '../../../assets/icons/download.svg';
+import MailIcon from '../../../assets/icons/mail.svg';
 import './style.scss';
 
 function HeaderWithInfo(props: {
@@ -23,8 +23,12 @@ function HeaderWithInfo(props: {
       </Box>
       {props?.isDownloadEnabled && (
         <Typography className="icons-container">
-          <img src={DownloadIcon} alt="" className="icons" />
-          <img src={MailIcon} alt="" className="icons" />
+          <Stack className="each-icon">
+            <img src={DownloadIcon} alt="" className="icons" />
+          </Stack>
+          <Stack className="each-icon">
+            <img src={MailIcon} alt="" className="icons" />
+          </Stack>
         </Typography>
       )}
       <Typography className="underline"></Typography>
