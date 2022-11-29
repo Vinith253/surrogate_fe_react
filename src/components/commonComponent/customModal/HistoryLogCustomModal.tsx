@@ -48,9 +48,6 @@ export default function HistoryLogCustomModal({
   return (
     <>
       <Stack className="App">
-        {/* <Button variant="outlined" onClick={handleClickOpen}>
-          Pause modal
-        </Button> */}
         <Dialog
           open={openSuccess}
           onClose={handleCloseSuccess}

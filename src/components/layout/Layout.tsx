@@ -4,6 +4,7 @@ import {
   Box,
   Divider,
   IconButton,
+  InputBase,
   ListItem,
   ListItemButton,
   ListItemIcon,
@@ -53,6 +54,7 @@ import profile_arrow_icon from '../../assets/icons/profile_arrow_icon.svg';
 import Collapse from '@mui/material/Collapse';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import SearchIcon from '@mui/icons-material/Search';
 import './Layout.scss';
 
 const drawerWidth = 300;
@@ -497,6 +499,12 @@ export default function Layout() {
                 // borderColor: "success.light"
               }}
             >
+              <Box className="search-container">
+                <Box className="search-box">
+                  <SearchIcon className="search-icon" />
+                  <InputBase placeholder="Search" fullWidth={true} />
+                </Box>
+              </Box>
               <Box style={{ marginRight: '40px' }}>
                 <Typography>Ashwin Kumar</Typography>
                 <Typography>Surrogate Manager</Typography>
