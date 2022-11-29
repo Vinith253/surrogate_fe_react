@@ -33,6 +33,7 @@ import ViewUser from './pages/userManagement/userCreation/singleUserUpload/viewU
 import LMSDashboard from './pages/lms/lmsDashboard';
 import LMSRule from './pages/lms/lmsRule';
 import Retargeting from './pages/lms/reTargeting';
+import { OrgHistoryLogDetails } from './pages/userManagement/orgStructure/screens/historyLog/historyLogDetails/historyLogDetails';
 
 export default function App() {
   return (
@@ -167,6 +168,10 @@ export default function App() {
         />
 
 
+        <Route
+          path="/userManagement/orgcreation/orgHistoryLogDetail"
+          element={<OrgHistoryLogDetails />}
+        />
       </Route>
     </Routes>
   );

@@ -1,32 +1,43 @@
 import {
   Box,
-  Button,
   Divider,
   Grid,
-  IconButton,
   List,
+  ListItem,
   Stack,
   Typography,
-  ListItem,
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { colors } from '../../../../../style/Color';
+import BtnContained from '../../../../../../components/commonComponent/CustomText/Button/Contained';
+import { colors } from '../../../../../../style/Color';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import TypoText from '../../../../../components/commonComponent/CustomText/Textfield';
-import TypographyInfo from '../../../../../components/commonComponent/CustomText/Info';
-import EditIcon from '../../../../../assets/images/edit_card.svg';
-import './style.scss';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
   historyLogDetailData,
   historyLogDetailInterface,
 } from './historyLogDetail.const';
-import DetailsCard from '../../../../../components/commonComponent/DetailsCard';
-import { ScreenHeader } from '../../../../../components/commonComponent/ScreenHeader/ScreenHeader';
-import BtnContained from '../../../../../components/commonComponent/CustomText/Button/Contained';
+import './style.scss';
+import { checkTagStatus } from '../../../../../../utils/tagBasedIndicator/tagStatus';
+import { ListTagStatus } from '../../../../../../utils/tagBasedIndicator/listTagStatus';
 
-export const HistoryLogDetailScreen = () => {
+export const orgDetailsData = [
+  {
+    detailName: 'Org. Name',
+    orgDetail: 'XYZ',
+  },
+  {
+    detailName: 'Version Number',
+    orgDetail: 'V0.02',
+  },
+  {
+    detailName: 'Current Status',
+    orgDetail: 'Active',
+  },
+];
+
+export const OrgHistoryLogDetails = () => {
   const navigate = useNavigate();
+  const { state } = useLocation();
   const [detailedData, setDetailedData] =
     useState<historyLogDetailInterface>(historyLogDetailData);
   const [orderedData, setOrderData] = useState<any>(null);
@@ -35,33 +46,39 @@ export const HistoryLogDetailScreen = () => {
     updateOrderedData();
   }, [detailedData]);
 
-  console.log('detaildata', detailedData);
-
   const updateOrderedData = () => {
     let value = {
       details: [
         {
-          label: 'Initiator',
+          label: 'Request',
+          value: detailedData?.request || '',
+        },
+        {
+          label: 'Request Status',
+          value: detailedData?.requestStatus || '',
+        },
+        {
+          label: 'Initiater',
           value: detailedData?.initiator || '',
         },
         {
-          label: 'Initiated Date & Time',
-          value: detailedData?.initiatedDateTime || '',
+          label: 'Date & Time',
+          value: detailedData?.reviewedDateTime || '',
         },
         {
           label: 'Reviewer',
           value: detailedData?.reviewer || '',
         },
         {
-          label: 'Reviewed Date & Time',
-          value: detailedData?.reviewedDateTime || '',
+          label: 'Date & Time',
+          value: detailedData?.approvedDateTime || '',
         },
         {
-          label: 'Approver',
+          label: 'Approvar',
           value: detailedData?.approver || '',
         },
         {
-          label: 'Rejected  date & Time',
+          label: 'Date & Time',
           value: detailedData?.approvedDateTime || '',
         },
       ],
@@ -71,7 +88,7 @@ export const HistoryLogDetailScreen = () => {
 
   return (
     <Stack sx={{ backgroundColor: colors.bgGrey }}>
-      <Box className="historyLog-container">
+      <Box className="org-historyLog-container">
         <Stack
           sx={{
             backgroundColor: '#ffffff;',
@@ -90,17 +107,28 @@ export const HistoryLogDetailScreen = () => {
 
               <Stack sx={{ marginLeft: '10px' }}>
                 <Typography className="heading">
-                  Authorization Level - History Log
+                  XYZ - Organisation Details
                 </Typography>
                 <Typography className="history-text">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing
-                  elit.Commodo dolor.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Commodo dolor.
                 </Typography>
               </Stack>
             </Stack>
             <Stack>
-              <Typography className="history-status">
-                Rejected By Approver
+              <Typography
+                sx={{
+                  color: checkTagStatus(state).color,
+                  backgroundColor: checkTagStatus(state).bgColor,
+                  fontSize: '12px',
+                  fontWeight: 400,
+                  padding: '2px 14px',
+                  borderRadius: '4px',
+                  // textAlign: "center",
+                  width: 'max-content',
+                }}
+              >
+                {state}
               </Typography>
             </Stack>
           </Stack>
@@ -110,20 +138,22 @@ export const HistoryLogDetailScreen = () => {
               backgroundColor: colors.white,
               margin: '20px 0',
               padding: '10px 0px',
+              display: 'flex',
+              flexDirection: 'row',
             }}
           >
-            <Grid
-              container
-              rowSpacing={4}
-              columnSpacing={{ xs: 3, sm: 3, md: 3 }}
-            >
-              <Grid item xs={3} sm={3} md={3} lg={3}>
-                <div className="each-info">
-                  <div className="info-label">Version Number</div>
-                  <div className="info-value">{detailedData.version}</div>
-                </div>
-              </Grid>
-            </Grid>
+            {orgDetailsData.map((item: any, index: number) => {
+              return (
+                <Stack sx={{ width: '28%' }}>
+                  <Stack>
+                    <Stack className="each-info">
+                      <Stack className="info-label">{item.detailName}</Stack>
+                      <Stack className="info-value">{item.orgDetail}</Stack>
+                    </Stack>
+                  </Stack>
+                </Stack>
+              );
+            })}
           </Stack>
         </Stack>
 
@@ -138,10 +168,14 @@ export const HistoryLogDetailScreen = () => {
             {orderedData?.details?.map((eachItem: any, index: number) => {
               return (
                 <Grid item xs={3} sm={3} md={3} lg={3} key={index}>
-                  <div className="each-info">
-                    <div className="info-label">{eachItem?.label ?? '--'}</div>
-                    <div className="info-value">{eachItem?.value ?? '--'}</div>
-                  </div>
+                  <Stack className="each-info">
+                    <Stack className="info-label">
+                      {eachItem?.label ?? '--'}
+                    </Stack>
+                    <Stack className="info-value">
+                      {eachItem?.value ?? '--'}
+                    </Stack>
+                  </Stack>
                 </Grid>
               );
             })}
@@ -151,7 +185,7 @@ export const HistoryLogDetailScreen = () => {
         <Stack
           sx={{
             backgroundColor: colors.white,
-            margin: '30px 0',
+            margin: '30px 0 60px 0',
             padding: '15px 20px',
           }}
         >
@@ -160,11 +194,15 @@ export const HistoryLogDetailScreen = () => {
             {detailedData.rejectionReason?.map((item: any, index: number) => {
               return (
                 <>
-                  <ListItem className="changes-listitem">
+                  <ListItem
+                    className="changes-listitem"
+                    sx={{ padding: '8px 0' }}
+                  >
                     <Stack
                       sx={{
                         display: 'flex',
                         flexDirection: 'row',
+                        padding: '0',
                       }}
                     >
                       <Stack className="changes">{`${index + 1}. `}</Stack>
@@ -182,9 +220,9 @@ export const HistoryLogDetailScreen = () => {
         sx={{
           marginTop: '10px',
           backgroundColor: 'white',
-          // position: 'fixed',
-          // bottom: 0,
-          // right: 0,
+          position: 'fixed',
+          bottom: 0,
+          right: 0,
           width: '100%',
           borderTop: '2px solid #f3f3f3 ',
         }}
@@ -194,10 +232,10 @@ export const HistoryLogDetailScreen = () => {
             display: 'flex',
             gap: 2,
             justifyContent: 'flex-end',
-            padding: '15px',
+            padding: '10px 30px',
           }}
         >
-          <BtnContained title="Close" />
+          <BtnContained title="Close" onClick={() => navigate(-1)} />
         </Box>
       </Box>
     </Stack>
