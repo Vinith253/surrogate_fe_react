@@ -47,6 +47,8 @@ import role_creation_icon from '../../assets/icons/roleCreation.svg';
 import user_creation_icon from '../../assets/icons/userCreation.svg';
 import org_structure_icon from '../../assets/icons/orgStructure.svg';
 import branch_details_icon from '../../assets/icons/branchDetails.svg';
+import retargeting_icon from '../../assets/icons/retargeting-icon.svg';
+import lms_rule_icon from '../../assets/icons/lms-rule-icon.svg';
 
 import profile_icon from '../../assets/icons/profile_icon.svg';
 import profile_arrow_icon from '../../assets/icons/profile_arrow_icon.svg';
@@ -140,14 +142,31 @@ const sideBarOptions = [
         path: '/userManagement/orgStructure',
         img: org_structure_icon,
       },
-      {
-        data: 'Branch Detais',
-        path: '/userManagement/branchDetails',
-        img: branch_details_icon,
-      },
+      // {
+      //   data: 'Branch Details',
+      //   path: '/userManagement/branchDetails',
+      //   img: branch_details_icon,
+      // },
     ],
   },
-  { key: 7, content: 'LMS', path: '/lms', image: lms_icon, subContent: [] },
+  { key: 7, content: 'LMS', path: '/lms', image: lms_icon,     
+  subContent: [
+    {
+      data: 'Dashboard',
+      path: '/lms/dashboard',
+      img: dashboard_icon,
+    },
+    {
+      data: 'LMS Rule',
+      path: '/lms/lmsrule',
+      img: retargeting_icon,
+    },
+    {
+      data: 'Re-Targeting',
+      path: '/lms/retargeting',
+      img: lms_rule_icon,
+    },
+  ], },
   {
     key: 8,
     content: 'RISK MNGMT.',

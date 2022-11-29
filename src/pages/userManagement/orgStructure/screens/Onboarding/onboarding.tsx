@@ -15,6 +15,7 @@ import {
   Checkbox,
 } from '@mui/material';
 import './onboarding.scss';
+import { OrgReview } from '../OrgReview/OrgReview';
 import { useNavigate } from 'react-router-dom';
 import dayjs, { Dayjs } from 'dayjs';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
@@ -38,8 +39,14 @@ import { Upload } from './upload';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '../../../../../assets/images/edit_card.svg';
+import Modal from '@mui/material/Modal';
+import ViewDoc from '../../../../../assets/images/viewDoc.svg';
+import TypographyHead from '../../../../../components/commonComponent/CustomText/Head';
 
 export const Onboarding = () => {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const navigate = useNavigate();
   const [value, setValue] = React.useState<Dayjs | null>(dayjs('DD/MM/YYYY'));
 
@@ -77,7 +84,7 @@ export const Onboarding = () => {
     keyContact: false,
     proprietor: false,
   });
-  const [viewMode, setViewMode] = useState<string>('edit');
+  const [viewMode, setViewMode] = useState<string>('add');
 
   const AddKeyContact = () => {
     // console.log('add key');
@@ -118,18 +125,22 @@ export const Onboarding = () => {
   };
 
   const handleSubmitClick = () => {
-    console.log("coming here");
-    let value = 'add';
-    setViewMode(value);
+    console.log('coming here');
+    // let value = 'add';
+    setViewMode('edit');
     // navigate('/userManagement/orgStructure/screens/OrgReview/OrgReview');
     // , {
     //   state: { record: dataObjValue },
     // });
   };
+  
+//   const goBack = () => {
+//     navigate(-1);
+//   };
 
   useEffect(() => {
-    console.log("viewMode", viewMode);
-  },[viewMode]);
+    console.log('viewMode', viewMode);
+  }, [viewMode]);
 
   const renderEditModeText = (
     textPlaceholder: string,
@@ -181,9 +192,9 @@ export const Onboarding = () => {
                 justifyContent: 'space-between',
               }}
             >
-              <Box sx={{ display: 'flex' }}>
-                <Box onClick={() => navigate(-1)}>
-                  <ArrowBackIcon className="headback" />
+              <Box sx={{ display: 'flex',gap:1 }}>
+                <Box onClick={()=>navigate(-1)}>
+                  <ArrowBackIcon sx={{color:'#0078EF'}} />
                 </Box>
                 <Box>
                   <TypoText title="View - Anand Agency - DSA" />
@@ -191,9 +202,9 @@ export const Onboarding = () => {
                 </Box>
               </Box>
               <Box>
-                {/* <Button sx={{ backgroundColor: '#E6E7E7' }}>ID.NO 123456</Button> */}
-                <Button className="btn" onClick={() => setViewMode('edit')}>
-                  <IconButton className="icon">
+                <Button sx={{ backgroundColor: '#E6E7E7',height:'30px' }}>ID.NO 123456</Button>
+                <Button sx={{textTransform:'capitalize',backgroundColor:'white'}}  onClick={() => setViewMode('edit')}>
+                  <IconButton sx={{heigght:'30px'}}>
                     <img
                       src={EditIcon}
                       style={{
@@ -201,7 +212,7 @@ export const Onboarding = () => {
                       }}
                     />
                   </IconButton>
-                  Edit Card
+                  Edit
                 </Button>
               </Box>
             </Box>
@@ -429,7 +440,7 @@ export const Onboarding = () => {
                   <TypographySubTitle title="Nature of Business" />
                   <Select
                     fullWidth
-                    sx={{ height: '40px', width: '280px' }}
+                    sx={{ height: '40px', width: '350px' }}
                     defaultValue={0}
                   >
                     <MenuItem value={0}>Select</MenuItem>
@@ -452,7 +463,7 @@ export const Onboarding = () => {
                 <FormControl className="formctrl">
                   <TypographySubTitle title="Nature of Company" />
                   <Select
-                    sx={{ height: '40px', width: '280px' }}
+                    sx={{ height: '40px', width: '350px' }}
                     defaultValue={0}
                   >
                     <MenuItem value={0}>Select</MenuItem>
@@ -475,7 +486,7 @@ export const Onboarding = () => {
                 <FormControl className="formctrl">
                   <TypographySubTitle title="Clarity on Company" />
                   <Select
-                    sx={{ height: '40px', width: '280px' }}
+                    sx={{ height: '40px', width: '350px' }}
                     defaultValue={0}
                     fullWidth
                   >
@@ -633,7 +644,7 @@ export const Onboarding = () => {
                       <FormControl className="formctrl">
                         <TypographySubTitle title="Gender" />
                         <Select
-                          sx={{ height: '40px', width: '280px' }}
+                          sx={{ height: '40px', width: '350px' }}
                           defaultValue={0}
                         >
                           <MenuItem value={0}>Select Gender</MenuItem>
@@ -646,7 +657,7 @@ export const Onboarding = () => {
                   )}
                   {viewMode === 'add' ? (
                     <Grid item xs={12} sm={6} md={4}>
-                      <FormControl sx={{ width: '280px' }} className="formctrl">
+                      <FormControl sx={{ width: '350px' }} className="formctrl">
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                           <TypographySubTitle title="Date of Birth" />
                           <DatePicker
@@ -683,7 +694,7 @@ export const Onboarding = () => {
                       <FormControl className="formctrl">
                         <TypographySubTitle title="User Role" />
                         <Select
-                          sx={{ height: '40px', width: '280px' }}
+                          sx={{ height: '40px', width: '350px' }}
                           defaultValue={0}
                           fullWidth
                         >
@@ -839,7 +850,7 @@ export const Onboarding = () => {
                       <FormControl className="formctrl">
                         <TypographySubTitle title="User Role" />
                         <Select
-                          sx={{ height: '40px', width: '280px' }}
+                          sx={{ height: '40px', width: '350px' }}
                           defaultValue={0}
                         >
                           <MenuItem value={0}>Select Role</MenuItem>
@@ -929,7 +940,8 @@ export const Onboarding = () => {
           })}
         </Box>
 
-        <Box
+        {viewMode === 'add' && (
+          <Box
           sx={{
             backgroundColor: 'white',
             marginTop: '25px',
@@ -937,6 +949,8 @@ export const Onboarding = () => {
             borderRadius: '5px',
           }}
         >
+            {viewMode === 'add' ? 
+            (<Box>
           <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
             <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
               <TypoText title="Regulatory Requirement" />
@@ -945,8 +959,88 @@ export const Onboarding = () => {
             </Box>
           </Box>
           <Divider sx={{ marginY: '20px' }} />
-          <UploadDetails />
+          <UploadDetails /></Box>) : (<OrgReview/>)}
         </Box>
+        )}
+
+        {viewMode === 'edit' && (
+          <Box
+            sx={{
+              backgroundColor: 'white',
+              marginTop: '25px',
+              padding: '20px 30px',
+              borderRadius: '5px',
+            }}
+          >
+            <Box>
+              <Box sx={{ display: 'flex', gap: 2 }}>
+                <TypographyHead title="Regulatory Requirement" />
+                <img src={Info_Icon} />
+                <TypographyInfo title="Add key regulatory requirement(s) for your partner here. " />
+              </Box>
+              <Divider sx={{ marginY: 2 }} />
+
+              <Grid container sx={{ marginBottom: '20px' }} spacing={5}>
+                <Grid item xs={12} sm={6} md={3}>
+                  <Box sx={{ gap: 2 }}>
+                    <TypographySubTitle
+                      color="#AFAEAF"
+                      title="Registration Number (MSMED)"
+                    />
+                    <TypoText color="#151515" title="U72900TN2020PTC130006" />
+                    <img className="img" src={ViewDoc} />
+                  </Box>
+                </Grid>
+
+                <Grid item xs={12} sm={6} md={3}>
+                  <Box sx={{ gap: 2 }}>
+                    <TypographySubTitle color="#AFAEAF" title="TIN Number" />
+                    <TypoText color="#151515" title="U72900TN2020PTC130006" />
+                    <img className="img" src={ViewDoc} />
+                  </Box>
+                </Grid>
+                <Grid item xs={12} sm={6} md={3}>
+                  <Box sx={{ gap: 2 }}>
+                    <TypographySubTitle color="#AFAEAF" title="GST Number" />
+                    <TypoText color="#151515" title="U72900TN2020PTC130006" />
+                    <img className="img" src={ViewDoc} />
+                  </Box>
+                </Grid>
+                <Grid item xs={12} sm={6} md={3}>
+                  <Box sx={{ gap: 2 }}>
+                    <TypographySubTitle color="#AFAEAF" title="PAN Number" />
+                    <TypoText color="#151515" title="U72900TN2020PTC130006" />
+                    <img className="img" src={ViewDoc} />
+                  </Box>
+                </Grid>
+              </Grid>
+
+              <Grid container sx={{ marginBottom: '20px' }} spacing={5}>
+                <Grid item xs={12} sm={6} md={3}>
+                  <Box sx={{ gap: 2 }}>
+                    <TypographySubTitle
+                      color="#AFAEAF"
+                      title="ESIC Registration No"
+                    />
+                    <TypoText color="#151515" title="U72900TN2020PTC130006" />
+                    <img className="img" src={ViewDoc} />
+                  </Box>
+                </Grid>
+
+                <Grid item xs={12} sm={6} md={3}>
+                  <Box sx={{ gap: 2 }}>
+                    <TypographySubTitle
+                      color="#AFAEAF"
+                      title="PF Registration No"
+                    />
+                    <TypoText color="#151515" title="U72900TN2020PTC130006" />
+                    <img className="img" src={ViewDoc} />
+                  </Box>
+                </Grid>
+              </Grid>
+            </Box>
+          </Box>
+        )}
 
         <Box
           sx={{
@@ -977,6 +1071,18 @@ export const Onboarding = () => {
                     '46, Lakshmi Nagar, Chromepet,chennai - 600040',
                     '#AFAEAF',
                     'Payee Address (Pref)'
+                  )}
+              {viewMode === 'add'
+                ? renderEditModeText(
+                    'Enter Payee address',
+                    'businessId',
+                    'Payee Address (Pref)'
+                  )
+                : renderViewModeText(
+                    '#151515',
+                    'India',
+                    '#AFAEAF',
+                    'Default Credit Period (Days)'
                   )}
               {viewMode === 'add'
                 ? renderEditModeText(
@@ -1038,7 +1144,7 @@ export const Onboarding = () => {
                   <FormControl className="formctrl">
                     <TypographySubTitle title="Bank Name" />
                     <Select
-                      sx={{ height: '40px', width: '280px' }}
+                      sx={{ height: '40px', width: '350px' }}
                       defaultValue={0}
                     >
                       <MenuItem value={0}>Choose Bank</MenuItem>
@@ -1057,7 +1163,7 @@ export const Onboarding = () => {
                 )
               )}
 
-              {viewMode === 'add'
+              {/* {viewMode === 'add'
                 ? renderEditModeText(
                     '15',
                     'businessId',
@@ -1068,7 +1174,7 @@ export const Onboarding = () => {
                     '12345678909876',
                     '#AFAEAF',
                     'Bank Account Number'
-                  )}
+                  )} */}
 
               {viewMode === 'add'
                 ? renderEditModeText(
@@ -1133,15 +1239,16 @@ export const Onboarding = () => {
                 )}
             </Grid>
 
-            {viewMode === 'add' && <Box sx={{ display: 'flex', gap: 5, marginBottom: '20px' }}>
-              <Box sx={{ width: '280px' }}>
-                <TypographySubTitle title="MICR Code (9 digits)" />
-                <TypoText placeholder="Enter MICR Code" id="businessId" />
-              </Box>
-              <Box>
-                <Upload title="Attach Copy of Cancelled Cheque" />
-              </Box>
-              {/* <Box
+            {viewMode === 'add' && (
+              <Box sx={{ display: 'flex', gap: 5, marginBottom: '20px' }}>
+                <Box sx={{ width: '350px' }}>
+                  <TypographySubTitle title="MICR Code (9 digits)" />
+                  <TypoText placeholder="Enter MICR Code" id="businessId" />
+                </Box>
+                <Box>
+                  <Upload title="Attach Copy of Cancelled Cheque" />
+                </Box>
+                {/* <Box
                 sx={{
                   width: '423px',
                   display: 'flex',
@@ -1182,20 +1289,21 @@ export const Onboarding = () => {
                   </Typography>
                 </Box>
               </Box> */}
-            </Box>}
+              </Box>
+            )}
           </Box>
         </Box>
 
-        <Box
-          sx={{
-            backgroundColor: 'white',
-            marginTop: '25px',
-            padding: '20px 30px',
-            marginBottom: '100px',
-            borderRadius: '5px',
-          }}
-        >
-          {viewMode === 'add' && <Box>
+        {viewMode === 'add' && (
+          <Box
+            sx={{
+              backgroundColor: 'white',
+              marginTop: '25px',
+              padding: '20px 30px',
+              marginBottom: '100px',
+              borderRadius: '5px',
+            }}
+          >
             <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
               <TypoText title="Declaration" />
               <img src={Info_Icon} />
@@ -1212,8 +1320,194 @@ export const Onboarding = () => {
                 </Box>
               </Box>
             </Box>
-          </Box>}
-        </Box>
+          </Box>
+        )}
+
+        {viewMode === 'edit' && (
+          <Box
+            sx={{
+              backgroundColor: 'white',
+              marginTop: '25px',
+              padding: '20px 30px',
+              borderRadius: '5px',
+              marginBottom: '100px',
+            }}
+          >
+            <Box>
+              <Box sx={{ display: 'flex', gap: 2 }}>
+                <TypographyHead title="Banking details mandatory for Electronic transfer" />
+                <img src={Info_Icon} />
+                <TypographyInfo title="Add your partner's bank details here " />
+              </Box>
+              <Divider sx={{ marginY: 2 }} />
+
+              <Grid container sx={{ marginBottom: '20px' }} spacing={5}>
+                <Grid item xs={12} sm={6} md={3}>
+                  <Box sx={{ gap: 2 }}>
+                    <TypographySubTitle color="#AFAEAF" title="Bank Name" />
+                    <TypoText color="#151515" title="YES Bank" />
+                  </Box>
+                </Grid>
+
+                <Grid item xs={12} sm={6} md={3}>
+                  <Box sx={{ gap: 2 }}>
+                    <TypographySubTitle
+                      color="#AFAEAF"
+                      title="Bank Account Number"
+                    />
+                    <TypoText color="#151515" title="12345678909876" />
+                  </Box>
+                </Grid>
+                <Grid item xs={12} sm={6} md={3}>
+                  <Box sx={{ gap: 2 }}>
+                    <TypographySubTitle color="#AFAEAF" title="IFSC Code" />
+                    <TypoText color="#151515" title="India" />
+                  </Box>
+                </Grid>
+                <Grid item xs={12} sm={6} md={3}>
+                  <Box sx={{ gap: 2 }}>
+                    <TypographySubTitle
+                      color="#AFAEAF"
+                      title="Branch Address"
+                    />
+                    <TypoText
+                      color="#151515"
+                      title="24, Railway colony station road,
+Koratur, chennai - 6000101."
+                    />
+                  </Box>
+                </Grid>
+              </Grid>
+
+              <Grid container sx={{ marginBottom: '20px' }} spacing={5}>
+                <Grid item xs={12} sm={6} md={3}>
+                  <Box sx={{ gap: 2 }}>
+                    <TypographySubTitle
+                      color="#AFAEAF"
+                      title="Address Line 2"
+                    />
+                    <TypoText
+                      color="#151515"
+                      title="T24, Railway colony station road,
+Koratur, chennai - 600100"
+                    />
+                  </Box>
+                </Grid>
+
+                <Grid item xs={12} sm={6} md={3}>
+                  <Box sx={{ gap: 2 }}>
+                    <TypographySubTitle color="#AFAEAF" title="Pincode" />
+                    <TypoText color="#151515" title="600100" />
+                  </Box>
+                </Grid>
+                <Grid item xs={12} sm={6} md={3}>
+                  <Box sx={{ gap: 2 }}>
+                    <TypographySubTitle
+                      color="#AFAEAF"
+                      title="MICR Code (9 digit)"
+                    />
+                    <TypoText color="#151515" title="123456789" />
+                  </Box>
+                </Grid>
+                {/* <Grid item xs={12} sm={6} md={3}>
+             <Box sx={{ gap: 2 }}>
+               <TypographySubTitle color="#AFAEAF" title="E-Mail ID" />
+               <TypoText color="#151515" title="ABC@gmail.com" />
+             </Box>
+           </Grid> */}
+              </Grid>
+
+              <Grid container sx={{ marginBottom: '20px' }} spacing={5}>
+                <Grid item xs={12} sm={6} md={4}>
+                  <Box sx={{ gap: 2 }}>
+                    <TypographySubTitle
+                      color="#AFAEAF"
+                      title="Cancelled Cheque"
+                    />
+                    {/* <Typography className='typeText' >File Name : Abcd12345</Typography> */}
+                    <TypoText color="#151515" title="File Name : Abcd12345" />
+                  </Box>
+                  {/* <Card className="card"> */}
+                  <Card sx={{width:'19vw',height:'20vh'}} >
+                    <img src={ViewDoc} onClick={handleOpen} />
+
+                    {open && (
+                      <Modal
+                        keepMounted
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="keep-mounted-modal-title"
+                        aria-describedby="keep-mounted-modal-description"
+                      >
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            // width: '100vw',
+                            height: '100vh',
+                            flexDirection: 'column',
+                          }}
+                        >
+                          <Box
+                            sx={{
+                              backgroundColor: 'white',
+                              borderRadius: '10px',
+                              padding: '20px',
+                            }}
+                          >
+                            <Box
+                              sx={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'space-between',
+                                paddingBottom: '15px',
+                              }}
+                            >
+                              {/* <Typography
+                       sx={{
+                         fontSize: '14px',
+                         fontWeight: 500,
+                         lineHeight: '16px',
+                         color: '#231F20',
+                         letterSpacing: '0.001em',
+                       }}
+                     >
+                       Card Photo - Eterna - Platinum
+                     </Typography> */}
+                              <Typography
+                                sx={{
+                                  fontSize: '14px',
+                                  fontWeight: 500,
+                                  lineHeight: '16px',
+                                  color: '#0662B7',
+                                  letterSpacing: '0.0125em',
+                                }}
+                                onClick={handleClose}
+                              >
+                                Close
+                              </Typography>
+                            </Box>
+                            <Box className="cardImageBox">
+                              <img
+                                style={{
+                                  width: '40vw',
+                                  height: '35vh',
+                                }}
+                                alt=""
+                                src={ViewDoc}
+                              />
+                            </Box>
+                          </Box>
+                        </Box>
+                      </Modal>
+                    )}
+                  </Card>
+                </Grid>
+              </Grid>
+            </Box>
+          </Box>
+        )}
 
         <Box
           sx={{
@@ -1226,22 +1520,60 @@ export const Onboarding = () => {
             borderTop: '1px solid #e9edf5',
           }}
         >
-          <Box
-            sx={{
-              display: 'flex',
-              gap: 2,
-              justifyContent: 'flex-end',
-              padding: '20px',
-            }}
-          >
-            <BtnOutlined title="close" />
+          {viewMode === 'add' ? (
+            <Box
+              sx={{
+                display: 'flex',
+                gap: 2,
+                justifyContent: 'flex-end',
+                padding: '20px',
+              }}
+            >
+              <BtnOutlined onClick={() => navigate(-1)} title="close" />
 
-            <BtnText title="Save as draft" />
+              <BtnText title="Save as draft" />
 
-            <BtnContained onClick={handleSubmitClick} title="Submit" />
-          </Box>
+              <BtnContained onClick={handleSubmitClick} title="Submit" />
+            </Box>
+          ) : (
+            <Box
+              sx={{
+                display: 'flex',
+                gap: 2,
+                justifyContent: 'flex-end',
+                padding: '20px',
+              }}
+            >
+              <BtnOutlined onClick={() => navigate(-1)} title="close" />
+            </Box>
+          )}
         </Box>
       </Box>
     </Stack>
   );
 };
+
+/* 
+945
+
+ <Box
+          sx={{
+            backgroundColor: 'white',
+            marginTop: '25px',
+            padding: '20px 30px',
+            borderRadius: '5px',
+          }}
+        >
+            {viewMode === 'add' ? 
+            (<Box>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+              <TypoText title="Regulatory Requirement" />
+              <img src={Info_Icon} />
+              <TypographyInfo title="Add key regulatory requirement(s) for your partner here." />
+            </Box>
+          </Box>
+          <Divider sx={{ marginY: '20px' }} />
+          <UploadDetails /></Box>) : (<OrgReview/>)}
+        </Box>
+*/

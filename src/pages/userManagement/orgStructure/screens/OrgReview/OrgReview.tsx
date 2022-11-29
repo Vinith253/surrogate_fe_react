@@ -44,7 +44,8 @@ export const OrgReview = () => {
   return (
     <Stack>
       <Box sx={{ backgroundColor: '#E6E7E7'}}>
-        <Box
+        
+        {/* <Box
           sx={{
             backgroundColor: 'white',
             marginTop: '25px',
@@ -69,7 +70,7 @@ export const OrgReview = () => {
               </Box>
             </Box>
             <Box>
-              {/* <Button sx={{ backgroundColor: '#E6E7E7' }}>ID.NO 123456</Button> */}
+             
               <Button className="btn">
                 <IconButton className="icon">
                   <img
@@ -83,8 +84,9 @@ export const OrgReview = () => {
               </Button>
             </Box>
           </Box>
-        </Box>
-        <Box
+        </Box> */}
+
+        {/* <Box
           sx={{
             backgroundColor: 'white',
             marginTop: '25px',
@@ -104,9 +106,9 @@ export const OrgReview = () => {
               <TypoText color="#151515" title="Card For Card" />
             </Box>
           </Box>
-        </Box>
+        </Box> */}
 
-        <Box
+        {/* <Box
           sx={{
             backgroundColor: 'white',
             marginTop: '25px',
@@ -262,9 +264,9 @@ export const OrgReview = () => {
               </Grid>
             </Grid>
           </Box>
-        </Box>
+        </Box> */}
 
-        <Box
+        {/* <Box
           sx={{
             backgroundColor: 'white',
             marginTop: '25px',
@@ -408,7 +410,7 @@ Koratur, chennai 600101."
               </Grid>
             </Grid>
           </Box>
-        </Box>
+        </Box> */}
 
         <Box
           sx={{
@@ -864,7 +866,7 @@ Koratur, chennai - 600100"
           </Box>
         </Box>
 
-        <Box
+        {/* <Box
           sx={{
             marginTop: '20px',
             backgroundColor: 'white',
@@ -883,13 +885,11 @@ Koratur, chennai - 600100"
               padding: '20px',
             }}
           >
-            {/* <BtnOutlined title="close" /> */}
-
-            {/* <BtnText title="Save as draft" /> */}
+            
 
             <BtnContained  title="Close" />
           </Box>
-        </Box>
+        </Box> */}
 
         
       </Box>
