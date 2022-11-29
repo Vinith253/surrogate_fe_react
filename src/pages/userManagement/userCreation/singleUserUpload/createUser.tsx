@@ -204,7 +204,10 @@ function CreateUser() {
               </Grid>
               {isAdminReviewApproved && (
                 <Stack>
-                  <ReviewerApproverTable data={ReviewerApproverList} />
+                  <ReviewerApproverTable
+                    data={ReviewerApproverList}
+                    mode="create"
+                  />
                 </Stack>
               )}
             </Stack>

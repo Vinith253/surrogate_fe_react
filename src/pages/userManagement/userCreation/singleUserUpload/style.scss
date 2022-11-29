@@ -1,4 +1,5 @@
 .create-user-main-container {
+  margin-bottom: 110px;
   .create-user-container {
     background-color: #ffffff;
     padding: 20px 30px 20px 30px;
@@ -119,6 +120,21 @@
 
       .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
         font-size: 14px;
+      }
+    }
+
+    .each-info {
+      margin: 20px 0px;
+      .info-label {
+        color: #afaeaf;
+        font-size: 12px;
+        font-weight: 500;
+        margin: 0px 0px 6px 0px;
+      }
+      .info-value {
+        color: #151515;
+        font-size: 14px;
+        font-weight: 500;
       }
     }
   }

@@ -11,31 +11,6 @@ import PageLayout from '../../../../../components/layout/pageLayout/pageLayout';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import './UserUploadCard.scss';
 
-function LinearProgressWithLabel(
-  props: LinearProgressProps & { value: number }
-) {
-  return (
-    <Box>
-      <Box className="progress-container">
-        <Box className="upload-card-progress-text">
-          <Typography variant="body2">{`${Math.round(
-            props.value
-          )}% Completed`}</Typography>
-        </Box>
-        <LinearProgress
-          variant="determinate"
-          {...props}
-          sx={{
-            '& .MuiLinearProgress-bar1Determinate': {
-              backgroundColor: 'green',
-            },
-          }}
-          className="upload-card-progress"
-        />
-      </Box>
-    </Box>
-  );
-}
 const UserUploadCard = ({
   toggle,
   data,
@@ -71,6 +46,32 @@ const UserUploadCard = ({
       clearInterval(timer);
     };
   }, [progressBar]);
+  function LinearProgressWithLabel(
+    props: LinearProgressProps & { value: number }
+  ) {
+    return (
+      <Box>
+        <Box className="progress-container">
+          <Box className="upload-card-progress-text">
+            <Typography variant="body2">{`${Math.round(
+              props.value
+            )}% Completed`}</Typography>
+          </Box>
+          <LinearProgress
+            variant="determinate"
+            {...props}
+            // color={progress === 100 ? 'success' : 'secondary'}
+            sx={{
+              '& .MuiLinearProgress-bar1Determinate': {
+                backgroundColor: 'green',
+              },
+            }}
+            className="upload-card-progress"
+          />
+        </Box>
+      </Box>
+    );
+  }
 
   const handleProgress = (value: number) => {
     setProgressBar(value);

@@ -298,7 +298,7 @@ export const duplicateRoleData = [
         id: 2,
         label: 'Apply Credit Card',
         isExpanded: false,
-        isChecked:true
+        isChecked:false
     },
     {
         id: 3,
@@ -320,7 +320,7 @@ export const duplicateRoleData = [
                     {
                         id: 2,
                         label: 'Pass & Resume Surrogate',
-                        isChecked:true,
+                        isChecked:false,
                         isDisabled:false,
                     },
                 ]
@@ -328,36 +328,36 @@ export const duplicateRoleData = [
             {
                 id:2,
                 innerTitle:'Credit Rule',
-                isSwitched:true,
+                isSwitched:false,
                 items:[
                     {
                         id: 1,
                         label: 'View Credit Rule',
-                        isChecked:true,
-                        isDisabled:true
+                        isChecked:false,
+                        isDisabled:false
                     },
                     {
                         id: 2,
                         label: 'Create Credit Rule',
-                        isChecked:true,
+                        isChecked:false,
                         isDisabled:false
                     },
                     {
                         id: 3,
                         label: 'View Operational Pincode',
-                        isChecked:true,
+                        isChecked:false,
                         isDisabled:false
                     },
                     {
                         id: 4,
                         label: 'Edit Operational Pincode',
-                        isChecked:true,
+                        isChecked:false,
                         isDisabled:false
                     },
                     {
                         id: 5,
                         label: 'BRE Back Test',
-                        isChecked:true,
+                        isChecked:false,
                         isDisabled:false
                     },
                 ]
@@ -382,7 +382,7 @@ export const duplicateRoleData = [
                     {
                         id: 3,
                         label: 'Activate/Deactivate',
-                        isChecked:true,
+                        isChecked:false,
                         isDisabled:false
                     },
                     {
@@ -428,7 +428,7 @@ export const duplicateRoleData = [
                     {
                         id: 2,
                         label: 'Download/email report',
-                        isChecked:true,
+                        isChecked:false,
                         isDisabled:false
                     },
                 ]
@@ -458,7 +458,7 @@ export const duplicateRoleData = [
         id: 5,
         label: 'User Management',
         isExpanded: true,
-        isChecked:true,
+        isChecked:false,
     },
     {
         id: 6,
@@ -486,7 +486,7 @@ export const duplicateRoleData = [
                     {
                         id: 3,
                         label: 'Re-Target Application',
-                        isChecked:true,
+                        isChecked:false,
                         isDisabled:false
                     },
                 ]
@@ -505,7 +505,7 @@ export const duplicateRoleData = [
                     {
                         id: 2,
                         label: 'Re-Target',
-                        isChecked:true,
+                        isChecked:false,
                         isDisabled:false
                     },
                 ]
@@ -532,7 +532,7 @@ export const duplicateRoleData = [
                     {
                         id: 2,
                         label: 'Refer approval',
-                        isChecked:true,
+                        isChecked:false,
                         isDisabled:false
                     },
                     {
@@ -565,7 +565,7 @@ export const duplicateRoleData = [
                     {
                         id: 2,
                         label: 'Copy Links',
-                        isChecked:true,
+                        isChecked:false,
                         isDisabled:false
                     },
                 ]

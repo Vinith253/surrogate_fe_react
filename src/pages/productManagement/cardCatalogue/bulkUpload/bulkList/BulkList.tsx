@@ -360,7 +360,18 @@ export default function BulkList(props: any) {
     setUploadProgress(value);
     console.log(value, 'handle upload progress');
   };
-
+  const footerStyle = {
+    backgroundColor: 'white',
+    marginTop: '24px',
+    padding: '20px 32px',
+    position: 'fixed',
+    bottom: 0,
+    right: 0,
+    width: ' 100%',
+    // borderTop: ' 1px solid black',
+    boxShadow:
+      '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
+  };
   function LinearProgressWithLabel(
     props: LinearProgressProps & { value: number }
   ) {
@@ -430,7 +441,9 @@ export default function BulkList(props: any) {
     setCorrectionState(true);
   };
   const handleProceed = () => {
-    props.toggle(false, 'image');
+    if (progress === 100 && correctionState) {
+      props.toggle(false, 'image');
+    }
   };
   let count = 2;
   let rows = correctionState ? rows2 : rows1;
@@ -702,57 +715,64 @@ export default function BulkList(props: any) {
       {/* {imageUpload && <BulkUpload />} */}
       {progress === 100 && (
         <>
-          {/* <Box sx={{ position: 'fixed', bottom: 0 }}> */}
-          {/* <FooterButton cancel="Cancel" submit="Procees" /> */}
-          <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: '1%' }}>
-            <Button variant="outlined">Cancel</Button>
-            <Button
-              variant="contained"
-              // color="secondary"
-              onClick={handleProceed}
+          <Box sx={footerStyle}>
+            {/* <Box sx={{ position: 'fixed', bottom: 0 }}> */}
+            {/* <FooterButton cancel="Cancel" submit="Procees" /> */}
+            <Box
+              sx={{ display: 'flex', justifyContent: 'flex-end', gap: '1%' }}
+            >
+              <Button variant="outlined">Cancel</Button>
+              <Button
+                variant="contained"
+                // color="secondary"
+                onClick={handleProceed}
+                sx={{
+                  backgroundColor:
+                    progress === 100 && correctionState
+                      ? ' #0662B7'
+                      : '#82B1DB',
+                }}
+              >
+                {progress === 100 && correctionState
+                  ? 'Upload card Photos'
+                  : 'Proceed'}
+              </Button>
+            </Box>
+            <Box
               sx={{
-                backgroundColor: correctionState ? '#82B1DB' : ' #0662B7',
+                display: 'flex',
+                justifyContent: 'flex-end',
+                gap: '1%',
+                marginTop: '1%',
               }}
             >
-              {progress === 100 && correctionState
-                ? 'Upload card Photos'
-                : 'Proceed'}
-            </Button>
+              <Button
+                variant="text"
+                color="secondary"
+                onClick={handleProceed}
+                sx={{ fontSize: '12px' }}
+              >
+                {`Discord Error entries and Continue >`}
+              </Button>
+            </Box>
+            {/* </Box> */}
           </Box>
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'flex-end',
-              gap: '1%',
-              marginTop: '1%',
-            }}
-          >
-            <Button
-              variant="text"
-              color="secondary"
-              onClick={handleProceed}
-              sx={{ fontSize: '12px' }}
-            >
-              {`Discord Error entries and Continue >`}
-            </Button>
-          </Box>
-          {/* </Box> */}
-          {imageUpload &&
-            correctionState &&
-            progress === 100 &&
-            props.fileCheck === 'image' && (
-              <CustomModal
-                openSuccess={imageUpload}
-                handleCloseSuccess={closeModal}
-                successModalTitle={'Card Catalogue is Uploaded Successfully'}
-                successModalMsg={
-                  '  Card Catalogue has been successully sent to the reviewer'
-                }
-                btn={' Close'}
-              />
-            )}
         </>
       )}
+      {imageUpload &&
+        correctionState &&
+        progress === 100 &&
+        props.fileCheck === 'image' && (
+          <CustomModal
+            openSuccess={imageUpload}
+            handleCloseSuccess={closeModal}
+            successModalTitle={'Card Catalogue is Uploaded Successfully'}
+            successModalMsg={
+              '  Card Catalogue has been successully sent to the reviewer'
+            }
+            btn={' Close'}
+          />
+        )}
     </PageLayout>
   );
 }

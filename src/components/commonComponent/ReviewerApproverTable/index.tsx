@@ -1,13 +1,10 @@
 import { Stack, Grid, Select } from '@mui/material';
 import './style.scss';
 
-function ApproverReviewerTable(props: { data: Array<Object> }) {
-  console.log('data', props?.data);
-
+function ApproverReviewerTable(props: { data: Array<Object>; mode: string }) {
   return (
     <Stack className="approver-reviewer-container">
       {props?.data?.map((eachItem: any) => {
-        console.log('eachItem', eachItem);
         return (
           <>
             <Stack className="header">{eachItem?.moduleName}</Stack>
@@ -28,14 +25,14 @@ function ApproverReviewerTable(props: { data: Array<Object> }) {
               return (
                 <Stack className="each-sub-module">
                   <Grid container spacing={2} key={index}>
-                    <Grid item xs={4} className="each-field">
+                    <Grid item xs={4}>
                       {eachModule?.name}
                     </Grid>
                     <Grid item xs={4}>
                       {eachModule?.reviewerList?.map((item: any) => {
                         return (
                           <Grid item xs={12}>
-                            <Select></Select>
+                            {props?.mode === 'view' ? '' : <Select></Select>}
                           </Grid>
                         );
                       })}
@@ -44,7 +41,7 @@ function ApproverReviewerTable(props: { data: Array<Object> }) {
                       {eachModule?.approverList?.map((item: any) => {
                         return (
                           <Grid item xs={12}>
-                            <Select></Select>
+                            {props?.mode === 'view' ? '' : <Select></Select>}
                           </Grid>
                         );
                       })}

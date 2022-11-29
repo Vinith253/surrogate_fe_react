@@ -11,31 +11,6 @@ import PageLayout from '../../../../../components/layout/pageLayout/pageLayout';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import './UploadCard.scss';
 
-function LinearProgressWithLabel(
-  props: LinearProgressProps & { value: number }
-) {
-  return (
-    <Box>
-      <Box className="progress-container">
-        <Box className="upload-card-progress-text">
-          <Typography variant="body2">{`${Math.round(
-            props.value
-          )}% Completed`}</Typography>
-        </Box>
-        <LinearProgress
-          variant="determinate"
-          {...props}
-          sx={{
-            '& .MuiLinearProgress-bar1Determinate': {
-              backgroundColor: 'green',
-            },
-          }}
-          className="upload-card-progress"
-        />
-      </Box>
-    </Box>
-  );
-}
 const UploadCard = ({
   toggle,
   data,
@@ -72,8 +47,46 @@ const UploadCard = ({
     };
   }, [progressBar]);
 
+  function LinearProgressWithLabel(
+    props: LinearProgressProps & { value: number }
+  ) {
+    return (
+      <Box>
+        <Box className="progress-container">
+          <Box className="upload-card-progress-text">
+            <Typography variant="body2">{`${Math.round(
+              props.value
+            )}% Completed`}</Typography>
+          </Box>
+          <LinearProgress
+            variant="determinate"
+            // color={progress === 100 ? 'success' : 'secondary'}
+            {...props}
+            sx={{
+              '& .MuiLinearProgress-bar1Determinate': {
+                backgroundColor: progress === 100 ? 'green' : '',
+              },
+            }}
+            className="upload-card-progress"
+          />
+        </Box>
+      </Box>
+    );
+  }
   const handleProgress = (value: number) => {
     setProgressBar(value);
+  };
+  const footerStyle = {
+    backgroundColor: 'white',
+    marginTop: '24px',
+    padding: '20px 32px',
+    position: 'fixed',
+    bottom: 0,
+    right: 0,
+    width: ' 100%',
+    // borderTop: ' 1px solid black',
+    boxShadow:
+      '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
   };
   return (
     <PageLayout>
@@ -116,6 +129,43 @@ const UploadCard = ({
         />
         <LinearProgressWithLabel variant="determinate" value={progress} />
       </Box>
+      {fileName === 'image' && (
+        <Box sx={footerStyle}>
+          {/* <Box sx={{ position: 'fixed', bottom: 0 }}> */}
+          {/* <FooterButton cancel="Cancel" submit="Procees" /> */}
+          <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: '1%' }}>
+            <Button variant="outlined">Cancel</Button>
+            <Button
+              variant="contained"
+              // color="secondary"
+              // onClick={handleProceed}
+              sx={{
+                backgroundColor: '#82B1DB',
+              }}
+            >
+              {'Proceed'}
+            </Button>
+          </Box>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              gap: '1%',
+              marginTop: '1%',
+            }}
+          >
+            <Button
+              variant="text"
+              color="secondary"
+              // onClick={handleProceed}
+              sx={{ fontSize: '12px' }}
+            >
+              {`Discord Error entries and Continue >`}
+            </Button>
+          </Box>
+          {/* </Box> */}
+        </Box>
+      )}
     </PageLayout>
   );
 };
