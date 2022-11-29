@@ -213,7 +213,7 @@ export default function OrgBulkList(props: any) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
-  const [imageUpload, setImageUpload] = useState(true);
+  const [imageUpload, setImageUpload] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
 
   const column = [
@@ -289,58 +289,59 @@ export default function OrgBulkList(props: any) {
       error: false,
     },
   ];
-  const data2 = [
-    {
-      id: 1,
-      companyName: 'Premier',
-      companyRegNo: '9336252729',
-      surrogateName: 'ABC Company',
-      cityOperation: 'Pan India',
-      teleNo: '432-1678-900',
-      email: 'contact@gmail.com',
-      error: false,
-    },
-    {
-      id: 2,
-      companyName: 'ABC Company',
-      companyRegNo: '9636832729',
-      surrogateName: 'Payroll',
-      cityOperation: 'Pan India',
-      teleNo: '432-1678-900',
-      email: 'contact@gmail.com',
-      error: false,
-    },
-    {
-      id: 3,
-      companyName: 'ABC Company',
-      companyRegNo: '9336252729',
-      surrogateName: 'Card-For-Card',
-      cityOperation: 'Pan India',
-      teleNo: '432-1678-900',
-      email: 'contact@gmail.com',
-      error: false,
-    },
-    {
-      id: 4,
-      companyName: 'ABC Company',
-      companyRegNo: '9336892729',
-      surrogateName: 'CIBIL',
-      cityOperation: 'Pan India',
-      teleNo: '432-1678-900',
-      email: 'contact@gmail.com',
-      error: false,
-    },
-    {
-      id: 5,
-      companyName: 'ABC Company',
-      companyRegNo: '9336252729',
-      surrogateName: 'Payroll',
-      cityOperation: 'Pan India',
-      teleNo: '432-1678-900',
-      email: 'contact@gmail.com',
-      error: false,
-    },
-  ];
+  // const data2 = [
+  //   {
+  //     id: 1,
+  //     companyName: 'Premier',
+  //     companyRegNo: '9336252729',
+  //     surrogateName: 'ABC Company',
+  //     cityOperation: 'Pan India',
+  //     teleNo: '432-1678-900',
+  //     email: 'contact@gmail.com',
+  //     error: false,
+  //   },
+  //   {
+  //     id: 2,
+  //     companyName: 'ABC Company',
+  //     companyRegNo: '9636832729',
+  //     surrogateName: 'Payroll',
+  //     cityOperation: 'Pan India',
+  //     teleNo: '432-1678-900',
+  //     email: 'contact@gmail.com',
+  //     error: false,
+  //   },
+  //   {
+  //     id: 3,
+  //     companyName: 'ABC Company',
+  //     companyRegNo: '9336252729',
+  //     surrogateName: 'Card-For-Card',
+  //     cityOperation: 'Pan India',
+  //     teleNo: '432-1678-900',
+  //     email: 'contact@gmail.com',
+  //     error: false,
+  //   },
+  //   {
+  //     id: 4,
+  //     companyName: 'ABC Company',
+  //     companyRegNo: '9336892729',
+  //     surrogateName: 'CIBIL',
+  //     cityOperation: 'Pan India',
+  //     teleNo: '432-1678-900',
+  //     email: 'contact@gmail.com',
+  //     error: false,
+  //   },
+  //   {
+  //     id: 5,
+  //     companyName: 'ABC Company',
+  //     companyRegNo: '9336252729',
+  //     surrogateName: 'Payroll',
+  //     cityOperation: 'Pan India',
+  //     teleNo: '432-1678-900',
+  //     email: 'contact@gmail.com',
+  //     error: false,
+  //   },
+  // ];
+  const data2 = [{}];
 
   const handleUploadProgress = (value: number) => {
     setUploadProgress(value);
@@ -382,7 +383,7 @@ export default function OrgBulkList(props: any) {
     );
   }
   const [columnList, setcolumnList] = useState(column);
-  const [dataList, setDataList] = useState(data1);
+  const [dataList, setDataList] = useState<any>(data1);
   const [validCount, setValidCount] = useState('20');
   const [errorCount, setErrorCount] = useState('02');
   const [openDiscard, setOpenDiscard] = useState(false);
@@ -418,8 +419,11 @@ export default function OrgBulkList(props: any) {
     setCorrectionState(true);
   };
   const handleProceed = () => {
-    if (progress === 100 && correctionState) {
+    if (progress === 100 && correctionState && props.fileCheck !== 'image') {
       props.toggle(false, 'image');
+    }
+    if (correctionState && progress === 100 && props.fileCheck === 'image') {
+      setImageUpload(true);
     }
   };
   let count = 2;
@@ -452,7 +456,7 @@ export default function OrgBulkList(props: any) {
   };
   const closeModal = () => {
     setImageUpload(false);
-    navigate('/productManagement/cardCatalogue');
+    navigate('/userManagement/orgStructure');
   };
   const progressBar = {
     borderRadius: '10px',
@@ -726,7 +730,11 @@ export default function OrgBulkList(props: any) {
                       : '#82B1DB',
                 }}
               >
-                {progress === 100 && 'Proceed'}
+                {correctionState &&
+                progress === 100 &&
+                props.fileCheck === 'image'
+                  ? 'Submit to reviewer'
+                  : 'Proceed'}
               </Button>
             </Box>
             <Box

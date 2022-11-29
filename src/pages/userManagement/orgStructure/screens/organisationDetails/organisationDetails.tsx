@@ -180,7 +180,8 @@ export const OrganisationDetails = () => {
   };
 
   const organisationOpen = () => {
-    setAnchorEl(null);
+    navigate('/userManagement/orgStructure/bulkUpload');
+    // setAnchorEl(null);
   };
   const handleSelectAllClick = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {

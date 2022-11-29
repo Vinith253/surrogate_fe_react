@@ -27,7 +27,10 @@ function UserCreationTab() {
       label: 'Single User Upload',
       routePath: '/userManagement/userCreation/createUser',
     },
-    { label: 'Bulk User Upload', routePath: '' },
+    {
+      label: 'Bulk User Upload',
+      routePath: '/userManagement/userCreation/bulkUpload',
+    },
   ];
 
   return (
