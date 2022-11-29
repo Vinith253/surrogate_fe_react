@@ -9,7 +9,7 @@ const TypoText = (props: any) => {
         <Typography
           sx={{
             marginBottom: '5px',
-            // fontFamily:'ilisarniq',
+            fontFamily:'ilisarniq',
             fontSize: '16px',
             fontWeight: 500,
             lineHeight: '20px',
