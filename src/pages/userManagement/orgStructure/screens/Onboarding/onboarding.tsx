@@ -1230,14 +1230,12 @@ export const Onboarding = () => {
 
             {viewMode === 'add' && (
               <Box sx={{ display: 'flex', gap: 3, marginBottom: '20px' }}>
-              <Box sx={{ width: '280px' }}>
-                <TypographySubTitle title="MICR Code (9 digits)" />
-                <TypoText placeholder="Enter MICR Code" id="businessId" />
+                <Box sx={{ width: '280px' }}>
+                  <TypographySubTitle title="MICR Code (9 digits)" />
+                  <TypoText placeholder="Enter MICR Code" id="businessId" />
+                </Box>
+                <Upload title="Attach Copy of Cancelled Cheque" />
               </Box>
-              <Upload title='Attach Copy of Cancelled Cheque'  />
-            </Box>
-                
-              
             )}
           </Box>
         </Box>

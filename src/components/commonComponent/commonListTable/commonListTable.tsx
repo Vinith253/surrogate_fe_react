@@ -148,7 +148,7 @@ const CommonTable = (props: any) => {
             {currentTableData?.map((dataItem: any, index: number) => {
               return (
                 <TableRow
-                  sx={{ padding: '5px' }}
+                  sx={{ padding: '5px', height: '45px' }}
                   style={selectedRow(dataItem, index)}
                 >
                   {column.map((columnItem: columnType) => {
