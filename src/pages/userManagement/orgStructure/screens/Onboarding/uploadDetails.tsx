@@ -120,47 +120,6 @@ export const UploadDetails = () => {
           <TypoText placeholder="Enter GST Number" id="businessId" />
         </Box>
         <Upload title='Attach Copy of GST Number' danger={true} />
-
-        {/* <Box
-          sx={{
-            width: '423px',
-            display: 'flex',
-            border: '2px dashed ',
-            borderColor: '#D2D2D3',
-            backgroundColor: '#F3F3F3',
-            borderRadius: '4px',
-            height: '45px',
-            marginTop: '14px',
-          }}
-        >
-          <Box sx={{ display: 'flex' }}>
-            <Button>
-              <img src={Upload_Img} />
-            </Button>
-          </Box>
-          <Box sx={{ paddingY: '3px' }}>
-            <Typography
-              sx={{
-                fontWeight: '400',
-                fontSize: '12px',
-                lineHeight: '16px',
-                color: '#0662B7',
-              }}
-            >
-              Attach Copy Of GST Number
-            </Typography>
-            <Typography
-              sx={{
-                fontSize: '10px',
-                fontWeight: '400',
-                letterSpacing: '0.004em',
-                color: 'grey',
-              }}
-            >
-              Upload file in PDF/JPEG/PNG formats with a maximum file size 2MB
-            </Typography>
-          </Box>
-        </Box> */}
       </Box>
 
       <Box sx={{ display: 'flex', gap: 3, marginBottom: '20px' }}>

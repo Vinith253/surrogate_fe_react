@@ -283,7 +283,7 @@ export const HistoryLog = (props: any) => {
       <Stack>
         {/* tableNavBar */}
         {historyLogData?.length > 0 ? (
-          <Stack className="container">
+          <Stack className="history-log-container">
             <Stack className="table-search-filters">
               <Box className="search-container">
                 <Box className="search-box">
