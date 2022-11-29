@@ -31,6 +31,7 @@ import Popover from '../../../components/commonComponent/Popover';
 import ActionModal from '../../../components/commonComponent/customModal/CustomModal';
 import SuccessModal from '../../../components/commonComponent/customModal/CustomModal';
 import './style.scss';
+import { HistoryLog } from '../roleCreation/screens/HistoryLogScreen';
 
 const data = [
   {
@@ -176,8 +177,8 @@ function UserCreation() {
     {
       id: '2',
       data: 'History Log',
-      component: <UserCreationTab />,
-      isDisabled: true,
+      component: <HistoryLog />,
+      isDisabled: false,
     },
   ];
 
