@@ -34,7 +34,7 @@ export const FooterButton = (props: {
         <Button
           color="secondary"
           variant="outlined"
-          style={{ backgroundColor: '#EEF7FF' }}
+          style={{ backgroundColor: '#EEF7FF', border: 'none' }}
           sx={{ textTransform: 'none' }}
           onClick={props.handleSaveasDraftClick}
         >

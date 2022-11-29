@@ -204,7 +204,10 @@ function EditUser() {
               </Grid>
               {isAdminReviewApproved && (
                 <Stack>
-                  <ReviewerApproverTable data={ReviewerApproverList} />
+                  <ReviewerApproverTable
+                    data={ReviewerApproverList}
+                    mode="create"
+                  />
                 </Stack>
               )}
             </Stack>
@@ -373,9 +376,9 @@ function EditUser() {
         <SuccessModal
           openSuccess={isUserCreated}
           handleCloseSuccess={handleSubmit}
-          successModalTitle={'User Created Successfully'}
+          successModalTitle={'User Edited Successfully'}
           successModalMsg={
-            'Your request for creating new user is successfully sent to the Reviewer.'
+            'Your request for editing user is successfully sent to the Reviewer.'
           }
           btn={' Close'}
         />
