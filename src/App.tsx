@@ -30,6 +30,9 @@ import { HistoryLogDetailScreen } from './pages/userManagement/roleCreation/scre
 import CreateUser from './pages/userManagement/userCreation/singleUserUpload/createUser';
 import EditUser from './pages/userManagement/userCreation/singleUserUpload/editUser';
 import ViewUser from './pages/userManagement/userCreation/singleUserUpload/viewUser';
+import LMSDashboard from './pages/lms/lmsDashboard';
+import LMSRule from './pages/lms/lmsRule';
+import Retargeting from './pages/lms/reTargeting';
 
 export default function App() {
   return (
@@ -149,6 +152,21 @@ export default function App() {
           path="/userManagement/roleCreation/authorisationDetails"
           element={<AuthDetail />}
         />
+
+        <Route
+          path="/lms/dashboard"
+          element={<LMSDashboard />}
+        />
+        <Route
+          path="/lms/lmsrule"
+          element={<LMSRule />}
+        />
+        <Route
+          path="/lms/retargeting"
+          element={<Retargeting />}
+        />
+
+
       </Route>
     </Routes>
   );
