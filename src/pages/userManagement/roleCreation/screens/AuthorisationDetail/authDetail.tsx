@@ -13,6 +13,7 @@ import BtnContained from '../../../../../components/commonComponent/CustomText/B
 import { useLocation, useNavigate } from 'react-router-dom';
 import CardAndDropDown from '../../../../../components/commonComponent/cardAndDropDown/cardAndDropDown';
 import BtnOutlined from '../../../../../components/commonComponent/CustomText/Button/Outlined';
+import CustomModal from '../../../../../components/commonComponent/customModal/CustomModal';
 
 export const authDetailHeader = [
   {
@@ -35,6 +36,7 @@ export const authDetailHeader = [
 
 export const AuthDetail = () => {
   const { state } = useLocation();
+  const [createRoleSelection, setCreateRoleSelection] = useState(false);
   const [edit, setEdit] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
@@ -42,7 +44,12 @@ export const AuthDetail = () => {
       setEdit(!edit);
     }
   }, []);
-
+  const handleSubmitClick = () => {
+    setCreateRoleSelection(true);
+  };
+  const goBack = () => {
+    navigate(-1);
+  };
   return (
     <Stack className="authDetailContainer">
       <Stack className="authDetailContainerHeaderMain">
@@ -270,12 +277,23 @@ export const AuthDetail = () => {
               }}
             >
               <BtnOutlined title="Cancel" onClick={() => navigate(-1)} />
-              <BtnContained title="Submit" onClick={() => navigate(-1)} />
+              <BtnContained title="Submit" onClick={handleSubmitClick} />
             </Box>
           </Box>
         </>
       ) : (
         <></>
+      )}
+      {createRoleSelection && (
+        <CustomModal
+          openSuccess={createRoleSelection}
+          handleCloseSuccess={goBack}
+          successModalTitle={'Authorization level Created Successfully'}
+          successModalMsg={
+            'Your request for creating new authorization level is successfully sent to the Reviewer.'
+          }
+          btn={'Close'}
+        />
       )}
     </Stack>
   );

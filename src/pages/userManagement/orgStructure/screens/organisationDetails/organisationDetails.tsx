@@ -179,8 +179,8 @@ export const OrganisationDetails = () => {
     // setAnchorEl(null);
     navigate('/userManagement/orgStructure/screens/Onboarding/onboarding', {
       state: {
-        isEditable: true
-      }
+        isEditable: true,
+      },
     });
   };
 
@@ -380,11 +380,14 @@ export const OrganisationDetails = () => {
                 // onClick={() => handleClose()}
                 onClick={() => {
                   handleClose();
-                  navigate('/userManagement/orgStructure/screens/Onboarding/onboarding', {
-                    state: {
-                      isEditable: false
+                  navigate(
+                    '/userManagement/orgStructure/screens/Onboarding/onboarding',
+                    {
+                      state: {
+                        isEditable: false,
+                      },
                     }
-                  });
+                  );
                 }}
                 style={{ padding: '10px 20px', textAlign: 'left' }}
               >
@@ -394,15 +397,34 @@ export const OrganisationDetails = () => {
                 // onClick={handleClose}
                 onClick={() => {
                   handleClose();
-                  navigate('/userManagement/orgStructure/screens/Onboarding/onboarding', {
-                    state: {
-                      isEditable: true
+                  navigate(
+                    '/userManagement/orgStructure/screens/Onboarding/onboarding',
+                    {
+                      state: {
+                        isEditable: true,
+                      },
                     }
-                  });
+                  );
                 }}
                 style={{ padding: '10px 20px', textAlign: 'left' }}
               >
                 Edit Org.
+              </MenuItem>
+              <MenuItem
+                style={{ padding: '10px 20px', textAlign: 'left' }}
+                onClick={() => {
+                  handleClose();
+                }}
+              >
+                Activate Org
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  handleClose();
+                }}
+                style={{ padding: '10px 20px', textAlign: 'left' }}
+              >
+                Deactivate Org
               </MenuItem>
             </Menu>
           </>
