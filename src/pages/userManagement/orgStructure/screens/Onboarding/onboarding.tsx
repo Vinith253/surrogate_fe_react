@@ -1234,7 +1234,8 @@ export const Onboarding = () => {
                   <TypographySubTitle title="MICR Code (9 digits)" />
                   <TypoText placeholder="Enter MICR Code" id="businessId" />
                 </Box>
-                <Upload title="Attach Copy of Cancelled Cheque" />
+                
+                <Upload title="Attach Copy of Cancelled Cheque"/>
               </Box>
             )}
           </Box>
