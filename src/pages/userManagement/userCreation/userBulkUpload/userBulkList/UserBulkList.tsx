@@ -376,6 +376,11 @@ export default function UserBulkList(props: any) {
                 ? 'success'
                 : 'error'
             }
+            sx={{
+              backgroundColor: ' #e6e7e7',
+              height: '8px',
+              borderRadius: '5px',
+            }}
             // sx={{ color: progress === 100 ? 'red' : '#0662B7;' }}
           />
         </Box>
@@ -466,14 +471,19 @@ export default function UserBulkList(props: any) {
   const closeModal = () => {
     setUserBulkSuccessPopup(false);
     // setImageUpload(false);
-    // navigate('/productManagement/cardCatalogue');
+    navigate('/userManagement/userCreation');
   };
   const handleDiscard = () => {
     setOpenDiscard(true);
   };
   const handleContinue = () => {
     setOpenDiscard(!openDiscard);
-    setOpenContinueDiscard(!openContinueDiscard);
+    setUserBulkSuccessPopup(!userBulkSuccessPopup);
+    // setOpenContinueDiscard(!openContinueDiscard);
+  };
+  const handleCancel = () => {
+    setOpenContinueDiscard(false);
+    navigate('/userManagement/userCreation');
   };
   const progressBar = {
     borderRadius: '10px',
@@ -717,7 +727,12 @@ export default function UserBulkList(props: any) {
             <Box
               sx={{ display: 'flex', justifyContent: 'flex-end', gap: '1%' }}
             >
-              <Button variant="outlined">Cancel</Button>
+              <Button
+                variant="outlined"
+                onClick={() => setOpenContinueDiscard(!openContinueDiscard)}
+              >
+                Cancel
+              </Button>
               <Button
                 variant="contained"
                 // color="secondary"
@@ -782,7 +797,7 @@ export default function UserBulkList(props: any) {
           handleCloseSuccess={() =>
             setOpenContinueDiscard(!openContinueDiscard)
           }
-          handleSuccess={() => setOpenContinueDiscard(false)}
+          handleSuccess={handleCancel}
           successModalTitle={'Do You want to Cancel Bulk upload?'}
           discardModalMsg={
             'Want to discard corrections for error entires in the excel sheet and continue upload cards'
