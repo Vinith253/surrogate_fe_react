@@ -151,7 +151,10 @@ export const HistoryLog = (props: any) => {
       key: 'id',
       width: '70px',
       render: (text: string) => {
-        return <Stack>{text}</Stack>;
+        return <Stack sx={{ textAlign: 'center' }}>{text}</Stack>;
+      },
+      headerRender: (text: string) => {
+        return <Stack sx={{ textAlign: 'center' }}>{text}</Stack>;
       },
     },
     {

@@ -122,15 +122,15 @@ const CommonTable = (props: any) => {
           <TableHead
             sx={{
               backgroundColor: colors.tableHeaderLightBlue,
-              padding: '5px',
+              padding: '10px',
             }}
           >
-            <TableRow sx={{ padding: '5px' }}>
+            <TableRow sx={{ padding: '10px' }}>
               {column.map((item: columnType, index: number) => {
                 return (
                   <TableCell
                     sx={{
-                      padding: '5px',
+                      padding: '10px',
                       fontWeight: 800,
                     }}
                     style={{ borderBottom: 'none' }}
@@ -148,14 +148,14 @@ const CommonTable = (props: any) => {
             {currentTableData?.map((dataItem: any, index: number) => {
               return (
                 <TableRow
-                  sx={{ padding: '5px', height: '45px' }}
+                  sx={{ padding: '10px', height: '45px' }}
                   style={selectedRow(dataItem, index)}
                 >
                   {column.map((columnItem: columnType) => {
                     return (
                       <TableCell
                         sx={{
-                          padding: '5px',
+                          padding: '10px',
                         }}
                         style={{ borderBottom: 'none' }}
                         onClick={() =>

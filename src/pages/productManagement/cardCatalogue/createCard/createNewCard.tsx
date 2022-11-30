@@ -13,7 +13,7 @@ import {
   Card,
   Grid,
   Divider,
-  Checkbox
+  Checkbox,
 } from '@mui/material';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import BtnContained from '../../../../components/commonComponent/CustomText/Button/Contained';
@@ -35,6 +35,7 @@ import TypoText from '../../../../components/commonComponent/CustomText/Textfiel
 import TypographyInfo from '../../../../components/commonComponent/CustomText/Info';
 import { useNavigate } from 'react-router-dom';
 import { CheckBox } from '@mui/icons-material';
+import TypographySubTitle from '../../../../components/commonComponent/CustomText/Typography';
 
 const CreateNewCard = () => {
   // const uploadRef = useRef<any>();
@@ -72,6 +73,15 @@ const CreateNewCard = () => {
     additionalBenefits: [{ value: ' ' }],
     welcomeBenefits: [{ value: '' }],
   };
+  // const box ={
+  //   boxValue1:'',
+  //   boxValue2:'',
+  //   boxValue3:''
+  // }
+  const [benifits1, setBenifits1] = useState(false);
+  const [benifits2, setBenifits2] = useState(false);
+  const [benifits3, setBenifits3] = useState(false);
+  
   const [dataObj, setDataObj] = useState(obj);
   const [removeClick, setRemoveClick] = useState({
     reward: false,
@@ -79,6 +89,15 @@ const CreateNewCard = () => {
     additionalBenefits: false,
     welcomeBenefits: false,
   });
+  const currencyBox = () => {
+    setBenifits1(!benifits1);
+  };
+  const airmilesBox =()=>{
+      setBenifits2(!benifits2)
+  }
+  const cashbacksBox=()=>{
+      setBenifits3(!benifits3)
+  }
 
   // const removeReward = (e , index) => {
   //   setRemoveClick((prev) => ({
@@ -322,9 +341,9 @@ const CreateNewCard = () => {
         <Grid container spacing={5}>
           <Grid item xs={12} sm={6} md={4}>
             <Box className="cardDetailSelect">
-              <TypoText title="Card Type" />
+              <TypoText title="Card Mode" />
               <Select
-                placeholder="Card type"
+                placeholder="Card Mode"
                 // onChange={handleValueChange}
                 id="interestRate"
                 // value={dataObj?.interestRate}
@@ -340,8 +359,8 @@ const CreateNewCard = () => {
 
           <Grid item xs={12} sm={6} md={4}>
             <Box className="cardDetailSelect">
-              <TypoText title="Card Mode" />
-              <Select placeholder="Card type" variant="outlined" size="small" />
+              <TypoText title="Card Type" />
+              <Select placeholder="Card Type" variant="outlined" size="small" />
             </Box>
           </Grid>
 
@@ -377,7 +396,7 @@ const CreateNewCard = () => {
 
       <Box className="box4">
         <Box className="surrogateTitle">
-          <TypoText title="Choose Surrogate" />
+          <TypoText title=" Surrogate" />
           <img className="img" src={Info_Icon} />
           <TypographyInfo title="From here, you can choose the type of surrogate for the card" />
         </Box>
@@ -386,37 +405,37 @@ const CreateNewCard = () => {
         <Grid container className="chooseSurrogateGrid">
           <Grid item xs={12} sm={6} md={2}>
             <Box className="box">
-              <Checkbox />
+              <Checkbox color="secondary" />
               <Typography className="text">Payroll</Typography>
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={2}>
             <Box className="box">
-              <Checkbox />
+              <Checkbox color="secondary" />
               <Typography className="text">Card For Card</Typography>
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={2}>
             <Box className="box">
-              <Checkbox />
+              <Checkbox color="secondary" />
               <Typography className="text">CIBIL</Typography>
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={2}>
             <Box className="box">
-              <Checkbox />
+              <Checkbox color="secondary" />
               <Typography className="text">AQB</Typography>
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={2}>
             <Box className="box">
-              <Checkbox />
+              <Checkbox color="secondary" />
               <Typography className="text">Pre-Approved</Typography>
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} md={2}>
             <Box className="box">
-              <Checkbox />
+              <Checkbox color="secondary" />
               <Typography className="text">Secured</Typography>
             </Box>
           </Grid>
@@ -440,19 +459,19 @@ const CreateNewCard = () => {
         <Grid container className="chooseChannelGrid">
           <Grid item>
             <Box className="box">
-              <Checkbox />
+              <Checkbox color="secondary" />
               <Typography className="text">Bank</Typography>
             </Box>
           </Grid>
           <Grid item>
             <Box className="box">
-              <Checkbox />
+              <Checkbox color="secondary" />
               <Typography className="text">DSA</Typography>
             </Box>
           </Grid>
           <Grid item>
             <Box className="box">
-              <Checkbox />
+              <Checkbox color="secondary" />
               <Typography className="text">Fintech Partner</Typography>
             </Box>
           </Grid>
@@ -515,7 +534,51 @@ const CreateNewCard = () => {
           </Grid>
         </Grid>
 
-        <Grid container className="eligibilityGrid2">
+        <Grid container className="eligibilityGrid " spacing={5}>
+          <Grid item xs={12} sm={6} md={4}>
+            <Box>
+              <TypoText title="C4C Limit" />
+              <TypoText
+                placeholder=" 00.00"
+                handleChange={handleValueChange}
+                id="cibilScore"
+                value={dataObj?.cibilScore}
+              />
+              {/* <TextField sx={{ width: "350px" }} size="small" placeholder="0" /> */}
+            </Box>
+          </Grid>
+
+          <Grid item xs={12} sm={6} md={4}>
+            <Box>
+              <TypoText title="AQB Limit (6 Month)" />
+              <TypoText
+                placeholder=" 00.00"
+                handleChange={handleValueChange}
+                id="salaryLimit"
+                value={dataObj?.salaryLimit}
+              />
+            </Box>
+          </Grid>
+
+          <Grid item xs={12} sm={6} md={4}>
+            <Box>
+              <TypoText title="RC (Vehicle Value)" />
+              <TypoText
+                placeholder="00.00"
+                handleChange={handleValueChange}
+                id="itrLimit"
+                value={dataObj?.itrLimit}
+              />
+              {/* <TextField
+                sx={{ width: "350px" }}
+                size="small"
+                placeholder="$ 00.00"
+              /> */}
+            </Box>
+          </Grid>
+        </Grid>
+
+        {/* <Grid container className="eligibilityGrid2"  >
           <Grid item xs={12} sm={6} md={4}>
             <Box
               className="c4c"
@@ -528,6 +591,58 @@ const CreateNewCard = () => {
                 id="c4climit"
                 value={dataObj?.c4cLimit}
               />
+            </Box>
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Box
+              className="c4c"
+              // sx={{ display: 'flex', flexDirection: 'column', width: '92%' }}
+            >
+              <TypoText title="AQB Limit (6 Month)" />
+              <TypoText
+                placeholder="00.00"
+                handleChange={handleValueChange}
+                id="c4climit"
+                value={dataObj?.c4cLimit}
+              />
+            </Box>
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Box
+              className="c4c"
+              // sx={{ display: 'flex', flexDirection: 'column', width: '92%' }}
+            >
+              <TypoText title="RC (Vehicle Value)" />
+              <TypoText
+                placeholder="00.00"
+                handleChange={handleValueChange}
+                id="c4climit"
+                value={dataObj?.c4cLimit}
+              />
+            </Box>
+          </Grid>
+        </Grid> */}
+      </Box>
+
+      <Box className="box5">
+        <Box className="channelTitle">
+          <TypoText title="Add On Card Availability" />
+
+          <img
+            className="img"
+            style={{ marginBottom: '14px' }}
+            src={Info_Icon}
+          />
+
+          <TypographyInfo title="From here, you can choose extra card for same card details" />
+        </Box>
+        <Divider />
+
+        <Grid container className="chooseChannelGrid">
+          <Grid item>
+            <Box className="box">
+              <Checkbox color="secondary" />
+              <Typography className="text">Add On Card</Typography>
             </Box>
           </Grid>
         </Grid>
@@ -543,17 +658,130 @@ const CreateNewCard = () => {
 
         <Box className="benefitsBox">
           <Box className="box">
-            <Checkbox />
+            <Checkbox onClick={currencyBox} color="secondary" />
             <Typography className="text">Currency Markup Charges</Typography>
           </Box>
+          {benifits1 && (
+            <>
+              <Grid container spacing={5}>
+                <Grid item xs={12} sm={6} md={4}>
+                  <Box>
+                    <TypographySubTitle title="Currency Markup Charges (in %)" />
+                    <TypoText
+                      placeholder="$ 00.00"
+                      handleChange={handleValueChange}
+                      id="joiningFee"
+                      value={dataObj?.joiningFee}
+                    />
+                  </Box>
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                  <Box>
+                    <TypographySubTitle title="Maximum Spent Limit Per Transaction" />
+                    <TypoText
+                      placeholder="$ 00.00"
+                      handleChange={handleValueChange}
+                      id="joiningFeewavier"
+                      value={dataObj?.joiningFeeWavier}
+                    />
+                  </Box>
+                </Grid>
+              </Grid>
+
+              <Box className="joiningFeeFull">
+                <TypographySubTitle title="Currency Markup Descripition" />
+                <Box className="textField">
+                  <TypoText placeholder="3.50% of the transaction value as a foreign currency transaction fee." />
+                </Box>
+              </Box>
+            </>
+          )}
           <Box className="box">
-            <Checkbox />
+            <Checkbox onClick={airmilesBox} color="secondary" />
             <Typography className="text">Airmiles</Typography>
           </Box>
+          {benifits2 && (
+            <>
+              <Grid container spacing={5}>
+                <Grid item xs={12} sm={6} md={4}>
+                  <Box>
+                    <TypographySubTitle title="Airmiles" />
+                    <TypoText
+                      placeholder="$ 00.00"
+                      handleChange={handleValueChange}
+                      id="joiningFee"
+                      value={dataObj?.joiningFee}
+                    />
+                  </Box>
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                  <Box>
+                    <TypographySubTitle title="Airmiles - Minmum Spends" />
+                    <TypoText
+                      placeholder="$ 00.00"
+                      handleChange={handleValueChange}
+                      id="joiningFeewavier"
+                      value={dataObj?.joiningFeeWavier}
+                    />
+                  </Box>
+                </Grid>
+              </Grid>
+
+              <Box className="joiningFeeFull">
+                <TypographySubTitle title="Airmiles Description" />
+                <Box className="textField">
+                  <TypoText placeholder="Get 4 Frequent Flyer Air miles for every Citi Prestige reward point you transfer to our airline partners" />
+                </Box>
+              </Box>
+            </>
+          )}
           <Box className="box">
-            <Checkbox />
+            <Checkbox onClick={cashbacksBox} color="secondary" />
             <Typography className="text">Cashbacks</Typography>
           </Box>
+          {benifits3 && (
+            <>
+            <Grid container spacing={5}>
+          <Grid item xs={12} sm={6} md={4}>
+            <Box>
+              <TypographySubTitle title="Cashback (in %)" />
+              <TypoText
+                placeholder="$ 00.00"
+                handleChange={handleValueChange}
+                id="joiningFee"
+                value={dataObj?.joiningFee}
+              />
+              
+            </Box>
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Box>
+              <TypographySubTitle title="Cashback - Minmum Spends" />
+              <TypoText
+                placeholder="$ 00.00"
+                handleChange={handleValueChange}
+                id="joiningFeewavier"
+                value={dataObj?.joiningFeeWavier}
+              />
+              
+            </Box>
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <Box className="joiningFeeSelect">
+              <TypographySubTitle title="Select Spend Category" />
+              <Select placeholder="choose period" className="field"></Select>
+            </Box>
+          </Grid>
+        </Grid>
+
+        <Box className="joiningFeeFull">
+          <TypographySubTitle title="Cashback Description" />
+          <Box className="textField">
+            <TypoText placeholder="W5% cashback will be rewarded to you on purchases of movie tickets, bill payments, or on any payments made for utilities done through Citi Billpay." />
+          </Box>
+        </Box>
+            </>
+          ) }
         </Box>
       </Box>
 
@@ -564,12 +792,7 @@ const CreateNewCard = () => {
             <img className="img" src={Info_Icon} />
             <TypographyInfo title="From here you can add fee wavier details" />
           </Box>
-          <Box className="btn">
-            <Button color="secondary">
-              <ControlPointIcon />
-              <Typography className="text">Add Additional Benefits</Typography>
-            </Button>
-          </Box>
+          
         </Box>
         <Divider />
         <Box className="joiningFeeBox">
@@ -790,6 +1013,7 @@ const CreateNewCard = () => {
               <Box className="newText">
                 {dataObj.rewardDescription.length > 1 && removeClick.reward ? (
                   <Button
+                    sx={{ textTransform: 'capitalize' }}
                     onClick={() => removeReward(index)}
                     color="secondary"
                     startIcon={<RemoveCircleOutlineIcon />}
@@ -835,6 +1059,7 @@ const CreateNewCard = () => {
               <Box className="newText">
                 {dataObj.keyBenefits.length > 1 && removeClick.keyBenefits ? (
                   <Button
+                    sx={{ textTransform: 'capitalize' }}
                     onClick={() => removeKeyBenefits(index)}
                     color="secondary"
                     startIcon={<RemoveCircleOutlineIcon />}
@@ -880,6 +1105,7 @@ const CreateNewCard = () => {
               {dataObj.additionalBenefits.length > 1 &&
               removeClick.additionalBenefits ? (
                 <Button
+                  sx={{ textTransform: 'capitalize' }}
                   onClick={() => removeAdditionalBenefits(index)}
                   color="secondary"
                   startIcon={<RemoveCircleOutlineIcon />}
@@ -902,7 +1128,11 @@ const CreateNewCard = () => {
             <TypographyInfo title="Add your additional benifits here" />
           </Box>
           <Box className="headerbtn">
-            <Button color="secondary" onClick={AddWelcomeList}>
+            <Button
+              sx={{ textTransform: 'capitalize' }}
+              color="secondary"
+              onClick={AddWelcomeList}
+            >
               <ControlPointIcon />
               <Typography className="btnTex">Add Description</Typography>
             </Button>
@@ -926,6 +1156,7 @@ const CreateNewCard = () => {
                 {dataObj.welcomeBenefits.length > 1 &&
                 removeClick.welcomeBenefits ? (
                   <Button
+                    sx={{ textTransform: 'capitalize' }}
                     onClick={() => removeWelcome(index)}
                     color="secondary"
                     startIcon={<RemoveCircleOutlineIcon />}

@@ -19,6 +19,8 @@ export const tagBasedIndicator = {
   SAVED: 'Saved',
   WAITING_FOR_APPROVAL: 'Waiting for Approval',
   CLOSED: 'Closed',
+  APPROVED:"Approved",
+  REJECTED:"Rejected"
 };
 
 export const bulkUpload = {
