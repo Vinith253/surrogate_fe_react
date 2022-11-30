@@ -151,7 +151,10 @@ export const HistoryLog = (props: any) => {
       key: 'id',
       width: '70px',
       render: (text: string) => {
-        return <Stack>{text}</Stack>;
+        return <Stack sx={{ textAlign: 'center' }}>{text}</Stack>;
+      },
+      headerRender: (text: string) => {
+        return <Stack sx={{ textAlign: 'center' }}>{text}</Stack>;
       },
     },
     {
@@ -280,7 +283,7 @@ export const HistoryLog = (props: any) => {
       <Stack>
         {/* tableNavBar */}
         {historyLogData?.length > 0 ? (
-          <Stack className="container">
+          <Stack className="history-log-container">
             <Stack className="table-search-filters">
               <Box className="search-container">
                 <Box className="search-box">

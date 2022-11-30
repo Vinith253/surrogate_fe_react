@@ -41,12 +41,12 @@ import {
   ListItemText,
 } from '@mui/material';
 import TypographySubTitle from '../../../../components/commonComponent/CustomText/Typography';
-// import OutlinedInput from '@mui/material/OutlinedInput';
-// import ListItemText from '@mui/material/ListItemText';
-import Surrogate_icon from '../../../../assets/icons/surrogates_selection_icon.svg';
-import Pause_icon from '../../../../assets/icons/pause_card_icon.svg';
-import Edit_icon from '../../../../assets/icons/edit_scheduled_pause_icon.svg';
-import Resume_icon from '../../../../assets/icons/resume_card_icon.svg';
+import Surrogate_icon from '../../../../assets/images/surrogateIcon.svg';
+import Pause_icon from '../../../../assets/images/pauseIcon.svg';
+import Edit_icon from '../../../../assets/images/editIcon.svg';
+import Resume_icon from '../../../../assets/images/resumeIcon.svg';
+import Email_Icon from '../../../../assets/images/emailIcon.svg';
+import Download_Icon from '../../../../assets/images/downloadIcon.svg';
 import TotalApplications from '../../../../assets/icons/total_application_icon.svg';
 import Comparisions from '../../../../assets/icons/comparision_icon.svg';
 import AddIcon from '@mui/icons-material/Add';
@@ -241,6 +241,8 @@ export const CardCatalogue = () => {
   const [showScheduledPauseSuccessModal, setShowScheduledPauseSuccessModal] =
     useState<boolean>(false);
 
+  const [editModal, setEditModal] = useState(false);
+
   const NORMAL_PAUSE = 'Pause Now';
   const SCHEDULED_PAUSE = 'Schedule Pause';
   const [alignment, setAlignment] = useState('all');
@@ -422,6 +424,8 @@ export const CardCatalogue = () => {
     setSurrogateMethod(value);
   };
 
+  const [editSuccessModal, setEditSuccessModal] = useState(false);
+
   const closeModal = () => {
     setSurrogateSelection(false);
     setSurrogateSuccessSelection(false);
@@ -431,6 +435,8 @@ export const CardCatalogue = () => {
     setShowPauseSuccessModal(false);
     setShowScheduledPauseSuccessModal(false);
     setShowPauseModal(false);
+    setEditModal(false);
+    setEditSuccessModal(false);
   };
 
   const successModal = () => {
@@ -461,6 +467,19 @@ export const CardCatalogue = () => {
     setResumeSuccessModal(true);
     setResumeModal(false);
   };
+
+  const handleEditSuccess = () => {
+    setEditModal(false);
+    setEditSuccessModal(true);
+  };
+
+  const editModalFun = () => {
+    setEditModal(true);
+  };
+
+  {
+    console.log('editModal', editModal);
+  }
 
   const product_label = [
     {
@@ -543,10 +562,7 @@ export const CardCatalogue = () => {
           <Box className="container1">
             <TypoText title="Card List" />
             <img className="img1" src={Info_Icon} />
-            <TypographyInfo
-              title="From here, you filter the card by its mode, status, category and
-                surrogate"
-            />
+            <TypographyInfo title="Filter cards by mode/status/category/surrogate here." />
           </Box>
           <Divider />
 
@@ -624,10 +640,10 @@ export const CardCatalogue = () => {
             //   backgroundColor: 'white',
             // }}
           >
-            <Button color="secondary" variant="outlined">
+            <Button sx={{textTransform:'capitalize'}} color="secondary" variant="outlined">
               Reset
             </Button>
-            <Button color="secondary" variant="contained">
+            <Button sx={{textTransform:'capitalize'}} color="secondary" variant="contained">
               Search
             </Button>
           </Box>
@@ -654,11 +670,11 @@ export const CardCatalogue = () => {
                 justifyContent: 'space-around',
               }}
             >
-              <Button sx={{ color: '#0662B7', padding: 0, borderRadius: 50 }}>
-                <DownloadIcon />
+              <Button>
+                <img src={Download_Icon} alt="d" />
               </Button>
-              <Button sx={{ color: '#0662B7', padding: 0, borderRadius: 50 }}>
-                <MailOutlineIcon />
+              <Button>
+                <img src={Email_Icon} alt="email" />
               </Button>
             </Box>
           </Box>
@@ -678,7 +694,6 @@ export const CardCatalogue = () => {
                 className="btn"
                 variant="contained"
                 color="secondary"
-                
                 // sx={{
                 //   padding: '3px 8px',
                 //   fontSize: '12px',
@@ -699,7 +714,6 @@ export const CardCatalogue = () => {
                 Resume card
               </Button>
               <Button
-              
                 variant="contained"
                 color="secondary"
                 className="btn"
@@ -716,7 +730,12 @@ export const CardCatalogue = () => {
                 </IconButton>
                 pause card
               </Button>
-              <Button variant="contained" color="secondary" className="btn">
+              <Button
+                variant="contained"
+                color="secondary"
+                className="btn"
+                onClick={() => setEditModal(true)}
+              >
                 <IconButton className="icon">
                   <img
                     src={Edit_icon}
@@ -777,28 +796,35 @@ export const CardCatalogue = () => {
                   onChange={handleButtonChange}
                   aria-label="Platform"
                   sx={{
-                    
                     height: '40px',
                   }}
                   // sx={ToggleBoxStyle}
                 >
-                  <ColorButton value="all" sx={{ paddingRight: '10px',textTransform:'capitalize' }}>
-                    
+                  <ColorButton
+                    value="all"
+                    sx={{ paddingRight: '10px', textTransform: 'capitalize' }}
+                  >
                     All
                   </ColorButton>
                   {/* <Divider orientation="vertical" /> */}
-                  <ColorButton value="activate" sx={{textTransform:'capitalize', paddingRight: '10px' }}>
+                  <ColorButton
+                    value="activate"
+                    sx={{ textTransform: 'capitalize', paddingRight: '10px' }}
+                  >
                     Activate
                   </ColorButton>
                   {/* <Divider orientation="vertical" /> */}
                   <ColorButton
                     value="deactivated"
-                    sx={{textTransform:'capitalize', paddingRight: '10px' }}
+                    sx={{ textTransform: 'capitalize', paddingRight: '10px' }}
                   >
                     Deactivated
                   </ColorButton>
                   {/* <Divider orientation="vertical" /> */}
-                  <ColorButton value="saved" sx={{textTransform:'capitalize', paddingRight: '10px' }}>
+                  <ColorButton
+                    value="saved"
+                    sx={{ textTransform: 'capitalize', paddingRight: '10px' }}
+                  >
                     Saved
                   </ColorButton>
                 </ToggleButtonGroup>
@@ -879,7 +905,7 @@ export const CardCatalogue = () => {
                       // sx={{ padding:0,border:0 }}
                     >
                       <TableCell align="center" padding="checkbox">
-                        <Checkbox />
+                        <Checkbox color='secondary' />
                       </TableCell>
                       <TableCell align="center">{row.id}</TableCell>
                       <TableCell align="center">{row.cardName}</TableCell>
@@ -1093,6 +1119,41 @@ export const CardCatalogue = () => {
           successModalTitle={'Card For Card - Scheduled Pause'}
           successModalMsg={
             'Your action of Scheduled Pause - Card For Card Surrogate From  DD/MM/YYYTo DD/MM/YYY is successfully sent to reviewer'
+          }
+          btn={' Close'}
+        />
+      )}
+
+      {editModal && (
+        <CustomModal
+          openSuccess={editModal}
+          handleCloseSuccess={closeModal}
+          handleSuccess={handleEditSuccess}
+          title={'Card - Edit Pause'}
+          pause_content={'You can pause it or perform a scheduled pause.'}
+          scheduledPause_content={
+            'Please choose a date range to perform a scheduled pause.'
+          }
+          textarea_title={'Add Remarks'}
+          radioValuOne={NORMAL_PAUSE}
+          radioValuTwo={SCHEDULED_PAUSE}
+          dateRange_title={'Enter Date range'}
+          maxLength={'Maximum of 500 words'}
+          pauseMethodChecking={pauseMethodChange}
+          close={'Close'}
+          submit={'Submit'}
+          datepickerLabelStart={'Start Date and time'}
+          datepickerLabelEnd={'End Date and time'}
+        />
+      )}
+
+      {editSuccessModal && (
+        <CustomModal
+          openSuccess={editSuccessModal}
+          handleCloseSuccess={closeModal}
+          successModalTitle={'Card - Edit Pause'}
+          successModalMsg={
+            'Your Edit pause request from DD/MM/YYYY to DD/MM/YYYY action has been successfully sent to Reviewer.'
           }
           btn={' Close'}
         />
