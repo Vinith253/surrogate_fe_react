@@ -367,7 +367,6 @@ function EditUser() {
       <FooterButton
         cancel="Close"
         submit="Submit"
-        saveAsDraft="Save as draft"
         handleSubmitClick={handleSubmitClick}
         handleCancelClick={goBack}
         // handleSaveasDraftClick={handleSaveasDraftClick}

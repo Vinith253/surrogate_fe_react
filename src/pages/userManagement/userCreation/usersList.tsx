@@ -415,7 +415,7 @@ function UserCreationTab() {
         </Box>
       </Stack>
       {isFiltered ? (
-        <Stack className="container">
+        <Stack className="container" style={{ margin: '0px' }}>
           <HeaderWithInfo
             header="Branch Details"
             isInfoEnabled={false}
