@@ -73,7 +73,11 @@ function CreateUser() {
 
   const RoleList = {
     defaultName: '',
-    options: [{ name: 'Role', value: 'Role' }],
+    options: [
+      { name: 'Head', value: 'Head' },
+      { name: 'Executive', value: 'Executive' },
+      { name: 'Manager', value: 'Manager' },
+    ],
   };
 
   return (

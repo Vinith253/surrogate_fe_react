@@ -15,35 +15,38 @@ export default function SelectLabels(props: { data: any }) {
   };
 
   return (
-    <div>
-      <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <Select
-          value={selectedValue}
-          onChange={handleChange}
-          displayEmpty
-          inputProps={{ 'aria-label': 'Without label' }}
-        >
-          <TextField
-            fullWidth
-            className="search-dropdown-text-field"
-            placeholder="Search by..."
-            InputProps={{
-              startAdornment: (
-                <IconButton edge="start">
-                  <SearchOutlined />
-                </IconButton>
-              ),
-            }}
-          />
-          {props?.data?.options?.map((eachOption: any, index: number) => {
-            return (
-              <MenuItem value={eachOption.value} key={index}>
-                {eachOption?.name}
-              </MenuItem>
-            );
-          })}
-        </Select>
-      </FormControl>
-    </div>
+    <FormControl sx={{ m: 1, minWidth: 120 }}>
+      <Select
+        style={{ height: '45px' }}
+        value={selectedValue}
+        onChange={handleChange}
+        displayEmpty
+        inputProps={{ 'aria-label': 'Without label' }}
+      >
+        <TextField
+          className="search-dropdown-text-field"
+          placeholder="Search by..."
+          style={{ width: '90%', margin: '5px 18px', height: '46px' }}
+          InputProps={{
+            startAdornment: (
+              <IconButton edge="start">
+                <SearchOutlined />
+              </IconButton>
+            ),
+          }}
+        />
+        {props?.data?.options?.map((eachOption: any, index: number) => {
+          return (
+            <MenuItem
+              value={eachOption.value}
+              key={index}
+              style={{ height: '45px', margin: '0px 18px' }}
+            >
+              {eachOption?.name}
+            </MenuItem>
+          );
+        })}
+      </Select>
+    </FormControl>
   );
 }
