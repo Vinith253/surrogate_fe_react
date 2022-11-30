@@ -574,13 +574,16 @@ function CustomModal({
               <Button
                 variant="contained"
                 onClick={handleCloseSuccess}
-                style={{
+                sx={{
                   // width: '340px',
                   height: '48px',
                   fontSize: '12px',
                   marginTop: '30px',
                   marginBottom: '40px',
                   backgroundColor: `${colors.Modalblue}`,
+                  '&:hover': {
+                    backgroundColor: `${colors.Modalblue}`,
+                  },
                 }}
               >
                 {ProceedBtn}
@@ -593,13 +596,16 @@ function CustomModal({
               <Button
                 variant="contained"
                 onClick={handleCloseSuccess}
-                style={{
+                sx={{
                   // width: '340px',
                   height: '48px',
                   fontSize: '12px',
                   marginTop: '10px',
                   marginBottom: '14px',
                   backgroundColor: `${colors.Modalblue}`,
+                  '&:hover': {
+                    backgroundColor: `${colors.Modalblue}`,
+                  },
                 }}
               >
                 {ProceedBtn}
@@ -635,6 +641,7 @@ function CustomModal({
                   padding: {
                     xs: '0 13px',
                   },
+                  hyphens: 'initial',
                 }}
               >
                 {rejectedModaltitle}
@@ -655,6 +662,7 @@ function CustomModal({
                 },
                 marginBottom: '10px',
                 color: '#656769',
+                hyphens: 'initial',
               }}
             >
               {successModalMsg}
@@ -672,6 +680,7 @@ function CustomModal({
                   xs: '0 13px',
                   sm: '0 60px',
                 },
+                hyphens: 'initial',
                 color: '#656769',
               }}
             >
@@ -975,6 +984,9 @@ function CustomModal({
                   backgroundColor: `${colors.Modalblue}`,
                   fontWeight: '500',
                   padding: '6px 20px',
+                  '&:hover': {
+                    backgroundColor: `${colors.Modalblue}`,
+                  },
                 }}
                 onClick={handleSuccess}
               >
@@ -994,12 +1006,15 @@ function CustomModal({
               <Button
                 variant="contained"
                 onClick={handleCloseSuccess}
-                style={{
+                sx={{
                   width: '30em',
                   height: '3em',
                   fontSize: '12px',
                   backgroundColor: `${colors.Modalblue}`,
                   textTransform: 'capitalize',
+                  '&:hover': {
+                    backgroundColor: `${colors.Modalblue}`,
+                  },
                 }}
               >
                 {btn}
@@ -1039,6 +1054,9 @@ function CustomModal({
                     fontSize: '13px',
                     textTransform: 'capitalize',
                     background: '#0662B7',
+                    '&:hover': {
+                      backgroundColor: '#0662B7',
+                    },
                   }}
                   onClick={handleSuccess}
                 >
@@ -1087,6 +1105,9 @@ function CustomModal({
                       background: '#0662B7',
                       fontSize: '13px',
                       textTransform: 'capitalize',
+                      '&:hover': {
+                        backgroundColor: '#0662B7',
+                      },
                     }}
                   >
                     Copy Link

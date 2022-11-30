@@ -230,6 +230,7 @@ export default function BulkList(props: any) {
     { title: 'Extra Card', dataIndex: 'extraCard', key: 'extraCard' },
     { title: 'CIBIL Score', dataIndex: 'cibilScore', key: 'cibilScore' },
     { title: 'Salary Limit', dataIndex: 'salaryLimit', key: 'salaryLimit' },
+    { title: 'ITR Limit', dataIndex: 'itrLimit', key: 'itrLimit' },
   ];
   const data1 = [
     {
@@ -242,6 +243,7 @@ export default function BulkList(props: any) {
       extraCard: 'Applicable',
       cibilScore: 700,
       salaryLimit: '30,000',
+      itrLimit: '30,000',
       error: false,
     },
     {
@@ -254,6 +256,7 @@ export default function BulkList(props: any) {
       extraCard: 'Non-Applicable',
       cibilScore: 700,
       salaryLimit: '40,000',
+      itrLimit: '40,000',
       error: true,
     },
     {
@@ -266,6 +269,7 @@ export default function BulkList(props: any) {
       extraCard: 'Applicable',
       cibilScore: 700,
       salaryLimit: '30,000',
+      itrLimit: '30,000',
       error: false,
     },
     {
@@ -278,6 +282,7 @@ export default function BulkList(props: any) {
       extraCard: 'Non-Applicable',
       cibilScore: 700,
       salaryLimit: '20,000',
+      itrLimit: '20,000',
       error: true,
     },
     {
@@ -290,70 +295,76 @@ export default function BulkList(props: any) {
       extraCard: 'Applicable',
       cibilScore: 700,
       salaryLimit: '30,000',
+      itrLimit: '30,000',
       error: false,
     },
   ];
-  const data2 = [
-    {
-      id: 1,
-      cardName: 'Premier',
-      surrogateName: 'Card-For-Card',
-      cardMode: 'Business',
-      cardType: 'Travel',
-      interestRate: '12%',
-      extraCard: 'Applicable',
-      cibilScore: 700,
-      salaryLimit: '30,000',
-      error: false,
-    },
-    {
-      id: 2,
-      cardName: 'Premier',
-      surrogateName: 'Payroll',
-      cardMode: 'Business',
-      cardType: 'Travel',
-      interestRate: '12%',
-      extraCard: 'Non-Applicable',
-      cibilScore: 700,
-      salaryLimit: '40,000',
-      error: false,
-    },
-    {
-      id: 3,
-      cardName: 'Premier',
-      surrogateName: 'Card-For-Card',
-      cardMode: 'Business',
-      cardType: 'Travel',
-      interestRate: '12%',
-      extraCard: 'Applicable',
-      cibilScore: 700,
-      salaryLimit: '30,000',
-      error: false,
-    },
-    {
-      id: 4,
-      cardName: 'Premier',
-      surrogateName: 'CIBIL',
-      cardMode: 'Business',
-      cardType: 'Travel',
-      interestRate: '12%',
-      extraCard: 'Non-Applicable',
-      cibilScore: 700,
-      salaryLimit: '20,000',
-      error: false,
-    },
-    {
-      id: 5,
-      cardName: 'Premier',
-      surrogateName: 'Payroll',
-      cardMode: 'Business',
-      cardType: 'Travel',
-      interestRate: '12%',
-      extraCard: 'Applicable',
-      cibilScore: 700,
-      salaryLimit: '30,000',
-      error: false,
-    },
+  const data2: any = [
+    // {
+    //   id: 1,
+    //   cardName: 'Premier',
+    //   surrogateName: 'Card-For-Card',
+    //   cardMode: 'Business',
+    //   cardType: 'Travel',
+    //   interestRate: '12%',
+    //   extraCard: 'Applicable',
+    //   cibilScore: 700,
+    //   salaryLimit: '30,000',
+    //   itrLimit: '30,000',
+    //   error: false,
+    // },
+    // {
+    //   id: 2,
+    //   cardName: 'Premier',
+    //   surrogateName: 'Payroll',
+    //   cardMode: 'Business',
+    //   cardType: 'Travel',
+    //   interestRate: '12%',
+    //   extraCard: 'Non-Applicable',
+    //   cibilScore: 700,
+    //   salaryLimit: '40,000',
+    //   itrLimit: '40,000',
+    //   error: false,
+    // },
+    // {
+    //   id: 3,
+    //   cardName: 'Premier',
+    //   surrogateName: 'Card-For-Card',
+    //   cardMode: 'Business',
+    //   cardType: 'Travel',
+    //   interestRate: '12%',
+    //   extraCard: 'Applicable',
+    //   cibilScore: 700,
+    //   salaryLimit: '30,000',
+    //   itrLimit: '30,000',
+    //   error: false,
+    // },
+    // {
+    //   id: 4,
+    //   cardName: 'Premier',
+    //   surrogateName: 'CIBIL',
+    //   cardMode: 'Business',
+    //   cardType: 'Travel',
+    //   interestRate: '12%',
+    //   extraCard: 'Non-Applicable',
+    //   cibilScore: 700,
+    //   salaryLimit: '20,000',
+    //   itrLimit: '20,000',
+    //   error: false,
+    // },
+    // {
+    //   id: 5,
+    //   cardName: 'Premier',
+    //   surrogateName: 'Payroll',
+    //   cardMode: 'Business',
+    //   cardType: 'Travel',
+    //   interestRate: '12%',
+    //   extraCard: 'Applicable',
+    //   cibilScore: 700,
+    //   salaryLimit: '30,000',
+    //   itrLimit: '30,000',
+    //   error: false,
+    // },
   ];
 
   const handleUploadProgress = (value: number) => {
@@ -388,6 +399,11 @@ export default function BulkList(props: any) {
                 ? 'success'
                 : 'error'
             }
+            sx={{
+              backgroundColor: ' #e6e7e7',
+              height: '8px',
+              borderRadius: '5px',
+            }}
             // sx={{ color: progress === 100 ? 'red' : '#0662B7;' }}
           />
         </Box>
@@ -410,6 +426,8 @@ export default function BulkList(props: any) {
   const [dataList, setDataList] = useState(data1);
   const [validCount, setValidCount] = useState('20');
   const [errorCount, setErrorCount] = useState('02');
+  const [openDiscard, setOpenDiscard] = useState(false);
+  const [openCancelModal, setOpenCancelModal] = useState(false);
 
   useEffect(() => {
     if (correctionState) {
@@ -473,9 +491,21 @@ export default function BulkList(props: any) {
   ) => {
     setAlignment(value);
   };
+  const handleDiscard = () => {
+    setOpenDiscard(true);
+  };
   const closeModal = () => {
     setImageUpload(false);
     navigate('/productManagement/cardCatalogue');
+  };
+  const handleContinue = () => {
+    setOpenDiscard(!openDiscard);
+    if (props.fileCheck === 'xls') {
+      props.toggle(false, 'image');
+    }
+    if (props.fileCheck === 'image') {
+      setImageUpload(true);
+    }
   };
   const progressBar = {
     borderRadius: '10px',
@@ -510,7 +540,10 @@ export default function BulkList(props: any) {
     const lastPageIndex = firstPageIndex + rowsPerPage;
     return rows.slice(firstPageIndex, lastPageIndex);
   }, [currentPage, rowsPerPage, rows]);
-
+  const handleCancel = () => {
+    setOpenCancelModal(false);
+    navigate('/productManagement/cardCatalogue');
+  };
   return (
     <PageLayout>
       <Box sx={{ padding: '2% 0' }}>
@@ -559,7 +592,7 @@ export default function BulkList(props: any) {
             Valid Records: {progress === 100 && validCount}
           </Typography>
           <Typography variant="h6" sx={{ fontSize: '1rem' }}>
-            Error Found: {progress === 100 && errorCount}
+            Errors Found: {progress === 100 && errorCount}
           </Typography>
         </Box>
         {progress !== 100 && (
@@ -576,7 +609,7 @@ export default function BulkList(props: any) {
           </Alert>
         )}
         {progress === 100 && !correctionState && (
-          <Alert severity="error">{count} Error found in Uploaded File</Alert>
+          <Alert severity="error">{count} Errors found in Uploaded File</Alert>
         )}
         {correctionState && progress === 100 && (
           <Alert severity="success">No Error found</Alert>
@@ -601,7 +634,9 @@ export default function BulkList(props: any) {
         >
           <ColorButton value="all">All</ColorButton>
           <ColorButton value="valid">Valid</ColorButton>
-          <ColorButton value="error">Error</ColorButton>
+          <ColorButton value="error">
+            {props.fileCheck === 'image' ? 'Missing' : 'Error'}
+          </ColorButton>
         </ToggleButtonGroup>
         {/* <ButtonGroup
           variant="contained"
@@ -672,7 +707,10 @@ export default function BulkList(props: any) {
             display: progress === 100 && correctionState ? 'none' : 'block',
           }}
         >
-          <CommonTable column={columnList} data={dataList} />
+          {progress === 100 && (
+            <CommonTable column={columnList} data={dataList} />
+          )}
+          {progress !== 100 && <CommonTable column={columnList} data={data2} />}
         </Box>
       )}
       {progress === 100 && correctionState && (
@@ -721,7 +759,12 @@ export default function BulkList(props: any) {
             <Box
               sx={{ display: 'flex', justifyContent: 'flex-end', gap: '1%' }}
             >
-              <Button variant="outlined">Cancel</Button>
+              <Button
+                variant="outlined"
+                onClick={() => setOpenCancelModal(!openCancelModal)}
+              >
+                Cancel
+              </Button>
               <Button
                 variant="contained"
                 // color="secondary"
@@ -749,10 +792,10 @@ export default function BulkList(props: any) {
               <Button
                 variant="text"
                 color="secondary"
-                onClick={handleProceed}
+                onClick={handleDiscard}
                 sx={{ fontSize: '12px' }}
               >
-                {`Discord Error entries and Continue >`}
+                {`Discard Error entries and Continue >`}
               </Button>
             </Box>
             {/* </Box> */}
@@ -773,6 +816,32 @@ export default function BulkList(props: any) {
             btn={' Close'}
           />
         )}
+      {
+        <CustomModal
+          openSuccess={openDiscard}
+          handleCloseSuccess={() => setOpenDiscard(!openDiscard)}
+          handleSuccess={handleContinue}
+          successModalTitle={'Do You want to discard?'}
+          discardModalMsg={
+            'Want to discard corrections for error entires in the excel sheet and continue upload cards'
+          }
+          yesContinueBtn={'Yes, Continue'}
+          closeBtn={'Close'}
+        />
+      }
+      {
+        <CustomModal
+          openSuccess={openCancelModal}
+          handleCloseSuccess={() => setOpenCancelModal(!openCancelModal)}
+          handleSuccess={handleCancel}
+          successModalTitle={'Do You want to Cancel Bulk upload?'}
+          discardModalMsg={
+            'Want to discard corrections for error entires in the excel sheet and continue upload cards'
+          }
+          yesContinueBtn={'Yes, Continue'}
+          closeBtn={'Close'}
+        />
+      }
     </PageLayout>
   );
 }

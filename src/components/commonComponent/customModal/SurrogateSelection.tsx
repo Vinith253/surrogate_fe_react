@@ -42,7 +42,7 @@ const product_label = [
   },
   {
     id: 2,
-    label: 'Car For Card',
+    label: 'Card For Card',
     defaultChecked: false,
   },
   {

@@ -489,7 +489,7 @@ export const CardCatalogue = () => {
     },
     {
       id: 2,
-      label: 'Car For Card',
+      label: 'Card For Card',
       defaultChecked: true,
     },
     {
@@ -640,10 +640,18 @@ export const CardCatalogue = () => {
             //   backgroundColor: 'white',
             // }}
           >
-            <Button sx={{textTransform:'capitalize'}} color="secondary" variant="outlined">
+            <Button
+              sx={{ textTransform: 'capitalize' }}
+              color="secondary"
+              variant="outlined"
+            >
               Reset
             </Button>
-            <Button sx={{textTransform:'capitalize'}} color="secondary" variant="contained">
+            <Button
+              sx={{ textTransform: 'capitalize' }}
+              color="secondary"
+              variant="contained"
+            >
               Search
             </Button>
           </Box>
@@ -905,7 +913,7 @@ export const CardCatalogue = () => {
                       // sx={{ padding:0,border:0 }}
                     >
                       <TableCell align="center" padding="checkbox">
-                        <Checkbox color='secondary' />
+                        <Checkbox color="secondary" />
                       </TableCell>
                       <TableCell align="center">{row.id}</TableCell>
                       <TableCell align="center">{row.cardName}</TableCell>
