@@ -77,6 +77,8 @@ import TablePagination from '@mui/material/TablePagination';
 import { Height } from '@mui/icons-material';
 import TypoText from '../../../../components/commonComponent/CustomText/Textfield';
 import GroupButton from '../../../../components/commonComponent/GroupButton/GroupButton';
+import BtnOutlined from '../../../../components/commonComponent/CustomText/Button/Outlined';
+import BtnContained from '../../../../components/commonComponent/CustomText/Button/Contained';
 
 // const columns: GridColDef[] = [
 //   { field: 'id', headerName: 'ID', width: 70 },
@@ -612,6 +614,21 @@ export const CardCatalogue = () => {
                     <ListItemText primary={mode} />
                   </MenuItem>
                 ))}
+                <Box>
+                  <Divider />
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'flex-end',
+                      paddingY: 2,
+                    }}
+                  >
+                    <Button sx={{ gap: 2 }}>
+                      <BtnOutlined title="Reset" />
+                      <BtnContained title="Select" />
+                    </Button>
+                  </Box>
+                </Box>
               </Select>
             </FormControl>
             <FormControl className="formctrl">
@@ -692,6 +709,7 @@ export const CardCatalogue = () => {
                 display: 'flex',
                 flexDirection: 'row',
                 justifyContent: 'space-around',
+                gap: 2,
               }}
             >
               <Button>
@@ -702,7 +720,8 @@ export const CardCatalogue = () => {
               </Button>
             </Box>
           </Box>
-          <Divider />
+          <Divider sx={{ paddingX: 3 }} />
+
           <Box
             className="body2"
             // sx={{
@@ -815,6 +834,7 @@ export const CardCatalogue = () => {
                 {/* <ToggleButtonGroup
                  
                   color="primary"
+                  // color="secondary"
                   value={alignment}
                   exclusive
                   onChange={handleButtonChange}
