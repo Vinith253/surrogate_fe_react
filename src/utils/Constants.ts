@@ -14,11 +14,13 @@ export const tagBasedIndicator = {
   ACTIVE: 'Active',
   PAUSED: 'Paused',
   PAUSED_SCHEDULED: 'Paused (scheduled)',
-  INACTIVE: 'InActive',
+  INACTIVE: 'In-Active',
   DEACTIVATE: 'Deactivated',
   SAVED: 'Saved',
   WAITING_FOR_APPROVAL: 'Waiting for Approval',
   CLOSED: 'Closed',
+  APPROVED:"Approved",
+  REJECTED:"Rejected"
 };
 
 export const bulkUpload = {

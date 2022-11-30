@@ -364,6 +364,11 @@ export default function OrgBulkList(props: any) {
                 ? 'success'
                 : 'error'
             }
+            sx={{
+              backgroundColor: ' #e6e7e7',
+              height: '8px',
+              borderRadius: '5px',
+            }}
             // sx={{ color: progress === 100 ? 'red' : '#0662B7;' }}
           />
         </Box>
@@ -467,7 +472,20 @@ export default function OrgBulkList(props: any) {
   };
   const handleContinue = () => {
     setOpenDiscard(!openDiscard);
-    setOpenContinueDiscard(!openContinueDiscard);
+    if (props.fileCheck === 'xls') {
+      console.log('xls file');
+      props.toggle(false, 'image');
+    }
+    if (props.fileCheck === 'image') {
+      console.log('image file');
+      setImageUpload(true);
+    }
+
+    // setOpenContinueDiscard(!openContinueDiscard);
+  };
+  const handleCancel = () => {
+    setOpenContinueDiscard(false);
+    navigate('/userManagement/orgStructure');
   };
   const ColorButton = styled(ToggleButton)(({ theme }) => ({
     backgroundColor: ' rgb(240, 240, 240)',
@@ -760,20 +778,17 @@ export default function OrgBulkList(props: any) {
           </Box>
         </>
       )}
-      {imageUpload &&
-        correctionState &&
-        progress === 100 &&
-        props.fileCheck === 'image' && (
-          <CustomModal
-            openSuccess={imageUpload}
-            handleCloseSuccess={closeModal}
-            successModalTitle={'Organisation is Uploaded Successfully'}
-            successModalMsg={
-              '  Organisation has been successully sent to the reviewer'
-            }
-            btn={' Close'}
-          />
-        )}
+      {
+        <CustomModal
+          openSuccess={imageUpload}
+          handleCloseSuccess={closeModal}
+          successModalTitle={'Organisation is Uploaded Successfully'}
+          successModalMsg={
+            '  Organisation has been successully sent to the reviewer'
+          }
+          btn={' Close'}
+        />
+      }
       {
         <CustomModal
           openSuccess={openDiscard}
@@ -793,7 +808,7 @@ export default function OrgBulkList(props: any) {
           handleCloseSuccess={() =>
             setOpenContinueDiscard(!openContinueDiscard)
           }
-          handleSuccess={() => setOpenContinueDiscard(false)}
+          handleSuccess={handleCancel}
           successModalTitle={'Do You want to Cancel Bulk upload?'}
           discardModalMsg={
             'Want to discard corrections for error entires in the excel sheet and continue upload cards'

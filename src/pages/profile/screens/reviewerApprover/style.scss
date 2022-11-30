@@ -1,0 +1,107 @@
+.profileReviewerApproverContainer {
+  .profileReviewerContainerHeaderMain {
+    background-color: white;
+    border-radius: 8px;
+    .profileReviewerHeaderContainer {
+      margin: 24px 32px 24px 32px;
+      .profileReviewerHeaderSubContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        .profileReviewerHeaderTitle {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        .profileReviewerHeaderStatus {
+          display: flex;
+          align-items: center;
+          flex-direction: row;
+          .profileReviewerHeaderButton {
+            font-weight: 500 !important;
+            font-size: 14px !important;
+            line-height: 16px !important;
+            letter-spacing: 0.0125em !important;
+            text-transform: capitalize !important;
+            margin-left: 15px;
+          }
+        }
+      }
+    }
+  }
+  .profileReviewerApproverTableContainer {
+    .profileReviewerApproverTableSubContainer {
+      background-color: white;
+      border-radius: 8px;
+      .profileReviewerApproverTable {
+        margin: 24px 32px 24px 32px;
+        .profileReviewerApproverTableHeader {
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 16px;
+          letter-spacing: 0.001em;
+          color: #151515;
+          padding: 18px 15px;
+          background-color: #cbe0f5;
+        }
+        .profileReviewerApproverTableSubHeader {
+          background-color: #edf6fc;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          padding: 18px 15px;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 16px;
+          letter-spacing: 0.001em;
+          color: #151515;
+          .profileSubModule2 {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+          }
+        }
+      }
+    }
+    .profileReviewerApproverTableData {
+      display: flex;
+      flex-direction: row;
+      // border: 1px solid black;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 16px;
+      letter-spacing: 0.0025em;
+      color: #151515;
+      // padding: 18px 15px;
+      .profileReviewerApproverSubTitle {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16px;
+        letter-spacing: 0.0025em;
+        color: #151515;
+      }
+    }
+  }
+  .MuiPaper-root .MuiPaper-elevation .MuiPaper-rounded .MuiPaper-elevation8 {
+    box-shadow: 0 !important;
+  }
+  .reviewer-search-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .search-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid #afaeaf;
+      border-radius: 4px;
+      height: 40px;
+      // width: 23vw;
+      padding: 5px;
+      .search-icon {
+        color: #151515;
+      }
+    }
+  }
+}

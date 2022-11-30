@@ -11,6 +11,7 @@ import PageLayout from '../../../../../components/layout/pageLayout/pageLayout';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import './OrgUploadCard.scss';
 import CustomModal from '../../../../../components/commonComponent/customModal/CustomModal';
+import { useNavigate } from 'react-router-dom';
 
 const OrgUploadCard = ({
   toggle,
@@ -19,6 +20,7 @@ const OrgUploadCard = ({
   fileName,
   uploadProgressValue,
 }: any) => {
+  const navigate = useNavigate();
   const [progress, setProgress] = useState(0);
   const [progressBar, setProgressBar] = useState(0);
   const [openDiscard, setOpenDiscard] = useState(false);
@@ -48,8 +50,9 @@ const OrgUploadCard = ({
       clearInterval(timer);
     };
   }, [progressBar]);
-  const handleDiscard = () => {
-    setOpenDiscard(true);
+  const handleCancel = () => {
+    setOpenDiscard(!openDiscard);
+    navigate('/userManagement/orgStructure');
   };
   const footerStyle = {
     backgroundColor: 'white',
@@ -177,10 +180,10 @@ const OrgUploadCard = ({
         <CustomModal
           openSuccess={openDiscard}
           handleCloseSuccess={() => setOpenDiscard(!openDiscard)}
-          handleSuccess={() => setOpenDiscard(!openDiscard)}
+          handleSuccess={handleCancel}
           successModalTitle={'Do You want to discard?'}
           discardModalMsg={
-            'Want to discard corrections for error entires in the excel sheet and continue upload cards'
+            'Want to discard uploading document and continue the bulk upload organisation'
           }
           yesContinueBtn={'Yes, Continue'}
           closeBtn={'Close'}

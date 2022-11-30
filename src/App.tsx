@@ -1,20 +1,16 @@
 import { Route, Routes } from 'react-router-dom';
-
 import { Layout, PrivateRoute } from './components';
 import { Dashboard, HomePage, LoginPage, NotFoundPage } from './pages';
 import BulkUpload from './pages/productManagement/cardCatalogue/bulkUpload';
 import CreateNewCard from './pages/productManagement/cardCatalogue/createCard/createNewCard';
-// import { CreateNewCard } from "./pages/productManagement/cardCatalogue/createCard/createNewCard";
 import CardCatalogue from './pages/productManagement/cardCatalogue/landingScreen/cardTab';
 import ProgramManagement from './pages/productManagement/programmeManagement/landingScreen';
 import SalesDashboard from './pages/sales/dashboard';
 import SalesReport from './pages/sales/salesReport';
 import SalesReportDetails from './pages/sales/salesReport/reportDetails';
-
 import ReviewCard from './pages/productManagement/cardCatalogue/reviewCard/reviewCard';
 import AccessLibrary from './pages/accessLibrary/AccessLibrary';
 import ReviewerLogDetails from './pages/productManagement/programmeManagement/screens/listComponents/ReviewerLogDetails';
-import { Profile } from './pages/profile/Profile';
 import { BranchDetails } from './pages/userManagement/branchDetails/landingScreen';
 import { OrgStructure } from './pages/userManagement/orgStructure/landingScreen';
 import { Onboarding } from './pages/userManagement/orgStructure/screens/Onboarding/onboarding';
@@ -33,6 +29,8 @@ import ViewUser from './pages/userManagement/userCreation/singleUserUpload/viewU
 import LMSDashboard from './pages/lms/lmsDashboard';
 import LMSRule from './pages/lms/lmsRule';
 import Retargeting from './pages/lms/reTargeting';
+import { OrgHistoryLogDetails } from './pages/userManagement/orgStructure/screens/historyLog/historyLogDetails/historyLogDetails';
+import UserProfile from './pages/profile/landingScreen';
 
 export default function App() {
   return (
@@ -46,7 +44,7 @@ export default function App() {
 
         {/* Public routes */}
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile" element={<UserProfile />} />
         <Route
           path="/productManagement/cardCatalogue"
           element={<CardCatalogue />}
