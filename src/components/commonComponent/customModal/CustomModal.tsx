@@ -815,6 +815,7 @@ function CustomModal({
                         <DateTimePicker
                           renderInput={(props: any) => (
                             <TextField
+                            sx={{fontSize:1,fontWeight:400}}
                               size="small"
                               {...props}
                               fullWidth
@@ -824,7 +825,7 @@ function CustomModal({
                               }}
                             />
                           )}
-                          label={datepickerLabelStart}
+                          // label={datepickerLabelStart}
                           value={startDatevalue}
                           onChange={(newValue: any) => {
                             setStartDateValue(newValue);
@@ -839,6 +840,7 @@ function CustomModal({
                         <DateTimePicker
                           renderInput={(props: any) => (
                             <TextField
+                            sx={{fontSize:'10px'}}
                               size="small"
                               {...props}
                               fullWidth
@@ -848,7 +850,7 @@ function CustomModal({
                               }}
                             />
                           )}
-                          label={datepickerLabelEnd}
+                          // label={datepickerLabelEnd}
                           value={endDatevalue}
                           onChange={(newValue: any) => {
                             setEndDateValue(newValue);

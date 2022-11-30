@@ -112,7 +112,7 @@
         }
         .chooseSurrogateGrid{
             display: flex;
-            justify-content: space-evenly;
+            justify-content: space-between;
             margin-top: 16px;
             .box{
                 display: flex;
@@ -137,7 +137,7 @@
         }
         .chooseChannelGrid{
             display: flex;
-             gap: 10%;
+             gap: 8%;
             margin-top: 16px; 
             .box{
                 display: flex;
