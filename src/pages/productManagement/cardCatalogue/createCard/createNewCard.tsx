@@ -740,8 +740,8 @@ const CreateNewCard = () => {
             <Typography className="text">Cashbacks</Typography>
           </Box>
           {benifits3 && (
-            <>
-            <Grid container spacing={5}>
+            <Box sx={{paddingX:2}} >
+            <Grid  container spacing={5}>
           <Grid item xs={12} sm={6} md={4}>
             <Box>
               <TypographySubTitle title="Cashback (in %)" />
@@ -780,7 +780,7 @@ const CreateNewCard = () => {
             <TypoText placeholder="W5% cashback will be rewarded to you on purchases of movie tickets, bill payments, or on any payments made for utilities done through Citi Billpay." />
           </Box>
         </Box>
-            </>
+            </Box>
           ) }
         </Box>
       </Box>
