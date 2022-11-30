@@ -150,7 +150,7 @@ function CheckBoxModal({
                                   e.target.checked
                                 )
                               }
-                              checked={false}
+                              checked={item.defaultChecked === true}
                               color="secondary"
                             />
                           }

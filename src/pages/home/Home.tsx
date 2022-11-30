@@ -19,7 +19,7 @@ import '../home/Home.scss';
 // import ResumeModalSuccess from '../../components/commonComponent/customModal/ResumeModalSuccess';
 // import SurrogateSelection from '../../components/commonComponent/customModal/SurrogateSelection';
 // import PageLayout from '../../components/layout/pageLayout/pageLayout';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import ChangePasswordProfileModal from '../../components/commonComponent/customModal/ChangePasswordProfileModal';
 import ChangePasswordOTP from '../../components/commonComponent/customModal/ChangePasswordOTP';
