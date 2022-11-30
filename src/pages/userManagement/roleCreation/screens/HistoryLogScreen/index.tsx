@@ -88,6 +88,7 @@ export const HistoryLog = (props: any) => {
 
   const handleClick = (event: React.MouseEvent<HTMLTableCellElement>) => {
     setAnchorElement(event.currentTarget);
+    console.log('coming here');
   };
 
   const tableData = [
@@ -224,8 +225,10 @@ export const HistoryLog = (props: any) => {
       key: 'more',
       render: () => {
         return (
-          <Stack onClick={handleClick}>
-            <MoreVertIcon />
+          <>
+            <Stack onClick={handleClick}>
+              <MoreVertIcon />
+            </Stack>
             <Menu
               id="more-menu"
               anchorEl={anchorElement}
@@ -244,7 +247,10 @@ export const HistoryLog = (props: any) => {
               // }}
             >
               <MenuItem
-                onClick={() => setShowHistoryModal(true)}
+                onClick={() => {
+                  handleClose();
+                  setShowHistoryModal(true);
+                }}
                 className="menu"
               >
                 History Log
@@ -255,12 +261,12 @@ export const HistoryLog = (props: any) => {
                   // navigate('/productManagement/cardCatalogue/singleupload/reviewCard');
                   navigate('/userManagement/roleCreation/historyLogDetail');
                 }}
-                className="menu"
+                // className="menu"
               >
                 View Role
               </MenuItem>
             </Menu>
-          </Stack>
+          </>
         );
       },
     },
@@ -281,6 +287,7 @@ export const HistoryLog = (props: any) => {
   }, [versionSorting]);
 
   const handleClose = () => {
+    console.log('coming into handleClose');
     setAnchorElement(null);
   };
   const closeModal = () => {
@@ -320,8 +327,7 @@ export const HistoryLog = (props: any) => {
           tableData={tableData}
           handleCloseSuccess={closeModal}
           openSuccess={showHistoryModal}
-          viewMoreDetails={'View More Details'}
-          historyViewMoreFun={historyViewMoreFun}
+          viewMoreDetails={'view more details'}
         />
       )}
     </Stack>
