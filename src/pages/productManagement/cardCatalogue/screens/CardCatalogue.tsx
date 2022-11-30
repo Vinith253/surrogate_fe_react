@@ -76,6 +76,8 @@ import {
 import TablePagination from '@mui/material/TablePagination';
 import { Height } from '@mui/icons-material';
 import TypoText from '../../../../components/commonComponent/CustomText/Textfield';
+import BtnContained from '../../../../components/commonComponent/CustomText/Button/Contained';
+import BtnOutlined from '../../../../components/commonComponent/CustomText/Button/Outlined';
 
 // const columns: GridColDef[] = [
 //   { field: 'id', headerName: 'ID', width: 70 },
@@ -596,6 +598,21 @@ export const CardCatalogue = () => {
                     <ListItemText primary={mode} />
                   </MenuItem>
                 ))}
+                <Box>
+                  <Divider />
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'flex-end',
+                      paddingY: 2,
+                    }}
+                  >
+                    <Button sx={{ gap: 2 }}>
+                      <BtnOutlined title="Reset" />
+                      <BtnContained title="Select" />
+                    </Button>
+                  </Box>
+                </Box>
               </Select>
             </FormControl>
             <FormControl className="formctrl">
@@ -652,7 +669,8 @@ export const CardCatalogue = () => {
               Reset
             </Button>
             <Button
-              sx={{ textTransform: 'capitalize', backgroundColor: '#0662B7' }}
+              sx={{ textTransform: 'capitalize' }}
+              color="secondary"
               variant="contained"
             >
               Search
@@ -679,6 +697,7 @@ export const CardCatalogue = () => {
                 display: 'flex',
                 flexDirection: 'row',
                 justifyContent: 'space-around',
+                gap: 2,
               }}
             >
               <Button>
@@ -689,7 +708,8 @@ export const CardCatalogue = () => {
               </Button>
             </Box>
           </Box>
-          <Divider />
+          <Divider sx={{ paddingX: 3 }} />
+
           <Box
             className="body2"
             // sx={{
@@ -802,6 +822,7 @@ export const CardCatalogue = () => {
                 <ToggleButtonGroup
                   //  size='small'
                   color="primary"
+                  // color="secondary"
                   value={alignment}
                   exclusive
                   onChange={handleButtonChange}
