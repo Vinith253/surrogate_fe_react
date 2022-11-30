@@ -156,7 +156,7 @@ const OrgUploadCard = ({
               {'Proceed'}
             </Button>
           </Box>
-          <Box
+          {/* <Box
             sx={{
               display: 'flex',
               justifyContent: 'flex-end',
@@ -172,7 +172,7 @@ const OrgUploadCard = ({
             >
               {`Discord Error entries and Continue >`}
             </Button>
-          </Box>
+          </Box> */}
           {/* </Box> */}
         </Box>
       )}

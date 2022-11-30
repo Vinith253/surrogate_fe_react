@@ -29,6 +29,7 @@ type props = {
   openSuccess: boolean;
   viewMoreDetails: string;
   historyViewMoreFun?: () => void;
+  routePath?: () => string;
 };
 export default function HistoryLogCustomModal({
   title,
@@ -39,6 +40,7 @@ export default function HistoryLogCustomModal({
   openSuccess,
   viewMoreDetails,
   historyViewMoreFun,
+  routePath,
 }: props) {
   const [open, setOpen] = useState(null);
   const handleOpen = (clickedIndex: any) => {

@@ -145,7 +145,13 @@ export const HistoryLog = (props: any) => {
   ];
 
   const historyViewMoreFun = () => {
-    navigate('/userManagement/roleCreation/historyLogDetail');
+    let navigatee = '';
+
+    if (navigatee) {
+      navigate('/userManagement/roleCreation/historyLogDetail');
+    } else {
+      navigate('/userManagement/userCreation/historyLogDetail');
+    }
   };
   const column = [
     {
