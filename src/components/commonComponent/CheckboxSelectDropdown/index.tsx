@@ -1,15 +1,10 @@
-import * as React from 'react';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import ListItemText from '@mui/material/ListItemText';
+import React, { useState, useEffect } from 'react';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import BtnContained from '../../../components/commonComponent/CustomText/Button/Contained';
 import BtnOutlined from '../../../components/commonComponent/CustomText/Button/Outlined';
 import { SearchOutlined } from '@mui/icons-material';
 import {
   FormControlLabel,
-  FormGroup,
   Grid,
   Typography,
   TextField,
@@ -26,29 +21,84 @@ type Props = {
 };
 
 function CheckboxSelectDropdown({ options, flag }: Props) {
-  const [personName, setPersonName] = React.useState<string[]>([]);
+  const [selectedValues, setSelectedValues] = useState<string[]>(['All']);
+  const [isAllSelected, setIsAllSelected] = useState(true);
+  const [listOptions, setListOptions] = useState(options);
+  const [isSelectLayoutOpen, setIsSelectLayoutOpen] = useState(false);
 
-  const handleChange = (event: SelectChangeEvent<typeof personName>) => {
-    console.log('value', event);
+  useEffect(() => {
+    prepareOptions();
+  }, [isAllSelected]);
 
+  const prepareOptions = async () => {
+    let array = [] as any;
+    listOptions?.map((eachOption: any) => {
+      if (isAllSelected) eachOption.isSelected = true;
+      else eachOption.isSelected = false;
+      array.push(eachOption);
+    });
+    await setListOptions(array);
+  };
+
+  const handleChange = (event: SelectChangeEvent<typeof selectedValues>) => {
     const {
       target: { value },
     } = event;
-    setPersonName(
-      // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value
-    );
+    setSelectedValues(typeof value === 'string' ? value.split(',') : value);
+  };
+
+  const checkboxHandleChange = (each: any) => {
+    if (each?.value === 'All') {
+      setIsAllSelected(!isAllSelected);
+    } else {
+      let array = [] as any;
+      listOptions?.map((eachItem: any, index: number) => {
+        if (each.value === eachItem.value) {
+          eachItem.isSelected = !eachItem.isSelected;
+        }
+        if (!eachItem.isSelected) {
+          setIsAllSelected(false);
+        }
+        array.push(eachItem);
+      });
+      setListOptions(array);
+    }
+  };
+
+  const resetAllOptions = () => {
+    let array = [] as any;
+    listOptions?.map((eachOption: any) => {
+      eachOption.isSelected = true;
+      array.push(eachOption);
+    });
+    setListOptions(array);
+    setIsAllSelected(true);
+  };
+
+  const submitSelectedOptions = () => {
+    let array = [] as any;
+    listOptions?.map((eachOption: any) => {
+      if (isAllSelected) {
+        setSelectedValues(['All']);
+      } else if (eachOption.isSelected) {
+        array.push(eachOption.value);
+        setSelectedValues(array);
+      }
+    });
+    setIsSelectLayoutOpen(false);
   };
 
   return (
     <Stack className="checkbox-select-dropdown">
       <Select
+        open={isSelectLayoutOpen}
+        onOpen={() => setIsSelectLayoutOpen(true)}
         labelId="demo-multiple-checkbox-label"
         id="demo-multiple-checkbox"
         multiple
-        value={personName}
+        value={selectedValues}
         onChange={handleChange}
-        size={flag === 'morefilter' ? 'small' : undefined}
+        renderValue={(selected) => selected.join(', ')}
       >
         <Stack className="checkbox-dropdown-options">
           <TextField
@@ -62,14 +112,7 @@ function CheckboxSelectDropdown({ options, flag }: Props) {
               ),
             }}
           />
-          <Stack className="all-option-checkbox">
-            <FormControlLabel
-              label={<Typography sx={{ fontSize: '14px' }}>All</Typography>}
-              control={<Checkbox color="secondary" />}
-            />
-          </Stack>
-
-          {options?.map((each: any, index: number) => (
+          {listOptions?.map((each: any, index: number) => (
             <Grid px={3} key={index}>
               <FormControlLabel
                 label={
@@ -77,14 +120,32 @@ function CheckboxSelectDropdown({ options, flag }: Props) {
                     {each?.name}
                   </Typography>
                 }
-                control={<Checkbox color="secondary" className="each-option" />}
+                control={
+                  <Checkbox
+                    color="secondary"
+                    className="each-option"
+                    checked={each.isSelected}
+                    onChange={() => checkboxHandleChange(each)}
+                  />
+                }
               />
             </Grid>
           ))}
           <div className="underline"></div>
           <Box className="button-container">
-            <BtnOutlined title="Reset" BtnHeight={32} BtnWidth={70} />
-            <BtnContained title="Select" BtnHeight={32} BtnWidth={70} />
+            <BtnOutlined
+              title="Reset"
+              BtnHeight={32}
+              BtnWidth={70}
+              onClick={resetAllOptions}
+            />
+            <BtnContained
+              title="Select"
+              BtnHeight={32}
+              BtnWidth={70}
+              disabled={!isAllSelected && selectedValues.length === 0}
+              onClick={submitSelectedOptions}
+            />
           </Box>
         </Stack>
       </Select>
