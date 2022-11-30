@@ -177,7 +177,11 @@ export const OrganisationDetails = () => {
 
   const addOrganisationOpen = () => {
     // setAnchorEl(null);
-    navigate('/userManagement/orgStructure/screens/Onboarding/onboarding');
+    navigate('/userManagement/orgStructure/screens/Onboarding/onboarding', {
+      state: {
+        isEditable: true,
+      },
+    });
   };
 
   const organisationOpen = () => {
@@ -376,6 +380,14 @@ export const OrganisationDetails = () => {
                 // onClick={() => handleClose()}
                 onClick={() => {
                   handleClose();
+                  navigate(
+                    '/userManagement/orgStructure/screens/Onboarding/onboarding',
+                    {
+                      state: {
+                        isEditable: false,
+                      },
+                    }
+                  );
                 }}
                 style={{ padding: '10px 20px', textAlign: 'left' }}
               >
@@ -385,10 +397,34 @@ export const OrganisationDetails = () => {
                 // onClick={handleClose}
                 onClick={() => {
                   handleClose();
+                  navigate(
+                    '/userManagement/orgStructure/screens/Onboarding/onboarding',
+                    {
+                      state: {
+                        isEditable: true,
+                      },
+                    }
+                  );
                 }}
                 style={{ padding: '10px 20px', textAlign: 'left' }}
               >
                 Edit Org.
+              </MenuItem>
+              <MenuItem
+                style={{ padding: '10px 20px', textAlign: 'left' }}
+                onClick={() => {
+                  handleClose();
+                }}
+              >
+                Activate Org
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  handleClose();
+                }}
+                style={{ padding: '10px 20px', textAlign: 'left' }}
+              >
+                Deactivate Org
               </MenuItem>
             </Menu>
           </>

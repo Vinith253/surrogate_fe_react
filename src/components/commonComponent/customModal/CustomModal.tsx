@@ -27,6 +27,7 @@ import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined
 import checkedIcon from '../../../assets/icons/check_box_square_icon.svg';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { fontSize } from '@mui/system';
 
 type props = {
   openSuccess?: any;
@@ -574,13 +575,16 @@ function CustomModal({
               <Button
                 variant="contained"
                 onClick={handleCloseSuccess}
-                style={{
+                sx={{
                   // width: '340px',
                   height: '48px',
                   fontSize: '12px',
                   marginTop: '30px',
                   marginBottom: '40px',
                   backgroundColor: `${colors.Modalblue}`,
+                  '&:hover': {
+                    backgroundColor: `${colors.Modalblue}`,
+                  },
                 }}
               >
                 {ProceedBtn}
@@ -593,13 +597,16 @@ function CustomModal({
               <Button
                 variant="contained"
                 onClick={handleCloseSuccess}
-                style={{
+                sx={{
                   // width: '340px',
                   height: '48px',
                   fontSize: '12px',
                   marginTop: '10px',
                   marginBottom: '14px',
                   backgroundColor: `${colors.Modalblue}`,
+                  '&:hover': {
+                    backgroundColor: `${colors.Modalblue}`,
+                  },
                 }}
               >
                 {ProceedBtn}
@@ -635,6 +642,7 @@ function CustomModal({
                   padding: {
                     xs: '0 13px',
                   },
+                  hyphens: 'initial',
                 }}
               >
                 {rejectedModaltitle}
@@ -655,6 +663,7 @@ function CustomModal({
                 },
                 marginBottom: '10px',
                 color: '#656769',
+                hyphens: 'initial',
               }}
             >
               {successModalMsg}
@@ -672,6 +681,7 @@ function CustomModal({
                   xs: '0 13px',
                   sm: '0 60px',
                 },
+                hyphens: 'initial',
                 color: '#656769',
               }}
             >
@@ -815,6 +825,7 @@ function CustomModal({
                         <DateTimePicker
                           renderInput={(props: any) => (
                             <TextField
+                            sx={{fontSize:1,fontWeight:400}}
                               size="small"
                               {...props}
                               fullWidth
@@ -822,9 +833,10 @@ function CustomModal({
                                 ...props.inputProps,
                                 placeholder: 'Start Date and time',
                               }}
+                              InputLabelProps={{ style: { fontSize: 14 } }}
                             />
                           )}
-                          label={datepickerLabelStart}
+                          // label={datepickerLabelStart}
                           value={startDatevalue}
                           onChange={(newValue: any) => {
                             setStartDateValue(newValue);
@@ -839,6 +851,7 @@ function CustomModal({
                         <DateTimePicker
                           renderInput={(props: any) => (
                             <TextField
+                            sx={{fontSize:'10px'}}
                               size="small"
                               {...props}
                               fullWidth
@@ -846,9 +859,10 @@ function CustomModal({
                                 ...props.inputProps,
                                 placeholder: 'End Date and time',
                               }}
+                              InputLabelProps={{ style: { fontSize: 14 } }}
                             />
                           )}
-                          label={datepickerLabelEnd}
+                          // label={datepickerLabelEnd}
                           value={endDatevalue}
                           onChange={(newValue: any) => {
                             setEndDateValue(newValue);
@@ -898,7 +912,7 @@ function CustomModal({
               >
                 <Typography
                   className="textarea"
-                  sx={{ float: 'right', fontSize: '8px', color: '#b6b7b7' }}
+                  sx={{ float: 'right', fontSize: '10px', color: '#b6b7b7' }}
                   pb={2}
                 >
                   {maxLength}
@@ -975,6 +989,9 @@ function CustomModal({
                   backgroundColor: `${colors.Modalblue}`,
                   fontWeight: '500',
                   padding: '6px 20px',
+                  '&:hover': {
+                    backgroundColor: `${colors.Modalblue}`,
+                  },
                 }}
                 onClick={handleSuccess}
               >
@@ -994,12 +1011,15 @@ function CustomModal({
               <Button
                 variant="contained"
                 onClick={handleCloseSuccess}
-                style={{
+                sx={{
                   width: '30em',
                   height: '3em',
                   fontSize: '12px',
                   backgroundColor: `${colors.Modalblue}`,
                   textTransform: 'capitalize',
+                  '&:hover': {
+                    backgroundColor: `${colors.Modalblue}`,
+                  },
                 }}
               >
                 {btn}
@@ -1039,6 +1059,9 @@ function CustomModal({
                     fontSize: '13px',
                     textTransform: 'capitalize',
                     background: '#0662B7',
+                    '&:hover': {
+                      backgroundColor: '#0662B7',
+                    },
                   }}
                   onClick={handleSuccess}
                 >
@@ -1087,6 +1110,9 @@ function CustomModal({
                       background: '#0662B7',
                       fontSize: '13px',
                       textTransform: 'capitalize',
+                      '&:hover': {
+                        backgroundColor: '#0662B7',
+                      },
                     }}
                   >
                     Copy Link

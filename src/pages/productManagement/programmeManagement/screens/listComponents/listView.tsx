@@ -44,7 +44,7 @@ const tableHeaderData = [
     activeSince: 'Active Since',
     lastModify: 'Last Modified',
     status: 'Status',
-    autoResumeForm: 'Auto Resume Form',
+    autoResumeForm: 'Auto Resume From',
     more: 'More',
   },
 ];

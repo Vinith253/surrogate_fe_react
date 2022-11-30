@@ -1,9 +1,7 @@
 import {
   Box,
-  Button,
   Divider,
   Grid,
-  IconButton,
   List,
   Stack,
   Typography,
@@ -13,16 +11,11 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { colors } from '../../../../../style/Color';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import TypoText from '../../../../../components/commonComponent/CustomText/Textfield';
-import TypographyInfo from '../../../../../components/commonComponent/CustomText/Info';
-import EditIcon from '../../../../../assets/images/edit_card.svg';
 import './style.scss';
 import {
   historyLogDetailData,
   historyLogDetailInterface,
 } from './historyLogDetail.const';
-import DetailsCard from '../../../../../components/commonComponent/DetailsCard';
-import { ScreenHeader } from '../../../../../components/commonComponent/ScreenHeader/ScreenHeader';
 import BtnContained from '../../../../../components/commonComponent/CustomText/Button/Contained';
 
 export const HistoryLogDetailScreen = () => {
@@ -182,9 +175,9 @@ export const HistoryLogDetailScreen = () => {
         sx={{
           marginTop: '10px',
           backgroundColor: 'white',
-          // position: 'fixed',
-          // bottom: 0,
-          // right: 0,
+          position: 'fixed',
+          bottom: 0,
+          right: 0,
           width: '100%',
           borderTop: '2px solid #f3f3f3 ',
         }}

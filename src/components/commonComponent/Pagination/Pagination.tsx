@@ -72,6 +72,7 @@ function PaginationComp(props: {
               fontSize: '14px',
               marginBottom: '20px',
               marginRight: '20px',
+              textTransform: 'capitalize',
             }}
             onClick={props.onFirstClick}
           >
@@ -94,6 +95,7 @@ function PaginationComp(props: {
               fontSize: '14px',
               marginBottom: '20px',
               marginLeft: '20px',
+              textTransform: 'capitalize',
             }}
             onClick={props.onLastClick}
           >

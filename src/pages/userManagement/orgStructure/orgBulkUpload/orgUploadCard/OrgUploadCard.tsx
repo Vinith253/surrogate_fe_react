@@ -11,6 +11,7 @@ import PageLayout from '../../../../../components/layout/pageLayout/pageLayout';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import './OrgUploadCard.scss';
 import CustomModal from '../../../../../components/commonComponent/customModal/CustomModal';
+import { useNavigate } from 'react-router-dom';
 
 const OrgUploadCard = ({
   toggle,
@@ -19,6 +20,7 @@ const OrgUploadCard = ({
   fileName,
   uploadProgressValue,
 }: any) => {
+  const navigate = useNavigate();
   const [progress, setProgress] = useState(0);
   const [progressBar, setProgressBar] = useState(0);
   const [openDiscard, setOpenDiscard] = useState(false);
@@ -48,8 +50,9 @@ const OrgUploadCard = ({
       clearInterval(timer);
     };
   }, [progressBar]);
-  const handleDiscard = () => {
-    setOpenDiscard(true);
+  const handleCancel = () => {
+    setOpenDiscard(!openDiscard);
+    navigate('/userManagement/orgStructure');
   };
   const footerStyle = {
     backgroundColor: 'white',
@@ -138,33 +141,19 @@ const OrgUploadCard = ({
           {/* <Box sx={{ position: 'fixed', bottom: 0 }}> */}
           {/* <FooterButton cancel="Cancel" submit="Procees" /> */}
           <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: '1%' }}>
-            <Button variant="outlined">Cancel</Button>
+            <Button variant="outlined" sx={{ textTransform: 'capitalize' }}>
+              Cancel
+            </Button>
             <Button
               variant="contained"
               // color="secondary"
               // onClick={handleProceed}
               sx={{
                 backgroundColor: '#82B1DB',
+                textTransform: 'capitalize',
               }}
             >
               {'Proceed'}
-            </Button>
-          </Box>
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'flex-end',
-              gap: '1%',
-              marginTop: '1%',
-            }}
-          >
-            <Button
-              variant="text"
-              color="secondary"
-              onClick={handleDiscard}
-              sx={{ fontSize: '12px' }}
-            >
-              {`Discord Error entries and Continue >`}
             </Button>
           </Box>
           {/* </Box> */}
@@ -174,10 +163,10 @@ const OrgUploadCard = ({
         <CustomModal
           openSuccess={openDiscard}
           handleCloseSuccess={() => setOpenDiscard(!openDiscard)}
-          handleSuccess={() => setOpenDiscard(!openDiscard)}
+          handleSuccess={handleCancel}
           successModalTitle={'Do You want to discard?'}
           discardModalMsg={
-            'Want to discard corrections for error entires in the excel sheet and continue upload cards'
+            'Want to discard uploading document and continue the bulk upload organisation'
           }
           yesContinueBtn={'Yes, Continue'}
           closeBtn={'Close'}

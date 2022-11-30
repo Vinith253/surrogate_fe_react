@@ -64,7 +64,7 @@ const UploadCard = ({
             {...props}
             sx={{
               '& .MuiLinearProgress-bar1Determinate': {
-                backgroundColor: progress === 100 ? 'green' : '',
+                backgroundColor: 'green',
               },
             }}
             className="upload-card-progress"
@@ -106,7 +106,10 @@ const UploadCard = ({
           <Button
             variant="text"
             // color={progress > 0 ? ' #82B1DB' : 'secondary'}
-            style={{ color: progress > 0 ? ' #82B1DB' : '#0662B7' }}
+            style={{
+              color: progress > 0 ? ' #82B1DB' : '#0662B7',
+              textTransform: 'capitalize',
+            }}
             disabled={progress > 0 ? true : false}
             startIcon={
               <FileDownloadOutlinedIcon
@@ -134,13 +137,16 @@ const UploadCard = ({
           {/* <Box sx={{ position: 'fixed', bottom: 0 }}> */}
           {/* <FooterButton cancel="Cancel" submit="Procees" /> */}
           <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: '1%' }}>
-            <Button variant="outlined">Cancel</Button>
+            <Button variant="outlined" sx={{ textTransform: 'capitalize' }}>
+              Cancel
+            </Button>
             <Button
               variant="contained"
               // color="secondary"
               // onClick={handleProceed}
               sx={{
                 backgroundColor: '#82B1DB',
+                textTransform: 'capitalize',
               }}
             >
               {'Proceed'}
@@ -158,9 +164,9 @@ const UploadCard = ({
               variant="text"
               color="secondary"
               // onClick={handleProceed}
-              sx={{ fontSize: '12px' }}
+              sx={{ fontSize: '12px', textTransform: 'capitalize' }}
             >
-              {`Discord Error entries and Continue >`}
+              {`Discard Error entries and Continue >`}
             </Button>
           </Box>
           {/* </Box> */}

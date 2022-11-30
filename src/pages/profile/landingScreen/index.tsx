@@ -1,21 +1,21 @@
 import { TabBar } from '../../../components/commonComponent/customTab/CustomTab';
 import { dataList } from '../../../interface/Types';
-import { ReTargetingHistory } from './screens/historyScreen/reTargetingHistory';
-import ReTargeting from './screens/reTargetingScreen/reTargeting';
+import { Profile } from '../screens/profileScreen/Profile';
+import { ReviewerApprover } from '../screens/reviewerApprover/reviewerApprover';
 
-function Retargeting() {
+function UserProfile() {
   const TabListData: dataList = [
     {
       id: '1',
-      data: 'Re-Targeting',
-      component: <ReTargeting />,
+      data: 'Profile',
+      component: <Profile />,
       isDisabled: false,
     },
 
     {
       id: '2',
-      data: 'Re-Targeting History',
-      component: <ReTargetingHistory />,
+      data: 'Reviewer & Approver',
+      component: <ReviewerApprover />,
       isDisabled: false,
     },
   ];
@@ -26,4 +26,4 @@ function Retargeting() {
   );
 }
 
-export default Retargeting;
+export default UserProfile;
