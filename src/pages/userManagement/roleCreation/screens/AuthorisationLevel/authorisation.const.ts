@@ -32,7 +32,14 @@ export const authorisationRows = [
   createData('3', 'v 1.0.0', 'Vinith', 'Vinith', '22/02/2022', 'Closed'),
   createData('4', 'v 1.0.0', 'Vinith', 'Vinith', '22/02/2022', 'Active'),
   createData('5', 'v 1.0.0', 'Vinith', 'Vinith', '22/02/2022', 'Active'),
-  createData('6', 'v 1.0.0', 'Vinith', 'Vinith', '22/02/2022', 'Waiting for Approval'),
+  createData(
+    '6',
+    'v 1.0.0',
+    'Vinith',
+    'Vinith',
+    '22/02/2022',
+    'Waiting for Approval'
+  ),
   createData('7', 'v 1.0.0', 'Vinith', 'Vinith', '22/02/2022', 'Active'),
   createData('8', 'v 1.0.0', 'Vinith', 'Vinith', '22/02/2022', 'Closed'),
   createData('9', 'v 1.0.0', 'Vinith', 'Vinith', '22/02/2022', 'Active'),
@@ -52,7 +59,8 @@ export const authorisationRows = [
 export const authorisation_user_data = [
   {
     module_id: 1,
-    module_name: "Product Management",
+    module_name: 'Product Management',
+    sub_modules: 'Sub-modules',
     reviewer: 'Reviewer',
     approver: 'Approver',
     sub_module: [
@@ -89,12 +97,12 @@ export const authorisation_user_data = [
           approver_data: [{ user_id: 3, user_name: 'Ganesh' }],
         },
       },
-      
     ],
   },
   {
     module_id: 2,
-    module_name: "User Management",
+    module_name: 'User Management',
+    sub_modules: 'Sub-modules',
     reviewer: 'Reviewer',
     approver: 'Approver',
     sub_module: [
@@ -138,7 +146,8 @@ export const authorisation_user_data = [
   },
   {
     module_id: 3,
-    module_name: "LMS",
+    module_name: 'LMS',
+    sub_modules: 'Sub-modules',
     reviewer: 'Reviewer',
     approver: 'Approver',
     sub_module: [
@@ -155,13 +164,125 @@ export const authorisation_user_data = [
   },
   {
     module_id: 4,
-    module_name: "Risk Management",
+    module_name: 'Risk Management',
+    sub_modules: 'Sub-modules',
     reviewer: 'Reviewer',
     approver: 'Approver',
     sub_module: [
       {
         sub_module_id: 9,
         sub_module_name: 'Customer Support',
+        sub_module_data: {
+          initiator_data: [{ user_id: 1, user_name: 'Parithi' }],
+          reviewer_data: [{ user_id: 2, user_name: 'Ashwin' }],
+          approver_data: [{ user_id: 3, user_name: 'Ganesh' }],
+        },
+      },
+    ],
+  },
+];
+
+export const review_user_data = [
+  {
+    module_id: 1,
+    module_name: 'Product Management',
+    sub_modules: 'Sub-modules',
+    reviewer: 'Reviewer',
+    approver: 'Approver',
+    sub_module: [
+      {
+        sub_module_id: 1,
+        sub_module_name: 'Programme Management',
+        sub_module_data: {
+          initiator_data: [{ user_id: 1, user_name: 'Parithi' }],
+          reviewer_data: [{ user_id: 2, user_name: 'Ashwin' }],
+          approver_data: [
+            { user_id: 3, user_name: 'Ganesh' },
+            { user_id: 4, user_name: 'Abishek' },
+          ],
+        },
+      },
+      {
+        sub_module_id: 2,
+        sub_module_name: 'Credit Rule',
+        sub_module_data: {
+          initiator_data: [{ user_id: 1, user_name: 'Parithi' }],
+          reviewer_data: [{ user_id: 2, user_name: 'Ashwin' }],
+          approver_data: [
+            { user_id: 3, user_name: 'Ganesh' },
+            { user_id: 4, user_name: 'Abishek' },
+          ],
+        },
+      },
+      {
+        sub_module_id: 3,
+        sub_module_name: 'Card Catalog',
+        sub_module_data: {
+          initiator_data: [{ user_id: 1, user_name: 'Parithi' }],
+          reviewer_data: [{ user_id: 2, user_name: 'Ashwin' }],
+          approver_data: [{ user_id: 3, user_name: 'Ganesh' }],
+        },
+      },
+    ],
+  },
+  {
+    module_id: 2,
+    module_name: 'Sales',
+    sub_modules: 'Sub-modules',
+    reviewer: 'Reviewer',
+    approver: 'Approver',
+    sub_module: [
+      {
+        sub_module_id: 9,
+        sub_module_name: 'Customer Support',
+        sub_module_data: {
+          initiator_data: [{ user_id: 1, user_name: 'Parithi' }],
+          reviewer_data: [
+            { user_id: 3, user_name: 'Ganesh' },
+            { user_id: 4, user_name: 'Abishek' },
+          ],
+          approver_data: [{ user_id: 3, user_name: 'Ganesh' }],
+        },
+      },
+    ],
+  },
+  {
+    module_id: 3,
+    module_name: 'User Management',
+    sub_modules: 'Sub-modules',
+    reviewer: 'Reviewer',
+    approver: 'Approver',
+    sub_module: [
+      {
+        sub_module_id: 4,
+        sub_module_name: 'Org.Structure',
+        sub_module_data: {
+          initiator_data: [{ user_id: 1, user_name: 'Parithi' }],
+          reviewer_data: [{ user_id: 2, user_name: 'Ashwin' }],
+          approver_data: [{ user_id: 3, user_name: 'Ganesh' }],
+        },
+      },
+      {
+        sub_module_id: 5,
+        sub_module_name: 'Branch Details',
+        sub_module_data: {
+          initiator_data: [{ user_id: 1, user_name: 'Parithi' }],
+          reviewer_data: [{ user_id: 2, user_name: 'Ashwin' }],
+          approver_data: [{ user_id: 3, user_name: 'Ganesh' }],
+        },
+      },
+      {
+        sub_module_id: 6,
+        sub_module_name: 'Role Creation',
+        sub_module_data: {
+          initiator_data: [{ user_id: 1, user_name: 'Parithi' }],
+          reviewer_data: [{ user_id: 2, user_name: 'Ashwin' }],
+          approver_data: [{ user_id: 3, user_name: 'Ganesh' }],
+        },
+      },
+      {
+        sub_module_id: 7,
+        sub_module_name: 'User Creation',
         sub_module_data: {
           initiator_data: [{ user_id: 1, user_name: 'Parithi' }],
           reviewer_data: [{ user_id: 2, user_name: 'Ashwin' }],
