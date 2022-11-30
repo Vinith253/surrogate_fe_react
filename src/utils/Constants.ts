@@ -2,7 +2,7 @@ export const tabBar = {
   PROGRAMME_MANAGEMENT: 'Programme Management',
   HISTORY_LOG: 'History Log',
   TEMPORARILY_PAUSE:
-    'Here is where we can activate, deactivate, and temporarily pause a surrogate',
+    'Here is where we can resume, pause, and temporarily pause a surrogate.',
 };
 export const programMmgt = {
   RESUME_SURROGATE: 'Resume Surrogate',
@@ -27,7 +27,7 @@ export const bulkUpload = {
   BULK_UPLOAD_ORG_HEAD: 'Bulk Upload - Organisation Details',
   BULK_UPLOAD_ORG_SUBHEAD: ` From here you can manage all your card's information`,
   BULK_UPLOAD_USER_HEAD: 'Bulk Upload - User Creation',
-  DOWNLOAD_SAMPLE: 'Download Sample',
+  DOWNLOAD_SAMPLE: 'Download sample',
   UPLOAD_CARD_DETAILS: 'Upload card details sheet',
   UPLOAD_DOCUMENTS: 'Upload the documents',
   UPLOAD_USER_SHEET: 'Upload user details sheet',

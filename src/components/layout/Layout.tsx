@@ -151,24 +151,29 @@ const sideBarOptions = [
       // },
     ],
   },
-  { key: 7, content: 'LMS', path: '/lms', image: lms_icon,     
-  subContent: [
-    {
-      data: 'Dashboard',
-      path: '/lms/dashboard',
-      img: dashboard_icon,
-    },
-    {
-      data: 'LMS Rule',
-      path: '/lms/lmsrule',
-      img: retargeting_icon,
-    },
-    {
-      data: 'Re-Targeting',
-      path: '/lms/retargeting',
-      img: lms_rule_icon,
-    },
-  ], },
+  {
+    key: 7,
+    content: 'LMS',
+    path: '/lms',
+    image: lms_icon,
+    subContent: [
+      {
+        data: 'Dashboard',
+        path: '/lms/dashboard',
+        img: dashboard_icon,
+      },
+      {
+        data: 'LMS Rule',
+        path: '/lms/lmsrule',
+        img: retargeting_icon,
+      },
+      {
+        data: 'Re-Targeting',
+        path: '/lms/retargeting',
+        img: lms_rule_icon,
+      },
+    ],
+  },
   {
     key: 8,
     content: 'RISK MNGMT.',
@@ -504,7 +509,15 @@ export default function Layout() {
               backgroundColor: 'white',
             }}
           >
-            <Typography variant="h5" sx={{ letterSpacing: '0.2px' }}>
+            <Typography
+              variant="h5"
+              sx={{
+                letterSpacing: '0.2px',
+                fontSize: '20px',
+                fontWeight: '500',
+                color: '#151515',
+              }}
+            >
               Surrogate Programme
             </Typography>
 
@@ -525,8 +538,24 @@ export default function Layout() {
                 </Box>
               </Box>
               <Box style={{ marginRight: '40px' }}>
-                <Typography>Ashwin Kumar</Typography>
-                <Typography>Surrogate Manager</Typography>
+                <Typography
+                  style={{
+                    fontSize: '14px',
+                    fontWeight: '400',
+                    color: '#151515',
+                  }}
+                >
+                  Ashwin Kumar
+                </Typography>
+                <Typography
+                  style={{
+                    fontSize: '12px',
+                    fontWeight: '400',
+                    color: ' #4D4E50',
+                  }}
+                >
+                  Surrogate Manager
+                </Typography>
               </Box>
 
               {/* <IconButton

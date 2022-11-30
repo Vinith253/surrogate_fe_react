@@ -127,7 +127,7 @@ const ReviewCard = () => {
 
         <Box className="body">
           <Box className="bodyBox">
-            <Card className="card">
+            <Card className="card" sx={{ cursor: 'pointer' }}>
               <img className="img" src={CardImage} onClick={handleOpen} />
 
               {open && (
@@ -181,6 +181,7 @@ const ReviewCard = () => {
                             lineHeight: '16px',
                             color: '#0662B7',
                             letterSpacing: '0.0125em',
+                            cursor: 'pointer',
                           }}
                           onClick={handleClose}
                         >
@@ -191,7 +192,7 @@ const ReviewCard = () => {
                         <img
                           style={{
                             width: '35vw',
-                            height: '35vh',
+                            objectFit: 'contain',
                           }}
                           alt=""
                           src={CardImage}
@@ -248,7 +249,6 @@ const ReviewCard = () => {
                 <Box>
                   <TypoText color="grey" title="Card Type" />
                   <Typography>Salaried</Typography>
-                  
                 </Box>
               </Grid>
 
@@ -288,7 +288,7 @@ const ReviewCard = () => {
         <Box className="surrogateHead">
           <TypoText title=" Surrogate" />
           <img src={Info_Icon} />
-          <TypographyInfo title='Lorem ipsum dolor sit amet consectetur. Urna. ' />
+          <TypographyInfo title="Lorem ipsum dolor sit amet consectetur. Urna. " />
         </Box>
         <Divider />
 
@@ -306,7 +306,7 @@ const ReviewCard = () => {
         <Box className="channelHead">
           <TypoText title=" Channels" />
           <img src={Info_Icon} />
-          <TypographyInfo title='Lorem ipsum dolor sit amet consectetur. Urna.'  />
+          <TypographyInfo title="Lorem ipsum dolor sit amet consectetur. Urna." />
         </Box>
         <Divider />
 

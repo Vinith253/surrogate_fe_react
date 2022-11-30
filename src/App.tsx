@@ -145,6 +145,11 @@ export default function App() {
           element={<HistoryLogDetailScreen />}
         />
 
+        <Route
+          path="/userManagement/userCreation/historyLogDetail"
+          element={<HistoryLogDetailScreen />}
+        />
+
         {/* Catch all */}
         <Route path="*" element={<NotFoundPage />} />
 
@@ -153,20 +158,9 @@ export default function App() {
           element={<AuthDetail />}
         />
 
-        <Route
-          path="/lms/dashboard"
-          element={<LMSDashboard />}
-        />
-        <Route
-          path="/lms/lmsrule"
-          element={<LMSRule />}
-        />
-        <Route
-          path="/lms/retargeting"
-          element={<Retargeting />}
-        />
-
-
+        <Route path="/lms/dashboard" element={<LMSDashboard />} />
+        <Route path="/lms/lmsrule" element={<LMSRule />} />
+        <Route path="/lms/retargeting" element={<Retargeting />} />
       </Route>
     </Routes>
   );

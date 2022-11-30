@@ -717,13 +717,16 @@ export default function UserBulkList(props: any) {
             <Box
               sx={{ display: 'flex', justifyContent: 'flex-end', gap: '1%' }}
             >
-              <Button variant="outlined">Cancel</Button>
+              <Button variant="outlined" sx={{ textTransform: 'capitalize' }}>
+                Cancel
+              </Button>
               <Button
                 variant="contained"
                 // color="secondary"
                 onClick={handleProceed}
                 sx={{
                   backgroundColor: correctionState ? ' #0662B7' : '#82B1DB',
+                  textTransform: 'capitalize',
                 }}
                 // disabled={true}
               >
@@ -744,7 +747,7 @@ export default function UserBulkList(props: any) {
                 variant="text"
                 color="secondary"
                 onClick={handleDiscard}
-                sx={{ fontSize: '12px' }}
+                sx={{ fontSize: '12px', textTransform: 'capitalize' }}
               >
                 {!correctionState && `Discord Error entries and Continue >`}
               </Button>

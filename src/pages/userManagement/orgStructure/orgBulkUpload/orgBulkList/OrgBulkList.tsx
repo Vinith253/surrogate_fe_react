@@ -718,7 +718,9 @@ export default function OrgBulkList(props: any) {
             <Box
               sx={{ display: 'flex', justifyContent: 'flex-end', gap: '1%' }}
             >
-              <Button variant="outlined">Cancel</Button>
+              <Button variant="outlined" sx={{ textTransform: 'capitalize' }}>
+                Cancel
+              </Button>
               <Button
                 variant="contained"
                 // color="secondary"
@@ -728,6 +730,7 @@ export default function OrgBulkList(props: any) {
                     progress === 100 && correctionState
                       ? ' #0662B7'
                       : '#82B1DB',
+                  textTransform: 'capitalize',
                 }}
               >
                 {correctionState &&
@@ -749,7 +752,7 @@ export default function OrgBulkList(props: any) {
                 variant="text"
                 color="secondary"
                 onClick={handleDiscard}
-                sx={{ fontSize: '12px' }}
+                sx={{ fontSize: '12px', textTransform: 'capitalize' }}
               >
                 {`Discord Error entries and Continue >`}
               </Button>

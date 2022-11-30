@@ -144,6 +144,9 @@ export const HistoryLog = (props: any) => {
     },
   ];
 
+  const historyViewMoreFun = () => {
+    navigate('/userManagement/roleCreation/historyLogDetail');
+  };
   const column = [
     {
       title: '#',
@@ -308,7 +311,8 @@ export const HistoryLog = (props: any) => {
           tableData={tableData}
           handleCloseSuccess={closeModal}
           openSuccess={showHistoryModal}
-          viewMoreDetails={'view more details'}
+          viewMoreDetails={'View More Details'}
+          historyViewMoreFun={historyViewMoreFun}
         />
       )}
     </Stack>

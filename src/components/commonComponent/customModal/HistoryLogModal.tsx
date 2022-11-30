@@ -18,7 +18,7 @@ function HistoryModal() {
         handleClickOpen={handleClickOpen}
         handleCloseSuccess={handleCloseSuccess}
         openSuccess={openSuccess}
-        viewMoreDetails={'view more details'}
+        viewMoreDetails={'View More Details'}
       />
     </div>
   );

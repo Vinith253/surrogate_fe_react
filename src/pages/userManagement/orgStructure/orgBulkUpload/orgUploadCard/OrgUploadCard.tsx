@@ -138,13 +138,16 @@ const OrgUploadCard = ({
           {/* <Box sx={{ position: 'fixed', bottom: 0 }}> */}
           {/* <FooterButton cancel="Cancel" submit="Procees" /> */}
           <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: '1%' }}>
-            <Button variant="outlined">Cancel</Button>
+            <Button variant="outlined" sx={{ textTransform: 'capitalize' }}>
+              Cancel
+            </Button>
             <Button
               variant="contained"
               // color="secondary"
               // onClick={handleProceed}
               sx={{
                 backgroundColor: '#82B1DB',
+                textTransform: 'capitalize',
               }}
             >
               {'Proceed'}
@@ -162,7 +165,7 @@ const OrgUploadCard = ({
               variant="text"
               color="secondary"
               onClick={handleDiscard}
-              sx={{ fontSize: '12px' }}
+              sx={{ fontSize: '12px', textTransform: 'capitalize' }}
             >
               {`Discord Error entries and Continue >`}
             </Button>
