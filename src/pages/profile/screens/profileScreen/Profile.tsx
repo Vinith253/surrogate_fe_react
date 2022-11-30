@@ -1,17 +1,11 @@
-import {
-  Box,
-  Grid,
-  IconButton,
-  Stack,
-  Typography,
-  Button,
-} from '@mui/material';
+import { Box, IconButton, Stack, Typography, Button } from '@mui/material';
 import React, { useState } from 'react';
-import { colors } from '../../style/Color';
-import profile_icon from '../../assets/icons/profile_icon.svg';
-import './style/style.scss';
-import passwordShow from '../../assets/icons/passwordView.svg';
-import DetailsCard from '../../components/commonComponent/DetailsCard';
+import { colors } from '../../../../style/Color';
+import profile_icon from '../../../../assets/icons/profile_icon.svg';
+import passwordShow from '../../../../assets/icons/passwordView.svg';
+import DetailsCard from '../../../../components/commonComponent/DetailsCard';
+import './style.scss';
+
 export const personalDetails = {
   title: 'Profile Details',
   icon: true,
@@ -83,10 +77,10 @@ export const contactDetails = {
   ],
 };
 export const Profile = () => {
-  const passWord = 'Apple@123';
-  const [show, setShow] = useState(false);
+  const passWord = '************';
+  // const [show, setShow] = useState(false);
   return (
-    <Stack sx={{ backgroundColor: colors.bgGrey }}>
+    <Stack sx={{ backgroundColor: colors.bgGrey }} className="profileContainer">
       <Stack>
         <Box
           className="headerContainer"
@@ -107,32 +101,25 @@ export const Profile = () => {
             </Typography>
           </Stack>
         </Box>
-        <Stack
-          sx={{ backgroundColor: colors.white, margin: '30px 0' }}
-          className="profile-details-container"
-        >
-          <DetailsCard data={personalDetails} gridColumn={2} />
-        </Stack>
-        <Stack
-          sx={{ backgroundColor: colors.white }}
-          className="profile-details-container"
-        >
-          <DetailsCard data={contactDetails} gridColumn={2} />
-        </Stack>
+
+        <DetailsCard data={personalDetails} gridColumn={2} />
+
+        <DetailsCard data={contactDetails} gridColumn={2} />
+
         <Stack
           sx={{
             backgroundColor: colors.white,
             margin: '30px 0',
           }}
         >
-          <Stack className="accountHeader">
-            <Stack className="header">Account Details</Stack>
-            <Stack className="underline"></Stack>
-            <Stack className="each-info">
-              <Stack className="info-label">Password</Stack>
-              <Stack className="passwordStyle">
+          <Stack className="profile-accountHeader">
+            <Stack className="profile-header">Account Details</Stack>
+            <Stack>
+              <Stack className="profile-password">Password</Stack>
+
+              <Stack className="ProfilepasswordStyle">
                 <Stack className="passwordDetailsStyle">
-                  <Stack className="info-value">
+                  <Stack className="profile-info-value">
                     <Typography>{passWord}</Typography>
                   </Stack>
                   <Stack>
@@ -143,10 +130,10 @@ export const Profile = () => {
                 </Stack>
                 <Stack>
                   <Button
-                    className="changePassword"
+                    className="profile-changePassword"
                     variant="text"
                     size="small"
-                    sx={{ color: '#0662B7' }}
+                    // sx={{ color: '#0662B7' }}
                   >
                     Change Password
                   </Button>
