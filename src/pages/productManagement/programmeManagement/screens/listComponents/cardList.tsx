@@ -49,10 +49,17 @@ function CardList({ data }: cardData) {
   const [showScheduledPauseSuccessModal, setShowScheduledPauseSuccessModal] =
     useState<boolean>(false);
   const [pauseMethod, setPauseMethod] = useState('Pause Now');
+  const [resumePopUpTitle, setResumePopUpTitle] = useState('');
+  const [pausePopUpTitle, setPausePopUpTitle] = useState('');
 
   const open = Boolean(anchorElement);
-  const handleClick = (event: React.MouseEvent<HTMLTableCellElement>) => {
+  const handleClick = (
+    event: React.MouseEvent<HTMLTableCellElement>,
+    value: string
+  ) => {
     setAnchorElement(event.currentTarget);
+    setResumePopUpTitle(value);
+    setPausePopUpTitle(value);
   };
   const handleClose = () => {
     setAnchorElement(null);
@@ -147,7 +154,9 @@ function CardList({ data }: cardData) {
                   </Box>
                   <Box
                     id="more-button"
-                    onClick={handleClick}
+                    onClick={(e: any) =>
+                      handleClick(e, dataItem.surrogateProgramme)
+                    }
                     aria-controls={open ? 'more-menu' : undefined}
                     aria-haspopup="true"
                     aria-expanded={open ? 'true' : undefined}
@@ -302,7 +311,7 @@ function CardList({ data }: cardData) {
             openSuccess={showPauseModal}
             handleCloseSuccess={closeModal}
             handleSuccess={successModal}
-            title={'Card For Card - Pause'}
+            title={`${pausePopUpTitle}- Pause`}
             pause_content={'You can pause it or perform a scheduled pause.'}
             scheduledPause_content={
               'Please choose a date range to perform a scheduled pause.'
@@ -323,7 +332,7 @@ function CardList({ data }: cardData) {
           <CustomModal
             openSuccess={showPauseSuccessModal}
             handleCloseSuccess={closeModal}
-            successModalTitle={'Card For Card - Pause'}
+            successModalTitle={`${pausePopUpTitle} - Pause`}
             successModalMsg={
               ' Your action of pausing - Card For Card Surrogate has been successully sent to the reviewer'
             }
@@ -334,7 +343,7 @@ function CardList({ data }: cardData) {
           <CustomModal
             openSuccess={showScheduledPauseSuccessModal}
             handleCloseSuccess={closeModal}
-            successModalTitle={'Card For Card - Scheduled Pause'}
+            successModalTitle={`${pausePopUpTitle} - Scheduled Pause`}
             successModalMsg={
               'Your action of Scheduled Pause - Card For Card Surrogate From  DD/MM/YYYTo DD/MM/YYY is successfully sent to reviewer'
             }
@@ -345,7 +354,7 @@ function CardList({ data }: cardData) {
           <CustomModal
             openSuccess={showResumeModal}
             handleCloseSuccess={closeModal}
-            title={'AQB - Resume Now'}
+            title={`${resumePopUpTitle} - Resume Now`}
             handleSuccess={resumeSuccessModal}
             pause_content={
               'You will be able to resume your paused surrogate here.'
@@ -361,7 +370,7 @@ function CardList({ data }: cardData) {
           <CustomModal
             openSuccess={showResumeSuccessModal}
             handleCloseSuccess={closeModal}
-            successModalTitle={'AQB - Resume Now'}
+            successModalTitle={`${resumePopUpTitle} - Resume Now`}
             successModalMsg={
               'Your action of Resuming - AQB Surrogate has been successfully sent to the reviewer.'
             }

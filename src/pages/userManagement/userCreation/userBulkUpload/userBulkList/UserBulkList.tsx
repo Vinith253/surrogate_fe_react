@@ -207,7 +207,7 @@ export default function UserBulkList(props: any) {
   const navigate = useNavigate();
   const [correctionState, setCorrectionState] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [alignment, setAlignment] = useState('all');
+  const [alignment, setAlignment] = useState('error');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
@@ -411,7 +411,17 @@ export default function UserBulkList(props: any) {
       setErrorCount('00');
     }
   }, [correctionState]);
-
+  useEffect(() => {
+    if (alignment === 'error') {
+      const errorData = data1.filter((item) => item.error === true);
+      setDataList(errorData);
+    } else if (alignment === 'valid') {
+      const validData = data1.filter((item) => item.error === false);
+      setDataList(validData);
+    } else {
+      setDataList(data1);
+    }
+  }, [alignment]);
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
     newPage: number
@@ -567,7 +577,7 @@ export default function UserBulkList(props: any) {
             Valid Records: {progress === 100 && validCount}
           </Typography>
           <Typography variant="h6" sx={{ fontSize: '1rem' }}>
-            Error Found: {progress === 100 && errorCount}
+            Errors Found: {progress === 100 && errorCount}
           </Typography>
         </Box>
         {progress !== 100 && (
@@ -584,7 +594,7 @@ export default function UserBulkList(props: any) {
           </Alert>
         )}
         {progress === 100 && !correctionState && (
-          <Alert severity="error">{count} Error found in Uploaded File</Alert>
+          <Alert severity="error">{count} Errors found in Uploaded File</Alert>
         )}
         {correctionState && progress === 100 && (
           <Alert severity="success">No Error found</Alert>
@@ -680,7 +690,10 @@ export default function UserBulkList(props: any) {
             display: progress === 100 && correctionState ? 'none' : 'block',
           }}
         >
-          <CommonTable column={columnList} data={dataList} />
+          {progress === 100 && (
+            <CommonTable column={columnList} data={dataList} />
+          )}
+          {progress !== 100 && <CommonTable column={columnList} data={data2} />}
         </Box>
       )}
       {progress === 100 && correctionState && (
@@ -759,7 +772,7 @@ export default function UserBulkList(props: any) {
                 onClick={handleDiscard}
                 sx={{ fontSize: '12px', textTransform: 'capitalize' }}
               >
-                {!correctionState && `Discord Error entries and Continue >`}
+                {!correctionState && `Discard Error entries and Continue >`}
               </Button>
             </Box>
           </Box>

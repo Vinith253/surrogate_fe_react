@@ -7,7 +7,7 @@ export const tabBar = {
 export const programMmgt = {
   RESUME_SURROGATE: 'Resume Surrogate',
   PAUSE_SURROGATE: 'Pause Surrogate',
-  EDIT_SCHEDULE_PAUSE: 'Edit Pause',
+  EDIT_SCHEDULE_PAUSE: 'Edit Scheduled Pause / Pause',
 };
 
 export const tagBasedIndicator = {

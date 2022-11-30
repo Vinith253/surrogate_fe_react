@@ -492,7 +492,7 @@ export const CardCatalogue = () => {
     },
     {
       id: 2,
-      label: 'Car For Card',
+      label: 'Card For Card',
       defaultChecked: true,
     },
     {
@@ -674,7 +674,11 @@ export const CardCatalogue = () => {
             // }}
           >
             <Button
-              sx={{ textTransform: 'capitalize' }}
+              sx={{
+                textTransform: 'capitalize',
+                fontSize: '14px',
+                fontWeight: 500,
+              }}
               color="secondary"
               variant="outlined"
             >
@@ -841,7 +845,6 @@ export const CardCatalogue = () => {
                   aria-label="Platform"
                   sx={{
                     height: '40px',
-                   
                   }}
                 
                 >

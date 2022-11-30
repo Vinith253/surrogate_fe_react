@@ -64,7 +64,7 @@ const UploadCard = ({
             {...props}
             sx={{
               '& .MuiLinearProgress-bar1Determinate': {
-                backgroundColor: progress === 100 ? 'green' : '',
+                backgroundColor: 'green',
               },
             }}
             className="upload-card-progress"
@@ -166,7 +166,7 @@ const UploadCard = ({
               // onClick={handleProceed}
               sx={{ fontSize: '12px', textTransform: 'capitalize' }}
             >
-              {`Discord Error entries and Continue >`}
+              {`Discard Error entries and Continue >`}
             </Button>
           </Box>
           {/* </Box> */}
