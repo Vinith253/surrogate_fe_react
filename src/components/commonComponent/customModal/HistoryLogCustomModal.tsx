@@ -17,8 +17,9 @@ import {
   List,
   ListItem,
 } from '@mui/material';
-// import "../../../style/Style.css";
+import './CustomModal.scss';
 import { modalStyle } from '../../../style/ModalStyle/ModalStyle';
+import { Link } from 'react-router-dom';
 type props = {
   title: string;
   closeBtn: string;
@@ -27,6 +28,7 @@ type props = {
   handleCloseSuccess: () => void;
   openSuccess: boolean;
   viewMoreDetails: string;
+  historyViewMoreFun?: () => void;
 };
 export default function HistoryLogCustomModal({
   title,
@@ -36,6 +38,7 @@ export default function HistoryLogCustomModal({
   handleCloseSuccess,
   openSuccess,
   viewMoreDetails,
+  historyViewMoreFun,
 }: props) {
   const [open, setOpen] = useState(null);
   const handleOpen = (clickedIndex: any) => {
@@ -53,8 +56,10 @@ export default function HistoryLogCustomModal({
           onClose={handleCloseSuccess}
           aria-labelledby="parent-modal-title"
           aria-describedby="parent-modal-description"
+          fullWidth={true}
+          className="history_modal"
         >
-          <Stack py={2} style={{ width: '540px' }} px={2}>
+          <Stack py={2} px={2}>
             <Stack
               sx={{
                 display: 'flex',
@@ -67,15 +72,14 @@ export default function HistoryLogCustomModal({
             >
               <Typography
                 className="modal_title"
-                component="h1"
-                fontSize={11}
-                fontWeight={600}
-                color="#555759"
+                fontWeight={500}
+                color="#656769"
+                style={{ fontSize: '13px' }}
               >
                 {title}
               </Typography>
               <Typography
-                sx={{ color: '#0662B7', fontSize: '11px', cursor: 'pointer' }}
+                sx={{ color: '#0662B7', fontSize: '14px', cursor: 'pointer' }}
                 onClick={handleCloseSuccess}
               >
                 {closeBtn}
@@ -86,9 +90,10 @@ export default function HistoryLogCustomModal({
                 <TableRow sx={{ backgroundColor: '#CBE0F5' }}>
                   <TableCell
                     sx={{
-                      fontSize: '10px',
+                      fontSize: '13px',
                       padding: '0px 5px',
-                      fontWeight: '600',
+                      fontWeight: '500',
+                      color: '#151515',
                     }}
                   >
                     Version Number
@@ -250,8 +255,10 @@ export default function HistoryLogCustomModal({
                                     return (
                                       <ListItem
                                         sx={{
-                                          fontSize: '10px',
-                                          padding: '3px 16px',
+                                          fontSize: '11px',
+                                          fontWeight: '600',
+                                          padding: '1px 2px',
+                                          color: '#151515',
                                         }}
                                       >
                                         <Stack
@@ -270,12 +277,14 @@ export default function HistoryLogCustomModal({
                               </List>
                               <Typography
                                 sx={{
-                                  fontSize: '10px',
+                                  fontSize: '12px',
                                   float: 'right',
                                   color: '#0662B7',
                                   fontWeight: '500',
                                   cursor: 'pointer',
+                                  textDecoration: 'underline',
                                 }}
+                                onClick={historyViewMoreFun}
                               >
                                 {viewMoreDetails}
                               </Typography>

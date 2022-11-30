@@ -27,6 +27,7 @@ import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined
 import checkedIcon from '../../../assets/icons/check_box_square_icon.svg';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { fontSize } from '@mui/system';
 
 type props = {
   openSuccess?: any;
@@ -823,6 +824,7 @@ function CustomModal({
                                 ...props.inputProps,
                                 placeholder: 'Start Date and time',
                               }}
+                              InputLabelProps={{ style: { fontSize: 14 } }}
                             />
                           )}
                           // label={datepickerLabelStart}
@@ -848,6 +850,7 @@ function CustomModal({
                                 ...props.inputProps,
                                 placeholder: 'End Date and time',
                               }}
+                              InputLabelProps={{ style: { fontSize: 14 } }}
                             />
                           )}
                           // label={datepickerLabelEnd}
@@ -900,7 +903,7 @@ function CustomModal({
               >
                 <Typography
                   className="textarea"
-                  sx={{ float: 'right', fontSize: '8px', color: '#b6b7b7' }}
+                  sx={{ float: 'right', fontSize: '10px', color: '#b6b7b7' }}
                   pb={2}
                 >
                   {maxLength}

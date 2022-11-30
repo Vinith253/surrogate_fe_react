@@ -35,6 +35,7 @@ import BulkUpload from '..';
 import CustomModal from '../../../../../components/commonComponent/customModal/CustomModal';
 import CommonTable from '../../../../../components/commonComponent/commonTable/CommonTable';
 import { FooterButton } from '../../../../../components/commonComponent/FooterButton/FooterButton';
+import GroupButton from '../../../../../components/commonComponent/GroupButton/GroupButton';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -485,6 +486,7 @@ export default function BulkList(props: any) {
     backgroundColor: ' rgb(240, 240, 240)',
     border: ' rgb(240, 240, 240) 1px ',
     color: 'black',
+    textTransform: 'capitalize',
     '&.Mui-selected, &.Mui-selected:hover': {
       color: 'white',
       backgroundColor: '#1976d2',
@@ -510,6 +512,18 @@ export default function BulkList(props: any) {
     const lastPageIndex = firstPageIndex + rowsPerPage;
     return rows.slice(firstPageIndex, lastPageIndex);
   }, [currentPage, rowsPerPage, rows]);
+
+  const GroupButtonData = [
+    {
+      title: 'All',
+    },
+    {
+      title: 'Valid',
+    },
+    {
+      title: 'Error',
+    },
+  ];
 
   return (
     <PageLayout>
@@ -597,20 +611,14 @@ export default function BulkList(props: any) {
           exclusive
           onChange={handleChange}
           aria-label="Platform"
-          // sx={ToggleBoxStyle}
         >
           <ColorButton value="all">All</ColorButton>
           <ColorButton value="valid">Valid</ColorButton>
-          <ColorButton value="error">Error</ColorButton>
+          <ColorButton value="error">
+            {props.fileCheck === 'image' ? 'Missing' : 'Error'}
+          </ColorButton>
         </ToggleButtonGroup>
-        {/* <ButtonGroup
-          variant="contained"
-          aria-label="outlined primary button group"
-        >
-          <ColorButton>All</ColorButton>
-          <ColorButton>Valid</ColorButton>
-          <ColorButton>Error</ColorButton>
-        </ButtonGroup> */}
+        {/* <GroupButton data={GroupButtonData} /> */}
       </Box>
       {progress > 70 && (
         // <TableContainer
@@ -721,7 +729,9 @@ export default function BulkList(props: any) {
             <Box
               sx={{ display: 'flex', justifyContent: 'flex-end', gap: '1%' }}
             >
-              <Button variant="outlined">Cancel</Button>
+              <Button variant="outlined" sx={{ textTransform: 'capitalize' }}>
+                Cancel
+              </Button>
               <Button
                 variant="contained"
                 // color="secondary"
@@ -731,6 +741,7 @@ export default function BulkList(props: any) {
                     progress === 100 && correctionState
                       ? ' #0662B7'
                       : '#82B1DB',
+                  textTransform: 'capitalize',
                 }}
               >
                 {progress === 100 && correctionState
@@ -750,7 +761,7 @@ export default function BulkList(props: any) {
                 variant="text"
                 color="secondary"
                 onClick={handleProceed}
-                sx={{ fontSize: '12px' }}
+                sx={{ fontSize: '12px', textTransform: 'capitalize' }}
               >
                 {`Discord Error entries and Continue >`}
               </Button>

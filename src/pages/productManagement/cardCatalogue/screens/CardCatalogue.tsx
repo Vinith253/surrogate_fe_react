@@ -76,8 +76,9 @@ import {
 import TablePagination from '@mui/material/TablePagination';
 import { Height } from '@mui/icons-material';
 import TypoText from '../../../../components/commonComponent/CustomText/Textfield';
-import BtnContained from '../../../../components/commonComponent/CustomText/Button/Contained';
+import GroupButton from '../../../../components/commonComponent/GroupButton/GroupButton';
 import BtnOutlined from '../../../../components/commonComponent/CustomText/Button/Outlined';
+import BtnContained from '../../../../components/commonComponent/CustomText/Button/Contained';
 
 // const columns: GridColDef[] = [
 //   { field: 'id', headerName: 'ID', width: 70 },
@@ -516,6 +517,21 @@ export const CardCatalogue = () => {
     },
   ];
 
+  const GroupButtonData = [
+    {
+      title: 'All',
+    },
+    {
+      title: 'Activate',
+    },
+    {
+      title: 'Deactivated',
+    },
+    {
+      title: 'Saved',
+    },
+  ];
+
   return (
     <Stack>
       <Stack>
@@ -532,7 +548,7 @@ export const CardCatalogue = () => {
           </Box>
           <Box>
             <Button
-              sx={{ textTransform: 'capitalize' }}
+              sx={{ textTransform: 'capitalize', backgroundColor: '#0662B7' }}
               variant="contained"
               color="secondary"
               startIcon={<AddIcon />}
@@ -599,13 +615,18 @@ export const CardCatalogue = () => {
                   </MenuItem>
                 ))}
                 <Box>
-                  <Divider/>
-                  <Box sx={{display:'flex',justifyContent:'flex-end',paddingY:2}} >
-                  <Button sx={{gap:2}} >
-                    <BtnOutlined title='Reset' />
-                    <BtnContained title='Select' />
-                    
-                  </Button>
+                  <Divider />
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'flex-end',
+                      paddingY: 2,
+                    }}
+                  >
+                    <Button sx={{ gap: 2 }}>
+                      <BtnOutlined title="Reset" />
+                      <BtnContained title="Select" />
+                    </Button>
                   </Box>
                 </Box>
               </Select>
@@ -652,10 +673,18 @@ export const CardCatalogue = () => {
             //   backgroundColor: 'white',
             // }}
           >
-            <Button sx={{textTransform:'capitalize',fontSize:'14px',fontWeight:500}} color="secondary" variant="outlined">
+            <Button
+              sx={{ textTransform: 'capitalize' }}
+              color="secondary"
+              variant="outlined"
+            >
               Reset
             </Button>
-            <Button sx={{textTransform:'capitalize'}} color='secondary'  variant="contained">
+            <Button
+              sx={{ textTransform: 'capitalize' }}
+              color="secondary"
+              variant="contained"
+            >
               Search
             </Button>
           </Box>
@@ -680,22 +709,19 @@ export const CardCatalogue = () => {
                 display: 'flex',
                 flexDirection: 'row',
                 justifyContent: 'space-around',
-                gap:2
+                gap: 2,
               }}
             >
-              
               <Button>
                 <img src={Download_Icon} alt="d" />
               </Button>
               <Button>
                 <img src={Email_Icon} alt="email" />
               </Button>
-              
             </Box>
-            
           </Box>
-          <Divider sx={{paddingX:3}}/>
-          
+          <Divider sx={{ paddingX: 3 }} />
+
           <Box
             className="body2"
             // sx={{
@@ -710,7 +736,7 @@ export const CardCatalogue = () => {
               <Button
                 className="btn"
                 variant="contained"
-                color='secondary'
+                color="secondary"
                 // sx={{
                 //   padding: '3px 8px',
                 //   fontSize: '12px',
@@ -805,8 +831,8 @@ export const CardCatalogue = () => {
               //   lineHeight: '14px',
               // }}
               >
-                <ToggleButtonGroup
-                  //  size='small'
+                {/* <ToggleButtonGroup
+                 
                   color="primary"
                   // color="secondary"
                   value={alignment}
@@ -817,7 +843,7 @@ export const CardCatalogue = () => {
                     height: '40px',
                    
                   }}
-                  // sx={ToggleBoxStyle}
+                
                 >
                   <ColorButton
                     value="all"
@@ -825,28 +851,30 @@ export const CardCatalogue = () => {
                   >
                     All
                   </ColorButton>
-                  {/* <Divider orientation="vertical" /> */}
+                 
                   <ColorButton
                     value="activate"
                     sx={{ textTransform: 'capitalize', paddingRight: '10px' }}
                   >
                     Activate
                   </ColorButton>
-                  {/* <Divider orientation="vertical" /> */}
+                 
                   <ColorButton
                     value="deactivated"
                     sx={{ textTransform: 'capitalize', paddingRight: '10px' }}
                   >
                     Deactivated
                   </ColorButton>
-                  {/* <Divider orientation="vertical" /> */}
+               
                   <ColorButton
                     value="saved"
                     sx={{ textTransform: 'capitalize', paddingRight: '10px' }}
                   >
                     Saved
                   </ColorButton>
-                </ToggleButtonGroup>
+                </ToggleButtonGroup> */}
+
+                <GroupButton data={GroupButtonData} />
               </Box>
             </Stack>
           </Box>
@@ -924,7 +952,7 @@ export const CardCatalogue = () => {
                       // sx={{ padding:0,border:0 }}
                     >
                       <TableCell align="center" padding="checkbox">
-                        <Checkbox color='secondary' />
+                        <Checkbox color="secondary" />
                       </TableCell>
                       <TableCell align="center">{row.id}</TableCell>
                       <TableCell align="center">{row.cardName}</TableCell>
@@ -1065,10 +1093,8 @@ export const CardCatalogue = () => {
           openSuccess={resumeModal}
           handleCloseSuccess={closeModal}
           handleSuccess={handleResumeSuccess}
-          title={'AQB - Resume Now'}
-          pause_content={
-            'You will be able to resume your paused surrogate here.'
-          }
+          title={'Card - Resume Now'}
+          pause_content={'You can resume your card from here.'}
           textarea_title={'Add Remarks'}
           dateRange_title={'Enter Date range'}
           maxLength={'Maximum of 500 words'}
@@ -1103,7 +1129,7 @@ export const CardCatalogue = () => {
           openSuccess={showPauseModal}
           handleCloseSuccess={closeModal}
           handleSuccess={successModal}
-          title={'Card For Card - Pause'}
+          title={' Card - Pause'}
           pause_content={'You can pause it or perform a scheduled pause.'}
           scheduledPause_content={
             'Please choose a date range to perform a scheduled pause.'
@@ -1115,7 +1141,7 @@ export const CardCatalogue = () => {
           maxLength={'Maximum of 500 words'}
           pauseMethodChecking={pauseMethodChange}
           close={'Close'}
-          submit={'Submit'}
+          submit={'Pause'}
           datepickerLabelStart={'Start Date and time'}
           datepickerLabelEnd={'End Date and time'}
         />
@@ -1149,9 +1175,9 @@ export const CardCatalogue = () => {
           handleCloseSuccess={closeModal}
           handleSuccess={handleEditSuccess}
           title={'Card - Edit Pause'}
-          pause_content={'You can pause it or perform a scheduled pause.'}
+          pause_content={'You can Pause or Schedule Pause card here.'}
           scheduledPause_content={
-            'Please choose a date range to perform a scheduled pause.'
+            'Please choose a date range to perform a scheduled Pause'
           }
           textarea_title={'Add Remarks'}
           radioValuOne={NORMAL_PAUSE}
@@ -1160,7 +1186,7 @@ export const CardCatalogue = () => {
           maxLength={'Maximum of 500 words'}
           pauseMethodChecking={pauseMethodChange}
           close={'Close'}
-          submit={'Submit'}
+          submit={'Pause'}
           datepickerLabelStart={'Start Date and time'}
           datepickerLabelEnd={'End Date and time'}
         />

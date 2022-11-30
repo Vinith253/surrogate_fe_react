@@ -113,6 +113,7 @@ const DragDrop = ({
             onClick={onButtonClick}
             sx={{ backgroundColor: progressValue > 0 ? ' #82B1DB' : '#0662B7' }}
             disabled={progressValue > 0 ? true : false}
+            style={{ textTransform: 'inherit' }}
           >
             {buttonText}
           </ColorButton>
