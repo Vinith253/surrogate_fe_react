@@ -35,6 +35,7 @@ import BulkUpload from '..';
 import CustomModal from '../../../../../components/commonComponent/customModal/CustomModal';
 import CommonTable from '../../../../../components/commonComponent/commonTable/CommonTable';
 import { FooterButton } from '../../../../../components/commonComponent/FooterButton/FooterButton';
+import GroupButton from '../../../../../components/commonComponent/GroupButton/GroupButton';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -515,6 +516,7 @@ export default function BulkList(props: any) {
     backgroundColor: ' rgb(240, 240, 240)',
     border: ' rgb(240, 240, 240) 1px ',
     color: 'black',
+    textTransform: 'capitalize',
     '&.Mui-selected, &.Mui-selected:hover': {
       color: 'white',
       backgroundColor: '#1976d2',
@@ -544,6 +546,19 @@ export default function BulkList(props: any) {
     setOpenCancelModal(false);
     navigate('/productManagement/cardCatalogue');
   };
+
+  const GroupButtonData = [
+    {
+      title: 'All',
+    },
+    {
+      title: 'Valid',
+    },
+    {
+      title: 'Error',
+    },
+  ];
+
   return (
     <PageLayout>
       <Box sx={{ padding: '2% 0' }}>
@@ -630,7 +645,6 @@ export default function BulkList(props: any) {
           exclusive
           onChange={handleChange}
           aria-label="Platform"
-          // sx={ToggleBoxStyle}
         >
           <ColorButton value="all">All</ColorButton>
           <ColorButton value="valid">Valid</ColorButton>
@@ -638,14 +652,7 @@ export default function BulkList(props: any) {
             {props.fileCheck === 'image' ? 'Missing' : 'Error'}
           </ColorButton>
         </ToggleButtonGroup>
-        {/* <ButtonGroup
-          variant="contained"
-          aria-label="outlined primary button group"
-        >
-          <ColorButton>All</ColorButton>
-          <ColorButton>Valid</ColorButton>
-          <ColorButton>Error</ColorButton>
-        </ButtonGroup> */}
+        {/* <GroupButton data={GroupButtonData} /> */}
       </Box>
       {progress > 70 && (
         // <TableContainer
@@ -762,6 +769,7 @@ export default function BulkList(props: any) {
               <Button
                 variant="outlined"
                 onClick={() => setOpenCancelModal(!openCancelModal)}
+                sx={{ textTransform: 'capitalize' }}
               >
                 Cancel
               </Button>
@@ -774,6 +782,7 @@ export default function BulkList(props: any) {
                     progress === 100 && correctionState
                       ? ' #0662B7'
                       : '#82B1DB',
+                  textTransform: 'capitalize',
                 }}
               >
                 {progress === 100 && correctionState
@@ -793,7 +802,7 @@ export default function BulkList(props: any) {
                 variant="text"
                 color="secondary"
                 onClick={handleDiscard}
-                sx={{ fontSize: '12px' }}
+                sx={{ fontSize: '12px', textTransform: 'capitalize' }}
               >
                 {`Discard Error entries and Continue >`}
               </Button>

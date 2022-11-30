@@ -76,8 +76,9 @@ import {
 import TablePagination from '@mui/material/TablePagination';
 import { Height } from '@mui/icons-material';
 import TypoText from '../../../../components/commonComponent/CustomText/Textfield';
-import BtnContained from '../../../../components/commonComponent/CustomText/Button/Contained';
+import GroupButton from '../../../../components/commonComponent/GroupButton/GroupButton';
 import BtnOutlined from '../../../../components/commonComponent/CustomText/Button/Outlined';
+import BtnContained from '../../../../components/commonComponent/CustomText/Button/Contained';
 
 // const columns: GridColDef[] = [
 //   { field: 'id', headerName: 'ID', width: 70 },
@@ -516,6 +517,21 @@ export const CardCatalogue = () => {
     },
   ];
 
+  const GroupButtonData = [
+    {
+      title: 'All',
+    },
+    {
+      title: 'Activate',
+    },
+    {
+      title: 'Deactivated',
+    },
+    {
+      title: 'Saved',
+    },
+  ];
+
   return (
     <Stack>
       <Stack>
@@ -819,8 +835,8 @@ export const CardCatalogue = () => {
               //   lineHeight: '14px',
               // }}
               >
-                <ToggleButtonGroup
-                  //  size='small'
+                {/* <ToggleButtonGroup
+                 
                   color="primary"
                   // color="secondary"
                   value={alignment}
@@ -830,7 +846,7 @@ export const CardCatalogue = () => {
                   sx={{
                     height: '40px',
                   }}
-                  // sx={ToggleBoxStyle}
+                
                 >
                   <ColorButton
                     value="all"
@@ -838,28 +854,30 @@ export const CardCatalogue = () => {
                   >
                     All
                   </ColorButton>
-                  {/* <Divider orientation="vertical" /> */}
+                 
                   <ColorButton
                     value="activate"
                     sx={{ textTransform: 'capitalize', paddingRight: '10px' }}
                   >
                     Activate
                   </ColorButton>
-                  {/* <Divider orientation="vertical" /> */}
+                 
                   <ColorButton
                     value="deactivated"
                     sx={{ textTransform: 'capitalize', paddingRight: '10px' }}
                   >
                     Deactivated
                   </ColorButton>
-                  {/* <Divider orientation="vertical" /> */}
+               
                   <ColorButton
                     value="saved"
                     sx={{ textTransform: 'capitalize', paddingRight: '10px' }}
                   >
                     Saved
                   </ColorButton>
-                </ToggleButtonGroup>
+                </ToggleButtonGroup> */}
+
+                <GroupButton data={GroupButtonData} />
               </Box>
             </Stack>
           </Box>
@@ -1078,10 +1096,8 @@ export const CardCatalogue = () => {
           openSuccess={resumeModal}
           handleCloseSuccess={closeModal}
           handleSuccess={handleResumeSuccess}
-          title={'AQB - Resume Now'}
-          pause_content={
-            'You will be able to resume your paused surrogate here.'
-          }
+          title={'Card - Resume Now'}
+          pause_content={'You can resume your card from here.'}
           textarea_title={'Add Remarks'}
           dateRange_title={'Enter Date range'}
           maxLength={'Maximum of 500 words'}
@@ -1116,7 +1132,7 @@ export const CardCatalogue = () => {
           openSuccess={showPauseModal}
           handleCloseSuccess={closeModal}
           handleSuccess={successModal}
-          title={'Card For Card - Pause'}
+          title={' Card - Pause'}
           pause_content={'You can pause it or perform a scheduled pause.'}
           scheduledPause_content={
             'Please choose a date range to perform a scheduled pause.'
@@ -1128,7 +1144,7 @@ export const CardCatalogue = () => {
           maxLength={'Maximum of 500 words'}
           pauseMethodChecking={pauseMethodChange}
           close={'Close'}
-          submit={'Submit'}
+          submit={'Pause'}
           datepickerLabelStart={'Start Date and time'}
           datepickerLabelEnd={'End Date and time'}
         />
@@ -1162,9 +1178,9 @@ export const CardCatalogue = () => {
           handleCloseSuccess={closeModal}
           handleSuccess={handleEditSuccess}
           title={'Card - Edit Pause'}
-          pause_content={'You can pause it or perform a scheduled pause.'}
+          pause_content={'You can Pause or Schedule Pause card here.'}
           scheduledPause_content={
-            'Please choose a date range to perform a scheduled pause.'
+            'Please choose a date range to perform a scheduled Pause'
           }
           textarea_title={'Add Remarks'}
           radioValuOne={NORMAL_PAUSE}
@@ -1173,7 +1189,7 @@ export const CardCatalogue = () => {
           maxLength={'Maximum of 500 words'}
           pauseMethodChecking={pauseMethodChange}
           close={'Close'}
-          submit={'Submit'}
+          submit={'Pause'}
           datepickerLabelStart={'Start Date and time'}
           datepickerLabelEnd={'End Date and time'}
         />

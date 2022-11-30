@@ -35,7 +35,7 @@ const DummyTableData = [
     id: 2,
   },
   {
-    surrogateProgramme: 'Payroll',
+    surrogateProgramme: 'AQB',
     activeSince: '20 June 2022, 11.00',
     lastModify: '20 June 2022, 11.00',
     status: 'Paused (scheduled)',

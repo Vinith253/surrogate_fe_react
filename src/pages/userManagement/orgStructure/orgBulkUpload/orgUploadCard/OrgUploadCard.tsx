@@ -141,10 +141,7 @@ const OrgUploadCard = ({
           {/* <Box sx={{ position: 'fixed', bottom: 0 }}> */}
           {/* <FooterButton cancel="Cancel" submit="Procees" /> */}
           <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: '1%' }}>
-            <Button
-              variant="outlined"
-              onClick={() => setOpenDiscard(!openDiscard)}
-            >
+            <Button variant="outlined" sx={{ textTransform: 'capitalize' }}>
               Cancel
             </Button>
             <Button
@@ -153,12 +150,12 @@ const OrgUploadCard = ({
               // onClick={handleProceed}
               sx={{
                 backgroundColor: '#82B1DB',
+                textTransform: 'capitalize',
               }}
             >
               {'Proceed'}
             </Button>
           </Box>
-
           {/* </Box> */}
         </Box>
       )}
