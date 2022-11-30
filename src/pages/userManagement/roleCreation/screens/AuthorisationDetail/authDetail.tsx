@@ -155,7 +155,10 @@ export const AuthDetail = () => {
           )}
         </Stack>
       </Stack>
-      <Stack className="modelAccessControlContainer">
+      <Stack
+        className="modelAccessControlContainer"
+        sx={{ margin: edit ? '30px 0 90px 0' : '30px 0' }}
+      >
         <Stack className="modelAccessControlSubContainer">
           <Stack>
             <Typography className="modelAccessControlContainerTitle">
@@ -245,37 +248,35 @@ export const AuthDetail = () => {
           })}
         </Stack>
       </Stack>
-      <Box
-        sx={{
-          marginTop: '10px',
-          backgroundColor: 'white',
-          position: 'fixed',
-          bottom: 0,
-          right: 0,
-          width: '100%',
-          borderTop: '2px solid #f3f3f3 ',
-        }}
-      >
-        <Box
-          sx={{
-            display: 'flex',
-            gap: 2,
-            justifyContent: 'flex-end',
-            padding: '10px 30px',
-          }}
-        >
-          {edit ? (
-            <>
+      {edit ? (
+        <>
+          <Box
+            sx={{
+              marginTop: '10px',
+              backgroundColor: 'white',
+              position: 'fixed',
+              bottom: 0,
+              right: 0,
+              width: '100%',
+              borderTop: '2px solid #f3f3f3 ',
+            }}
+          >
+            <Box
+              sx={{
+                display: 'flex',
+                gap: 2,
+                justifyContent: 'flex-end',
+                padding: '10px 30px',
+              }}
+            >
               <BtnOutlined title="Cancel" onClick={() => navigate(-1)} />
               <BtnContained title="Submit" onClick={() => navigate(-1)} />
-            </>
-          ) : (
-            <>
-              <BtnContained title="Close" onClick={() => navigate(-1)} />
-            </>
-          )}
-        </Box>
-      </Box>
+            </Box>
+          </Box>
+        </>
+      ) : (
+        <></>
+      )}
     </Stack>
   );
 };

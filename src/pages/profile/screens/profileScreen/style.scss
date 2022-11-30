@@ -1,0 +1,59 @@
+.profileContainer {
+  .headerContainer {
+    padding: 30px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    .headerContent {
+      margin-left: 20px !important;
+      .userName {
+        font-weight: 400 !important;
+        font-size: 16px !important;
+        line-height: 20px !important;
+      }
+      .userRole {
+        padding-top: 8px;
+        font-weight: 400 !important;
+        font-size: 14px !important;
+        line-height: 16px !important;
+      }
+    }
+  }
+}
+
+.profile-accountHeader {
+  padding: 30px 25px;
+  .profile-header {
+    padding-bottom: 25px;
+    border-bottom: 3px solid #f0f2f5;
+  }
+  .profile-password {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: 0.004em;
+    color: #afaeaf;
+    padding: 20px 0 8px 0;
+  }
+  .ProfilepasswordStyle {
+    display: flex !important;
+    flex-direction: row !important;
+    .passwordDetailsStyle {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      border-right: 1px solid #e6e7e7;
+      padding-right: 20px;
+    }
+    .profile-changePassword {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 16px;
+      letter-spacing: 0.0125em;
+      text-decoration-line: underline;
+      color: #0662b7;
+      text-transform: capitalize;
+      margin: 0 20px;
+    }
+  }
+}
