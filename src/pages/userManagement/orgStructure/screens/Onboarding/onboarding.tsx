@@ -16,7 +16,7 @@ import {
 } from '@mui/material';
 import './onboarding.scss';
 import { OrgReview } from '../OrgReview/OrgReview';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import dayjs, { Dayjs } from 'dayjs';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -48,6 +48,8 @@ export const Onboarding = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const { state } = location;
   const [value, setValue] = React.useState<Dayjs | null>(dayjs('DD/MM/YYYY'));
 
   let objValue = {
@@ -84,7 +86,7 @@ export const Onboarding = () => {
     keyContact: false,
     proprietor: false,
   });
-  const [viewMode, setViewMode] = useState<string>('add');
+  const [viewMode, setViewMode] = useState<string>(state.isEditable ? 'add' : 'edit');
 
   const AddKeyContact = () => {
     // console.log('add key');
