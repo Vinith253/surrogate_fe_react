@@ -399,6 +399,16 @@ export default function Layout() {
                       onClick={() => {
                         handleClick(text.key);
                       }}
+                      sx={{
+                        backgroundColor:
+                          openList && openIndex === index + 1 ? '#4D4E50' : '',
+                        '&:hover': {
+                          backgroundColor:
+                            openList && openIndex === index + 1
+                              ? '#4D4E50'
+                              : '',
+                        },
+                      }}
                     >
                       <ListItemIcon>
                         <img src={text.image} alt="" />
