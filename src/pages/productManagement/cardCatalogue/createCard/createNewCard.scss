@@ -6,6 +6,7 @@
         background-color: white;
         padding: 16px 24px 0 24px;
         margin-top: 25px;
+        border-radius: 8px;
 
         .head{
             display: flex; 
@@ -40,6 +41,7 @@
         background-color: white;
         padding: 24px;
         margin-top: 24px;
+        border-radius: 8px;
 
         .uploadTitle{
             display: flex;
@@ -71,6 +73,7 @@
         background-color: white;
         padding: 24px;
         margin-top: 24px;
+        border-radius: 8px;
 
         .cardDetail{
             display: flex;
@@ -98,6 +101,7 @@
         background-color: white;
         padding: 24px;
         margin-top: 24px;
+        border-radius: 8px;
         .surrogateTitle{
             display: flex;
             justify-content: flex-start;
@@ -122,6 +126,7 @@
         background-color: white;
         padding: 24px;
         margin-top: 24px;
+        border-radius: 8px;
         .channelTitle{
             display: flex;
             justify-content: flex-start;
@@ -148,6 +153,7 @@
         background-color: white;
         padding: 24px;
         margin-top: 24px;
+        border-radius: 8px;
         .eligibilityTitle{
             display: flex;
             justify-content: flex-start;
@@ -177,6 +183,7 @@
         background-color: white;
         padding: 24px;
         margin-top: 24px;
+        border-radius: 8px;
         .benefitsTitle{
             display: flex;
             justify-content: flex-start;
@@ -204,9 +211,11 @@
         background-color: white;
         padding: 24px;
         margin-top: 24px;
+        border-radius: 8px;
         .feeWavier{
             display: flex;
             justify-content: space-between;
+            margin-bottom: 15px;
             .feeWavierHead{
               display: flex;
               justify-content: flex-start;
@@ -230,6 +239,7 @@
         //     padding: 20px;
         // }
         .joiningFeeBox{
+            margin-top: 8px;
             display: flex;
             justify-content: flex-start;
             padding: 10px 0;
@@ -345,6 +355,7 @@
         background-color: white;
          margin-top: 24px;
           padding: 32px;
+          border-radius: 8px;
           .rewardHeader{
             display: flex;
              justify-content: space-between;
@@ -386,6 +397,7 @@
         background-color: white;
          margin-top: 24px;
           padding: 32px;
+          border-radius: 8px;
           .keyBenefitsHeader{
             display: flex;
              justify-content: space-between;
@@ -427,6 +439,7 @@
         background-color: white;
          margin-top: 24px;
           padding: 32px;
+          border-radius: 8px;
           .additionalBenefitsHeader{
             display: flex;
              justify-content: space-between;
@@ -469,6 +482,7 @@
         background-color: white;
          margin-top: 24px;
           padding: 32px;
+          border-radius: 8px;
           .welcomeBenefitsHeader{
             display: flex;
              justify-content: space-between;
@@ -512,6 +526,7 @@
     
     .footer{
         background-color: white;
+        border-radius: 8px;
           margin-top: 24px;
           padding: 20px 32px;
           position: fixed;
@@ -538,3 +553,246 @@
     
 
 }
+
+
+
+
+
+.reviewCard {
+    background-color: #eceff2;
+    padding: 0;
+    padding-bottom: 88px;
+    .box1 {
+      background-color: white;
+      padding: 20px 24px 20px 24px;
+      margin-top: 24px;
+  
+      .head {
+        display: flex;
+        justify-content: space-between;
+  
+        .headFull {
+          display: flex;
+          justify-content: flex-start;
+          gap: 8px;
+        }
+        .headback {
+          color: #0078ef;
+          cursor: pointer;
+        }
+  
+        .headId {
+          background-color: #e6e7e7;
+          border-radius: 4px;
+        }
+  
+        .headIconBox {
+          display: flex;
+          align-items: center;
+          color: #0662b7;
+          .btn {
+            padding: 3px 8px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            color: #0662b7;
+            text-transform: none;
+            .icon {
+              padding: 0;
+              margin-right: 8px;
+            }
+          }
+        }
+      }
+      .body {
+        display: flex;
+        gap: 24px;
+        .bodyBox {
+          margin-top: 16px;
+          display: flex;
+          .card {
+            width: 250px;
+            height: 160px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #e0e0de;
+            .img {
+              width: 250px;
+              height: 160px;
+            }
+  
+            .modal {
+              tabindex: 1px;
+              // position: absolute;
+              // top: 20%;
+              // right: 40%;
+              // top: 50%;
+              // left: 50%;
+              display: flex;
+              align-items: 'center';
+              justify-content: 'center';
+              transform: translate(-50%, -50%);
+              // width: 540px;
+              // height: 380px;
+              width: '100vw';
+              height: '100vh';
+              border: 2px solid #000;
+              box-shadow: 60px;
+              padding: 0 16px 0 16px;
+  
+              .cardHead {
+                display: flex;
+                justify-content: space-between;
+                padding: 16px;
+                .text {
+                  font-size: 14px;
+                  font-weight: 400;
+                  color: aqua !important;
+                }
+                .typo {
+                  color: #0662b7;
+                  cursor: pointer;
+                }
+              }
+              .cardImageBox {
+                margin: auto;
+                .img {
+                  width: '50vw';
+                  height: '50vh';
+                }
+              }
+            }
+          }
+        }
+        .modal {
+          position: absolute;
+          // top: 20%;
+          // right: 40%;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 540px;
+          height: 380px;
+          border: 2px solid #000;
+          box-shadow: 60px;
+          padding: 0 16px 0 16px;
+  
+          .cardHead {
+            display: flex;
+            justify-content: space-between;
+            padding: 16px;
+            .text {
+              font-size: 14px;
+              font-weight: 400;
+            }
+            .typo {
+              color: #0662b7;
+              cursor: pointer;
+            }
+          }
+          .cardImageBox {
+            margin: auto;
+            .img {
+              width: 500px;
+              height: 300px;
+            }
+          }
+        }
+      }
+    }
+  
+    .textGrid {
+      padding: 16px 0;
+      .businessText {
+        display: flex;
+        flex-direction: column;
+        width: 350px;
+      }
+    }
+    .maximumCardGrid {
+      margin-top: 16px;
+      .textField {
+        display: flex;
+        flex-direction: column;
+        width: 92%;
+      }
+    }
+  }
+  
+  .box2 {
+    margin-top: 24px;
+    background-color: white;
+    padding: 24px;
+    .surrogateHead {
+      display: flex;
+      justify-content: flex-start;
+      gap: 8px;
+      padding-bottom: 16px;
+    }
+    .surrogateBody {
+      padding-top: 16px;
+      display: flex;
+      flex-direction: column;
+      .title {
+        font-size: 14px;
+        color: grey;
+      }
+      .text {
+        font-size: 16px;
+        font-weight: 500;
+      }
+    }
+  }
+  
+  .box3 {
+    margin-top: 24px;
+    background-color: white;
+    padding: 24px;
+    .channelHead {
+      display: flex;
+      justify-content: flex-start;
+      gap: 8px;
+      padding-bottom: 16px;
+    }
+    .channelBody {
+      padding-top: 16px;
+      display: flex;
+      flex-direction: column;
+      .title {
+        font-size: 14px;
+        color: grey;
+      }
+      .text {
+        font-size: 16px;
+        font-weight: 500;
+      }
+    }
+  }
+  
+  .box4 {
+    margin-top: 24px;
+    background-color: white;
+    padding: 24px;
+    .eligibilityHead {
+      display: flex;
+      justify-content: flex-start;
+      gap: 8px;
+      padding-bottom: 16px;
+    }
+    .eligibilityBody {
+      padding-top: 16px;
+      display: flex;
+      flex-direction: column;
+      .title {
+        font-size: 14px;
+        color: grey;
+      }
+      .text {
+        font-size: 16px;
+        font-weight: 500;
+      }
+    }
+  }
+  

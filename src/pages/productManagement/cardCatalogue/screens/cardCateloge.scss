@@ -34,6 +34,13 @@
     justify-content: space-between;
     background-color: white;
   }
+  .boxBtn {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    padding: 24px 0;
+    background-color: white;
+  }
 }
 // .body1 {
 //   background-color: white;
@@ -66,13 +73,7 @@
   }
 }
 
-.boxBtn {
-  display: flex;
-  justify-content: flex-end;
-  gap: 16px;
-  padding: 24px 0;
-  background-color: white;
-}
+
 .css-ops09h-MuiTableCell-root.MuiTableCell-paddingCheckbox{
   padding: 0 0 0 0;
 }

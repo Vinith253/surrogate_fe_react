@@ -150,7 +150,7 @@ const rows = [
     1234567890,
     'General',
     'Premium',
-    'InActive',
+    'In-Active',
     ''
   ),
   createData(
@@ -530,11 +530,11 @@ export const CardCatalogue = () => {
           </Box>
           <Box>
             <Button
-              sx={{ textTransform: 'capitalize' }}
+              sx={{ textTransform: 'capitalize',backgroundColor:'#0662B7' }}
               variant="contained"
               color="secondary"
               startIcon={<AddIcon />}
-              endIcon={<ExpandMoreIcon />}
+              // endIcon={<ExpandMoreIcon />}
               aria-controls={openCardMenu ? 'basic-menu' : undefined}
               aria-haspopup="true"
               aria-expanded={openCardMenu ? 'true' : undefined}
@@ -552,8 +552,8 @@ export const CardCatalogue = () => {
                 'aria-labelledby': 'basic-button',
               }}
             >
-              <MenuItem onClick={singleCardOpen}>Single card upload</MenuItem>
-              <MenuItem onClick={bulkCardOpen}>Bulk card Upload</MenuItem>
+              <MenuItem onClick={singleCardOpen}>Single Card Upload</MenuItem>
+              <MenuItem onClick={bulkCardOpen}>Bulk Card Upload</MenuItem>
             </Menu>
           </Box>
         </Box>
@@ -640,10 +640,10 @@ export const CardCatalogue = () => {
             //   backgroundColor: 'white',
             // }}
           >
-            <Button sx={{textTransform:'capitalize'}} color="secondary" variant="outlined">
+            <Button sx={{textTransform:'capitalize',fontSize:'14px',fontWeight:500}} color="secondary" variant="outlined">
               Reset
             </Button>
-            <Button sx={{textTransform:'capitalize'}} color="secondary" variant="contained">
+            <Button sx={{textTransform:'capitalize',backgroundColor:'#0662B7'}}  variant="contained">
               Search
             </Button>
           </Box>
@@ -797,6 +797,7 @@ export const CardCatalogue = () => {
                   aria-label="Platform"
                   sx={{
                     height: '40px',
+                   
                   }}
                   // sx={ToggleBoxStyle}
                 >
