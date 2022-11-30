@@ -32,14 +32,14 @@ import {
 import dayjs, { Dayjs } from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { AccordianLayover } from '../../../../components/commonComponent/CustomAccordian/Accordian';
 import { FooterButton } from '../../../../components/commonComponent/FooterButton/FooterButton';
 import { ScreenHeader } from '../../../../components/commonComponent/ScreenHeader/ScreenHeader';
 import ReviewerApproverTable from '../../../../components/commonComponent/ReviewerApproverTable';
 
 function EditUser() {
-  const [value, setValue] = React.useState<Dayjs | null>(dayjs('DD/MM/YYYY'));
+  const [value, setValue] = React.useState<Dayjs | null>(dayjs());
   const [isPermission, setIsPermission] = useState(false);
   const [isUserCreated, setIsUserCreated] = useState(false);
   const [isAdminReviewApproved, setIsAdminReviewApproved] = useState(false);
@@ -64,6 +64,10 @@ function EditUser() {
     } else {
       setIsAdminReviewApproved(false);
     }
+  };
+
+  const handleChange = (newValue: Dayjs | null) => {
+    setValue(newValue);
   };
 
   return (
@@ -254,24 +258,11 @@ function EditUser() {
                       </Typography>
                       {eachItem?.label === 'Date of Joining' ? (
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
-                          {/* <TypographySubTitle title="Year of inc./ in Business Since" /> */}
-                          <DatePicker
-                            disableFuture
-                            // label="Responsive"
-                            openTo="year"
-                            views={['year', 'month', 'day']}
+                          <DesktopDatePicker
+                            inputFormat="DD/MM/YYYY"
                             value={value}
-                            onChange={(newValue) => {
-                              // setValue(newValue);
-                            }}
-                            renderInput={(params) => (
-                              <TextField
-                                size="small"
-                                {...params}
-                                fullWidth
-                                placeholder={eachItem?.placeHolder}
-                              />
-                            )}
+                            onChange={handleChange}
+                            renderInput={(params) => <TextField {...params} />}
                           />
                         </LocalizationProvider>
                       ) : (
