@@ -414,6 +414,7 @@ export const OrganisationDetails = () => {
                 style={{ padding: '10px 20px', textAlign: 'left' }}
                 onClick={() => {
                   handleClose();
+                  setActivateModal(!activateModal);
                 }}
               >
                 Activate Org
@@ -421,6 +422,7 @@ export const OrganisationDetails = () => {
               <MenuItem
                 onClick={() => {
                   handleClose();
+                  setDeactivateModal(!deactivateModal);
                 }}
                 style={{ padding: '10px 20px', textAlign: 'left' }}
               >
@@ -675,7 +677,9 @@ export const OrganisationDetails = () => {
             setActivateModal(false);
           }}
           title={'Request for Activation'}
-          pause_content={'Do you want to submit request for activating user?'}
+          pause_content={
+            'Do you want to submit request for Activating Organisation?'
+          }
           close={'Close'}
           submit={'Submit'}
         />
@@ -685,9 +689,9 @@ export const OrganisationDetails = () => {
         <CustomModal
           openSuccess={activateSuccessModal}
           handleCloseSuccess={() => setActivateSuccessModal(false)}
-          successModalTitle={'Request - Activate User'}
+          successModalTitle={'Activation Organisation'}
           successModalMsg={
-            'Your request for activating user is successfully sent to the Reviewer.'
+            'Your request for Activating Org is successfully sent to the Reviewer.'
           }
           btn={' Close'}
         />
@@ -704,7 +708,9 @@ export const OrganisationDetails = () => {
             setDeactivateModal(false);
           }}
           title={'Request for Deactivation'}
-          pause_content={'Do you want to submit request for deactivating user?'}
+          pause_content={
+            'Do you want to submit request for Deactivating Organisation?'
+          }
           close={'Close'}
           submit={'Submit'}
         />
@@ -714,9 +720,9 @@ export const OrganisationDetails = () => {
         <CustomModal
           openSuccess={deactivateSuccessModal}
           handleCloseSuccess={() => setDeactivateSuccessModal(false)}
-          successModalTitle={'Request - Deactivate User'}
+          successModalTitle={'Deactivation Organisation'}
           successModalMsg={
-            'Your request for deactivating user is successfully sent to the Reviewer.'
+            'Your request for Deactivating Org is successfully sent to the Reviewer.'
           }
           btn={' Close'}
         />
