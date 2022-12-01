@@ -152,7 +152,10 @@
     .report-cards {
       display: flex;
       // height: 70vh;
-      margin: 40px;
+      margin-top: 24px;
+      margin-left: 40px;
+      margin-right: 40px;
+      margin-bottom: 24px;
 
       .progress-card {
         width: 50%;
@@ -162,7 +165,7 @@
         .graph-div {
           border: 1px solid #F0F2F5;
           border-radius: 10px;
-          margin-top: 30px;
+          // margin-top: 30px;
           margin-right: 20px;
           display: flex;
           flex-direction: column;
@@ -171,6 +174,11 @@
 
           .line-div {
             border-bottom: 1px dotted #D2D2D3;
+            margin-top: 27px;
+            width: 100%;
+          }
+
+          .donut-chart-div {
             margin-top: 27px;
             width: 100%;
           }

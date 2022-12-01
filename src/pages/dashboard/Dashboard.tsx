@@ -5,7 +5,6 @@ import {
   salesDashboardList,
   state_label,
   statusRowHeading,
-  zonal_label,
 } from '../sales/dashboard/dashboard.const';
 import './style.scss';
 import ApprovedIcon from '../../assets/icons/approved_icon.svg';
@@ -412,7 +411,6 @@ export default function Dashboard() {
                 policies_label={channels_label}
                 surrogates_label={surrogates_label}
                 state_label={state_label}
-                zonal_label={zonal_label}
                 flag="main-dashboard"
               />
             </div>

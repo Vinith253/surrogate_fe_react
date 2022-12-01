@@ -2,7 +2,7 @@ import { Typography, Button, Grid } from "@mui/material";
 import CheckBoxPopOver from "../../../components/commonComponent/CheckBoxPopOver/SingleLabel";
 import MoreFilterModal from "../../../components/commonComponent/customModal/MoreFilterModal";
 import DateTimePopOver from "../../../components/commonComponent/DateTimePopOver";
-import { product_label, state_label, zonal_label } from "../../sales/dashboard/dashboard.const";
+import { product_label, state_label } from "../../sales/dashboard/dashboard.const";
 import { ReactComponent as Reset } from '../../../assets/icons/reset.svg';
 import { useState } from "react";
 import './style.scss'; 
@@ -21,11 +21,65 @@ import ReactApexChart from "react-apexcharts";
 const donutGraphSeries :any = 
 [12, 3, 14, 8, 17, 20, 6, 13];
 
+const donutGraphSeries2 :any = 
+[20, 13, 17, 4, 3, 12, 13, 6];
+
 
 const donutGraphOptions: {} = {
   series: [12, 3, 14, 8, 17, 20, 6, 13],
   labels: ["Office Pincode", "Resident Pincode", "C4C-Card Rejection", "HRMS Not Listed","DPD","KYC Rejection","Low Income","Low Salary","Low CIBIL"],
   colors: ["#E697FF", "#F18F96","#999B9C", "#8BCD9A","#63ABFD","#F8B481","#F5DE99","#A08BDA"],
+  chart: {
+      type: 'donut',
+  },
+  legend: {
+    show: true,
+    position: 'bottom',
+    horizontalAlign: 'center',
+    offsetX: 30,
+    // offsetY:50,
+    
+  },
+  responsive: [{
+      breakpoint: 480,
+      options: {
+          chart: {
+              width: 300,
+          },
+          legend: {
+              position: 'bottom',
+          }
+      },
+  }],
+  plotOptions: {
+    pie: {
+      dataLabels: {
+        offset: 50,
+      },
+      donut: {
+        
+        labels: {
+          show: true,
+          total: {
+            show: true,
+            label: 'Rejected',
+            color: '#999B9C',
+            // formatter: function (w) {
+            //   return w.globals.seriesTotals.reduce((a, b) => {
+            //     return a + b
+            //   }, 0)
+            // }
+          }
+        }
+      }
+    }
+  }
+};
+
+const donutGraphOptions2: {} = {
+  series: [20, 13, 17, 4, 3, 12, 13, 6],
+  labels: ["Initial Verification", "Surrogare Selection", "HRMS - Input", "Employment Details","HRMS - Fetching Data","C4C - Eligible","C4C - Verification","Card Selection","KYC"],
+  colors: [ "#8BCD9A","#F8B481","#63ABFD","#F18F96","#E697FF", "#F5DE99","#A08BDA","#999B9C",],
   chart: {
       type: 'donut',
   },
@@ -149,27 +203,6 @@ export default function LMSDashboard() {
       id: 5,
       label: 'RC',
       // onclick: (() => {setDayFilter("Current Year");})
-    },
-  ];
-
-  const policies_label = [
-    {
-      label: 'All Main Policies',
-      data: [
-        {
-          id: 1,
-          label: 'M_Payroll_Policy',
-        },
-      ],
-    },
-    {
-      label: 'All Overwrite Policies',
-      data: [
-        {
-          id: 2,
-          label: 'OW_Pongal_21_Payroll',
-        },
-      ],
     },
   ];
 
@@ -334,7 +367,6 @@ export default function LMSDashboard() {
               policies_label={channels_label}
               surrogates_label={surrogates_label}
               state_label={state_label}
-              zonal_label={zonal_label}
               flag="main-dashboard"
             />
           </div>
@@ -377,7 +409,7 @@ export default function LMSDashboard() {
                   <text className="overview-text">Rejected data </text>
                 </div>
                 <div className="line-div"/>
-                <div className="line-div" id="chart">
+                <div className="donut-chart-div" id="chart">
                   <ReactApexChart
                     options={donutGraphOptions}
                     series={donutGraphSeries}
@@ -386,15 +418,23 @@ export default function LMSDashboard() {
                   />
                 </div>
                 </div>
-              {/* <BarGarph
-                currencies={currencies}
-                handleChange={handleChange}
-                currency={currency}
-                options={options}
-                series={series}
-                graphView={graphView}
-                handleGraphView={(value: number) => setGraphView(value)}
-              /> */}
+            </div>
+
+            <div className="graph-card">
+            <div className="graph-div">
+            <div>
+                  <text className="overview-text">Dropped data </text>
+                </div>
+                <div className="line-div"/>
+                <div className="donut-chart-div" id="chart">
+                  <ReactApexChart
+                    options={donutGraphOptions2}
+                    series={donutGraphSeries2}
+                    type="donut"
+                    height={500}
+                  />
+                </div>
+                </div>
             </div>
 
            
