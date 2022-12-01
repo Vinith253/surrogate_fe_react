@@ -7,6 +7,7 @@ import CardCatalogue from './pages/productManagement/cardCatalogue/landingScreen
 import ProgramManagement from './pages/productManagement/programmeManagement/landingScreen';
 import SalesDashboard from './pages/sales/dashboard';
 import SalesReport from './pages/sales/salesReport';
+import PerformanceReport from './pages/sales/performanceReport';
 import SalesReportDetails from './pages/sales/salesReport/reportDetails';
 import ReviewCard from './pages/productManagement/cardCatalogue/reviewCard/reviewCard';
 import AccessLibrary from './pages/accessLibrary/AccessLibrary';
@@ -125,6 +126,12 @@ export default function App() {
         <Route path="/sales/salesDashboard" element={<SalesDashboard />} />
 
         <Route path="/sales/salesReport" element={<SalesReport />} />
+
+        <Route
+          path="/sales/performanceReport"
+          element={<PerformanceReport />}
+        />
+
         <Route
           path="/sales/salesReportDetails"
           element={<SalesReportDetails />}
