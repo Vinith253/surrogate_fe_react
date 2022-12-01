@@ -49,7 +49,7 @@ export const Onboarding = () => {
   const [startDatevalue, setStartDateValue] = useState(null);
   const [endDatevalue, setEndDateValue] = useState(null);
   const [open, setOpen] = React.useState(false);
-  const [editable, setEditable] = useState(false)
+  // const [editable, setEditable] = useState(false)
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
@@ -181,12 +181,12 @@ export const Onboarding = () => {
       <Grid item xs={12} sm={6} md={3}>
         <Box sx={{ gap: 2 }}>
           <TypographySubTitle color={subTitleColor} title={subTitleTile} />
-          {editable == true ? (
+          {/* {editable == true ? ( */}
             <TypoText color={textColor} title={textTitle} />
-          ):(
+          {/* // ):( */}
 
-          <TypoText color={textColor} placeholder={textTitle} />
-          )}
+          {/* // <TypoText color={textColor} placeholder={textTitle} /> */}
+          {/* // )} */}
         </Box>
       </Grid>
     );
@@ -977,7 +977,7 @@ export const Onboarding = () => {
           })}
         </Box>
 
-        {viewMode === 'add' && (
+        {/* {viewMode === 'add' && (
           <Box
             sx={{
               backgroundColor: 'white',
@@ -1002,7 +1002,7 @@ export const Onboarding = () => {
               <OrgReview />
             )}
           </Box>
-        )}
+        )} */}
 
         {viewMode === 'edit' && (
           <Box
@@ -1278,8 +1278,8 @@ export const Onboarding = () => {
             </Grid>
 
             {viewMode === 'add' && (
-              <Box sx={{ display: 'flex', gap: 4, marginBottom: '20px' }}>
-                <Box sx={{ width: '280px' }}>
+              <Box sx={{ display: 'flex', gap: 5, marginBottom: '20px' }}>
+                <Box sx={{ width: '350px' }}>
                   <TypographySubTitle fullWidth title="MICR Code (9 digits)" />
                   <TypoText
                     fullWidth
