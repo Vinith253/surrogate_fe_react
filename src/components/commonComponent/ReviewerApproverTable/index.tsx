@@ -1,4 +1,5 @@
-import { Stack, Grid, Select } from '@mui/material';
+import { Stack, Grid } from '@mui/material';
+import SearchDropdown from './../SearchDropdown';
 import './style.scss';
 
 function ApproverReviewerTable(props: { data: Array<Object>; mode: string }) {
@@ -14,10 +15,10 @@ function ApproverReviewerTable(props: { data: Array<Object>; mode: string }) {
                   <Stack>Sub-modules</Stack>
                 </Grid>
                 <Grid item xs={4}>
-                  <Stack style={{ textAlign: 'center' }}>Reviewer</Stack>
+                  <Stack style={{ marginLeft: '25px' }}>Reviewer</Stack>
                 </Grid>
                 <Grid item xs={4}>
-                  <Stack style={{ textAlign: 'center' }}>Approver</Stack>
+                  <Stack style={{ marginLeft: '25px' }}>Approver</Stack>
                 </Grid>
               </Grid>
             </Stack>
@@ -32,7 +33,11 @@ function ApproverReviewerTable(props: { data: Array<Object>; mode: string }) {
                       {eachModule?.reviewerList?.map((item: any) => {
                         return (
                           <Grid item xs={12}>
-                            {props?.mode === 'view' ? '' : <Select></Select>}
+                            {props?.mode === 'view' ? (
+                              ''
+                            ) : (
+                              <SearchDropdown data={item} />
+                            )}
                           </Grid>
                         );
                       })}
@@ -41,7 +46,11 @@ function ApproverReviewerTable(props: { data: Array<Object>; mode: string }) {
                       {eachModule?.approverList?.map((item: any) => {
                         return (
                           <Grid item xs={12}>
-                            {props?.mode === 'view' ? '' : <Select></Select>}
+                            {props?.mode === 'view' ? (
+                              ''
+                            ) : (
+                              <SearchDropdown data={item} />
+                            )}
                           </Grid>
                         );
                       })}
