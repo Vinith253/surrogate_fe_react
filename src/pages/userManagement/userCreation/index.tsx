@@ -15,7 +15,7 @@ function UserCreation() {
     {
       id: '2',
       data: 'History Log',
-      component: <HistoryLog />,
+      component: <HistoryLog comingFrom={'userCreation'} />,
       isDisabled: false,
     },
   ];

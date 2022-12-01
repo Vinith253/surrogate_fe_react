@@ -156,6 +156,23 @@ const OrgUploadCard = ({
               {'Proceed'}
             </Button>
           </Box>
+          {/* <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              gap: '1%',
+              marginTop: '1%',
+            }}
+          >
+            <Button
+              variant="text"
+              color="secondary"
+              onClick={handleDiscard}
+              sx={{ fontSize: '12px', textTransform: 'capitalize' }}
+            >
+              {`Discord Error entries and Continue >`}
+            </Button>
+          </Box> */}
           {/* </Box> */}
         </Box>
       )}
