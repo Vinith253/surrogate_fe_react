@@ -91,6 +91,8 @@ export const HistoryLog = (props: any) => {
     console.log('coming here');
   };
 
+  console.log('historyprops', props);
+
   const tableData = [
     {
       versionNumber: 'V1.1.5',
@@ -143,12 +145,46 @@ export const HistoryLog = (props: any) => {
         'Facilisi est morbi sollicitudin ornare a. Ullamcorper semper fac.',
       ],
     },
+    {
+      versionNumber: 'V1.4.5',
+      surrogateName: 'Card For Card',
+      requestStatus: 'Rejected',
+      currentStatus: 'Active',
+      initiater: 'Ganesh',
+      dateAndTime: '10 Aug,2022 10:00',
+      reviewer: 'Ganesh',
+      dateAndTimeReview: '12 Aug,2022 10:00',
+      approver: 'Ganesh',
+      dateAndTimeapprover: '12 Aug,2022 10:00',
+      reasonRejection: [
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Faucibus in ipsum aliquam cursus. Ac mattis lectus eleifend scelerisque Vitae quis praesent tempus ut',
+        'Accumsan diam a vulputate ultrices turpis viverra rhoncus donec ultricies. In dui  ultricies in curabitur quis et. Justo velit    massa sed morbi nunc, sit magna.',
+        'Facilisi est morbi sollicitudin ornare a. Ullamcorper semper fac.',
+      ],
+    },
+    {
+      versionNumber: 'V1.5.5',
+      surrogateName: 'Card For Card',
+      requestStatus: 'Rejected',
+      currentStatus: 'Active',
+      initiater: 'Ganesh',
+      dateAndTime: '10 Aug,2022 10:00',
+      reviewer: 'Ganesh',
+      dateAndTimeReview: '12 Aug,2022 10:00',
+      approver: 'Ganesh',
+      dateAndTimeapprover: '12 Aug,2022 10:00',
+      reasonRejection: [
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Faucibus in ipsum aliquam cursus. Ac mattis lectus eleifend scelerisque Vitae quis praesent tempus ut',
+        'Accumsan diam a vulputate ultrices turpis viverra rhoncus donec ultricies. In dui  ultricies in curabitur quis et. Justo velit    massa sed morbi nunc, sit magna.',
+        'Facilisi est morbi sollicitudin ornare a. Ullamcorper semper fac.',
+      ],
+    },
   ];
 
   const historyViewMoreFun = () => {
     let navigatee = '';
 
-    if (navigatee) {
+    if (props.comingfrom == 'roleCreation') {
       navigate('/userManagement/roleCreation/historyLogDetail');
     } else {
       navigate('/userManagement/userCreation/historyLogDetail');
@@ -328,6 +364,7 @@ export const HistoryLog = (props: any) => {
           handleCloseSuccess={closeModal}
           openSuccess={showHistoryModal}
           viewMoreDetails={'view more details'}
+          historyViewMoreFun={historyViewMoreFun}
         />
       )}
     </Stack>
