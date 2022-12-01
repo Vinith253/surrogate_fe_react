@@ -35,7 +35,6 @@ type props = {
   policies_label?: Array<any>;
   surrogates_label?: Array<any>;
   state_label: Array<object>;
-  zonal_label: Array<object>;
   flag?: string;
 };
 
@@ -52,7 +51,6 @@ function MoreFilterModal({
   policies_label,
   surrogates_label,
   state_label,
-  zonal_label,
   flag
 }: props) {
   const [categories, setCategories] = useState(product_label);
@@ -138,17 +136,11 @@ function MoreFilterModal({
       >
         <Stack
           pb={3}
-          // className={`${
-          //   accessLibraryModaBtn ? 'modal_container' : 'modal_container1'
-          // }`}
-          // px={true ? 3 : 0}
         >
-          {/* {product_label && ( */}
           <Stack
             sx={{
               borderBottom: `1px solid #36363624`,
               marginBottom: '16px',
-              // paddingLeft: '16px',
             }}
           >
             <FormGroup
@@ -436,96 +428,25 @@ function MoreFilterModal({
                     More Filters
                   </Typography>
                 </Box>
-                <Box
-                  sx={{
-                    height: '70px',
-                    justifyContent: 'space-between',
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    padding: '12px',
-                  }}
-                >
-                  <Typography sx={{ fontSize: '14px' }}>State</Typography>
-                  <FormControl sx={{ m: 1, width: 233 }}>
-                    <SelectDropdown options={state_label} flag='morefilter' />
-                  </FormControl>
-                </Box>
-                <Box
-                  sx={{
-                    height: '70px',
-                    justifyContent: 'space-between',
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    padding: '12px',
-                  }}
-                >
-                  <Typography sx={{ fontSize: '14px' }}>Zonal</Typography>
-                  <FormControl sx={{ m: 1, width: 233 }}>
-                    <SelectDropdown options={zonal_label} flag='morefilter'/>
-                  </FormControl>
-                </Box>
-                <Box
-                  sx={{
-                    height: '70px',
-                    justifyContent: 'space-between',
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    padding: '12px',
-                  }}
-                >
-                  <Typography sx={{ fontSize: '14px' }}>District</Typography>
-                  <FormControl sx={{ m: 1, width: 233 }}>
-                    <SelectDropdown options={zonal_label} flag='morefilter'/>
-                  </FormControl>
-                </Box>
-                <Box
-                  sx={{
-                    height: '70px',
-                    justifyContent: 'space-between',
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    padding: '12px',
-                  }}
-                >
-                  <Typography sx={{ fontSize: '14px' }}>DSA Name(s)</Typography>
-                  <FormControl sx={{ m: 1, width: 233 }}>
-                    <SelectDropdown options={zonal_label} flag='morefilter' />
-                  </FormControl>
-                </Box>
-                <Box
-                  sx={{
-                    height: '70px',
-                    justifyContent: 'space-between',
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    padding: '12px',
-                  }}
-                >
-                  <Typography sx={{ fontSize: '14px' }}>F. Partner Name(s)</Typography>
-                  <FormControl sx={{ m: 1, width: 233 }}>
-                    <SelectDropdown options={zonal_label} flag='morefilter'/>
-                  </FormControl>
-                </Box>
-                <Box
-                  sx={{
-                    height: '70px',
-                    justifyContent: 'space-between',
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    padding: '12px',
-                  }}
-                >
-                  <Typography sx={{ fontSize: '14px' }}>Branch Name(s)</Typography>
-                  <FormControl sx={{ m: 1, width: 233 }}>
-                    <SelectDropdown options={zonal_label} flag='morefilter'/>
-                  </FormControl>
-                </Box>
+                {state_label.map((item:any)=> {
+                  return (
+                    <Box
+                    sx={{
+                      height: '70px',
+                      justifyContent: 'space-between',
+                      display: 'flex',
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      padding: '12px',
+                    }}
+                  >
+                    <Typography sx={{ fontSize: '14px' }}>{item.name}</Typography>
+                    <FormControl sx={{ m: 1, width: 233 }}>
+                      <SelectDropdown options={item.dataLabel}  />
+                    </FormControl>
+                  </Box>
+                  )
+                } )}
               </Grid>
             </FormGroup>
           </Stack>

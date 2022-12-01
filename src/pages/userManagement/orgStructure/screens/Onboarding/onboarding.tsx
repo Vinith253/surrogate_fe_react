@@ -15,13 +15,14 @@ import {
   Checkbox,
 } from '@mui/material';
 import './onboarding.scss';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { OrgReview } from '../OrgReview/OrgReview';
 import { useLocation, useNavigate } from 'react-router-dom';
 import dayjs, { Dayjs } from 'dayjs';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+// import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Info_Icon from '../../../../../assets/images/info_icon.svg';
 import TypoText from '../../../../../components/commonComponent/CustomText/Textfield';
 import TypographyInfo from '../../../../../components/commonComponent/CustomText/Info';
@@ -42,16 +43,20 @@ import EditIcon from '../../../../../assets/images/edit_card.svg';
 import Modal from '@mui/material/Modal';
 import ViewDoc from '../../../../../assets/images/viewDoc.svg';
 import TypographyHead from '../../../../../components/commonComponent/CustomText/Head';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 
 export const Onboarding = () => {
+  const [startDatevalue, setStartDateValue] = useState(null);
+  const [endDatevalue, setEndDateValue] = useState(null);
   const [open, setOpen] = React.useState(false);
+  const [editable, setEditable] = useState(false)
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
   const location = useLocation();
   const { state } = location;
-  const [value, setValue] = React.useState<Dayjs | null>(dayjs('DD/MM/YYYY'));
-
+  // const [value, setValue] = React.useState<Dayjs | null>(dayjs('DD/MM/YYYY'));
+  const [value, setValue] = React.useState<Dayjs | null>(dayjs());
   let objValue = {
     supplierCompany: '',
     workAddress: '',
@@ -86,7 +91,9 @@ export const Onboarding = () => {
     keyContact: false,
     proprietor: false,
   });
-  const [viewMode, setViewMode] = useState<string>(state.isEditable ? 'add' : 'edit');
+  const [viewMode, setViewMode] = useState<string>(
+    state.isEditable ? 'add' : 'edit'
+  );
 
   const AddKeyContact = () => {
     // console.log('add key');
@@ -125,7 +132,12 @@ export const Onboarding = () => {
       proprietor: newData,
     }));
   };
-
+  const DOBStyle = {
+    '& .MuiInputBase-root-MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline':
+      {
+        border: '1px solid black',
+      },
+  };
   const handleSubmitClick = () => {
     console.log('coming here');
     // let value = 'add';
@@ -169,12 +181,19 @@ export const Onboarding = () => {
       <Grid item xs={12} sm={6} md={3}>
         <Box sx={{ gap: 2 }}>
           <TypographySubTitle color={subTitleColor} title={subTitleTile} />
-          <TypoText color={textColor} title={textTitle} />
+          {editable == true ? (
+            <TypoText color={textColor} title={textTitle} />
+          ):(
+
+          <TypoText color={textColor} placeholder={textTitle} />
+          )}
         </Box>
       </Grid>
     );
   };
-
+  const handleChange = (newValue: Dayjs | null) => {
+    setValue(newValue);
+  };
   return (
     <Stack>
       <Box sx={{ backgroundColor: '#E6E7E7' }}>
@@ -209,7 +228,7 @@ export const Onboarding = () => {
                 </Button>
                 <Button
                   sx={{ textTransform: 'capitalize', backgroundColor: 'white' }}
-                  onClick={() => setViewMode('edit')}
+                  onClick={() => setViewMode('add')}
                 >
                   <IconButton sx={{ heigght: '30px' }}>
                     <img
@@ -336,7 +355,9 @@ export const Onboarding = () => {
           </Box>
           <Divider sx={{ marginY: '20px' }} />
 
-          <Grid container sx={{ marginBottom: '20px' }} spacing={5}>
+          <Grid container sx={{ marginBottom: '5px' }} spacing={5}>
+            
+            
             {viewMode === 'add'
               ? renderEditModeText(
                   'Supplier Name',
@@ -385,9 +406,9 @@ export const Onboarding = () => {
                   '#AFAEAF',
                   'Cities of Operations'
                 )}
-          </Grid>
+          {/* </Grid>
 
-          <Grid container sx={{ marginBottom: '20px' }} spacing={5}>
+          <Grid container sx={{ marginBottom: '20px' }} spacing={5}> */}
             {viewMode === 'add'
               ? renderEditModeText(
                   'Enter Telephone No',
@@ -414,7 +435,7 @@ export const Onboarding = () => {
               <Grid item xs={12} sm={6} md={4}>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <TypographySubTitle title="Year of inc./ in Business Since" />
-                  <DatePicker
+                  <DesktopDatePicker
                     //   disableFuture
                     toolbarPlaceholder="DD/MM/YYYY"
                     //   label="DD/MM/YYYY"
@@ -425,9 +446,25 @@ export const Onboarding = () => {
                       setValue(newValue);
                     }}
                     renderInput={(params) => (
-                      <TextField size="small" {...params} fullWidth />
+                      <TextField
+                        sx={DOBStyle}
+                        size="small"
+                        {...params}
+                        fullWidth
+                      />
                     )}
                   />
+                  {/* <DesktopDatePicker
+                    inputFormat="DD/MM/YYYY"
+                    toolbarPlaceholder="DD/MM/YYYY"
+                    value={value}
+                    onChange={(newValue) => {
+                      setValue(newValue);
+                    }}
+                    renderInput={(params) => (
+                      <TextField size="small" fullWidth {...params} />
+                    )}
+                  /> */}
                 </LocalizationProvider>
               </Grid>
             ) : (
@@ -438,9 +475,9 @@ export const Onboarding = () => {
                 'Year of inc./ in Business Since'
               )
             )}
-          </Grid>
+          {/* </Grid> */}
 
-          <Grid container sx={{ marginBottom: '20px' }} spacing={5}>
+          {/* <Grid container sx={{ marginBottom: '20px' }} spacing={5}> */}
             {viewMode === 'add' ? (
               <Grid item xs={12} sm={6} md={4}>
                 <FormControl fullWidth>
@@ -472,7 +509,7 @@ export const Onboarding = () => {
                     <MenuItem value={30}>Thirty</MenuItem>
                   </Select>
                 </FormControl>
-              </Grid>
+               </Grid>
             ) : (
               renderViewModeText(
                 '#151515',
@@ -503,7 +540,7 @@ export const Onboarding = () => {
             )}
           </Grid>
 
-          <Grid container sx={{ marginBottom: '20px' }} spacing={5}>
+          <Grid container sx={{ marginY: '5px' }} spacing={5}>
             {viewMode === 'add'
               ? renderEditModeText(
                   'Enter Company Registration No',
@@ -653,7 +690,7 @@ export const Onboarding = () => {
                       <FormControl fullWidth>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                           <TypographySubTitle title="Date of Birth" />
-                          <DatePicker
+                          {/* <DatePicker
                             disableFuture
                             // label="Responsive"
                             openTo="year"
@@ -664,11 +701,21 @@ export const Onboarding = () => {
                             }}
                             renderInput={(params) => (
                               <TextField
-                                sx={{ borderColor: 'black' }}
+                                sx={DOBStyle}
                                 size="small"
                                 {...params}
                                 fullWidth
                               />
+                            )}
+                          /> */}
+                          <DesktopDatePicker
+                            inputFormat="DD/MM/YYYY"
+                            value={value}
+                            onChange={(newValue) => {
+                              setValue(newValue);
+                            }}
+                            renderInput={(params) => (
+                              <TextField size="small" fullWidth {...params} />
                             )}
                           />
                         </LocalizationProvider>
@@ -982,7 +1029,7 @@ export const Onboarding = () => {
                       title="Registration Number (MSMED)"
                     />
                     <TypoText color="#151515" title="U72900TN2020PTC130006" />
-                    <img className="img" src={ViewDoc} />
+                    <img onClick={handleOpen} className="img" src={ViewDoc} />
                   </Box>
                 </Grid>
 
@@ -990,21 +1037,21 @@ export const Onboarding = () => {
                   <Box sx={{ gap: 2 }}>
                     <TypographySubTitle color="#AFAEAF" title="TIN Number" />
                     <TypoText color="#151515" title="U72900TN2020PTC130006" />
-                    <img className="img" src={ViewDoc} />
+                    <img onClick={handleOpen} className="img" src={ViewDoc} />
                   </Box>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3}>
                   <Box sx={{ gap: 2 }}>
                     <TypographySubTitle color="#AFAEAF" title="GST Number" />
                     <TypoText color="#151515" title="U72900TN2020PTC130006" />
-                    <img className="img" src={ViewDoc} />
+                    <img onClick={handleOpen} className="img" src={ViewDoc} />
                   </Box>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3}>
                   <Box sx={{ gap: 2 }}>
                     <TypographySubTitle color="#AFAEAF" title="PAN Number" />
                     <TypoText color="#151515" title="U72900TN2020PTC130006" />
-                    <img className="img" src={ViewDoc} />
+                    <img onClick={handleOpen} className="img" src={ViewDoc} />
                   </Box>
                 </Grid>
               </Grid>
@@ -1017,7 +1064,7 @@ export const Onboarding = () => {
                       title="ESIC Registration No"
                     />
                     <TypoText color="#151515" title="U72900TN2020PTC130006" />
-                    <img className="img" src={ViewDoc} />
+                    <img onClick={handleOpen} className="img" src={ViewDoc} />
                   </Box>
                 </Grid>
 
@@ -1028,7 +1075,7 @@ export const Onboarding = () => {
                       title="PF Registration No"
                     />
                     <TypoText color="#151515" title="U72900TN2020PTC130006" />
-                    <img className="img" src={ViewDoc} />
+                    <img onClick={handleOpen} className="img" src={ViewDoc} />
                   </Box>
                 </Grid>
               </Grid>
@@ -1231,13 +1278,17 @@ export const Onboarding = () => {
             </Grid>
 
             {viewMode === 'add' && (
-              <Box sx={{ display: 'flex', gap: 3, marginBottom: '20px' }}>
+              <Box sx={{ display: 'flex', gap: 4, marginBottom: '20px' }}>
                 <Box sx={{ width: '280px' }}>
-                  <TypographySubTitle title="MICR Code (9 digits)" />
-                  <TypoText placeholder="Enter MICR Code" id="businessId" />
+                  <TypographySubTitle fullWidth title="MICR Code (9 digits)" />
+                  <TypoText
+                    fullWidth
+                    placeholder="Enter MICR Code"
+                    id="businessId"
+                  />
                 </Box>
-                
-                <Upload title="Attach Copy of Cancelled Cheque"/>
+
+                <Upload title="Attach Copy of Cancelled Cheque" />
               </Box>
             )}
           </Box>
@@ -1409,23 +1460,16 @@ Koratur, chennai - 600100"
                               sx={{
                                 display: 'flex',
                                 alignItems: 'center',
-                                justifyContent: 'space-between',
+                                justifyContent: 'flex-end',
                                 paddingBottom: '15px',
                               }}
                             >
-                              {/* <Typography
-                       sx={{
-                         fontSize: '14px',
-                         fontWeight: 500,
-                         lineHeight: '16px',
-                         color: '#231F20',
-                         letterSpacing: '0.001em',
-                       }}
-                     >
-                       Card Photo - Eterna - Platinum
-                     </Typography> */}
+                              
                               <Typography
                                 sx={{
+                                  display: 'flex',
+                                  justifyContent: 'flex-end',
+                                  alignItems: 'flex-end',
                                   fontSize: '14px',
                                   fontWeight: 500,
                                   lineHeight: '16px',
@@ -1440,8 +1484,8 @@ Koratur, chennai - 600100"
                             <Box className="cardImageBox">
                               <img
                                 style={{
-                                  width: '40vw',
-                                  height: '35vh',
+                                  width: '70vw',
+                                  height: '70vh',
                                 }}
                                 alt=""
                                 src={ViewDoc}
@@ -1467,6 +1511,8 @@ Koratur, chennai - 600100"
             right: 0,
             width: '100%',
             borderTop: '1px solid #e9edf5',
+            boxShadow:
+              '0px 2px 10px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
           }}
         >
           {viewMode === 'add' ? (
@@ -1485,6 +1531,7 @@ Koratur, chennai - 600100"
               <BtnContained onClick={handleSubmitClick} title="Submit" />
             </Box>
           ) : (
+  
             <Box
               sx={{
                 display: 'flex',

@@ -1,0 +1,263 @@
+.lms-dashboard-container {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    margin-top: 32px;
+
+    .filter-header {
+      display: flex;
+      margin-top: 28px;
+      margin-bottom: 28px;
+      margin-left: 32px;
+      margin-right: 32px;    
+      cursor: pointer;
+      justify-content: space-between;
+      align-items: flex-start;
+  
+      .filter-data {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+  
+      .reset-data {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+      }
+    }
+
+    .horizontal-cards {
+      margin-left: 40px;
+      margin-right: 40px; 
+
+      .progress-icon-box {
+        width: 3vw;
+        height: 5.5vh;
+        background-color: #3d8597;
+        justify-content: center;
+        border-radius: 8px;
+        margin-right: 15px;
+        margin-left: 20px;
+        align-items: center;
+        display: flex;
+      }
+
+      .approval-icon-box {
+        width: 3vw;
+        height: 5.5vh;
+        background-color: #2e562e;
+        justify-content: center;
+        border-radius: 8px;
+        margin-right: 15px;
+        margin-left: 20px;
+        align-items: center;
+        display: flex;
+      }
+
+      .rejected-icon-box {
+        width: 3vw;
+        height: 5.5vh;
+        background-color: #8d3529;
+        justify-content: center;
+        border-radius: 8px;
+        margin-right: 15px;
+        margin-left: 20px;
+        align-items: center;
+        display: flex;
+      } 
+      
+      .dropped-icon-box {
+        width: 3vw;
+        height: 5.5vh;
+        background-color: #957f3e;
+        justify-content: center;
+        border-radius: 8px;
+        margin-right: 15px;
+        margin-left: 20px;
+        align-items: center;
+        display: flex;
+      }
+    
+    }
+
+    .heading-text {
+        align-items: flex-start;
+        padding: 20px;
+        justify-content: flex-start;
+        display: flex;
+        margin-left: 20px;
+    }
+
+    .horizontal-cards2 {
+        margin-left: 40px;
+        margin-right: 40px;
+        margin-bottom: 32px;
+
+        .progress-icon-box {
+            width: 3vw;
+            height: 5.5vh;
+            background-color: #3d8597;
+            justify-content: center;
+            border-radius: 8px;
+            margin-right: 15px;
+            margin-left: 20px;
+            align-items: center;
+            display: flex;
+          }
+    
+          .approval-icon-box {
+            width: 3vw;
+            height: 5.5vh;
+            background-color: #2e562e;
+            justify-content: center;
+            border-radius: 8px;
+            margin-right: 15px;
+            margin-left: 20px;
+            align-items: center;
+            display: flex;
+          }
+    
+          .rejected-icon-box {
+            width: 3vw;
+            height: 5.5vh;
+            background-color: #8d3529;
+            justify-content: center;
+            border-radius: 8px;
+            margin-right: 15px;
+            margin-left: 20px;
+            align-items: center;
+            display: flex;
+          } 
+          
+          .dropped-icon-box {
+            width: 3vw;
+            height: 5.5vh;
+            background-color: #957f3e;
+            justify-content: center;
+            border-radius: 8px;
+            margin-right: 15px;
+            margin-left: 20px;
+            align-items: center;
+            display: flex;
+          }
+    }
+
+    .divider-line {
+      border: 1px solid #e6e7e8;
+      margin-left: 40px;
+      margin-right: 40px;
+    }
+
+    .report-cards {
+      display: flex;
+      // height: 70vh;
+      margin-top: 24px;
+      margin-left: 40px;
+      margin-right: 40px;
+      margin-bottom: 24px;
+
+      .progress-card {
+        width: 50%;
+      }
+      .graph-card {
+        width: 50%;
+        .graph-div {
+          border: 1px solid #F0F2F5;
+          border-radius: 10px;
+          // margin-top: 30px;
+          margin-right: 20px;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 20px;
+
+          .line-div {
+            border-bottom: 1px dotted #D2D2D3;
+            margin-top: 27px;
+            width: 100%;
+          }
+
+          .donut-chart-div {
+            margin-top: 27px;
+            width: 100%;
+          }
+
+          .overview-text {
+            font-size: 14px;
+            color: #4D4E50;
+            // font-weight: bold;
+          }
+
+          .overview-text2 {
+            font-size: 14px;
+            color: black;
+          }
+          .filter-graph-box {
+            margin-top: 26px;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+
+            .third-header {
+              display: flex;
+              flex-direction: row;
+              // margin-bottom: 14px;
+            }
+
+            .line2-div {
+              border: 0.5px solid #8a8b8c;
+              height: 3vh;
+            }
+
+            .graph-filter-box {
+              color: black;
+              font-size: 12px;
+              background-color: #d8d9db;
+              display: flex;
+              align-items: center;
+              border-radius: 3px;
+
+              .hour-box {
+                color: black;
+                font-size: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding-left: 10px;
+                padding-right: 10px;
+              }
+
+              .selectedBox {
+                font-size: 12px;
+                background-color: #0662b7;
+                height: 5vh;
+                display: flex;
+                align-items: center;
+                padding-left: 10px;
+                padding-right: 10px;
+                border-radius: 3px;
+              }
+              .overview-text3 {
+                font-size: 12px;
+                color: black;
+                font-weight: 500;
+                cursor: pointer;
+              }
+
+              .selected-overview-text3 {
+                font-size: 12px;
+                color: white;
+                font-weight: 500;
+                cursor: pointer;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .diff-area {
+    margin-top: 32px;
+  }
