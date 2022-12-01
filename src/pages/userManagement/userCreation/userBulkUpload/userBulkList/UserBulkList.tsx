@@ -570,6 +570,7 @@ export default function UserBulkList(props: any) {
           sx={{
             display: 'flex',
             gap: '5%',
+            width: '65%',
           }}
         >
           <Box sx={boxCenter}>
