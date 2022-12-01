@@ -171,7 +171,7 @@ export default function Home() {
         <ChangePasswordProfileModal />
         <ChangePasswordOTP />
         <CreateNewPassword /> */}
-        <DuplicateRole />
+        {/* <DuplicateRole /> */}
         <Card content={pendingActionsData} />
         <Card content={savedItemsData} />
         <Card content={frequentActivitiesData} />
