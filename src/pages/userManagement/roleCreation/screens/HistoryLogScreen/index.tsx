@@ -46,6 +46,7 @@ import UnfoldMoreIcon from '../../../../../assets/icons/sortArrow.svg';
 import { checkTagStatus } from '../../../../../utils/tagBasedIndicator/tagStatus';
 import ListTable from '../../../../../components/commonComponent/commonListTable/commonListTable';
 import HistoryLogCustomModal from '../../../../../components/commonComponent/customModal/HistoryLogCustomModal';
+import { duplicateRoleData } from '../../createRole/createrole.const';
 
 const tableHeaderData: historyLogAuthenticationInterface[] = [
   {
@@ -295,7 +296,9 @@ export const HistoryLog = (props: any) => {
                 onClick={() => {
                   handleClose();
                   // navigate('/productManagement/cardCatalogue/singleupload/reviewCard');
-                  navigate('/userManagement/roleCreation/historyLogDetail');
+                  navigate('/userManagement/roleCreation/createRole', {
+                    state: { roleName: 'Head', data: duplicateRoleData, isView: true },
+                  });
                 }}
                 // className="menu"
               >
