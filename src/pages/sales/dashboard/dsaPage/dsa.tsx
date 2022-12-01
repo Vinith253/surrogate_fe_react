@@ -20,7 +20,7 @@ import {
   zonal_label,
 } from '../dashboard.const';
 import BarGarph from '../../../../components/commonComponent/BarGraph/BarGraph';
-import { Button, Typography } from '@mui/material';
+import { Button, Grid, Typography } from '@mui/material';
 import { ReactComponent as Reset } from '../../../../assets/icons/reset.svg';
 import DateTimePopOver from '../../../../components/commonComponent/DateTimePopOver';
 import CheckBoxPopOver from '../../../../components/commonComponent/CheckBoxPopOver/SingleLabel';
@@ -383,7 +383,9 @@ export default function DsaPage() {
 
           <div className="divider-line" />
           <div className="horizontal-cards">
+          <Grid container spacing={2}>
             {dashboardVal?.map((value) => (
+              <Grid xs={3} item>
               <DashboardCard
                 title={value.title}
                 value={value.value}
@@ -391,7 +393,9 @@ export default function DsaPage() {
                 image={value.image}
                 navPath="/sales/salesReport"
               />
+              </Grid>
             ))}
+            </Grid>
           </div>
 
           <div className="report-cards">

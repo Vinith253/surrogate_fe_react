@@ -5,7 +5,7 @@ import {
   ReactPortal,
 } from "react";
 import "./card.scss";
-import { Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { ReactComponent as RightArrow } from "../../../../assets/icons/rightArrow.svg";
 import { ReactComponent as DownArrow } from "../../../../assets/icons/downArrow.svg";
 import { useNavigate } from "react-router-dom";
@@ -48,31 +48,23 @@ function DashboardCard(props: {
           <text className="card-text-value">{props.value}</text>
         </div>
       </div>
-      {props.more && (
+      <Box sx={{height:'50px'}}>
+      {(props.more || props.viewAll) && (
         <div className="lower-div">
           <Button
-          endIcon={<RightArrow style={{width:'5px', height: '10px'}}/>}
+          endIcon={ props.viewAll ? <DownArrow style={{width:'10px', height: '5px'}}/> : <RightArrow style={{width:'5px', height: '10px'}}/>}
           sx={{ fontSize: "0.8vw",color:'#0662B7',textTransform:'none'}}
           onClick={()=> {
             navigate(props.navPath)
           }}
         >
-          More
+          {props.viewAll ? "View All": "More"}
         </Button>
 
 
         </div>
       )}
-      {props.viewAll && (
-        <div className="lower-div">
-          <Button
-          endIcon={<DownArrow style={{width:'10px', height: '5px'}}/>}
-          sx={{ fontSize: "0.8vw",color:'#0662B7',textTransform:'none'}}
-        >
-          View All
-        </Button>
-        </div>
-      )}
+      </Box>
     </div>
   );
 }
