@@ -362,19 +362,72 @@ export const product_label = [
 ];
 
 export const state_label =[
-  { value: 'tamilnadu', name: 'Tamilnadu' },
-  { value: 'andra', name: 'Andhra' },
-  { value: 'telungana', name: 'Telungana' },
-  { value: 'karnataka', name: 'Karnataka' },
-  { value: 'kerala', name: 'Kerala' },
-]
-
-export const zonal_label =[
-  { value: 'tamilnadu', name: 'Tamilnadu' },
-  { value: 'andra', name: 'Andhra' },
-  { value: 'telungana', name: 'Telungana' },
-  { value: 'karnataka', name: 'Karnataka' },
-  { value: 'kerala', name: 'Kerala' },
+  {
+    name:'State',
+    dataLabel : [
+      { value: 'All', name: 'All' },
+      { value: 'tamilnadu', name: 'Tamilnadu' },
+      { value: 'andra', name: 'Andhra' },
+      { value: 'telungana', name: 'Telungana' },
+      { value: 'karnataka', name: 'Karnataka' },
+      { value: 'kerala', name: 'Kerala' },
+    ]
+  },
+  {
+    name:'Zonal',
+    dataLabel : [
+      { value: 'All', name: 'All' },
+      { value: 'tamilnadu', name: 'Tamilnadu' },
+      { value: 'andra', name: 'Andhra' },
+      { value: 'telungana', name: 'Telungana' },
+      { value: 'karnataka', name: 'Karnataka' },
+      { value: 'kerala', name: 'Kerala' },
+    ]
+  },
+  {
+    name:'District',
+    dataLabel : [
+      { value: 'All', name: 'All' },
+      { value: 'tamilnadu', name: 'Tamilnadu' },
+      { value: 'andra', name: 'Andhra' },
+      { value: 'telungana', name: 'Telungana' },
+      { value: 'karnataka', name: 'Karnataka' },
+      { value: 'kerala', name: 'Kerala' },
+    ]
+  },
+  {
+    name:'DSA Name(s)',
+    dataLabel : [
+      { value: 'All', name: 'All' },
+      { value: 'tamilnadu', name: 'Tamilnadu' },
+      { value: 'andra', name: 'Andhra' },
+      { value: 'telungana', name: 'Telungana' },
+      { value: 'karnataka', name: 'Karnataka' },
+      { value: 'kerala', name: 'Kerala' },
+    ]
+  },
+  {
+    name:'F. Partner Name(s)',
+    dataLabel : [
+      { value: 'All', name: 'All' },
+      { value: 'tamilnadu', name: 'Tamilnadu' },
+      { value: 'andra', name: 'Andhra' },
+      { value: 'telungana', name: 'Telungana' },
+      { value: 'karnataka', name: 'Karnataka' },
+      { value: 'kerala', name: 'Kerala' },
+    ]
+  },
+  {
+    name:'Branch Name(s)',
+    dataLabel : [
+      { value: 'All', name: 'All' },
+      { value: 'tamilnadu', name: 'Tamilnadu' },
+      { value: 'andra', name: 'Andhra' },
+      { value: 'telungana', name: 'Telungana' },
+      { value: 'karnataka', name: 'Karnataka' },
+      { value: 'kerala', name: 'Kerala' },
+    ]
+  }
 ]
 
 

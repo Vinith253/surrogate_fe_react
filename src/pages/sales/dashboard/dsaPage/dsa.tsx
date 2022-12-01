@@ -17,7 +17,6 @@ import {
   salesDashboardList,
   state_label,
   statusRowHeading,
-  zonal_label,
 } from '../dashboard.const';
 import BarGarph from '../../../../components/commonComponent/BarGraph/BarGraph';
 import { Button, Grid, Typography } from '@mui/material';
@@ -362,7 +361,6 @@ export default function DsaPage() {
                 policies_label={policies_label}
                 surrogates_label={surrogates_label}
                 state_label={state_label}
-                zonal_label={zonal_label}
               />
             </div>
             <div className="reset-data">
