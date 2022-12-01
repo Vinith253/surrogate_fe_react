@@ -375,14 +375,14 @@ export default function BulkList(props: any) {
   const footerStyle = {
     backgroundColor: 'white',
     marginTop: '24px',
-    padding: '20px 32px',
+    padding: '25px 32px 20px',
     position: 'fixed',
     bottom: 0,
     right: 0,
     width: ' 100%',
     // borderTop: ' 1px solid black',
     boxShadow:
-      '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
+      '0px 2px 10px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
   };
   function LinearProgressWithLabel(
     props: LinearProgressProps & { value: number }

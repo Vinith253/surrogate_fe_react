@@ -33,6 +33,7 @@ import PaginationComp from '../../../../../components/commonComponent/Pagination
 import CustomModal from '../../../../../components/commonComponent/customModal/CustomModal';
 import CommonTable from '../../../../../components/commonComponent/commonTable/CommonTable';
 import UserUploadCard from '../userUploadCard/UserUploadCard';
+import ChooseCategoryToViewData from '../../../../../components/commonComponent/ChooseCategoryToViewData';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -346,14 +347,14 @@ export default function UserBulkList(props: any) {
   const footerStyle = {
     backgroundColor: 'white',
     marginTop: '24px',
-    padding: '20px 32px',
+    padding: '25px 32px 20px',
     position: 'fixed',
     bottom: 0,
     right: 0,
     width: ' 100%',
     // borderTop: ' 1px solid black',
     boxShadow:
-      '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
+      '0px 2px 10px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
   };
   const handleUploadProgress = (value: number) => {
     setUploadProgress(value);
@@ -522,6 +523,10 @@ export default function UserBulkList(props: any) {
     // downloadSample: bulkUpload.DOWNLOAD_ERROR_FILE,
     upload: bulkUpload.UPLOAD_MISSING_DOCUMENT,
   };
+  const boxCenter = {
+    display: 'flex',
+    alignItems: 'center',
+  };
 
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * rowsPerPage;
@@ -567,18 +572,27 @@ export default function UserBulkList(props: any) {
             gap: '5%',
           }}
         >
-          <Typography variant="h6" sx={{ fontSize: '1rem' }}>
-            File Name:{progress === 100 && 'arantic'}
-          </Typography>
-          <Typography variant="h6" sx={{ fontSize: '1rem' }}>
-            Record Found: {progress === 100 && '25'}
-          </Typography>
-          <Typography variant="h6" sx={{ fontSize: '1rem' }}>
-            Valid Records: {progress === 100 && validCount}
-          </Typography>
-          <Typography variant="h6" sx={{ fontSize: '1rem' }}>
-            Errors Found: {progress === 100 && errorCount}
-          </Typography>
+          <Box sx={boxCenter}>
+            {' '}
+            <Typography variant="h6" sx={{ fontSize: '1rem' }}>
+              File Name:{progress === 100 && 'arantic'}
+            </Typography>
+          </Box>
+          <Box sx={boxCenter}>
+            <Typography variant="h6" sx={{ fontSize: '1rem' }}>
+              Record Found: {progress === 100 && '25'}
+            </Typography>
+          </Box>
+          <Box sx={boxCenter}>
+            <Typography variant="h6" sx={{ fontSize: '1rem' }}>
+              Valid Records: {progress === 100 && validCount}
+            </Typography>
+          </Box>
+          <Box sx={boxCenter}>
+            <Typography variant="h6" sx={{ fontSize: '1rem' }}>
+              Errors Found: {progress === 100 && errorCount}
+            </Typography>
+          </Box>
         </Box>
         {progress !== 100 && (
           <Alert
@@ -609,18 +623,20 @@ export default function UserBulkList(props: any) {
           width: '100%',
         }}
       >
-        <ToggleButtonGroup
-          color="primary"
-          value={alignment}
-          exclusive
-          onChange={handleChange}
-          aria-label="Platform"
-          // sx={ToggleBoxStyle}
-        >
-          <ColorButton value="all">All</ColorButton>
-          <ColorButton value="valid">Valid</ColorButton>
-          <ColorButton value="error">Error</ColorButton>
-        </ToggleButtonGroup>
+        {progress === 100 && (
+          <ToggleButtonGroup
+            color="primary"
+            value={alignment}
+            exclusive
+            onChange={handleChange}
+            aria-label="Platform"
+            // sx={ToggleBoxStyle}
+          >
+            <ColorButton value="all">All</ColorButton>
+            <ColorButton value="valid">Valid</ColorButton>
+            <ColorButton value="error">Error</ColorButton>
+          </ToggleButtonGroup>
+        )}
         {/* <ButtonGroup
           variant="contained"
           aria-label="outlined primary button group"
@@ -630,7 +646,7 @@ export default function UserBulkList(props: any) {
           <ColorButton>Error</ColorButton>
         </ButtonGroup> */}
       </Box>
-      {progress > 70 && (
+      {progress > 0 && (
         // <TableContainer
         //   component={Paper}
         //   sx={{
@@ -693,7 +709,7 @@ export default function UserBulkList(props: any) {
           {progress === 100 && (
             <CommonTable column={columnList} data={dataList} />
           )}
-          {progress !== 100 && <CommonTable column={columnList} data={data2} />}
+          {progress !== 100 && <ChooseCategoryToViewData />}
         </Box>
       )}
       {progress === 100 && correctionState && (
