@@ -1,6 +1,6 @@
 import { TabBar } from '../../../../components/commonComponent/customTab/CustomTab';
 import { dataList } from '../../../../interface/Types';
-import { HistoryLog } from '../screens/historyLog/historyLog';
+import { OrgStrHistoryLog } from '../screens/historyLog/historyLog';
 
 import { OrganisationDetails } from '../screens/organisationDetails/organisationDetails';
 
@@ -16,7 +16,7 @@ export const OrgStructure = () => {
     {
       id: '2',
       data: 'History Log',
-      component: <HistoryLog />,
+      component: <OrgStrHistoryLog />,
       isDisabled: false,
     },
   ];
