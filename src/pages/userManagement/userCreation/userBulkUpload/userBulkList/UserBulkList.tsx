@@ -291,7 +291,7 @@ export default function UserBulkList(props: any) {
       error: false,
     },
   ];
-  const data2 = [{}];
+  const data2: any = [];
   // const data2 = [
   //   {
   //     id: 1,
@@ -570,7 +570,7 @@ export default function UserBulkList(props: any) {
           sx={{
             display: 'flex',
             gap: '5%',
-            width: '65%'
+            width: '65%',
           }}
         >
           <Box sx={boxCenter}>
@@ -710,7 +710,7 @@ export default function UserBulkList(props: any) {
           {progress === 100 && (
             <CommonTable column={columnList} data={dataList} />
           )}
-          {progress !== 100 && <ChooseCategoryToViewData />}
+          {progress !== 100 && <CommonTable column={columnList} data={data2} />}
         </Box>
       )}
       {progress === 100 && correctionState && (
