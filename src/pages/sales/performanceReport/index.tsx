@@ -1,18 +1,19 @@
 import { dataList } from '../../../interface/Types';
-// import { TabBar } from '../../../components/commonComponent/customTab/CustomTab';
+import { TabBar } from '../../../components/commonComponent/customTab/CustomTab';
+import ReportList from '../performanceReport/reportsList';
 import './style.scss';
 
 function PerformanceReport() {
   const TabListData: dataList = [
     {
       id: '1',
-      data: 'User Creation',
-      component: <div>DSA</div>,
+      data: 'DSA',
+      component: <ReportList />,
       isDisabled: false,
     },
     {
       id: '2',
-      data: 'History Log',
+      data: 'Bank',
       component: <div>Bank</div>,
       isDisabled: true,
     },
@@ -20,8 +21,7 @@ function PerformanceReport() {
 
   return (
     <div className="performance-report-main-container">
-      Performance Report
-      {/* <TabBar data={TabListData} /> */}
+      <TabBar data={TabListData} />
     </div>
   );
 }
