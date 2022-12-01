@@ -15,10 +15,10 @@ function ApproverReviewerTable(props: { data: Array<Object>; mode: string }) {
                   <Stack>Sub-modules</Stack>
                 </Grid>
                 <Grid item xs={4}>
-                  <Stack style={{ marginLeft: '25px' }}>Reviewer</Stack>
+                  <Stack style={{ marginLeft: '2px' }}>Reviewer</Stack>
                 </Grid>
                 <Grid item xs={4}>
-                  <Stack style={{ marginLeft: '25px' }}>Approver</Stack>
+                  <Stack style={{ marginLeft: '13px' }}>Approver</Stack>
                 </Grid>
               </Grid>
             </Stack>
@@ -29,7 +29,7 @@ function ApproverReviewerTable(props: { data: Array<Object>; mode: string }) {
                     <Grid item xs={4}>
                       {eachModule?.name}
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={4} className="each-dropdown">
                       {eachModule?.reviewerList?.map((item: any) => {
                         return (
                           <Grid item xs={12}>
@@ -42,7 +42,7 @@ function ApproverReviewerTable(props: { data: Array<Object>; mode: string }) {
                         );
                       })}
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={4} className="each-dropdown">
                       {eachModule?.approverList?.map((item: any) => {
                         return (
                           <Grid item xs={12}>
