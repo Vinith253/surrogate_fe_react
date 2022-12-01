@@ -57,6 +57,13 @@ const CommonTable = (props: any) => {
     setPage(page);
     setCurrentPage(page);
   };
+
+  const noDataStyle = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+  };
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * rowsPerPage;
     const lastPageIndex = firstPageIndex + rowsPerPage;
@@ -83,31 +90,40 @@ const CommonTable = (props: any) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {currentTableData?.map((dataItem: any) => {
-              return (
-                <TableRow
-                  sx={{
-                    backgroundColor: dataItem?.error ? '#ffe5e3' : 'white',
-                  }}
-                >
-                  {props.column.map((columnItem: columnType) => {
-                    return (
-                      <StyledTableCell
-                        onClick={() =>
-                          columnItem.onClick
-                            ? columnItem.onClick(dataItem.copyLink)
-                            : null
-                        }
-                      >
-                        {dataItem[columnItem.dataIndex]
-                          ? dataItem[columnItem.dataIndex]
-                          : ''}
-                      </StyledTableCell>
-                    );
-                  })}
-                </TableRow>
-              );
-            })}
+            {currentTableData.length > 0 &&
+              currentTableData?.map((dataItem: any) => {
+                return (
+                  <TableRow
+                    sx={{
+                      backgroundColor: dataItem?.error ? '#ffe5e3' : 'white',
+                    }}
+                  >
+                    {props.column.map((columnItem: columnType) => {
+                      return (
+                        <StyledTableCell
+                          onClick={() =>
+                            columnItem.onClick
+                              ? columnItem.onClick(dataItem.copyLink)
+                              : null
+                          }
+                        >
+                          {dataItem[columnItem.dataIndex]
+                            ? dataItem[columnItem.dataIndex]
+                            : ''}
+                        </StyledTableCell>
+                      );
+                    })}
+                  </TableRow>
+                );
+              })}
+            {currentTableData.length === 0 && (
+              <TableRow>
+                <TableCell colSpan={10}>
+                  {' '}
+                  <Box sx={noDataStyle}>{'No data found'}</Box>
+                </TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </TableContainer>
