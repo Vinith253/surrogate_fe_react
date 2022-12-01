@@ -9,15 +9,7 @@
   .search-text-field {
     .css-176f598-MuiInputBase-root-MuiOutlinedInput-root {
       height: 42px;
-      margin: 18px 18px 0px 18px;
-    }
-  }
-
-  .all-option-checkbox {
-    margin: 10px 18px 0px 18px;
-
-    .css-qd4whe-MuiButtonBase-root-MuiCheckbox-root.Mui-checked {
-      color: #0662b7;
+      margin: 18px;
     }
   }
 
@@ -37,5 +29,9 @@
     border: 1px solid #f0f2f5;
     width: 100%;
     margin: 10px 0px;
+  }
+
+  .dropdown-option-container {
+    margin-left: 13px !important;
   }
 }

@@ -67,13 +67,13 @@ function UserCreationTab() {
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
   );
-  const [addUserPopoverOpen, setaddUserPopoverOpen] =
+  const [isAddUserPopoverOpen, setIsAddUserPopoverOpen] =
     React.useState<HTMLButtonElement | null>(null);
 
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
 
-  const openAddUserPopover = Boolean(addUserPopoverOpen);
+  const openAddUserPopover = Boolean(isAddUserPopoverOpen);
   const addNewUserid = openAddUserPopover ? 'simple-popover' : undefined;
 
   const userListMoreMenu = [
@@ -268,11 +268,11 @@ function UserCreationTab() {
   const handleOpenAddUserPopover = (
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
-    setaddUserPopoverOpen(event.currentTarget);
+    setIsAddUserPopoverOpen(event.currentTarget);
   };
 
   const closeAddUserPopover = () => {
-    setaddUserPopoverOpen(null);
+    setIsAddUserPopoverOpen(null);
   };
 
   const filterData = () => {
@@ -368,6 +368,7 @@ function UserCreationTab() {
           info="From here you can create access presets to assign with users in Users Creation."
           showBackButton={false}
         />
+
         <Button
           sx={{ textTransform: 'capitalize' }}
           variant="contained"
@@ -378,13 +379,15 @@ function UserCreationTab() {
         >
           Add New User
         </Button>
-        <Popover
-          id={addNewUserid}
-          open={openAddUserPopover}
-          anchorEl={addUserPopoverOpen}
-          handleClose={closeAddUserPopover}
-          options={createUserMenu}
-        />
+        {openAddUserPopover && (
+          <Popover
+            id={addNewUserid}
+            open={openAddUserPopover}
+            anchorEl={isAddUserPopoverOpen}
+            handleClose={closeAddUserPopover}
+            options={createUserMenu}
+          />
+        )}
       </Box>
       <Stack className="container">
         <HeaderWithInfo

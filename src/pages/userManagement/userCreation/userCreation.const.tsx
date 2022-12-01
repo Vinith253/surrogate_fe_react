@@ -2,41 +2,45 @@ export const UserCreationFilterDropdown: userCreationFilterInterface[] = [
   {
     label: 'State',
     option: [
-      { value: 'tamilnadu', name: 'Tamilnadu', isChecked: true },
-      { value: 'andra', name: 'Andhra', isChecked: true },
-      { value: 'telungana', name: 'Telungana', isChecked: true },
-      { value: 'karnataka', name: 'Karnataka', isChecked: true },
-      { value: 'kerala', name: 'Kerala', isChecked: true },
+      { value: 'All', name: 'All' },
+      { value: 'Tamilnadu', name: 'Tamilnadu' },
+      { value: 'Andra', name: 'Andhra' },
+      { value: 'Telungana', name: 'Telungana' },
+      { value: 'Karnataka', name: 'Karnataka' },
+      { value: 'Kerala', name: 'Kerala' },
     ],
   },
   {
     label: 'Zone',
     option: [
-      { value: 'tamilnadu', name: 'Tamilnadu' },
-      { value: 'andra', name: 'Andhra' },
-      { value: 'telungana', name: 'Telungana' },
-      { value: 'karnataka', name: 'Karnataka' },
-      { value: 'kerala', name: 'Kerala' },
+      { value: 'All', name: 'All' },
+      { value: 'Tamilnadu', name: 'Tamilnadu' },
+      { value: 'Andra', name: 'Andhra' },
+      { value: 'Telungana', name: 'Telungana' },
+      { value: 'Karnataka', name: 'Karnataka' },
+      { value: 'Kerala', name: 'Kerala' },
     ],
   },
   {
     label: 'District',
     option: [
-      { value: 'tamilnadu', name: 'Tamilnadu' },
-      { value: 'andra', name: 'Andhra' },
-      { value: 'telungana', name: 'Telungana' },
-      { value: 'karnataka', name: 'Karnataka' },
-      { value: 'kerala', name: 'Kerala' },
+      { value: 'All', name: 'All' },
+      { value: 'Tamilnadu', name: 'Tamilnadu' },
+      { value: 'Andra', name: 'Andhra' },
+      { value: 'Telungana', name: 'Telungana' },
+      { value: 'Karnataka', name: 'Karnataka' },
+      { value: 'Kerala', name: 'Kerala' },
     ],
   },
   {
     label: 'Branch',
     option: [
-      { value: 'tamilnadu', name: 'Tamilnadu' },
-      { value: 'andra', name: 'Andhra' },
-      { value: 'telungana', name: 'Telungana' },
-      { value: 'karnataka', name: 'Karnataka' },
-      { value: 'kerala', name: 'Kerala' },
+      { value: 'All', name: 'All' },
+      { value: 'Tamilnadu', name: 'Tamilnadu' },
+      { value: 'Andra', name: 'Andhra' },
+      { value: 'Telungana', name: 'Telungana' },
+      { value: 'Karnataka', name: 'Karnataka' },
+      { value: 'Kerala', name: 'Kerala' },
     ],
   },
 ];
@@ -62,6 +66,7 @@ export const DropdownFields: dropdownFieldsInterface[] = [
   {
     label: 'State',
     option: [
+      { value: 'All', name: 'All' },
       { value: 'tamilnadu', name: 'Tamilnadu' },
       { value: 'andra', name: 'Andhra' },
       { value: 'telungana', name: 'Telungana' },
@@ -72,6 +77,7 @@ export const DropdownFields: dropdownFieldsInterface[] = [
   {
     label: 'Zone',
     option: [
+      { value: 'All', name: 'All' },
       { value: 'tamilnadu', name: 'Tamilnadu' },
       { value: 'andra', name: 'Andhra' },
       { value: 'telungana', name: 'Telungana' },
@@ -82,6 +88,7 @@ export const DropdownFields: dropdownFieldsInterface[] = [
   {
     label: 'District',
     option: [
+      { value: 'All', name: 'All' },
       { value: 'tamilnadu', name: 'Tamilnadu' },
       { value: 'andra', name: 'Andhra' },
       { value: 'telungana', name: 'Telungana' },
@@ -92,6 +99,7 @@ export const DropdownFields: dropdownFieldsInterface[] = [
   {
     label: 'Branch',
     option: [
+      { value: 'All', name: 'All' },
       { value: 'tamilnadu', name: 'Tamilnadu' },
       { value: 'andra', name: 'Andhra' },
       { value: 'telungana', name: 'Telungana' },
@@ -833,13 +841,56 @@ export const ReviewerApproverList = [
     subModules: [
       {
         name: 'Programme Management',
-        reviewerList: [{ reviewerName: '' }],
-        approverList: [{ approverName: '' }, { approverName: '' }],
+        reviewerList: [
+          {
+            defaultName: 'Ashwin',
+            options: [
+              { name: 'Ashwin', value: 'Ashwin' },
+              { name: 'Ganesh', value: 'Ganesh' },
+            ],
+          },
+        ],
+        approverList: [
+          {
+            defaultName: 'Ashwin',
+            options: [
+              { name: 'Ashwin', value: 'Ashwin' },
+              { name: 'Ganesh', value: 'Ganesh' },
+            ],
+          },
+          {
+            defaultName: 'Ganesh',
+            options: [
+              { name: 'Ashwin', value: 'Ashwin' },
+              { name: 'Ganesh', value: 'Ganesh' },
+            ],
+          },
+        ],
       },
       {
         name: 'Credit Rule',
-        reviewerList: [{ reviewerName: '' }],
-        approverList: [{ approverName: '' }],
+        reviewerList: [
+          {
+            defaultName: 'Ashwin',
+            options: [
+              { name: 'Ashwin', value: 'Ashwin' },
+              { name: 'Ganesh', value: 'Ganesh' },
+            ],
+          },
+        ],
+        approverList: [
+          {
+            defaultName: 'Ashwin',
+            options: [
+              { name: 'Ashwin', value: 'Ashwin' },
+              { name: 'Ganesh', value: 'Ganesh' },
+            ],
+          },
+          {
+            defaultName: 'Ganesh',
+            options: [{ name: 'Ganesh', value: 'Ganesh' }],
+          },
+        ],
       },
     ],
   },
@@ -848,13 +899,41 @@ export const ReviewerApproverList = [
     subModules: [
       {
         name: 'Customer reports',
-        reviewerList: [{ reviewerName: '' }],
-        approverList: [{ approverName: '' }],
+        reviewerList: [
+          {
+            defaultName: 'Ashwin',
+            options: [{ name: 'Ashwin', value: 'Ashwin' }],
+          },
+        ],
+        approverList: [
+          {
+            defaultName: 'Ashwin',
+            options: [{ name: 'Ashwin', value: 'Ashwin' }],
+          },
+          {
+            defaultName: 'Ganesh',
+            options: [{ name: 'Ganesh', value: 'Ganesh' }],
+          },
+        ],
       },
       {
         name: 'Performance Report',
-        reviewerList: [{ reviewerName: '' }],
-        approverList: [{ approverName: '' }],
+        reviewerList: [
+          {
+            defaultName: 'Ashwin',
+            options: [{ name: 'Ashwin', value: 'Ashwin' }],
+          },
+        ],
+        approverList: [
+          {
+            defaultName: 'Ashwin',
+            options: [{ name: 'Ashwin', value: 'Ashwin' }],
+          },
+          {
+            defaultName: 'Ganesh',
+            options: [{ name: 'Ganesh', value: 'Ganesh' }],
+          },
+        ],
       },
     ],
   },
@@ -863,13 +942,41 @@ export const ReviewerApproverList = [
     subModules: [
       {
         name: 'Role Creation',
-        reviewerList: [{ reviewerName: '' }],
-        approverList: [{ approverName: '' }],
+        reviewerList: [
+          {
+            defaultName: 'Ashwin',
+            options: [{ name: 'Ashwin', value: 'Ashwin' }],
+          },
+        ],
+        approverList: [
+          {
+            defaultName: 'Ashwin',
+            options: [{ name: 'Ashwin', value: 'Ashwin' }],
+          },
+          {
+            defaultName: 'Ganesh',
+            options: [{ name: 'Ganesh', value: 'Ganesh' }],
+          },
+        ],
       },
       {
         name: 'User Creation',
-        reviewerList: [{ reviewerName: '' }],
-        approverList: [{ approverName: '' }],
+        reviewerList: [
+          {
+            defaultName: 'Ashwin',
+            options: [{ name: 'Ashwin', value: 'Ashwin' }],
+          },
+        ],
+        approverList: [
+          {
+            defaultName: 'Ashwin',
+            options: [{ name: 'Ashwin', value: 'Ashwin' }],
+          },
+          {
+            defaultName: 'Ganesh',
+            options: [{ name: 'Ganesh', value: 'Ganesh' }],
+          },
+        ],
       },
     ],
   },

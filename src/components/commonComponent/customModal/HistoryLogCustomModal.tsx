@@ -29,6 +29,7 @@ type props = {
   openSuccess: boolean;
   viewMoreDetails: string;
   historyViewMoreFun?: () => void;
+  routePath?: () => string;
 };
 export default function HistoryLogCustomModal({
   title,
@@ -39,6 +40,7 @@ export default function HistoryLogCustomModal({
   openSuccess,
   viewMoreDetails,
   historyViewMoreFun,
+  routePath,
 }: props) {
   const [open, setOpen] = useState(null);
   const handleOpen = (clickedIndex: any) => {
@@ -66,7 +68,7 @@ export default function HistoryLogCustomModal({
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 borderBottom: '1px solid #E9EAEB',
-                paddingBottom: '10px',
+                paddingBottom: '16px',
                 marginBottom: '16px',
               }}
             >
@@ -74,12 +76,17 @@ export default function HistoryLogCustomModal({
                 className="modal_title"
                 fontWeight={500}
                 color="#656769"
-                style={{ fontSize: '13px' }}
+                style={{ fontSize: '16px' }}
               >
                 {title}
               </Typography>
               <Typography
-                sx={{ color: '#0662B7', fontSize: '14px', cursor: 'pointer' }}
+                sx={{
+                  color: '#0662B7',
+                  fontSize: '14px',
+                  cursor: 'pointer',
+                  fontWeight: '500',
+                }}
                 onClick={handleCloseSuccess}
               >
                 {closeBtn}
@@ -255,8 +262,8 @@ export default function HistoryLogCustomModal({
                                     return (
                                       <ListItem
                                         sx={{
-                                          fontSize: '11px',
-                                          fontWeight: '600',
+                                          fontSize: '14px',
+                                          fontWeight: '400',
                                           padding: '1px 2px',
                                           color: '#151515',
                                         }}
@@ -277,7 +284,7 @@ export default function HistoryLogCustomModal({
                               </List>
                               <Typography
                                 sx={{
-                                  fontSize: '12px',
+                                  fontSize: '14px',
                                   float: 'right',
                                   color: '#0662B7',
                                   fontWeight: '500',

@@ -22,7 +22,7 @@ export const RoleCreation = () => {
     {
       id: '3',
       data: 'History Log',
-      component: <HistoryLog />,
+      component: <HistoryLog comingfrom={'roleCreation'} />,
       isDisabled: false,
     },
   ];

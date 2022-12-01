@@ -30,7 +30,11 @@ function PopoverContainer(props: {
       onClose={() => props.handleClose()}
       anchorOrigin={{
         vertical: 'bottom',
-        horizontal: 'left',
+        horizontal: 'center',
+      }}
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'center',
       }}
     >
       {props?.options?.map((eachItem: any, index: number) => {

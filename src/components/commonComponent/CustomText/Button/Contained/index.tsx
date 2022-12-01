@@ -9,6 +9,7 @@ const BtnContained = (props: any) => {
       variant="contained"
       color="secondary"
       onClick={props.onClick}
+      disabled={props?.disabled ?? false}
     >
       <Typography sx={{ textTransform: 'capitalize', fontSize: 13 }}>
         {props.title}
