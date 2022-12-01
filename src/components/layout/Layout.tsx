@@ -164,7 +164,7 @@ const sideBarOptions = [
       },
       {
         data: 'LMS Rule',
-        path: '/lms/lmsrule',
+        path: '/lms/lmsRule',
         img: retargeting_icon,
       },
       {

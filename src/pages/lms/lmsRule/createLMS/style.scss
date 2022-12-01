@@ -1,0 +1,73 @@
+.create-lms-rule-container {
+  margin: 30px 0px;
+  .create-lms-rule-header {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 24px 32px 24px 32px;
+    border-radius: 8px;
+  }
+  .lms-rule-container {
+    background-color: #ffffff;
+    padding: 20px 30px 30px 30px;
+    margin-top: 30px;
+    border-radius: 8px;
+
+    .lms-rule-form-container {
+      margin-top: 20px;
+      display: flex;
+
+      .css-10gs3tb-MuiInputBase-root-MuiOutlinedInput-root.Mui-error
+        .MuiOutlinedInput-notchedOutline {
+        border-color: #afaeaf;
+        height: 52px;
+      }
+
+      .each-field-label {
+        font-size: 13px;
+      }
+
+      .checkbox-label {
+        .css-gsv0eb-MuiTypography-root {
+          font-size: 14px;
+        }
+      }
+
+      .radio-group-container {
+        display: contents;
+
+        .css-j204z7-MuiFormControlLabel-root {
+          margin: 15px 5px 0px 5px;
+        }
+      }
+
+      .css-qd4whe-MuiButtonBase-root-MuiCheckbox-root.Mui-checked {
+        color: #0c4ca8;
+      }
+
+      .css-yf0af4-MuiButtonBase-root-MuiRadio-root.Mui-checked {
+        color: #0c4ca8;
+      }
+
+      .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+        width: 100%;
+      }
+      .css-1fczfs4-MuiInputBase-root-MuiOutlinedInput-root {
+        height: 48px;
+      }
+
+      .css-13uexx6-MuiInputBase-root-MuiOutlinedInput-root {
+        height: 47px;
+      }
+
+      .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
+        font-size: 14px;
+      }
+
+      .css-1869usk-MuiFormControl-root {
+        width: 100%;
+        margin: 10px 0px;
+      }
+    }
+  }
+}
