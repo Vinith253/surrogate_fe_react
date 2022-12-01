@@ -340,10 +340,13 @@ export const HistoryLog = (props: any) => {
         {historyLogData?.length > 0 ? (
           <Stack className="history-log-container">
             <Stack className="table-search-filters">
-              <Box className="search-container">
+              <Box className="search-container-history">
                 <Box className="search-box">
-                  <InputBase placeholder="Search by Name, emp ID" />
                   <SearchIcon className="search-icon" />
+                  <InputBase
+                    placeholder="Search by name,and emp ID"
+                    fullWidth={true}
+                  />
                 </Box>
               </Box>
               <Box className="groupButtonContainer">
