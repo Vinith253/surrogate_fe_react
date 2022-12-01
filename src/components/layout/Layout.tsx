@@ -111,7 +111,7 @@ const sideBarOptions = [
       },
       {
         data: 'Performance Report',
-        path: '/productManagement/performanceReport',
+        path: '/sales/performanceReport',
         img: card_catalogue_icon,
       },
     ],
