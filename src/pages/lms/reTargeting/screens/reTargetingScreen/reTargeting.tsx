@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './style.scss';
-import { Typography, Stack, Box, Grid } from '@mui/material';
+import { Typography, Stack, Box, Grid, Button } from '@mui/material';
 import BtnOutlined from '../../../../../components/commonComponent/CustomText/Button/Outlined';
 import SelectDropdown from '../../../../../components/commonComponent/CheckboxSelectDropdown';
 import BtnContained from '../../../../../components/commonComponent/CustomText/Button/Contained';
@@ -16,6 +16,7 @@ import {
   statusRowHeading,
 } from '../../../../sales/dashboard/dashboard.const';
 import { reTargetingText } from './reTargeting.const';
+import { colors } from '../../../../../style/Color';
 function ReTargeting() {
   const [isFiltered, setIsFiltered] = useState(false);
   return (
@@ -41,13 +42,18 @@ function ReTargeting() {
               cursor: 'pointer',
             }}
           >
-            <Stack sx={{ position: 'absolute', bottom: '20px' }}>
+            <Button
+              sx={{
+                position: 'absolute',
+                bottom: '20px',
+                textTransform: 'capitalize',
+              }}
+            >
               <Typography className="retargetingmoreFilters">
-                {' '}
                 More Filters
                 <img src={filter_icon} alt="" style={{ padding: '0 15px' }} />
               </Typography>
-            </Stack>
+            </Button>
           </Stack>
         </Grid>
         <Box className="retargeting-button-container">
@@ -57,16 +63,38 @@ function ReTargeting() {
       </Stack>
 
       {isFiltered ? (
-        <Stack className="container">
-          <Stack className="underline">
-            <Typography variant="subtitle1" sx={{ letterSpacing: 0.5 }}>
-              Sales Data
-              <Typography className="icons-container">
-                <img src={download_icon} alt="" className="icons" />
-                <img src={mail_icon} alt="" className="icons" />
-              </Typography>
-            </Typography>
-            <Typography variant="subtitle2" className="sub-label"></Typography>
+        <Stack sx={{ marginBottom: '30px' }}>
+          <Stack
+            className="retargetingOrgDetails"
+            sx={{
+              padding: '0 30px',
+            }}
+          >
+            <Stack className="retargetingOrgDetailsHeaderTable">
+              <Stack>
+                <Typography>Organisation Details</Typography>
+              </Stack>
+              <Stack>
+                <Box>
+                  <Button>
+                    <img
+                      src={download_icon}
+                      alt="download_icon"
+                      width="70%"
+                      height="70%"
+                    />
+                  </Button>
+                  <Button>
+                    <img
+                      src={mail_icon}
+                      alt="mail_icon"
+                      width="70%"
+                      height="70%"
+                    />
+                  </Button>
+                </Box>
+              </Stack>
+            </Stack>
           </Stack>
           <TableComp
             viewPath="/sales/salesReportDetails"

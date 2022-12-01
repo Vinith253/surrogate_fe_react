@@ -183,9 +183,12 @@ export const OrgStrHistoryLog = () => {
               <MenuItem
                 onClick={() => {
                   console.log('data[status - 1]', data[status - 1]);
-                  navigate('/userManagement/orgcreation/orgHistoryLogDetail', {
-                    state: data[status - 1].status,
-                  });
+                  navigate(
+                    '/userManagement/orgStructure/screens/Onboarding/onboarding',
+                    {
+                      state: data[status - 1].status,
+                    }
+                  );
                   handleClose();
                 }}
                 style={{ padding: '10px 20px', textAlign: 'left' }}
@@ -262,11 +265,10 @@ export const OrgStrHistoryLog = () => {
   ];
 
   const historyViewMoreAction = () => {
-    // navigate('/userManagement/orgStructure/historyLogDetail');
-    navigate('/userManagement/orgcreation/orgHistoryLogDetail', {
+    navigate('/userManagement/orgStructure/historyLogDetail', {
       state: data[status - 1].status,
     });
-  }
+  };
 
   return (
     <Stack sx={{ backgroundColor: 'white' }}>
