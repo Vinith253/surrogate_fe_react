@@ -44,6 +44,12 @@ import SuccessForRoleCreated from '../../components/commonComponent/customModal/
 import DuplicateRole from '../../components/commonComponent/customModal/ROLE-CREATION/DuplicateRole';
 import EmployeeDetails from '../../components/commonComponent/customModal/ROLE-CREATION/EmployeeDetails';
 import SuccessAuthorizationLevel from '../../components/commonComponent/customModal/ROLE-CREATION/SuccessAuthorizationLevel';
+import AddNew from '../../components/commonComponent/customModal/BRANCH-DETAILS/AddNew';
+import BranchDetailsSuccess from '../../components/commonComponent/customModal/BRANCH-DETAILS/BranchDetailsSuccess';
+import Communication from '../../components/commonComponent/customModal/Re-Targeting/Communication';
+import Loading from '../../components/commonComponent/customModal/Re-Targeting/Loading';
+import RejectionType from '../../components/commonComponent/customModal/Re-Targeting/RejectionType';
+import SelectedDSA from '../../components/commonComponent/customModal/Re-Targeting/SelectedDSA';
 
 export default function Home() {
   const pendingActionsData = {
@@ -172,6 +178,13 @@ export default function Home() {
         <ChangePasswordOTP />
         <CreateNewPassword /> */}
         {/* <DuplicateRole /> */}
+        {/* <AddNew />
+        <BranchDetailsSuccess /> */}
+        {/* <Communication />
+        <Loading />
+        <BranchDetailsSuccess />
+        <RejectionType />
+        <SelectedDSA /> */}
         <Card content={pendingActionsData} />
         <Card content={savedItemsData} />
         <Card content={frequentActivitiesData} />

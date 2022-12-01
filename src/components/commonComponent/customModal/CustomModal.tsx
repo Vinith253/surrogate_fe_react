@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import '../../../style/Style.scss';
-import { Button, Stack, Typography } from '@mui/material';
+import {
+  Button,
+  Stack,
+  Table,
+  Typography,
+  TableHead,
+  TableBody,
+  TableCell,
+  TableRow,
+  InputBase,
+} from '@mui/material';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -19,6 +28,8 @@ import Grid from '@mui/material/Grid';
 import { colors } from '../../../style/Color';
 import card_catalogue_sucess_icon from '../../../assets/icons/card_catalogue_sucess_icon.svg';
 import card_catalogue_rejecte_icon from '../../../assets/icons/modal_rejected_icon.svg';
+import close_icon from '../../../assets/icons/cancel.png';
+import loading_icon from '../../../assets/icons/modal-loading.svg';
 import info_icon from '../../../assets/images/info_icon.svg';
 import InputLabel from '@mui/material/InputLabel';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
@@ -27,7 +38,8 @@ import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined
 import checkedIcon from '../../../assets/icons/check_box_square_icon.svg';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { fontSize } from '@mui/system';
+import SearchIcon from '@mui/icons-material/Search';
+import './CustomModal.scss';
 
 type props = {
   openSuccess?: any;
@@ -77,6 +89,11 @@ type props = {
   employeeDetailsRowOne?: any;
   employeeDetailsRowTwo?: any;
   employeeDetailsRowThree?: any;
+  radioValueThree?: string;
+  radioValueFour?: string;
+  LoadingMsg?: string;
+  successMsg?: string;
+  tableDataLMSRule?: any;
 };
 
 function CustomModal({
@@ -127,6 +144,11 @@ function CustomModal({
   employeeDetailsRowOne,
   employeeDetailsRowTwo,
   employeeDetailsRowThree,
+  radioValueThree,
+  radioValueFour,
+  LoadingMsg,
+  successMsg,
+  tableDataLMSRule,
 }: props) {
   const [pauseStatus, setPauseStatus] = useState(radioValuOne);
   const [startDatevalue, setStartDateValue] = useState(null);
@@ -165,7 +187,10 @@ function CustomModal({
           title == 'Request for Deactivation' ||
           title == 'Add Organisation' ||
           title == 'Duplicate Role' ||
-          title == 'Employee Details'
+          title == 'Employee Details' ||
+          title == 'Choose the mode of communication' ||
+          LoadingMsg ||
+          tableDataLMSRule
             ? true
             : false
         }
@@ -208,7 +233,7 @@ function CustomModal({
               src={
                 discardModalMsg
                   ? discard_icon
-                  : successModalTitle
+                  : successModalMsg
                   ? card_catalogue_sucess_icon
                   : card_catalogue_rejecte_icon
               }
@@ -247,6 +272,19 @@ function CustomModal({
               {duplicateRoleCloseBtn}
             </Button>
           )}
+          {/* <Button
+            variant="text"
+            color="secondary"
+            sx={{
+              position: 'absolute',
+              right: '10px',
+              top: '15px',
+              textTransform: 'capitalize',
+            }}
+            onClick={handleCloseSuccess}
+          >
+            Close
+          </Button> */}
 
           {duplicate_role_content && (
             <Typography
@@ -611,6 +649,7 @@ function CustomModal({
               >
                 {ProceedBtn}
               </Button>
+              info_icon
             </Stack>
           )}
 
@@ -670,6 +709,56 @@ function CustomModal({
             </Typography>
           )}
 
+          {successMsg && (
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 auto',
+                paddingBottom: '10px',
+              }}
+              component="img"
+              src={card_catalogue_sucess_icon}
+              pb={0}
+              width={45}
+            ></Box>
+          )}
+
+          {successMsg && (
+            <Box
+              sx={{
+                position: 'absolute',
+                right: '27px',
+                textTransform: 'capitalize',
+                cursor: 'pointer',
+              }}
+              onClick={handleCloseSuccess}
+              component="img"
+              src={close_icon}
+              width={13}
+            ></Box>
+          )}
+
+          {successMsg && (
+            <Typography
+              fontWeight={400}
+              align={'center'}
+              pb={0}
+              fontSize={12}
+              sx={{
+                padding: {
+                  xs: '0 13px',
+                  sm: '0 70px',
+                },
+                marginBottom: '10px',
+                color: '#656769',
+                hyphens: 'initial',
+              }}
+            >
+              {successMsg}
+            </Typography>
+          )}
           {discardModalMsg && (
             <Typography
               fontWeight={400}
@@ -689,6 +778,26 @@ function CustomModal({
             </Typography>
           )}
 
+          {LoadingMsg && (
+            <>
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  marginBottom: '20px',
+                }}
+              >
+                <img src={loading_icon} alt="loading" />
+              </Box>
+              <Typography
+                align="center"
+                sx={{ fontSize: ' 14px', fontWeight: '400', color: '#656769' }}
+              >
+                {LoadingMsg}
+              </Typography>
+            </>
+          )}
           {accessLibraryMsg && (
             <Typography
               align="center"
@@ -697,6 +806,68 @@ function CustomModal({
               {accessLibraryMsg}
             </Typography>
           )}
+
+          {tableDataLMSRule && (
+            <>
+              {title == 'Selected DSA' && (
+                <Box className="search-container-rejection">
+                  <Box className="search-box">
+                    <SearchIcon className="search-icon" />
+                    <InputBase placeholder="Search" fullWidth={true} />
+                  </Box>
+                </Box>
+              )}
+
+              <Table aria-label="collapsible table" sx={{ marginTop: '13px' }}>
+                <TableHead sx={{ padding: '4px 14px' }}>
+                  <TableRow sx={{ backgroundColor: '#EEF7FF' }}>
+                    <TableCell
+                      sx={{
+                        fontSize: '14px',
+                        fontWeight: '500',
+                        height: '40px',
+                        padding: '10px',
+                        textAlign: 'center',
+                        color: '#151515',
+                        border: 'none',
+                      }}
+                    >
+                      S.No
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        fontSize: '14px',
+                        fontWeight: '500',
+                        height: '40px',
+                        padding: '10px',
+                        textAlign: 'center',
+                        color: '#151515',
+                        border: 'none',
+                      }}
+                    >
+                      Rejection Type
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+
+                <TableBody sx={{ borderBottom: '2px solid #E9EAEB' }}>
+                  {tableDataLMSRule.map((data: any) => {
+                    return (
+                      <TableRow sx={{ border: 'none' }}>
+                        <TableCell sx={{ textAlign: 'center', border: 'none' }}>
+                          {data.sNo}
+                        </TableCell>
+                        <TableCell sx={{ textAlign: 'center', border: 'none' }}>
+                          {data.typeAndDSA}
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+                </TableBody>
+              </Table>
+            </>
+          )}
+
           {org_ID && org_Name && channel_type && (
             <Stack
               sx={{
@@ -778,6 +949,21 @@ function CustomModal({
                     control={<Radio color="secondary" />}
                     label={radioValuTwo}
                   />
+
+                  {radioValueThree && (
+                    <>
+                      <FormControlLabel
+                        value={radioValueThree}
+                        control={<Radio color="secondary" />}
+                        label={radioValueThree}
+                      />
+                      <FormControlLabel
+                        value={radioValueFour}
+                        control={<Radio color="secondary" />}
+                        label={radioValueFour}
+                      />
+                    </>
+                  )}
                 </RadioGroup>
               </Stack>
             </FormControl>
@@ -934,7 +1120,12 @@ function CustomModal({
                 <Grid container>
                   {product_label.map((item: any) => {
                     return (
-                      <Grid item xs={6} sm={4} key={item.id}>
+                      <Grid
+                        item
+                        xs={6}
+                        sm={product_label.length > 4 ? 4 : 3}
+                        key={item.id}
+                      >
                         {' '}
                         <FormControlLabel
                           control={
