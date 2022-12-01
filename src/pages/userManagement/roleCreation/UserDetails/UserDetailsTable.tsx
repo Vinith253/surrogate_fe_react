@@ -268,13 +268,11 @@ const UserDetailsTable = (props: any) => {
         />
       )}
 
-      <Box
+      {/* <Box
         sx={{
           marginTop: '10px',
           backgroundColor: 'white',
-          // position: 'fixed',
-          // bottom: 0,
-          // right: 0,
+
           width: '100%',
           borderTop: '2px solid #f3f3f3 ',
         }}
@@ -289,7 +287,7 @@ const UserDetailsTable = (props: any) => {
         >
           <BtnContained title="Close" />
         </Box>
-      </Box>
+      </Box> */}
     </Box>
   );
 };

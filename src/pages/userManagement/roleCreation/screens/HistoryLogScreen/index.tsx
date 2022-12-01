@@ -46,6 +46,7 @@ import UnfoldMoreIcon from '../../../../../assets/icons/sortArrow.svg';
 import { checkTagStatus } from '../../../../../utils/tagBasedIndicator/tagStatus';
 import ListTable from '../../../../../components/commonComponent/commonListTable/commonListTable';
 import HistoryLogCustomModal from '../../../../../components/commonComponent/customModal/HistoryLogCustomModal';
+import { duplicateRoleData } from '../../createRole/createrole.const';
 
 const tableHeaderData: historyLogAuthenticationInterface[] = [
   {
@@ -295,7 +296,9 @@ export const HistoryLog = (props: any) => {
                 onClick={() => {
                   handleClose();
                   // navigate('/productManagement/cardCatalogue/singleupload/reviewCard');
-                  navigate('/userManagement/roleCreation/historyLogDetail');
+                  navigate('/userManagement/roleCreation/createRole', {
+                    state: { roleName: 'Head', data: duplicateRoleData, isView: true },
+                  });
                 }}
                 // className="menu"
               >
@@ -337,10 +340,13 @@ export const HistoryLog = (props: any) => {
         {historyLogData?.length > 0 ? (
           <Stack className="history-log-container">
             <Stack className="table-search-filters">
-              <Box className="search-container">
+              <Box className="search-container-history">
                 <Box className="search-box">
-                  <InputBase placeholder="Search by Name, emp ID" />
                   <SearchIcon className="search-icon" />
+                  <InputBase
+                    placeholder="Search by name,and emp ID"
+                    fullWidth={true}
+                  />
                 </Box>
               </Box>
               <Box className="groupButtonContainer">
