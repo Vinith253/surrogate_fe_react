@@ -19,6 +19,7 @@ function PopoverContainer(props: {
       eachItem?.label === 'Deactivate User'
     )
       props?.openActionModal !== undefined && props?.openActionModal();
+    props.handleClose();
   };
 
   return (
