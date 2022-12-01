@@ -7,8 +7,7 @@ import { SearchOutlined } from '@mui/icons-material';
 import { Box } from '@mui/material';
 import './style.scss';
 
-export default function SelectLabels(props: { data: any }) {
-  console.log('props', props);
+export default function SearchDropdown(props: { data: any }) {
   const [selectedValue, setSelectedValue] = useState(props?.data?.defaultName);
   const handleChange = (event: SelectChangeEvent) => {
     setSelectedValue(event.target.value);
