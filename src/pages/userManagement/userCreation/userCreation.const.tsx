@@ -844,7 +844,10 @@ export const ReviewerApproverList = [
         reviewerList: [
           {
             defaultName: 'Ashwin',
-            options: [{ name: 'Ashwin', value: 'Ashwin' }],
+            options: [
+              { name: 'Ashwin', value: 'Ashwin' },
+              { name: 'Ganesh', value: 'Ganesh' },
+            ],
           },
         ],
         approverList: [
@@ -857,7 +860,10 @@ export const ReviewerApproverList = [
           },
           {
             defaultName: 'Ganesh',
-            options: [{ name: 'Ganesh', value: 'Ganesh' }],
+            options: [
+              { name: 'Ashwin', value: 'Ashwin' },
+              { name: 'Ganesh', value: 'Ganesh' },
+            ],
           },
         ],
       },
@@ -866,13 +872,19 @@ export const ReviewerApproverList = [
         reviewerList: [
           {
             defaultName: 'Ashwin',
-            options: [{ name: 'Ashwin', value: 'Ashwin' }],
+            options: [
+              { name: 'Ashwin', value: 'Ashwin' },
+              { name: 'Ganesh', value: 'Ganesh' },
+            ],
           },
         ],
         approverList: [
           {
             defaultName: 'Ashwin',
-            options: [{ name: 'Ashwin', value: 'Ashwin' }],
+            options: [
+              { name: 'Ashwin', value: 'Ashwin' },
+              { name: 'Ganesh', value: 'Ganesh' },
+            ],
           },
           {
             defaultName: 'Ganesh',

@@ -17,6 +17,7 @@ import SecondDisabledStepperIcon from '../../../../assets/icons/second_disabled_
 import CompletedStepperIcon from '../../../../assets/icons/completed_stepper_icon.svg';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import SelectDropdown from '../../../../components/commonComponent/CheckboxSelectDropdown';
+import SearchSelectDropdown from '../../../../components/commonComponent/SearchDropdown';
 import SuccessModal from '../../../../components/commonComponent/customModal/CustomModal';
 import {
   PersonalDetails,
@@ -68,6 +69,15 @@ function EditUser() {
 
   const handleChange = (newValue: Dayjs | null) => {
     setValue(newValue);
+  };
+
+  const RoleList = {
+    defaultName: '',
+    options: [
+      { name: 'Head', value: 'Head' },
+      { name: 'Executive', value: 'Executive' },
+      { name: 'Manager', value: 'Manager' },
+    ],
   };
 
   return (
@@ -154,7 +164,7 @@ function EditUser() {
                     <Typography className="each-field-label">
                       Select User Role
                     </Typography>
-                    <SelectDropdown options={[]} />
+                    <SearchSelectDropdown data={RoleList} />
                   </Grid>
                 </Grid>
               </Stack>

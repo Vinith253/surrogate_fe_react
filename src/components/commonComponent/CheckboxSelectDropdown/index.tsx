@@ -112,25 +112,33 @@ function CheckboxSelectDropdown({ options, flag }: Props) {
               ),
             }}
           />
-          {listOptions?.map((each: any, index: number) => (
-            <Grid px={3} key={index}>
-              <FormControlLabel
-                label={
-                  <Typography sx={{ fontSize: '14px' }}>
-                    {each?.name}
-                  </Typography>
-                }
-                control={
-                  <Checkbox
-                    color="secondary"
-                    className="each-option"
-                    checked={each.isSelected}
-                    onChange={() => checkboxHandleChange(each)}
-                  />
-                }
-              />
-            </Grid>
-          ))}
+          <Stack className="dropdown-option-container">
+            {listOptions?.map((each: any, index: number) => (
+              <Grid px={3} key={index}>
+                <FormControlLabel
+                  label={
+                    <Typography sx={{ fontSize: '14px' }}>
+                      {each?.name}
+                    </Typography>
+                  }
+                  control={
+                    <Checkbox
+                      style={
+                        each?.name === 'All'
+                          ? { marginLeft: '0px' }
+                          : { marginLeft: '20px' }
+                      }
+                      color="secondary"
+                      className="each-option"
+                      checked={each.isSelected}
+                      onChange={() => checkboxHandleChange(each)}
+                    />
+                  }
+                />
+              </Grid>
+            ))}
+          </Stack>
+
           <div className="underline"></div>
           <Box className="button-container">
             <BtnOutlined

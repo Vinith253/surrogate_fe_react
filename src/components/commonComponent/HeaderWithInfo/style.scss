@@ -5,7 +5,7 @@
     font-size: 16px;
     display: flex;
     color: #151515;
-    margin: 10px 0px 5px 0px;
+    margin: 5px 0px;
 
     .info-icon {
       margin: 0px 8px 0px 15px;
@@ -29,11 +29,12 @@
   .icons-container {
     display: flex;
     justify-content: end;
+    height: 5px;
     .each-icon {
-      width: 35px;
-      height: 35px;
+      width: 33px;
+      height: 33px;
       display: flex;
-      margin: -22px 15px 0px 0px;
+      margin: -27px 15px 0px 0px;
       cursor: pointer;
 
       .icons {
