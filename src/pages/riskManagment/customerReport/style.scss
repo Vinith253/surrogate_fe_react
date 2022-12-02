@@ -1,0 +1,131 @@
+.risk-customer-report-list {
+    background-color: #f0f2f5;
+  
+    .container {
+      background-color: #ffffff;
+      padding: 20px 30px 30px 30px;
+      margin: 30px 0px;
+      border-radius: 8px;
+  
+      .underline {
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        border-bottom: 2px solid #eceff2;
+      }
+  
+      .sub-label {
+        font-size: 13px;
+        letter-spacing: 0.2;
+        color: #a3a3a5;
+        padding-bottom: 20px;
+      }
+  
+      .filters-container {
+        margin-top: 7px;
+      }
+  
+      .dropdown-label {
+        font-size: 13px;
+      }
+  
+      .button-container {
+        display: flex;
+        gap: 16px;
+        margin-left: auto;
+        margin-top: 24px;
+      }
+  
+      .icons-container {
+        display: flex;
+        justify-content: end;
+        .icons {
+          width: 16px;
+          margin: -20px 20px 0px 0px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .risk-mngmt-customer-details{
+
+  .upper-head-container {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 32px;
+
+    .create-header-container {
+      background-color: white;
+      display: flex;
+      justify-content: space-between;
+      padding: 24px 32px 20px 32px;
+    }
+
+    .icons-container {
+      display: flex;
+      justify-content: flex-start;
+      height: 5px;
+      margin-left: 24px;
+      margin-right: 24px;
+      gap: 16px;
+
+      .each-icon {
+        width: 24px;
+        height: 24px;
+        display: flex;
+        cursor: pointer;
+        background-color: #f3f3f3;
+        border-radius: 50%;
+  
+        .icons {
+          margin: auto;
+          width: 13px;
+          height: 13px;
+        }
+      }
+  
+      .each-icon:hover {
+        background-color: #f3f3f3;
+        border-radius: 50%;
+      }
+    }
+  
+    .viewpage-detail {
+      padding: 0px 32px 24px 32px;
+    }  
+  
+    .underline {
+      border: 1px solid #f0f2f5;
+      width: 100%;
+      margin: 0px 0px 24px 0px;
+    }
+  
+    .info-label {
+      color: #afaeaf;
+      font-size: 12px;
+      font-weight: 500;
+      margin: 0px 0px 6px 0px;
+    }
+    .info-value {
+      color: #151515;
+      font-size: 14px;
+      font-weight: 500;
+    }
+  
+  }
+
+  .credit-score-outer-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 32px;
+  }
+
+}
+  
+  
+  
+  

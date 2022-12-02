@@ -34,6 +34,8 @@ import Retargeting from './pages/lms/reTargeting';
 import { OrgHistoryLogDetails } from './pages/userManagement/orgStructure/screens/historyLog/historyLogDetails/historyLogDetails';
 import UserProfile from './pages/profile/landingScreen';
 import { OrgStrHistoryLog } from './pages/userManagement/orgStructure/screens/historyLog/historyLog';
+import CustomerReport from './pages/riskManagment/customerReport';
+import CustomerDetailScreen from './pages/riskManagment/customerReport/customerDetails';
 
 export default function App() {
   return (
@@ -175,6 +177,10 @@ export default function App() {
 
         <Route path="/lms/lmsRule" element={<LMSRule />} />
         <Route path="/lms/lmsRule/addNewRule" element={<AddLMSRule />} />
+        
+        <Route path="/riskManagement/customerReports" element={<CustomerReport />} />
+        <Route path="/riskManagement/customerDetails" element={<CustomerDetailScreen />} />
+
       </Route>
     </Routes>
   );
