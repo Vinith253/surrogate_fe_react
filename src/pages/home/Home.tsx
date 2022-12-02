@@ -185,6 +185,7 @@ export default function Home() {
         <BranchDetailsSuccess />
         <RejectionType />
         <SelectedDSA /> */}
+
         <Card content={pendingActionsData} />
         <Card content={savedItemsData} />
         <Card content={frequentActivitiesData} />

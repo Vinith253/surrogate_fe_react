@@ -27,28 +27,103 @@
   }
 }
 
-.search-container-rejection {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.custom-modal {
+  .search-container-rejection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-  input {
-    font-size: 13px;
+    input {
+      font-size: 13px;
+    }
+    .search-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      border: 1px solid #afaeaf;
+      border-radius: 4px;
+      height: 40px;
+      width: 100%;
+      padding: 0 14px;
+      margin-top: 13px;
+      .search-icon {
+        color: #afaeaf;
+        margin-right: 10px !important;
+      }
+    }
   }
-  .search-box {
+  .lmsRule-table {
+    margin-top: 13px;
+    .lmsRule-table-header {
+      padding: 4px 14px;
+      .lmsRule-table-head {
+        font-size: 14px;
+        font-weight: 500;
+        height: 40px;
+        padding: 10px;
+        text-align: center;
+        color: #151515;
+        border: none;
+      }
+      .lmsRule-tableRow {
+        background-color: #eef7ff;
+      }
+    }
+    .lmsRule-TableBody {
+      border-bottom: 2px solid #e9eaeb;
+      .lmsRule-tableData {
+        text-align: center;
+        border: none;
+      }
+    }
+  }
+
+  .modal-title {
+    border-bottom: 1px solid #36363624;
+    font-size: 13px;
+    font-weight: 600;
+    color: #555759;
+  }
+
+  .success-reject-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding-bottom: 10px;
+  }
+  .accessLibraryCloseBtn {
+    position: absolute !important;
+    right: 10px !important;
+    text-transform: capitalize !important;
+  }
+
+  .loading-msg-img {
     display: flex;
     justify-content: center;
     align-items: center;
-
-    border: 1px solid #afaeaf;
-    border-radius: 4px;
-    height: 40px;
-    width: 100%;
-    padding: 0 14px;
-    margin-top: 13px;
-    .search-icon {
-      color: #afaeaf;
-      margin-right: 10px !important;
+    margin-bottom: 20px;
+  }
+  .loading-msg {
+    font-size: 14px;
+    font-weight: 400;
+    color: #656769;
+  }
+  .successMsg {
+    .successMsg-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+      padding-bottom: 10px;
+    }
+    .successicon-closeIcon {
+      position: absolute;
+      right: 27px;
+      top: 20px;
+      text-transform: capitalize;
+      cursor: pointer;
     }
   }
 }

@@ -26,19 +26,19 @@ import FormGroup from '@mui/material/FormGroup';
 import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import { colors } from '../../../style/Color';
-import card_catalogue_sucess_icon from '../../../assets/icons/card_catalogue_sucess_icon.svg';
-import card_catalogue_rejecte_icon from '../../../assets/icons/modal_rejected_icon.svg';
-import close_icon from '../../../assets/icons/cancel.png';
-import loading_icon from '../../../assets/icons/modal-loading.svg';
-import info_icon from '../../../assets/images/info_icon.svg';
 import InputLabel from '@mui/material/InputLabel';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import discard_icon from '../../../assets/icons/Vector1.svg';
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
-import checkedIcon from '../../../assets/icons/check_box_square_icon.svg';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import SearchIcon from '@mui/icons-material/Search';
+import card_catalogue_sucess_icon from '../../../assets/icons/card_catalogue_sucess_icon.svg';
+import card_catalogue_rejecte_icon from '../../../assets/icons/modal_rejected_icon.svg';
+import checkedIcon from '../../../assets/icons/check_box_square_icon.svg';
+import discard_icon from '../../../assets/icons/Vector1.svg';
+import close_icon from '../../../assets/icons/cancel.png';
+import loading_icon from '../../../assets/icons/modal-loading.svg';
+import info_icon from '../../../assets/images/info_icon.svg';
 import './CustomModal.scss';
 
 type props = {
@@ -94,6 +94,7 @@ type props = {
   LoadingMsg?: string;
   successMsg?: string;
   tableDataLMSRule?: any;
+  pauseStatusKey?: string;
 };
 
 function CustomModal({
@@ -149,8 +150,9 @@ function CustomModal({
   LoadingMsg,
   successMsg,
   tableDataLMSRule,
+  pauseStatusKey,
 }: props) {
-  const [pauseStatus, setPauseStatus] = useState(radioValuOne);
+  const [pauseStatus, setPauseStatus] = useState(pauseStatusKey);
   const [startDatevalue, setStartDateValue] = useState(null);
   const [endDatevalue, setEndDateValue] = useState(null);
   const [existingRole, setexistingRole] = React.useState('');
@@ -194,6 +196,7 @@ function CustomModal({
             ? true
             : false
         }
+        className="custom-modal"
       >
         <Stack
           py={3}
@@ -207,28 +210,14 @@ function CustomModal({
           px={title ? 3 : 0}
         >
           {title && (
-            <Typography
-              component="h1"
-              pt={0}
-              pb={2}
-              borderBottom="1px solid #36363624"
-              fontSize={13}
-              fontWeight={600}
-              color="#555759"
-            >
+            <Typography className="modal-title" component="h1" pt={0} pb={2}>
               {title}
             </Typography>
           )}
 
           {(successModalTitle || rejectedModaltitle || discardModalMsg) && (
             <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                margin: '0 auto',
-                paddingBottom: '10px',
-              }}
+              className="success-reject-title"
               component="img"
               src={
                 discardModalMsg
@@ -246,11 +235,7 @@ function CustomModal({
             <Button
               variant="text"
               color="secondary"
-              sx={{
-                position: 'absolute',
-                right: '10px',
-                textTransform: 'capitalize',
-              }}
+              className="accessLibraryCloseBtn"
               onClick={handleCloseSuccess}
             >
               {accessLibraryCloseBtn}
@@ -272,19 +257,6 @@ function CustomModal({
               {duplicateRoleCloseBtn}
             </Button>
           )}
-          {/* <Button
-            variant="text"
-            color="secondary"
-            sx={{
-              position: 'absolute',
-              right: '10px',
-              top: '15px',
-              textTransform: 'capitalize',
-            }}
-            onClick={handleCloseSuccess}
-          >
-            Close
-          </Button> */}
 
           {duplicate_role_content && (
             <Typography
@@ -305,7 +277,6 @@ function CustomModal({
               </InputLabel>
 
               <Select
-                // labelId="demo-select-small"
                 id="demo-select-small"
                 value={existingRole}
                 onChange={handleChange}
@@ -600,7 +571,6 @@ function CustomModal({
           )}
           {ProceedBtn === 'Proceed' && (
             <Stack sx={{ margin: '0 60px' }}>
-              {/* {ProceedBtn === 'Proceed' && ( */}
               <TextField
                 fullWidth
                 variant="outlined"
@@ -608,7 +578,6 @@ function CustomModal({
                 sx={{ height: '40px', fontSize: '14px' }}
                 value={'Ashwin@yesbank.com'}
               ></TextField>
-              {/* )} */}
 
               <Button
                 variant="contained"
@@ -709,56 +678,47 @@ function CustomModal({
             </Typography>
           )}
 
-          {successMsg && (
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                margin: '0 auto',
-                paddingBottom: '10px',
-              }}
-              component="img"
-              src={card_catalogue_sucess_icon}
-              pb={0}
-              width={45}
-            ></Box>
-          )}
+          <Box className="successMsg">
+            {successMsg && (
+              <Box
+                className="successMsg-icon"
+                component="img"
+                src={card_catalogue_sucess_icon}
+                pb={0}
+                width={45}
+              ></Box>
+            )}
 
-          {successMsg && (
-            <Box
-              sx={{
-                position: 'absolute',
-                right: '27px',
-                textTransform: 'capitalize',
-                cursor: 'pointer',
-              }}
-              onClick={handleCloseSuccess}
-              component="img"
-              src={close_icon}
-              width={13}
-            ></Box>
-          )}
+            {successMsg && (
+              <Box
+                className="successicon-closeIcon"
+                onClick={handleCloseSuccess}
+                component="img"
+                src={close_icon}
+                width={13}
+              ></Box>
+            )}
 
-          {successMsg && (
-            <Typography
-              fontWeight={400}
-              align={'center'}
-              pb={0}
-              fontSize={12}
-              sx={{
-                padding: {
-                  xs: '0 13px',
-                  sm: '0 70px',
-                },
-                marginBottom: '10px',
-                color: '#656769',
-                hyphens: 'initial',
-              }}
-            >
-              {successMsg}
-            </Typography>
-          )}
+            {successMsg && (
+              <Typography
+                fontWeight={400}
+                align={'center'}
+                pb={0}
+                fontSize={12}
+                sx={{
+                  padding: {
+                    xs: '0 13px',
+                    sm: '0 70px',
+                  },
+                  marginBottom: '10px',
+                  color: '#656769',
+                  hyphens: 'initial',
+                }}
+              >
+                {successMsg}
+              </Typography>
+            )}
+          </Box>
           {discardModalMsg && (
             <Typography
               fontWeight={400}
@@ -780,20 +740,10 @@ function CustomModal({
 
           {LoadingMsg && (
             <>
-              <Box
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  marginBottom: '20px',
-                }}
-              >
+              <Box className="loading-msg-img">
                 <img src={loading_icon} alt="loading" />
               </Box>
-              <Typography
-                align="center"
-                sx={{ fontSize: ' 14px', fontWeight: '400', color: '#656769' }}
-              >
+              <Typography align="center" className="loading-msg">
                 {LoadingMsg}
               </Typography>
             </>
@@ -818,46 +768,24 @@ function CustomModal({
                 </Box>
               )}
 
-              <Table aria-label="collapsible table" sx={{ marginTop: '13px' }}>
-                <TableHead sx={{ padding: '4px 14px' }}>
-                  <TableRow sx={{ backgroundColor: '#EEF7FF' }}>
-                    <TableCell
-                      sx={{
-                        fontSize: '14px',
-                        fontWeight: '500',
-                        height: '40px',
-                        padding: '10px',
-                        textAlign: 'center',
-                        color: '#151515',
-                        border: 'none',
-                      }}
-                    >
-                      S.No
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        fontSize: '14px',
-                        fontWeight: '500',
-                        height: '40px',
-                        padding: '10px',
-                        textAlign: 'center',
-                        color: '#151515',
-                        border: 'none',
-                      }}
-                    >
+              <Table aria-label="collapsible table" className="lmsRule-table">
+                <TableHead className="lmsRule-table-header">
+                  <TableRow className="lmsRule-tableRow">
+                    <TableCell className="lmsRule-table-head">S.No</TableCell>
+                    <TableCell className="lmsRule-table-head">
                       Rejection Type
                     </TableCell>
                   </TableRow>
                 </TableHead>
 
-                <TableBody sx={{ borderBottom: '2px solid #E9EAEB' }}>
+                <TableBody className="lmsRule-TableBody">
                   {tableDataLMSRule.map((data: any) => {
                     return (
                       <TableRow sx={{ border: 'none' }}>
-                        <TableCell sx={{ textAlign: 'center', border: 'none' }}>
+                        <TableCell className="lmsRule-tableData">
                           {data.sNo}
                         </TableCell>
-                        <TableCell sx={{ textAlign: 'center', border: 'none' }}>
+                        <TableCell className="lmsRule-tableData">
                           {data.typeAndDSA}
                         </TableCell>
                       </TableRow>
