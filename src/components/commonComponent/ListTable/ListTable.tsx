@@ -234,7 +234,7 @@ function TableComp(props: {
         </Stack>
       )}
 
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: 'flex', width:'100%' }}>
         {props.flag === 'sales-report' && (
           <TextField
             className="text-field"

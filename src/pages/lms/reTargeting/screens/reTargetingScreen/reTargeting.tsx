@@ -231,7 +231,6 @@ function ReTargeting() {
                 policies_label={channels_label}
                 surrogates_label={surrogates_label}
                 state_label={state_label}
-                // zonal_label={zonal_label}
                 flag="main-dashboard"
               />
             </Stack>
