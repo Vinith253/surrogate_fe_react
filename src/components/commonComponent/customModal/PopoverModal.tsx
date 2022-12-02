@@ -83,7 +83,7 @@ function CheckBoxModal({
       count++;
     }
   });
-  const e = count >= 7;
+  const e = count >= 2;
 
   return (
     <Stack className="App">

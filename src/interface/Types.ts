@@ -16,3 +16,25 @@ export interface dataList extends Array<tabList> {}
 export interface toggleFunctionType {
   toggle: (a: boolean) => void;
 }
+
+export interface lmsDataInterface {
+  id?: string;
+  application?: string;
+  customerName?: string;
+  mobileNumber?: number;
+  cibil?: string;
+  income?: string;
+  status?: string;
+  lead?: string;
+  surrogateName?: string;
+  dateTime?: string;
+  Policy?: string;
+  channelName?: string;
+  processedBy?: string;
+  kycStatus?: string;
+  version? :string;
+  currentStatus?:string;
+  initiatedBy?:string;
+  request?:string;
+  dateAndTime?:string;
+}
