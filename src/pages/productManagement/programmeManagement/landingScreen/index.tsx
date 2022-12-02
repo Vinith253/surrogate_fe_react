@@ -2,7 +2,7 @@ import { TabBar } from '../../../../components/commonComponent/customTab/CustomT
 import { dataList } from '../../../../interface/Types';
 import { ReviewerLog } from '../screens/ReviewerLog';
 import { ProgramManagementScreen } from '../screens/programMmgt';
-import HistoryLog from '../screens/HistoryLog';
+import { ProgrammeHistoryLog } from '../screens/ProgrammeHistoryLog';
 
 function ProgramManagement() {
   const TabListData: dataList = [
@@ -16,7 +16,7 @@ function ProgramManagement() {
     {
       id: '2',
       data: 'History Log',
-      component: <HistoryLog />,
+      component: <ProgrammeHistoryLog />,
       isDisabled: false,
     },
     {
