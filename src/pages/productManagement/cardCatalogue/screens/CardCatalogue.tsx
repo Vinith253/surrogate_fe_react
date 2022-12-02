@@ -653,11 +653,11 @@ export const CardCatalogue = () => {
           <Divider />
 
           <Box className="bodyBox">
-            <Grid container spacing={2}>
+            <Grid container>
               {CardCatalogueFilterDropdown?.map(
                 (eachItem: any, index: number) => {
                   return (
-                    <Grid   item xs={12} sm={4} md={3} key={index}>
+                    <Grid item xs={3} key={index}>
                       <Typography className="dropdown-label">
                         {eachItem?.label}
                       </Typography>
@@ -1163,6 +1163,7 @@ export const CardCatalogue = () => {
           submit={'Pause'}
           datepickerLabelStart={'Start Date and time'}
           datepickerLabelEnd={'End Date and time'}
+          pauseStatusKey={'Pause Now'}
         />
       )}
       {showPauseSuccessModal && (
@@ -1208,6 +1209,7 @@ export const CardCatalogue = () => {
           submit={'Pause'}
           datepickerLabelStart={'Start Date and time'}
           datepickerLabelEnd={'End Date and time'}
+          pauseStatusKey={'Pause Now'}
         />
       )}
 
