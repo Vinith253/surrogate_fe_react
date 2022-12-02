@@ -51,6 +51,7 @@ function CardList({ data }: cardData) {
   const [pauseMethod, setPauseMethod] = useState('Pause Now');
   const [resumePopUpTitle, setResumePopUpTitle] = useState('');
   const [pausePopUpTitle, setPausePopUpTitle] = useState('');
+  const [editSchedulePause, setEditSchedulePause] = useState(false);
 
   const open = Boolean(anchorElement);
   const handleClick = (
