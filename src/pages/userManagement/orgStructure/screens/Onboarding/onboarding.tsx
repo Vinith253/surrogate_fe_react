@@ -182,7 +182,7 @@ export const Onboarding = () => {
         <Box sx={{ gap: 2 }}>
           <TypographySubTitle color={subTitleColor} title={subTitleTile} />
           {/* {editable == true ? ( */}
-            <TypoText color={textColor} title={textTitle} />
+          <TypoText color={textColor} title={textTitle} />
           {/* // ):( */}
 
           {/* // <TypoText color={textColor} placeholder={textTitle} /> */}
@@ -356,8 +356,6 @@ export const Onboarding = () => {
           <Divider sx={{ marginY: '20px' }} />
 
           <Grid container sx={{ marginBottom: '5px' }} spacing={5}>
-            
-            
             {viewMode === 'add'
               ? renderEditModeText(
                   'Supplier Name',
@@ -406,7 +404,7 @@ export const Onboarding = () => {
                   '#AFAEAF',
                   'Cities of Operations'
                 )}
-          {/* </Grid>
+            {/* </Grid>
 
           <Grid container sx={{ marginBottom: '20px' }} spacing={5}> */}
             {viewMode === 'add'
@@ -475,9 +473,9 @@ export const Onboarding = () => {
                 'Year of inc./ in Business Since'
               )
             )}
-          {/* </Grid> */}
+            {/* </Grid> */}
 
-          {/* <Grid container sx={{ marginBottom: '20px' }} spacing={5}> */}
+            {/* <Grid container sx={{ marginBottom: '20px' }} spacing={5}> */}
             {viewMode === 'add' ? (
               <Grid item xs={12} sm={6} md={4}>
                 <FormControl fullWidth>
@@ -509,7 +507,7 @@ export const Onboarding = () => {
                     <MenuItem value={30}>Thirty</MenuItem>
                   </Select>
                 </FormControl>
-               </Grid>
+              </Grid>
             ) : (
               renderViewModeText(
                 '#151515',
@@ -977,7 +975,7 @@ export const Onboarding = () => {
           })}
         </Box>
 
-        {/* {viewMode === 'add' && (
+        {viewMode === 'add' && (
           <Box
             sx={{
               backgroundColor: 'white',
@@ -1002,7 +1000,7 @@ export const Onboarding = () => {
               <OrgReview />
             )}
           </Box>
-        )} */}
+        )}
 
         {viewMode === 'edit' && (
           <Box
@@ -1125,18 +1123,21 @@ export const Onboarding = () => {
                     '#AFAEAF',
                     'Default Credit Period (Days)'
                   )}
-              {viewMode === 'add'
-                ? renderEditModeText(
-                    '15',
-                    'businessId',
-                    'Default Credit Period (Days)'
-                  )
-                : renderViewModeText(
-                    '#151515',
-                    '15',
-                    '#AFAEAF',
-                    'Default Credit Period (Days)' //todo
-                  )}
+              {
+                viewMode === 'add'
+                  ? renderEditModeText(
+                      '15',
+                      'businessId',
+                      'Default Credit Period (Days)'
+                    )
+                  : ''
+                //  renderViewModeText(
+                //     '#151515',
+                //     '15',
+                //     '#AFAEAF',
+                //     'Default Credit Period (Days)'
+                //   )
+              }
               {viewMode === 'edit' &&
                 renderViewModeText(
                   '#151515',
@@ -1279,7 +1280,7 @@ export const Onboarding = () => {
 
             {viewMode === 'add' && (
               <Box sx={{ display: 'flex', gap: 5, marginBottom: '20px' }}>
-                <Box sx={{ width: '350px' }}>
+                <Box sx={{ width: '27.5vw' }}>
                   <TypographySubTitle fullWidth title="MICR Code (9 digits)" />
                   <TypoText
                     fullWidth
@@ -1464,7 +1465,6 @@ Koratur, chennai - 600100"
                                 paddingBottom: '15px',
                               }}
                             >
-                              
                               <Typography
                                 sx={{
                                   display: 'flex',
@@ -1531,7 +1531,6 @@ Koratur, chennai - 600100"
               <BtnContained onClick={handleSubmitClick} title="Submit" />
             </Box>
           ) : (
-  
             <Box
               sx={{
                 display: 'flex',

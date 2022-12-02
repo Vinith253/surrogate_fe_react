@@ -81,6 +81,10 @@ const ReviewCard = () => {
     setEditData((prev: any) => ({ ...prev, [value]: e }));
   };
 
+  const editPage = () => {
+    navigate('/productManagement/cardCatalogue/singleupload');
+  };
+
   const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
@@ -110,7 +114,7 @@ const ReviewCard = () => {
           </Box>
 
           <Box className="headIconBox">
-            <Button className="btn">
+            <Button onClick={editPage} className="btn">
               <IconButton className="icon">
                 <img
                   src={EditIcon}
