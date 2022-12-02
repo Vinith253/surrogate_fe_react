@@ -33,6 +33,7 @@ import Retargeting from './pages/lms/reTargeting';
 import { OrgHistoryLogDetails } from './pages/userManagement/orgStructure/screens/historyLog/historyLogDetails/historyLogDetails';
 import UserProfile from './pages/profile/landingScreen';
 import { OrgStrHistoryLog } from './pages/userManagement/orgStructure/screens/historyLog/historyLog';
+import { ProgrammeHistoryDetails } from './pages/productManagement/programmeManagement/screens/listComponents/ProgrammeHistoryDetails';
 
 export default function App() {
   return (
@@ -73,6 +74,10 @@ export default function App() {
         <Route
           path="/productManagement/cardCatalogue/singleupload/reviewCard"
           element={<ReviewCard />}
+        />
+        <Route
+          path="/productManagement/programmeManagement/ProgrammeHistoryDetails"
+          element={<ProgrammeHistoryDetails />}
         />
         <Route
           path="/userManagement/branchDetails"
