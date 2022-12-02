@@ -95,12 +95,10 @@ import BtnContained from '../../../../components/commonComponent/CustomText/Butt
 
 // ];
 
-
 export interface cardCatalogueFilterInterface {
   label?: string;
   option?: Array<object>;
 }
-
 
 export const CardCatalogueFilterDropdown: cardCatalogueFilterInterface[] = [
   {
@@ -129,7 +127,6 @@ export const CardCatalogueFilterDropdown: cardCatalogueFilterInterface[] = [
       { value: 'Offline Shopping', name: 'Offline Shopping' },
       { value: 'Restaurant', name: 'Restaurant' },
       { value: 'Grocery', name: 'Grocery' },
-      
     ],
   },
   {
@@ -138,7 +135,6 @@ export const CardCatalogueFilterDropdown: cardCatalogueFilterInterface[] = [
       { value: 'All', name: 'All' },
       { value: 'Active', name: 'Active' },
       { value: 'In-Active', name: 'In-Active' },
-  
     ],
   },
   {
@@ -647,25 +643,21 @@ export const CardCatalogue = () => {
           </Box>
           <Divider />
 
-          <Box
-            className="bodyBox"
-          >
-            
-
-            <Grid container >
-              
-              {CardCatalogueFilterDropdown?.map((eachItem: any, index: number) => {
-            return (
-              <Grid item xs={3} key={index}>
-                <Typography className="dropdown-label">
-                  {eachItem?.label}
-                </Typography>
-                <SelectDropdown options={eachItem?.option} />
-              </Grid>
-            );
-          })}
-              </Grid>
-          
+          <Box className="bodyBox">
+            <Grid container>
+              {CardCatalogueFilterDropdown?.map(
+                (eachItem: any, index: number) => {
+                  return (
+                    <Grid item xs={3} key={index}>
+                      <Typography className="dropdown-label">
+                        {eachItem?.label}
+                      </Typography>
+                      <SelectDropdown options={eachItem?.option} />
+                    </Grid>
+                  );
+                }
+              )}
+            </Grid>
           </Box>
 
           <Box
@@ -1153,6 +1145,7 @@ export const CardCatalogue = () => {
           submit={'Pause'}
           datepickerLabelStart={'Start Date and time'}
           datepickerLabelEnd={'End Date and time'}
+          pauseStatusKey={'Pause Now'}
         />
       )}
       {showPauseSuccessModal && (
@@ -1198,6 +1191,7 @@ export const CardCatalogue = () => {
           submit={'Pause'}
           datepickerLabelStart={'Start Date and time'}
           datepickerLabelEnd={'End Date and time'}
+          pauseStatusKey={'Pause Now'}
         />
       )}
 

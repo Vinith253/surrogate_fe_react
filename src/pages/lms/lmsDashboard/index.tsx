@@ -8,11 +8,12 @@ import { useState } from "react";
 import './style.scss'; 
 import Rejected from '../../../assets/icons/rejected_icon.svg';
 import Dropped from '../../../assets/icons/dropped_icon.svg';
-import FintechIcon from '../../../assets/icons/fintech-partner-icon.svg';
-import dsaIcon from '../../../assets/icons/totaldsa_icon.svg';
-import unionIcon from '../../../assets/icons/Union.svg';
 import ApprovedIcon from '../../../assets/icons/approved_icon.svg';
 import InProgress from '../../../assets/icons/in_progress_icon.svg';
+import RejectedIcon from '../../../assets/icons/rejectedApplication.svg';
+import RetargetedInitiate from '../../../assets/icons/retargetedaInitiate.svg';
+import RetargetedFailed from '../../../assets/icons/retargetedFailed.svg';
+import RetargetedRate from '../../../assets/icons/retargetedRate.svg';
 
 import DashboardCard from "../../../components/commonComponent/CommonCard/SalesDashbaordCard/DashboardCard";
 import LMSDashboardCard from "../../../components/commonComponent/CommonCard/LMSDashboardCard";
@@ -78,7 +79,7 @@ const donutGraphOptions: {} = {
 
 const donutGraphOptions2: {} = {
   series: [20, 13, 17, 4, 3, 12, 13, 6],
-  labels: ["Initial Verification", "Surrogare Selection", "HRMS - Input", "Employment Details","HRMS - Fetching Data","C4C - Eligible","C4C - Verification","Card Selection","KYC"],
+  labels: ["Initial Verification", "Surrogare Selection", "HRMS - Input", "Employment Details","HRMS - Fetching Data","C4C - Eligible","C4C - Verification","Card Selection"],
   colors: [ "#8BCD9A","#F8B481","#63ABFD","#F18F96","#E697FF", "#F5DE99","#A08BDA","#999B9C",],
   chart: {
       type: 'donut',
@@ -246,7 +247,7 @@ export default function LMSDashboard() {
       title: 'Rejected Application',
       value: 3500,
       more: false,
-      image: dsaIcon,
+      image: RejectedIcon,
       viewAll: false,
     },
     {
@@ -254,7 +255,7 @@ export default function LMSDashboard() {
       title: 'Re-Target Initiated',
       value: 3500,
       more: false,
-      image: unionIcon,
+      image: RetargetedInitiate,
       viewAll: false,
       lastPeriodValue:2500,
       lastYearValue:2500,
@@ -264,7 +265,7 @@ export default function LMSDashboard() {
       title: 'Re-Target - Failed',
       value: 3500,
       more: false,
-      image: FintechIcon,
+      image: RetargetedFailed,
       viewAll: false,
       lastPeriodValue:2500,
       lastYearValue:2500,
@@ -274,7 +275,7 @@ export default function LMSDashboard() {
       title: 'Re-Target - Approval Rate (%)',
       value: '95.09%',
       more: false,
-      image: unionIcon,
+      image: RetargetedRate,
       viewAll: false,
       lastPeriodValue:2500,
       lastYearValue:2500,
