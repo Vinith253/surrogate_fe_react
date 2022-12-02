@@ -29,6 +29,7 @@ import UnfoldMoreIcon from '../../../assets/icons/sortArrow.svg';
 import deActiveIcon from '../../../assets/icons/DeActive.svg';
 import { checkTagStatus } from '../../../utils/tagBasedIndicator/tagStatus';
 import Popover from '../../../components/commonComponent/Popover';
+import DuplicateRoleModal from '../../../components/commonComponent/customModal/DuplicateRoleModal';
 import ChooseCategoryToViewData from '../../../components/commonComponent/ChooseCategoryToViewData';
 import './style.scss';
 
@@ -64,6 +65,7 @@ function LMSRuleTab() {
   const [ascending, setAscending] = useState<boolean>(true);
   const [sortingData, setSortingData] = useState(data);
   const [idSorting, setIdSorting] = useState<boolean>(true);
+  const [duplicateRole, openDulicateRole] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
   );
@@ -484,6 +486,16 @@ function LMSRuleTab() {
           'Your request for activating user is successfully sent to the Reviewer.'
         }
         btn={' Close'}
+      /> */}
+      {/* <DuplicateRoleModal
+        openSuccess={duplicateRole}
+        handleClose={() => {
+          openDulicateRole(false);
+          handleCardMenuClose();
+        }}
+        btn={'Next'}
+        handleCloseSuccess={handleDuplicateNext}
+        data={duplicate_role}
       /> */}
     </Stack>
   );
