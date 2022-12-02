@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import '../../../style/Style.scss';
-import { Button, Stack, Typography } from '@mui/material';
+import {
+  Button,
+  Stack,
+  Table,
+  Typography,
+  TableHead,
+  TableBody,
+  TableCell,
+  TableRow,
+  InputBase,
+} from '@mui/material';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -17,17 +26,20 @@ import FormGroup from '@mui/material/FormGroup';
 import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import { colors } from '../../../style/Color';
-import card_catalogue_sucess_icon from '../../../assets/icons/card_catalogue_sucess_icon.svg';
-import card_catalogue_rejecte_icon from '../../../assets/icons/modal_rejected_icon.svg';
-import info_icon from '../../../assets/images/info_icon.svg';
 import InputLabel from '@mui/material/InputLabel';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import discard_icon from '../../../assets/icons/Vector1.svg';
 import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
-import checkedIcon from '../../../assets/icons/check_box_square_icon.svg';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { fontSize } from '@mui/system';
+import SearchIcon from '@mui/icons-material/Search';
+import card_catalogue_sucess_icon from '../../../assets/icons/card_catalogue_sucess_icon.svg';
+import card_catalogue_rejecte_icon from '../../../assets/icons/modal_rejected_icon.svg';
+import checkedIcon from '../../../assets/icons/check_box_square_icon.svg';
+import discard_icon from '../../../assets/icons/Vector1.svg';
+import close_icon from '../../../assets/icons/cancel.png';
+import loading_icon from '../../../assets/icons/modal-loading.svg';
+import info_icon from '../../../assets/images/info_icon.svg';
+import './CustomModal.scss';
 
 type props = {
   openSuccess?: any;
@@ -77,6 +89,12 @@ type props = {
   employeeDetailsRowOne?: any;
   employeeDetailsRowTwo?: any;
   employeeDetailsRowThree?: any;
+  radioValueThree?: string;
+  radioValueFour?: string;
+  LoadingMsg?: string;
+  successMsg?: string;
+  tableDataLMSRule?: any;
+  pauseStatusKey?: string;
 };
 
 function CustomModal({
@@ -127,8 +145,14 @@ function CustomModal({
   employeeDetailsRowOne,
   employeeDetailsRowTwo,
   employeeDetailsRowThree,
+  radioValueThree,
+  radioValueFour,
+  LoadingMsg,
+  successMsg,
+  tableDataLMSRule,
+  pauseStatusKey,
 }: props) {
-  const [pauseStatus, setPauseStatus] = useState(radioValuOne);
+  const [pauseStatus, setPauseStatus] = useState(pauseStatusKey);
   const [startDatevalue, setStartDateValue] = useState(null);
   const [endDatevalue, setEndDateValue] = useState(null);
   const [existingRole, setexistingRole] = React.useState('');
@@ -165,10 +189,14 @@ function CustomModal({
           title == 'Request for Deactivation' ||
           title == 'Add Organisation' ||
           title == 'Duplicate Role' ||
-          title == 'Employee Details'
+          title == 'Employee Details' ||
+          title == 'Choose the mode of communication' ||
+          LoadingMsg ||
+          tableDataLMSRule
             ? true
             : false
         }
+        className="custom-modal"
       >
         <Stack
           py={3}
@@ -182,33 +210,19 @@ function CustomModal({
           px={title ? 3 : 0}
         >
           {title && (
-            <Typography
-              component="h1"
-              pt={0}
-              pb={2}
-              borderBottom="1px solid #36363624"
-              fontSize={13}
-              fontWeight={600}
-              color="#555759"
-            >
+            <Typography className="modal-title" component="h1" pt={0} pb={2}>
               {title}
             </Typography>
           )}
 
           {(successModalTitle || rejectedModaltitle || discardModalMsg) && (
             <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                margin: '0 auto',
-                paddingBottom: '10px',
-              }}
+              className="success-reject-title"
               component="img"
               src={
                 discardModalMsg
                   ? discard_icon
-                  : successModalTitle
+                  : successModalMsg
                   ? card_catalogue_sucess_icon
                   : card_catalogue_rejecte_icon
               }
@@ -221,11 +235,7 @@ function CustomModal({
             <Button
               variant="text"
               color="secondary"
-              sx={{
-                position: 'absolute',
-                right: '10px',
-                textTransform: 'capitalize',
-              }}
+              className="accessLibraryCloseBtn"
               onClick={handleCloseSuccess}
             >
               {accessLibraryCloseBtn}
@@ -267,7 +277,6 @@ function CustomModal({
               </InputLabel>
 
               <Select
-                // labelId="demo-select-small"
                 id="demo-select-small"
                 value={existingRole}
                 onChange={handleChange}
@@ -562,7 +571,6 @@ function CustomModal({
           )}
           {ProceedBtn === 'Proceed' && (
             <Stack sx={{ margin: '0 60px' }}>
-              {/* {ProceedBtn === 'Proceed' && ( */}
               <TextField
                 fullWidth
                 variant="outlined"
@@ -570,7 +578,6 @@ function CustomModal({
                 sx={{ height: '40px', fontSize: '14px' }}
                 value={'Ashwin@yesbank.com'}
               ></TextField>
-              {/* )} */}
 
               <Button
                 variant="contained"
@@ -611,6 +618,7 @@ function CustomModal({
               >
                 {ProceedBtn}
               </Button>
+              info_icon
             </Stack>
           )}
 
@@ -670,6 +678,47 @@ function CustomModal({
             </Typography>
           )}
 
+          <Box className="successMsg">
+            {successMsg && (
+              <Box
+                className="successMsg-icon"
+                component="img"
+                src={card_catalogue_sucess_icon}
+                pb={0}
+                width={45}
+              ></Box>
+            )}
+
+            {successMsg && (
+              <Box
+                className="successicon-closeIcon"
+                onClick={handleCloseSuccess}
+                component="img"
+                src={close_icon}
+                width={13}
+              ></Box>
+            )}
+
+            {successMsg && (
+              <Typography
+                fontWeight={400}
+                align={'center'}
+                pb={0}
+                fontSize={12}
+                sx={{
+                  padding: {
+                    xs: '0 13px',
+                    sm: '0 70px',
+                  },
+                  marginBottom: '10px',
+                  color: '#656769',
+                  hyphens: 'initial',
+                }}
+              >
+                {successMsg}
+              </Typography>
+            )}
+          </Box>
           {discardModalMsg && (
             <Typography
               fontWeight={400}
@@ -689,6 +738,16 @@ function CustomModal({
             </Typography>
           )}
 
+          {LoadingMsg && (
+            <>
+              <Box className="loading-msg-img">
+                <img src={loading_icon} alt="loading" />
+              </Box>
+              <Typography align="center" className="loading-msg">
+                {LoadingMsg}
+              </Typography>
+            </>
+          )}
           {accessLibraryMsg && (
             <Typography
               align="center"
@@ -697,6 +756,46 @@ function CustomModal({
               {accessLibraryMsg}
             </Typography>
           )}
+
+          {tableDataLMSRule && (
+            <>
+              {title == 'Selected DSA' && (
+                <Box className="search-container-rejection">
+                  <Box className="search-box">
+                    <SearchIcon className="search-icon" />
+                    <InputBase placeholder="Search" fullWidth={true} />
+                  </Box>
+                </Box>
+              )}
+
+              <Table aria-label="collapsible table" className="lmsRule-table">
+                <TableHead className="lmsRule-table-header">
+                  <TableRow className="lmsRule-tableRow">
+                    <TableCell className="lmsRule-table-head">S.No</TableCell>
+                    <TableCell className="lmsRule-table-head">
+                      Rejection Type
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+
+                <TableBody className="lmsRule-TableBody">
+                  {tableDataLMSRule.map((data: any) => {
+                    return (
+                      <TableRow sx={{ border: 'none' }}>
+                        <TableCell className="lmsRule-tableData">
+                          {data.sNo}
+                        </TableCell>
+                        <TableCell className="lmsRule-tableData">
+                          {data.typeAndDSA}
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+                </TableBody>
+              </Table>
+            </>
+          )}
+
           {org_ID && org_Name && channel_type && (
             <Stack
               sx={{
@@ -778,6 +877,21 @@ function CustomModal({
                     control={<Radio color="secondary" />}
                     label={radioValuTwo}
                   />
+
+                  {radioValueThree && (
+                    <>
+                      <FormControlLabel
+                        value={radioValueThree}
+                        control={<Radio color="secondary" />}
+                        label={radioValueThree}
+                      />
+                      <FormControlLabel
+                        value={radioValueFour}
+                        control={<Radio color="secondary" />}
+                        label={radioValueFour}
+                      />
+                    </>
+                  )}
                 </RadioGroup>
               </Stack>
             </FormControl>
@@ -934,7 +1048,12 @@ function CustomModal({
                 <Grid container>
                   {product_label.map((item: any) => {
                     return (
-                      <Grid item xs={6} sm={4} key={item.id}>
+                      <Grid
+                        item
+                        xs={6}
+                        sm={product_label.length > 4 ? 4 : 3}
+                        key={item.id}
+                      >
                         {' '}
                         <FormControlLabel
                           control={

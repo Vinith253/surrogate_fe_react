@@ -349,6 +349,7 @@ export const ListView = ({ data }: any) => {
           submit={'Submit'}
           datepickerLabelStart={'Start Date and time'}
           datepickerLabelEnd={'End Date and time'}
+          pauseStatusKey={'Pause Now'}
         />
       )}
       {showPauseSuccessModal && (
