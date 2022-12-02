@@ -95,12 +95,10 @@ import BtnContained from '../../../../components/commonComponent/CustomText/Butt
 
 // ];
 
-
 export interface cardCatalogueFilterInterface {
   label?: string;
   option?: Array<object>;
 }
-
 
 export const CardCatalogueFilterDropdown: cardCatalogueFilterInterface[] = [
   {
@@ -129,7 +127,6 @@ export const CardCatalogueFilterDropdown: cardCatalogueFilterInterface[] = [
       { value: 'Offline Shopping', name: 'Offline Shopping' },
       { value: 'Restaurant', name: 'Restaurant' },
       { value: 'Grocery', name: 'Grocery' },
-      
     ],
   },
   {
@@ -138,7 +135,6 @@ export const CardCatalogueFilterDropdown: cardCatalogueFilterInterface[] = [
       { value: 'All', name: 'All' },
       { value: 'Active', name: 'Active' },
       { value: 'In-Active', name: 'In-Active' },
-  
     ],
   },
   {
@@ -302,6 +298,7 @@ export const CardCatalogue = () => {
   const [filteredData, setFilterteredData] = useState(rows);
   const openCardMenu = Boolean(anchorEl);
   const [surrogateMethod, setSurrogateMethod] = useState('Assign Surrogate');
+  // const [sortingData, setSortingData] = useState(data);
   const [showPauseSuccessModal, setShowPauseSuccessModal] =
     useState<boolean>(false);
   const [showScheduledPauseSuccessModal, setShowScheduledPauseSuccessModal] =
@@ -353,6 +350,14 @@ export const CardCatalogue = () => {
   ) => {
     setPage(newPage);
   };
+  // const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   if (event.target.checked) {
+  //     const newSelected = data.map((n: any) => n.id);
+  //     setSelected(newSelected);
+  //     return;
+  //   }
+  //   setSelected([]);
+  // };
 
   const onPageChange = (event: React.ChangeEvent<unknown>, page: number) => {
     setPage(page);
@@ -647,25 +652,21 @@ export const CardCatalogue = () => {
           </Box>
           <Divider />
 
-          <Box
-            className="bodyBox"
-          >
-            
-
-            <Grid container >
-              
-              {CardCatalogueFilterDropdown?.map((eachItem: any, index: number) => {
-            return (
-              <Grid item xs={3} key={index}>
-                <Typography className="dropdown-label">
-                  {eachItem?.label}
-                </Typography>
-                <SelectDropdown options={eachItem?.option} />
-              </Grid>
-            );
-          })}
-              </Grid>
-          
+          <Box className="bodyBox">
+            <Grid container spacing={2}>
+              {CardCatalogueFilterDropdown?.map(
+                (eachItem: any, index: number) => {
+                  return (
+                    <Grid   item xs={12} sm={4} md={3} key={index}>
+                      <Typography className="dropdown-label">
+                        {eachItem?.label}
+                      </Typography>
+                      <SelectDropdown options={eachItem?.option} />
+                    </Grid>
+                  );
+                }
+              )}
+            </Grid>
           </Box>
 
           <Box
@@ -747,6 +748,7 @@ export const CardCatalogue = () => {
                 className="btn"
                 variant="contained"
                 color="secondary"
+                disabled
                 // sx={{
                 //   padding: '3px 8px',
                 //   fontSize: '12px',
@@ -771,6 +773,7 @@ export const CardCatalogue = () => {
                 color="secondary"
                 className="btn"
                 onClick={() => setShowPauseModal(true)}
+                disabled
               >
                 <IconButton className="icon">
                   <img
@@ -787,6 +790,7 @@ export const CardCatalogue = () => {
                 variant="contained"
                 color="secondary"
                 className="btn"
+                disabled
                 onClick={() => setEditModal(true)}
               >
                 <IconButton className="icon">
@@ -803,6 +807,7 @@ export const CardCatalogue = () => {
                 variant="contained"
                 color="secondary"
                 className="btn"
+                disabled
                 onClick={() => setSurrogateSelection(true)}
               >
                 <IconButton className="icon">
@@ -889,25 +894,30 @@ export const CardCatalogue = () => {
           </Box>
           <Box
             className="tableBox"
-            // sx={{
-            //   height: 400,
-            //   // width: "100%",
-            //   backgroundColor: 'white',
-            //   paddingX: 4,
-            // }}
+            
           >
             <TableContainer component={Paper}>
               <Table size="small" aria-label="Table">
                 <TableHead
                   className="tableHead"
-                  // style={{ background: '#EEF7FF' }}
-                  // sx={{ padding: '5px' }}
+                  
                 >
                   {tableHeaderData.map(
                     (items: dataHeaderList, index: number) => (
                       <TableRow key={index}>
                         <TableCell>
-                          <Checkbox />
+                          <Checkbox color='secondary' />
+                        {/* <Checkbox
+                    color={'secondary'}
+                    indeterminate={
+                      selected.length > 0 && selected.length < data.length
+                    }
+                    checked={data.length > 0 && selected.length === data.length}
+                    onChange={handleSelectAllClick}
+                    inputProps={{
+                      'aria-label': 'select all desserts',
+                    }}
+                  /> */}
                         </TableCell>
                         <TableCell
                           width={'20px'}
