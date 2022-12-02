@@ -66,8 +66,73 @@
 
       .css-1869usk-MuiFormControl-root {
         width: 100%;
-        margin: 10px 0px;
+        margin: 3px 0px 0px 0px;
       }
+    }
+  }
+
+  .frequency-period-form {
+    margin-top: 10px;
+
+    .plus-icon-container {
+      margin-left: 20px;
+
+      .plus-icon {
+        width: 20px;
+        margin-top: -40px;
+        display: flex;
+        margin-left: auto;
+      }
+    }
+
+    .add-more-days {
+      font-size: 14px;
+      margin-top: -39px;
+      margin-left: -10px;
+      color: #0662b7;
+    }
+
+    .select-date-container {
+      margin: 20px 0px;
+      padding: 20px;
+      border: 1px solid #d7d8d8;
+      border-radius: 8px;
+
+      .repeat-conatiner {
+        margin: 20px 0px;
+        .css-mhc70k-MuiGrid-root > .MuiGrid-item {
+          padding: 0px;
+        }
+      }
+
+      .swicth-container {
+        display: flex;
+        margin: 10px 0px;
+
+        .swicth-label {
+          font-size: 14px;
+          width: 50%;
+        }
+      }
+
+      .end-date-container {
+      }
+      .remove-container {
+        display: flex;
+        margin-left: auto;
+        .remove-icon {
+          width: 20px;
+          margin: -1px 10px 0px 10px;
+        }
+        .remove-label {
+          color: #0662b7;
+          font-size: 14px;
+        }
+      }
+    }
+
+    .css-13uexx6-MuiInputBase-root-MuiOutlinedInput-root {
+      width: 30%;
     }
   }
 }
