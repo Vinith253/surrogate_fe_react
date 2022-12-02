@@ -5,7 +5,6 @@ import {
   salesDashboardList,
   state_label,
   statusRowHeading,
-  zonal_label,
 } from '../sales/dashboard/dashboard.const';
 import './style.scss';
 import ApprovedIcon from '../../assets/icons/approved_icon.svg';
@@ -19,7 +18,7 @@ import UserIcon from '../../assets/icons/users_icon.svg';
 import { useState } from 'react';
 import TableComp from '../../components/commonComponent/ListTable/ListTable';
 import BarGarph from '../../components/commonComponent/BarGraph/BarGraph';
-import { Button, TextField, Typography } from '@mui/material';
+import { Button, Grid, TextField, Typography } from '@mui/material';
 import ReactApexChart from 'react-apexcharts';
 import CheckBoxPopOver from '../../components/commonComponent/CheckBoxPopOver/SingleLabel';
 import DateTimePopOver from '../../components/commonComponent/DateTimePopOver';
@@ -412,7 +411,6 @@ export default function Dashboard() {
                 policies_label={channels_label}
                 surrogates_label={surrogates_label}
                 state_label={state_label}
-                zonal_label={zonal_label}
                 flag="main-dashboard"
               />
             </div>
@@ -433,7 +431,9 @@ export default function Dashboard() {
           </div>
           <div className="divider-line" />
           <div className="horizontal-cards">
+            <Grid container spacing={2}>
             {dashboardVal.map((value) => (
+              <Grid xs={3} item>
               <DashboardCard
                 title={value.title}
                 value={value.value}
@@ -442,7 +442,9 @@ export default function Dashboard() {
                 boxStyles={value.boxstyles}
                 navPath="/sales/salesReport"
               />
+              </Grid>
             ))}
+            </Grid>
           </div>
           <div className="report-cards">
             <div className="graph-card">
@@ -584,7 +586,9 @@ export default function Dashboard() {
           </div>
           <div className="divider-line" />
           <div className="horizontal-cards2">
+          <Grid container spacing={2}>
             {channelUserData.map((value) => (
+              <Grid xs={3} item>
               <DashboardCard
                 title={value.title}
                 value={value.value}
@@ -593,7 +597,9 @@ export default function Dashboard() {
                 viewAll={value.viewAll}
                 navPath=""
               />
+              </Grid>
             ))}
+            </Grid>
           </div>
         </div>
         <div className="diff-area" />

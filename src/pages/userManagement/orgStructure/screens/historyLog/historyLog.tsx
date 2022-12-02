@@ -37,7 +37,7 @@ export const data = [
     status: 'Rejected',
   },
 ];
-export const HistoryLog = () => {
+export const OrgStrHistoryLog = () => {
   const navigate = useNavigate();
 
   const [sortingData, setSortingData] = useState(data);
@@ -183,9 +183,12 @@ export const HistoryLog = () => {
               <MenuItem
                 onClick={() => {
                   console.log('data[status - 1]', data[status - 1]);
-                  navigate('/userManagement/orgcreation/orgHistoryLogDetail', {
-                    state: data[status - 1].status,
-                  });
+                  navigate(
+                    '/userManagement/orgStructure/screens/Onboarding/onboarding',
+                    {
+                      state: data[status - 1].status,
+                    }
+                  );
                   handleClose();
                 }}
                 style={{ padding: '10px 20px', textAlign: 'left' }}
@@ -260,6 +263,13 @@ export const HistoryLog = () => {
       ],
     },
   ];
+
+  const historyViewMoreAction = () => {
+    navigate('/userManagement/orgStructure/historyLogDetail', {
+      state: data[status - 1].status,
+    });
+  };
+
   return (
     <Stack sx={{ backgroundColor: 'white' }}>
       <Stack className="orgStructureHistoryLogContainer">
@@ -282,6 +292,7 @@ export const HistoryLog = () => {
           handleCloseSuccess={closeModal}
           openSuccess={showHistoryModal}
           viewMoreDetails={'view more details'}
+          historyViewMoreFun={historyViewMoreAction}
         />
       )}
     </Stack>

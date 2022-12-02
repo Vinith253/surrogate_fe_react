@@ -116,13 +116,15 @@ export const Upload = (props: any) => {
                     value={progress}
                     color={'secondary'}
                     sx={{
-                      color:
-                        progress !== 100
-                          ? 'secondary'
-                          : danger
-                          ? '#E63946'
-                          : '#8BCD9A',
-                    }}
+                      backgroundColor: '#E6E7E7',
+                      '& .MuiLinearProgress-bar': {
+                        backgroundColor:  progress !== 100
+                              ? 'secondary'
+                              : danger
+                              ? '#E63946'
+                              : '#8BCD9A', 
+                      }
+                    }}  
                   />
                 </Box>
               )}

@@ -10,6 +10,8 @@ import DragDrop from '../../../../../components/commonComponent/dragDrop/DragDro
 import PageLayout from '../../../../../components/layout/pageLayout/pageLayout';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import './UploadCard.scss';
+import CustomModal from '../../../../../components/commonComponent/customModal/CustomModal';
+import { useNavigate } from 'react-router-dom';
 
 const UploadCard = ({
   toggle,
@@ -18,8 +20,14 @@ const UploadCard = ({
   fileName,
   uploadProgressValue,
 }: any) => {
+  const navigate = useNavigate();
   const [progress, setProgress] = useState(0);
   const [progressBar, setProgressBar] = useState(0);
+  const [openDiscard, setOpenDiscard] = useState(false);
+  const handleCancel = () => {
+    setOpenDiscard(!openDiscard);
+    navigate('/productManagement/cardCatalogue');
+  };
   useEffect(() => {
     const timer = setInterval(() => {
       // uploadProgressValue(progress);
@@ -79,14 +87,14 @@ const UploadCard = ({
   const footerStyle = {
     backgroundColor: 'white',
     marginTop: '24px',
-    padding: '20px 32px',
+    padding: '25px 32px 20px',
     position: 'fixed',
     bottom: 0,
     right: 0,
     width: ' 100%',
     // borderTop: ' 1px solid black',
     boxShadow:
-      '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
+      '0px 2px 10px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
   };
   return (
     <PageLayout>
@@ -137,7 +145,11 @@ const UploadCard = ({
           {/* <Box sx={{ position: 'fixed', bottom: 0 }}> */}
           {/* <FooterButton cancel="Cancel" submit="Procees" /> */}
           <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: '1%' }}>
-            <Button variant="outlined" sx={{ textTransform: 'capitalize' }}>
+            <Button
+              variant="outlined"
+              sx={{ textTransform: 'capitalize' }}
+              onClick={() => setOpenDiscard(!openDiscard)}
+            >
               Cancel
             </Button>
             <Button
@@ -152,26 +164,23 @@ const UploadCard = ({
               {'Proceed'}
             </Button>
           </Box>
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'flex-end',
-              gap: '1%',
-              marginTop: '1%',
-            }}
-          >
-            <Button
-              variant="text"
-              color="secondary"
-              // onClick={handleProceed}
-              sx={{ fontSize: '12px', textTransform: 'capitalize' }}
-            >
-              {`Discard Error entries and Continue >`}
-            </Button>
-          </Box>
+
           {/* </Box> */}
         </Box>
       )}
+      {
+        <CustomModal
+          openSuccess={openDiscard}
+          handleCloseSuccess={() => setOpenDiscard(!openDiscard)}
+          handleSuccess={handleCancel}
+          successModalTitle={'Do You want to discard?'}
+          discardModalMsg={
+            'Want to discard uploading document and continue the bulk upload organisation'
+          }
+          yesContinueBtn={'Yes, Continue'}
+          closeBtn={'Close'}
+        />
+      }
     </PageLayout>
   );
 };

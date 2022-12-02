@@ -1317,3 +1317,58 @@ export interface reviewerApproverInterface {
   label?: string;
   value?: string;
 }
+
+export interface cardCatalogueFilterInterface {
+  label?: string;
+  option?: Array<object>;
+}
+
+
+export const CardCatalogueDropdown: cardCatalogueFilterInterface[] = [
+  {
+    label: 'Card Mode',
+    option: [
+      { value: 'All', name: 'All Mode' },
+      { value: 'Salaried', name: 'Salaried' },
+      { value: 'Business', name: 'Business' },
+      { value: 'Doctor', name: 'Doctor' },
+      { value: 'Teacher', name: 'Teacher' },
+      { value: 'Defence', name: 'Defence' },
+      { value: 'Chartered Accountant', name: 'Chartered Accountant' },
+      { value: 'FD Based', name: 'FD Based' },
+    ],
+  },
+  {
+    label: 'Card Category',
+    option: [
+      { value: 'All', name: 'All' },
+      { value: 'Tamilnadu', name: 'Tamilnadu' },
+      { value: 'Andra', name: 'Andhra' },
+      { value: 'Telungana', name: 'Telungana' },
+      { value: 'Karnataka', name: 'Karnataka' },
+      { value: 'Kerala', name: 'Kerala' },
+    ],
+  },
+  {
+    label: 'Card Status',
+    option: [
+      { value: 'All', name: 'All' },
+      { value: 'Tamilnadu', name: 'Tamilnadu' },
+      { value: 'Andra', name: 'Andhra' },
+      { value: 'Telungana', name: 'Telungana' },
+      { value: 'Karnataka', name: 'Karnataka' },
+      { value: 'Kerala', name: 'Kerala' },
+    ],
+  },
+  {
+    label: 'Choose Surrogate',
+    option: [
+      { value: 'All', name: 'All' },
+      { value: 'Tamilnadu', name: 'Tamilnadu' },
+      { value: 'Andra', name: 'Andhra' },
+      { value: 'Telungana', name: 'Telungana' },
+      { value: 'Karnataka', name: 'Karnataka' },
+      { value: 'Kerala', name: 'Kerala' },
+    ],
+  },
+];

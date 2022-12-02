@@ -9,6 +9,8 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { tableCellClasses } from '@mui/material/TableCell';
 import TypographyHead from '../../../../components/commonComponent/CustomText/Head';
 import { useNavigate } from 'react-router-dom';
+import SelectDropdown from '../../../../components/commonComponent/CheckboxSelectDropdown';
+import SearchSelectDropdown from '../../../../components/commonComponent/SearchDropdown';
 import TableComp from '../../../../components/commonComponent/ListTable/ListTable';
 import PaginationComp from '../../../../components/commonComponent/Pagination/Pagination';
 import {
@@ -35,6 +37,7 @@ import {
   TableCell,
   Paper,
   Menu,
+  Grid,
   Select,
   TextField,
   OutlinedInput,
@@ -89,7 +92,63 @@ import BtnContained from '../../../../components/commonComponent/CustomText/Butt
 //   { field: 'cardCategory', headerName: 'Card Category', width: 130 },
 //   { field: 'cardStatus', headerName: 'Card Status', width: 120 },
 //   { field: 'more', headerName: 'More', type: 'number', width: 20 },
+
 // ];
+
+export interface cardCatalogueFilterInterface {
+  label?: string;
+  option?: Array<object>;
+}
+
+export const CardCatalogueFilterDropdown: cardCatalogueFilterInterface[] = [
+  {
+    label: 'Card Mode',
+    option: [
+      { value: 'All', name: 'All Mode' },
+      { value: 'Salaried', name: 'Salaried' },
+      { value: 'Business', name: 'Business' },
+      { value: 'Doctor', name: 'Doctor' },
+      { value: 'Teacher', name: 'Teacher' },
+      { value: 'Defence', name: 'Defence' },
+      { value: 'Chartered Accountant', name: 'Chartered Accountant' },
+      { value: 'FD Based', name: 'FD Based' },
+    ],
+  },
+  {
+    label: 'Card Category',
+    option: [
+      { value: 'All', name: 'All Category' },
+      { value: 'General', name: 'General' },
+      { value: 'Travel', name: 'Travel' },
+      { value: 'Fuel', name: 'Fuel' },
+      { value: 'Online Shopping', name: 'Online Shopping' },
+      { value: 'Entertainment', name: 'Entertainment' },
+      { value: 'Utility Bills', name: 'Utility Bills' },
+      { value: 'Offline Shopping', name: 'Offline Shopping' },
+      { value: 'Restaurant', name: 'Restaurant' },
+      { value: 'Grocery', name: 'Grocery' },
+    ],
+  },
+  {
+    label: 'Card Status',
+    option: [
+      { value: 'All', name: 'All' },
+      { value: 'Active', name: 'Active' },
+      { value: 'In-Active', name: 'In-Active' },
+    ],
+  },
+  {
+    label: 'Choose Surrogate',
+    option: [
+      { value: 'All', name: 'All Surrogates' },
+      { value: 'Payroll', name: 'Payroll' },
+      { value: 'Card on Card', name: 'Card on Card' },
+      { value: 'CIBIL', name: 'CIBIL' },
+      { value: 'AQB', name: 'AQB' },
+      { value: 'RC', name: 'RC' },
+    ],
+  },
+];
 
 export interface dataHeaderList {
   id: string;
@@ -239,6 +298,7 @@ export const CardCatalogue = () => {
   const [filteredData, setFilterteredData] = useState(rows);
   const openCardMenu = Boolean(anchorEl);
   const [surrogateMethod, setSurrogateMethod] = useState('Assign Surrogate');
+  // const [sortingData, setSortingData] = useState(data);
   const [showPauseSuccessModal, setShowPauseSuccessModal] =
     useState<boolean>(false);
   const [showScheduledPauseSuccessModal, setShowScheduledPauseSuccessModal] =
@@ -290,6 +350,14 @@ export const CardCatalogue = () => {
   ) => {
     setPage(newPage);
   };
+  // const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   if (event.target.checked) {
+  //     const newSelected = data.map((n: any) => n.id);
+  //     setSelected(newSelected);
+  //     return;
+  //   }
+  //   setSelected([]);
+  // };
 
   const onPageChange = (event: React.ChangeEvent<unknown>, page: number) => {
     setPage(page);
@@ -584,82 +652,21 @@ export const CardCatalogue = () => {
           </Box>
           <Divider />
 
-          <Box
-            className="bodyBox"
-            // sx={{
-            //   minWidth: 500,
-            //   marginTop: 2,
-            //   display: 'flex',
-            //   gap: '3%',
-            //   justifyContent: 'space-between',
-            //   backgroundColor: 'white',
-            // }}
-          >
-            <FormControl className="formctrl">
-              <TypographySubTitle title="Card Mode" />
-              {/* <InputLabel id="demo-simple-select-label">All</InputLabel> */}
-              <Select
-                // labelId="demo-multiple-checkbox-label"
-                id="demo-simple-select-label"
-                multiple
-                value={cardMode}
-                onChange={handleChange}
-                // input={<OutlinedInput label="Tag" />}
-                renderValue={(selected) => selected.join(', ')}
-                className="select"
-              >
-                {modes.map((mode) => (
-                  <MenuItem key={mode} value={mode}>
-                    <Checkbox checked={cardMode.indexOf(mode) > -1} />
-                    <ListItemText primary={mode} />
-                  </MenuItem>
-                ))}
-                <Box>
-                  <Divider />
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      justifyContent: 'flex-end',
-                      paddingY: 2,
-                    }}
-                  >
-                    <Button sx={{ gap: 2 }}>
-                      <BtnOutlined title="Reset" />
-                      <BtnContained title="Select" />
-                    </Button>
-                  </Box>
-                </Box>
-              </Select>
-            </FormControl>
-            <FormControl className="formctrl">
-              <TypographySubTitle title="Card Category" />
-              <Select className="select" defaultValue={0}>
-                <MenuItem value={0}>All</MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </Select>
-            </FormControl>
-            <FormControl className="formctrl">
-              <TypographySubTitle title="Card Status" />
-
-              <Select placeholder="All" className="select" defaultValue={0}>
-                <MenuItem value={0}>All</MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </Select>
-            </FormControl>
-            <FormControl className="formctrl">
-              <TypographySubTitle title="Choose Surrogate" />
-
-              <Select className="select" defaultValue={0}>
-                <MenuItem value={0}>All</MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </Select>
-            </FormControl>
+          <Box className="bodyBox">
+            <Grid container>
+              {CardCatalogueFilterDropdown?.map(
+                (eachItem: any, index: number) => {
+                  return (
+                    <Grid item xs={3} key={index}>
+                      <Typography className="dropdown-label">
+                        {eachItem?.label}
+                      </Typography>
+                      <SelectDropdown options={eachItem?.option} />
+                    </Grid>
+                  );
+                }
+              )}
+            </Grid>
           </Box>
 
           <Box
@@ -741,6 +748,7 @@ export const CardCatalogue = () => {
                 className="btn"
                 variant="contained"
                 color="secondary"
+                disabled
                 // sx={{
                 //   padding: '3px 8px',
                 //   fontSize: '12px',
@@ -765,6 +773,7 @@ export const CardCatalogue = () => {
                 color="secondary"
                 className="btn"
                 onClick={() => setShowPauseModal(true)}
+                disabled
               >
                 <IconButton className="icon">
                   <img
@@ -781,6 +790,7 @@ export const CardCatalogue = () => {
                 variant="contained"
                 color="secondary"
                 className="btn"
+                disabled
                 onClick={() => setEditModal(true)}
               >
                 <IconButton className="icon">
@@ -797,6 +807,7 @@ export const CardCatalogue = () => {
                 variant="contained"
                 color="secondary"
                 className="btn"
+                disabled
                 onClick={() => setSurrogateSelection(true)}
               >
                 <IconButton className="icon">
@@ -883,25 +894,30 @@ export const CardCatalogue = () => {
           </Box>
           <Box
             className="tableBox"
-            // sx={{
-            //   height: 400,
-            //   // width: "100%",
-            //   backgroundColor: 'white',
-            //   paddingX: 4,
-            // }}
+            
           >
             <TableContainer component={Paper}>
               <Table size="small" aria-label="Table">
                 <TableHead
                   className="tableHead"
-                  // style={{ background: '#EEF7FF' }}
-                  // sx={{ padding: '5px' }}
+                  
                 >
                   {tableHeaderData.map(
                     (items: dataHeaderList, index: number) => (
                       <TableRow key={index}>
                         <TableCell>
-                          <Checkbox />
+                          <Checkbox color='secondary' />
+                        {/* <Checkbox
+                    color={'secondary'}
+                    indeterminate={
+                      selected.length > 0 && selected.length < data.length
+                    }
+                    checked={data.length > 0 && selected.length === data.length}
+                    onChange={handleSelectAllClick}
+                    inputProps={{
+                      'aria-label': 'select all desserts',
+                    }}
+                  /> */}
                         </TableCell>
                         <TableCell
                           width={'20px'}
@@ -1147,6 +1163,7 @@ export const CardCatalogue = () => {
           submit={'Pause'}
           datepickerLabelStart={'Start Date and time'}
           datepickerLabelEnd={'End Date and time'}
+          pauseStatusKey={'Pause Now'}
         />
       )}
       {showPauseSuccessModal && (
@@ -1192,6 +1209,7 @@ export const CardCatalogue = () => {
           submit={'Pause'}
           datepickerLabelStart={'Start Date and time'}
           datepickerLabelEnd={'End Date and time'}
+          pauseStatusKey={'Pause Now'}
         />
       )}
 

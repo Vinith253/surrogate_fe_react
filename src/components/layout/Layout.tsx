@@ -255,6 +255,7 @@ export default function Layout() {
   const theme = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
+  const [active,setActive] = React.useState(true)
   const [open, setOpen] = React.useState(true);
   const [openIndex, setOpenIndex] = React.useState(0);
   const [openList, setOpenList] = React.useState(false);
@@ -448,7 +449,7 @@ export default function Layout() {
                             classes={({ isActive }: any) =>
                               isActive ? 'active' : 'inactive'
                             }
-                            sx={{ padding: '0' }}
+                            sx={{ padding: '0',backgroundColor:'rgba(111, 111, 111,.4)' }}
                           >
                             <Collapse
                               in={openList}
@@ -456,7 +457,7 @@ export default function Layout() {
                               unmountOnExit
                               sx={{
                                 padding: '0 2.6rem',
-                                // backgroundColor: 'green',
+                                // backgroundColor: 'grey',
                               }}
                             >
                               <List
@@ -473,15 +474,15 @@ export default function Layout() {
                                   //   isActive ? 'active' : 'inactive'
                                   // }
                                 >
-                                  <ListItemIcon sx={{ width: '2.5rem' }}>
-                                    <img src={subData.img} alt="" />
+                                  <ListItemIcon   sx={{ width: '2.5rem' }}>
+                                    <img   src={subData.img} alt="" />
                                   </ListItemIcon>
                                   <ListItemText
                                     primary={subData.data}
                                     sx={{
                                       paddingLeft: '8px',
                                       opacity: open ? 1 : 0,
-                                      color: 'white',
+                                      color: '#FFFFFF',
                                     }}
                                   />
                                 </ListItemButton>

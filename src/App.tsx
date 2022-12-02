@@ -33,6 +33,7 @@ import AddLMSRule from './pages/lms/lmsRule/createLMS/addNewRule';
 import Retargeting from './pages/lms/reTargeting';
 import { OrgHistoryLogDetails } from './pages/userManagement/orgStructure/screens/historyLog/historyLogDetails/historyLogDetails';
 import UserProfile from './pages/profile/landingScreen';
+import { OrgStrHistoryLog } from './pages/userManagement/orgStructure/screens/historyLog/historyLog';
 
 export default function App() {
   return (
@@ -141,6 +142,10 @@ export default function App() {
         <Route
           path="/userManagement/roleCreation/userdetails"
           element={<UserDetails />}
+        />
+        <Route
+          path="/userManagement/orgStructure/historyLogDetail"
+          element={<OrgHistoryLogDetails />}
         />
         <Route
           path="/userManagement/roleCreation/authorisationDetails"
