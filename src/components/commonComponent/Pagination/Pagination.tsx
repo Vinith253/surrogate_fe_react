@@ -36,7 +36,7 @@ function PaginationComp(props: {
           <TablePagination
             rowsPerPageOptions={[5, 10, 20, 30, { label: 'All', value: -1 }]}
             colSpan={3}
-            count={props.rows.length}
+            count={props.rows?.length}
             rowsPerPage={props.rowsPerPage}
             page={props.page}
             labelRowsPerPage={'Listing per Page'}
@@ -82,7 +82,7 @@ function PaginationComp(props: {
             sx={{
               ...useStyles.numberPag,
             }}
-            count={Math.ceil(props.rows.length / props.rowsPerPage)}
+            count={Math.ceil(props.rows?.length / props.rowsPerPage)}
             variant="outlined"
             shape="rounded"
             onChange={props.onPageChange}

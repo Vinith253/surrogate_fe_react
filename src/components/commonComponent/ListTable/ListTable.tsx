@@ -20,8 +20,8 @@ import {
 } from '../../../pages/sales/dashboard/dashboard.const';
 import PaginationComp from '../Pagination/Pagination';
 import { useNavigate } from 'react-router-dom';
-import {  tabBar, tableHeader } from '../../../utils/Constants';
-import {  Stack } from '@mui/system';
+import { tabBar, tableHeader } from '../../../utils/Constants';
+import { Stack } from '@mui/system';
 import { SearchOutlined } from '@mui/icons-material';
 import { Link, TextField, IconButton } from '@mui/material';
 import CheckBoxModal from '../customModal/PopoverModal';
@@ -75,6 +75,7 @@ function TableComp(props: {
 
   const handleClose = (categories: any) => {
     setFilterteredData(props.rows);
+    console.log('categories 2', categories);
     handleCloseSuccess(categories);
   };
 
@@ -119,6 +120,7 @@ function TableComp(props: {
             }
           });
           const array = [collections];
+          console.log(array, 'array2 checking');
           setFilterteredHeader(array);
           return item; //gets everything that was already in item, and updates "done"
         }
