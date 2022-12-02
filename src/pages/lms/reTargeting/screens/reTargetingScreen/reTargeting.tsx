@@ -1,6 +1,19 @@
 import React, { useState } from 'react';
 import './style.scss';
-import { Typography, Stack, Box, Grid, Button, Checkbox } from '@mui/material';
+import {
+  Typography,
+  Stack,
+  Box,
+  Grid,
+  Button,
+  Checkbox,
+  FormControl,
+  Select,
+  OutlinedInput,
+  MenuItem,
+  InputLabel,
+  Input,
+} from '@mui/material';
 import BtnOutlined from '../../../../../components/commonComponent/CustomText/Button/Outlined';
 import SelectDropdown from '../../../../../components/commonComponent/CheckboxSelectDropdown';
 import BtnContained from '../../../../../components/commonComponent/CustomText/Button/Contained';
@@ -16,12 +29,12 @@ import {
   statusRowHeading,
   product_label,
   state_label,
-  zonal_label,
 } from '../../../../sales/dashboard/dashboard.const';
 import { reTargetingText } from './reTargeting.const';
 import { colors } from '../../../../../style/Color';
 import MoreFilterModal from '../../../../../components/commonComponent/customModal/MoreFilterModal';
 import ListLMSTable from '../../../../../components/commonComponent/listLmstable/listlmsTable';
+import { useNavigate } from 'react-router-dom';
 
 export const retargetingData = [
   {
@@ -54,8 +67,17 @@ export const retargetingData = [
 ];
 
 function ReTargeting() {
+  const navigate = useNavigate();
   const [isFiltered, setIsFiltered] = useState(false);
   const [dayFilterValue, setDayFilter] = useState<string>('Current Day');
+  const [value, setValue] = React.useState('10');
+
+  const handleChange = (event: any) => {
+    setValue(event.target.value as string);
+  };
+  const reTargetingDetailsNavigate = () => {
+    navigate('/lms/retargeting/reTargetingDetails');
+  };
   const day_filter_label = [
     {
       id: 1,
@@ -206,38 +228,72 @@ function ReTargeting() {
             );
           })}
         </Grid>
-        <Stack sx={{ padding: '20px 0' }}>
-          <Stack
-            sx={{
-              width: '180px',
-              display: 'flex',
-              alignItems: 'center',
-              // position: 'relative',
-              cursor: 'pointer',
-            }}
-          >
+
+        <Stack
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            padding: '8px 0',
+          }}
+        >
+          <Box sx={{ minWidth: 220 }}>
+            <FormControl fullWidth>
+              <Typography className="retargetingDropDownText">
+                Period
+              </Typography>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={value}
+                onChange={handleChange}
+                sx={{
+                  '& legend': { display: 'none' },
+                  '& fieldset': { top: 0 },
+                }}
+                style={{ height: 46 }}
+              >
+                <MenuItem value={10}>Current Day</MenuItem>
+                <MenuItem value={20}>Current Week</MenuItem>
+                <MenuItem value={30}>Current Month</MenuItem>
+                <MenuItem value={40}>Current Quarter</MenuItem>
+                <MenuItem value={50}>Current Year</MenuItem>
+                <MenuItem value={60}>Custom Period</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
+          <Stack>
             <Stack
               sx={{
-                // position: 'absolute',
-                // bottom: '20px',
-                textTransform: 'capitalize',
+                width: '180px',
+                display: 'flex',
+                alignItems: 'center',
+                cursor: 'pointer',
+                marginTop: '30px',
               }}
             >
-              <MoreFilterModal
-                product_label={product_label}
-                day_filter_label={day_filter_label}
-                dayFilterValue={dayFilterValue}
-                submit={'Apply'}
-                close={'Reset'}
-                policies_label={channels_label}
-                surrogates_label={surrogates_label}
-                state_label={state_label}
-                zonal_label={zonal_label}
-                flag="main-dashboard"
-              />
+              <Stack
+                sx={{
+                  textTransform: 'capitalize',
+                }}
+              >
+                <MoreFilterModal
+                  product_label={product_label}
+                  day_filter_label={day_filter_label}
+                  dayFilterValue={dayFilterValue}
+                  submit={'Apply'}
+                  close={'Reset'}
+                  policies_label={channels_label}
+                  surrogates_label={surrogates_label}
+                  state_label={state_label}
+                  // zonal_label={zonal_label}
+                  flag="reTargeting"
+                />
+              </Stack>
             </Stack>
           </Stack>
         </Stack>
+
         <Box className="retargeting-button-container">
           <BtnOutlined title="Reset" onClick={() => setIsFiltered(false)} />
           <BtnContained title="Search" onClick={() => setIsFiltered(true)} />
@@ -258,7 +314,7 @@ function ReTargeting() {
               </Stack>
               <Stack>
                 <Box>
-                  <Button>
+                  <Button onClick={reTargetingDetailsNavigate}>
                     <img
                       src={download_icon}
                       alt="download_icon"

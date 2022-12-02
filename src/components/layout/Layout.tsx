@@ -366,7 +366,7 @@ export default function Layout() {
                         justifyContent: 'center',
                       }}
                     >
-                      <img src={text.image} alt="" />
+                      <img src={text.image} alt=""  />
                     </ListItemIcon>
                     {text.content === 'HOME' && (
                       <Badge

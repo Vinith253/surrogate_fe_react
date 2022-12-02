@@ -33,6 +33,7 @@ import Retargeting from './pages/lms/reTargeting';
 import { OrgHistoryLogDetails } from './pages/userManagement/orgStructure/screens/historyLog/historyLogDetails/historyLogDetails';
 import UserProfile from './pages/profile/landingScreen';
 import { OrgStrHistoryLog } from './pages/userManagement/orgStructure/screens/historyLog/historyLog';
+import ReTargetingDetails from './pages/lms/reTargeting/screens/reTargetingScreen/reTargetingDetails';
 
 export default function App() {
   return (
@@ -171,6 +172,7 @@ export default function App() {
         <Route path="/lms/dashboard" element={<LMSDashboard />} />
         <Route path="/lms/lmsrule" element={<LMSRule />} />
         <Route path="/lms/retargeting" element={<Retargeting />} />
+        <Route path="/lms/retargeting/reTargetingDetails" element={<ReTargetingDetails />} />
       </Route>
     </Routes>
   );
