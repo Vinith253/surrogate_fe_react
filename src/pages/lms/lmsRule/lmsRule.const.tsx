@@ -1,3 +1,5 @@
+import { lmsTableHeader } from '../../../utils/Constants';
+
 export const Configuration = [
   {
     label: 'Rejected',
@@ -163,5 +165,38 @@ export const CommunicationMode = [
   },
   {
     label: 'Call',
+  },
+];
+
+export const product_label = [
+  {
+    id: 1,
+    label: lmsTableHeader.HEADING1,
+    defaultChecked: true,
+  },
+  {
+    id: 2,
+    label: lmsTableHeader.HEADING2,
+    defaultChecked: true,
+  },
+  {
+    id: 3,
+    label: lmsTableHeader.HEADING3,
+    defaultChecked: true,
+  },
+  {
+    id: 4,
+    label: lmsTableHeader.HEADING4,
+    defaultChecked: true,
+  },
+  {
+    id: 5,
+    label: lmsTableHeader.HEADING5,
+    defaultChecked: true,
+  },
+  {
+    id: 6,
+    label: lmsTableHeader.HEADING6,
+    defaultChecked: true,
   },
 ];
