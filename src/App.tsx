@@ -71,7 +71,7 @@ export default function App() {
         />
 
         <Route
-          path="/productManagement/cardCatalogue/singleupload/reviewCard"
+          path="/productManagement/cardCatalogue/reviewCard"
           element={<ReviewCard />}
         />
         <Route

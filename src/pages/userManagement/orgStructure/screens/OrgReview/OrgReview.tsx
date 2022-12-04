@@ -43,8 +43,7 @@ export const OrgReview = () => {
   const handleClose = () => setOpen(false);
   return (
     <Stack>
-      <Box sx={{ backgroundColor: '#E6E7E7'}}>
-        
+      <Box sx={{ backgroundColor: '#E6E7E7' }}>
         {/* <Box
           sx={{
             backgroundColor: 'white',
@@ -427,10 +426,7 @@ Koratur, chennai 600101."
               <TypographyInfo title="Add your partner’s contact information here." />
             </Box>
             <Divider sx={{ marginY: 2 }} />
-            {/* <Box>
-                <TypographySubTitle color='#AFAEAF' title='Supplier Company' />
-                <TypoText color='#151515'  title='Anand Agency' />
-            </Box> */}
+          
             <Grid container sx={{ marginBottom: '20px' }} spacing={5}>
               <Grid item xs={12} sm={6} md={3}>
                 <Box sx={{ gap: 2 }}>
@@ -666,25 +662,7 @@ chennai - 600040"
               </Grid>
             </Grid>
 
-            {/* <Grid container sx={{ marginBottom: '20px' }} spacing={5}>
-              <Grid item xs={12} sm={6} md={3}>
-                <Box sx={{ gap: 2 }}>
-                  <TypographySubTitle color="#AFAEAF" title="ESIC Registration No" />
-                  <TypoText color="#151515" title="U72900TN2020PTC130006" />
-                </Box>
-              </Grid>
-
-              <Grid item xs={12} sm={6} md={3}>
-                <Box sx={{ gap: 2 }}>
-                  <TypographySubTitle
-                    color="#AFAEAF"
-                    title="PF Registration No"
-                  />
-                  <TypoText color="#151515" title="U72900TN2020PTC130006" />
-                </Box>
-              </Grid>
-              
-            </Grid> */}
+            
           </Box>
         </Box>
 
@@ -694,7 +672,7 @@ chennai - 600040"
             marginTop: '25px',
             padding: '20px 30px',
             borderRadius: '5px',
-            marginBottom:'50px'
+            marginBottom: '50px',
           }}
         >
           <Box>
@@ -890,10 +868,7 @@ Koratur, chennai - 600100"
             <BtnContained  title="Close" />
           </Box>
         </Box> */}
-
-        
       </Box>
-      
     </Stack>
   );
 };

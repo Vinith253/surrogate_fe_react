@@ -110,7 +110,7 @@ const CommonTable = (props: any) => {
 
   return (
     <Box>
-      <TableContainer component={Paper} sx={{ margin: '2% 0' }}>
+      <TableContainer component={Paper} sx={{ margin: '0' }}>
         <Table
           style={{
             width: '100%',
