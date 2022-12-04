@@ -50,6 +50,7 @@ import org_structure_icon from '../../assets/icons/orgStructure.svg';
 import branch_details_icon from '../../assets/icons/branchDetails.svg';
 import retargeting_icon from '../../assets/icons/retargeting-icon.svg';
 import lms_rule_icon from '../../assets/icons/lms-rule-icon.svg';
+import risk_customer_report from '../../assets/icons/risk-customer-report.svg';
 
 import profile_icon from '../../assets/icons/profile_icon.svg';
 import profile_arrow_icon from '../../assets/icons/profile_arrow_icon.svg';
@@ -164,7 +165,7 @@ const sideBarOptions = [
       },
       {
         data: 'LMS Rule',
-        path: '/lms/lmsrule',
+        path: '/lms/lmsRule',
         img: retargeting_icon,
       },
       {
@@ -179,7 +180,13 @@ const sideBarOptions = [
     content: 'RISK MNGMT.',
     path: '/risktManagement',
     image: risk_management_icon,
-    subContent: [],
+    subContent: [
+      {
+        data: 'Customer Reports',
+        path: '/riskManagement/customerReports',
+        img: risk_customer_report,
+      },
+    ],
   },
   {
     key: 9,
