@@ -281,23 +281,24 @@ const ListLMSTable = (props: any) => {
 
   return (
     <Box sx={{ backgroundColor: 'white' }} className="lms-table">
-      <Stack sx={{ padding: '25px' }}>
+      <Stack sx={{ padding: '25px 10px' }}>
         <div style={{ display: 'flex' }}>
           {(props.flag === 'sales-report' ||
-            props.flag === 'retargeting' || 
+            props.flag === 'retargeting' ||
+            props.flag === 'lms-rule' ||
             props.flag === 'lmsdashboard') && (
-              <TextField
-                className="text-field"
-                placeholder="Search by..."
-                InputProps={{
-                  startAdornment: (
-                    <IconButton edge="start">
-                      <SearchOutlined />
-                    </IconButton>
-                  ),
-                }}
-              />
-            )}
+            <TextField
+              className="text-field"
+              placeholder="Search by..."
+              InputProps={{
+                startAdornment: (
+                  <IconButton edge="start">
+                    <SearchOutlined />
+                  </IconButton>
+                ),
+              }}
+            />
+          )}
           <div className="third-header">
             {/* <ToggleButtonGroup
               color="primary"
@@ -495,22 +496,22 @@ const ListLMSTable = (props: any) => {
                 </Button>
               </div>
             )}
-            {props.flag === 'lmsdashboard' && 
-            <div className="reset-data">
-              <Button
-                endIcon={<RightArrow />}
-                sx={{
-                  fontSize: '1vw',
-                  marginLeft: '35px',
-                  color: '#0662B7',
-                  fontWeight: '600',
-                  textTransform: 'none',
-                }}
-              >
-                Detailed Reports
-              </Button>
-            </div>
-              }
+            {props.flag === 'lmsdashboard' && (
+              <div className="reset-data">
+                <Button
+                  endIcon={<RightArrow />}
+                  sx={{
+                    fontSize: '1vw',
+                    marginLeft: '35px',
+                    color: '#0662B7',
+                    fontWeight: '600',
+                    textTransform: 'none',
+                  }}
+                >
+                  Detailed Reports
+                </Button>
+              </div>
+            )}
           </div>
         </div>
 

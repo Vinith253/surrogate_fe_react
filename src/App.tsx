@@ -182,10 +182,15 @@ export default function App() {
 
         <Route path="/lms/lmsRule" element={<LMSRule />} />
         <Route path="/lms/lmsRule/addNewRule" element={<AddLMSRule />} />
-        
-        <Route path="/riskManagement/customerReports" element={<CustomerReport />} />
-        <Route path="/riskManagement/customerDetails" element={<CustomerDetailScreen />} />
 
+        <Route
+          path="/riskManagement/customerReports"
+          element={<CustomerReport />}
+        />
+        <Route
+          path="/riskManagement/customerDetails"
+          element={<CustomerDetailScreen />}
+        />
       </Route>
     </Routes>
   );
