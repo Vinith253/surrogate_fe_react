@@ -558,7 +558,7 @@ export default function LMSDashboard() {
           </div>
         </div>
         <div className="diff-area" />
-        <Stack sx={{ marginBottom: '30px' }}>
+        <Stack sx={{ marginBottom: '30px'}}>
           <Stack
             className="lmsDashboardOrgDetails"
             sx={{
@@ -567,7 +567,7 @@ export default function LMSDashboard() {
           >
             <Stack className="retargetingOrgDetailsHeaderTable">
               <Stack>
-                <Typography>Recent {lmsDashboardData.length} Data</Typography>
+                <Typography>Rejected and Dropped Applications</Typography>
               </Stack>
               <Stack>
                 <Box>
@@ -591,6 +591,7 @@ export default function LMSDashboard() {
               </Stack>
             </Stack>
           </Stack>
+          <Box sx={{paddingLeft:'18px', backgroundColor:'white', paddingRight:'18px'}}>
           <ListLMSTable
             data={lmsDashboardData}
             listColumn={column1}
@@ -599,6 +600,7 @@ export default function LMSDashboard() {
             label={product_label}
             toggleOptions={toggleOptions}
           />
+          </Box>
         </Stack>
         </>
   );
