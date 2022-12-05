@@ -1,51 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button } from '@mui/material';
 import { Box, Stack, InputBase, Checkbox } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { ScreenHeader } from '../../../components/commonComponent/ScreenHeader/ScreenHeader';
 import SearchIcon from '@mui/icons-material/Search';
 import HeaderWithInfo from '../../../components/commonComponent/HeaderWithInfo';
-import { product_label } from './lmsRule.const';
+import { product_label, LMSListData } from './lmsRule.const';
 import CustomIconButton from '../../../components/commonComponent/CustomIconButton';
 import GroupButton from '../../../components/commonComponent/GroupButton/GroupButton';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import CustomModal from '../../../components/commonComponent/customModal/CustomModal';
 import deActiveIcon from '../../../assets/icons/DeActive.svg';
 import ListLMSTable from '../../../components/commonComponent/listLmstable/listlmsTable';
 import Popover from '../../../components/commonComponent/Popover';
 import './style.scss';
-
-export const retargetingData = [
-  {
-    id: '1',
-    application: '#12345',
-    customerName: 'Ashwin',
-    mobileNumber: '1234567891',
-    cibil: '123',
-    income: '1500000',
-    status: 'Approved',
-    more: <MoreVertIcon />,
-  },
-  {
-    id: '2',
-    application: '#12345',
-    customerName: 'Ashwin',
-    mobileNumber: '1234567891',
-    cibil: '123',
-    income: '1500000',
-    status: 'Rejected',
-    more: <MoreVertIcon />,
-  },
-  {
-    id: '3',
-    application: '#12345',
-    customerName: 'Ashwin',
-    mobileNumber: '1234567891',
-    cibil: '123',
-    income: '1500000',
-    status: 'Dropped',
-    more: <MoreVertIcon />,
-  },
-];
 
 const column1: any = [
   {
@@ -70,18 +37,17 @@ const column1: any = [
     },
   },
   {
-    title: 'Application#',
-    dataIndex: 'application',
-    key: 'application',
+    title: 'Rule Name',
+    dataIndex: 'rulename',
+    key: 'rulename',
   },
   {
-    title: 'Customer Name',
-    dataIndex: 'customerName',
-    key: 'customerName',
+    title: 'Starts at',
+    dataIndex: 'startsAt',
+    key: 'startsAt',
   },
-  { title: 'Mobile Number', dataIndex: 'mobileNumber', key: 'mobileNumber' },
-  { title: 'CIBIL', dataIndex: 'cibil', key: 'cibil' },
-  { title: 'Income', dataIndex: 'income', key: 'income' },
+  { title: 'Ended at', dataIndex: 'endedAt', key: 'endedAt' },
+  { title: 'Initiated By', dataIndex: 'initiatedBy', key: 'initiatedBy' },
 ];
 
 const column2: any = [
@@ -98,42 +64,37 @@ const column2: any = [
 ];
 
 function LMSRuleTab() {
+  const [showPauseModal, setShowPauseModal] = useState<boolean>(false);
+  const [showPauseSuccessModal, setShowPauseSuccessModal] =
+    useState<boolean>(false);
+  const [showScheduledPauseSuccessModal, setShowScheduledPauseSuccessModal] =
+    useState<boolean>(false);
+  const [showResumeModal, setShowResumeModal] = useState<boolean>(false);
+  const [showResumeSuccessModal, setShowResumeSuccessModal] =
+    useState<boolean>(false);
+  const [pauseMethod, setPauseMethod] = useState('Pause Now');
   const [isAddRulePopoverOpen, setIsAddRulePopoverOpen] =
     React.useState<HTMLButtonElement | null>(null);
+  const [isDuplicateRule, setIsDuplicateRule] = useState(false);
 
-  const openAddUserPopover = Boolean(isAddRulePopoverOpen);
-  const addNewUserid = openAddUserPopover ? 'simple-popover' : undefined;
-
-  const GroupButtonData = [
-    {
-      title: 'All',
-    },
-    {
-      title: 'Active',
-    },
-    {
-      title: 'Saved',
-    },
-    {
-      title: 'Closed',
-    },
-  ];
+  const openAddRulePopover = Boolean(isAddRulePopoverOpen);
+  const addNewRuleId = openAddRulePopover ? 'simple-popover' : undefined;
 
   const customIconBtns = [
-    { label: 'Resume Rule', icon: deActiveIcon, isDisabled: true },
+    { label: 'Resume Rule', icon: deActiveIcon, isDisabled: false },
     {
       label: 'Pause Rule',
       icon: deActiveIcon,
-      isDisabled: true,
+      isDisabled: false,
     },
     {
       label: 'Edit Scheduled Pause',
       icon: deActiveIcon,
-      isDisabled: true,
+      isDisabled: false,
     },
   ];
 
-  const createUserMenu = [
+  const createRuleMenu = [
     {
       label: 'Create New LMS Rule',
       routePath: '/lms/lmsRule/addNewRule',
@@ -144,27 +105,65 @@ function LMSRuleTab() {
     },
   ];
 
+  const existingLMSRuleItem = [
+    'Main Config_R_C4C_Incomplete',
+    'Main config_D_FBI',
+  ];
+
+  const NORMAL_PAUSE = 'Pause Now';
+  const SCHEDULED_PAUSE = 'Schedule Pause';
+
   const handleOpenAddRulePopover = (
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
     setIsAddRulePopoverOpen(event.currentTarget);
   };
 
-  const closeAddUserPopover = () => {
+  const closeAddRulePopover = () => {
     setIsAddRulePopoverOpen(null);
   };
 
   const onClickButton = (eachBtn: any) => {
-    // console.log(eachBtn);
+    console.log('eachBtn', eachBtn);
+    if (eachBtn?.label === 'Resume Rule') {
+      setShowResumeModal(true);
+    } else if (eachBtn?.label === 'Pause Rule') {
+      setShowPauseModal(true);
+    }
+  };
+
+  const openActionModal = () => {
+    setIsDuplicateRule(true);
   };
 
   const toggleOptions = [
     { title: 'All' },
-    { title: 'Approved' },
-    { title: 'In-Progress' },
-    { title: 'Rejected' },
-    { title: 'Dropped' },
+    { title: 'Active' },
+    { title: 'Saved' },
+    { title: 'Closed' },
   ];
+
+  const resumeSuccessModal = () => {
+    setShowResumeSuccessModal(true);
+    setShowResumeModal(false);
+  };
+
+  const successModal = () => {
+    if (pauseMethod === NORMAL_PAUSE) {
+      setShowPauseModal(false);
+      setShowPauseSuccessModal(true);
+      console.log('success');
+    }
+    if (pauseMethod === SCHEDULED_PAUSE) {
+      setShowPauseModal(false);
+      setShowScheduledPauseSuccessModal(true);
+      console.log('fail');
+    }
+  };
+
+  const pauseMethodChange = (value: any) => {
+    setPauseMethod(value);
+  };
 
   return (
     <Stack>
@@ -185,13 +184,14 @@ function LMSRuleTab() {
         >
           Create New
         </Button>
-        {openAddUserPopover && (
+        {openAddRulePopover && (
           <Popover
-            id={addNewUserid}
-            open={openAddUserPopover}
+            openActionModal={openActionModal}
+            id={addNewRuleId}
+            open={openAddRulePopover}
             anchorEl={isAddRulePopoverOpen}
-            handleClose={closeAddUserPopover}
-            options={createUserMenu}
+            handleClose={closeAddRulePopover}
+            options={createRuleMenu}
           />
         )}
       </Box>
@@ -211,37 +211,98 @@ function LMSRuleTab() {
               />
             );
           })}
-          <Stack className="lms-list-table-search-filters">
-            <Box className="search-container">
-              <Box className="search-box">
-                <SearchIcon className="search-icon" />
-                <InputBase placeholder="Search" />
-              </Box>
-              <Box>
-                <GroupButton data={GroupButtonData} />
-              </Box>
-            </Box>
-          </Stack>
         </Box>
         <ListLMSTable
-          data={retargetingData}
+          data={LMSListData}
           listColumn={column1}
           statusColumn={column2}
-          flag="retargeting"
+          flag="lms-rule"
           label={product_label}
           toggleOptions={toggleOptions}
         />
       </Stack>
-      {/* <DuplicateRoleModal
-        openSuccess={duplicateRole}
-        handleClose={() => {
-          openDulicateRole(false);
-          handleCardMenuClose();
-        }}
-        btn={'Next'}
-        handleCloseSuccess={handleDuplicateNext}
-        data={duplicate_role}
-      /> */}
+      {isDuplicateRule && (
+        <CustomModal
+          openSuccess={isDuplicateRule}
+          handleCloseSuccess={() => setIsDuplicateRule(false)}
+          title={'Duplicate LMS Rule'}
+          duplicate_role_content={'Select the LMS Rule'}
+          duplicateRoleCloseBtn={' Close'}
+          existingRoleItem={existingLMSRuleItem}
+        />
+      )}
+      {showPauseModal && (
+        <CustomModal
+          openSuccess={showPauseModal}
+          handleCloseSuccess={() => setShowPauseModal(false)}
+          handleSuccess={successModal}
+          title={'Main Config_R_CIBIL - Pause Rule'}
+          pause_content={'You can pause it or perform a scheduled pause.'}
+          scheduledPause_content={
+            'Please choose a date range to perform a scheduled pause.'
+          }
+          textarea_title={'Add Remarks'}
+          radioValuOne={NORMAL_PAUSE}
+          radioValuTwo={SCHEDULED_PAUSE}
+          dateRange_title={'Enter Date range'}
+          maxLength={'Maximum of 500 words'}
+          pauseMethodChecking={(arg1: string) => pauseMethodChange(arg1)}
+          close={'Close'}
+          submit={'Submit'}
+          datepickerLabelStart={'Start Date and time'}
+          datepickerLabelEnd={'End Date and time'}
+          pauseStatusKey={'Pause Now'}
+        />
+      )}
+      {showPauseSuccessModal && (
+        <CustomModal
+          openSuccess={showPauseSuccessModal}
+          handleCloseSuccess={() => setShowPauseSuccessModal(false)}
+          successModalTitle={'Main Config_R_CIBIL - Pause Rule'}
+          successModalMsg={
+            'Your action of pausing - Main Config_R_CIBIL has been successfully sent to the reviewer.'
+          }
+          btn={' Close'}
+        />
+      )}
+      {showScheduledPauseSuccessModal && (
+        <CustomModal
+          openSuccess={showScheduledPauseSuccessModal}
+          handleCloseSuccess={() => {
+            setShowScheduledPauseSuccessModal(false);
+          }}
+          successModalTitle={'Main Config_R_CIBIL - Scheduled Pause'}
+          successModalMsg={
+            'Your action of pausing - Main Config_R_CIBIL has been successfully sent to the reviewer.'
+          }
+          btn={' Close'}
+        />
+      )}
+      {showResumeModal && (
+        <CustomModal
+          openSuccess={showResumeModal}
+          handleCloseSuccess={() => setShowResumeModal(false)}
+          title={'Main Config_R_CIBIL - Resume Now'}
+          handleSuccess={resumeSuccessModal}
+          pause_content={'You will be able to resume your paused rule here.'}
+          textarea_title={'Add Remarks'}
+          dateRange_title={'Enter Date range'}
+          maxLength={'Maximum of 500 words'}
+          close={'Close'}
+          submit={'Submit'}
+        />
+      )}
+      {showResumeSuccessModal && (
+        <CustomModal
+          openSuccess={showResumeSuccessModal}
+          handleCloseSuccess={() => setShowResumeSuccessModal(false)}
+          successModalTitle={'Main Config_R_CIBIL - Resume Now'}
+          successModalMsg={
+            'Your action of Resuming - Main Config_R_CIBIL has been successfully sent to the reviewer.'
+          }
+          btn={' Close'}
+        />
+      )}
     </Stack>
   );
 }

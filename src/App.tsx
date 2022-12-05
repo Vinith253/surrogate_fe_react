@@ -29,7 +29,7 @@ import EditUser from './pages/userManagement/userCreation/singleUserUpload/editU
 import ViewUser from './pages/userManagement/userCreation/singleUserUpload/viewUser';
 import LMSDashboard from './pages/lms/lmsDashboard';
 import LMSRule from './pages/lms/lmsRule';
-import AddLMSRule from './pages/lms/lmsRule/createLMS/addNewRule';
+import AddLMSRule from './pages/lms/lmsRule/createLMS/viewLMS';
 import Retargeting from './pages/lms/reTargeting';
 import { OrgHistoryLogDetails } from './pages/userManagement/orgStructure/screens/historyLog/historyLogDetails/historyLogDetails';
 import UserProfile from './pages/profile/landingScreen';
@@ -182,10 +182,15 @@ export default function App() {
 
         <Route path="/lms/lmsRule" element={<LMSRule />} />
         <Route path="/lms/lmsRule/addNewRule" element={<AddLMSRule />} />
-        
-        <Route path="/riskManagement/customerReports" element={<CustomerReport />} />
-        <Route path="/riskManagement/customerDetails" element={<CustomerDetailScreen />} />
 
+        <Route
+          path="/riskManagement/customerReports"
+          element={<CustomerReport />}
+        />
+        <Route
+          path="/riskManagement/customerDetails"
+          element={<CustomerDetailScreen />}
+        />
       </Route>
     </Routes>
   );

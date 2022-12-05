@@ -280,22 +280,23 @@ const ListLMSTable = (props: any) => {
 
   return (
     <Box sx={{ backgroundColor: 'white' }} className="lms-table">
-      <Stack sx={{ padding: '25px' }}>
+      <Stack sx={{ padding: '25px 10px' }}>
         <div style={{ display: 'flex' }}>
-          {props.flag === 'sales-report' ||
-            (props.flag === 'retargeting' && (
-              <TextField
-                className="text-field"
-                placeholder="Search by..."
-                InputProps={{
-                  startAdornment: (
-                    <IconButton edge="start">
-                      <SearchOutlined />
-                    </IconButton>
-                  ),
-                }}
-              />
-            ))}
+          {(props.flag === 'sales-report' ||
+            props.flag === 'lms-rule' ||
+            props.flag === 'retargeting') && (
+            <TextField
+              className="text-field"
+              placeholder="Search by..."
+              InputProps={{
+                startAdornment: (
+                  <IconButton edge="start">
+                    <SearchOutlined />
+                  </IconButton>
+                ),
+              }}
+            />
+          )}
           <div className="third-header">
             {/* <ToggleButtonGroup
               color="primary"
