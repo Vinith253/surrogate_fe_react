@@ -49,6 +49,7 @@ const tableHeaderData = [
   },
 ];
 export const ListView = ({ data }: any) => {
+console.log("********** ", data)
   const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
   const [selected, setSelected] = React.useState<number[]>([]);
   const [showPauseModal, setShowPauseModal] = useState<boolean>(false);
