@@ -361,6 +361,7 @@ export default function Layout() {
                     classes={({ isActive }: any) =>
                       isActive ? 'active' : 'inactive'
                     }
+
                     // onClick={() => setMenuItemIndex(text.key)}
                     // style={{
                     //   backgroundColor:
@@ -424,7 +425,14 @@ export default function Layout() {
                       }}
                     >
                       <ListItemIcon>
-                        <img src={text.image} alt="" />
+                        <img
+                          src={text.image}
+                          alt=""
+                          style={{
+                            filter:
+                              'invert(100%) sepia(100%) saturate(0%) hue-rotate(24deg) brightness(104%) contrast(101%)',
+                          }}
+                        />
                       </ListItemIcon>
                       <ListItemText
                         primary={text.content}
@@ -458,7 +466,10 @@ export default function Layout() {
                             }
                             sx={{
                               padding: '0',
-                              backgroundColor: 'rgba(111, 111, 111,.4)',
+                              backgroundColor: '#282829',
+                              '&:hover': {
+                                backgroundColor: '#282829',
+                              },
                             }}
                           >
                             <Collapse
@@ -485,8 +496,19 @@ export default function Layout() {
                                   // }
                                 >
                                   <ListItemIcon sx={{ width: '2.5rem' }}>
-                                    <img src={subData.img} alt="" />
+                                    <img
+                                      src={subData.img}
+                                      alt=""
+                                      //   classes={({ isActive }: any) =>
+                                      //   isActive ? 'active' : 'inactive'
+                                      // }
+                                      style={{
+                                        filter:
+                                          'invert(100%) sepia(100%) saturate(0%) hue-rotate(24deg) brightness(104%) contrast(101%)',
+                                      }}
+                                    />
                                   </ListItemIcon>
+
                                   <ListItemText
                                     primary={subData.data}
                                     sx={{

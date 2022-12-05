@@ -43,8 +43,6 @@ export const UploadDetails = () => {
         <TypoText placeholder="Enter Registration Number" id="businessId" />
       </Box>
 
-      
-      
 
       <Box sx={{ display: 'flex', gap: 3, marginBottom: '20px' }}>
         <Box sx={{ width: '280px' }}>

@@ -1,6 +1,7 @@
 import { TabBar } from '../../../../components/commonComponent/customTab/CustomTab';
 import { dataList } from '../../../../interface/Types';
 import { OrgStrHistoryLog } from '../screens/historyLog/historyLog';
+// import { OrgStrHistoryLog } from '../screens/historyLog/historyLog';
 
 import { OrganisationDetails } from '../screens/organisationDetails/organisationDetails';
 

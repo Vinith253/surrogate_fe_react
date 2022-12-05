@@ -16,9 +16,12 @@ function PopoverContainer(props: {
     if (eachItem?.routePath !== '') navigate(eachItem?.routePath);
     else if (
       eachItem?.label === 'Activate User' ||
-      eachItem?.label === 'Deactivate User'
-    )
-      props?.openActionModal !== undefined && props?.openActionModal();
+      eachItem?.label === 'Deactivate User' ||
+      eachItem?.label === 'Duplicate LMS Rule'
+    ) {
+      props?.openActionModal !== undefined && props.openActionModal();
+    }
+
     props.handleClose();
   };
 
