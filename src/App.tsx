@@ -40,7 +40,7 @@ import CustomerReport from './pages/riskManagment/customerReport';
 import CustomerDetailScreen from './pages/riskManagment/customerReport/customerDetails';
 import { ProgrammeHistoryDetails } from './pages/productManagement/programmeManagement/screens/listComponents/ProgrammeHistoryDetails';
 import ReTargetingDetails from './pages/lms/reTargeting/screens/reTargetingScreen/reTargetingDetails';
-import { LMSHistoryLogDetails } from './pages/lms/lmsRule/LMS-HistoryLog/LMSHistoryLogDetails';
+import { LMSHistoryLogDetails } from './pages/lms/lmsRule/lmsHistoryLog/lmsHistoryLogDetails';
 
 export default function App() {
   return (

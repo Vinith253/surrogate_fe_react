@@ -1,6 +1,6 @@
 import { IconButton, Menu, MenuItem, Stack, Box } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import './LMSHistoryLog.scss';
+import './lmsHistoryLog.scss';
 import UnfoldMoreIcon from '../../../../assets/icons/sortArrow.svg';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { checkTagStatus } from '../../../../utils/tagBasedIndicator/tagStatus';

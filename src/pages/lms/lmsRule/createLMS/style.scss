@@ -1,5 +1,5 @@
 .create-lms-rule-container {
-  margin: 30px 0px;
+  margin-bottom: 30px;
   .create-lms-rule-header {
     background-color: white;
     display: flex;
@@ -13,10 +13,15 @@
     margin-top: 30px;
     border-radius: 8px;
 
+    .display-flex {
+      display: -webkit-box;
+    }
+
     .show-more {
       color: #0662b7;
       cursor: pointer;
       font-size: 13px;
+      text-decoration: underline;
     }
 
     .each-field-label {
@@ -38,10 +43,16 @@
         height: 52px;
       }
 
-      .checkbox-label {
+      .checkbox-name {
         .css-gsv0eb-MuiTypography-root {
           font-size: 14px;
+          font-weight: 400;
         }
+      }
+
+      .checkbox-main-label {
+        font-size: 14px;
+        margin-top: 5px;
       }
 
       .radio-group-container {
@@ -156,13 +167,14 @@
     border-radius: 8px;
 
     .display-flex {
-      display: flex;
+      display: -webkit-box;
     }
 
     .show-more {
       color: #0662b7;
       cursor: pointer;
       font-size: 13px;
+      text-decoration: underline;
     }
 
     .each-info {
@@ -184,14 +196,13 @@
       .frequency-header {
         font-size: 15px;
       }
-
-      .underline {
-        border-top: none;
-        border-left: none;
-        border-right: none;
-        margin: 18px 0px;
-        border-bottom: 2px solid #eceff2;
-      }
+    }
+    .underline {
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      margin: 12px 0px;
+      border-bottom: 2px solid #eceff2;
     }
   }
 }

@@ -24,8 +24,14 @@ import {
   Configuration,
   FrequencyPeriod,
   SurrogateCheckboxList,
+  RejectionTypeCheckboxList,
   DroppedTypeCheckboxList,
   CommunicationMode,
+  DSAList,
+  DivisionList,
+  FintechPartnerList,
+  ShowMoreModalData,
+  ApplicableOrNOT,
   EveryDays,
   EveryOrder,
   WeekDays,
@@ -33,6 +39,7 @@ import {
 import HeaderWithInfo from '../../../../components/commonComponent/HeaderWithInfo';
 import CustomModal from '../../../../components/commonComponent/customModal/CustomModal';
 import Dropdown from '../../../../components/commonComponent/Dropdown';
+import SelectSearchDropdown from '../../../../components/commonComponent/CheckboxSelectDropdown';
 import PlusCircleIcon from '../../../../assets/icons/plus_circle.svg';
 import './style.scss';
 
@@ -42,6 +49,8 @@ function LMSRule() {
   const [isFintechPartnerListModalOpen, setIsFintechPartnerListModalOpen] =
     useState(false);
   const [isSelectedDates, setIsSelectedDates] = useState(false);
+  const [selectedTypeConfiguration, setSelectedTypeConfiguration] =
+    useState('rejected');
   const [startDate, setStartDate] = React.useState<Dayjs | null>(dayjs());
   const [frequencyPeriodValue, setFrequencyPeriodValue] = useState('EnterDays');
   const [selectedOccurence, setSelectedOccurence] = useState('daily');
@@ -82,17 +91,21 @@ function LMSRule() {
     else setIsSelectedDates(false);
   };
 
+  const changeTypeConfiguration = (event: any) => {
+    setSelectedTypeConfiguration(event.target.value);
+  };
+
   const switchHandleChange = (flag: string) => {
     setSelectedOccurence(flag);
   };
 
-  const addMoreDates = async () => {
+  const addMoreDates = () => {
     let array = datesList;
     array.push({
       title: 'Select Date',
     });
     console.log('array', array);
-    await setDatesList(array);
+    setDatesList(array);
   };
 
   const removeDates = () => {
@@ -101,49 +114,16 @@ function LMSRule() {
     setDatesList(array);
   };
 
-  const tableDataLMSRule = [
-    {
-      sNo: '1',
-      typeAndDSA: 'Score',
-    },
-    {
-      sNo: '2',
-      typeAndDSA: 'CIBIL',
-    },
-    {
-      sNo: '3',
-      typeAndDSA: 'DPD',
-    },
-    {
-      sNo: '4',
-      typeAndDSA: 'Income',
-    },
-    {
-      sNo: '5',
-      typeAndDSA: 'C4C',
-    },
-    {
-      sNo: '6',
-      typeAndDSA: 'Pincode',
-    },
-    {
-      sNo: '7',
-      typeAndDSA: 'KYC',
-    },
-    {
-      sNo: '8',
-      typeAndDSA: 'Others',
-    },
-  ];
+  console.log('datesList', datesList);
   return (
     <Stack className="create-lms-rule-container">
-      <Stack className="create-lms-rule-header">
+      {/* <Stack className="create-lms-rule-header">
         <ScreenHeader
           title="Rule Name: C4CNORCKYC (Auto Populate)"
           info="From here you can create access presets to assign with users in Users Creation."
           showBackButton={false}
         />
-      </Stack>
+      </Stack> */}
 
       <Stack className="lms-rule-container">
         <HeaderWithInfo
@@ -153,16 +133,16 @@ function LMSRule() {
           isDownloadEnabled={false}
         />
         <Stack className="lms-rule-form-container">
-          <Typography className="each-field-label">Role Access Type</Typography>
           <Grid container spacing={2}>
             <RadioGroup
-              defaultValue="initiator"
+              value={selectedTypeConfiguration}
               name="radio-buttons-group"
               className="radio-group-container"
+              onChange={changeTypeConfiguration}
             >
               {Configuration?.map((eachItem: any, index: number) => {
                 return (
-                  <Grid item xs={2} key={index} className="checkbox-label">
+                  <Grid item xs={2} key={index} className="checkbox-name">
                     <FormControlLabel
                       value={eachItem?.value}
                       control={<Radio color="secondary" />}
@@ -183,11 +163,13 @@ function LMSRule() {
           isDownloadEnabled={false}
         />
         <Stack className="lms-rule-form-container">
-          <Typography className="each-field-label">Select Surrogate</Typography>
+          <Typography className="checkbox-main-label">
+            Select Surrogate
+          </Typography>
           <Grid container spacing={2}>
             {SurrogateCheckboxList?.map((eachItem: any, index: number) => {
               return (
-                <Grid item xs={2} key={index} className="checkbox-label">
+                <Grid item xs={2} key={index} className="checkbox-name">
                   <FormControlLabel
                     control={<Checkbox />}
                     label={eachItem?.label}
@@ -198,39 +180,71 @@ function LMSRule() {
           </Grid>
         </Stack>
         <Stack className="lms-rule-form-container">
-          <Typography className="each-field-label">Dedube</Typography>
+          <Typography className="checkbox-main-label">Dedube</Typography>
           <Grid container spacing={2}>
-            <Grid item xs={4} className="checkbox-label">
+            <Grid item xs={4} className="checkbox-name">
               <FormControlLabel
                 control={<Checkbox />}
                 label={'Enable Dedube Configuration'}
               />
             </Grid>
+            {selectedTypeConfiguration === 'rejected' && (
+              <Grid item xs={4} className="checkbox-name">
+                <FormControlLabel
+                  control={<Checkbox />}
+                  label={'No need Dedube Check'}
+                />
+              </Grid>
+            )}
           </Grid>
         </Stack>
+        {selectedTypeConfiguration === 'dropped' ? (
+          <Stack className="lms-rule-form-container">
+            <Typography className="checkbox-main-label">
+              Dropped Type
+            </Typography>
+            <Grid container spacing={2}>
+              {DroppedTypeCheckboxList?.map((eachItem: any, index: number) => {
+                return (
+                  <Grid item xs={3} key={index} className="checkbox-name">
+                    <FormControlLabel
+                      control={<Checkbox />}
+                      label={eachItem?.label}
+                    />
+                  </Grid>
+                );
+              })}
+            </Grid>
+          </Stack>
+        ) : (
+          <Stack className="lms-rule-form-container">
+            <Typography className="checkbox-main-label">
+              Rejection Type
+            </Typography>
+            <Grid container spacing={2}>
+              {RejectionTypeCheckboxList?.map(
+                (eachItem: any, index: number) => {
+                  return (
+                    <Grid item xs={2} key={index} className="checkbox-name">
+                      <FormControlLabel
+                        control={<Checkbox />}
+                        label={eachItem?.label}
+                      />
+                    </Grid>
+                  );
+                }
+              )}
+            </Grid>
+          </Stack>
+        )}
         <Stack className="lms-rule-form-container">
-          <Typography className="each-field-label">Dropped Type</Typography>
-          <Grid container spacing={2}>
-            {DroppedTypeCheckboxList?.map((eachItem: any, index: number) => {
-              return (
-                <Grid item xs={3} key={index} className="checkbox-label">
-                  <FormControlLabel
-                    control={<Checkbox />}
-                    label={eachItem?.label}
-                  />
-                </Grid>
-              );
-            })}
-          </Grid>
-        </Stack>
-        <Stack className="lms-rule-form-container">
-          <Typography className="each-field-label">
+          <Typography className="checkbox-main-label">
             Mode Of Communication
           </Typography>
           <Grid container spacing={2}>
             {CommunicationMode?.map((eachItem: any, index: number) => {
               return (
-                <Grid item xs={2} key={index} className="checkbox-label">
+                <Grid item xs={2} key={index} className="checkbox-name">
                   <FormControlLabel
                     control={<Checkbox />}
                     label={eachItem?.label}
@@ -252,20 +266,20 @@ function LMSRule() {
           <Grid item xs={12} style={{ display: 'flex' }}>
             <Grid item xs={4} style={{ margin: '0px 10px' }}>
               <Typography className="each-field-label">DSA</Typography>
-              <Dropdown data={EveryDays} />
+              <Dropdown data={ApplicableOrNOT} />
             </Grid>
             <Grid item xs={4}>
               <Typography className="each-field-label">Choose DSAs</Typography>
-              <Dropdown data={EveryDays} />
-              <Typography className="each-field-label">
-                Selected DSAs: DSA1,DSA2,...
+              <SelectSearchDropdown options={DSAList} />
+              <Stack className="each-field-label display-flex">
+                <Stack>Selected DSAs: DSA1,DSA2,...</Stack>
                 <Stack
                   className="show-more"
                   onClick={() => setIsDSAListModalOpen(true)}
                 >
                   Show More
                 </Stack>
-              </Typography>
+              </Stack>
             </Grid>
           </Grid>
           <Grid item xs={12} style={{ display: 'flex' }}>
@@ -273,20 +287,22 @@ function LMSRule() {
               <Typography className="each-field-label">
                 Bank Divisions
               </Typography>
-              <Dropdown data={EveryDays} />
+              <Dropdown data={ApplicableOrNOT} />
             </Grid>
             <Grid item xs={4}>
-              <Typography className="each-field-label">Choose DSAs</Typography>
-              <Dropdown data={EveryDays} />
               <Typography className="each-field-label">
-                Selected Divisions: Div1, Div2,...
+                Choose Divisions
+              </Typography>
+              <SelectSearchDropdown options={DivisionList} />
+              <Stack className="each-field-label display-flex">
+                <Stack>Selected Divisions: Div1, Div2,...</Stack>
                 <Stack
                   className="show-more"
                   onClick={() => setIsDivisionListModalOpen(true)}
                 >
                   Show More
                 </Stack>
-              </Typography>
+              </Stack>
             </Grid>
           </Grid>
           <Grid item xs={12} style={{ display: 'flex' }}>
@@ -294,22 +310,22 @@ function LMSRule() {
               <Typography className="each-field-label">
                 Fintech Partner
               </Typography>
-              <Dropdown data={EveryDays} />
+              <Dropdown data={ApplicableOrNOT} />
             </Grid>
             <Grid item xs={4}>
               <Typography className="each-field-label">
                 Choose Fintech Partner
               </Typography>
-              <Dropdown data={EveryDays} />
-              <Typography className="each-field-label">
-                Selected Fintech Partners: Part,...
+              <SelectSearchDropdown options={FintechPartnerList} />
+              <Stack className="each-field-label display-flex">
+                <Stack> Selected Fintech Partners: Part,...</Stack>
                 <Stack
                   className="show-more"
                   onClick={() => setIsFintechPartnerListModalOpen(true)}
                 >
                   Show More
                 </Stack>
-              </Typography>
+              </Stack>
             </Grid>
           </Grid>
         </Grid>
@@ -333,7 +349,7 @@ function LMSRule() {
             >
               {FrequencyPeriod?.map((eachItem: any, index: number) => {
                 return (
-                  <Grid item xs={2} key={index} className="checkbox-label">
+                  <Grid item xs={2} key={index} className="checkbox-name">
                     <FormControlLabel
                       value={eachItem?.value}
                       control={<Radio color="secondary" />}
@@ -423,7 +439,7 @@ function LMSRule() {
 
                             <Stack>
                               <FormControlLabel
-                                control={<Checkbox />}
+                                control={<Checkbox checked={true} />}
                                 label={'End Date'}
                               />
                               <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -490,7 +506,7 @@ function LMSRule() {
                                             item
                                             xs={2}
                                             key={index}
-                                            className="checkbox-label"
+                                            className="checkbox-name"
                                           >
                                             <FormControlLabel
                                               value={eachItem?.value}
@@ -579,7 +595,7 @@ function LMSRule() {
             handleCloseSuccess={() => setIsDSAListModalOpen(false)}
             title={`Selected DSA's`}
             duplicateRoleCloseBtn={'Close'}
-            tableDataLMSRule={tableDataLMSRule}
+            tableDataLMSRule={ShowMoreModalData}
           />
         )}
         {isDivisionListModalOpen && (
@@ -588,7 +604,7 @@ function LMSRule() {
             handleCloseSuccess={() => setIsDivisionListModalOpen(false)}
             title={`Selected Division's`}
             duplicateRoleCloseBtn={'Close'}
-            tableDataLMSRule={tableDataLMSRule}
+            tableDataLMSRule={ShowMoreModalData}
           />
         )}
         {isFintechPartnerListModalOpen && (
@@ -597,7 +613,7 @@ function LMSRule() {
             handleCloseSuccess={() => setIsFintechPartnerListModalOpen(false)}
             title={`Selected Fintech Partner's`}
             duplicateRoleCloseBtn={'Close'}
-            tableDataLMSRule={tableDataLMSRule}
+            tableDataLMSRule={ShowMoreModalData}
           />
         )}
       </Stack>
