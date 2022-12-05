@@ -574,7 +574,7 @@ export default function Layout() {
                 // borderColor: "success.light"
               }}
             >
-              <Box className="search-container">
+              <Box className="search-container-layout">
                 <Box className="search-box">
                   <SearchIcon className="search-icon" />
                   <InputBase placeholder="Search" fullWidth={true} />
