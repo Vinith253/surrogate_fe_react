@@ -37,6 +37,7 @@ import { OrgStrHistoryLog } from './pages/userManagement/orgStructure/screens/hi
 import CustomerReport from './pages/riskManagment/customerReport';
 import CustomerDetailScreen from './pages/riskManagment/customerReport/customerDetails';
 import { ProgrammeHistoryDetails } from './pages/productManagement/programmeManagement/screens/listComponents/ProgrammeHistoryDetails';
+import ReTargetingDetails from './pages/lms/reTargeting/screens/reTargetingScreen/reTargetingDetails';
 
 export default function App() {
   return (
@@ -191,6 +192,7 @@ export default function App() {
           path="/riskManagement/customerDetails"
           element={<CustomerDetailScreen />}
         />
+        <Route path="/lms/retargeting/reTargetingDetails" element={<ReTargetingDetails />} />
       </Route>
     </Routes>
   );
