@@ -10,58 +10,10 @@ import CustomIconButton from '../../../components/commonComponent/CustomIconButt
 import GroupButton from '../../../components/commonComponent/GroupButton/GroupButton';
 import CustomModal from '../../../components/commonComponent/customModal/CustomModal';
 import deActiveIcon from '../../../assets/icons/DeActive.svg';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ListLMSTable from '../../../components/commonComponent/listLmstable/listlmsTable';
 import Popover from '../../../components/commonComponent/Popover';
 import './style.scss';
-
-const column1: any = [
-  {
-    title: '',
-    dataIndex: 'id',
-    key: 'checkBox',
-    width: '70px',
-    headerRender: () => {
-      return <Checkbox />;
-    },
-    render: (_: string, row: any, index: number) => {
-      return <Checkbox />;
-    },
-  },
-  {
-    title: '#',
-    dataIndex: 'id',
-    key: 'id',
-    width: '70px',
-    render: (text: string) => {
-      return <Stack>{text}</Stack>;
-    },
-  },
-  {
-    title: 'Rule Name',
-    dataIndex: 'rulename',
-    key: 'rulename',
-  },
-  {
-    title: 'Starts at',
-    dataIndex: 'startsAt',
-    key: 'startsAt',
-  },
-  { title: 'Ended at', dataIndex: 'endedAt', key: 'endedAt' },
-  { title: 'Initiated By', dataIndex: 'initiatedBy', key: 'initiatedBy' },
-];
-
-const column2: any = [
-  {
-    title: 'Status',
-    dataIndex: 'status',
-    key: 'status',
-  },
-  {
-    title: 'Actions',
-    dataIndex: 'more',
-    key: 'more',
-  },
-];
 
 function LMSRuleTab() {
   const [showPauseModal, setShowPauseModal] = useState<boolean>(false);
@@ -76,9 +28,86 @@ function LMSRuleTab() {
   const [isAddRulePopoverOpen, setIsAddRulePopoverOpen] =
     React.useState<HTMLButtonElement | null>(null);
   const [isDuplicateRule, setIsDuplicateRule] = useState(false);
-
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+    null
+  );
   const openAddRulePopover = Boolean(isAddRulePopoverOpen);
   const addNewRuleId = openAddRulePopover ? 'simple-popover' : undefined;
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
+
+  const userListMoreMenu = [
+    { label: 'View Rule', routePath: '/lms/lmsRule/viewRule' },
+    { label: 'Edit Rule', routePath: '/lms/lmsRule/editRule' },
+  ];
+  const column1: any = [
+    {
+      title: '',
+      dataIndex: 'id',
+      key: 'checkBox',
+      width: '70px',
+      headerRender: () => {
+        return <Checkbox />;
+      },
+      render: (_: string, row: any, index: number) => {
+        return <Checkbox />;
+      },
+    },
+    {
+      title: '#',
+      dataIndex: 'id',
+      key: 'id',
+      width: '70px',
+      render: (text: string) => {
+        return <Stack>{text}</Stack>;
+      },
+    },
+    {
+      title: 'Rule Name',
+      dataIndex: 'rulename',
+      key: 'rulename',
+    },
+    {
+      title: 'Starts at',
+      dataIndex: 'startsAt',
+      key: 'startsAt',
+    },
+    { title: 'Ended at', dataIndex: 'endedAt', key: 'endedAt' },
+    { title: 'Initiated By', dataIndex: 'initiatedBy', key: 'initiatedBy' },
+  ];
+
+  const column2: any = [
+    {
+      title: 'Status',
+      dataIndex: 'status',
+      key: 'status',
+    },
+    {
+      title: 'Actions',
+      dataIndex: 'more',
+      key: 'more',
+      render: (text: string) => {
+        return (
+          <Stack className="more-btn">
+            <MoreVertIcon
+              onClick={(event: any) => {
+                handleClick(event);
+              }}
+            />
+            <Popover
+              id={id}
+              open={open}
+              anchorEl={anchorEl}
+              handleClose={handleClose}
+              options={userListMoreMenu}
+              // openActionModal={() => openActionModal(row)}
+            />
+          </Stack>
+        );
+      },
+    },
+  ];
 
   const customIconBtns = [
     { label: 'Resume Rule', icon: deActiveIcon, isDisabled: false },
@@ -90,7 +119,7 @@ function LMSRuleTab() {
     {
       label: 'Edit Scheduled Pause',
       icon: deActiveIcon,
-      isDisabled: false,
+      isDisabled: true,
     },
   ];
 
@@ -109,6 +138,14 @@ function LMSRuleTab() {
     'Main Config_R_C4C_Incomplete',
     'Main config_D_FBI',
   ];
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const NORMAL_PAUSE = 'Pause Now';
   const SCHEDULED_PAUSE = 'Schedule Pause';
