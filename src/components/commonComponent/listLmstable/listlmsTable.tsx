@@ -168,7 +168,7 @@ const ListLMSTable = (props: any) => {
     } else if (alignment === 'Dropped') {
       let res3 = props.data.filter((item: any) => item.status === 'Dropped');
       setFilterteredData(res3);
-    }else if (alignment === 'Refer') {
+    } else if (alignment === 'Refer') {
       let res3 = props.data.filter((item: any) => item.status === 'Refer');
       setFilterteredData(res3);
     } else {
@@ -331,6 +331,7 @@ const ListLMSTable = (props: any) => {
           {(props.flag === 'sales-report' ||
             props.flag === 'retargeting' ||
             props.flag === 'lms-rule' ||
+            props.flag === 'retargeting-history' ||
             props.flag === 'lmsdashboard') && (
             <TextField
               className="text-field"
@@ -541,7 +542,7 @@ const ListLMSTable = (props: any) => {
                                         ProgressDot,
                                         '#E4AC04'
                                       )}
-                                      {dataItem?.status?.includes('Refer') &&
+                                    {dataItem?.status?.includes('Refer') &&
                                       kycStatus(
                                         dataItem?.status,
                                         ProgressDot,

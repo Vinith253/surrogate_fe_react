@@ -31,13 +31,17 @@ import {
   product_label,
   state_label,
 } from '../../../../sales/dashboard/dashboard.const';
-import { reTargetingText } from './reTargeting.const';
+import {
+  reTargetingDropdownFields,
+  reTargetingText,
+} from './reTargeting.const';
 import { colors } from '../../../../../style/Color';
 import MoreFilterModal from '../../../../../components/commonComponent/customModal/MoreFilterModal';
 import ListLMSTable from '../../../../../components/commonComponent/listLmstable/listlmsTable';
 import { lmsTableHeader } from '../../../../../utils/Constants';
 import { useNavigate } from 'react-router-dom';
 import CustomModal from '../../../../../components/commonComponent/customModal/CustomModal';
+import { DropdownFields } from '../../../../userManagement/userCreation/userCreation.const';
 export const retargetingData = [
   {
     id: '1',
@@ -355,7 +359,7 @@ function ReTargeting() {
     <Stack className="retargetingMainContainer">
       <Stack className="retargetingcontainer">
         <Grid container spacing={2} className="retargeting-filters-container">
-          {reTargetingText?.map((eachItem: any, index: number) => {
+          {reTargetingDropdownFields?.map((eachItem: any, index: number) => {
             return (
               <Grid item xs={3} key={index}>
                 <Typography className="retargeting-dropdown-label">
