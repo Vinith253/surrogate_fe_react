@@ -158,8 +158,8 @@ export const OrganisationDetails = () => {
   const open = Boolean(anchorElement);
   const [isItem, setIsItem] = useState<boolean>(false);
   const [btnActive, setBtnActive] = useState(true);
-  const [editSchedulePause, setEditSchedulePause] = useState(false);
   const [pauseMethod, setPauseMethod] = useState('Pause Now');
+  const [editSchedulePause, setEditSchedulePause] = useState(false);
   const [successEditSchedulePause, setSuccessEditSchedulePause] =
     useState(false);
   const [successEditPause, setSuccessEditPause] = useState(false);
