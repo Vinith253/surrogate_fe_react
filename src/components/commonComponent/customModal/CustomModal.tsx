@@ -740,9 +740,12 @@ function CustomModal({
 
           {LoadingMsg && (
             <>
-              <Box className="loading-msg-img">
-                <img src={loading_icon} alt="loading" />
-              </Box>
+              <div className="bouncing-loader">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
               <Typography align="center" className="loading-msg">
                 {LoadingMsg}
               </Typography>

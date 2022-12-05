@@ -35,7 +35,7 @@ import { colors } from '../../../../../style/Color';
 import MoreFilterModal from '../../../../../components/commonComponent/customModal/MoreFilterModal';
 import ListLMSTable from '../../../../../components/commonComponent/listLmstable/listlmsTable';
 import { useNavigate } from 'react-router-dom';
-
+import CustomModal from '../../../../../components/commonComponent/customModal/CustomModal';
 export const retargetingData = [
   {
     id: '1',
@@ -70,13 +70,32 @@ function ReTargeting() {
   const navigate = useNavigate();
   const [isFiltered, setIsFiltered] = useState(false);
   const [dayFilterValue, setDayFilter] = useState<string>('Current Day');
+  const [openModel, setOpenModel] = useState(false);
+  const [communicationModel, setCommunicationModel] = useState(false);
   const [value, setValue] = React.useState('10');
+  const [successModel, setSuccesModel] = useState(false);
 
+  const handleCloseSuccess = () => {
+    setOpenModel(false);
+    setCommunicationModel(false);
+    setSuccesModel(false);
+  };
   const handleChange = (event: any) => {
     setValue(event.target.value as string);
   };
   const reTargetingDetailsNavigate = () => {
     navigate('/lms/retargeting/reTargetingDetails');
+  };
+  const modelOpenNavigate = () => {
+    setOpenModel(true);
+    setTimeout(() => {
+      setOpenModel(false);
+      setCommunicationModel(true);
+    }, 2000);
+  };
+  const reTargetingModel = () => {
+    setCommunicationModel(false);
+    setSuccesModel(true);
   };
   const day_filter_label = [
     {
@@ -212,6 +231,28 @@ function ReTargeting() {
       key: 'more',
     },
   ];
+  const product_label = [
+    {
+      id: 1,
+      label: 'SMS',
+      defaultChecked: false,
+    },
+    {
+      id: 2,
+      label: 'Whatsapp',
+      defaultChecked: false,
+    },
+    {
+      id: 3,
+      label: 'Mail',
+      defaultChecked: false,
+    },
+    {
+      id: 4,
+      label: 'Call',
+      defaultChecked: false,
+    },
+  ];
   return (
     <Stack className="retargetingMainContainer">
       <Stack className="retargetingcontainer">
@@ -314,20 +355,23 @@ function ReTargeting() {
               </Stack>
               <Stack>
                 <Box>
-                  <Button onClick={reTargetingDetailsNavigate}>
+                  <Button
+                    onClick={reTargetingDetailsNavigate}
+                    sx={{ margin: '0' }}
+                  >
                     <img
                       src={download_icon}
                       alt="download_icon"
-                      width="70%"
-                      height="70%"
+                      width="60%"
+                      height="60%"
                     />
                   </Button>
-                  <Button>
+                  <Button onClick={modelOpenNavigate} sx={{ margin: '0' }}>
                     <img
                       src={mail_icon}
                       alt="mail_icon"
-                      width="70%"
-                      height="70%"
+                      width="60%"
+                      height="60%"
                     />
                   </Button>
                 </Box>
@@ -342,6 +386,38 @@ function ReTargeting() {
         </Stack>
       ) : (
         <ChooseCategoryToViewData />
+      )}
+      {openModel && (
+        <CustomModal
+          openSuccess={openModel}
+          handleCloseSuccess={handleCloseSuccess}
+          // successModalTitle={'Activation Organisation'}
+          // successModalMsg={
+          //   'Your request for Activating Org is successfully sent to the Reviewer.'
+          // }
+          // btn={' Close'}
+          LoadingMsg={'Loading selected application(s) for Re-Targeting'}
+        />
+      )}
+      {communicationModel && (
+        <CustomModal
+          openSuccess={communicationModel}
+          handleCloseSuccess={handleCloseSuccess}
+          title={'Choose the mode of communication'}
+          close={'Cancel'}
+          submit={'Re-Target'}
+          product_label={product_label}
+          handleSuccess={reTargetingModel}
+        />
+      )}
+      {successModel && (
+        <CustomModal
+          openSuccess={successModel}
+          handleCloseSuccess={handleCloseSuccess}
+          successMsg={
+            'Selected applications are being processed. They will be notified of eligible customers to resume or process.'
+          }
+        />
       )}
     </Stack>
   );

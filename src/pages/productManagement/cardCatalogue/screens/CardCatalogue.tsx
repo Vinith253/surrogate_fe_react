@@ -647,17 +647,17 @@ export const CardCatalogue = () => {
         <Box className="body1">
           <Box className="container1">
             <TypoText title="Card List" />
-            <img className="img1" src={Info_Icon} />
+            <img className="img1" src={Info_Icon} alt="" />
             <TypographyInfo title="Filter cards by mode/status/category/surrogate here." />
           </Box>
           <Divider />
 
           <Box className="bodyBox">
-            <Grid container>
+            <Grid container spacing={2}>
               {CardCatalogueFilterDropdown?.map(
                 (eachItem: any, index: number) => {
                   return (
-                    <Grid item xs={3} key={index}>
+                    <Grid item xs={12} sm={6} md={3} key={index}>
                       <Typography className="dropdown-label">
                         {eachItem?.label}
                       </Typography>
@@ -892,22 +892,16 @@ export const CardCatalogue = () => {
               </Box>
             </Stack>
           </Box>
-          <Box
-            className="tableBox"
-            
-          >
+          <Box className="tableBox">
             <TableContainer component={Paper}>
               <Table size="small" aria-label="Table">
-                <TableHead
-                  className="tableHead"
-                  
-                >
+                <TableHead className="tableHead">
                   {tableHeaderData.map(
                     (items: dataHeaderList, index: number) => (
                       <TableRow key={index}>
                         <TableCell>
-                          <Checkbox color='secondary' />
-                        {/* <Checkbox
+                          <Checkbox color="secondary" />
+                          {/* <Checkbox
                     color={'secondary'}
                     indeterminate={
                       selected.length > 0 && selected.length < data.length
