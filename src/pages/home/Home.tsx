@@ -15,6 +15,8 @@ import ReasonForRejection from '../../components/commonComponent/customModal/RIS
 import SuccessForActivate from '../../components/commonComponent/customModal/USER-CREATION/SuccessForActivate';
 import SuccessForRejection from '../../components/commonComponent/customModal/RISK-MANAGEMENT/SuccessForRejection';
 import DuplicateRole from '../../components/commonComponent/customModal/ROLE-CREATION/DuplicateRole';
+import ChangePasswordOTP from '../../components/commonComponent/customModal/ChangePasswordOTP';
+import ChangePasswordProfileModal from '../../components/commonComponent/customModal/ChangePasswordProfileModal';
 
 export default function Home() {
   const pendingActionsData = {
@@ -101,6 +103,8 @@ export default function Home() {
         {/* <ReasonForRejection />
         <SuccessForRejection />
         <DuplicateRole /> */}
+        <ChangePasswordOTP />
+        <ChangePasswordProfileModal />
         <Card content={pendingActionsData} />
         <Card content={savedItemsData} />
         <Card content={frequentActivitiesData} />

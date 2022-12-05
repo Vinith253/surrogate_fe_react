@@ -98,6 +98,7 @@ type props = {
   pauseStatusKey?: string;
   textAreaHeight?: any;
   modalType?: string;
+  duplicate_modal_label?: string;
 };
 
 function CustomModal({
@@ -156,12 +157,15 @@ function CustomModal({
   pauseStatusKey,
   textAreaHeight,
   modalType,
+  duplicate_modal_label,
 }: props) {
   const [pauseStatus, setPauseStatus] = useState(pauseStatusKey);
   const [startDatevalue, setStartDateValue] = useState(null);
   const [endDatevalue, setEndDateValue] = useState(null);
   const [existingRole, setexistingRole] = React.useState('');
   const [checked, setChecked] = React.useState(false);
+
+  console.log('existingRole', existingRole);
 
   useEffect(() => {
     if (pauseStatus) {
@@ -265,7 +269,7 @@ function CustomModal({
           {existingRoleItem && (
             <FormControl sx={{ minWidth: 120 }} size="small">
               <InputLabel id="demo-select-small">
-                Choose existing role for duplication
+                {existingRole == '' ? duplicate_modal_label : ''}
               </InputLabel>
 
               <Select
