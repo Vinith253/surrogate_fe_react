@@ -769,7 +769,7 @@ function CustomModal({
                   <TableRow className="lmsRule-tableRow">
                     <TableCell className="lmsRule-table-head">S.No</TableCell>
                     <TableCell className="lmsRule-table-head">
-                      Rejection Type
+                      {title}
                     </TableCell>
                   </TableRow>
                 </TableHead>
