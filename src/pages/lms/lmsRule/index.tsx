@@ -3,6 +3,7 @@ import { TabBar } from '../../../components/commonComponent/customTab/CustomTab'
 import LMSList from './lmsList';
 import { Stack } from '@mui/material';
 import './style.scss';
+import { LMSHistoryLog } from './LMS-HistoryLog/LMSHistoryLog';
 
 function LMSRule() {
   const TabListData: dataList = [
@@ -15,7 +16,7 @@ function LMSRule() {
     {
       id: '2',
       data: 'History Log',
-      component: <div>Bank</div>,
+      component: <LMSHistoryLog />,
       isDisabled: false,
     },
   ];

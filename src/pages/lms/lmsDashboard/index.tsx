@@ -1,4 +1,4 @@
-import { Typography, Button, Grid, Stack, Box } from "@mui/material";
+import { Typography, Button, Grid, Stack, Box, Link } from "@mui/material";
 import CheckBoxPopOver from "../../../components/commonComponent/CheckBoxPopOver/SingleLabel";
 import MoreFilterModal from "../../../components/commonComponent/customModal/MoreFilterModal";
 import DateTimePopOver from "../../../components/commonComponent/DateTimePopOver";
@@ -21,6 +21,7 @@ import ReactApexChart from "react-apexcharts";
 import ListLMSTable from "../../../components/commonComponent/listLmstable/listlmsTable";
 import download_icon from '../../../assets/icons/download_icon.svg';
 import mail_icon from '../../../assets/icons/mail_icon.svg';
+import { useNavigate } from "react-router-dom";
 
 
 export const lmsDashboardData = [
@@ -164,6 +165,7 @@ const donutGraphOptions2: {} = {
 export default function LMSDashboard() {
 
   const [dayFilterValue, setDayFilter] = useState<string>('Current Day');
+  const navigate = useNavigate();
 
   const day_filter_label = [
     {
@@ -389,6 +391,17 @@ export default function LMSDashboard() {
       title: 'Actions',
       dataIndex: 'more',
       key: 'more',
+      headerRender: () => {
+        return <text>Actions</text>;
+      },
+      render: (_: string, row: any, index: number) => {
+        return <Link
+        sx={{ cursor: 'pointer', color: '#0662B7' }}
+        onClick={() => navigate('/lms/retargeting/reTargetingDetails')}
+      >
+        View
+      </Link>
+      },
     },
   ];
 
@@ -545,7 +558,7 @@ export default function LMSDashboard() {
           </div>
         </div>
         <div className="diff-area" />
-        <Stack sx={{ marginBottom: '30px' }}>
+        <Stack sx={{ marginBottom: '30px'}}>
           <Stack
             className="lmsDashboardOrgDetails"
             sx={{
@@ -554,7 +567,7 @@ export default function LMSDashboard() {
           >
             <Stack className="retargetingOrgDetailsHeaderTable">
               <Stack>
-                <Typography>Recent {lmsDashboardData.length} Data</Typography>
+                <Typography>Rejected and Dropped Applications</Typography>
               </Stack>
               <Stack>
                 <Box>
@@ -578,6 +591,7 @@ export default function LMSDashboard() {
               </Stack>
             </Stack>
           </Stack>
+          <Box sx={{paddingLeft:'18px', backgroundColor:'white', paddingRight:'18px'}}>
           <ListLMSTable
             data={lmsDashboardData}
             listColumn={column1}
@@ -586,6 +600,7 @@ export default function LMSDashboard() {
             label={product_label}
             toggleOptions={toggleOptions}
           />
+          </Box>
         </Stack>
         </>
   );

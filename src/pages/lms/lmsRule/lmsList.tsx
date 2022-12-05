@@ -266,6 +266,7 @@ function LMSRuleTab() {
           duplicate_role_content={'Select the LMS Rule'}
           duplicateRoleCloseBtn={' Close'}
           existingRoleItem={existingLMSRuleItem}
+          duplicate_modal_label={'Choose LMS rule for duplication'}
         />
       )}
       {showPauseModal && (
