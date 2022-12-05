@@ -34,6 +34,7 @@ import { reTargetingText } from './reTargeting.const';
 import { colors } from '../../../../../style/Color';
 import MoreFilterModal from '../../../../../components/commonComponent/customModal/MoreFilterModal';
 import ListLMSTable from '../../../../../components/commonComponent/listLmstable/listlmsTable';
+import { lmsTableHeader } from '../../../../../utils/Constants';
 import { useNavigate } from 'react-router-dom';
 import CustomModal from '../../../../../components/commonComponent/customModal/CustomModal';
 export const retargetingData = [
@@ -44,7 +45,8 @@ export const retargetingData = [
     mobileNumber: '1234567891',
     cibil: '123',
     income: '1500000',
-    status: 'Rejected',
+    status: 'Approved',
+    more: <MoreVertIcon />,
   },
   {
     id: '2',
@@ -54,6 +56,7 @@ export const retargetingData = [
     cibil: '123',
     income: '1500000',
     status: 'Rejected',
+    more: <MoreVertIcon />,
   },
   {
     id: '3',
@@ -62,7 +65,8 @@ export const retargetingData = [
     mobileNumber: '1234567891',
     cibil: '123',
     income: '1500000',
-    status: 'Rejected',
+    status: 'Dropped',
+    more: <MoreVertIcon />,
   },
 ];
 
@@ -183,6 +187,7 @@ function ReTargeting() {
       label: 'Fintech Partners',
     },
   ];
+
   const column1: any = [
     {
       title: '',
@@ -206,7 +211,7 @@ function ReTargeting() {
       },
     },
     {
-      title: 'Application #',
+      title: 'Application#',
       dataIndex: 'application',
       key: 'application',
     },
@@ -227,7 +232,7 @@ function ReTargeting() {
     },
     {
       title: 'Actions',
-      dataIndex: 'id',
+      dataIndex: 'more',
       key: 'more',
     },
   ];
@@ -252,6 +257,14 @@ function ReTargeting() {
       label: 'Call',
       defaultChecked: false,
     },
+  ];
+
+  const toggleOptions = [
+    { title: 'All' },
+    { title: 'Approved' },
+    { title: 'In-Progress' },
+    { title: 'Rejected' },
+    { title: 'Dropped' },
   ];
   return (
     <Stack className="retargetingMainContainer">
@@ -382,6 +395,9 @@ function ReTargeting() {
             data={retargetingData}
             listColumn={column1}
             statusColumn={column2}
+            flag="retargeting"
+            label={product_label}
+            toggleOptions={toggleOptions}
           />
         </Stack>
       ) : (

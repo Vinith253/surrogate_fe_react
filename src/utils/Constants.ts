@@ -71,3 +71,12 @@ export const tableHeader = {
   HEADING9: 'Channel',
   HEADING10: 'Processed',
 };
+
+export const lmsTableHeader = {
+  HEADING1: '#',
+  HEADING2: 'Application#',
+  HEADING3: 'Customer Name',
+  HEADING4: 'Mobile Number',
+  HEADING5: 'CIBIL',
+  HEADING6: 'Income',
+};

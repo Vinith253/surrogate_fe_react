@@ -4,15 +4,16 @@ import { stackButtonInterface } from '../../../interface/Types';
 import './groupButtonStyle.scss';
 type props = {
   data?: Array<stackButtonInterface>;
-  //   onChange?: void | undefined;
+  onChange?: any;
 };
 
-const GroupButton = ({ data }: props) => {
+const GroupButton = ({ data, onChange }: props) => {
   const [activeIndex, setActiveIndex] = React.useState<number>(0);
 
   const onClickAction = (item: any, index: number) => {
     setActiveIndex(index);
-    // onChange(item);
+    console.log(item, 'button group');
+    onChange(item);
   };
 
   return (

@@ -158,7 +158,11 @@ export const OrganisationDetails = () => {
   const open = Boolean(anchorElement);
   const [isItem, setIsItem] = useState<boolean>(false);
   const [btnActive, setBtnActive] = useState(true);
-
+  const [editSchedulePause, setEditSchedulePause] = useState(false);
+  const [pauseMethod, setPauseMethod] = useState('Pause Now');
+  const [successEditSchedulePause, setSuccessEditSchedulePause] =
+    useState(false);
+  const [successEditPause, setSuccessEditPause] = useState(false);
   const openCardMenu = Boolean(anchorEl);
 
   useEffect(() => {
@@ -229,6 +233,31 @@ export const OrganisationDetails = () => {
   const handleClick = (event: React.MouseEvent<HTMLTableCellElement>) => {
     setAnchorElement(event.currentTarget);
   };
+
+  const NORMAL_PAUSE = 'Pause Now';
+  const SCHEDULED_PAUSE = 'Schedule Pause';
+
+  const pauseMethodChange = (value: any) => {
+    setPauseMethod(value);
+  };
+
+  const closeModal = () => {
+    setEditSchedulePause(false);
+    setSuccessEditPause(false);
+    setSuccessEditSchedulePause(false);
+  };
+
+  const successModal = () => {
+    if (pauseMethod === NORMAL_PAUSE) {
+      setEditSchedulePause(false);
+      setSuccessEditPause(true);
+    }
+    if (pauseMethod === SCHEDULED_PAUSE) {
+      setSuccessEditSchedulePause(true);
+      setEditSchedulePause(false);
+    }
+  };
+
   const column = [
     {
       title: '',
@@ -422,7 +451,8 @@ export const OrganisationDetails = () => {
               <MenuItem
                 onClick={() => {
                   handleClose();
-                  setDeactivateModal(!deactivateModal);
+                  // setDeactivateModal(!deactivateModal);
+                  setEditSchedulePause(true);
                 }}
                 style={{ padding: '10px 20px', textAlign: 'left' }}
               >
@@ -723,6 +753,53 @@ export const OrganisationDetails = () => {
           successModalTitle={'Deactivation Organisation'}
           successModalMsg={
             'Your request for Deactivating Org is successfully sent to the Reviewer.'
+          }
+          btn={' Close'}
+        />
+      )}
+
+      {editSchedulePause && (
+        <CustomModal
+          openSuccess={editSchedulePause}
+          handleCloseSuccess={closeModal}
+          handleSuccess={successModal}
+          title={'Deactivate '}
+          pause_content={'You can pause it or perform a scheduled pause.'}
+          scheduledPause_content={
+            'Please choose a date range to perform a scheduled pause.'
+          }
+          textarea_title={'Add Remarks'}
+          radioValuOne={NORMAL_PAUSE}
+          radioValuTwo={SCHEDULED_PAUSE}
+          dateRange_title={'Enter Date range'}
+          maxLength={'Maximum of 500 words'}
+          pauseMethodChecking={(arg1: string) => pauseMethodChange(arg1)}
+          close={'Close'}
+          submit={'Submit'}
+          datepickerLabelStart={'Start Date and time'}
+          datepickerLabelEnd={'End Date and time'}
+          pauseStatusKey={'Schedule Pause'}
+        />
+      )}
+
+      {successEditPause && (
+        <CustomModal
+          openSuccess={successEditPause}
+          handleCloseSuccess={closeModal}
+          successModalTitle={`Deactivated - Pause`}
+          successModalMsg={
+            ' Your action of pausing - Card For Card Surrogate has been successully sent to the reviewer'
+          }
+          btn={' Close'}
+        />
+      )}
+      {successEditSchedulePause && (
+        <CustomModal
+          openSuccess={successEditSchedulePause}
+          handleCloseSuccess={closeModal}
+          successModalTitle={`Deactivated- Scheduled Pause`}
+          successModalMsg={
+            'Your action of Scheduled Pause - Card For Card Surrogate From  DD/MM/YYYTo DD/MM/YYY is successfully sent to reviewer'
           }
           btn={' Close'}
         />
