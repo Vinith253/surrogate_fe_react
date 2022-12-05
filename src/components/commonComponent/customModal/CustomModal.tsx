@@ -194,6 +194,7 @@ function CustomModal({
           title == 'Request for Deactivation' ||
           title == 'Add Organisation' ||
           title == 'Duplicate Role' ||
+          title == 'Duplicate LMS Rule' ||
           title == 'Employee Details' ||
           title == 'Choose the mode of communication' ||
           LoadingMsg ||
