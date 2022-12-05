@@ -1,3 +1,6 @@
+import { lmsTableHeader } from '../../../utils/Constants';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+
 export const Configuration = [
   {
     label: 'Rejected',
@@ -163,5 +166,86 @@ export const CommunicationMode = [
   },
   {
     label: 'Call',
+  },
+];
+
+export const product_label = [
+  {
+    id: 1,
+    label: lmsTableHeader.HEADING1,
+    defaultChecked: true,
+  },
+  {
+    id: 2,
+    label: lmsTableHeader.HEADING2,
+    defaultChecked: true,
+  },
+  {
+    id: 3,
+    label: lmsTableHeader.HEADING3,
+    defaultChecked: true,
+  },
+  {
+    id: 4,
+    label: lmsTableHeader.HEADING4,
+    defaultChecked: true,
+  },
+  {
+    id: 5,
+    label: lmsTableHeader.HEADING5,
+    defaultChecked: true,
+  },
+  {
+    id: 6,
+    label: lmsTableHeader.HEADING6,
+    defaultChecked: true,
+  },
+];
+
+export const LMSListData = [
+  {
+    id: '1',
+    application: '#12345',
+    customerName: 'Ashwin',
+    mobileNumber: '1234567891',
+    cibil: '123',
+    income: '1500000',
+    status: 'Approved',
+    more: <MoreVertIcon />,
+  },
+  {
+    id: '2',
+    application: '#12345',
+    customerName: 'Ashwin',
+    mobileNumber: '1234567891',
+    cibil: '123',
+    income: '1500000',
+    status: 'Rejected',
+    more: <MoreVertIcon />,
+  },
+  {
+    id: '3',
+    application: '#12345',
+    customerName: 'Ashwin',
+    mobileNumber: '1234567891',
+    cibil: '123',
+    income: '1500000',
+    status: 'Dropped',
+    more: <MoreVertIcon />,
+  },
+];
+
+export const GroupButtonData = [
+  {
+    title: 'All',
+  },
+  {
+    title: 'Active',
+  },
+  {
+    title: 'Saved',
+  },
+  {
+    title: 'Closed',
   },
 ];

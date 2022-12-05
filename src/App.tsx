@@ -76,7 +76,7 @@ export default function App() {
         />
 
         <Route
-          path="/productManagement/cardCatalogue/singleupload/reviewCard"
+          path="/productManagement/cardCatalogue/reviewCard"
           element={<ReviewCard />}
         />
         <Route
@@ -183,10 +183,15 @@ export default function App() {
 
         <Route path="/lms/lmsRule" element={<LMSRule />} />
         <Route path="/lms/lmsRule/addNewRule" element={<AddLMSRule />} />
-        
-        <Route path="/riskManagement/customerReports" element={<CustomerReport />} />
-        <Route path="/riskManagement/customerDetails" element={<CustomerDetailScreen />} />
 
+        <Route
+          path="/riskManagement/customerReports"
+          element={<CustomerReport />}
+        />
+        <Route
+          path="/riskManagement/customerDetails"
+          element={<CustomerDetailScreen />}
+        />
         <Route path="/lms/retargeting/reTargetingDetails" element={<ReTargetingDetails />} />
       </Route>
     </Routes>

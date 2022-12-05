@@ -1,0 +1,34 @@
+.performance-report-main-container {
+  .choose-category-container {
+    .css-1869usk-MuiFormControl-root {
+      margin: 10px 0px;
+      width: 100%;
+    }
+
+    .underline {
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      border-bottom: 2px solid #eceff2;
+      margin: 22px 0px;
+    }
+
+    .button-container {
+      display: flex;
+      gap: 16px;
+      margin-left: auto;
+      margin-top: 25px;
+    }
+  }
+
+  .each-container {
+    background-color: #ffffff;
+    padding: 20px 30px 30px 30px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+  }
+
+  .each-field-label {
+    font-size: 13px;
+  }
+}
