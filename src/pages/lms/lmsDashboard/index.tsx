@@ -1,4 +1,4 @@
-import { Typography, Button, Grid, Stack, Box } from "@mui/material";
+import { Typography, Button, Grid, Stack, Box, Link } from "@mui/material";
 import CheckBoxPopOver from "../../../components/commonComponent/CheckBoxPopOver/SingleLabel";
 import MoreFilterModal from "../../../components/commonComponent/customModal/MoreFilterModal";
 import DateTimePopOver from "../../../components/commonComponent/DateTimePopOver";
@@ -21,6 +21,7 @@ import ReactApexChart from "react-apexcharts";
 import ListLMSTable from "../../../components/commonComponent/listLmstable/listlmsTable";
 import download_icon from '../../../assets/icons/download_icon.svg';
 import mail_icon from '../../../assets/icons/mail_icon.svg';
+import { useNavigate } from "react-router-dom";
 
 
 export const lmsDashboardData = [
@@ -164,6 +165,7 @@ const donutGraphOptions2: {} = {
 export default function LMSDashboard() {
 
   const [dayFilterValue, setDayFilter] = useState<string>('Current Day');
+  const navigate = useNavigate();
 
   const day_filter_label = [
     {
@@ -389,6 +391,17 @@ export default function LMSDashboard() {
       title: 'Actions',
       dataIndex: 'more',
       key: 'more',
+      headerRender: () => {
+        return <text>Actions</text>;
+      },
+      render: (_: string, row: any, index: number) => {
+        return <Link
+        sx={{ cursor: 'pointer', color: '#0662B7' }}
+        onClick={() => navigate('/lms/retargeting/reTargetingDetails')}
+      >
+        View
+      </Link>
+      },
     },
   ];
 
