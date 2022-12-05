@@ -31,6 +31,7 @@ import UnfoldMoreIcon from '../../../../../assets/icons/sortArrow.svg';
 import { checkTagStatus } from '../../../../../utils/tagBasedIndicator/tagStatus';
 import { useNavigate } from 'react-router-dom';
 import CustomModal from '../../../../../components/commonComponent/customModal/CustomModal';
+import { DropdownFields } from '../../../userCreation/userCreation.const';
 export const organisationFilterDropdown: salesReportFilterInterface[] = [
   {
     label: 'Org Type',
@@ -158,8 +159,8 @@ export const OrganisationDetails = () => {
   const open = Boolean(anchorElement);
   const [isItem, setIsItem] = useState<boolean>(false);
   const [btnActive, setBtnActive] = useState(true);
-  const [editSchedulePause, setEditSchedulePause] = useState(false);
   const [pauseMethod, setPauseMethod] = useState('Pause Now');
+  const [editSchedulePause, setEditSchedulePause] = useState(false);
   const [successEditSchedulePause, setSuccessEditSchedulePause] =
     useState(false);
   const [successEditPause, setSuccessEditPause] = useState(false);
@@ -551,7 +552,7 @@ export const OrganisationDetails = () => {
         </Box>
         <Box>
           <Box className="organisation-checkbox-select-dropdown">
-            {organisationFilterDropdown?.map((eachItem: any, index: number) => {
+            {DropdownFields?.map((eachItem: any, index: number) => {
               return (
                 <Box key={index} className="select-dropdown">
                   <Typography sx={{ fontSize: '12px', fontWeight: 500 }}>
