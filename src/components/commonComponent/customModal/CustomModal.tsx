@@ -591,7 +591,6 @@ function CustomModal({
               >
                 {ProceedBtn}
               </Button>
-              info_icon
             </Stack>
           )}
 

@@ -13,6 +13,7 @@ import {
   MenuItem,
   InputLabel,
   Input,
+  Menu,
 } from '@mui/material';
 import BtnOutlined from '../../../../../components/commonComponent/CustomText/Button/Outlined';
 import SelectDropdown from '../../../../../components/commonComponent/CheckboxSelectDropdown';
@@ -46,7 +47,7 @@ export const retargetingData = [
     cibil: '123',
     income: '1500000',
     status: 'Approved',
-    more: <MoreVertIcon />,
+    // more: <MoreVertIcon />,
   },
   {
     id: '2',
@@ -56,7 +57,7 @@ export const retargetingData = [
     cibil: '123',
     income: '1500000',
     status: 'Rejected',
-    more: <MoreVertIcon />,
+    // more: <MoreVertIcon />,
   },
   {
     id: '3',
@@ -66,7 +67,7 @@ export const retargetingData = [
     cibil: '123',
     income: '1500000',
     status: 'Dropped',
-    more: <MoreVertIcon />,
+    // more: <MoreVertIcon />,
   },
 ];
 
@@ -78,7 +79,11 @@ function ReTargeting() {
   const [communicationModel, setCommunicationModel] = useState(false);
   const [value, setValue] = React.useState('10');
   const [successModel, setSuccesModel] = useState(false);
-
+  const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorElement);
+  const [selected, setSelected] = useState<number[]>([]);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const openCardMenu = Boolean(anchorEl);
   const handleCloseSuccess = () => {
     setOpenModel(false);
     setCommunicationModel(false);
@@ -100,6 +105,31 @@ function ReTargeting() {
   const reTargetingModel = () => {
     setCommunicationModel(false);
     setSuccesModel(true);
+  };
+  const handleClose = () => {
+    setAnchorElement(null);
+  };
+  const handleClick = (event: React.MouseEvent<HTMLTableCellElement>) => {
+    setAnchorElement(event.currentTarget);
+  };
+  const isSelected = (id: number) => {
+    const res = selected.indexOf(id);
+    if ((res && res !== -1) || res === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+  const handleClickCheckbox = (id: number) => {
+    const result = isSelected(id);
+    let selectedData = selected;
+    if (result) {
+      const index = selected.indexOf(id);
+      selectedData.splice(index, 1);
+      setSelected([...selectedData]);
+    } else {
+      setSelected([...selectedData, id]);
+    }
   };
   const day_filter_label = [
     {
@@ -232,8 +262,63 @@ function ReTargeting() {
     },
     {
       title: 'Actions',
-      dataIndex: 'more',
-      key: 'more',
+      dataIndex: 'id',
+      key: 'action',
+      render: (_: string, row: any, index: number) => {
+        return (
+          <>
+            <Stack
+              id="more-button"
+              onClick={handleClick}
+              aria-controls={open ? 'more-menu' : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? 'true' : undefined}
+              sx={{ padding: '5px', borderBottom: 'none' }}
+            >
+              <MoreVertIcon />
+            </Stack>
+            <Menu
+              id="more-menu"
+              anchorEl={anchorElement}
+              open={open}
+              MenuListProps={{
+                'aria-labelledby': 'more-button',
+              }}
+              onClose={handleClose}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+            >
+              <MenuItem
+                // onClick={() => handleClose()}
+                onClick={() => {
+                  handleClose();
+                  navigate('/lms/retargeting/reTargetingDetails');
+                }}
+                style={{ padding: '10px 20px', textAlign: 'left' }}
+              >
+                View Application
+              </MenuItem>
+              <MenuItem
+                // onClick={handleClose}
+
+                onClick={() => {
+                  handleClose();
+                  modelOpenNavigate();
+                }}
+                style={{ padding: '10px 20px', textAlign: 'left' }}
+              >
+                Retarget Application
+              </MenuItem>
+            </Menu>
+          </>
+        );
+      },
     },
   ];
   const product_label = [
@@ -368,10 +453,7 @@ function ReTargeting() {
               </Stack>
               <Stack>
                 <Box>
-                  <Button
-                    onClick={reTargetingDetailsNavigate}
-                    sx={{ margin: '0' }}
-                  >
+                  <Button sx={{ margin: '0' }}>
                     <img
                       src={download_icon}
                       alt="download_icon"
@@ -379,7 +461,7 @@ function ReTargeting() {
                       height="60%"
                     />
                   </Button>
-                  <Button onClick={modelOpenNavigate} sx={{ margin: '0' }}>
+                  <Button sx={{ margin: '0' }}>
                     <img
                       src={mail_icon}
                       alt="mail_icon"
@@ -391,6 +473,7 @@ function ReTargeting() {
               </Stack>
             </Stack>
           </Stack>
+
           <ListLMSTable
             data={retargetingData}
             listColumn={column1}
