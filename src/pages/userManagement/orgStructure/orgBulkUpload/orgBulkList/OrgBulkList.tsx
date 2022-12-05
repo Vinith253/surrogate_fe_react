@@ -342,7 +342,7 @@ export default function OrgBulkList(props: any) {
   //     error: false,
   //   },
   // ];
-  const data2 = [{}];
+  const data2: any = [];
 
   const handleUploadProgress = (value: number) => {
     setUploadProgress(value);
@@ -721,7 +721,7 @@ export default function OrgBulkList(props: any) {
           {progress === 100 && (
             <CommonTable column={columnList} data={dataList} />
           )}
-          {progress !== 100 && <ChooseCategoryToViewData />}
+          {progress !== 100 && <CommonTable column={columnList} data={data2} />}
         </Box>
       )}
       {progress === 100 && correctionState && (

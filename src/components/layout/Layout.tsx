@@ -50,6 +50,7 @@ import org_structure_icon from '../../assets/icons/orgStructure.svg';
 import branch_details_icon from '../../assets/icons/branchDetails.svg';
 import retargeting_icon from '../../assets/icons/retargeting-icon.svg';
 import lms_rule_icon from '../../assets/icons/lms-rule-icon.svg';
+import risk_customer_report from '../../assets/icons/risk-customer-report.svg';
 
 import profile_icon from '../../assets/icons/profile_icon.svg';
 import profile_arrow_icon from '../../assets/icons/profile_arrow_icon.svg';
@@ -164,7 +165,7 @@ const sideBarOptions = [
       },
       {
         data: 'LMS Rule',
-        path: '/lms/lmsrule',
+        path: '/lms/lmsRule',
         img: retargeting_icon,
       },
       {
@@ -179,7 +180,13 @@ const sideBarOptions = [
     content: 'RISK MNGMT.',
     path: '/risktManagement',
     image: risk_management_icon,
-    subContent: [],
+    subContent: [
+      {
+        data: 'Customer Reports',
+        path: '/riskManagement/customerReports',
+        img: risk_customer_report,
+      },
+    ],
   },
   {
     key: 9,
@@ -255,6 +262,7 @@ export default function Layout() {
   const theme = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
+  const [active, setActive] = React.useState(true);
   const [open, setOpen] = React.useState(true);
   const [openIndex, setOpenIndex] = React.useState(0);
   const [openList, setOpenList] = React.useState(false);
@@ -353,6 +361,7 @@ export default function Layout() {
                     classes={({ isActive }: any) =>
                       isActive ? 'active' : 'inactive'
                     }
+
                     // onClick={() => setMenuItemIndex(text.key)}
                     // style={{
                     //   backgroundColor:
@@ -416,7 +425,14 @@ export default function Layout() {
                       }}
                     >
                       <ListItemIcon>
-                        <img src={text.image} alt="" />
+                        <img
+                          src={text.image}
+                          alt=""
+                          style={{
+                            filter:
+                              'invert(100%) sepia(100%) saturate(0%) hue-rotate(24deg) brightness(104%) contrast(101%)',
+                          }}
+                        />
                       </ListItemIcon>
                       <ListItemText
                         primary={text.content}
@@ -448,7 +464,13 @@ export default function Layout() {
                             classes={({ isActive }: any) =>
                               isActive ? 'active' : 'inactive'
                             }
-                            sx={{ padding: '0' }}
+                            sx={{
+                              padding: '0',
+                              backgroundColor: '#282829',
+                              '&:hover': {
+                                backgroundColor: '#282829',
+                              },
+                            }}
                           >
                             <Collapse
                               in={openList}
@@ -456,7 +478,7 @@ export default function Layout() {
                               unmountOnExit
                               sx={{
                                 padding: '0 2.6rem',
-                                // backgroundColor: 'green',
+                                // backgroundColor: 'grey',
                               }}
                             >
                               <List
@@ -474,14 +496,25 @@ export default function Layout() {
                                   // }
                                 >
                                   <ListItemIcon sx={{ width: '2.5rem' }}>
-                                    <img src={subData.img} alt="" />
+                                    <img
+                                      src={subData.img}
+                                      alt=""
+                                      //   classes={({ isActive }: any) =>
+                                      //   isActive ? 'active' : 'inactive'
+                                      // }
+                                      style={{
+                                        filter:
+                                          'invert(100%) sepia(100%) saturate(0%) hue-rotate(24deg) brightness(104%) contrast(101%)',
+                                      }}
+                                    />
                                   </ListItemIcon>
+
                                   <ListItemText
                                     primary={subData.data}
                                     sx={{
                                       paddingLeft: '8px',
                                       opacity: open ? 1 : 0,
-                                      color: 'white',
+                                      color: '#FFFFFF',
                                     }}
                                   />
                                 </ListItemButton>
@@ -541,7 +574,7 @@ export default function Layout() {
                 // borderColor: "success.light"
               }}
             >
-              <Box className="search-container">
+              <Box className="search-container-layout">
                 <Box className="search-box">
                   <SearchIcon className="search-icon" />
                   <InputBase placeholder="Search" fullWidth={true} />

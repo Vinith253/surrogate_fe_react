@@ -10,40 +10,11 @@ import performance_report from '../../assets/icons/performance_report.svg';
 import lms from '../../assets/icons/lms.svg';
 import frequentActivity from '../../assets/images/frequentActivity.svg';
 import '../home/Home.scss';
-// import HistoryLogCustomModal from '../../components/commonComponent/customModal/HistoryLogCustomModal';
-// import HistoryModal from '../../components/commonComponent/customModal/HistoryLogModal';
-// import PauseModal from '../../components/commonComponent/customModal/PauseModal';
-
-// import RejectionModal from '../../components/commonComponent/customModal/RejectionModal';
-// import ResumeModal from '../../components/commonComponent/customModal/ResumeModal';
-// import ResumeModalSuccess from '../../components/commonComponent/customModal/ResumeModalSuccess';
-// import SurrogateSelection from '../../components/commonComponent/customModal/SurrogateSelection';
-// import PageLayout from '../../components/layout/pageLayout/pageLayout';
 import { useEffect, useState } from 'react';
-
-import ChangePasswordProfileModal from '../../components/commonComponent/customModal/ChangePasswordProfileModal';
-import ChangePasswordOTP from '../../components/commonComponent/customModal/ChangePasswordOTP';
-import CreateNewPassword from '../../components/commonComponent/customModal/CreateNewPassword';
-import BulkUploadDiscard from '../../components/commonComponent/customModal/USER-CREATION/BulkUploadDiscard';
-import RequestForDeactivation from '../../components/commonComponent/customModal/USER-CREATION/RequestForDeactivation';
-import RequestForActivation from '../../components/commonComponent/customModal/USER-CREATION/RequestForActivation';
-import SuccessForDeactivation from '../../components/commonComponent/customModal/USER-CREATION/SuccessForDeactivation';
+import ReasonForRejection from '../../components/commonComponent/customModal/RISK-MANAGEMENT/ReasonForRejection';
 import SuccessForActivate from '../../components/commonComponent/customModal/USER-CREATION/SuccessForActivate';
-import SuccessForUserCreated from '../../components/commonComponent/customModal/USER-CREATION/SuccessForUserCreated';
-import AddOrganisation from '../../components/commonComponent/customModal/ORG-STRUCTURE/AddOrganisation';
-import HistoryModal from '../../components/commonComponent/customModal/HistoryLogModal';
-
-import RequestForDeactivationOrg from '../../components/commonComponent/customModal/ORG-STRUCTURE/RequestForDeactivationOrg';
-import RequestForActivationOrg from '../../components/commonComponent/customModal/ORG-STRUCTURE/RequestForActivationOrg';
-import SuccessForActivationOrg from '../../components/commonComponent/customModal/ORG-STRUCTURE/SuccessForActivationOrg';
-import SuccessDeactivationOrg from '../../components/commonComponent/customModal/ORG-STRUCTURE/SuccessDeactivationOrg';
-import OrgUploadSuccess from '../../components/commonComponent/customModal/ORG-STRUCTURE/OrgUploadSuccess';
-import CreateOrgSuccess from '../../components/commonComponent/customModal/ORG-STRUCTURE/CreateOrgSuccess';
-import CancelBulkUploadDiscard from '../../components/commonComponent/customModal/ORG-STRUCTURE/CancelBulkUploadDiscard';
-import SuccessForRoleCreated from '../../components/commonComponent/customModal/ROLE-CREATION/SuccessForRoleCreated';
+import SuccessForRejection from '../../components/commonComponent/customModal/RISK-MANAGEMENT/SuccessForRejection';
 import DuplicateRole from '../../components/commonComponent/customModal/ROLE-CREATION/DuplicateRole';
-import EmployeeDetails from '../../components/commonComponent/customModal/ROLE-CREATION/EmployeeDetails';
-import SuccessAuthorizationLevel from '../../components/commonComponent/customModal/ROLE-CREATION/SuccessAuthorizationLevel';
 
 export default function Home() {
   const pendingActionsData = {
@@ -125,53 +96,11 @@ export default function Home() {
       <Typography color="secondary" variant="h5">
         Welcome Parithi!
       </Typography>
+
       <Box className="home-container">
-        {/*ORG-STRUCTURE*/}
-        {/* <AddOrganisation /> */}
-        {/* <Stack>
-          <RequestForActivationOrg />
-          <SuccessForActivationOrg />
-          <RequestForDeactivationOrg />
-          <SuccessDeactivationOrg />
-          <OrgUploadSuccess />
-          <CreateOrgSuccess />
-          <CancelBulkUploadDiscard />
-          <HistoryModal />
-          <AddOrganisation />
-        </Stack> */}
-
-        {/* ROLE_CREATION */}
-        {/* <Stack>
-          <SuccessForRoleCreated />
-          <DuplicateRole />
-          <EmployeeDetails />
-          <SuccessAuthorizationLevel />
-        </Stack> */}
-
-        {/*USER-CREATION*/}
-        {/* <Stack> */}
-        {/* <RequestForActivation />
-          <SuccessForActivate />
-          <RequestForDeactivation />
-          <SuccessForDeactivation />
-          <SuccessForUserCreated />
-          <BulkUploadDiscard /> */}
-        {/* </Stack> */}
-
-        {/* <HistoryModal /> */}
-        {/* <BulkUploadDiscard />
-        <RequestForDeactivation />
-        <RequestForActivation />
-        <SuccessForDeactivation />
-        <SuccessForActivate />
-        <SuccessForUserCreated /> */}
-
-        {/* PROFILE-MODAL */}
-        {/* <AccessLibraryModal />
-        <ChangePasswordProfileModal />
-        <ChangePasswordOTP />
-        <CreateNewPassword /> */}
-        {/* <DuplicateRole /> */}
+        {/* <ReasonForRejection />
+        <SuccessForRejection />
+        <DuplicateRole /> */}
         <Card content={pendingActionsData} />
         <Card content={savedItemsData} />
         <Card content={frequentActivitiesData} />

@@ -1,0 +1,178 @@
+.create-lms-rule-container {
+  margin: 30px 0px;
+  .create-lms-rule-header {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 24px 32px 24px 32px;
+    border-radius: 8px;
+  }
+  .lms-rule-container {
+    background-color: #ffffff;
+    padding: 20px 30px 30px 30px;
+    margin-top: 30px;
+    border-radius: 8px;
+
+    .lms-rule-form-container {
+      margin-top: 20px;
+      display: flex;
+
+      .css-10gs3tb-MuiInputBase-root-MuiOutlinedInput-root.Mui-error
+        .MuiOutlinedInput-notchedOutline {
+        border-color: #afaeaf;
+        height: 52px;
+      }
+
+      .each-field-label {
+        font-size: 13px;
+      }
+
+      .checkbox-label {
+        .css-gsv0eb-MuiTypography-root {
+          font-size: 14px;
+        }
+      }
+
+      .radio-group-container {
+        display: contents;
+
+        .css-j204z7-MuiFormControlLabel-root {
+          margin: 15px 5px 0px 5px;
+        }
+      }
+
+      .css-qd4whe-MuiButtonBase-root-MuiCheckbox-root.Mui-checked {
+        color: #0c4ca8;
+      }
+
+      .css-yf0af4-MuiButtonBase-root-MuiRadio-root.Mui-checked {
+        color: #0c4ca8;
+      }
+
+      .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+        width: 100%;
+      }
+      .css-1fczfs4-MuiInputBase-root-MuiOutlinedInput-root {
+        height: 48px;
+      }
+
+      .css-13uexx6-MuiInputBase-root-MuiOutlinedInput-root {
+        height: 47px;
+      }
+
+      .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
+        font-size: 14px;
+      }
+
+      .css-1869usk-MuiFormControl-root {
+        width: 100%;
+        margin: 3px 0px 0px 0px;
+      }
+    }
+  }
+
+  .frequency-period-form {
+    margin-top: 10px;
+
+    .plus-icon-container {
+      margin-left: 20px;
+
+      .plus-icon {
+        width: 20px;
+        margin-top: -40px;
+        display: flex;
+        margin-left: auto;
+      }
+    }
+
+    .add-more-days {
+      font-size: 14px;
+      margin-top: -39px;
+      margin-left: -10px;
+      color: #0662b7;
+    }
+
+    .select-date-container {
+      margin: 20px 0px;
+      padding: 20px;
+      border: 1px solid #d7d8d8;
+      border-radius: 8px;
+
+      .repeat-conatiner {
+        margin: 20px 0px;
+        .css-mhc70k-MuiGrid-root > .MuiGrid-item {
+          padding: 0px;
+        }
+      }
+
+      .swicth-container {
+        display: flex;
+        margin: 10px 0px;
+
+        .swicth-label {
+          font-size: 14px;
+          width: 50%;
+        }
+      }
+
+      .end-date-container {
+      }
+      .remove-container {
+        display: flex;
+        margin-left: auto;
+        .remove-icon {
+          width: 20px;
+          margin: -1px 10px 0px 10px;
+        }
+        .remove-label {
+          color: #0662b7;
+          font-size: 14px;
+        }
+      }
+    }
+
+    .css-13uexx6-MuiInputBase-root-MuiOutlinedInput-root {
+      width: 30%;
+    }
+  }
+}
+
+.view-rule-main-container {
+  margin-bottom: 60px;
+
+  .lms-rule-container {
+    background-color: #ffffff;
+    padding: 20px 30px 30px 30px;
+    margin-top: 30px;
+    border-radius: 8px;
+
+    .each-info {
+      margin-bottom: 10px;
+      .info-label {
+        color: #afaeaf;
+        font-size: 12px;
+        font-weight: 500;
+        margin: 0px 0px 6px 0px;
+      }
+      .info-value {
+        color: #151515;
+        font-size: 14px;
+        font-weight: 500;
+      }
+    }
+
+    .each-frequency-info {
+      .frequency-header {
+        font-size: 15px;
+      }
+
+      .underline {
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        margin: 18px 0px;
+        border-bottom: 2px solid #eceff2;
+      }
+    }
+  }
+}

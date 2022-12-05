@@ -1,6 +1,19 @@
 import React, { useState } from 'react';
 import './style.scss';
-import { Typography, Stack, Box, Grid, Button } from '@mui/material';
+import {
+  Typography,
+  Stack,
+  Box,
+  Grid,
+  Button,
+  Checkbox,
+  FormControl,
+  Select,
+  OutlinedInput,
+  MenuItem,
+  InputLabel,
+  Input,
+} from '@mui/material';
 import BtnOutlined from '../../../../../components/commonComponent/CustomText/Button/Outlined';
 import SelectDropdown from '../../../../../components/commonComponent/CheckboxSelectDropdown';
 import BtnContained from '../../../../../components/commonComponent/CustomText/Button/Contained';
@@ -8,17 +21,251 @@ import ChooseCategoryToViewData from '../../../../../components/commonComponent/
 import download_icon from '../../../../../assets/icons/download_icon.svg';
 import mail_icon from '../../../../../assets/icons/mail_icon.svg';
 import filter_icon from '../../../../../assets/icons/filter.svg';
-
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import TableComp from '../../../../../components/commonComponent/ListTable/ListTable';
 import {
   listRowHeading,
   salesDashboardList,
   statusRowHeading,
+  product_label,
+  state_label,
 } from '../../../../sales/dashboard/dashboard.const';
 import { reTargetingText } from './reTargeting.const';
 import { colors } from '../../../../../style/Color';
+import MoreFilterModal from '../../../../../components/commonComponent/customModal/MoreFilterModal';
+import ListLMSTable from '../../../../../components/commonComponent/listLmstable/listlmsTable';
+import { lmsTableHeader } from '../../../../../utils/Constants';
+import { useNavigate } from 'react-router-dom';
+import CustomModal from '../../../../../components/commonComponent/customModal/CustomModal';
+export const retargetingData = [
+  {
+    id: '1',
+    application: '#12345',
+    customerName: 'Ashwin',
+    mobileNumber: '1234567891',
+    cibil: '123',
+    income: '1500000',
+    status: 'Approved',
+    more: <MoreVertIcon />,
+  },
+  {
+    id: '2',
+    application: '#12345',
+    customerName: 'Ashwin',
+    mobileNumber: '1234567891',
+    cibil: '123',
+    income: '1500000',
+    status: 'Rejected',
+    more: <MoreVertIcon />,
+  },
+  {
+    id: '3',
+    application: '#12345',
+    customerName: 'Ashwin',
+    mobileNumber: '1234567891',
+    cibil: '123',
+    income: '1500000',
+    status: 'Dropped',
+    more: <MoreVertIcon />,
+  },
+];
+
 function ReTargeting() {
+  const navigate = useNavigate();
   const [isFiltered, setIsFiltered] = useState(false);
+  const [dayFilterValue, setDayFilter] = useState<string>('Current Day');
+  const [openModel, setOpenModel] = useState(false);
+  const [communicationModel, setCommunicationModel] = useState(false);
+  const [value, setValue] = React.useState('10');
+  const [successModel, setSuccesModel] = useState(false);
+
+  const handleCloseSuccess = () => {
+    setOpenModel(false);
+    setCommunicationModel(false);
+    setSuccesModel(false);
+  };
+  const handleChange = (event: any) => {
+    setValue(event.target.value as string);
+  };
+  const reTargetingDetailsNavigate = () => {
+    navigate('/lms/retargeting/reTargetingDetails');
+  };
+  const modelOpenNavigate = () => {
+    setOpenModel(true);
+    setTimeout(() => {
+      setOpenModel(false);
+      setCommunicationModel(true);
+    }, 2000);
+  };
+  const reTargetingModel = () => {
+    setCommunicationModel(false);
+    setSuccesModel(true);
+  };
+  const day_filter_label = [
+    {
+      id: 1,
+      label: 'Current Day',
+      // onclick: () => {
+      //   setDayFilter('Current Day');
+      // },
+    },
+    {
+      id: 2,
+      label: 'Current Week',
+      // onclick: () => {
+      //   setDayFilter('Current Week');
+      // },
+    },
+    {
+      id: 3,
+      label: 'Current Month',
+      // onclick: () => {
+      //   setDayFilter('Current Month');
+      // },
+    },
+    {
+      id: 4,
+      label: 'Current Quarter',
+      // onclick: () => {
+      //   setDayFilter('Current Quarter');
+      // },
+    },
+    {
+      id: 5,
+      label: 'Current Year',
+      // onclick: () => {
+      //   setDayFilter('Current Year');
+      // },
+    },
+    {
+      id: 6,
+      label: 'Custom Period',
+      // onclick: () => {
+      //   setDayFilter('Custom Period');
+      // },
+    },
+  ];
+
+  const surrogates_label = [
+    {
+      id: 1,
+      label: 'Payroll',
+      // onclick: (() => {setDayFilter("Current Day");})
+    },
+    {
+      id: 2,
+      label: 'Card on Card',
+      // onclick: (() => {setDayFilter("Current Week");})
+    },
+    {
+      id: 3,
+      label: 'CIBIL',
+      // onclick: (() => {setDayFilter("Current Month");})
+    },
+    {
+      id: 4,
+      label: 'AQB',
+      // onclick: (() => {setDayFilter("Current Quarter");})
+    },
+    {
+      id: 5,
+      label: 'RC',
+      // onclick: (() => {setDayFilter("Current Year");})
+    },
+  ];
+  const channels_label = [
+    {
+      id: 1,
+      label: 'Bank',
+    },
+    {
+      id: 2,
+      label: 'DSA',
+    },
+    {
+      id: 3,
+      label: 'Fintech Partners',
+    },
+  ];
+
+  const column1: any = [
+    {
+      title: '',
+      dataIndex: 'id',
+      key: 'checkBox',
+      width: '70px',
+      headerRender: () => {
+        return <Checkbox />;
+      },
+      render: (_: string, row: any, index: number) => {
+        return <Checkbox />;
+      },
+    },
+    {
+      title: '#',
+      dataIndex: 'id',
+      key: 'id',
+      width: '70px',
+      render: (text: string) => {
+        return <Stack>{text}</Stack>;
+      },
+    },
+    {
+      title: 'Application#',
+      dataIndex: 'application',
+      key: 'application',
+    },
+    {
+      title: 'Customer Name',
+      dataIndex: 'customerName',
+      key: 'customerName',
+    },
+    { title: 'Mobile Number', dataIndex: 'mobileNumber', key: 'mobileNumber' },
+    { title: 'CIBIL', dataIndex: 'cibil', key: 'cibil' },
+    { title: 'Income', dataIndex: 'income', key: 'income' },
+  ];
+  const column2: any = [
+    {
+      title: 'Status',
+      dataIndex: 'status',
+      key: 'status',
+    },
+    {
+      title: 'Actions',
+      dataIndex: 'more',
+      key: 'more',
+    },
+  ];
+  const product_label = [
+    {
+      id: 1,
+      label: 'SMS',
+      defaultChecked: false,
+    },
+    {
+      id: 2,
+      label: 'Whatsapp',
+      defaultChecked: false,
+    },
+    {
+      id: 3,
+      label: 'Mail',
+      defaultChecked: false,
+    },
+    {
+      id: 4,
+      label: 'Call',
+      defaultChecked: false,
+    },
+  ];
+
+  const toggleOptions = [
+    { title: 'All' },
+    { title: 'Approved' },
+    { title: 'In-Progress' },
+    { title: 'Rejected' },
+    { title: 'Dropped' },
+  ];
   return (
     <Stack className="retargetingMainContainer">
       <Stack className="retargetingcontainer">
@@ -29,33 +276,78 @@ function ReTargeting() {
                 <Typography className="retargeting-dropdown-label">
                   {eachItem?.label}
                 </Typography>
+
                 <SelectDropdown options={eachItem?.option} />
               </Grid>
             );
           })}
-          <Stack
-            sx={{
-              width: '180px',
-              display: 'flex',
-              alignItems: 'center',
-              position: 'relative',
-              cursor: 'pointer',
-            }}
-          >
-            <Button
+        </Grid>
+
+        <Stack
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            padding: '8px 0',
+          }}
+        >
+          <Box sx={{ minWidth: 220 }}>
+            <FormControl fullWidth>
+              <Typography className="retargetingDropDownText">
+                Period
+              </Typography>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={value}
+                onChange={handleChange}
+                sx={{
+                  '& legend': { display: 'none' },
+                  '& fieldset': { top: 0 },
+                }}
+                style={{ height: 46 }}
+              >
+                <MenuItem value={10}>Current Day</MenuItem>
+                <MenuItem value={20}>Current Week</MenuItem>
+                <MenuItem value={30}>Current Month</MenuItem>
+                <MenuItem value={40}>Current Quarter</MenuItem>
+                <MenuItem value={50}>Current Year</MenuItem>
+                <MenuItem value={60}>Custom Period</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
+          <Stack>
+            <Stack
               sx={{
-                position: 'absolute',
-                bottom: '20px',
-                textTransform: 'capitalize',
+                width: '180px',
+                display: 'flex',
+                alignItems: 'center',
+                cursor: 'pointer',
+                marginTop: '30px',
               }}
             >
-              <Typography className="retargetingmoreFilters">
-                More Filters
-                <img src={filter_icon} alt="" style={{ padding: '0 15px' }} />
-              </Typography>
-            </Button>
+              <Stack
+                sx={{
+                  textTransform: 'capitalize',
+                }}
+              >
+                <MoreFilterModal
+                  product_label={product_label}
+                  day_filter_label={day_filter_label}
+                  dayFilterValue={dayFilterValue}
+                  submit={'Apply'}
+                  close={'Reset'}
+                  policies_label={channels_label}
+                  surrogates_label={surrogates_label}
+                  state_label={state_label}
+                  // zonal_label={zonal_label}
+                  flag="reTargeting"
+                />
+              </Stack>
+            </Stack>
           </Stack>
-        </Grid>
+        </Stack>
+
         <Box className="retargeting-button-container">
           <BtnOutlined title="Reset" onClick={() => setIsFiltered(false)} />
           <BtnContained title="Search" onClick={() => setIsFiltered(true)} />
@@ -76,36 +368,72 @@ function ReTargeting() {
               </Stack>
               <Stack>
                 <Box>
-                  <Button>
+                  <Button
+                    onClick={reTargetingDetailsNavigate}
+                    sx={{ margin: '0' }}
+                  >
                     <img
                       src={download_icon}
                       alt="download_icon"
-                      width="70%"
-                      height="70%"
+                      width="60%"
+                      height="60%"
                     />
                   </Button>
-                  <Button>
+                  <Button onClick={modelOpenNavigate} sx={{ margin: '0' }}>
                     <img
                       src={mail_icon}
                       alt="mail_icon"
-                      width="70%"
-                      height="70%"
+                      width="60%"
+                      height="60%"
                     />
                   </Button>
                 </Box>
               </Stack>
             </Stack>
           </Stack>
-          <TableComp
-            viewPath="/sales/salesReportDetails"
-            rows={salesDashboardList}
-            statusRowsHeading={statusRowHeading}
-            listRowHeading={listRowHeading}
-            flag="sales-report"
+          <ListLMSTable
+            data={retargetingData}
+            listColumn={column1}
+            statusColumn={column2}
+            flag="retargeting"
+            label={product_label}
+            toggleOptions={toggleOptions}
           />
         </Stack>
       ) : (
         <ChooseCategoryToViewData />
+      )}
+      {openModel && (
+        <CustomModal
+          openSuccess={openModel}
+          handleCloseSuccess={handleCloseSuccess}
+          // successModalTitle={'Activation Organisation'}
+          // successModalMsg={
+          //   'Your request for Activating Org is successfully sent to the Reviewer.'
+          // }
+          // btn={' Close'}
+          LoadingMsg={'Loading selected application(s) for Re-Targeting'}
+        />
+      )}
+      {communicationModel && (
+        <CustomModal
+          openSuccess={communicationModel}
+          handleCloseSuccess={handleCloseSuccess}
+          title={'Choose the mode of communication'}
+          close={'Cancel'}
+          submit={'Re-Target'}
+          product_label={product_label}
+          handleSuccess={reTargetingModel}
+        />
+      )}
+      {successModel && (
+        <CustomModal
+          openSuccess={successModel}
+          handleCloseSuccess={handleCloseSuccess}
+          successMsg={
+            'Selected applications are being processed. They will be notified of eligible customers to resume or process.'
+          }
+        />
       )}
     </Stack>
   );

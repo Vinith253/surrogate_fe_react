@@ -1,7 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate, json } from 'react-router-dom';
-
-// MUI components
+import React, { ChangeEvent, useState, useEffect } from 'react';
+import './cardCateloge.scss';
+// import useStyles from "./cardStyle";
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
+// import DashboardCard from '../../../../componens/commonComponent/CommonCard/SalesDashbaordCard/DashboardCard';
+import ProgressCard from '../../../../components/commonComponent/CommonCard/ProgressCard/ProgressCard';
+import DashboardCard from '../../../../components/commonComponent/CommonCard/SalesDashbaordCard/DashboardCard';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import { tableCellClasses } from '@mui/material/TableCell';
+import TypographyHead from '../../../../components/commonComponent/CustomText/Head';
+import { useNavigate } from 'react-router-dom';
+import SelectDropdown from '../../../../components/commonComponent/CheckboxSelectDropdown';
+import SearchSelectDropdown from '../../../../components/commonComponent/SearchDropdown';
+import TableComp from '../../../../components/commonComponent/ListTable/ListTable';
 import {
   MenuItem,
   Checkbox,
@@ -22,6 +32,7 @@ import {
   TableCell,
   Paper,
   Menu,
+  Grid,
   Select,
   ListItemText,
 } from '@mui/material';
@@ -35,10 +46,6 @@ import PaginationComp from '../../../../components/commonComponent/Pagination/Pa
 import TypographySubTitle from '../../../../components/commonComponent/CustomText/Typography';
 import TypographyInfo from '../../../../components/commonComponent/CustomText/Info';
 import CustomModal from '../../../../components/commonComponent/customModal/CustomModal';
-import TypoText from '../../../../components/commonComponent/CustomText/Textfield';
-import GroupButton from '../../../../components/commonComponent/GroupButton/GroupButton';
-import BtnOutlined from '../../../../components/commonComponent/CustomText/Button/Outlined';
-import BtnContained from '../../../../components/commonComponent/CustomText/Button/Contained';
 
 // services
 import { getCardList } from '../../../../services/cardCatalogueServices';
@@ -62,29 +69,86 @@ import Info_Icon from '../../../../assets/images/info_icon.svg';
 
 // Utils
 import { checkTagStatus } from '../../../../utils/tagBasedIndicator/tagStatus';
+import {
+  listRowHeading,
+  salesDashboardList,
+  statusRowHeading,
+} from '../../../../pages/sales/dashboard/dashboard.const';
+import TablePagination from '@mui/material/TablePagination';
+import { Height } from '@mui/icons-material';
+import TypoText from '../../../../components/commonComponent/CustomText/Textfield';
+import GroupButton from '../../../../components/commonComponent/GroupButton/GroupButton';
+import BtnOutlined from '../../../../components/commonComponent/CustomText/Button/Outlined';
+import BtnContained from '../../../../components/commonComponent/CustomText/Button/Contained';
+import UnfoldMoreIcon from '../../../../assets/icons/sortArrow.svg';
+import ListTable from '../../../../components/commonComponent/commonListTable/commonListTable';
 
-// css
-import './cardCateloge.scss';
+// const columns: GridColDef[] = [
+//   { field: 'id', headerName: 'ID', width: 70 },
+//   { field: 'cardName', headerName: 'Card Name', width: 130 },
+//   { field: 'productID', headerName: 'Product ID', width: 130 },
+//   { field: 'businessID', headerName: 'Business ID', width: 130 },
+//   { field: 'cardMode', headerName: 'Card Mode', width: 130 },
+//   { field: 'cardCategory', headerName: 'Card Category', width: 130 },
+//   { field: 'cardStatus', headerName: 'Card Status', width: 120 },
+//   { field: 'more', headerName: 'More', type: 'number', width: 20 },
 
-// Loader function
+// ];
 
-export async function cardCatalogueLoader() {
-  const cardList = await getListOfCards();
-  return json({ cardList }, { status: 200 });
+export interface cardCatalogueFilterInterface {
+  label?: string;
+  option?: Array<object>;
 }
 
-const getListOfCards = async () => {
-  await getCardList({
-    page: 1,
-    size: 2,
-  })
-    .then((response) => {
-      return response.data;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
+export const CardCatalogueFilterDropdown: cardCatalogueFilterInterface[] = [
+  {
+    label: 'Card Mode',
+    option: [
+      { value: 'All', name: 'All Mode' },
+      { value: 'Salaried', name: 'Salaried' },
+      { value: 'Business', name: 'Business' },
+      { value: 'Doctor', name: 'Doctor' },
+      { value: 'Teacher', name: 'Teacher' },
+      { value: 'Defence', name: 'Defence' },
+      { value: 'Chartered Accountant', name: 'Chartered Accountant' },
+      { value: 'FD Based', name: 'FD Based' },
+    ],
+  },
+  {
+    label: 'Card Category',
+    option: [
+      { value: 'All', name: 'All Category' },
+      { value: 'General', name: 'General' },
+      { value: 'Travel', name: 'Travel' },
+      { value: 'Fuel', name: 'Fuel' },
+      { value: 'Online Shopping', name: 'Online Shopping' },
+      { value: 'Entertainment', name: 'Entertainment' },
+      { value: 'Utility Bills', name: 'Utility Bills' },
+      { value: 'Offline Shopping', name: 'Offline Shopping' },
+      { value: 'Restaurant', name: 'Restaurant' },
+      { value: 'Grocery', name: 'Grocery' },
+    ],
+  },
+  {
+    label: 'Card Status',
+    option: [
+      { value: 'All', name: 'All' },
+      { value: 'Active', name: 'Active' },
+      { value: 'In-Active', name: 'In-Active' },
+    ],
+  },
+  {
+    label: 'Choose Surrogate',
+    option: [
+      { value: 'All', name: 'All Surrogates' },
+      { value: 'Payroll', name: 'Payroll' },
+      { value: 'Card on Card', name: 'Card on Card' },
+      { value: 'CIBIL', name: 'CIBIL' },
+      { value: 'AQB', name: 'AQB' },
+      { value: 'RC', name: 'RC' },
+    ],
+  },
+];
 
 export interface dataHeaderList {
   id: string;
@@ -130,7 +194,90 @@ function createData(
   };
 }
 
-const rows = [
+// const rows = [
+//   createData(
+//     1,
+//     'ETERNA',
+//     1234567890,
+//     1234567890,
+//     'General',
+//     'Basic',
+//     'Active',
+//     ''
+//   ),
+//   createData(
+//     2,
+//     'PREMIER',
+//     1234567890,
+//     1234567890,
+//     'General',
+//     'Premium',
+//     'In-Active',
+//     ''
+//   ),
+//   createData(
+//     3,
+//     'EXCLUSIVE ICAI',
+//     1234567890,
+//     1234567890,
+//     'General',
+//     'Ultra Premium',
+//     'Active',
+//     ''
+//   ),
+//   createData(
+//     4,
+//     'EXCLUSIVE ICAI',
+//     1234567890,
+//     1234567890,
+//     'General',
+//     'Ultra Premium',
+//     'Active',
+//     ''
+//   ),
+//   createData(
+//     5,
+//     'EXCLUSIVE ICAI',
+//     1234567890,
+//     1234567890,
+//     'General',
+//     'Ultra Premium',
+//     'Active',
+//     ''
+//   ),
+//   createData(
+//     6,
+//     'EXCLUSIVE ICAI',
+//     1234567890,
+//     1234567890,
+//     'General',
+//     'Basic',
+//     'Active',
+//     ''
+//   ),
+// ];
+
+const tableHeaderData = [
+  {
+    id: 'ID',
+    cardName: 'Card Name',
+    productID: 'Product ID',
+    businessID: 'Business ID',
+    cardMode: 'Card Mode',
+    cardCategory: 'Card Category',
+    cardStatus: 'Card Status',
+    // more: 'More',
+  },
+];
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: 'inherit',
+  '& .MuiInputBase-input': {
+    padding: theme.spacing(0, 1, 0, 2),
+  },
+}));
+
+export const data = [
   createData(
     1,
     'ETERNA',
@@ -193,30 +340,10 @@ const rows = [
   ),
 ];
 
-const tableHeaderData = [
-  {
-    id: 'ID',
-    cardName: 'Card Name',
-    productID: 'Product ID',
-    businessID: 'Business ID',
-    cardMode: 'Card Mode',
-    cardCategory: 'Card Category',
-    cardStatus: 'Card Status',
-    more: 'More',
-  },
-];
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(0, 1, 0, 2),
-  },
-}));
-
 export const CardCatalogue = () => {
   const navigate = useNavigate();
   const [age, setAge] = useState('');
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
   const [currency, setCurrency] = useState<number>(1);
   const [surrogateSelection, setSurrogateSelection] = useState(false);
   const [resumeModal, setResumeModal] = useState(false);
@@ -227,19 +354,38 @@ export const CardCatalogue = () => {
   const [showPauseModal, setShowPauseModal] = useState<boolean>(false);
   const [pauseMethods, setPauseMethods] = useState('Pause Now');
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [selected, setSelected] = React.useState('');
+  //  const [selected, setSelected] = React.useState('');
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [currentPage, setCurrentPage] = useState(1);
-  const [filteredData, setFilterteredData] = useState(rows);
+  // const [filteredData, setFilterteredData] = useState(rows);
   const openCardMenu = Boolean(anchorEl);
   const [surrogateMethod, setSurrogateMethod] = useState('Assign Surrogate');
+  // const [sortingData, setSortingData] = useState(data);
   const [showPauseSuccessModal, setShowPauseSuccessModal] =
     useState<boolean>(false);
   const [showScheduledPauseSuccessModal, setShowScheduledPauseSuccessModal] =
     useState<boolean>(false);
 
   const [editModal, setEditModal] = useState(false);
+
+  //Table
+  const [sortingData, setSortingData] = useState(data);
+  const [ascending, setAscending] = useState<boolean>(true);
+  const [idSorting, setIdSorting] = useState<boolean>(true);
+  const [selected, setSelected] = useState<number[]>([]);
+  const [isItem, setIsItem] = useState<boolean>(false);
+  const [activateModal, setActivateModal] = useState<boolean>(false);
+  const [deactivateModal, setDeactivateModal] = useState<boolean>(false);
+  const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorElement);
+
+  useEffect(() => {
+    filterData();
+  }, [ascending]);
+  // useEffect(() => {
+  //   idFilterData();
+  // }, [idSorting]);
 
   const NORMAL_PAUSE = 'Pause Now';
   const SCHEDULED_PAUSE = 'Schedule Pause';
@@ -266,7 +412,7 @@ export const CardCatalogue = () => {
     },
   }));
 
-  const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
+  // const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
   const menuOpen = Boolean(anchorElement);
   const handleClick = (event: React.MouseEvent<HTMLTableCellElement>) => {
     setAnchorElement(event.currentTarget);
@@ -289,6 +435,14 @@ export const CardCatalogue = () => {
   ) => {
     setPage(newPage);
   };
+  // const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   if (event.target.checked) {
+  //     const newSelected = data.map((n: any) => n.id);
+  //     setSelected(newSelected);
+  //     return;
+  //   }
+  //   setSelected([]);
+  // };
 
   const onPageChange = (event: React.ChangeEvent<unknown>, page: number) => {
     setPage(page);
@@ -527,6 +681,268 @@ export const CardCatalogue = () => {
     },
   ];
 
+  //Table
+  const handleSortByName = () => {
+    setAscending(!ascending);
+  };
+
+  // const handleSortById = () => {
+  //   setIdSorting(!idSorting);
+  // };
+
+  const handleSelectAllClick = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.checked) {
+      const newSelected = data.map((n: any) => n.id);
+      setSelected(newSelected);
+      return;
+    }
+    setSelected([]);
+  };
+
+  const isSelected = (id: number) => {
+    const res = selected.indexOf(id);
+    if ((res && res !== -1) || res === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+  const handleClickCheckbox = (id: number) => {
+    const result = isSelected(id);
+    let selectedData = selected;
+    if (result) {
+      const index = selected.indexOf(id);
+      selectedData.splice(index, 1);
+      setSelected([...selectedData]);
+    } else {
+      setSelected([...selectedData, id]);
+    }
+  };
+
+  const column = [
+    {
+      title: '',
+      dataIndex: 'id',
+      key: 'checkBox',
+      width: '70px',
+      headerRender: () => {
+        return (
+          <Checkbox
+            color={'secondary'}
+            indeterminate={selected.length > 0 && selected.length < data.length}
+            checked={data.length > 0 && selected.length === data.length}
+            onChange={handleSelectAllClick}
+            inputProps={{
+              'aria-label': 'select all desserts',
+            }}
+          />
+        );
+      },
+      render: (_: string, row: any, index: number) => {
+        const isItemSelected = isSelected(row.id);
+        setIsItem(isItemSelected);
+        console.log('isItemSelected', isItemSelected);
+        const labelId = `enhanced-table-checkbox-${index}`;
+        return (
+          <Checkbox
+            color={'secondary'}
+            checked={isItemSelected}
+            inputProps={{
+              'aria-labelledby': labelId,
+            }}
+            onChange={() => handleClickCheckbox(row.id)}
+          />
+        );
+      },
+    },
+    {
+      title: '#',
+      dataIndex: 'id',
+      key: 'id',
+      width: '70px',
+      render: (text: string) => {
+        return <Stack>{text}</Stack>;
+      },
+    },
+    {
+      title: 'Card Name',
+      dataIndex: 'cardName',
+      key: 'cardName',
+      headerRender: (text: string) => {
+        return (
+          <Stack
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              flexDirection: 'row',
+            }}
+          >
+            <>{text}</>
+            <IconButton onClick={() => handleSortByName()}>
+              <img src={UnfoldMoreIcon} alt="Sort Icon" />
+            </IconButton>
+          </Stack>
+        );
+      },
+    },
+    {
+      title: 'Product ID',
+      dataIndex: 'productID',
+      key: 'productID',
+    },
+    { title: 'Business ID', dataIndex: 'businessID', key: 'businessID' },
+
+    { title: 'Card Category', dataIndex: 'cardCategory', key: 'cardCategory' },
+    // {
+    //   title: 'Card Category',
+    //   dataIndex: 'cardCategory',
+    //   key: 'cardCategory',
+    //   headerRender: (text: string) => {
+    //     return (
+    //       <Stack
+    //         sx={{
+    //           display: 'flex',
+    //           alignItems: 'center',
+    //           justifyContent: 'space-between',
+    //           flexDirection: 'row',
+    //         }}
+    //       >
+    //         <>{text}</>
+    //         <IconButton onClick={() => handleSortByName()}>
+    //           <img src={UnfoldMoreIcon} alt="Sort Icon" />
+    //         </IconButton>
+    //       </Stack>
+    //     );
+    //   },
+    // },
+    {
+      title: 'Card Status',
+      dataIndex: 'cardStatus',
+      key: 'cardStatus',
+
+      render: (text: string) => {
+        return (
+          <Stack
+            sx={{
+              color: text ? checkTagStatus(text).color : '',
+            }}
+          >
+            {text}
+          </Stack>
+        );
+      },
+    },
+    {
+      title: 'More',
+      dataIndex: 'id',
+      key: 'more',
+      render: () => {
+        return (
+          <>
+            <Stack
+              id="more-button"
+              onClick={handleClick}
+              aria-controls={open ? 'more-menu' : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? 'true' : undefined}
+              sx={{ padding: '5px', borderBottom: 'none', cursor: 'pointer' }}
+            >
+              <MoreVertIcon />
+            </Stack>
+            <Menu
+              id="more-menu"
+              anchorEl={anchorElement}
+              open={open}
+              MenuListProps={{
+                'aria-labelledby': 'more-button',
+              }}
+              onClose={handleClose}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+            >
+              <MenuItem
+                // onClick={() => handleClose()}
+                onClick={() => {
+                  handleClose();
+                  navigate('/productManagement/cardCatalogue/singleupload', {
+                    state: {
+                      isEditable: false,
+                    },
+                  });
+                }}
+                style={{ padding: '10px 20px', textAlign: 'left' }}
+              >
+                View Org.
+              </MenuItem>
+              <MenuItem
+                // onClick={handleClose}
+                onClick={() => {
+                  handleClose();
+                  navigate(
+                    '/userManagement/orgStructure/screens/Onboarding/onboarding',
+                    {
+                      state: {
+                        isEditable: true,
+                      },
+                    }
+                  );
+                }}
+                style={{ padding: '10px 20px', textAlign: 'left' }}
+              >
+                Edit Org.
+              </MenuItem>
+              <MenuItem
+                style={{ padding: '10px 20px', textAlign: 'left' }}
+                onClick={() => {
+                  handleClose();
+                  setActivateModal(!activateModal);
+                }}
+              >
+                Activate Org
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  handleClose();
+                  setDeactivateModal(!deactivateModal);
+                }}
+                style={{ padding: '10px 20px', textAlign: 'left' }}
+              >
+                Deactivate Org
+              </MenuItem>
+            </Menu>
+          </>
+        );
+      },
+    },
+  ];
+
+  const filterData = () => {
+    const sort = sortingData.sort((a: any, b: any) => {
+      if (ascending) {
+        return a.cardName < b.cardName ? -1 : 1;
+      }
+      return a.cardName > b.cardName ? -1 : 1;
+    });
+    setSortingData([...sort]);
+  };
+
+  // const idFilterData = () => {
+  //   const sort = sortingData.sort((a: any, b: any) => {
+  //     if (idSorting) {
+  //       return a.orgId < b.orgId ? -1 : 1;
+  //     }
+  //     return a.orgId > b.orgId ? -1 : 1;
+  //   });
+  //   setSortingData([...sort]);
+  // };
+
   return (
     <Stack>
       <Stack>
@@ -574,100 +990,29 @@ export const CardCatalogue = () => {
         <Box className="body1">
           <Box className="container1">
             <TypoText title="Card List" />
-            <img className="img1" src={Info_Icon} />
+            <img className="img1" src={Info_Icon} alt="" />
             <TypographyInfo title="Filter cards by mode/status/category/surrogate here." />
           </Box>
           <Divider />
 
-          <Box
-            className="bodyBox"
-            // sx={{
-            //   minWidth: 500,
-            //   marginTop: 2,
-            //   display: 'flex',
-            //   gap: '3%',
-            //   justifyContent: 'space-between',
-            //   backgroundColor: 'white',
-            // }}
-          >
-            <FormControl className="formctrl">
-              <TypographySubTitle title="Card Mode" />
-              {/* <InputLabel id="demo-simple-select-label">All</InputLabel> */}
-              <Select
-                // labelId="demo-multiple-checkbox-label"
-                id="demo-simple-select-label"
-                multiple
-                value={cardMode}
-                onChange={handleChange}
-                // input={<OutlinedInput label="Tag" />}
-                renderValue={(selected) => selected.join(', ')}
-                className="select"
-              >
-                {modes.map((mode) => (
-                  <MenuItem key={mode} value={mode}>
-                    <Checkbox checked={cardMode.indexOf(mode) > -1} />
-                    <ListItemText primary={mode} />
-                  </MenuItem>
-                ))}
-                <Box>
-                  <Divider />
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      justifyContent: 'flex-end',
-                      paddingY: 2,
-                    }}
-                  >
-                    <Button sx={{ gap: 2 }}>
-                      <BtnOutlined title="Reset" />
-                      <BtnContained title="Select" />
-                    </Button>
-                  </Box>
-                </Box>
-              </Select>
-            </FormControl>
-            <FormControl className="formctrl">
-              <TypographySubTitle title="Card Category" />
-              <Select className="select" defaultValue={0}>
-                <MenuItem value={0}>All</MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </Select>
-            </FormControl>
-            <FormControl className="formctrl">
-              <TypographySubTitle title="Card Status" />
-
-              <Select placeholder="All" className="select" defaultValue={0}>
-                <MenuItem value={0}>All</MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </Select>
-            </FormControl>
-            <FormControl className="formctrl">
-              <TypographySubTitle title="Choose Surrogate" />
-
-              <Select className="select" defaultValue={0}>
-                <MenuItem value={0}>All</MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </Select>
-            </FormControl>
+          <Box className="bodyBox">
+            <Grid container spacing={2}>
+              {CardCatalogueFilterDropdown?.map(
+                (eachItem: any, index: number) => {
+                  return (
+                    <Grid item xs={12} sm={6} md={3} key={index}>
+                      <Typography className="dropdown-label">
+                        {eachItem?.label}
+                      </Typography>
+                      <SelectDropdown options={eachItem?.option} />
+                    </Grid>
+                  );
+                }
+              )}
+            </Grid>
           </Box>
 
-          <Box
-            className="boxBtn"
-            // sx={{
-            //   display: 'flex',
-            //   justifyContent: 'flex-end',
-            //   gap: 2,
-            //   paddingTop: 3,
-            //   paddingBottom:3,
-            //   backgroundColor: 'white',
-            // }}
-          >
+          <Box className="boxBtn">
             <Button
               sx={{
                 textTransform: 'capitalize',
@@ -691,12 +1036,12 @@ export const CardCatalogue = () => {
         <Box sx={{ marginTop: 4 }}>
           <Box
             sx={{
-              paddingX: 3,
-              backgroundColor: 'white',
               display: 'flex',
               flexDirection: 'row',
               justifyContent: 'space-between',
               alignItems: 'center',
+              paddingX: 4,
+              backgroundColor: 'white',
               paddingY: 2,
             }}
           >
@@ -719,29 +1064,15 @@ export const CardCatalogue = () => {
               </Button>
             </Box>
           </Box>
-          <Divider sx={{ paddingX: 3 }} />
+          <Divider sx={{ marginX: 3 }} />
 
-          <Box
-            className="body2"
-            // sx={{
-            //   paddingX: '30px',
-            //   backgroundColor: 'white',
-            //   display: 'flex',
-            //   justifyContent: 'space-between',
-            //   alignItems: 'center',
-            // }}
-          >
+          <Box className="body2">
             <Stack direction="row" spacing={2} sx={{ margin: '30px 0px' }}>
               <Button
                 className="btn"
                 variant="contained"
                 color="secondary"
-                // sx={{
-                //   padding: '3px 8px',
-                //   fontSize: '12px',
-                //   display: 'flex',
-                //   alignItems: 'center',
-                // }}
+                disabled
                 onClick={() => setResumeModal(true)}
               >
                 <IconButton className="icon">
@@ -760,6 +1091,7 @@ export const CardCatalogue = () => {
                 color="secondary"
                 className="btn"
                 onClick={() => setShowPauseModal(true)}
+                disabled
               >
                 <IconButton className="icon">
                   <img
@@ -776,6 +1108,7 @@ export const CardCatalogue = () => {
                 variant="contained"
                 color="secondary"
                 className="btn"
+                disabled
                 onClick={() => setEditModal(true)}
               >
                 <IconButton className="icon">
@@ -787,6 +1120,7 @@ export const CardCatalogue = () => {
                 variant="contained"
                 color="secondary"
                 className="btn"
+                disabled
                 onClick={() => setSurrogateSelection(true)}
               >
                 <IconButton className="icon">
@@ -802,257 +1136,21 @@ export const CardCatalogue = () => {
               </Button>
             </Stack>
             <Stack>
-              {/* <Box
-              className='searchBox'
-                // sx={{
-                //   display: 'flex',
-                //   justifyContent: 'center',
-                //   alignItems: 'center',
-                //   border: '1px solid grey',
-                //   borderRadius: 1,
-                //   paddingY: '5px',
-                // }}
-              >
-                <StyledInputBase placeholder="Search"/>
-                <SearchIcon className='searchIcon' />
-              </Box> */}
-              <Box
-              // sx={{
-              //   width: '241px',
-              //   fontSize: '12px',
-              //   fontFamily: 'Ilisarniq',
-              //   fontWeight: 400,
-              //   lineHeight: '14px',
-              // }}
-              >
-                {/* <ToggleButtonGroup
-                 
-                  color="primary"
-                  // color="secondary"
-                  value={alignment}
-                  exclusive
-                  onChange={handleButtonChange}
-                  aria-label="Platform"
-                  sx={{
-                    height: '40px',
-                  }}
-                
-                >
-                  <ColorButton
-                    value="all"
-                    sx={{ paddingRight: '10px', textTransform: 'capitalize' }}
-                  >
-                    All
-                  </ColorButton>
-                 
-                  <ColorButton
-                    value="activate"
-                    sx={{ textTransform: 'capitalize', paddingRight: '10px' }}
-                  >
-                    Activate
-                  </ColorButton>
-                 
-                  <ColorButton
-                    value="deactivated"
-                    sx={{ textTransform: 'capitalize', paddingRight: '10px' }}
-                  >
-                    Deactivated
-                  </ColorButton>
-               
-                  <ColorButton
-                    value="saved"
-                    sx={{ textTransform: 'capitalize', paddingRight: '10px' }}
-                  >
-                    Saved
-                  </ColorButton>
-                </ToggleButtonGroup> */}
-
+              <Box>
                 <GroupButton data={GroupButtonData} />
               </Box>
             </Stack>
           </Box>
-          <Box
-            className="tableBox"
-            // sx={{
-            //   height: 400,
-            //   // width: "100%",
-            //   backgroundColor: 'white',
-            //   paddingX: 4,
-            // }}
-          >
-            <TableContainer component={Paper}>
-              <Table size="small" aria-label="Table">
-                <TableHead
-                  className="tableHead"
-                  // style={{ background: '#EEF7FF' }}
-                  // sx={{ padding: '5px' }}
-                >
-                  {tableHeaderData.map(
-                    (items: dataHeaderList, index: number) => (
-                      <TableRow key={index}>
-                        <TableCell>
-                          <Checkbox />
-                        </TableCell>
-                        <TableCell
-                          width={'20px'}
-                          align="center"
-                          className="tableCell"
-                        >
-                          #
-                        </TableCell>
-                        <TableCell
-                          width={'160px'}
-                          align="center"
-                          className="tableCell"
-                        >
-                          {items.cardName}
-                        </TableCell>
-                        <TableCell align="center" className="tableCell">
-                          {items.productID}
-                        </TableCell>
-                        <TableCell align="center" className="tableCell">
-                          {items.businessID}
-                        </TableCell>
-                        <TableCell
-                          width={'150px'}
-                          className="tableCell"
-                          align="center"
-                        >
-                          {items.cardMode}
-                        </TableCell>
-                        <TableCell
-                          width={'150px'}
-                          className="tableCell"
-                          align="left"
-                        >
-                          {items.cardCategory}
-                        </TableCell>
-                        <TableCell className="tableCell" align="center">
-                          {items.cardStatus}
-                        </TableCell>
-                        <TableCell className="tableCell">
-                          {items.more}
-                        </TableCell>
-                      </TableRow>
-                    )
-                  )}
-                </TableHead>
 
-                <TableBody>
-                  {rows.map((row) => (
-                    <TableRow
-                      key={row.id}
-                      // sx={{ padding:0,border:0 }}
-                    >
-                      <TableCell align="center" padding="checkbox">
-                        <Checkbox color="secondary" />
-                      </TableCell>
-                      <TableCell align="center">{row.id}</TableCell>
-                      <TableCell align="center">{row.cardName}</TableCell>
-                      <TableCell align="center">{row.productID}</TableCell>
-                      <TableCell align="center">{row.businessID}</TableCell>
-                      <TableCell align="center">{row.cardMode}</TableCell>
-                      <TableCell align="left">{row.cardCategory}</TableCell>
-                      <TableCell
-                        sx={{
-                          color: checkTagStatus(row.cardStatus).color,
-                          padding: '5px',
-                        }}
-                        align="center"
-                      >
-                        {row.cardStatus}
-                      </TableCell>
-                      {/* <TableCell align="left">{<MoreVertIcon  />}</TableCell> */}
-                      <TableCell>
-                        <Box
-                          id="more-button"
-                          onClick={handleClick}
-                          aria-controls={menuOpen ? 'more-menu' : undefined}
-                          aria-haspopup="true"
-                          aria-expanded={menuOpen ? 'true' : undefined}
-                        >
-                          <IconButton aria-label="settings">
-                            <MoreVertIcon />
-                          </IconButton>
-                        </Box>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-                <Menu
-                  id="more-menu"
-                  anchorEl={anchorElement}
-                  open={menuOpen}
-                  MenuListProps={{
-                    'aria-labelledby': 'more-button',
-                  }}
-                  onClose={handleClose}
-                  // anchorOrigin={{
-                  //   vertical: 'top',
-                  //   horizontal: 'right',
-                  // }}
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                >
-                  <MenuItem
-                    onClick={() => {
-                      handleClose();
-                      navigate(
-                        '/productManagement/cardCatalogue/singleupload/reviewCard'
-                      );
-                    }}
-                    className="menu"
-                  >
-                    View
-                  </MenuItem>
-                  <MenuItem onClick={handleClose} className="menu">
-                    Edit
-                  </MenuItem>
-                </Menu>
-              </Table>
-
-              <PaginationComp
-                rows={filteredData}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                handleChangePage={handleChangePage}
-                handleChangeRowsPerPage={handleChangeRowsPerPage}
-                onPageChange={onPageChange}
-                onLastClick={() => {
-                  setPage(Math.ceil(filteredData.length / rowsPerPage));
-                  setCurrentPage(Math.ceil(filteredData.length / rowsPerPage));
-                }}
-                onFirstClick={() => {
-                  setPage(1);
-                  setCurrentPage(1);
-                }}
-                lastButtonDisabled={
-                  page == Math.ceil(filteredData.length / rowsPerPage)
-                }
-              />
-            </TableContainer>
-
-            {/* <DataGrid
-              rows={rows1}
-              columns={columns}
-              pageSize={5}
-              rowsPerPageOptions={[5]}
-              checkboxSelection
-            /> */}
+          <Box className="tableBox">
+            <ListTable
+              column={column}
+              data={sortingData}
+              isItemSelected={selected}
+              selectedKey="id"
+            />
           </Box>
         </Box>
-      </Stack>
-
-      <Stack>
-        {/* <TableComp
-          rows={rows}
-          statusRowsHeading={statusRowHeading}
-          listRowHeading={listRowHeading}
-          flag="dashboard"
-          viewPath="/sales/salesDashboard"
-        /> */}
       </Stack>
 
       {surrogateSelection && (
@@ -1137,6 +1235,7 @@ export const CardCatalogue = () => {
           submit={'Pause'}
           datepickerLabelStart={'Start Date and time'}
           datepickerLabelEnd={'End Date and time'}
+          pauseStatusKey={'Pause Now'}
         />
       )}
       {showPauseSuccessModal && (
@@ -1182,6 +1281,7 @@ export const CardCatalogue = () => {
           submit={'Pause'}
           datepickerLabelStart={'Start Date and time'}
           datepickerLabelEnd={'End Date and time'}
+          pauseStatusKey={'Pause Now'}
         />
       )}
 

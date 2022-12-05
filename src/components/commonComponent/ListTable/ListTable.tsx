@@ -75,6 +75,7 @@ function TableComp(props: {
 
   const handleClose = (categories: any) => {
     setFilterteredData(props.rows);
+    console.log('categories 2', categories);
     handleCloseSuccess(categories);
   };
 
@@ -119,6 +120,7 @@ function TableComp(props: {
             }
           });
           const array = [collections];
+          console.log(array, 'array2 checking');
           setFilterteredHeader(array);
           return item; //gets everything that was already in item, and updates "done"
         }
@@ -234,7 +236,7 @@ function TableComp(props: {
         </Stack>
       )}
 
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: 'flex', width: '100%' }}>
         {props.flag === 'sales-report' && (
           <TextField
             className="text-field"

@@ -20,6 +20,7 @@ import { ReactComponent as MoreFilter } from '../../../assets/icons/moreFilter.s
 import { ReactComponent as BlueCross } from '../../../assets/icons/blueCross.svg';
 import { colors } from '../../../style/Color';
 import SelectDropdown from '../../../components/commonComponent/CheckboxSelectDropdown';
+import { ReactComponent as FilterDarkIcon } from '../../../assets/icons/filter_icon_dark.svg';
 
 type props = {
   openSuccess?: any;
@@ -35,7 +36,6 @@ type props = {
   policies_label?: Array<any>;
   surrogates_label?: Array<any>;
   state_label: Array<object>;
-  zonal_label: Array<object>;
   flag?: string;
 };
 
@@ -52,8 +52,7 @@ function MoreFilterModal({
   policies_label,
   surrogates_label,
   state_label,
-  zonal_label,
-  flag
+  flag,
 }: props) {
   const [categories, setCategories] = useState(product_label);
   const [value, setValue] = useState('');
@@ -117,9 +116,11 @@ function MoreFilterModal({
   return (
     <Stack className="App">
       <Button
-        endIcon={<MoreFilter />}
+        endIcon={
+          flag === 'main-dashboard' ? <MoreFilter /> : <FilterDarkIcon />
+        }
         sx={{
-          fontSize: '0.9vw',
+          fontSize: flag === 'main-dashboard' ? '0.9vw' : '1vw',
           marginRight: '20px',
           fontWeight: '600',
           color: '#0662B7',
@@ -136,19 +137,11 @@ function MoreFilterModal({
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <Stack
-          pb={3}
-          // className={`${
-          //   accessLibraryModaBtn ? 'modal_container' : 'modal_container1'
-          // }`}
-          // px={true ? 3 : 0}
-        >
-          {/* {product_label && ( */}
+        <Stack pb={3}>
           <Stack
             sx={{
               borderBottom: `1px solid #36363624`,
               marginBottom: '16px',
-              // paddingLeft: '16px',
             }}
           >
             <FormGroup
@@ -194,7 +187,12 @@ function MoreFilterModal({
                       size="small"
                       // value={dayFilterValue}
                       // onChange={handleChange}
-                      input={<OutlinedInput label={dayFilterValue} sx={{paddingBottom:'10px'}} />}
+                      input={
+                        <OutlinedInput
+                          label={dayFilterValue}
+                          sx={{ paddingBottom: '10px' }}
+                        />
+                      }
                       // inputProps={{ 'aria-label': 'Without label' }}
                     >
                       {day_filter_label?.map((value) => (
@@ -209,152 +207,172 @@ function MoreFilterModal({
                     </Select>
                   </FormControl>
                 </Box>
-                {flag === "main-dashboard" ?  <Box
-                  sx={{
-                    height: '70px',
-                    justifyContent: 'space-between',
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    padding: '12px',
-                  }}
-                >
-                  <Typography sx={{ fontSize: '14px' }}>Channels</Typography>
-                  <FormControl sx={{ m: 1, width: 233 }}>
-                    <InputLabel id="demo-multiple-name-label">
-                      All Channels
-                    </InputLabel>
-                    <Select
-                      labelId="demo-multiple-name-label"
-                      id="demo-multiple-name"
-                      size="small"
-                      // value={personName}
-                      // onChange={handleChange}
-                      input={<OutlinedInput label="All Channels" sx={{paddingBottom:'10px'}} />}
-                    >
-                      {policies_label && (
+                {flag === 'main-dashboard' || flag === 'reTargeting' ? (
+                  <Box
+                    sx={{
+                      height: '70px',
+                      justifyContent: 'space-between',
+                      display: 'flex',
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      padding: '12px',
+                    }}
+                  >
+                    <Typography sx={{ fontSize: '14px' }}>Channels</Typography>
+                    <FormControl sx={{ m: 1, width: 233 }}>
+                      <InputLabel id="demo-multiple-name-label">
+                        All Channels
+                      </InputLabel>
+                      <Select
+                        labelId="demo-multiple-name-label"
+                        id="demo-multiple-name"
+                        size="small"
+                        // value={personName}
+                        // onChange={handleChange}
+                        input={
+                          <OutlinedInput
+                            label="All Channels"
+                            sx={{ paddingBottom: '10px' }}
+                          />
+                        }
+                      >
+                        {policies_label && (
+                          <Stack px={2}>
+                            <FormGroup>
+                              <Grid>
+                                <FormControlLabel
+                                  label={
+                                    <Typography sx={{ fontSize: '14px' }}>
+                                      All Surrogates
+                                    </Typography>
+                                  }
+                                  control={<Checkbox color="secondary" />}
+                                />
+                                {policies_label?.map((item: any, index) => {
+                                  return (
+                                    <Grid item key={item.id}>
+                                      {' '}
+                                      <Box
+                                        sx={{
+                                          display: 'flex',
+                                          flexDirection: 'column',
+                                          ml: 3,
+                                        }}
+                                      >
+                                        <FormControlLabel
+                                          label={
+                                            <Typography
+                                              sx={{ fontSize: '14px' }}
+                                            >
+                                              {item.label}
+                                            </Typography>
+                                          }
+                                          control={
+                                            <Checkbox color="secondary" />
+                                          }
+                                        />
+                                      </Box>
+                                    </Grid>
+                                  );
+                                })}
+                              </Grid>
+                            </FormGroup>
+                          </Stack>
+                        )}
+                      </Select>
+                    </FormControl>
+                  </Box>
+                ) : (
+                  <Box
+                    sx={{
+                      height: '70px',
+                      justifyContent: 'space-between',
+                      display: 'flex',
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      padding: '12px',
+                    }}
+                  >
+                    <Typography sx={{ fontSize: '14px' }}>Policy</Typography>
+                    <FormControl sx={{ m: 1, width: 233 }}>
+                      <InputLabel id="demo-multiple-name-label">
+                        All Policies
+                      </InputLabel>
+                      <Select
+                        labelId="demo-multiple-name-label"
+                        id="demo-multiple-name"
+                        size="small"
+                        // value={personName}
+                        // onChange={handleChange}
+                        input={
+                          <OutlinedInput
+                            label="All Policies"
+                            sx={{ paddingBottom: '10px' }}
+                          />
+                        }
+                      >
                         <Stack px={2}>
                           <FormGroup>
-                            <Grid>
-                              <FormControlLabel
-                                label={
-                                  <Typography sx={{ fontSize: '14px' }}>
-                                    All Surrogates
-                                  </Typography>
-                                }
-                                control={<Checkbox color="secondary" />}
-                              />
-                              {policies_label?.map((item: any, index) => {
-                                return (
-                                  <Grid item key={item.id}>
-                                    {' '}
-                                    <Box
-                                      sx={{
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        ml: 3,
-                                      }}
-                                    >
-                                      <FormControlLabel
-                                        label={
-                                          <Typography sx={{ fontSize: '14px' }}>
-                                            {item.label}
-                                          </Typography>
-                                        }
-                                        control={<Checkbox color="secondary" />}
-                                      />
-                                    </Box>
-                                  </Grid>
-                                );
-                              })}
-                            </Grid>
+                            {policies_label?.map((item: any) => (
+                              <Grid>
+                                <FormControlLabel
+                                  label={
+                                    <Typography sx={{ fontSize: '14px' }}>
+                                      {item.label}
+                                    </Typography>
+                                  }
+                                  control={
+                                    <Checkbox
+                                      //   onChange={(e) =>
+                                      //     handleCheckboxClick(index,item.id, e.target.checked)
+                                      //   }
+                                      //   checked={item.defaultChecked === true}
+                                      color="secondary"
+                                    />
+                                  }
+                                />
+                                {item.data?.map((item: any, index: any) => {
+                                  return (
+                                    <Grid item key={item.id}>
+                                      {' '}
+                                      <Box
+                                        sx={{
+                                          display: 'flex',
+                                          flexDirection: 'column',
+                                          ml: 3,
+                                        }}
+                                      >
+                                        <FormControlLabel
+                                          label={
+                                            <Typography
+                                              sx={{ fontSize: '14px' }}
+                                            >
+                                              {item.label}
+                                            </Typography>
+                                          }
+                                          control={
+                                            <Checkbox
+                                              //   onChange={(e) =>
+                                              //     handleCheckboxClick(index,item.id, e.target.checked)
+                                              //   }
+                                              //   checked={item.defaultChecked === true}
+                                              color="secondary"
+                                            />
+                                          }
+                                        />
+                                      </Box>
+                                    </Grid>
+                                  );
+                                })}
+                              </Grid>
+                            ))}
                           </FormGroup>
                         </Stack>
-                      )}
-                    </Select>
-                  </FormControl>
-                </Box> :  <Box
-                  sx={{
-                    height: '70px',
-                    justifyContent: 'space-between',
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    padding: '12px',
-                  }}
-                >
-                  <Typography sx={{ fontSize: '14px' }}>Policy</Typography>
-                  <FormControl sx={{ m: 1, width: 233 }}>
-                    <InputLabel id="demo-multiple-name-label">
-                      All Policies
-                    </InputLabel>
-                    <Select
-                      labelId="demo-multiple-name-label"
-                      id="demo-multiple-name"
-                      size="small"
-                      // value={personName}
-                      // onChange={handleChange}
-                      input={<OutlinedInput label="All Policies" sx={{paddingBottom:'10px'}}/>}
-                    >
-                      <Stack px={2}>
-                        <FormGroup>
-                          {policies_label?.map((item: any) => (
-                            <Grid>
-                              <FormControlLabel
-                                label={
-                                  <Typography sx={{ fontSize: '14px' }}>
-                                    {item.label}
-                                  </Typography>
-                                }
-                                control={
-                                  <Checkbox
-                                    //   onChange={(e) =>
-                                    //     handleCheckboxClick(index,item.id, e.target.checked)
-                                    //   }
-                                    //   checked={item.defaultChecked === true}
-                                    color="secondary"
-                                  />
-                                }
-                              />
-                              {item.data?.map((item: any, index: any) => {
-                                return (
-                                  <Grid item key={item.id}>
-                                    {' '}
-                                    <Box
-                                      sx={{
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        ml: 3,
-                                      }}
-                                    >
-                                      <FormControlLabel
-                                        label={
-                                          <Typography sx={{ fontSize: '14px' }}>
-                                            {item.label}
-                                          </Typography>
-                                        }
-                                        control={
-                                          <Checkbox
-                                            //   onChange={(e) =>
-                                            //     handleCheckboxClick(index,item.id, e.target.checked)
-                                            //   }
-                                            //   checked={item.defaultChecked === true}
-                                            color="secondary"
-                                          />
-                                        }
-                                      />
-                                    </Box>
-                                  </Grid>
-                                );
-                              })}
-                            </Grid>
-                          ))}
-                        </FormGroup>
-                      </Stack>
-                    </Select>
-                  </FormControl>
-                </Box> }
-               
+                      </Select>
+                    </FormControl>
+                  </Box>
+                )}
+
                 <Box
                   sx={{
                     height: '70px',
@@ -376,7 +394,12 @@ function MoreFilterModal({
                       size="small"
                       // value={personName}
                       // onChange={handleChange}
-                      input={<OutlinedInput label="All Surrogates" sx={{paddingBottom:'10px'}}/>}
+                      input={
+                        <OutlinedInput
+                          label="All Surrogates"
+                          sx={{ paddingBottom: '10px' }}
+                        />
+                      }
                     >
                       {surrogates_label && (
                         <Stack px={2}>
@@ -436,96 +459,27 @@ function MoreFilterModal({
                     More Filters
                   </Typography>
                 </Box>
-                <Box
-                  sx={{
-                    height: '70px',
-                    justifyContent: 'space-between',
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    padding: '12px',
-                  }}
-                >
-                  <Typography sx={{ fontSize: '14px' }}>State</Typography>
-                  <FormControl sx={{ m: 1, width: 233 }}>
-                    <SelectDropdown options={state_label} flag='morefilter' />
-                  </FormControl>
-                </Box>
-                <Box
-                  sx={{
-                    height: '70px',
-                    justifyContent: 'space-between',
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    padding: '12px',
-                  }}
-                >
-                  <Typography sx={{ fontSize: '14px' }}>Zonal</Typography>
-                  <FormControl sx={{ m: 1, width: 233 }}>
-                    <SelectDropdown options={zonal_label} flag='morefilter'/>
-                  </FormControl>
-                </Box>
-                <Box
-                  sx={{
-                    height: '70px',
-                    justifyContent: 'space-between',
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    padding: '12px',
-                  }}
-                >
-                  <Typography sx={{ fontSize: '14px' }}>District</Typography>
-                  <FormControl sx={{ m: 1, width: 233 }}>
-                    <SelectDropdown options={zonal_label} flag='morefilter'/>
-                  </FormControl>
-                </Box>
-                <Box
-                  sx={{
-                    height: '70px',
-                    justifyContent: 'space-between',
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    padding: '12px',
-                  }}
-                >
-                  <Typography sx={{ fontSize: '14px' }}>DSA Name(s)</Typography>
-                  <FormControl sx={{ m: 1, width: 233 }}>
-                    <SelectDropdown options={zonal_label} flag='morefilter' />
-                  </FormControl>
-                </Box>
-                <Box
-                  sx={{
-                    height: '70px',
-                    justifyContent: 'space-between',
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    padding: '12px',
-                  }}
-                >
-                  <Typography sx={{ fontSize: '14px' }}>F. Partner Name(s)</Typography>
-                  <FormControl sx={{ m: 1, width: 233 }}>
-                    <SelectDropdown options={zonal_label} flag='morefilter'/>
-                  </FormControl>
-                </Box>
-                <Box
-                  sx={{
-                    height: '70px',
-                    justifyContent: 'space-between',
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    padding: '12px',
-                  }}
-                >
-                  <Typography sx={{ fontSize: '14px' }}>Branch Name(s)</Typography>
-                  <FormControl sx={{ m: 1, width: 233 }}>
-                    <SelectDropdown options={zonal_label} flag='morefilter'/>
-                  </FormControl>
-                </Box>
+                {state_label.map((item: any) => {
+                  return (
+                    <Box
+                      sx={{
+                        height: '70px',
+                        justifyContent: 'space-between',
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        padding: '12px',
+                      }}
+                    >
+                      <Typography sx={{ fontSize: '14px' }}>
+                        {item.name}
+                      </Typography>
+                      <FormControl sx={{ m: 1, width: 233 }}>
+                        <SelectDropdown options={item.dataLabel} />
+                      </FormControl>
+                    </Box>
+                  );
+                })}
               </Grid>
             </FormGroup>
           </Stack>

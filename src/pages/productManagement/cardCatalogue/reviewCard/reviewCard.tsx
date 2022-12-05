@@ -12,6 +12,16 @@ import {
   Card,
   Grid,
   Divider,
+  Checkbox,
+  TableContainer,
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell,
+  Paper,
+  Menu,
+  IconButton,
 } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
 import BtnOutlined from '../../../../components/commonComponent/CustomText/Button/Outlined';
@@ -25,12 +35,45 @@ import Info_Icon from '../../../../assets/images/info_icon.svg';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import RotateRightIcon from '@mui/icons-material/RotateRight';
-import IconButton from '@mui/material/IconButton';
 import Modal from '@mui/material/Modal';
 import CardImage from '../../../../assets/images/image 44.png';
 import TypoText from '../../../../components/commonComponent/CustomText/Textfield';
 import TypographyInfo from '../../../../components/commonComponent/CustomText/Info';
 import TypographyHead from '../../../../components/commonComponent/CustomText/Head';
+import BtnContained from '../../../../components/commonComponent/CustomText/Button/Contained';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import UnfoldMoreIcon from '../../../../../assets/icons/sortArrow.svg';
+import { checkTagStatus } from '../../../../utils/tagBasedIndicator/tagStatus';
+
+export interface dataList {
+  surrogateProgramme: string;
+  lastModify: string;
+  status: string;
+  autoResumeForm: string;
+  StatusActiveDate: string;
+  activeSince: string;
+  id: number;
+  resumeItNow: string;
+  resumeStatus: string;
+}
+export interface dataHeaderList {
+  surrogateProgramme: string;
+  activeSince?: string;
+  lastModify?: string;
+  status?: string;
+  autoResumeForm?: string;
+  more?: string;
+}
+const tableHeaderData = [
+  {
+    surrogateProgramme: 'Surrogate Programme',
+    activeSince: 'Active Since',
+    lastModify: 'Last Modified',
+    status: 'Status',
+    autoResumeForm: 'Auto Resume From',
+    more: 'More',
+  },
+];
 
 const ReviewCard = () => {
   const { state } = useLocation();
@@ -81,6 +124,10 @@ const ReviewCard = () => {
     setEditData((prev: any) => ({ ...prev, [value]: e }));
   };
 
+  const editPage = () => {
+    navigate('/productManagement/cardCatalogue/singleupload');
+  };
+
   const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
@@ -97,7 +144,7 @@ const ReviewCard = () => {
   console.log('data', data);
   return (
     <Box className="reviewCard">
-      <Box className="box1">
+      <Box className="reviewbox1">
         <Box className="head">
           <Box className="headFull">
             <Box onClick={goBack}>
@@ -110,7 +157,7 @@ const ReviewCard = () => {
           </Box>
 
           <Box className="headIconBox">
-            <Button className="btn">
+            <Button onClick={editPage} className="btn">
               <IconButton className="icon">
                 <img
                   src={EditIcon}
@@ -264,10 +311,10 @@ const ReviewCard = () => {
                   <TypoText color="grey" title="Card Category" />
                   <Typography>General</Typography>
                   {/* <Select
-                    placeholder="General"
-                    variant="outlined"
-                    size="small"
-                  /> */}
+                      placeholder="General"
+                      variant="outlined"
+                      size="small"
+                    /> */}
                 </Box>
               </Grid>
             </Grid>
@@ -294,15 +341,15 @@ const ReviewCard = () => {
 
         <Box className="surrogateBody">
           <Typography variant="body2" className="title">
-            Surrogate
+            Choose Surrogate
           </Typography>
           <Typography className="text">
-            Payroll,Card for Card,CIBIL,AQB
+            Payroll, Card for Card, CIBIL, AQB
           </Typography>
         </Box>
       </Box>
 
-      <Box className="box3">
+      <Box className="reviewbox3">
         <Box className="channelHead">
           <TypoText title=" Channels" />
           <img src={Info_Icon} />
@@ -314,7 +361,7 @@ const ReviewCard = () => {
           <Typography variant="body2" className="title">
             Channels
           </Typography>
-          <Typography className="text">Bank,DSA,Fintech Partner</Typography>
+          <Typography className="text">Bank, DSA, Fintech Partner</Typography>
         </Box>
       </Box>
 
@@ -329,42 +376,51 @@ const ReviewCard = () => {
         >
           <TypoText title="Eligibility Criteria " />
           <img src={Info_Icon} />
+          <TypographyInfo title="Lorem ipsum dolor sit amet consectetur. Urna." />
         </Box>
         <Divider />
 
-        <Box
-          sx={{
-            paddingTop: 2,
-            display: 'flex',
-            justifyContent: 'space-between',
-            width: '80%',
-          }}
-        >
-          <Box>
+        <Grid container sx={{ marginTop: 2 }}>
+          <Grid item xs={12} sm={6} md={3}>
             <Typography variant="body2" sx={{ fontSize: 14, color: 'grey' }}>
               CIBIL Score
             </Typography>
             <Typography sx={{ fontSize: 16 }}>700</Typography>
-          </Box>
-          <Box>
+          </Grid>
+          <Grid item xs={12} sm={6} md={3}>
             <Typography variant="body2" sx={{ fontSize: 14, color: 'grey' }}>
               Salary Limit
             </Typography>
             <Typography sx={{ fontSize: 16 }}>40,000.00</Typography>
-          </Box>
-          <Box>
+          </Grid>
+          <Grid item xs={12} sm={6} md={3}>
             <Typography variant="body2" sx={{ fontSize: 14, color: 'grey' }}>
               ITR Limit
             </Typography>
             <Typography sx={{ fontSize: 16 }}>50,000.00</Typography>
-          </Box>
-          <Box>
+          </Grid>
+          <Grid item xs={12} sm={6} md={3}>
             <Typography variant="body2" sx={{ fontSize: 14, color: 'grey' }}>
               C4C Limit
             </Typography>
             <Typography sx={{ fontSize: 16 }}>70,000.00</Typography>
-          </Box>
-        </Box>
+          </Grid>
+        </Grid>
+
+        <Grid container sx={{ marginTop: 2 }}>
+          <Grid item xs={12} sm={6} md={3}>
+            <Typography variant="body2" sx={{ fontSize: 14, color: 'grey' }}>
+              AQB Limit (6 Month)
+            </Typography>
+            <Typography sx={{ fontSize: 16 }}>70,000.00</Typography>
+          </Grid>
+          <Grid item xs={12} sm={6} md={3}>
+            <Typography variant="body2" sx={{ fontSize: 14, color: 'grey' }}>
+              RC (Vehicle Value)
+            </Typography>
+            <Typography sx={{ fontSize: 16 }}>70,000.00</Typography>
+          </Grid>
+        </Grid>
       </Box>
 
       <Box sx={{ marginTop: 3, backgroundColor: 'white', padding: 3 }}>
@@ -376,8 +432,9 @@ const ReviewCard = () => {
             paddingBottom: 2,
           }}
         >
-          <TypoText title=" Extra Cards" />
+          <TypoText title=" Add on Card Availability" />
           <img src={Info_Icon} />
+          <TypographyInfo title="Lorem ipsum dolor sit amet consectetur. Urna." />
         </Box>
         <Divider />
 
@@ -408,6 +465,7 @@ const ReviewCard = () => {
         >
           <TypoText title="Benifits" />
           <img src={Info_Icon} />
+          <TypographyInfo title="Lorem ipsum dolor sit amet consectetur. Urna." />
         </Box>
         <Divider />
 
@@ -516,6 +574,7 @@ const ReviewCard = () => {
         >
           <TypoText title="Fee & Fee Wavier Details" />
           <img src={Info_Icon} />
+          <TypographyInfo title="Lorem ipsum dolor sit amet consectetur. Urna." />
         </Box>
         <Divider sx={{ paddingTop: 2 }} />
 
@@ -644,6 +703,7 @@ const ReviewCard = () => {
         >
           <TypoText title=" Rewards" />
           <img src={Info_Icon} />
+          <TypographyInfo title="Lorem ipsum dolor sit amet consectetur. Urna." />
         </Box>
         <Divider />
 
@@ -677,6 +737,7 @@ const ReviewCard = () => {
         >
           <TypoText title=" Key Benefits" />
           <img src={Info_Icon} />
+          <TypographyInfo title="Lorem ipsum dolor sit amet consectetur. Urna." />
         </Box>
         <Divider />
 
@@ -727,6 +788,7 @@ const ReviewCard = () => {
         >
           <TypoText title=" Additional Benefits" />
           <img src={Info_Icon} />
+          <TypographyInfo title="Lorem ipsum dolor sit amet consectetur. Urna." />
         </Box>
         <Divider />
 
@@ -774,6 +836,7 @@ const ReviewCard = () => {
         >
           <TypoText title=" Welcome Benefits" />
           <img src={Info_Icon} />
+          <TypographyInfo title="Lorem ipsum dolor sit amet consectetur. Urna." />
         </Box>
         <Divider />
 
@@ -822,7 +885,7 @@ const ReviewCard = () => {
         }}
       >
         <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <BtnOutlined onClick={close} title="close" />
+          <BtnContained onClick={close} title="close" />
         </Box>
       </Box>
     </Box>

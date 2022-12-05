@@ -4,3 +4,148 @@
 .MuiButtonBase-root .MuiIconButton-root .MuiIconButton-sizeMedium .css-o0qvbn-MuiButtonBase-root-MuiIconButton-root{
 padding: 0;
 }
+.css-p3zgmz-MuiInputBase-root-MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline{
+    border-color: black !important;
+}
+
+.onboarding{
+    background-color: #E6E7E7; 
+    .header{
+        background-color: white;
+              margin-top: 25px;
+              padding: 20px 30px;
+              border-radius: 5px;
+
+        .header-box{
+            display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                .head{
+                    display: flex;
+                     gap: 8px;
+
+                    .arrow{
+                        color: #0078EF;
+                    }
+                }
+                .id-btn{
+                    background-color: #E6E7E7;
+                     height: 30px;
+
+                }
+                .btn{
+                    text-transform: capitalize;
+                     background-color: white;
+                    .icon-btn{
+                        height: 30px;
+                    }
+                }
+
+        }
+    }
+    .add-header{
+        background-color: white;
+        margin-top: 25px;
+        padding: 20px 30px;
+        border-radius: 5px;
+        .head-title{
+            display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+        }
+
+    }
+    .surrogate-container{
+        background-color: white;
+        margin-top: 25px;
+        padding: 20px 30px;
+        border-radius: 5px;
+        .surrogate-box{
+            display: flex;
+             gap: 8px; 
+             align-items: center;
+        }
+        .add-surrogate{
+            width: 90%;
+            .add-surrogate-text{
+                margin-bottom: 10px;
+                    font-size: 14px;
+                    font-weight: 500;
+            }
+            .add-surrogate-content{
+                display: flex;
+                 justify-content: space-between;
+                 .add-surrogate-box{
+                    display: flex;
+                     align-items: center;
+                    .add-surrogate-checkbox{
+                        color:#0662B7;
+                    }
+                    .add-surrogate-item{
+                        font-size: 14px; 
+                        font-weight: 400 
+                    }
+                 }
+            }
+        }
+    }
+    .supplier-container{
+        background-color: white;
+        margin-top: 25px;
+        padding: 20px 30px;
+        border-radius: 5px;
+        .supplier-box{
+            display: flex;
+            gap: 8px;
+            align-items: center; 
+        }
+    }
+    .proprietor-container{
+        background-color: white;
+            margin-top: 25px;
+            padding: 20px 30px;
+            border-radius: 5px;
+            .proprietor-container-box{
+                display: flex; 
+                justify-content: space-between;
+                .proprietor-head{
+                    display: flex;
+                    gap: 16px;
+                    align-items: center; 
+                }
+            }
+            
+    }
+    .keycontact-container{
+        background-color: white;
+            margin-top: 25px;
+            padding: 20px 30px;
+            border-radius: 5px;
+            .keycontact-container-box{
+                display: flex; 
+                justify-content: space-between;
+                .keycontact-head{
+                    display: flex;
+                    gap: 16px;
+                    align-items: center; 
+                }
+            }
+            
+    }
+    .item-container{
+        background-color: white;
+            margin-top: 25px;
+            padding: 20px 30px;
+            border-radius: 5px;
+            .item-container-box{
+                display: flex; 
+                justify-content: space-between;
+                .item-head{
+                    display: flex;
+                    gap: 16px;
+                    align-items: center; 
+                }
+            }
+            
+    }
+}

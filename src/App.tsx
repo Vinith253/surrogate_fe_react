@@ -29,10 +29,15 @@ import EditUser from './pages/userManagement/userCreation/singleUserUpload/editU
 import ViewUser from './pages/userManagement/userCreation/singleUserUpload/viewUser';
 import LMSDashboard from './pages/lms/lmsDashboard';
 import LMSRule from './pages/lms/lmsRule';
+import AddLMSRule from './pages/lms/lmsRule/createLMS/addNewRule';
 import Retargeting from './pages/lms/reTargeting';
 import { OrgHistoryLogDetails } from './pages/userManagement/orgStructure/screens/historyLog/historyLogDetails/historyLogDetails';
 import UserProfile from './pages/profile/landingScreen';
 import { OrgStrHistoryLog } from './pages/userManagement/orgStructure/screens/historyLog/historyLog';
+import CustomerReport from './pages/riskManagment/customerReport';
+import CustomerDetailScreen from './pages/riskManagment/customerReport/customerDetails';
+import { ProgrammeHistoryDetails } from './pages/productManagement/programmeManagement/screens/listComponents/ProgrammeHistoryDetails';
+import ReTargetingDetails from './pages/lms/reTargeting/screens/reTargetingScreen/reTargetingDetails';
 
 // Loaders
 import { cardCatalogueLoader } from './pages/productManagement/cardCatalogue/screens/CardCatalogue';
@@ -75,8 +80,12 @@ export default function App() {
         />
 
         <Route
-          path="/productManagement/cardCatalogue/singleupload/reviewCard"
+          path="/productManagement/cardCatalogue/reviewCard"
           element={<ReviewCard />}
+        />
+        <Route
+          path="/productManagement/programmeManagement/ProgrammeHistoryDetails"
+          element={<ProgrammeHistoryDetails />}
         />
         <Route
           path="/userManagement/branchDetails"
@@ -173,8 +182,21 @@ export default function App() {
         />
 
         <Route path="/lms/dashboard" element={<LMSDashboard />} />
-        <Route path="/lms/lmsrule" element={<LMSRule />} />
+
         <Route path="/lms/retargeting" element={<Retargeting />} />
+
+        <Route path="/lms/lmsRule" element={<LMSRule />} />
+        <Route path="/lms/lmsRule/addNewRule" element={<AddLMSRule />} />
+
+        <Route
+          path="/riskManagement/customerReports"
+          element={<CustomerReport />}
+        />
+        <Route
+          path="/riskManagement/customerDetails"
+          element={<CustomerDetailScreen />}
+        />
+        <Route path="/lms/retargeting/reTargetingDetails" element={<ReTargetingDetails />} />
       </Route>
     </Routes>
   );

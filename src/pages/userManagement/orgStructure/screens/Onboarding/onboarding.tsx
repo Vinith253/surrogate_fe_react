@@ -22,7 +22,7 @@ import dayjs, { Dayjs } from 'dayjs';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+// import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Info_Icon from '../../../../../assets/images/info_icon.svg';
 import TypoText from '../../../../../components/commonComponent/CustomText/Textfield';
 import TypographyInfo from '../../../../../components/commonComponent/CustomText/Info';
@@ -43,18 +43,20 @@ import EditIcon from '../../../../../assets/images/edit_card.svg';
 import Modal from '@mui/material/Modal';
 import ViewDoc from '../../../../../assets/images/viewDoc.svg';
 import TypographyHead from '../../../../../components/commonComponent/CustomText/Head';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 
 export const Onboarding = () => {
   const [startDatevalue, setStartDateValue] = useState(null);
   const [endDatevalue, setEndDateValue] = useState(null);
   const [open, setOpen] = React.useState(false);
+  // const [editable, setEditable] = useState(false)
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
   const location = useLocation();
   const { state } = location;
-  const [value, setValue] = React.useState<Dayjs | null>(dayjs('DD/MM/YYYY'));
-
+  // const [value, setValue] = React.useState<Dayjs | null>(dayjs('DD/MM/YYYY'));
+  const [value, setValue] = React.useState<Dayjs | null>(dayjs());
   let objValue = {
     supplierCompany: '',
     workAddress: '',
@@ -89,7 +91,9 @@ export const Onboarding = () => {
     keyContact: false,
     proprietor: false,
   });
-  const [viewMode, setViewMode] = useState<string>(state.isEditable ? 'add' : 'edit');
+  const [viewMode, setViewMode] = useState<string>(
+    state.isEditable ? 'add' : 'edit'
+  );
 
   const AddKeyContact = () => {
     // console.log('add key');
@@ -98,10 +102,7 @@ export const Onboarding = () => {
       ...prev,
       keyContact: [...prev.keyContact, newVal],
     }));
-    // setRemoveClick((prev) => ({
-    //   ...prev,
-    //   keyContact: true,
-    // }));
+   
   };
   const removeKeyContact = (index: number) => {
     let newData = data.keyContact ?? [];
@@ -128,7 +129,12 @@ export const Onboarding = () => {
       proprietor: newData,
     }));
   };
-
+  const DOBStyle = {
+    '& .MuiInputBase-root-MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline':
+      {
+        border: '1px solid black',
+      },
+  };
   const handleSubmitClick = () => {
     console.log('coming here');
     // let value = 'add';
@@ -172,34 +178,32 @@ export const Onboarding = () => {
       <Grid item xs={12} sm={6} md={3}>
         <Box sx={{ gap: 2 }}>
           <TypographySubTitle color={subTitleColor} title={subTitleTile} />
+          {/* {editable == true ? ( */}
           <TypoText color={textColor} title={textTitle} />
+          {/* // ):( */}
+
+          {/* // <TypoText color={textColor} placeholder={textTitle} /> */}
+          {/* // )} */}
         </Box>
       </Grid>
     );
   };
-
+  const handleChange = (newValue: Dayjs | null) => {
+    setValue(newValue);
+  };
   return (
     <Stack>
-      <Box sx={{ backgroundColor: '#E6E7E7' }}>
+      <Box className='onboarding' >
         {viewMode === 'edit' && (
           <Box
-            sx={{
-              backgroundColor: 'white',
-              marginTop: '25px',
-              padding: '20px 30px',
-              borderRadius: '5px',
-            }}
+          className='header'
           >
             <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-              }}
+            className='header-box'
             >
-              <Box sx={{ display: 'flex', gap: 1 }}>
+              <Box  className='head' >
                 <Box onClick={() => navigate(-1)}>
-                  <ArrowBackIcon sx={{ color: '#0078EF' }} />
+                  <ArrowBackIcon className='arrow' />
                 </Box>
                 <Box>
                   <TypoText title="View - Anand Agency - DSA" />
@@ -207,14 +211,13 @@ export const Onboarding = () => {
                 </Box>
               </Box>
               <Box>
-                <Button sx={{ backgroundColor: '#E6E7E7', height: '30px' }}>
+                <Button className='id-btn' >
                   ID.NO 123456
                 </Button>
-                <Button
-                  sx={{ textTransform: 'capitalize', backgroundColor: 'white' }}
+                <Button className='btn'
                   onClick={() => setViewMode('add')}
                 >
-                  <IconButton sx={{ heigght: '30px' }}>
+                  <IconButton className='icon-btn' >
                     <img
                       src={EditIcon}
                       style={{
@@ -229,87 +232,65 @@ export const Onboarding = () => {
           </Box>
         )}
         {viewMode === 'add' && (
-          <Box
-            sx={{
-              backgroundColor: 'white',
-              marginTop: '25px',
-              padding: '20px 30px',
-              borderRadius: '5px',
-            }}
+          <Box className='add-header'
           >
             <TypoText title="DSA Onboarding" />
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-              }}
+            <Box className='head-title'
+              
             >
               <TypographyInfo title="Onboard your partners here" />
             </Box>
           </Box>
         )}
 
-        <Box
-          sx={{
-            backgroundColor: 'white',
-            marginTop: '25px',
-            padding: '20px 30px',
-            borderRadius: '5px',
-          }}
+        <Box className='surrogate-container' 
         >
           <Box>
-            <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+            <Box className='surrogate-box' >
               <TypoText title="Surrogate" />
               <img src={Info_Icon} />
               <TypographyInfo title="Choose a surrogate for your partners here" />
             </Box>
             <Divider sx={{ marginY: '20px' }} />
             {viewMode === 'add' ? (
-              <Box sx={{ width: '90%' }}>
-                <Typography
-                  sx={{
-                    marginBottom: '10px',
-                    fontSize: '14px',
-                    fontWeight: '500',
-                  }}
-                >
+              <Box className='add-surrogate' sx={{ width: '90%' }}>
+                <Typography className='add-surrogate-text' >
                   Select Surrogate
                 </Typography>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Box className='add-surrogate-content' >
+                  <Box className='add-surrogate-box' >
                     <Checkbox color="secondary" />
-                    <Typography sx={{ fontSize: '14px', fontWeight: '400' }}>
+                    <Typography className='add-surrogate-item' >
                       Payroll
                     </Typography>
                   </Box>
-                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                  <Box  className='add-surrogate-box'>
                     <Checkbox color="secondary" />
-                    <Typography sx={{ fontSize: '14px', fontWeight: '400' }}>
+                    <Typography className='add-surrogate-item'>
                       Card For Card
                     </Typography>
                   </Box>
-                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                  <Box  className='add-surrogate-box'>
                     <Checkbox color="secondary" />
-                    <Typography sx={{ fontSize: '14px', fontWeight: '400' }}>
+                    <Typography className='add-surrogate-item'>
                       CIBIL
                     </Typography>
                   </Box>
-                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                  <Box  className='add-surrogate-box'>
                     <Checkbox color="secondary" />
-                    <Typography sx={{ fontSize: '14px', fontWeight: '400' }}>
+                    <Typography className='add-surrogate-item'>
                       AQB
                     </Typography>
                   </Box>
-                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                  <Box  className='add-surrogate-box'>
                     <Checkbox color="secondary" />
-                    <Typography sx={{ fontSize: '14px', fontWeight: '400' }}>
+                    <Typography className='add-surrogate-item'>
                       Pre-Approved
                     </Typography>
                   </Box>
-                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                  <Box  className='add-surrogate-box'>
                     <Checkbox color="secondary" />
-                    <Typography sx={{ fontSize: '14px', fontWeight: '400' }}>
+                    <Typography className='add-surrogate-item'>
                       Secured
                     </Typography>
                   </Box>
@@ -324,22 +305,16 @@ export const Onboarding = () => {
           </Box>
         </Box>
 
-        <Box
-          sx={{
-            backgroundColor: 'white',
-            marginTop: '25px',
-            padding: '20px 30px',
-            borderRadius: '5px',
-          }}
+        <Box className='supplier-container'
         >
-          <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+          <Box className='supplier-box' >
             <TypoText title="Supplier Profile" />
             <img src={Info_Icon} />
             <TypographyInfo title="Add company details of your partner here" />
           </Box>
           <Divider sx={{ marginY: '20px' }} />
 
-          <Grid container sx={{ marginBottom: '20px' }} spacing={5}>
+          <Grid container  spacing={3}>
             {viewMode === 'add'
               ? renderEditModeText(
                   'Supplier Name',
@@ -388,9 +363,7 @@ export const Onboarding = () => {
                   '#AFAEAF',
                   'Cities of Operations'
                 )}
-          </Grid>
-
-          <Grid container sx={{ marginBottom: '20px' }} spacing={5}>
+           
             {viewMode === 'add'
               ? renderEditModeText(
                   'Enter Telephone No',
@@ -415,13 +388,10 @@ export const Onboarding = () => {
 
             {viewMode === 'add' ? (
               <Grid item xs={12} sm={6} md={4}>
-                
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <TypographySubTitle title="Year of inc./ in Business Since" />
-                  <DatePicker
-                    //   disableFuture
+                  <DesktopDatePicker
                     toolbarPlaceholder="DD/MM/YYYY"
-                    //   label="DD/MM/YYYY"
                     openTo="year"
                     views={['year', 'month', 'day']}
                     value={value}
@@ -429,9 +399,15 @@ export const Onboarding = () => {
                       setValue(newValue);
                     }}
                     renderInput={(params) => (
-                      <TextField size="small" {...params} fullWidth />
+                      <TextField
+                        sx={DOBStyle}
+                        size="small"
+                        {...params}
+                        fullWidth
+                      />
                     )}
                   />
+                  
                 </LocalizationProvider>
               </Grid>
             ) : (
@@ -442,9 +418,7 @@ export const Onboarding = () => {
                 'Year of inc./ in Business Since'
               )
             )}
-          </Grid>
-
-          <Grid container sx={{ marginBottom: '20px' }} spacing={5}>
+            
             {viewMode === 'add' ? (
               <Grid item xs={12} sm={6} md={4}>
                 <FormControl fullWidth>
@@ -507,7 +481,7 @@ export const Onboarding = () => {
             )}
           </Grid>
 
-          <Grid container sx={{ marginBottom: '20px' }} spacing={5}>
+          <Grid container sx={{ marginY: '2px' }} spacing={3}>
             {viewMode === 'add'
               ? renderEditModeText(
                   'Enter Company Registration No',
@@ -549,16 +523,9 @@ export const Onboarding = () => {
           </Grid>
         </Box>
 
-        <Box
-          sx={{
-            backgroundColor: 'white',
-            marginTop: '25px',
-            padding: '20px 30px',
-            borderRadius: '5px',
-          }}
-        >
-          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+        <Box className='proprietor-container' >
+          <Box className='proprietor-container-box' >
+            <Box className='proprietor-head' >
               <TypoText title="Proprietor/ All Directors/ All Partners" />
               <img src={Info_Icon} />
               <TypographyInfo title="Add key personal information of your partner(s) here." />
@@ -657,22 +624,14 @@ export const Onboarding = () => {
                       <FormControl fullWidth>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                           <TypographySubTitle title="Date of Birth" />
-                          <DatePicker
-                            disableFuture
-                            // label="Responsive"
-                            openTo="year"
-                            views={['year', 'month', 'day']}
+                          <DesktopDatePicker
+                            inputFormat="DD/MM/YYYY"
                             value={value}
                             onChange={(newValue) => {
                               setValue(newValue);
                             }}
                             renderInput={(params) => (
-                              <TextField
-                                sx={{ borderColor: 'black' }}
-                                size="small"
-                                {...params}
-                                fullWidth
-                              />
+                              <TextField size="small" fullWidth {...params} />
                             )}
                           />
                         </LocalizationProvider>
@@ -748,16 +707,10 @@ export const Onboarding = () => {
           })}
         </Box>
 
-        <Box
-          sx={{
-            backgroundColor: 'white',
-            marginTop: '25px',
-            padding: '20px 30px',
-            borderRadius: '5px',
-          }}
+        <Box className='keycontact-container'
         >
-          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+          <Box className='keycontact-container-box' >
+            <Box className='keycontact-head' >
               <TypoText title="Key Contact Details" />
               <img src={Info_Icon} />
               <TypographyInfo title="Add your partner's contact information here." />
@@ -900,53 +853,22 @@ export const Onboarding = () => {
                         'Reporting Head'
                       )}
 
-                  {/* <Grid item xs={12} sm={6} md={4}>
-                    <Box sx={{ gap: 2 }}>
-                      <TypographySubTitle title="Reporting Head" />
-                      <TypoText
-                        placeholder="Enter Reporting Head"
-                        id="businessId"
-                      />
-                    </Box>
-                  </Grid> */}
+                  
                 </Grid>
 
-                {/* <Box>
-                  {removeClick.keyContact ? (
-                    <Box>
-                      <Divider sx={{ marginY: '20px' }} />
-                      <Box
-                        sx={{
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                        }}
-                      >
-                        <TypoText title={`Key Contact Person ${index + 1}`} />
-                        <Button startIcon={<HighlightOffIcon />}>Remove</Button>
-                      </Box>
-                    </Box>
-                  ) : (
-                    ''
-                  )}
-                </Box> */}
+               
               </Box>
             );
           })}
         </Box>
 
         {viewMode === 'add' && (
-          <Box
-            sx={{
-              backgroundColor: 'white',
-              marginTop: '25px',
-              padding: '20px 30px',
-              borderRadius: '5px',
-            }}
+          <Box className='item-container'
           >
             {viewMode === 'add' ? (
               <Box>
-                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+                <Box className='item-container-box' >
+                  <Box className='item-head' >
                     <TypoText title="Regulatory Requirement" />
                     <img src={Info_Icon} />
                     <TypographyInfo title="Add key regulatory requirement(s) for your partner here." />
@@ -956,22 +878,18 @@ export const Onboarding = () => {
                 <UploadDetails />
               </Box>
             ) : (
-              <OrgReview />
+              ""
+              // <OrgReview />
             )}
           </Box>
         )}
 
         {viewMode === 'edit' && (
           <Box
-            sx={{
-              backgroundColor: 'white',
-              marginTop: '25px',
-              padding: '20px 30px',
-              borderRadius: '5px',
-            }}
+          className='item-container'
           >
             <Box>
-              <Box sx={{ display: 'flex', gap: 2 }}>
+              <Box  sx={{ display: 'flex', gap: 2 }}>
                 <TypographyHead title="Regulatory Requirement" />
                 <img src={Info_Icon} />
                 <TypographyInfo title="Add key regulatory requirement(s) for your partner here. " />
@@ -986,7 +904,7 @@ export const Onboarding = () => {
                       title="Registration Number (MSMED)"
                     />
                     <TypoText color="#151515" title="U72900TN2020PTC130006" />
-                    <img className="img" src={ViewDoc} />
+                    <img onClick={handleOpen} className="img" src={ViewDoc} />
                   </Box>
                 </Grid>
 
@@ -994,21 +912,21 @@ export const Onboarding = () => {
                   <Box sx={{ gap: 2 }}>
                     <TypographySubTitle color="#AFAEAF" title="TIN Number" />
                     <TypoText color="#151515" title="U72900TN2020PTC130006" />
-                    <img className="img" src={ViewDoc} />
+                    <img onClick={handleOpen} className="img" src={ViewDoc} />
                   </Box>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3}>
                   <Box sx={{ gap: 2 }}>
                     <TypographySubTitle color="#AFAEAF" title="GST Number" />
                     <TypoText color="#151515" title="U72900TN2020PTC130006" />
-                    <img className="img" src={ViewDoc} />
+                    <img onClick={handleOpen} className="img" src={ViewDoc} />
                   </Box>
                 </Grid>
                 <Grid item xs={12} sm={6} md={3}>
                   <Box sx={{ gap: 2 }}>
                     <TypographySubTitle color="#AFAEAF" title="PAN Number" />
                     <TypoText color="#151515" title="U72900TN2020PTC130006" />
-                    <img className="img" src={ViewDoc} />
+                    <img onClick={handleOpen} className="img" src={ViewDoc} />
                   </Box>
                 </Grid>
               </Grid>
@@ -1021,7 +939,7 @@ export const Onboarding = () => {
                       title="ESIC Registration No"
                     />
                     <TypoText color="#151515" title="U72900TN2020PTC130006" />
-                    <img className="img" src={ViewDoc} />
+                    <img onClick={handleOpen} className="img" src={ViewDoc} />
                   </Box>
                 </Grid>
 
@@ -1032,7 +950,7 @@ export const Onboarding = () => {
                       title="PF Registration No"
                     />
                     <TypoText color="#151515" title="U72900TN2020PTC130006" />
-                    <img className="img" src={ViewDoc} />
+                    <img onClick={handleOpen} className="img" src={ViewDoc} />
                   </Box>
                 </Grid>
               </Grid>
@@ -1040,16 +958,10 @@ export const Onboarding = () => {
           </Box>
         )}
 
-        <Box
-          sx={{
-            backgroundColor: 'white',
-            marginTop: '25px',
-            padding: '20px 30px',
-            borderRadius: '5px',
-          }}
+        <Box className='item-container'
         >
-          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+          <Box className='item-container-box'  >
+            <Box className='item-head' >
               <TypoText title="Regulatory Requirement" />
               <img src={Info_Icon} />
               <TypographyInfo title="Add key regulatory requirement(s) for your partner here." />
@@ -1082,18 +994,16 @@ export const Onboarding = () => {
                     '#AFAEAF',
                     'Default Credit Period (Days)'
                   )}
-              {viewMode === 'add'
-                ? renderEditModeText(
-                    '15',
-                    'businessId',
-                    'Default Credit Period (Days)'
-                  )
-                : renderViewModeText(
-                    '#151515',
-                    '15',
-                    '#AFAEAF',
-                    'Default Credit Period (Days)' //todo
-                  )}
+              {
+                viewMode === 'add'
+                  ? renderEditModeText(
+                      '15',
+                      'businessId',
+                      'Default Credit Period (Days)'
+                    )
+                  : ''
+                
+              }
               {viewMode === 'edit' &&
                 renderViewModeText(
                   '#151515',
@@ -1158,19 +1068,7 @@ export const Onboarding = () => {
                 )
               )}
 
-              {/* {viewMode === 'add'
-                ? renderEditModeText(
-                    '15',
-                    'businessId',
-                    'Default Credit Period (Days)'
-                  )
-                : renderViewModeText(
-                    '#151515',
-                    '12345678909876',
-                    '#AFAEAF',
-                    'Bank Account Number'
-                  )} */}
-
+             
               {viewMode === 'add'
                 ? renderEditModeText(
                     'Enter Bank Account Number',
@@ -1204,7 +1102,7 @@ export const Onboarding = () => {
                   '#AFAEAF',
                   'Address Line 2'
                 )}
-            </Grid>
+            </Grid> 
 
             <Grid container sx={{ marginBottom: '20px' }} spacing={5}>
               {viewMode === 'add' &&
@@ -1232,17 +1130,23 @@ export const Onboarding = () => {
                   '#AFAEAF',
                   'MICR Code (9 digit)'
                 )}
-            </Grid>
+            </Grid> 
 
             {viewMode === 'add' && (
-              <Box sx={{ display: 'flex', gap: 4, marginBottom: '20px' }}>
-                <Box  sx={{ width: '280px' }} >
+             
+              <Grid container spacing={5}>
+                <Grid item md={4}>
                   <TypographySubTitle fullWidth title="MICR Code (9 digits)" />
-                  <TypoText fullWidth placeholder="Enter MICR Code" id="businessId" />
-                </Box>
-                
-                <Upload title="Attach Copy of Cancelled Cheque"/>
-              </Box>
+                  <TypoText
+                    fullWidth
+                    placeholder="Enter MICR Code"
+                    id="businessId"
+                  />
+                </Grid>
+                <Grid item md={4}>
+                  <Upload title="Attach Copy of Cancelled Cheque" />
+                </Grid>
+              </Grid>
             )}
           </Box>
         </Box>
@@ -1283,7 +1187,7 @@ export const Onboarding = () => {
               marginTop: '25px',
               padding: '20px 30px',
               borderRadius: '5px',
-              // marginBottom: '100px',
+              marginBottom: '100px',
             }}
           >
             <Box>
@@ -1413,23 +1317,15 @@ Koratur, chennai - 600100"
                               sx={{
                                 display: 'flex',
                                 alignItems: 'center',
-                                justifyContent: 'space-between',
+                                justifyContent: 'flex-end',
                                 paddingBottom: '15px',
                               }}
                             >
-                              {/* <Typography
-                       sx={{
-                         fontSize: '14px',
-                         fontWeight: 500,
-                         lineHeight: '16px',
-                         color: '#231F20',
-                         letterSpacing: '0.001em',
-                       }}
-                     >
-                       Card Photo - Eterna - Platinum
-                     </Typography> */}
                               <Typography
                                 sx={{
+                                  display: 'flex',
+                                  justifyContent: 'flex-end',
+                                  alignItems: 'flex-end',
                                   fontSize: '14px',
                                   fontWeight: 500,
                                   lineHeight: '16px',
@@ -1444,8 +1340,8 @@ Koratur, chennai - 600100"
                             <Box className="cardImageBox">
                               <img
                                 style={{
-                                  width: '40vw',
-                                  height: '35vh',
+                                  width: '70vw',
+                                  height: '70vh',
                                 }}
                                 alt=""
                                 src={ViewDoc}
@@ -1471,7 +1367,8 @@ Koratur, chennai - 600100"
             right: 0,
             width: '100%',
             borderTop: '1px solid #e9edf5',
-            boxShadow:'0px 2px 10px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)'
+            boxShadow:
+              '0px 2px 10px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
           }}
         >
           {viewMode === 'add' ? (
@@ -1489,22 +1386,18 @@ Koratur, chennai - 600100"
 
               <BtnContained onClick={handleSubmitClick} title="Submit" />
             </Box>
-          ) 
-          :
-           (
-            ""
-            // <Box
-            //   sx={{
-            //     display: 'flex',
-            //     gap: 2,
-            //     justifyContent: 'flex-end',
-            //     padding: '20px',
-            //   }}
-            // >
-            //   <BtnOutlined onClick={() => navigate(-1)} title="close" />
-            // </Box>
-          )
-          }
+          ) : (
+            <Box
+              sx={{
+                display: 'flex',
+                gap: 2,
+                justifyContent: 'flex-end',
+                padding: '20px',
+              }}
+            >
+              <BtnOutlined onClick={() => navigate(-1)} title="close" />
+            </Box>
+          )}
         </Box>
       </Box>
     </Stack>

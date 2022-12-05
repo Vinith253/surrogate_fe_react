@@ -141,7 +141,11 @@ const OrgUploadCard = ({
           {/* <Box sx={{ position: 'fixed', bottom: 0 }}> */}
           {/* <FooterButton cancel="Cancel" submit="Procees" /> */}
           <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: '1%' }}>
-            <Button variant="outlined" sx={{ textTransform: 'capitalize' }}>
+            <Button
+              variant="outlined"
+              sx={{ textTransform: 'capitalize' }}
+              onClick={() => setOpenDiscard(!openDiscard)}
+            >
               Cancel
             </Button>
             <Button

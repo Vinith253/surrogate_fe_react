@@ -210,11 +210,11 @@ export default function BulkList(props: any) {
   const navigate = useNavigate();
   const [correctionState, setCorrectionState] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [alignment, setAlignment] = useState('all');
+  const [alignment, setAlignment] = useState('error');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
-  const [imageUpload, setImageUpload] = useState(true);
+  const [imageUpload, setImageUpload] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
 
   const column = [
@@ -437,6 +437,17 @@ export default function BulkList(props: any) {
       setErrorCount('00');
     }
   }, [correctionState]);
+  useEffect(() => {
+    if (alignment === 'error') {
+      const errorData = data1.filter((item) => item.error === true);
+      setDataList(errorData);
+    } else if (alignment === 'valid') {
+      const validData = data1.filter((item) => item.error === false);
+      setDataList(validData);
+    } else {
+      setDataList(data1);
+    }
+  }, [alignment]);
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
@@ -546,6 +557,10 @@ export default function BulkList(props: any) {
     setOpenCancelModal(false);
     navigate('/productManagement/cardCatalogue');
   };
+  const boxCenter = {
+    display: 'flex',
+    alignItems: 'center',
+  };
 
   const GroupButtonData = [
     {
@@ -595,20 +610,30 @@ export default function BulkList(props: any) {
           sx={{
             display: 'flex',
             gap: '5%',
+            width: '65%',
           }}
         >
-          <Typography variant="h6" sx={{ fontSize: '1rem' }}>
-            File Name:{progress === 100 && 'arantic'}
-          </Typography>
-          <Typography variant="h6" sx={{ fontSize: '1rem' }}>
-            Record Found: {progress === 100 && '25'}
-          </Typography>
-          <Typography variant="h6" sx={{ fontSize: '1rem' }}>
-            Valid Records: {progress === 100 && validCount}
-          </Typography>
-          <Typography variant="h6" sx={{ fontSize: '1rem' }}>
-            Errors Found: {progress === 100 && errorCount}
-          </Typography>
+          <Box sx={boxCenter}>
+            {' '}
+            <Typography variant="h6" sx={{ fontSize: '1rem' }}>
+              File Name:{progress === 100 && 'arantic'}
+            </Typography>
+          </Box>
+          <Box sx={boxCenter}>
+            <Typography variant="h6" sx={{ fontSize: '1rem' }}>
+              Record Found: {progress === 100 && '25'}
+            </Typography>
+          </Box>
+          <Box sx={boxCenter}>
+            <Typography variant="h6" sx={{ fontSize: '1rem' }}>
+              Valid Records: {progress === 100 && validCount}
+            </Typography>
+          </Box>
+          <Box sx={boxCenter}>
+            <Typography variant="h6" sx={{ fontSize: '1rem' }}>
+              Errors Found: {progress === 100 && errorCount}
+            </Typography>
+          </Box>
         </Box>
         {progress !== 100 && (
           <Alert
@@ -639,22 +664,24 @@ export default function BulkList(props: any) {
           width: '100%',
         }}
       >
-        <ToggleButtonGroup
-          color="primary"
-          value={alignment}
-          exclusive
-          onChange={handleChange}
-          aria-label="Platform"
-        >
-          <ColorButton value="all">All</ColorButton>
-          <ColorButton value="valid">Valid</ColorButton>
-          <ColorButton value="error">
-            {props.fileCheck === 'image' ? 'Missing' : 'Error'}
-          </ColorButton>
-        </ToggleButtonGroup>
+        {progress === 100 && (
+          <ToggleButtonGroup
+            color="primary"
+            value={alignment}
+            exclusive
+            onChange={handleChange}
+            aria-label="Platform"
+          >
+            <ColorButton value="all">All</ColorButton>
+            <ColorButton value="valid">Valid</ColorButton>
+            <ColorButton value="error">
+              {props.fileCheck === 'image' ? 'Missing' : 'Error'}
+            </ColorButton>
+          </ToggleButtonGroup>
+        )}
         {/* <GroupButton data={GroupButtonData} /> */}
       </Box>
-      {progress > 70 && (
+      {progress > 0 && (
         // <TableContainer
         //   component={Paper}
         //   sx={{
@@ -811,20 +838,17 @@ export default function BulkList(props: any) {
           </Box>
         </>
       )}
-      {imageUpload &&
-        correctionState &&
-        progress === 100 &&
-        props.fileCheck === 'image' && (
-          <CustomModal
-            openSuccess={imageUpload}
-            handleCloseSuccess={closeModal}
-            successModalTitle={'Card Catalogue is Uploaded Successfully'}
-            successModalMsg={
-              '  Card Catalogue has been successully sent to the reviewer'
-            }
-            btn={' Close'}
-          />
-        )}
+      {
+        <CustomModal
+          openSuccess={imageUpload}
+          handleCloseSuccess={closeModal}
+          successModalTitle={'Card Catalogue is Uploaded Successfully'}
+          successModalMsg={
+            '  Card Catalogue has been successully sent to the reviewer'
+          }
+          btn={' Close'}
+        />
+      }
       {
         <CustomModal
           openSuccess={openDiscard}
