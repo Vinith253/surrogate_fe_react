@@ -184,14 +184,11 @@ export const LMSHistoryLog = () => {
                 // onClick={handleClose}
                 onClick={() => {
                   handleClose();
-                  navigate(
-                    '/userManagement/orgStructure/screens/Onboarding/onboarding',
-                    {
-                      state: {
-                        isEditable: true,
-                      },
-                    }
-                  );
+                  navigate('/lms/lmsRule/viewRule', {
+                    state: {
+                      isEditable: true,
+                    },
+                  });
                 }}
                 style={{ padding: '10px 20px', textAlign: 'left' }}
               >

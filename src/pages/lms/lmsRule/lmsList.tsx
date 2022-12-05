@@ -11,6 +11,7 @@ import GroupButton from '../../../components/commonComponent/GroupButton/GroupBu
 import CustomModal from '../../../components/commonComponent/customModal/CustomModal';
 import deActiveIcon from '../../../assets/icons/DeActive.svg';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { useNavigate } from 'react-router-dom';
 import ListLMSTable from '../../../components/commonComponent/listLmstable/listlmsTable';
 import Popover from '../../../components/commonComponent/Popover';
 import './style.scss';
@@ -36,6 +37,8 @@ function LMSRuleTab() {
 
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
+
+  const navigate = useNavigate();
 
   const userListMoreMenu = [
     { label: 'View Rule', routePath: '/lms/lmsRule/viewRule' },
@@ -75,6 +78,20 @@ function LMSRuleTab() {
     },
     { title: 'Ended at', dataIndex: 'endedAt', key: 'endedAt' },
     { title: 'Initiated By', dataIndex: 'initiatedBy', key: 'initiatedBy' },
+    { title: 'Re-targeted', dataIndex: 'reTargeted', key: 'reTargeted' },
+    { title: 'Initiated', dataIndex: 'initiated', key: 'initiated' },
+    // { title: 'Failed', dataIndex: 'failed', key: 'failed' },
+    // { title: 'Again Dropped', dataIndex: 'againDropped', key: 'againDropped' },
+    // {
+    //   title: 'Again Rejected',
+    //   dataIndex: 'againRejected',
+    //   key: 'againRejected',
+    // },
+    // {
+    //   title: 'Approved',
+    //   dataIndex: 'approved',
+    //   key: 'approved',
+    // },
   ];
 
   const column2: any = [
@@ -202,6 +219,11 @@ function LMSRuleTab() {
     setPauseMethod(value);
   };
 
+  const reRouteToCreateRule = () => {
+    setIsDuplicateRule(false);
+    navigate('/lms/lmsRule/addNewRule');
+  };
+
   return (
     <Stack>
       <Box className="lms-header-container">
@@ -261,7 +283,7 @@ function LMSRuleTab() {
       {isDuplicateRule && (
         <CustomModal
           openSuccess={isDuplicateRule}
-          handleCloseSuccess={() => setIsDuplicateRule(false)}
+          handleCloseSuccess={reRouteToCreateRule}
           title={'Duplicate LMS Rule'}
           duplicate_role_content={'Select the LMS Rule'}
           duplicateRoleCloseBtn={' Close'}
