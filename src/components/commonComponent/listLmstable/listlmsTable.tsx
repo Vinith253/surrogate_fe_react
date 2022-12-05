@@ -31,6 +31,7 @@ import { ReactComponent as EditIcon } from '../../../assets/icons/editColumn.svg
 import { lmsDataInterface } from '../../../interface/Types';
 import CheckBoxModal from '../customModal/PopoverModal';
 import GroupButton from '../GroupButton/GroupButton';
+import { ReactComponent as RightArrow } from '../../../assets/icons/rightArrow.svg';
 
 type columnType = {
   title: string;
@@ -282,8 +283,9 @@ const ListLMSTable = (props: any) => {
     <Box sx={{ backgroundColor: 'white' }} className="lms-table">
       <Stack sx={{ padding: '25px' }}>
         <div style={{ display: 'flex' }}>
-          {props.flag === 'sales-report' ||
-            (props.flag === 'retargeting' && (
+          {(props.flag === 'sales-report' ||
+            props.flag === 'retargeting' || 
+            props.flag === 'lmsdashboard') && (
               <TextField
                 className="text-field"
                 placeholder="Search by..."
@@ -295,7 +297,7 @@ const ListLMSTable = (props: any) => {
                   ),
                 }}
               />
-            ))}
+            )}
           <div className="third-header">
             {/* <ToggleButtonGroup
               color="primary"
@@ -474,7 +476,8 @@ const ListLMSTable = (props: any) => {
 
             {(props.flag === 'dashboard' ||
               props.flag === 'sales-report' ||
-              props.flag === 'retargeting') && (
+              props.flag === 'retargeting' ||
+              props.flag === 'lmsdashboard') && (
               <div className="reset-data">
                 <Button
                   startIcon={<EditIcon />}
@@ -492,6 +495,22 @@ const ListLMSTable = (props: any) => {
                 </Button>
               </div>
             )}
+            {props.flag === 'lmsdashboard' && 
+            <div className="reset-data">
+              <Button
+                endIcon={<RightArrow />}
+                sx={{
+                  fontSize: '1vw',
+                  marginLeft: '35px',
+                  color: '#0662B7',
+                  fontWeight: '600',
+                  textTransform: 'none',
+                }}
+              >
+                Detailed Reports
+              </Button>
+            </div>
+              }
           </div>
         </div>
 

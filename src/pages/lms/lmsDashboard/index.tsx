@@ -1,4 +1,4 @@
-import { Typography, Button, Grid } from "@mui/material";
+import { Typography, Button, Grid, Stack, Box } from "@mui/material";
 import CheckBoxPopOver from "../../../components/commonComponent/CheckBoxPopOver/SingleLabel";
 import MoreFilterModal from "../../../components/commonComponent/customModal/MoreFilterModal";
 import DateTimePopOver from "../../../components/commonComponent/DateTimePopOver";
@@ -18,6 +18,43 @@ import RetargetedRate from '../../../assets/icons/retargetedRate.svg';
 import DashboardCard from "../../../components/commonComponent/CommonCard/SalesDashbaordCard/DashboardCard";
 import LMSDashboardCard from "../../../components/commonComponent/CommonCard/LMSDashboardCard";
 import ReactApexChart from "react-apexcharts";
+import ListLMSTable from "../../../components/commonComponent/listLmstable/listlmsTable";
+import download_icon from '../../../assets/icons/download_icon.svg';
+import mail_icon from '../../../assets/icons/mail_icon.svg';
+
+
+export const lmsDashboardData = [
+  {
+    id: '1',
+    application: '#12345',
+    customerName: 'Ashwin',
+    mobileNumber: '1234567891',
+    cibil: '123',
+    income: '1500000',
+    status: 'Rejected',
+    more: 'View',
+  },
+  {
+    id: '2',
+    application: '#12345',
+    customerName: 'Ashwin',
+    mobileNumber: '1234567891',
+    cibil: '123',
+    income: '1500000',
+    status: 'Rejected',
+    more: 'View',
+  },
+  {
+    id: '3',
+    application: '#12345',
+    customerName: 'Ashwin',
+    mobileNumber: '1234567891',
+    cibil: '123',
+    income: '1500000',
+    status: 'Dropped',
+    more: 'View',
+  },
+];
 
 const donutGraphSeries :any = 
 [12, 3, 14, 8, 17, 20, 6, 13];
@@ -33,23 +70,23 @@ const donutGraphOptions: {} = {
   chart: {
       type: 'donut',
   },
-  legend: {
-    show: true,
-    position: 'bottom',
-    horizontalAlign: 'center',
-    offsetX: 30,
-    // offsetY:50,
+  // legend: {
+  //   show: true,
+  //   position: 'bottom',
+  //   horizontalAlign: 'center',
+  //   offsetX: 30,
+  //   // offsetY:50,
     
-  },
+  // },
   responsive: [{
-      breakpoint: 480,
+      // breakpoint: 480,
       options: {
-          chart: {
-              width: 300,
-          },
-          legend: {
-              position: 'bottom',
-          }
+          // chart: {
+          //     width: 300,
+          // },
+          // legend: {
+          //     position: 'bottom',
+          // }
       },
   }],
   plotOptions: {
@@ -84,23 +121,22 @@ const donutGraphOptions2: {} = {
   chart: {
       type: 'donut',
   },
-  legend: {
-    show: true,
-    position: 'bottom',
-    horizontalAlign: 'center',
-    offsetX: 30,
-    // offsetY:50,
+  // legend: {
+  //   show: true,
+  //   position: 'bottom',
+  //   horizontalAlign: 'center',
+  //   offsetX: 30,
     
-  },
+  // },
   responsive: [{
-      breakpoint: 480,
+      // breakpoint: 480,
       options: {
-          chart: {
-              width: 300,
-          },
-          legend: {
-              position: 'bottom',
-          }
+          // chart: {
+          //     width: 300,
+          // },
+          // legend: {
+          //     position: 'bottom',
+          // }
       },
   }],
   plotOptions: {
@@ -116,11 +152,6 @@ const donutGraphOptions2: {} = {
             show: true,
             label: 'Rejected',
             color: '#999B9C',
-            // formatter: function (w) {
-            //   return w.globals.seriesTotals.reduce((a, b) => {
-            //     return a + b
-            //   }, 0)
-            // }
           }
         }
       }
@@ -324,6 +355,49 @@ export default function LMSDashboard() {
     },
   ];
 
+  const column1: any = [
+    {
+      title: '#',
+      dataIndex: 'id',
+      key: 'id',
+      width: '70px',
+      render: (text: string) => {
+        return <Stack>{text}</Stack>;
+      },
+    },
+    {
+      title: 'Application#',
+      dataIndex: 'application',
+      key: 'application',
+    },
+    {
+      title: 'Customer Name',
+      dataIndex: 'customerName',
+      key: 'customerName',
+    },
+    { title: 'Mobile Number', dataIndex: 'mobileNumber', key: 'mobileNumber' },
+    { title: 'CIBIL', dataIndex: 'cibil', key: 'cibil' },
+    { title: 'Income', dataIndex: 'income', key: 'income' },
+  ];
+  const column2: any = [
+    {
+      title: 'Status',
+      dataIndex: 'status',
+      key: 'status',
+    },
+    {
+      title: 'Actions',
+      dataIndex: 'more',
+      key: 'more',
+    },
+  ];
+
+  const toggleOptions = [
+    { title: 'All' },
+    { title: 'Rejected' },
+    { title: 'Dropped' },
+  ];
+
 
   return (
     <>
@@ -415,7 +489,7 @@ export default function LMSDashboard() {
                     options={donutGraphOptions}
                     series={donutGraphSeries}
                     type="donut"
-                    height={500}
+                    height={220}
                   />
                 </div>
                 </div>
@@ -432,7 +506,7 @@ export default function LMSDashboard() {
                     options={donutGraphOptions2}
                     series={donutGraphSeries2}
                     type="donut"
-                    height={500}
+                    height={220}
                   />
                 </div>
                 </div>
@@ -460,7 +534,7 @@ export default function LMSDashboard() {
                 more={value.more}
                 image={value.image}
                 viewAll={value.viewAll}
-                navPath=""
+                navPath="/lms/retargeting"
                 lastPeriodValue={value.lastPeriodValue}
                 lastYearValue={value.lastYearValue}
                 boxStyles={value.boxstyles}
@@ -471,6 +545,48 @@ export default function LMSDashboard() {
           </div>
         </div>
         <div className="diff-area" />
+        <Stack sx={{ marginBottom: '30px' }}>
+          <Stack
+            className="lmsDashboardOrgDetails"
+            sx={{
+              padding: '0 30px',
+            }}
+          >
+            <Stack className="retargetingOrgDetailsHeaderTable">
+              <Stack>
+                <Typography>Recent {lmsDashboardData.length} Data</Typography>
+              </Stack>
+              <Stack>
+                <Box>
+                  <Button>
+                    <img
+                      src={download_icon}
+                      alt="download_icon"
+                      width="70%"
+                      height="70%"
+                    />
+                  </Button>
+                  <Button>
+                    <img
+                      src={mail_icon}
+                      alt="mail_icon"
+                      width="70%"
+                      height="70%"
+                    />
+                  </Button>
+                </Box>
+              </Stack>
+            </Stack>
+          </Stack>
+          <ListLMSTable
+            data={lmsDashboardData}
+            listColumn={column1}
+            statusColumn={column2}
+            flag="lmsdashboard"
+            label={product_label}
+            toggleOptions={toggleOptions}
+          />
+        </Stack>
         </>
   );
 }
