@@ -5,11 +5,15 @@
 .inactive {
   background-color: transparent !important;
 }
+
 .search-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 30px;
+  input {
+    font-size: 13px;
+  }
   .search-box {
     display: flex;
     justify-content: center;

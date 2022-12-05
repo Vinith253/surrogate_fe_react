@@ -74,3 +74,30 @@
   padding: 10px 20px !important;
   text-align: left !important;
 }
+.history-log-container {
+  .search-container-history {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1px;
+    input {
+      font-size: 13px;
+    }
+    .search-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row-reverse;
+      border: 1px solid #afaeaf;
+      font-size: 1px;
+      height: 40px;
+      width: 23vw;
+      padding: 0 14px;
+      border-radius: 4px;
+      color: #afaeaf;
+      .search-icon {
+        color: #afaeaf;
+      }
+    }
+  }
+}

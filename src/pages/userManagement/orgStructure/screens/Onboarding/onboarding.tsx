@@ -15,6 +15,7 @@ import {
   Checkbox,
 } from '@mui/material';
 import './onboarding.scss';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { OrgReview } from '../OrgReview/OrgReview';
 import { useLocation, useNavigate } from 'react-router-dom';
 import dayjs, { Dayjs } from 'dayjs';
@@ -44,6 +45,8 @@ import ViewDoc from '../../../../../assets/images/viewDoc.svg';
 import TypographyHead from '../../../../../components/commonComponent/CustomText/Head';
 
 export const Onboarding = () => {
+  const [startDatevalue, setStartDateValue] = useState(null);
+  const [endDatevalue, setEndDateValue] = useState(null);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -209,7 +212,7 @@ export const Onboarding = () => {
                 </Button>
                 <Button
                   sx={{ textTransform: 'capitalize', backgroundColor: 'white' }}
-                  onClick={() => setViewMode('edit')}
+                  onClick={() => setViewMode('add')}
                 >
                   <IconButton sx={{ heigght: '30px' }}>
                     <img
@@ -412,6 +415,7 @@ export const Onboarding = () => {
 
             {viewMode === 'add' ? (
               <Grid item xs={12} sm={6} md={4}>
+                
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <TypographySubTitle title="Year of inc./ in Business Since" />
                   <DatePicker
@@ -1231,10 +1235,10 @@ export const Onboarding = () => {
             </Grid>
 
             {viewMode === 'add' && (
-              <Box sx={{ display: 'flex', gap: 3, marginBottom: '20px' }}>
-                <Box sx={{ width: '280px' }}>
-                  <TypographySubTitle title="MICR Code (9 digits)" />
-                  <TypoText placeholder="Enter MICR Code" id="businessId" />
+              <Box sx={{ display: 'flex', gap: 4, marginBottom: '20px' }}>
+                <Box  sx={{ width: '280px' }} >
+                  <TypographySubTitle fullWidth title="MICR Code (9 digits)" />
+                  <TypoText fullWidth placeholder="Enter MICR Code" id="businessId" />
                 </Box>
                 
                 <Upload title="Attach Copy of Cancelled Cheque"/>
@@ -1279,7 +1283,7 @@ export const Onboarding = () => {
               marginTop: '25px',
               padding: '20px 30px',
               borderRadius: '5px',
-              marginBottom: '100px',
+              // marginBottom: '100px',
             }}
           >
             <Box>
@@ -1467,6 +1471,7 @@ Koratur, chennai - 600100"
             right: 0,
             width: '100%',
             borderTop: '1px solid #e9edf5',
+            boxShadow:'0px 2px 10px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)'
           }}
         >
           {viewMode === 'add' ? (
@@ -1484,18 +1489,22 @@ Koratur, chennai - 600100"
 
               <BtnContained onClick={handleSubmitClick} title="Submit" />
             </Box>
-          ) : (
-            <Box
-              sx={{
-                display: 'flex',
-                gap: 2,
-                justifyContent: 'flex-end',
-                padding: '20px',
-              }}
-            >
-              <BtnOutlined onClick={() => navigate(-1)} title="close" />
-            </Box>
-          )}
+          ) 
+          :
+           (
+            ""
+            // <Box
+            //   sx={{
+            //     display: 'flex',
+            //     gap: 2,
+            //     justifyContent: 'flex-end',
+            //     padding: '20px',
+            //   }}
+            // >
+            //   <BtnOutlined onClick={() => navigate(-1)} title="close" />
+            // </Box>
+          )
+          }
         </Box>
       </Box>
     </Stack>
