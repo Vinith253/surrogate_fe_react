@@ -30,9 +30,6 @@ export const Upload = (props: any) => {
     const timer = setInterval(() => {
       if (progress !== 0) {
         setProgress((oldProgress) => {
-          // if (oldProgress === 100) {
-          //   return 0;
-          // }
           const diff = Math.random() * 10;
           return Math.min(oldProgress + diff, 100);
         });
@@ -68,7 +65,7 @@ export const Upload = (props: any) => {
           >
             <Box sx={{ display: 'flex' }}>
               <Button
-                // onClick={()=>handleChange(true,'tinNumber')}
+                
                 component="label"
               >
                 <img src={Upload_Img} />

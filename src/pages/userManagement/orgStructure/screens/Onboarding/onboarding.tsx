@@ -1029,7 +1029,7 @@ export const Onboarding = () => {
           </Box>
         </Box>
 
-        {/* <Box
+        <Box
           sx={{
             backgroundColor: 'white',
             marginTop: '25px',
@@ -1149,7 +1149,7 @@ export const Onboarding = () => {
               </Grid>
             )}
           </Box>
-        </Box> */}
+        </Box>
 
         {viewMode === 'add' && (
           <Box
