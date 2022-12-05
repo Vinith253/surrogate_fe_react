@@ -297,7 +297,11 @@ export const HistoryLog = (props: any) => {
                   handleClose();
                   // navigate('/productManagement/cardCatalogue/singleupload/reviewCard');
                   navigate('/userManagement/roleCreation/createRole', {
-                    state: { roleName: 'Head', data: duplicateRoleData, isView: true },
+                    state: {
+                      roleName: 'Head',
+                      data: duplicateRoleData,
+                      isView: true,
+                    },
                   });
                 }}
                 // className="menu"
