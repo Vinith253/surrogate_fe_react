@@ -1,4 +1,4 @@
-import { tableHeader } from "../../../utils/Constants";
+import { tableHeader } from '../../../utils/constants/Constants';
 
 export const salesDashboardList: rowsDataInterface[] = [
   {
@@ -288,11 +288,11 @@ export interface rowsDataInterface {
   kycStatus?: string;
   status?: string;
 
-  version? :string;
-  currentStatus?:string;
-  initiatedBy?:string;
-  request?:string;
-  dateAndTime?:string;
+  version?: string;
+  currentStatus?: string;
+  initiatedBy?: string;
+  request?: string;
+  dateAndTime?: string;
 }
 
 export interface statusRowHeadingInterface {
@@ -361,26 +361,25 @@ export const product_label = [
   },
 ];
 
-export const state_label =[
+export const state_label = [
   { value: 'tamilnadu', name: 'Tamilnadu' },
   { value: 'andra', name: 'Andhra' },
   { value: 'telungana', name: 'Telungana' },
   { value: 'karnataka', name: 'Karnataka' },
   { value: 'kerala', name: 'Kerala' },
-]
+];
 
-export const zonal_label =[
+export const zonal_label = [
   { value: 'tamilnadu', name: 'Tamilnadu' },
   { value: 'andra', name: 'Andhra' },
   { value: 'telungana', name: 'Telungana' },
   { value: 'karnataka', name: 'Karnataka' },
   { value: 'kerala', name: 'Kerala' },
-]
+];
 
-
-export const duplicate_role =[
+export const duplicate_role = [
   { value: 'head', name: 'Head' },
   { value: 'executive', name: 'Executive' },
   { value: 'underwritingManager', name: 'Underwriting Manager' },
   { value: 'manager', name: 'Manager' },
-]
+];

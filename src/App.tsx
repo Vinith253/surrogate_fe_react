@@ -34,6 +34,9 @@ import { OrgHistoryLogDetails } from './pages/userManagement/orgStructure/screen
 import UserProfile from './pages/profile/landingScreen';
 import { OrgStrHistoryLog } from './pages/userManagement/orgStructure/screens/historyLog/historyLog';
 
+// Loaders
+import { cardCatalogueLoader } from './pages/productManagement/cardCatalogue/screens/CardCatalogue';
+
 export default function App() {
   return (
     <Routes>
@@ -50,6 +53,7 @@ export default function App() {
         <Route
           path="/productManagement/cardCatalogue"
           element={<CardCatalogue />}
+          // loader={cardCatalogueLoader}
         />
         <Route
           path="/productManagement/cardCatalogue/bulkupload"

@@ -1,30 +1,17 @@
-import React, { useState } from 'react';
-import './cardCateloge.scss';
-// import useStyles from "./cardStyle";
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
-// import DashboardCard from '../../../../components/commonComponent/CommonCard/SalesDashbaordCard/DashboardCard';
-import ProgressCard from '../../../../components/commonComponent/CommonCard/ProgressCard/ProgressCard';
-import DashboardCard from '../../../../components/commonComponent/CommonCard/SalesDashbaordCard/DashboardCard';
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import { tableCellClasses } from '@mui/material/TableCell';
-import TypographyHead from '../../../../components/commonComponent/CustomText/Head';
-import { useNavigate } from 'react-router-dom';
-import TableComp from '../../../../components/commonComponent/ListTable/ListTable';
-import PaginationComp from '../../../../components/commonComponent/Pagination/Pagination';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, json } from 'react-router-dom';
+
+// MUI components
 import {
   MenuItem,
   Checkbox,
   Typography,
   Box,
-  Tab,
   Stack,
   Button,
-  ToggleButtonGroup,
   ToggleButton,
-  Icon,
   IconButton,
   Divider,
-  InputLabel,
   FormControl,
   SelectChangeEvent,
   Table,
@@ -36,11 +23,27 @@ import {
   Paper,
   Menu,
   Select,
-  TextField,
-  OutlinedInput,
   ListItemText,
 } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import { styled } from '@mui/material/styles';
+import InputBase from '@mui/material/InputBase';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+
+// Common components
+import PaginationComp from '../../../../components/commonComponent/Pagination/Pagination';
 import TypographySubTitle from '../../../../components/commonComponent/CustomText/Typography';
+import TypographyInfo from '../../../../components/commonComponent/CustomText/Info';
+import CustomModal from '../../../../components/commonComponent/customModal/CustomModal';
+import TypoText from '../../../../components/commonComponent/CustomText/Textfield';
+import GroupButton from '../../../../components/commonComponent/GroupButton/GroupButton';
+import BtnOutlined from '../../../../components/commonComponent/CustomText/Button/Outlined';
+import BtnContained from '../../../../components/commonComponent/CustomText/Button/Contained';
+
+// services
+import { getCardList } from '../../../../services/cardCatalogueServices';
+
+// Assets
 import Surrogate_icon from '../../../../assets/images/surrogateIcon.svg';
 import Pause_icon from '../../../../assets/images/pauseIcon.svg';
 import Edit_icon from '../../../../assets/images/editIcon.svg';
@@ -49,47 +52,39 @@ import Email_Icon from '../../../../assets/images/emailIcon.svg';
 import Download_Icon from '../../../../assets/images/downloadIcon.svg';
 import TotalApplications from '../../../../assets/icons/total_application_icon.svg';
 import Comparisions from '../../../../assets/icons/comparision_icon.svg';
-import AddIcon from '@mui/icons-material/Add';
 import VirtualCard from '../../../../assets/icons/virtual_card_icon.svg';
 import ApprovalRate from '../../../../assets/icons/approval_rate_icon.svg';
 import ApprovedIcon from '../../../../assets/icons/approved_icon.svg';
 import Dropped from '../../../../assets/icons/dropped_icon.svg';
 import InProgress from '../../../../assets/icons/in_progress_icon.svg';
 import Rejected from '../../../../assets/icons/rejected_icon.svg';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import {} from '../../../../utils/tagBasedIndicator/tagStatus';
-// import InfoIcon from '@mui/icons-material/Info';
 import Info_Icon from '../../../../assets/images/info_icon.svg';
-import DownloadIcon from '@mui/icons-material/Download';
-import SearchIcon from '@mui/icons-material/Search';
-import TypographyInfo from '../../../../components/commonComponent/CustomText/Info';
-import { styled, alpha } from '@mui/material/styles';
-import InputBase from '@mui/material/InputBase';
-import CustomModal from '../../../../components/commonComponent/customModal/CustomModal';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { checkTagStatus } from '../../../../utils/tagBasedIndicator/tagStatus';
-import {
-  listRowHeading,
-  salesDashboardList,
-  statusRowHeading,
-} from '../../../../pages/sales/dashboard/dashboard.const';
-import TablePagination from '@mui/material/TablePagination';
-import { Height } from '@mui/icons-material';
-import TypoText from '../../../../components/commonComponent/CustomText/Textfield';
-import GroupButton from '../../../../components/commonComponent/GroupButton/GroupButton';
-import BtnOutlined from '../../../../components/commonComponent/CustomText/Button/Outlined';
-import BtnContained from '../../../../components/commonComponent/CustomText/Button/Contained';
 
-// const columns: GridColDef[] = [
-//   { field: 'id', headerName: 'ID', width: 70 },
-//   { field: 'cardName', headerName: 'Card Name', width: 130 },
-//   { field: 'productID', headerName: 'Product ID', width: 130 },
-//   { field: 'businessID', headerName: 'Business ID', width: 130 },
-//   { field: 'cardMode', headerName: 'Card Mode', width: 130 },
-//   { field: 'cardCategory', headerName: 'Card Category', width: 130 },
-//   { field: 'cardStatus', headerName: 'Card Status', width: 120 },
-//   { field: 'more', headerName: 'More', type: 'number', width: 20 },
-// ];
+// Utils
+import { checkTagStatus } from '../../../../utils/tagBasedIndicator/tagStatus';
+
+// css
+import './cardCateloge.scss';
+
+// Loader function
+
+export async function cardCatalogueLoader() {
+  const cardList = await getListOfCards();
+  return json({ cardList }, { status: 200 });
+}
+
+const getListOfCards = async () => {
+  await getCardList({
+    page: 1,
+    size: 2,
+  })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
 export interface dataHeaderList {
   id: string;
@@ -280,9 +275,13 @@ export const CardCatalogue = () => {
     setAnchorElement(null);
   };
 
-  // const handleClick = (event: React.MouseEvent<HTMLTableCellElement>) => {
-  //   setAnchorElement(event.currentTarget);
-  // };
+  // useEffect(() => {
+  //   let mounted = true;
+  //   getListOfCards(mounted);
+  //   return () => {
+  //     mounted = false;
+  //   };
+  // }, []);
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
@@ -479,10 +478,6 @@ export const CardCatalogue = () => {
   const editModalFun = () => {
     setEditModal(true);
   };
-
-  {
-    console.log('editModal', editModal);
-  }
 
   const product_label = [
     {
@@ -784,12 +779,7 @@ export const CardCatalogue = () => {
                 onClick={() => setEditModal(true)}
               >
                 <IconButton className="icon">
-                  <img
-                    src={Edit_icon}
-                    style={{
-                      filter: '',
-                    }}
-                  />
+                  <img src={Edit_icon} alt="edit icon" />
                 </IconButton>
                 edit card
               </Button>
