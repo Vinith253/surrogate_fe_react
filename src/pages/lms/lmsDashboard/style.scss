@@ -261,3 +261,15 @@
   .diff-area {
     margin-top: 32px;
   }
+
+  .lmsDashboardOrgDetails {
+    background-color: #ffffff;
+    .retargetingOrgDetailsHeaderTable {
+      padding: 15px 0;
+      display: flex !important;
+      justify-content: space-between !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      border-bottom: 2px solid #eceff2;
+    }
+  }
