@@ -30,6 +30,8 @@ import ViewUser from './pages/userManagement/userCreation/singleUserUpload/viewU
 import LMSDashboard from './pages/lms/lmsDashboard';
 import LMSRule from './pages/lms/lmsRule';
 import AddLMSRule from './pages/lms/lmsRule/createLMS/addNewRule';
+import ViewLMSRule from './pages/lms/lmsRule/createLMS/viewLMS';
+import EditLMSRule from './pages/lms/lmsRule/createLMS/editLMS';
 import Retargeting from './pages/lms/reTargeting';
 import { OrgHistoryLogDetails } from './pages/userManagement/orgStructure/screens/historyLog/historyLogDetails/historyLogDetails';
 import UserProfile from './pages/profile/landingScreen';
@@ -183,6 +185,8 @@ export default function App() {
 
         <Route path="/lms/lmsRule" element={<LMSRule />} />
         <Route path="/lms/lmsRule/addNewRule" element={<AddLMSRule />} />
+        <Route path="/lms/lmsRule/viewRule" element={<ViewLMSRule />} />
+        <Route path="/lms/lmsRule/editRule" element={<EditLMSRule />} />
 
         <Route
           path="/riskManagement/customerReports"
@@ -192,7 +196,10 @@ export default function App() {
           path="/riskManagement/customerDetails"
           element={<CustomerDetailScreen />}
         />
-        <Route path="/lms/retargeting/reTargetingDetails" element={<ReTargetingDetails />} />
+        <Route
+          path="/lms/retargeting/reTargetingDetails"
+          element={<ReTargetingDetails />}
+        />
       </Route>
     </Routes>
   );

@@ -16,7 +16,7 @@ function LMSRule() {
       id: '2',
       data: 'History Log',
       component: <div>Bank</div>,
-      isDisabled: true,
+      isDisabled: false,
     },
   ];
 
