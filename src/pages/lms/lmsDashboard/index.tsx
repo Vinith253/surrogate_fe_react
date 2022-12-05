@@ -600,13 +600,14 @@ export default function LMSDashboard() {
           </div>
         </div>
         <div className="diff-area" />
-        <Stack sx={{ backgroundColor: 'white', padding: '20px 30px 30px 30px',margin: '30px 0px'}}>
+        <Stack sx={{ backgroundColor: 'white',margin: '30px 0px'}}>
+          <Stack sx={{padding: '20px 30px 0px 30px'}}>
         <HeaderWithInfo
           header="Rejected and Dropped Applications"
           isInfoEnabled={false}
           info=""
           isDownloadEnabled={false}
-        />
+        /></Stack>
           <ListLMSTable
             data={lmsDashboardData}
             listColumn={column1}
