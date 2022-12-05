@@ -185,7 +185,8 @@ const AccessLibrary = () => {
             org_Name={'Ganesh Agency'}
             channel_type={'DSA'}
             accessLibraryModaBtn={'Link to share'}
-            accessLibraryCloseBtn={' Close'}
+            duplicateRoleCloseBtn={' Close'}
+            accessLibraryCopyLinkBtn={'Copy Link'}
           />
         )}
       </PageLayout>

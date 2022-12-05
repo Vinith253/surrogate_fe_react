@@ -13,6 +13,21 @@
     margin-top: 30px;
     border-radius: 8px;
 
+    .show-more {
+      color: #0662b7;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .each-field-label {
+      font-size: 13px;
+    }
+
+    .css-1869usk-MuiFormControl-root {
+      width: 100%;
+      margin: 3px 0px 0px 0px;
+    }
+
     .lms-rule-form-container {
       margin-top: 20px;
       display: flex;
@@ -21,10 +36,6 @@
         .MuiOutlinedInput-notchedOutline {
         border-color: #afaeaf;
         height: 52px;
-      }
-
-      .each-field-label {
-        font-size: 13px;
       }
 
       .checkbox-label {
@@ -63,11 +74,6 @@
       .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
         font-size: 14px;
       }
-
-      .css-1869usk-MuiFormControl-root {
-        width: 100%;
-        margin: 3px 0px 0px 0px;
-      }
     }
   }
 
@@ -98,6 +104,10 @@
       border: 1px solid #d7d8d8;
       border-radius: 8px;
 
+      .radio-buttons-conatiner {
+        margin-top: 20px;
+      }
+
       .repeat-conatiner {
         margin: 20px 0px;
         .css-mhc70k-MuiGrid-root > .MuiGrid-item {
@@ -114,20 +124,19 @@
           width: 50%;
         }
       }
+    }
 
-      .end-date-container {
+    .remove-container {
+      cursor: pointer;
+      display: flex;
+      margin-left: auto;
+      .remove-icon {
+        width: 20px;
+        margin: -1px 10px 0px 10px;
       }
-      .remove-container {
-        display: flex;
-        margin-left: auto;
-        .remove-icon {
-          width: 20px;
-          margin: -1px 10px 0px 10px;
-        }
-        .remove-label {
-          color: #0662b7;
-          font-size: 14px;
-        }
+      .remove-label {
+        color: #0662b7;
+        font-size: 14px;
       }
     }
 
@@ -145,6 +154,16 @@
     padding: 20px 30px 30px 30px;
     margin-top: 30px;
     border-radius: 8px;
+
+    .display-flex {
+      display: flex;
+    }
+
+    .show-more {
+      color: #0662b7;
+      cursor: pointer;
+      font-size: 13px;
+    }
 
     .each-info {
       margin-bottom: 10px;

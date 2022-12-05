@@ -38,6 +38,7 @@ import checkedIcon from '../../../assets/icons/check_box_square_icon.svg';
 import discard_icon from '../../../assets/icons/Vector1.svg';
 import close_icon from '../../../assets/icons/cancel.png';
 import loading_icon from '../../../assets/icons/modal-loading.svg';
+import reject_icon from '../../../assets/icons/Rejection-icon.svg';
 import info_icon from '../../../assets/images/info_icon.svg';
 import './CustomModal.scss';
 
@@ -69,9 +70,9 @@ type props = {
   org_Name?: string;
   channel_type?: string;
   accessLibraryModaBtn?: string;
-  accessLibraryCloseBtn?: string;
   changePasswordTitle?: string;
   changePasswordTitleMsg?: string;
+  accessLibraryCopyLinkBtn?: string;
   ProceedBtn?: string;
   resentOTP?: string;
   resentOTPmsg?: string;
@@ -95,6 +96,9 @@ type props = {
   successMsg?: string;
   tableDataLMSRule?: any;
   pauseStatusKey?: string;
+  textAreaHeight?: any;
+  modalType?: string;
+  duplicate_modal_label?: string;
 };
 
 function CustomModal({
@@ -125,7 +129,7 @@ function CustomModal({
   org_Name,
   channel_type,
   accessLibraryModaBtn,
-  accessLibraryCloseBtn,
+  accessLibraryCopyLinkBtn,
   changePasswordTitle,
   changePasswordTitleMsg,
   ProceedBtn,
@@ -151,12 +155,17 @@ function CustomModal({
   successMsg,
   tableDataLMSRule,
   pauseStatusKey,
+  textAreaHeight,
+  modalType,
+  duplicate_modal_label,
 }: props) {
   const [pauseStatus, setPauseStatus] = useState(pauseStatusKey);
   const [startDatevalue, setStartDateValue] = useState(null);
   const [endDatevalue, setEndDateValue] = useState(null);
   const [existingRole, setexistingRole] = React.useState('');
   const [checked, setChecked] = React.useState(false);
+
+  console.log('existingRole', existingRole);
 
   useEffect(() => {
     if (pauseStatus) {
@@ -189,6 +198,7 @@ function CustomModal({
           title == 'Request for Deactivation' ||
           title == 'Add Organisation' ||
           title == 'Duplicate Role' ||
+          title == 'Duplicate LMS Rule' ||
           title == 'Employee Details' ||
           title == 'Choose the mode of communication' ||
           LoadingMsg ||
@@ -201,7 +211,7 @@ function CustomModal({
         <Stack
           py={3}
           className={`${
-            successModalMsg || discardModalMsg
+            successModalMsg || discardModalMsg || rejectedModalMsg
               ? 'modal_container1'
               : ProceedBtn == 'Update'
               ? 'create_newpassword'
@@ -210,7 +220,7 @@ function CustomModal({
           px={title ? 3 : 0}
         >
           {title && (
-            <Typography className="modal-title" component="h1" pt={0} pb={2}>
+            <Typography className="modal-title" component="h1">
               {title}
             </Typography>
           )}
@@ -224,6 +234,8 @@ function CustomModal({
                   ? discard_icon
                   : successModalMsg
                   ? card_catalogue_sucess_icon
+                  : modalType
+                  ? reject_icon
                   : card_catalogue_rejecte_icon
               }
               pb={0}
@@ -231,27 +243,11 @@ function CustomModal({
             ></Box>
           )}
 
-          {accessLibraryCloseBtn && (
-            <Button
-              variant="text"
-              color="secondary"
-              className="accessLibraryCloseBtn"
-              onClick={handleCloseSuccess}
-            >
-              {accessLibraryCloseBtn}
-            </Button>
-          )}
-
           {duplicateRoleCloseBtn && (
             <Button
               variant="text"
               color="secondary"
-              sx={{
-                position: 'absolute',
-                right: '10px',
-                top: '15px',
-                textTransform: 'capitalize',
-              }}
+              className="duplicateRoleCloseBtn"
               onClick={handleCloseSuccess}
             >
               {duplicateRoleCloseBtn}
@@ -273,7 +269,7 @@ function CustomModal({
           {existingRoleItem && (
             <FormControl sx={{ minWidth: 120 }} size="small">
               <InputLabel id="demo-select-small">
-                Choose existing role for duplication
+                {existingRole == '' ? duplicate_modal_label : ''}
               </InputLabel>
 
               <Select
@@ -291,29 +287,16 @@ function CustomModal({
           {(employeeDetailsRowOne ||
             employeeDetailsRowTwo ||
             employeeDetailsRowThree) && (
-            <Stack>
+            <Stack className="employee-details-modal">
               {employeeDetailsRowOne && (
                 <Box sx={{ marginBottom: '10px' }}>
                   <Grid container spacing={2} mt={1}>
                     {employeeDetailsRowOne.map((item: any) => (
                       <Grid md={4} item>
-                        <Typography
-                          sx={{
-                            fontSize: '12px',
-                            color: '#AFAEAF',
-                            marginBottom: '5px',
-                            fontWeight: '500',
-                          }}
-                        >
+                        <Typography className="employee-details-key">
                           {item.Key}
                         </Typography>
-                        <Typography
-                          sx={{
-                            fontSize: '14px',
-                            color: '#151515',
-                            fontWeight: '400',
-                          }}
-                        >
+                        <Typography className="employee-details-value">
                           {item.value}
                         </Typography>
                       </Grid>
@@ -334,23 +317,10 @@ function CustomModal({
                   <Grid container spacing={2} mt={1}>
                     {employeeDetailsRowTwo.map((item: any) => (
                       <Grid md={4} item>
-                        <Typography
-                          sx={{
-                            fontSize: '12px',
-                            color: '#AFAEAF',
-                            marginBottom: '5px',
-                            fontWeight: '500',
-                          }}
-                        >
+                        <Typography className="employee-details-key">
                           {item.Key}
                         </Typography>
-                        <Typography
-                          sx={{
-                            fontSize: '14px',
-                            color: '#151515',
-                            fontWeight: '400',
-                          }}
-                        >
+                        <Typography className="employee-details-value">
                           {item.value}
                         </Typography>
                       </Grid>
@@ -364,23 +334,10 @@ function CustomModal({
                   <Grid container spacing={2} mt={1}>
                     {employeeDetailsRowThree.map((item: any) => (
                       <Grid md={4} item>
-                        <Typography
-                          sx={{
-                            fontSize: '12px',
-                            color: '#AFAEAF',
-                            marginBottom: '5px',
-                            fontWeight: '500',
-                          }}
-                        >
+                        <Typography className="employee-details-key">
                           {item.Key}
                         </Typography>
-                        <Typography
-                          sx={{
-                            fontSize: '14px',
-                            color: '#151515',
-                            fontWeight: '400',
-                          }}
-                        >
+                        <Typography className="employee-details-value">
                           {item.value}
                         </Typography>
                       </Grid>
@@ -392,13 +349,11 @@ function CustomModal({
           )}
 
           {successModalTitle && (
-            <DialogContent sx={{ paddingTop: '18px', paddingBottom: '5px' }}>
+            <DialogContent className="successs-modal-content">
               <DialogContentText
                 id="alert-dialog-slide-description"
+                className="successs-modal-title"
                 align={'center'}
-                fontSize={16}
-                fontWeight={600}
-                color="#1d1d1d"
                 sx={{
                   padding: {
                     xs: '0 13px',
@@ -407,6 +362,24 @@ function CustomModal({
                 }}
               >
                 {successModalTitle}
+              </DialogContentText>
+            </DialogContent>
+          )}
+
+          {rejectedModaltitle && (
+            <DialogContent className="successs-modal-content">
+              <DialogContentText
+                id="alert-dialog-slide-description"
+                className="successs-modal-title"
+                align={'center'}
+                sx={{
+                  padding: {
+                    xs: '0 13px',
+                  },
+                  marginBottom: '5px',
+                }}
+              >
+                {rejectedModaltitle}
               </DialogContentText>
             </DialogContent>
           )}
@@ -637,8 +610,8 @@ function CustomModal({
             </Stack>
           )}
 
-          {rejectedModaltitle && (
-            <DialogContent sx={{ paddingTop: '18px', paddingBottom: '5px' }}>
+          {/* {rejectedModaltitle && (
+            <DialogContent sx={{ paddingTop: '18px', paddingBottom: '0px' }}>
               <DialogContentText
                 id="alert-dialog-slide-description"
                 align={'center'}
@@ -655,7 +628,7 @@ function CustomModal({
                 {rejectedModaltitle}
               </DialogContentText>
             </DialogContent>
-          )}
+          )} */}
 
           {successModalMsg && (
             <Typography
@@ -674,6 +647,26 @@ function CustomModal({
               }}
             >
               {successModalMsg}
+            </Typography>
+          )}
+
+          {rejectedModalMsg && (
+            <Typography
+              fontWeight={400}
+              align={'center'}
+              pb={0}
+              fontSize={12}
+              sx={{
+                padding: {
+                  xs: '0 13px',
+                  sm: '0 70px',
+                },
+                marginBottom: '10px',
+                color: '#656769',
+                hyphens: 'initial',
+              }}
+            >
+              {rejectedModalMsg}
             </Typography>
           )}
 
@@ -775,7 +768,7 @@ function CustomModal({
                   <TableRow className="lmsRule-tableRow">
                     <TableCell className="lmsRule-table-head">S.No</TableCell>
                     <TableCell className="lmsRule-table-head">
-                      Rejection Type
+                      {title}
                     </TableCell>
                   </TableRow>
                 </TableHead>
@@ -823,22 +816,23 @@ function CustomModal({
             </Stack>
           )}
 
-          {rejectedModalMsg && (
+          {/* {rejectedModalMsg && (
             <Typography
-              fontWeight={700}
+              fontWeight={400}
               align={'center'}
               pb={0}
               fontSize={13}
               sx={{
                 padding: {
                   xs: '0 13px',
-                  sm: '0 70px',
+                  sm: '15px 70px',
                 },
+                color: '#151515',
               }}
             >
               {rejectedModalMsg}
             </Typography>
-          )}
+          )} */}
 
           {pause_content && (
             <Typography
@@ -995,13 +989,11 @@ function CustomModal({
               </Stack>
             )}
           {textarea_title && (
-            <Stack>
-              <Typography
-                className="textarea_title"
-                fontWeight={600}
-                fontSize={12}
-                sx={{ marginTop: '5px', marginBottom: '5px' }}
-              >
+            <Stack
+              className="modal-textarea"
+              style={textAreaHeight && { marginTop: '20px' }}
+            >
+              <Typography className="textarea_title">
                 {textarea_title}
               </Typography>
 
@@ -1013,24 +1005,14 @@ function CustomModal({
                     style={{
                       width: 538,
                       border: `1px solid #36363624`,
-                      height: '160px',
+                      height: `${textAreaHeight ? textAreaHeight : '160px'}`,
                     }}
                   />
                 </Grid>
               </Grid>
 
-              <Stack
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'row-reverse',
-                  marginTop: '5px',
-                }}
-              >
-                <Typography
-                  className="textarea"
-                  sx={{ float: 'right', fontSize: '10px', color: '#b6b7b7' }}
-                  pb={2}
-                >
+              <Stack className="textarea-alertMsg-container">
+                <Typography className="textarea-alertMsg">
                   {maxLength}
                 </Typography>
               </Stack>
@@ -1077,25 +1059,12 @@ function CustomModal({
             </Stack>
           )}
 
-          <Stack
-            className="modal_buttons"
-            sx={{
-              flexDirection: 'row',
-              justifyContent: 'flex-end',
-            }}
-          >
+          <Stack className="modal_buttons">
             {submit && (
               <Button
                 onClick={handleCloseSuccess}
                 variant="outlined"
-                sx={{
-                  fontSize: '13px',
-                  textTransform: 'capitalize',
-                  border: `1px solid #0662B7`,
-                  color: '#0662B7',
-                  fontWeight: '500',
-                  padding: '5px 21px',
-                }}
+                className="close-button"
               >
                 {close}
               </Button>
@@ -1103,17 +1072,7 @@ function CustomModal({
             {submit && (
               <Button
                 variant="contained"
-                sx={{
-                  fontSize: '13px',
-                  marginLeft: '30px',
-                  textTransform: 'capitalize',
-                  backgroundColor: `${colors.Modalblue}`,
-                  fontWeight: '500',
-                  padding: '6px 20px',
-                  '&:hover': {
-                    backgroundColor: `${colors.Modalblue}`,
-                  },
-                }}
+                className="submit-button"
                 onClick={handleSuccess}
               >
                 {pauseStatus == 'Remove Surrogate' ? 'Remove' : submit}
@@ -1121,27 +1080,11 @@ function CustomModal({
             )}
           </Stack>
           {btn && (
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-              }}
-              pb={0}
-              px={4}
-            >
+            <Box className="success-closeBtn-container">
               <Button
                 variant="contained"
+                className="success-closeBtn"
                 onClick={handleCloseSuccess}
-                sx={{
-                  width: '30em',
-                  height: '3em',
-                  fontSize: '12px',
-                  backgroundColor: `${colors.Modalblue}`,
-                  textTransform: 'capitalize',
-                  '&:hover': {
-                    backgroundColor: `${colors.Modalblue}`,
-                  },
-                }}
               >
                 {btn}
               </Button>
@@ -1193,15 +1136,11 @@ function CustomModal({
           )}
 
           {accessLibraryModaBtn && (
-            <Stack sx={{ margin: '0 30px' }}>
-              <Typography
-                sx={{
-                  color: '#151515',
-                  fontSize: ' 12px',
-                  fontWeight: '600',
-                  marginBottom: '4px',
-                }}
-              >
+            <Stack
+              className="access-library-container"
+              sx={{ margin: '0 30px' }}
+            >
+              <Typography className="access-library-header">
                 {accessLibraryModaBtn}
               </Typography>
               <Grid container sx={{ alignItems: 'center' }}>
@@ -1225,18 +1164,9 @@ function CustomModal({
                 <Grid sm={3}>
                   <Button
                     variant="contained"
-                    sx={{
-                      marginLeft: '30px',
-                      padding: '11px 20px',
-                      background: '#0662B7',
-                      fontSize: '13px',
-                      textTransform: 'capitalize',
-                      '&:hover': {
-                        backgroundColor: '#0662B7',
-                      },
-                    }}
+                    className="accessLibraryCopyLinkBtn"
                   >
-                    Copy Link
+                    {accessLibraryCopyLinkBtn}
                   </Button>
                 </Grid>
               </Grid>

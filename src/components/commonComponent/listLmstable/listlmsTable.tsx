@@ -168,6 +168,9 @@ const ListLMSTable = (props: any) => {
     } else if (alignment === 'Dropped') {
       let res3 = props.data.filter((item: any) => item.status === 'Dropped');
       setFilterteredData(res3);
+    }else if (alignment === 'Refer') {
+      let res3 = props.data.filter((item: any) => item.status === 'Refer');
+      setFilterteredData(res3);
     } else {
       setFilterteredData(props.data);
     }
@@ -368,22 +371,6 @@ const ListLMSTable = (props: any) => {
                 </Button>
               </div>
             )}
-            {props.flag === 'lmsdashboard' && (
-              <div className="reset-data">
-                <Button
-                  endIcon={<RightArrow />}
-                  sx={{
-                    fontSize: '1vw',
-                    marginLeft: '35px',
-                    color: '#0662B7',
-                    fontWeight: '600',
-                    textTransform: 'none',
-                  }}
-                >
-                  Detailed Reports
-                </Button>
-              </div>
-            )}
           </div>
         </div>
 
@@ -553,6 +540,12 @@ const ListLMSTable = (props: any) => {
                                         dataItem?.status,
                                         ProgressDot,
                                         '#E4AC04'
+                                      )}
+                                      {dataItem?.status?.includes('Refer') &&
+                                      kycStatus(
+                                        dataItem?.status,
+                                        ProgressDot,
+                                        '#F37B21'
                                       )}
 
                                     {dataItem?.status?.includes(

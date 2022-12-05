@@ -92,6 +92,7 @@ export default function Home() {
       <Typography color="secondary" variant="h5">
         Welcome Parithi!
       </Typography>
+
       <Box className="home-container">
         <Card content={pendingActionsData} />
         <Card content={savedItemsData} />
