@@ -1,6 +1,6 @@
 import { IconButton, Menu, MenuItem, Stack, Box } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import './LMSHistoryLog.scss';
+import './lmsHistoryLog.scss';
 import UnfoldMoreIcon from '../../../../assets/icons/sortArrow.svg';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { checkTagStatus } from '../../../../utils/tagBasedIndicator/tagStatus';
@@ -184,14 +184,11 @@ export const LMSHistoryLog = () => {
                 // onClick={handleClose}
                 onClick={() => {
                   handleClose();
-                  navigate(
-                    '/userManagement/orgStructure/screens/Onboarding/onboarding',
-                    {
-                      state: {
-                        isEditable: true,
-                      },
-                    }
-                  );
+                  navigate('/lms/lmsRule/viewRule', {
+                    state: {
+                      isEditable: true,
+                    },
+                  });
                 }}
                 style={{ padding: '10px 20px', textAlign: 'left' }}
               >

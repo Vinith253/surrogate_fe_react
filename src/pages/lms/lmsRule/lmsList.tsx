@@ -11,6 +11,7 @@ import GroupButton from '../../../components/commonComponent/GroupButton/GroupBu
 import CustomModal from '../../../components/commonComponent/customModal/CustomModal';
 import deActiveIcon from '../../../assets/icons/DeActive.svg';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { useNavigate } from 'react-router-dom';
 import ListLMSTable from '../../../components/commonComponent/listLmstable/listlmsTable';
 import Popover from '../../../components/commonComponent/Popover';
 import './style.scss';
@@ -24,6 +25,9 @@ function LMSRuleTab() {
   const [showResumeModal, setShowResumeModal] = useState<boolean>(false);
   const [showResumeSuccessModal, setShowResumeSuccessModal] =
     useState<boolean>(false);
+  const [editSchedulePause, setEditSchedulePause] = useState(false);
+  const [successEditSchedulePause, setSuccessEditSchedulePause] =
+    useState(false);
   const [pauseMethod, setPauseMethod] = useState('Pause Now');
   const [isAddRulePopoverOpen, setIsAddRulePopoverOpen] =
     React.useState<HTMLButtonElement | null>(null);
@@ -36,6 +40,8 @@ function LMSRuleTab() {
 
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
+
+  const navigate = useNavigate();
 
   const userListMoreMenu = [
     { label: 'View Rule', routePath: '/lms/lmsRule/viewRule' },
@@ -75,6 +81,20 @@ function LMSRuleTab() {
     },
     { title: 'Ended at', dataIndex: 'endedAt', key: 'endedAt' },
     { title: 'Initiated By', dataIndex: 'initiatedBy', key: 'initiatedBy' },
+    { title: 'Re-targeted', dataIndex: 'reTargeted', key: 'reTargeted' },
+    { title: 'Initiated', dataIndex: 'initiated', key: 'initiated' },
+    // { title: 'Failed', dataIndex: 'failed', key: 'failed' },
+    // { title: 'Again Dropped', dataIndex: 'againDropped', key: 'againDropped' },
+    // {
+    //   title: 'Again Rejected',
+    //   dataIndex: 'againRejected',
+    //   key: 'againRejected',
+    // },
+    // {
+    //   title: 'Approved',
+    //   dataIndex: 'approved',
+    //   key: 'approved',
+    // },
   ];
 
   const column2: any = [
@@ -119,7 +139,7 @@ function LMSRuleTab() {
     {
       label: 'Edit Scheduled Pause',
       icon: deActiveIcon,
-      isDisabled: true,
+      isDisabled: false,
     },
   ];
 
@@ -161,11 +181,12 @@ function LMSRuleTab() {
   };
 
   const onClickButton = (eachBtn: any) => {
-    console.log('eachBtn', eachBtn);
     if (eachBtn?.label === 'Resume Rule') {
       setShowResumeModal(true);
     } else if (eachBtn?.label === 'Pause Rule') {
       setShowPauseModal(true);
+    } else if (eachBtn?.label === 'Edit Scheduled Pause') {
+      setEditSchedulePause(true);
     }
   };
 
@@ -189,17 +210,21 @@ function LMSRuleTab() {
     if (pauseMethod === NORMAL_PAUSE) {
       setShowPauseModal(false);
       setShowPauseSuccessModal(true);
-      console.log('success');
     }
     if (pauseMethod === SCHEDULED_PAUSE) {
       setShowPauseModal(false);
       setShowScheduledPauseSuccessModal(true);
-      console.log('fail');
+      setEditSchedulePause(false);
     }
   };
 
   const pauseMethodChange = (value: any) => {
     setPauseMethod(value);
+  };
+
+  const reRouteToCreateRule = () => {
+    setIsDuplicateRule(false);
+    navigate('/lms/lmsRule/addNewRule');
   };
 
   return (
@@ -261,12 +286,13 @@ function LMSRuleTab() {
       {isDuplicateRule && (
         <CustomModal
           openSuccess={isDuplicateRule}
-          handleCloseSuccess={() => setIsDuplicateRule(false)}
+          handleCloseSuccess={reRouteToCreateRule}
           title={'Duplicate LMS Rule'}
           duplicate_role_content={'Select the LMS Rule'}
           duplicateRoleCloseBtn={' Close'}
           existingRoleItem={existingLMSRuleItem}
           duplicate_modal_label={'Choose LMS rule for duplication'}
+          btn={'Next'}
         />
       )}
       {showPauseModal && (
@@ -292,6 +318,7 @@ function LMSRuleTab() {
           pauseStatusKey={'Pause Now'}
         />
       )}
+
       {showPauseSuccessModal && (
         <CustomModal
           openSuccess={showPauseSuccessModal}
@@ -337,6 +364,40 @@ function LMSRuleTab() {
           successModalTitle={'Main Config_R_CIBIL - Resume Now'}
           successModalMsg={
             'Your action of Resuming - Main Config_R_CIBIL has been successfully sent to the reviewer.'
+          }
+          btn={' Close'}
+        />
+      )}
+      {editSchedulePause && (
+        <CustomModal
+          openSuccess={editSchedulePause}
+          handleCloseSuccess={() => setEditSchedulePause(false)}
+          handleSuccess={successModal}
+          title={'Deactivate '}
+          pause_content={'You can pause it or perform a scheduled pause.'}
+          scheduledPause_content={
+            'Please choose a date range to perform a scheduled pause.'
+          }
+          textarea_title={'Add Remarks'}
+          radioValuOne={NORMAL_PAUSE}
+          radioValuTwo={SCHEDULED_PAUSE}
+          dateRange_title={'Enter Date range'}
+          maxLength={'Maximum of 500 words'}
+          pauseMethodChecking={(arg1: string) => pauseMethodChange(arg1)}
+          close={'Close'}
+          submit={'Submit'}
+          datepickerLabelStart={'Start Date and time'}
+          datepickerLabelEnd={'End Date and time'}
+          pauseStatusKey={'Schedule Pause'}
+        />
+      )}
+      {successEditSchedulePause && (
+        <CustomModal
+          openSuccess={successEditSchedulePause}
+          handleCloseSuccess={() => setSuccessEditSchedulePause(false)}
+          successModalTitle={`Deactivated- Scheduled Pause`}
+          successModalMsg={
+            'Your action of Scheduled Pause - Card For Card Surrogate From  DD/MM/YYYTo DD/MM/YYY is successfully sent to reviewer'
           }
           btn={' Close'}
         />
