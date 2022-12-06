@@ -34,6 +34,7 @@ function DuplicateRole() {
         duplicate_role_content={'Select the Existing Role'}
         duplicateRoleCloseBtn={' Close'}
         existingRoleItem={existingRoleItem}
+        btn={'submit'}
       />
     </div>
   );
