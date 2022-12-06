@@ -759,7 +759,9 @@ function CustomModal({
 
           {tableDataLMSRule && (
             <>
-              {title == 'Selected DSA' && (
+              {(title === `Selected DSA's` ||
+                title === `Selected Division's` ||
+                title === `Selected Fintech Partner's`) && (
                 <Box className="search-container-rejection">
                   <Box className="search-box">
                     <SearchIcon className="search-icon" />

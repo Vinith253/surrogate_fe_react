@@ -3,7 +3,7 @@ import { TabBar } from '../../../components/commonComponent/customTab/CustomTab'
 import LMSList from './lmsList';
 import { Stack } from '@mui/material';
 import './style.scss';
-import { LMSHistoryLog } from './LMS-HistoryLog/LMSHistoryLog';
+import { LMSHistoryLog } from './lmsHistoryLog/lmsHistoryLog';
 
 function LMSRule() {
   const TabListData: dataList = [
