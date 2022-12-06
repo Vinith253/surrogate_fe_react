@@ -55,7 +55,7 @@ function DashboardCard(props: {
           endIcon={ props.viewAll ? <DownArrow style={{width:'10px', height: '5px'}}/> : <RightArrow style={{width:'5px', height: '10px'}}/>}
           sx={{ fontSize: "0.8vw",color:'#0662B7',textTransform:'none'}}
           onClick={()=> {
-            navigate(props.navPath)
+            navigate(props?.navPath)
           }}
         >
           {props.viewAll ? "View All": "More"}

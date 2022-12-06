@@ -376,17 +376,17 @@ const ListLMSTable = (props: any) => {
         </div>
 
         <Grid container spacing={0}>
-          <Grid item sm={9}>
+          <Grid item sm={9} sx={{ maxWidth: '900px !important' }}>
             <TableContainer
               component={Paper}
-              sx={{ maxWidth: '950px' }}
+              // sx={{ maxWidth: '950px' }}
               className="table1"
             >
               <Table
                 style={{
-                  width: '100%',
+                  width: '120%',
                   borderBottom: '1px solid #F3F3F3',
-                  overflowX: 'auto',
+                  // overflowX: 'auto',
                 }}
                 aria-label="customized table"
               >
