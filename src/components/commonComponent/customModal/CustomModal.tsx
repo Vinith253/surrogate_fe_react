@@ -698,10 +698,9 @@ function CustomModal({
 
             {successMsg && (
               <Typography
-                fontWeight={400}
                 align={'center'}
                 pb={0}
-                fontSize={12}
+                fontSize={14}
                 sx={{
                   padding: {
                     xs: '0 13px',
@@ -710,6 +709,7 @@ function CustomModal({
                   marginBottom: '10px',
                   color: '#656769',
                   hyphens: 'initial',
+                  fontWeight: '500',
                 }}
               >
                 {successMsg}

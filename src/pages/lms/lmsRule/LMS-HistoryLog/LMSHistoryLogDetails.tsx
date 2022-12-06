@@ -96,7 +96,7 @@ export const LMSHistoryLogDetails = () => {
                     className="back-arrow"
                     onClick={() => navigate(-1)}
                   >
-                    <ArrowBackIcon className="back-arrow" />{' '}
+                    <ArrowBackIcon width={200} className="back-arrow" />{' '}
                   </Typography>
                 </Stack>
 
