@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Stack, Box, Typography, Button, ListItem, List } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
@@ -11,8 +11,12 @@ import { colors } from '../../../../../style/Color';
 import { historyLogDetailData } from '../../../../userManagement/roleCreation/screens/HistoryLogDetailScreen/historyLogDetail.const';
 import BtnOutlined from '../../../../../components/commonComponent/CustomText/Button/Outlined';
 import BtnContained from '../../../../../components/commonComponent/CustomText/Button/Contained';
+import CustomModal from '../../../../../components/commonComponent/customModal/CustomModal';
 function ReTargetingDetails() {
   const navigate = useNavigate();
+  const [openModel, setOpenModel] = useState(false);
+  const [communicationModel, setCommunicationModel] = useState(false);
+  const [successModel, setSuccesModel] = useState(false);
 
   const goBack = () => {
     navigate(-1);
@@ -126,7 +130,44 @@ function ReTargetingDetails() {
       value: 'DPD - 71 (Failed) ',
     },
   ];
-
+  const product_label = [
+    {
+      id: 1,
+      label: 'SMS',
+      defaultChecked: false,
+    },
+    {
+      id: 2,
+      label: 'Whatsapp',
+      defaultChecked: false,
+    },
+    {
+      id: 3,
+      label: 'Mail',
+      defaultChecked: false,
+    },
+    {
+      id: 4,
+      label: 'Call',
+      defaultChecked: false,
+    },
+  ];
+  const handleCloseSuccess = () => {
+    setOpenModel(false);
+    setCommunicationModel(false);
+    setSuccesModel(false);
+  };
+  const modelOpenNavigate = () => {
+    setOpenModel(true);
+    setTimeout(() => {
+      setOpenModel(false);
+      setCommunicationModel(true);
+    }, 2000);
+  };
+  const reTargetingModel = () => {
+    setCommunicationModel(false);
+    setSuccesModel(true);
+  };
   return (
     <Stack className="reTargeting-container">
       <Stack sx={{ margin: ' 10px 0 60px 0' }}>
@@ -242,10 +283,47 @@ function ReTargetingDetails() {
             }}
           >
             <BtnOutlined title="Close" onClick={() => navigate(-1)} />
-            <BtnContained title="Re-Target" onClick={() => navigate(-1)} />
+            <BtnContained
+              title="Re-Target"
+              onClick={() => {
+                modelOpenNavigate();
+              }}
+            />
           </Box>
         </Box>
       </Stack>
+      {openModel && (
+        <CustomModal
+          openSuccess={openModel}
+          handleCloseSuccess={handleCloseSuccess}
+          // successModalTitle={'Activation Organisation'}
+          // successModalMsg={
+          //   'Your request for Activating Org is successfully sent to the Reviewer.'
+          // }
+          // btn={' Close'}
+          LoadingMsg={'Loading selected application(s) for Re-Targeting'}
+        />
+      )}
+      {communicationModel && (
+        <CustomModal
+          openSuccess={communicationModel}
+          handleCloseSuccess={handleCloseSuccess}
+          title={'Choose the mode of communication'}
+          close={'Cancel'}
+          submit={'Re-Target'}
+          product_label={product_label}
+          handleSuccess={reTargetingModel}
+        />
+      )}
+      {successModel && (
+        <CustomModal
+          openSuccess={successModel}
+          handleCloseSuccess={handleCloseSuccess}
+          successMsg={
+            'Selected applications are being processed. They will be notified of eligible customers to resume or process.'
+          }
+        />
+      )}
     </Stack>
   );
 }

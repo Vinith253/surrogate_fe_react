@@ -6,20 +6,18 @@ import './style.scss';
 
 export default function SearchDropdown(props: {
   data: any;
-  handleChange?: Function;
+  onSelect?: Function;
+  selectedValue?: string;
 }) {
-  const [selectedValue, setSelectedValue] = useState('');
-
   const handleChange = (event: SelectChangeEvent) => {
-    setSelectedValue(event.target.value);
-    // props.handleChange();
+    props?.onSelect && props?.onSelect(event);
   };
 
   return (
     <FormControl sx={{ m: 1, minWidth: 120 }}>
       <Select
         className="single-select-dropdown"
-        value={selectedValue}
+        value={props?.selectedValue ?? ''}
         onChange={handleChange}
         displayEmpty
         inputProps={{ 'aria-label': 'Without label' }}
