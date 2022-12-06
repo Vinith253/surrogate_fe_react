@@ -11,10 +11,6 @@ import lms from '../../assets/icons/lms.svg';
 import frequentActivity from '../../assets/images/frequentActivity.svg';
 import '../home/Home.scss';
 import { useEffect, useState } from 'react';
-import ReasonForRejection from '../../components/commonComponent/customModal/RISK-MANAGEMENT/ReasonForRejection';
-import SuccessForActivate from '../../components/commonComponent/customModal/USER-CREATION/SuccessForActivate';
-import SuccessForRejection from '../../components/commonComponent/customModal/RISK-MANAGEMENT/SuccessForRejection';
-import DuplicateRole from '../../components/commonComponent/customModal/ROLE-CREATION/DuplicateRole';
 
 export default function Home() {
   const pendingActionsData = {
@@ -98,9 +94,6 @@ export default function Home() {
       </Typography>
 
       <Box className="home-container">
-        {/* <ReasonForRejection />
-        <SuccessForRejection />
-        <DuplicateRole /> */}
         <Card content={pendingActionsData} />
         <Card content={savedItemsData} />
         <Card content={frequentActivitiesData} />

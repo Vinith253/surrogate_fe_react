@@ -98,6 +98,8 @@ type props = {
   pauseStatusKey?: string;
   textAreaHeight?: any;
   modalType?: string;
+  duplicate_modal_label?: string;
+  closeFunction?: () => void;
 };
 
 function CustomModal({
@@ -156,12 +158,16 @@ function CustomModal({
   pauseStatusKey,
   textAreaHeight,
   modalType,
+  duplicate_modal_label,
+  closeFunction,
 }: props) {
   const [pauseStatus, setPauseStatus] = useState(pauseStatusKey);
   const [startDatevalue, setStartDateValue] = useState(null);
   const [endDatevalue, setEndDateValue] = useState(null);
   const [existingRole, setexistingRole] = React.useState('');
   const [checked, setChecked] = React.useState(false);
+
+  console.log('existingRole', existingRole);
 
   useEffect(() => {
     if (pauseStatus) {
@@ -194,6 +200,7 @@ function CustomModal({
           title == 'Request for Deactivation' ||
           title == 'Add Organisation' ||
           title == 'Duplicate Role' ||
+          title == 'Duplicate LMS Rule' ||
           title == 'Employee Details' ||
           title == 'Choose the mode of communication' ||
           LoadingMsg ||
@@ -262,9 +269,12 @@ function CustomModal({
           )}
 
           {existingRoleItem && (
-            <FormControl sx={{ minWidth: 120 }} size="small">
+            <FormControl
+              sx={{ minWidth: 120, marginBottom: '20px' }}
+              size="small"
+            >
               <InputLabel id="demo-select-small">
-                Choose existing role for duplication
+                {existingRole == '' ? duplicate_modal_label : ''}
               </InputLabel>
 
               <Select
@@ -417,7 +427,7 @@ function CustomModal({
                 variant="text"
                 color="secondary"
                 sx={{ fontSize: '14px', textTransform: 'capitalize' }}
-                onClick={handleCloseSuccess}
+                onClick={closeFunction}
               >
                 Close
               </Button>
@@ -586,7 +596,6 @@ function CustomModal({
               >
                 {ProceedBtn}
               </Button>
-              info_icon
             </Stack>
           )}
 
@@ -750,7 +759,9 @@ function CustomModal({
 
           {tableDataLMSRule && (
             <>
-              {title == 'Selected DSA' && (
+              {(title === `Selected DSA's` ||
+                title === `Selected Division's` ||
+                title === `Selected Fintech Partner's`) && (
                 <Box className="search-container-rejection">
                   <Box className="search-box">
                     <SearchIcon className="search-icon" />
@@ -764,7 +775,7 @@ function CustomModal({
                   <TableRow className="lmsRule-tableRow">
                     <TableCell className="lmsRule-table-head">S.No</TableCell>
                     <TableCell className="lmsRule-table-head">
-                      Rejection Type
+                      {title}
                     </TableCell>
                   </TableRow>
                 </TableHead>

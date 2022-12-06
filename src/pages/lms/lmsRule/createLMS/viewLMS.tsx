@@ -7,8 +7,15 @@ import { ScreenHeader } from '../../../../components/commonComponent/ScreenHeade
 import { ReactComponent as EditRole } from '../../../../assets/icons/edit_role.svg';
 import DetailsCard from '../../../../components/commonComponent/DetailsCard';
 import HeaderWithInfo from '../../../../components/commonComponent/HeaderWithInfo';
+import CustomModal from '../../../../components/commonComponent/customModal/CustomModal';
 
 function ViewUser() {
+  const [isRejectedTypeModalOpen, setIsRejectedTypeModalOpen] = useState(false);
+  const [isDSAListModalOpen, setIsDSAListModalOpen] = useState(false);
+  const [isDivisionListModalOpen, setIsDivisionListModalOpen] = useState(false);
+  const [isFintechPartnerListModalOpen, setIsFintechPartnerListModalOpen] =
+    useState(false);
+
   const navigate = useNavigate();
   const goBack = () => {
     navigate(-1);
@@ -22,30 +29,6 @@ function ViewUser() {
       {
         label: 'Type',
         value: 'Rejected',
-      },
-    ],
-  };
-
-  const rejectedRuleConfiguration = {
-    title: 'Rejected Rule Configuration',
-    icon: true,
-    note: 'Lorem ipusm dolor sit amet, consectetur adipiscing elit. Euismod nulla cursus nascetur velit nisl sed',
-    details: [
-      {
-        label: 'Surrogate Categories',
-        value: 'Payroll, Card For Card, CIBIL',
-      },
-      {
-        label: 'Dedube',
-        value: 'Enable Dedube Configuration',
-      },
-      {
-        label: 'Rejection Type',
-        value: 'Score, CIBIL...Show More',
-      },
-      {
-        label: 'Mode Of Communication',
-        value: 'SMS, Whatsapp, Mail',
       },
     ],
   };
@@ -87,6 +70,41 @@ function ViewUser() {
     },
   ];
 
+  const tableDataLMSRule = [
+    {
+      sNo: '1',
+      typeAndDSA: 'Score',
+    },
+    {
+      sNo: '2',
+      typeAndDSA: 'CIBIL',
+    },
+    {
+      sNo: '3',
+      typeAndDSA: 'DPD',
+    },
+    {
+      sNo: '4',
+      typeAndDSA: 'Income',
+    },
+    {
+      sNo: '5',
+      typeAndDSA: 'C4C',
+    },
+    {
+      sNo: '6',
+      typeAndDSA: 'Pincode',
+    },
+    {
+      sNo: '7',
+      typeAndDSA: 'KYC',
+    },
+    {
+      sNo: '8',
+      typeAndDSA: 'Others',
+    },
+  ];
+
   return (
     <Stack className="view-rule-main-container">
       <Box className="lms-rule-container">
@@ -102,7 +120,7 @@ function ViewUser() {
               color="secondary"
               startIcon={<EditRole />}
               aria-haspopup="true"
-              onClick={() => navigate('/userManagement/userCreation/editUser')}
+              onClick={() => navigate('/lms/lmsRule/editRule')}
               id="basic-button"
             >
               Edit Rule
@@ -112,7 +130,57 @@ function ViewUser() {
       </Box>
       <Stack>
         <DetailsCard data={selectedConfiguration} gridColumn={3} />
-        <DetailsCard data={rejectedRuleConfiguration} gridColumn={3} />
+        <Stack className="lms-rule-container">
+          <HeaderWithInfo
+            header={'Rejected Rule Configuration'}
+            isInfoEnabled={true}
+            info="From here, you can add the user’s personal details"
+            isDownloadEnabled={false}
+          />
+          <Grid
+            container
+            rowSpacing={2}
+            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+            style={{ marginTop: '0px' }}
+          >
+            <Grid item xs={3}>
+              <Stack className="each-info">
+                <Stack className="info-label">Surrogate Categories</Stack>
+                <Stack className="info-value">
+                  Payroll, Card For Card, CIBIL
+                </Stack>
+              </Stack>
+            </Grid>
+            <Grid item xs={3}>
+              <Stack className="each-info">
+                <Stack className="info-label">Dedube</Stack>
+                <Stack className="info-value">
+                  Enable Dedube Configuration
+                </Stack>
+              </Stack>
+            </Grid>
+            <Grid item xs={3}>
+              <Stack className="each-info">
+                <Stack className="info-label">Rejection Type</Stack>
+                <Stack className="info-value display-flex">
+                  <Stack>Score, CIBIL...</Stack>
+                  <Stack
+                    className="show-more"
+                    onClick={() => setIsRejectedTypeModalOpen(true)}
+                  >
+                    Show More
+                  </Stack>
+                </Stack>
+              </Stack>
+            </Grid>
+            <Grid item xs={3}>
+              <Stack className="each-info">
+                <Stack className="info-label">Mode Of Communication</Stack>
+                <Stack className="info-value">SMS, Whatsapp, Mail</Stack>
+              </Stack>
+            </Grid>
+          </Grid>
+        </Stack>
 
         <Stack className="lms-rule-container">
           <HeaderWithInfo
@@ -136,8 +204,14 @@ function ViewUser() {
             <Grid item xs={8}>
               <Stack className="each-info">
                 <Stack className="info-label">Type</Stack>
-                <Stack className="info-value">
-                  4 DSAs Selected...Show DSAs
+                <Stack className="info-value display-flex">
+                  <Stack>4 DSAs Selected...</Stack>
+                  <Stack
+                    className="show-more"
+                    onClick={() => setIsDSAListModalOpen(true)}
+                  >
+                    Show DSAs
+                  </Stack>
                 </Stack>
               </Stack>
             </Grid>
@@ -150,8 +224,14 @@ function ViewUser() {
             <Grid item xs={8}>
               <Stack className="each-info">
                 <Stack className="info-label">Type</Stack>
-                <Stack className="info-value">
-                  4 DSAs Selected...Show Divisions
+                <Stack className="info-value display-flex">
+                  <Stack>4 Divisions Selected...</Stack>
+                  <Stack
+                    className="show-more"
+                    onClick={() => setIsDivisionListModalOpen(true)}
+                  >
+                    Show Divisions
+                  </Stack>
                 </Stack>
               </Stack>
             </Grid>
@@ -164,15 +244,21 @@ function ViewUser() {
             <Grid item xs={8}>
               <Stack className="each-info">
                 <Stack className="info-label">Type</Stack>
-                <Stack className="info-value">
-                  4 DSAs Selected...Show Fintech Partners
+                <Stack className="info-value display-flex">
+                  <Stack>4 Fintech Partner Selected...</Stack>
+                  <Stack
+                    className="show-more"
+                    onClick={() => setIsFintechPartnerListModalOpen(true)}
+                  >
+                    Show Fintech Partners
+                  </Stack>
                 </Stack>
               </Stack>
             </Grid>
           </Grid>
         </Stack>
 
-        <Stack className="lms-rule-container">
+        <Stack className="lms-rule-container" style={{ marginBottom: '50px' }}>
           <HeaderWithInfo
             header={'Frequency'}
             isInfoEnabled={true}
@@ -188,6 +274,7 @@ function ViewUser() {
             <Grid item xs={12}>
               1.Select Date - Daily
             </Grid>
+
             <Grid item xs={4}>
               <Stack className="each-info">
                 <Stack className="info-label">Start Date</Stack>
@@ -206,7 +293,9 @@ function ViewUser() {
                 <Stack className="info-value">12 Days once</Stack>
               </Stack>
             </Grid>
-            <Stack className="underline"></Stack>
+            <Grid item xs={12}>
+              <Stack className="underline"></Stack>
+            </Grid>
             <Grid item xs={12}>
               2.Select Date - Weekly
             </Grid>
@@ -234,7 +323,9 @@ function ViewUser() {
                 <Stack className="info-value">Monday</Stack>
               </Stack>
             </Grid>
-            <Stack className="underline"></Stack>
+            <Grid item xs={12}>
+              <Stack className="underline"></Stack>
+            </Grid>
             <Grid item xs={12}>
               3.Select Date - Monthly
             </Grid>
@@ -262,7 +353,9 @@ function ViewUser() {
                 <Stack className="info-value">For Day - First, Monday</Stack>
               </Stack>
             </Grid>
-            <Stack className="underline"></Stack>
+            <Grid item xs={12}>
+              <Stack className="underline"></Stack>
+            </Grid>
             <Grid item xs={12}>
               4.Select Date - Yearly
             </Grid>
@@ -290,7 +383,6 @@ function ViewUser() {
                 <Stack className="info-value">For Day - First, Monday</Stack>
               </Stack>
             </Grid>
-            <Stack className="underline"></Stack>
           </Grid>
         </Stack>
       </Stack>
@@ -299,6 +391,42 @@ function ViewUser() {
         handleCancelClick={goBack}
         // handleSaveasDraftClick={handleSaveasDraftClick}
       />
+      {isRejectedTypeModalOpen && (
+        <CustomModal
+          openSuccess={isRejectedTypeModalOpen}
+          handleCloseSuccess={() => setIsRejectedTypeModalOpen(false)}
+          title={'Rejection Type'}
+          duplicateRoleCloseBtn={'Close'}
+          tableDataLMSRule={tableDataLMSRule}
+        />
+      )}
+      {isDSAListModalOpen && (
+        <CustomModal
+          openSuccess={isDSAListModalOpen}
+          handleCloseSuccess={() => setIsDSAListModalOpen(false)}
+          title={`Selected DSA's`}
+          duplicateRoleCloseBtn={'Close'}
+          tableDataLMSRule={tableDataLMSRule}
+        />
+      )}
+      {isDivisionListModalOpen && (
+        <CustomModal
+          openSuccess={isDivisionListModalOpen}
+          handleCloseSuccess={() => setIsDivisionListModalOpen(false)}
+          title={`Selected Division's`}
+          duplicateRoleCloseBtn={'Close'}
+          tableDataLMSRule={tableDataLMSRule}
+        />
+      )}
+      {isFintechPartnerListModalOpen && (
+        <CustomModal
+          openSuccess={isFintechPartnerListModalOpen}
+          handleCloseSuccess={() => setIsFintechPartnerListModalOpen(false)}
+          title={`Selected Fintech Partner's`}
+          duplicateRoleCloseBtn={'Close'}
+          tableDataLMSRule={tableDataLMSRule}
+        />
+      )}
     </Stack>
   );
 }

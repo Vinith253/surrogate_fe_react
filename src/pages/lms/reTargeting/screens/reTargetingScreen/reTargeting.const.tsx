@@ -79,3 +79,49 @@ export const reTargeting: any = [
   },
 ];
 
+export const reTargetingDropdownFields = [
+  {
+    label: 'Select Channel',
+    option: [
+      { value: 'All', name: 'All' },
+      { value: 'tamilnadu', name: 'Tamilnadu' },
+      { value: 'andra', name: 'Andhra' },
+      { value: 'telungana', name: 'Telungana' },
+      { value: 'karnataka', name: 'Karnataka' },
+      { value: 'kerala', name: 'Kerala' },
+    ],
+  },
+  {
+    label: 'Select Surrogate',
+    option: [
+      { value: 'All', name: 'All' },
+      { value: 'tamilnadu', name: 'Tamilnadu' },
+      { value: 'andra', name: 'Andhra' },
+      { value: 'telungana', name: 'Telungana' },
+      { value: 'karnataka', name: 'Karnataka' },
+      { value: 'kerala', name: 'Kerala' },
+    ],
+  },
+  {
+    label: 'Select Type',
+    option: [
+      { value: 'All', name: 'All' },
+      { value: 'tamilnadu', name: 'Tamilnadu' },
+      { value: 'andra', name: 'Andhra' },
+      { value: 'telungana', name: 'Telungana' },
+      { value: 'karnataka', name: 'Karnataka' },
+      { value: 'kerala', name: 'Kerala' },
+    ],
+  },
+  {
+    label: 'Rejection Type',
+    option: [
+      { value: 'All', name: 'All' },
+      { value: 'tamilnadu', name: 'Tamilnadu' },
+      { value: 'andra', name: 'Andhra' },
+      { value: 'telungana', name: 'Telungana' },
+      { value: 'karnataka', name: 'Karnataka' },
+      { value: 'kerala', name: 'Kerala' },
+    ],
+  },
+];
