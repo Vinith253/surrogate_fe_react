@@ -8,7 +8,7 @@ import DashboardCard from '../../../../components/commonComponent/CommonCard/Sal
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { tableCellClasses } from '@mui/material/TableCell';
 import TypographyHead from '../../../../components/commonComponent/CustomText/Head';
-import { useNavigate } from 'react-router-dom';
+import { json, useNavigate } from 'react-router-dom';
 import SelectDropdown from '../../../../components/commonComponent/CheckboxSelectDropdown';
 import SearchSelectDropdown from '../../../../components/commonComponent/SearchDropdown';
 import TableComp from '../../../../components/commonComponent/ListTable/ListTable';
@@ -94,6 +94,25 @@ import ListTable from '../../../../components/commonComponent/commonListTable/co
 //   { field: 'more', headerName: 'More', type: 'number', width: 20 },
 
 // ];
+
+export async function cardCatalogueLoader() {
+  const cardList = await getListOfCards();
+  // return json({ cardList }, { status: 200 });
+  return {};
+}
+
+const getListOfCards = async () => {
+  await getCardList({
+    page: 1,
+    size: 2,
+  })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
 export interface cardCatalogueFilterInterface {
   label?: string;

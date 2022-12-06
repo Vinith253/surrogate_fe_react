@@ -196,7 +196,10 @@ export default function App() {
           path="/riskManagement/customerDetails"
           element={<CustomerDetailScreen />}
         />
-        <Route path="/lms/retargeting/reTargetingDetails" element={<ReTargetingDetails />} />
+        <Route
+          path="/lms/retargeting/reTargetingDetails"
+          element={<ReTargetingDetails />}
+        />
       </Route>
     </Routes>
   );
