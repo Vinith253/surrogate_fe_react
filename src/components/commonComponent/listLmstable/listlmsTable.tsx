@@ -332,7 +332,8 @@ const ListLMSTable = (props: any) => {
             props.flag === 'retargeting' ||
             props.flag === 'lms-rule' ||
             props.flag === 'retargeting-history' ||
-            props.flag === 'lmsdashboard') && (
+            props.flag === 'lmsdashboard' ||
+            props.flag === 'riskMngmt') && (
             <TextField
               className="text-field"
               placeholder="Search by..."
@@ -354,7 +355,8 @@ const ListLMSTable = (props: any) => {
             {(props.flag === 'dashboard' ||
               props.flag === 'sales-report' ||
               props.flag === 'retargeting' ||
-              props.flag === 'lmsdashboard') && (
+              props.flag === 'lmsdashboard' ||
+              props.flag === 'riskMngmt') && (
               <div className="reset-data">
                 <Button
                   startIcon={<EditIcon />}

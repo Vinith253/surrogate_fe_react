@@ -122,6 +122,31 @@
     flex-direction: column;
     justify-content: space-between;
     margin-top: 32px;
+    margin-bottom: 32px;
+
+    .underline {
+      border: 1px solid #f0f2f5;
+      width: 100%;
+      margin: 24px 0px 12px 0px;
+    }
+  }
+
+  .refer-value-container{
+    background-color: white;
+      display: flex;
+      padding: 24px 32px 20px 32px;
+      width: 100%;
+      gap:24px;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.16);
+      border-radius: 4px;
+  }
+
+  .risk-channel-detail-container {
+    background-color: white;
+      display: flex;
+      justify-content: space-between;
+      margin-top: 32px;
+
   }
 
 }
