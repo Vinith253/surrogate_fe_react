@@ -43,7 +43,7 @@ import SelectSearchDropdown from '../../../../components/commonComponent/Checkbo
 import PlusCircleIcon from '../../../../assets/icons/plus_circle.svg';
 import './style.scss';
 
-function CreateLMSRule() {
+function EditLMSRule() {
   const [isDSAListModalOpen, setIsDSAListModalOpen] = useState(false);
   const [isDivisionListModalOpen, setIsDivisionListModalOpen] = useState(false);
   const [isFintechPartnerListModalOpen, setIsFintechPartnerListModalOpen] =
@@ -143,14 +143,13 @@ function CreateLMSRule() {
 
   return (
     <Stack className="create-lms-rule-container">
-      {/* <Stack className="create-lms-rule-header">
+      <Stack className="create-lms-rule-header">
         <ScreenHeader
           title="Rule Name: C4CNORCKYC (Auto Populate)"
           info="From here you can create access presets to assign with users in Users Creation."
           showBackButton={false}
         />
-      </Stack> */}
-
+      </Stack>
       <Stack className="lms-rule-container">
         <HeaderWithInfo
           header="Role Details"
@@ -756,4 +755,4 @@ function CreateLMSRule() {
   );
 }
 
-export default CreateLMSRule;
+export default EditLMSRule;
