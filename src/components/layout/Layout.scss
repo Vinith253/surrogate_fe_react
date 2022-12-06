@@ -1,5 +1,9 @@
 .active {
   background-color: #0662b7 !important;
+  img {
+    filter: invert(88%) sepia(100%) saturate(3%) hue-rotate(188deg)
+      brightness(109%) contrast(97%);
+  }
 }
 
 .inactive {
