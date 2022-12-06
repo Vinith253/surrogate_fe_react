@@ -12,6 +12,8 @@ import BtnContained from '../../../components/commonComponent/CustomText/Button/
 import BtnOutlined from '../../../components/commonComponent/CustomText/Button/Outlined';
 import SelectDropdown from '../../../components/commonComponent/CheckboxSelectDropdown';
 import ChooseCategoryToViewData from '../../../components/commonComponent/ChooseCategoryToViewData';
+import { ScreenHeader } from '../../../components/commonComponent/ScreenHeader/ScreenHeader';
+import HeaderWithInfo from '../../../components/commonComponent/HeaderWithInfo';
 import { SalesReportFilterDropdown } from './salesReport.const';
 import { Typography, Stack, Box, Grid } from '@mui/material';
 
@@ -20,17 +22,13 @@ function SalesReportList() {
   return (
     <Stack className="sales-report-list">
       <Stack className="container">
-        <Stack className="underline">
-          <Stack>
-            <Typography variant="subtitle1" sx={{ letterSpacing: 0.5 }}>
-              Sales Report
-            </Typography>
-            <Typography variant="subtitle2" className="sub-label">
-              Copy a specific link of any channel from here.
-            </Typography>
-          </Stack>
-        </Stack>
-        <Grid container spacing={2} className="filters-container">
+        <ScreenHeader
+          title="Sales Report"
+          info="From here you can create access presets to assign with users in Users Creation."
+          showBackButton={false}
+        />
+        <Stack className="underline"></Stack>
+        <Grid container spacing={2}>
           {SalesReportFilterDropdown?.map((eachItem: any, index: number) => {
             return (
               <Grid item xs={3} key={index}>
@@ -50,16 +48,12 @@ function SalesReportList() {
 
       {isFiltered ? (
         <Stack className="container">
-          <Stack className="underline">
-            <Typography variant="subtitle1" sx={{ letterSpacing: 0.5 }}>
-              Sales Data
-              <Typography className="icons-container">
-                <img src={DownloadIcon} alt="" className="icons" />
-                <img src={MailIcon} alt="" className="icons" />
-              </Typography>
-            </Typography>
-            <Typography variant="subtitle2" className="sub-label"></Typography>
-          </Stack>
+          <HeaderWithInfo
+            header="Sales Data"
+            isInfoEnabled={false}
+            info=""
+            isDownloadEnabled={true}
+          />
           <TableComp
             viewPath="/sales/salesReportDetails"
             rows={salesDashboardList}

@@ -11,6 +11,7 @@
       border-top: none;
       border-left: none;
       border-right: none;
+      margin: 18px 0px;
       border-bottom: 2px solid #eceff2;
     }
 
@@ -19,10 +20,6 @@
       letter-spacing: 0.2;
       color: #a3a3a5;
       padding-bottom: 20px;
-    }
-
-    .filters-container {
-      margin-top: 7px;
     }
 
     .dropdown-label {
@@ -49,7 +46,8 @@
 
 .sales-report-details-container {
   background-color: #eceff2;
-  min-height: 100vh;
+  margin-bottom: 110px;
+  margin-top: 10px;
   .header-container {
     background-color: #ffffff;
     padding: 20px 25px;
