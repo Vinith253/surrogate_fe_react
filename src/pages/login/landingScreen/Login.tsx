@@ -19,7 +19,7 @@ import {
 } from '@mui/material';
 
 import { useLocation, useNavigate } from 'react-router-dom';
-
+import wrong_info from '../../../assets/images/wrong_Info.svg';
 import CardImage from '../../../../../assets/images/image 44.png';
 import CardImg from '../../../../../assets/images/cardImg.svg';
 import ViewDoc from '../../../../../assets/images/viewDoc.svg';
@@ -297,8 +297,12 @@ export const LoginPage = () => {
                       width: '340px',
                     }}
                     placeholder="Enter Email Id"
-                    helperText={email && 'Error Mismatch'}
+                    
                   />
+                  {email && <Box sx={{display:'flex',marginTop:'5px',gap:1}} >
+                      <img src={wrong_info} />
+                      <Typography sx={{fontSize:'10px',color:'#992D26'}} >Error Mismatch</Typography>
+                    </Box>}
                 </Box>
                 {/* {email && (
                   <Box>
@@ -339,9 +343,15 @@ export const LoginPage = () => {
                     }
                   />
                   {password && (
-                    <FormHelperText error id="accountId-error">
+                    <Box sx={{display:'flex',marginTop:'5px',gap:1}} >
+                      <img src={wrong_info} />
+                      <Typography sx={{fontSize:'10px',color:'#992D26'}} >Password Wrong</Typography>
+
+                    {/* <FormHelperText error id="accountId-error">
+                    
                       Password Wrong
-                    </FormHelperText>
+                    </FormHelperText> */}
+                    </Box>
                   )}
 
                   <Typography

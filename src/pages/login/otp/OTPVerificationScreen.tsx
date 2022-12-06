@@ -14,6 +14,7 @@ import Poweredby from '../../../assets/images/Powered by.svg';
 import Yesbank from '../../../assets/images/Yes_Bank_SVG_Logo 1.svg';
 import { verification } from '../../../utils/Constants';
 import info_icon from '../../../assets/images/info_icon.svg';
+import wrong_Info from '../../../assets/images/wrong_Info.svg';
 
 export default function OtpVerificationScreen() {
   const navigate = useNavigate();
@@ -206,7 +207,7 @@ export default function OtpVerificationScreen() {
                 }}
               >
                 <Box>
-                  <TimerComponent time={299} callBackFunction={updateTimer} />
+                  <TimerComponent time={180} callBackFunction={updateTimer} />
                 </Box>
                 <Box>
                   <Typography
@@ -221,12 +222,16 @@ export default function OtpVerificationScreen() {
                   </Typography>
                 </Box>
               </Box>
+              <Box sx={{marginTop:'25px',display:'flex',gap:2,alignItems:'center'}} >
+                <img src={wrong_Info} />
+                <Typography  sx={{fontSize:'10px',fontWeight:'400',color:'#992D26'}} >Please enter the correct OTP sent to your registered Email ID</Typography>
+              </Box>
             </Box>
            
           </Box>
-          <Box sx={{ marginTop: '20%' }}>
+          <Box sx={{ marginTop: '10%' }}>
             <Button
-              onClick={submitButtonAction}
+              // onClick={submitButtonAction}
               fullWidth
               variant="contained"
               color="secondary"
@@ -238,7 +243,8 @@ export default function OtpVerificationScreen() {
             >
               Proceed
             </Button>
-            <Box sx={{ display: 'flex', gap: 2, marginTop: '10px' }}>
+            {}
+            <Box sx={{ display: 'flex', gap: 2, marginTop: '10px',alignItems:'center' }}>
               <img src={info_icon} />
               <Typography
                 sx={{ fontSize: '10px', fontWeight: 400, color: ' #898989' }}
