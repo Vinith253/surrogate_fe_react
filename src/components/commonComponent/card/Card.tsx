@@ -15,6 +15,7 @@ import '../card/Card.scss';
 import edit_icon from '../../../assets/icons/edit_icon.svg';
 import delete_icon from '../../../assets/icons/delete_icon.svg';
 import { useNavigate } from 'react-router-dom';
+import { styled } from '@mui/material/styles';
 type dataType = {
   image: string;
   text_one?: string;
@@ -37,6 +38,11 @@ function Card({ content }: { content: cardItems }) {
   const handlePath = (value: any) => {
     navigate(value);
   };
+  const StyledChip = styled(Chip)(() => ({
+    color: '#0662B7',
+    backgroundColor: '#EEF7FF',
+  }));
+
   return (
     <Paper elevation={3} sx={{ width: '100%' }} className="card-container">
       <Stack
@@ -54,14 +60,13 @@ function Card({ content }: { content: cardItems }) {
         </Box>
         {content.clipText && (
           <Box>
-            <Chip
+            <StyledChip
               avatar={
                 <Avatar className="avatar">
                   <Box className="flex-box">{content.clipNo}</Box>
                 </Avatar>
               }
               label={content.clipText}
-              sx={{ backgroundColor: '#EEF7FF' }}
             />
           </Box>
         )}
