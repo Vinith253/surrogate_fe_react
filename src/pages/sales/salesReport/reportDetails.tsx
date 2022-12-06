@@ -4,6 +4,8 @@ import DetailsCard from './../../../components/commonComponent/DetailsCard';
 import { Stack, Box } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
+import { ScreenHeader } from '../../../components/commonComponent/ScreenHeader/ScreenHeader';
+import { FooterButton } from '../../../components/commonComponent/FooterButton/FooterButton';
 
 function SalesReportDetails() {
   const navigate = useNavigate();
@@ -120,20 +122,16 @@ function SalesReportDetails() {
 
   return (
     <Stack className="sales-report-details-container">
-      <Stack className="header-container">
-        <Stack className="main-header">
-          {/* <ArrowBackIcon onClick={goBack} className="headIcon" /> */}
-          Customer Details
-        </Stack>
-        <Stack className="info-label">
-          Lorem ipusm dolor sit amet, consectetur adipiscing elit.integer
-          senectus mattis
-        </Stack>
-      </Stack>
+      <ScreenHeader
+        title="Customer Details"
+        info="From here you can create access presets to assign with users in Users Creation."
+        showBackButton={true}
+      />
       <DetailsCard data={personalDetails} gridColumn={4} />
       <DetailsCard data={channelDetails} gridColumn={4} />
       <DetailsCard data={applicationDetails} gridColumn={4} />
       <DetailsCard data={remarkDetails} gridColumn={4} />
+      <FooterButton submit="Close" handleSubmitClick={goBack} />
     </Stack>
   );
 }
