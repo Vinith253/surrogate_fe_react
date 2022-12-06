@@ -74,7 +74,7 @@ function EmptyTableView({toggleOptions, headerData}: props) {
           pointerEvents: 'none',
           backgroundColor: 'white',
           opacity: '0.6',
-          marginTop: '36px',
+          marginTop: '16px',
         }}
       >
         <Grid container spacing={0}>

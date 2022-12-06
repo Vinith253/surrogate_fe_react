@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import './style.scss';
-import DownloadIcon from '../../../assets/icons/download_icon.svg';
-import MailIcon from '../../../assets/icons/mail_icon.svg';
+import DownloadIcon from '../../../assets/icons/download.svg';
+import MailIcon from '../../../assets/icons/mail.svg';
 import BtnContained from '../../../components/commonComponent/CustomText/Button/Contained';
 import BtnOutlined from '../../../components/commonComponent/CustomText/Button/Outlined';
 import SelectDropdown from '../../../components/commonComponent/CheckboxSelectDropdown';
-import ChooseCategoryToViewData from '../../../components/commonComponent/ChooseCategoryToViewData';
 import { Typography, Stack, Box, Grid, Link } from '@mui/material';
 import {
   approvedCustomerDetailData,
@@ -13,12 +12,13 @@ import {
   CustomerReportFilterDropdown,
   referCustomerDetailData,
   rejectedCustomerDetailData,
+  rejectedriskMngmtViewData,
   riskDashboardData,
+  riskMngmtViewData,
 } from '../riskManagement.const';
 import EmptyTableView from '../../../components/commonComponent/EmptyTableView';
 import ListLMSTable from '../../../components/commonComponent/listLmstable/listlmsTable';
 import { useNavigate } from 'react-router-dom';
-import HeaderWithInfo from '../../../components/commonComponent/HeaderWithInfo';
 
 const toggleOptions = [
   { title: 'All' },
@@ -97,16 +97,20 @@ function CustomerReport() {
       },
       render: (_: string, row: any, index: number) => {
         var modalTxt = '';
-        var userData={}
+        var userData = {};
+        var riskDetailData: any = [];
         if (row.status === 'Rejected') {
           modalTxt = 'Forced Approve';
-          userData = {...rejectedCustomerDetailData}
+          userData = { ...rejectedCustomerDetailData };
+          riskDetailData = rejectedriskMngmtViewData;
         } else if (row.status === 'Approved') {
           modalTxt = 'Forced Reject';
-          userData = {...approvedCustomerDetailData}
+          userData = { ...approvedCustomerDetailData };
+          riskDetailData = riskMngmtViewData;
         } else if (row.status === 'Refer') {
           modalTxt = '';
-          userData = {...referCustomerDetailData}
+          userData = { ...referCustomerDetailData };
+          riskDetailData = rejectedriskMngmtViewData;
         }
         return (
           <Link
@@ -118,6 +122,7 @@ function CustomerReport() {
                   statusText: row.status,
                   modalText: modalTxt,
                   cashFlowData: { ...userData },
+                  riskMngmtViewContent: riskDetailData,
                 },
               })
             }
@@ -132,46 +137,52 @@ function CustomerReport() {
   return (
     <Stack className="risk-customer-report-list">
       <Stack className="container">
-        <Stack className="underline">
-          <Stack>
-            <Typography variant="subtitle1" sx={{ letterSpacing: 0.5 }}>
-              Customer Report
-            </Typography>
-            <Typography variant="subtitle2" className="sub-label">
-              Lorem ipsum dolor sit amet consectetur. Sit.
-            </Typography>
+        <Stack className="padding-container">
+          <Stack className="underline">
+            <Stack>
+              <Typography variant="subtitle1" sx={{ letterSpacing: 0.5 }}>
+                Customer Report
+              </Typography>
+              <Typography variant="subtitle2" className="sub-label">
+                Lorem ipsum dolor sit amet consectetur. Sit.
+              </Typography>
+            </Stack>
           </Stack>
+          <Grid container spacing={2} className="filters-container">
+            {CustomerReportFilterDropdown?.map(
+              (eachItem: any, index: number) => {
+                return (
+                  <Grid item xs={3} key={index}>
+                    <Typography className="dropdown-label">
+                      {eachItem?.label}
+                    </Typography>
+                    <SelectDropdown options={eachItem?.option} />
+                  </Grid>
+                );
+              }
+            )}
+          </Grid>
+          <Box className="button-container">
+            <BtnOutlined title="Reset" onClick={() => setIsFiltered(false)} />
+            <BtnContained title="Search" onClick={() => setIsFiltered(true)} />
+          </Box>
         </Stack>
-        <Grid container spacing={2} className="filters-container">
-          {CustomerReportFilterDropdown?.map((eachItem: any, index: number) => {
-            return (
-              <Grid item xs={3} key={index}>
-                <Typography className="dropdown-label">
-                  {eachItem?.label}
-                </Typography>
-                <SelectDropdown options={eachItem?.option} />
-              </Grid>
-            );
-          })}
-        </Grid>
-        <Box className="button-container">
-          <BtnOutlined title="Reset" onClick={() => setIsFiltered(false)} />
-          <BtnContained title="Search" onClick={() => setIsFiltered(true)} />
-        </Box>
       </Stack>
 
       <Stack className="container">
-        <Stack className="underline">
-          <Typography variant="subtitle1" sx={{ letterSpacing: 0.5 }}>
-            Application Data
-            <Typography className="icons-container">
-              <img src={DownloadIcon} alt="" className="icons" />
-              <img src={MailIcon} alt="" className="icons" />
+        <Stack className="padding-container2">
+          <Stack className="underline">
+            <Typography variant="subtitle1" sx={{ letterSpacing: 0.5 }}>
+              Application Data
+              <Typography className="icons-container">
+                <img src={DownloadIcon} alt="" className="icons" />
+                <img src={MailIcon} alt="" className="icons" />
+              </Typography>
             </Typography>
-          </Typography>
-          <Typography variant="subtitle2" className="sub-label"></Typography>
+            <Typography variant="subtitle2" className="sub-label"></Typography>
+          </Stack>
         </Stack>
-       
+
         {isFiltered ? (
           <ListLMSTable
             data={riskDashboardData}
@@ -181,7 +192,12 @@ function CustomerReport() {
             toggleOptions={toggleOptions}
           />
         ) : (
-          <EmptyTableView toggleOptions={toggleOptions} headerData={column1} />
+          <Stack className="padding-container">
+            <EmptyTableView
+              toggleOptions={toggleOptions}
+              headerData={column1}
+            />
+          </Stack>
         )}
       </Stack>
     </Stack>

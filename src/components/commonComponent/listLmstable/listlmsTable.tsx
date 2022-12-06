@@ -451,7 +451,7 @@ const ListLMSTable = (props: any) => {
             </TableContainer>
           </Grid>
           <Grid item sm={3}>
-            <div style={{ boxShadow: '-10px 0 8px 0 #EDEDED' }}>
+            <div style={{ boxShadow: props?.flag === 'riskMngmt' ? 'none' :'-10px 0 8px 0 #EDEDED' }}>
               <TableContainer>
                 <Table
                   style={{

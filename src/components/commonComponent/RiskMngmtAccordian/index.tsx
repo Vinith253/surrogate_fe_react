@@ -3,23 +3,18 @@ import {
   AccordionSummary,
   Grid,
   Box,
-  FormControlLabel,
   Typography,
-  Checkbox,
   AccordionDetails,
   Accordion,
   styled,
-  Button,
 } from '@mui/material';
-import './style.scss';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useState } from 'react';
 import { ReactComponent as RiskExpand } from '../../../assets/icons/risk_mgmt_expand.svg';
 import { ReactComponent as PassIcon } from '../../../assets/icons/risk_mgmt_pass.svg';
-import { ReactComponent as StatusPassIcon } from '../../../assets/icons/risk_status_pass.svg';
-import { ReactComponent as ApprovedIcon } from '../../../assets/icons/approved_risk_mngm_icon.svg';
+import { ReactComponent as FailIcon } from '../../../assets/icons/risk_fail_icon.svg';
 import UserIdentityBox from './UserIdentityBox';
 import UserCashFlowBox from './UserCashflowBox';
+import './style.scss';
 
 const CustomAccordion = styled(Accordion)(({ theme }) => {
   return {
@@ -30,18 +25,28 @@ const CustomAccordion = styled(Accordion)(({ theme }) => {
       margin: '0',
       height: '108px',
       alignItems: 'center',
-      // padding: '24px',
     },
   };
 });
 
 type props = {
   data: Array<any>;
-  isViewPage: boolean;
 };
 
-export const RiskMngmtAccordian = ({ data, isViewPage }: props) => {
+export const RiskMngmtAccordian = ({ data }: props) => {
   const [categories, setCategories] = useState(data);
+
+
+
+  const handleExpandedClick = ( id: number) => {
+    let updatedList = categories?.map((item) => {
+      if (item.id === id) {
+        return { ...item, isExpanded: !item.isExpanded }; //gets everything that was already in item, and updates "done"
+      }
+      return {...item, isExpanded: false}; // else return unmodified item
+    });
+    setCategories(updatedList);
+  };
 
   return (
     <FormGroup>
@@ -55,62 +60,63 @@ export const RiskMngmtAccordian = ({ data, isViewPage }: props) => {
                   backgroundColor: 'white',
                 },
               }}
-              // expanded={item.isChecked}
+              onClick={()=> handleExpandedClick(item.id)}
+              expanded={item.isExpanded}
             >
               <AccordionSummary
-                // sx={{
-                //   '.css-o4b71y-MuiAccordionSummary-content': {
-                //     margin: '0',
-                //     backgroundColor: 'white',
-                //     borderBottom:  '1px solid white',
-                //   },
-                //   padding: '0',
-                //   '.css-1kua6lf-MuiPaper-root-MuiAccordion-root': {
-                //     backgroundColor: item.isChecked ? '#F3F3F4' : 'white',
-                //   },
-                //   backgroundColor: item.isChecked ? '#F3F3F4' : 'white',
-                //   borderBottom: item.isChecked ? '1px solid white' : '1px solid #F3F3F4',
-                //   '.css-o4b71y-MuiAccordionSummary-content.Mui-expanded': {
-                //     border:'none'
-                //   },
-                // }}
                 expandIcon={<RiskExpand />}
                 aria-controls="panel1a-content"
                 id="panel1a-header"
               >
-                <Grid container item key={item.id} className="grid-style" columnGap={30}>
+                <Grid
+                  container
+                  item
+                  key={item.id}
+                  className="risk-accordian-grid-style"
+                  columnGap={30}
+                >
                   {' '}
-                    <Box>
-                      <Typography sx={{ fontSize: '14px', fontWeight: 'bold',marginBottom:'12px' }}>
-                        {item.label}
+                  <Box>
+                    <Typography className="risk-label-text">
+                      {item.label}
+                    </Typography>
+                    <Typography className="risk-info-label">
+                      {item.infoData}
+                    </Typography>
+                  </Box>
+                  <Box>
+                    <Box className="status-box">
+                      <Typography
+                        sx={{
+                          fontSize: '14px',
+                          color: item.isPassed ? '#32A64D' : '#E63946',
+                          marginBottom: '12px',
+                        }}
+                      >
+                        {item.passFailText}
                       </Typography>
-                      <Typography sx={{ fontSize: '14px', color: '#656769' }}>
-                        {item.infoData}
-                      </Typography>
-                    </Box>
-                    <Box>
-                      <Box sx={{ display: 'flex', gap: '16px' }}>
-                        <Typography sx={{ fontSize: '14px', color: '#32A64D',marginBottom:'12px' }}>
-                          {item.passFailText}
-                        </Typography>
-                        <PassIcon width={'16px'}/>
-                      </Box>
-                      {item?.score && (
-                        <Typography sx={{ fontSize: '14px', color: '#656769' }}>
-                          Score {item?.score?.result}
-                          {'/'}
-                          {item?.score?.total}
-                        </Typography>
+                      {item.isPassed ? (
+                        <PassIcon width={'16px'} />
+                      ) : (
+                        <FailIcon width={'16px'} />
                       )}
                     </Box>
+                    {item?.score && (
+                      <Typography className="risk-info-label">
+                        Score {item?.score?.result}
+                        {'/'}
+                        {item?.score?.total}
+                      </Typography>
+                    )}
+                  </Box>
                 </Grid>
               </AccordionSummary>
               {item.isExpanded && (
                 <AccordionDetails>
-                  {item.id === 1 && <UserIdentityBox item={item}/>}
-                  {item.id === 2 && <UserIdentityBox item={item}/>}
-                  {item.id === 3 && <UserCashFlowBox item={item}/>}
-                  {item.id === 4 && <UserCashFlowBox item={item}/>}
+                  {item.id === 1 && <UserIdentityBox item={item} />}
+                  {item.id === 2 && <UserIdentityBox item={item} />}
+                  {item.id === 3 && <UserCashFlowBox item={item} />}
+                  {item.id === 4 && <UserCashFlowBox item={item} />}
                 </AccordionDetails>
               )}
             </CustomAccordion>

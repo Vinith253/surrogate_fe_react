@@ -1,6 +1,6 @@
-import { Box, Grid, Typography, Button } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 import { ReactComponent as StatusPassIcon } from '../../../../assets/icons/risk_status_pass.svg';
-import { ReactComponent as ApprovedIcon } from '../../../../assets/icons/approved_risk_mngm_icon.svg';
+import { ReactComponent as StatusFailIcon } from '../../../../assets/icons/risk_mgmt_expand_fail.svg';
 
 type props = {
   item?: any;
@@ -15,19 +15,28 @@ export default function UserCashFlowBox({ item }: props) {
             container
             item
             key={item.id}
-            className="grid-style"
-            columnGap={10}
+            className="risk-accordian-grid-style"
+            columnGap={8}
           >
-            <Box sx={{ width: '163px'}}>
-            <Typography sx={{fontSize:'14px', fontWeight:'bold'}}>Criteria</Typography></Box>
-            <Box sx={{ width: '150px'}}>
-            <Typography sx={{fontSize:'14px', fontWeight:'bold'}}>Customers Eligibility</Typography></Box>
-            <Box sx={{ width: '150px'}}>
-            <Typography sx={{fontSize:'14px', fontWeight:'bold'}}>Customers Eligibility</Typography></Box>
-            <Box sx={{ width: '150px'}}>
-            <Typography sx={{fontSize:'14px', fontWeight:'bold'}}>Status</Typography></Box>
-            <Box sx={{ width: '100px'}}>
-            <Typography sx={{fontSize:'14px', fontWeight:'bold'}}>Score</Typography></Box>
+            <Box sx={{ width: '150px' }}>
+              <Typography className="cashflow-text">Criteria</Typography>
+            </Box>
+            <Box sx={{ width: '150px' }}>
+              <Typography className="cashflow-text">
+                Customers Eligibility
+              </Typography>
+            </Box>
+            <Box sx={{ width: '150px' }}>
+              <Typography className="cashflow-text">
+                Customers Eligibility
+              </Typography>
+            </Box>
+            <Box sx={{ width: '200px' }}>
+              <Typography className="cashflow-text">Status</Typography>
+            </Box>
+            <Box sx={{ width: '50px'}}>
+              <Typography className="cashflow-text">Score</Typography>
+            </Box>
           </Grid>
         </Box>
       )}
@@ -43,38 +52,52 @@ export default function UserCashFlowBox({ item }: props) {
               container
               item
               key={item.id}
-              className="grid-style"
-              columnGap={10}
+              className="risk-accordian-grid-style"
+              columnGap={8}
             >
-              <Box sx={{ width: '163px' }}>
-                <Typography sx={{ fontSize: '12px'}}>
+              <Box sx={{ width: '150px' }}>
+                <Typography className="cashflow-value-text">
                   {item?.criteriaValue}
                 </Typography>
               </Box>
-              <Box sx={{ width: '150px'}}>
-              <Typography sx={{ fontSize: '12px' }}>
+              <Box sx={{ width: '150px' }}>
+                <Typography className="cashflow-value-text">
                   {item?.customerEligibility1Value}
                 </Typography>
-                </Box>
-                <Box sx={{ width: '150px'}}>
-                <Typography sx={{ fontSize: '12px' }}>
+              </Box>
+              <Box sx={{ width: '150px' }}>
+                <Typography className="cashflow-value-text">
                   {item?.customerEligibility2Value}
                 </Typography>
-                </Box>
+              </Box>
 
-              {item?.passedStatus && (
-                <Box sx={{ display: 'flex', gap: '14px' }}>
-                  <StatusPassIcon width={'16px'} />
-                  <Typography sx={{ fontSize: '12px' }}>
-                    {item?.matchedDisplayText}
-                  </Typography>
-                </Box>
-              )}
-              <Box sx={{ width: '100px' }}>
-              <Typography sx={{ fontSize: '12px' }}>
+              <Box sx={{ width: '200px' }}>
+                {item?.passedStatus ? (
+                  <Box className="cashflow-status-box">
+                    <StatusPassIcon width={'16px'} />
+                    <Typography className="cashflow-value-text">
+                      {item?.matchedDisplayText}
+                    </Typography>
+                  </Box>
+                ) : (
+                  <Box className="cashflow-status-box">
+                    <StatusFailIcon width={'16px'} />
+                    <Typography className="cashflow-value-text">
+                      {item?.matchedDisplayText}
+                    </Typography>
+                  </Box>
+                )}
+              </Box>
+              <Box sx={{ width: '50px' }}>
+                <Typography
+                  sx={{
+                    fontSize: '12px',
+                    color: item?.passedStatus ? 'black' : '#E63946',
+                  }}
+                >
                   {item?.scoreValue}
                 </Typography>
-                </Box>
+              </Box>
             </Grid>
           </Box>
         );
