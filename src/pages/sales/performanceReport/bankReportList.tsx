@@ -13,6 +13,15 @@ import {
   DistrictWiseFilterDropdown,
   ExecutiveWiseFilterDropdown,
   LeadWiseFilterDropdown,
+  DSAWiseReportListFirstColumn,
+  DSAWiseReportListSecondColumn,
+  PerformanceReportListData,
+  StateWiseReportListSecondColumn,
+  ZonalWiseReportListSecondColumn,
+  DistrictWiseReportListSecondColumn,
+  BranchWiseReportListSecondColumn,
+  LeadWiseReportListSecondColumn,
+  ExecutiveWiseReportListSecondColumn,
 } from './performanceReport.const';
 import BtnOutlined from '../../../components/commonComponent/CustomText/Button/Outlined';
 import { CategoryList } from './performanceReport.const';
@@ -22,88 +31,21 @@ function BankPerformanceReport() {
   const [isFiltered, setIsFiltered] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('State Wise');
 
-  const column1: any = [
-    {
-      title: 'Branch Count',
-      dataIndex: 'branchCount',
-      key: 'branchCount',
-    },
-    {
-      title: 'Total Applicationts',
-      dataIndex: 'totalApplications',
-      key: 'totalApplications',
-    },
-    {
-      title: 'Approval Rate (%)',
-      dataIndex: 'approvalRate',
-      key: 'approvalRate',
-    },
-    {
-      title: 'Acquired Customers',
-      dataIndex: 'acquiredCustomers',
-      key: 'acquiredCustomers',
-    },
-    {
-      title: 'Rejected Applications',
-      dataIndex: 'rejectedApplications',
-      key: 'rejectedApplications',
-    },
-  ];
-
-  const column2: any = [
-    {
-      title: '#',
-      dataIndex: 'id',
-      key: 'id',
-      width: '70px',
-      render: (text: string) => {
-        return <Stack>{text}</Stack>;
-      },
-    },
-    {
-      title: 'State',
-      dataIndex: 'state',
-      key: 'state',
-    },
-    {
-      title: 'State Head',
-      dataIndex: 'stateHead',
-      key: 'stateHead',
-    },
-  ];
-
-  const LMSListData = [
-    {
-      id: '1',
-      state: 'Tamilnadu',
-      stateHead: 'Ashwin',
-      branchCount: '32',
-      totalApplications: '5000',
-      approvalRate: '40%',
-      acquiredCustomers: '2000',
-      rejectedApplications: '2000',
-    },
-    {
-      id: '2',
-      state: 'Karnataka',
-      stateHead: 'Ashwin',
-      branchCount: '20',
-      totalApplications: '5000',
-      approvalRate: '40%',
-      acquiredCustomers: '1000',
-      rejectedApplications: '800',
-    },
-    {
-      id: '3',
-      state: 'U.Pradesh',
-      stateHead: 'Ashwin',
-      branchCount: '12',
-      totalApplications: '3000',
-      approvalRate: '40%',
-      acquiredCustomers: '2000',
-      rejectedApplications: '500',
-    },
-  ];
+  const firstColumn = DSAWiseReportListFirstColumn;
+  const secondColumn =
+    selectedCategory === 'State Wise'
+      ? StateWiseReportListSecondColumn
+      : selectedCategory === 'Zonal Wise'
+      ? ZonalWiseReportListSecondColumn
+      : selectedCategory === 'District Wise'
+      ? DistrictWiseReportListSecondColumn
+      : selectedCategory === 'Branch Wise'
+      ? BranchWiseReportListSecondColumn
+      : selectedCategory === 'Lead Wise'
+      ? LeadWiseReportListSecondColumn
+      : selectedCategory === 'Executive Wise'
+      ? ExecutiveWiseReportListSecondColumn
+      : DSAWiseReportListSecondColumn;
 
   const DropdownOptions =
     selectedCategory === 'State Wise' || selectedCategory === 'Zonal Wise'
@@ -130,6 +72,7 @@ function BankPerformanceReport() {
                 data={CategoryList}
                 onSelect={(event: any) => {
                   setSelectedCategory(event.target.value);
+                  setIsFiltered(false);
                 }}
               />
             </Grid>
@@ -156,18 +99,16 @@ function BankPerformanceReport() {
       {isFiltered ? (
         <Stack className="each-container" style={{ margin: '0px' }}>
           <HeaderWithInfo
-            header={`DSA Data - ${selectedCategory} Performance Report`}
+            header={`Bank Data - ${selectedCategory} Performance Report`}
             isInfoEnabled={false}
             info=""
             isDownloadEnabled={true}
           />
           <PerformanceReportTable
-            data={LMSListData}
-            listColumn={column1}
-            statusColumn={column2}
+            data={PerformanceReportListData}
+            listColumn={firstColumn}
+            statusColumn={secondColumn}
             flag="performance-report"
-            // label={product_label}
-            // toggleOptions={toggleOptions}
           />
         </Stack>
       ) : (
