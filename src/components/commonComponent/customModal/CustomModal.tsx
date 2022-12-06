@@ -269,7 +269,10 @@ function CustomModal({
           )}
 
           {existingRoleItem && (
-            <FormControl sx={{ minWidth: 120 }} size="small">
+            <FormControl
+              sx={{ minWidth: 120, marginBottom: '20px' }}
+              size="small"
+            >
               <InputLabel id="demo-select-small">
                 {existingRole == '' ? duplicate_modal_label : ''}
               </InputLabel>
