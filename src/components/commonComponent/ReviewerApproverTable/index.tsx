@@ -1,5 +1,13 @@
-import { Stack, Grid } from '@mui/material';
+import {
+  Stack,
+  Grid,
+  Typography,
+  FormControl,
+  Select,
+  TextField,
+} from '@mui/material';
 import SearchDropdown from './../SearchDropdown';
+
 import './style.scss';
 
 function ApproverReviewerTable(props: { data: Array<Object>; mode: string }) {
@@ -34,7 +42,26 @@ function ApproverReviewerTable(props: { data: Array<Object>; mode: string }) {
                         return (
                           <Grid item xs={12}>
                             {props?.mode === 'view' ? (
-                              ''
+                              <Stack sx={{ m: 1, minWidth: 120 }}>
+                                <Stack
+                                  style={{
+                                    height: '45px',
+                                    // backgroundColor: 'red',
+                                  }}
+                                >
+                                  <Stack
+                                    className="search-dropdown-text-field"
+                                    sx={{
+                                      width: '90%',
+                                      padding: '15px 0px',
+                                      height: '46px',
+                                      // backgroundColor: 'green',
+                                    }}
+                                  >
+                                    Ashwini
+                                  </Stack>
+                                </Stack>
+                              </Stack>
                             ) : (
                               <SearchDropdown data={item} />
                             )}
@@ -47,7 +74,26 @@ function ApproverReviewerTable(props: { data: Array<Object>; mode: string }) {
                         return (
                           <Grid item xs={12}>
                             {props?.mode === 'view' ? (
-                              ''
+                              <Stack sx={{ m: 1, minWidth: 120 }}>
+                                <Stack
+                                  style={{
+                                    height: '45px',
+                                    // backgroundColor: 'red',
+                                  }}
+                                >
+                                  <Stack
+                                    className="search-dropdown-text-field"
+                                    sx={{
+                                      width: '90%',
+                                      padding: '15px 0px',
+                                      height: '46px',
+                                      // backgroundColor: 'green',
+                                    }}
+                                  >
+                                    Ganesh
+                                  </Stack>
+                                </Stack>
+                              </Stack>
                             ) : (
                               <SearchDropdown data={item} />
                             )}

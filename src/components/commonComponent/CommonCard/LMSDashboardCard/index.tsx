@@ -61,7 +61,7 @@ import {
             {props.lastPeriodValue != 0 && (
               <div className="card-value-with-icon">
               <text className="card-text-value">{props.lastPeriodValue}</text>
-              <img src={redDown} style={{marginLeft:'4px', marginTop:'4px'}}></img>
+              <img src={redDown} style={{marginLeft:'5px', marginTop:'4px'}}></img>
               </div>
             )}
           </div>
@@ -72,7 +72,7 @@ import {
             {props.lastYearValue != 0 && (
               <div className="card-value-with-icon">
               <text className="card-text-value">{props.lastYearValue}</text>
-              <img src={GreenUp} style={{marginLeft:'4px',  marginTop:'4px'}}></img>
+              <img src={GreenUp} style={{marginLeft:'5px',  marginTop:'4px'}}></img>
               </div>
             )}
           </div>

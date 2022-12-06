@@ -99,6 +99,7 @@ type props = {
   textAreaHeight?: any;
   modalType?: string;
   duplicate_modal_label?: string;
+  closeFunction?: () => void;
 };
 
 function CustomModal({
@@ -158,6 +159,7 @@ function CustomModal({
   textAreaHeight,
   modalType,
   duplicate_modal_label,
+  closeFunction,
 }: props) {
   const [pauseStatus, setPauseStatus] = useState(pauseStatusKey);
   const [startDatevalue, setStartDateValue] = useState(null);
@@ -425,7 +427,7 @@ function CustomModal({
                 variant="text"
                 color="secondary"
                 sx={{ fontSize: '14px', textTransform: 'capitalize' }}
-                onClick={handleCloseSuccess}
+                onClick={closeFunction}
               >
                 Close
               </Button>
@@ -594,7 +596,6 @@ function CustomModal({
               >
                 {ProceedBtn}
               </Button>
-              info_icon
             </Stack>
           )}
 
