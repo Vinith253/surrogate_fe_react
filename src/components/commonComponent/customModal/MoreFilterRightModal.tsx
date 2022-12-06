@@ -39,7 +39,7 @@ type props = {
   flag?: string;
 };
 
-function MoreFilterModal({
+function MoreFilterRightModal({
   openSuccess,
   handleCloseSuccess,
   product_label,
@@ -136,8 +136,13 @@ function MoreFilterModal({
         onClose={handleClose}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
+        sx={{mt :-4,mb:-4,
+        "& .MuiDialog-container": {
+          justifyContent:'flex-end',
+        },}}
+        PaperProps={{ sx: { margin: "0" , height:'100%'} }}
       >
-        <Stack pb={3}>
+        <Stack>
           <Stack
             sx={{
               borderBottom: `1px solid #36363624`,
@@ -530,4 +535,4 @@ function MoreFilterModal({
   );
 }
 
-export default MoreFilterModal;
+export default MoreFilterRightModal;

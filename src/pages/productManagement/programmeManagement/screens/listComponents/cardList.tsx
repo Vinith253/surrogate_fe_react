@@ -52,7 +52,10 @@ function CardList({ data }: cardData) {
   const [resumePopUpTitle, setResumePopUpTitle] = useState('');
   const [pausePopUpTitle, setPausePopUpTitle] = useState('');
   const [editSchedulePause, setEditSchedulePause] = useState(false);
-
+  const [successEditSchedulePause, setSuccessEditSchedulePause] =
+    useState(false);
+  const [successEditPause, setSuccessEditPause] = useState(false);
+  // const openCardMenu = Boolean(anchorEl);
   const open = Boolean(anchorElement);
   const handleClick = (
     event: React.MouseEvent<HTMLTableCellElement>,
@@ -72,6 +75,9 @@ function CardList({ data }: cardData) {
     setShowScheduledPauseSuccessModal(false);
     setShowResumeModal(false);
     setShowResumeSuccessModal(false);
+    setEditSchedulePause(false);
+    setSuccessEditPause(false);
+    setSuccessEditSchedulePause(false);
   };
 
   const NORMAL_PAUSE = 'Pause Now';
@@ -85,11 +91,15 @@ function CardList({ data }: cardData) {
     if (pauseMethod === NORMAL_PAUSE) {
       setShowPauseModal(false);
       setShowPauseSuccessModal(true);
+      setEditSchedulePause(false);
+      setSuccessEditPause(true);
       console.log('success');
     }
     if (pauseMethod === SCHEDULED_PAUSE) {
       setShowPauseModal(false);
       setShowScheduledPauseSuccessModal(true);
+      setSuccessEditSchedulePause(true);
+      setEditSchedulePause(false);
       console.log('fail');
     }
   };
@@ -301,7 +311,11 @@ function CardList({ data }: cardData) {
             {programMmgt.PAUSE_SURROGATE}
           </MenuItem>
           <MenuItem
-            onClick={handleClose}
+            onClick={() => {
+              handleClose();
+              // setDeactivateModal(!deactivateModal);
+              setEditSchedulePause(true);
+            }}
             style={{ padding: '10px 20px', textAlign: 'left' }}
           >
             {programMmgt.EDIT_SCHEDULE_PAUSE}
@@ -375,6 +389,52 @@ function CardList({ data }: cardData) {
             successModalTitle={`${resumePopUpTitle} - Resume Now`}
             successModalMsg={
               'Your action of Resuming - AQB Surrogate has been successfully sent to the reviewer.'
+            }
+            btn={' Close'}
+          />
+        )}
+        {editSchedulePause && (
+          <CustomModal
+            openSuccess={editSchedulePause}
+            handleCloseSuccess={closeModal}
+            handleSuccess={successModal}
+            title={'Deactivate '}
+            pause_content={'You can pause it or perform a scheduled pause.'}
+            scheduledPause_content={
+              'Please choose a date range to perform a scheduled pause.'
+            }
+            textarea_title={'Add Remarks'}
+            radioValuOne={NORMAL_PAUSE}
+            radioValuTwo={SCHEDULED_PAUSE}
+            dateRange_title={'Enter Date range'}
+            maxLength={'Maximum of 500 words'}
+            pauseMethodChecking={(arg1: string) => pauseMethodChange(arg1)}
+            close={'Close'}
+            submit={'Submit'}
+            datepickerLabelStart={'Start Date and time'}
+            datepickerLabelEnd={'End Date and time'}
+            pauseStatusKey={'Schedule Pause'}
+          />
+        )}
+
+        {successEditPause && (
+          <CustomModal
+            openSuccess={successEditPause}
+            handleCloseSuccess={closeModal}
+            successModalTitle={`Deactivated - Pause`}
+            successModalMsg={
+              ' Your action of pausing - Card For Card Surrogate has been successully sent to the reviewer'
+            }
+            btn={' Close'}
+          />
+        )}
+        {successEditSchedulePause && (
+          <CustomModal
+            openSuccess={successEditSchedulePause}
+            handleCloseSuccess={closeModal}
+            successModalTitle={`Deactivated- Scheduled Pause`}
+            successModalMsg={
+              'Your action of Scheduled Pause - Card For Card Surrogate From  DD/MM/YYYTo DD/MM/YYY is successfully sent to reviewer'
             }
             btn={' Close'}
           />

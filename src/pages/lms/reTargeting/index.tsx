@@ -1,6 +1,6 @@
 import { TabBar } from '../../../components/commonComponent/customTab/CustomTab';
 import { dataList } from '../../../interface/Types';
-import { ReTargetingHistory } from './screens/historyScreen/reTargetingHistory';
+import ReTargetingHistory from './screens/historyScreen/reTargetingHistory';
 import ReTargeting from './screens/reTargetingScreen/reTargeting';
 
 function Retargeting() {

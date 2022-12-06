@@ -995,7 +995,7 @@ export const CardCatalogue = () => {
         <Box className="body1">
           <Box className="container1">
             <TypoText title="Card List" />
-            <img className="img1" src={Info_Icon} />
+            <img className="img1" src={Info_Icon} alt="" />
             <TypographyInfo title="Filter cards by mode/status/category/surrogate here." />
           </Box>
           <Divider />

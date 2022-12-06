@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-
 import { Button } from '@mui/material';
 import CustomModal from '../CustomModal';
 
-function DuplicateRole() {
+function SuccessForRejection() {
   const [openSuccess, setOpenSuccess] = useState(false);
 
   const handleClickOpen = () => {
@@ -13,31 +12,23 @@ function DuplicateRole() {
   const handleCloseSuccess = () => {
     setOpenSuccess(false);
   };
-
-  const existingRoleItem = [
-    'Head',
-    'Executive',
-    'Underwriting Manager',
-    'Manager',
-  ];
-
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
-        {' '}
-        DuplicateRole
+        Success For Rejection
       </Button>
       <CustomModal
         openSuccess={openSuccess}
         handleCloseSuccess={handleCloseSuccess}
-        title={'Duplicate Role'}
-        duplicate_role_content={'Select the Existing Role'}
-        duplicateRoleCloseBtn={' Close'}
-        existingRoleItem={existingRoleItem}
-        btn={'submit'}
+        btn={' Close'}
+        rejectedModaltitle={'Application Force Rejection'}
+        rejectedModalMsg={
+          'Your action of force rejection of application has been successfully sent to the reviewer.'
+        }
+        modalType={'Success For Rejection'}
       />
     </div>
   );
 }
 
-export default DuplicateRole;
+export default SuccessForRejection;

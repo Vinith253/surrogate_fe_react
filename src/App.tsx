@@ -31,6 +31,8 @@ import ViewUser from './pages/userManagement/userCreation/singleUserUpload/viewU
 import LMSDashboard from './pages/lms/lmsDashboard';
 import LMSRule from './pages/lms/lmsRule';
 import AddLMSRule from './pages/lms/lmsRule/createLMS/addNewRule';
+import ViewLMSRule from './pages/lms/lmsRule/createLMS/viewLMS';
+import EditLMSRule from './pages/lms/lmsRule/createLMS/editLMS';
 import Retargeting from './pages/lms/reTargeting';
 import { OrgHistoryLogDetails } from './pages/userManagement/orgStructure/screens/historyLog/historyLogDetails/historyLogDetails';
 import UserProfile from './pages/profile/landingScreen';
@@ -41,6 +43,9 @@ import { ProgrammeHistoryDetails } from './pages/productManagement/programmeMana
 import {LoginPage} from './pages/login/landingScreen/Login'
 import OtpVerificationScreen from './pages/login/otp/OTPVerificationScreen';
 // import { otpPage } from './pages/userManagement/orgStructure/screens/OrgReview/otpPage/otpPage'
+import ReTargetingDetails from './pages/lms/reTargeting/screens/reTargetingScreen/reTargetingDetails';
+import { LMSHistoryLogDetails } from './pages/lms/lmsRule/lmsHistoryLog/lmsHistoryLogDetails';
+
 export default function App() {
   return (
     <Routes>
@@ -187,6 +192,10 @@ export default function App() {
         <Route path="/lms/retargeting" element={<Retargeting />} />
 
         <Route path="/lms/lmsRule" element={<LMSRule />} />
+        <Route
+          path="/lms/lmsRule/historyLogDetails"
+          element={<LMSHistoryLogDetails />}
+        />
         <Route path="/lms/lmsRule/addNewRule" element={<AddLMSRule />} />
 
         <Route
@@ -202,6 +211,10 @@ export default function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/login/verification" element={<OtpVerificationScreen/>} />
         
+        <Route
+          path="/lms/retargeting/reTargetingDetails"
+          element={<ReTargetingDetails />}
+        />
       </Route>
     </Routes>
   );

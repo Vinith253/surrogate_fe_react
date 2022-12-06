@@ -262,7 +262,7 @@ export default function Layout() {
   const theme = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
-  const [active,setActive] = React.useState(true)
+  const [active, setActive] = React.useState(true);
   const [open, setOpen] = React.useState(true);
   const [openIndex, setOpenIndex] = React.useState(0);
   const [openList, setOpenList] = React.useState(false);
@@ -361,6 +361,7 @@ export default function Layout() {
                     classes={({ isActive }: any) =>
                       isActive ? 'active' : 'inactive'
                     }
+
                     // onClick={() => setMenuItemIndex(text.key)}
                     // style={{
                     //   backgroundColor:
@@ -424,7 +425,14 @@ export default function Layout() {
                       }}
                     >
                       <ListItemIcon>
-                        <img src={text.image} alt="" />
+                        <img
+                          src={text.image}
+                          alt=""
+                          style={{
+                            filter:
+                              'invert(100%) sepia(100%) saturate(0%) hue-rotate(24deg) brightness(104%) contrast(101%)',
+                          }}
+                        />
                       </ListItemIcon>
                       <ListItemText
                         primary={text.content}
@@ -456,7 +464,13 @@ export default function Layout() {
                             classes={({ isActive }: any) =>
                               isActive ? 'active' : 'inactive'
                             }
-                            sx={{ padding: '0',backgroundColor:'rgba(111, 111, 111,.4)' }}
+                            sx={{
+                              padding: '0',
+                              backgroundColor: '#282829',
+                              '&:hover': {
+                                backgroundColor: '#282829',
+                              },
+                            }}
                           >
                             <Collapse
                               in={openList}
@@ -481,9 +495,20 @@ export default function Layout() {
                                   //   isActive ? 'active' : 'inactive'
                                   // }
                                 >
-                                  <ListItemIcon   sx={{ width: '2.5rem' }}>
-                                    <img   src={subData.img} alt="" />
+                                  <ListItemIcon sx={{ width: '2.5rem' }}>
+                                    <img
+                                      src={subData.img}
+                                      alt=""
+                                      //   classes={({ isActive }: any) =>
+                                      //   isActive ? 'active' : 'inactive'
+                                      // }
+                                      style={{
+                                        filter:
+                                          'invert(100%) sepia(100%) saturate(0%) hue-rotate(24deg) brightness(104%) contrast(101%)',
+                                      }}
+                                    />
                                   </ListItemIcon>
+
                                   <ListItemText
                                     primary={subData.data}
                                     sx={{
@@ -549,7 +574,7 @@ export default function Layout() {
                 // borderColor: "success.light"
               }}
             >
-              <Box className="search-container">
+              <Box className="search-container-layout">
                 <Box className="search-box">
                   <SearchIcon className="search-icon" />
                   <InputBase placeholder="Search" fullWidth={true} />

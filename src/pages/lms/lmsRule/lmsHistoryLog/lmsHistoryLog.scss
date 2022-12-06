@@ -1,0 +1,157 @@
+.LMSHistoryLogContainer {
+  margin: 0 30px !important;
+  .LMSHistoryLogHeader {
+    padding: 25px 0;
+    border-bottom: 2px solid #f0f2f5;
+    .groupButtonContainer {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}
+.LMS-historyLog-container {
+  margin: 30px 0;
+  .LMS-historyLog {
+    background-color: #ffffff;
+    padding: 0 20px;
+  }
+  .header-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px 0;
+    border-bottom: 2px solid #f0f2f5;
+    width: 100%;
+
+    .header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+      .title {
+        margin-left: 10px;
+      }
+    }
+
+    .header-content {
+      display: flex;
+      flex-direction: row;
+      .back-arrow {
+        color: #0662b7;
+      }
+
+      .heading {
+        font-size: 16px;
+        font-weight: 400;
+        color: #333333;
+      }
+      .history-text {
+        font-size: 12px;
+        font-weight: 500;
+        color: #afaeaf;
+      }
+
+      .back-arrow {
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+      }
+    }
+
+    .history-status {
+      font-size: 12px;
+      font-weight: 400;
+      color: #992d26;
+      background-color: #fce4e5;
+      padding: 3px 10px;
+      border-radius: 4px;
+    }
+  }
+  .history-log-details {
+    margin: 20px 0;
+    padding: 40px 20px;
+    background-color: white;
+  }
+  .reasonStyle {
+    font-family: 'Ilisarniq';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.0015em;
+    color: #151515;
+    padding: 10px 0;
+  }
+  .changes-listitem {
+    font-size: 14px;
+    // line-height: 20px;
+    letter-spacing: 0.0125em;
+    color: #151515;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    .changes {
+      font-weight: 100 !important;
+      margin-left: 10px;
+      padding: 0 !important;
+    }
+  }
+  .status {
+    background-color: #fce4e5;
+    padding: 5px 8px;
+    color: #992d26;
+    font-size: 12px;
+    border-radius: 4px;
+  }
+}
+.historylog-footer {
+  margin-top: 10px;
+  background-color: white;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  border-top: 2px solid #f3f3f3;
+
+  .historylog-button-container {
+    display: flex;
+    gap: 2;
+    justify-content: flex-end;
+    padding: 10px 30px;
+  }
+  .history-close-button {
+    padding: 5px 20px !important ;
+    font-size: 1vw !important;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    text-transform: capitalize !important;
+    letter-spacing: 0.0025em;
+    background-color: #0662b7 !important;
+    color: #ffffff !important;
+  }
+}
+
+.historylog-label {
+  background-color: #ffffff !important;
+  margin: 20px 0 !important;
+  padding: 10px 0px !important;
+  display: flex !important;
+  flex-direction: row !important;
+}
+.reasonFor-rejection {
+  background-color: #ffffff;
+  margin: 30px 0 60px 0;
+  padding: 15px 20px;
+  .changes-listitem {
+    padding: 8px 0;
+  }
+  .changes-listitem {
+    padding: 8px 0;
+    .rejection-content {
+      display: flex;
+      flex-direction: row;
+      padding: 0;
+    }
+  }
+}

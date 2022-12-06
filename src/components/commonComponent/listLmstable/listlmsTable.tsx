@@ -26,6 +26,7 @@ import GreenDot from '../../../assets/icons/greendot.svg';
 import DroppedDot from '../../../assets/icons/droppeddot.svg';
 import FailureDot from '../../../assets/icons/failuredot.svg';
 import ProgressDot from '../../../assets/icons/progressdot.svg';
+import retargetingIcon from '../../../assets/icons/retargeting_icon.svg';
 import { SearchOutlined } from '@mui/icons-material';
 import { ReactComponent as EditIcon } from '../../../assets/icons/editColumn.svg';
 import { lmsDataInterface } from '../../../interface/Types';
@@ -52,7 +53,6 @@ type dataProps = {
 };
 
 const indexKey = 'index';
-
 function kycStatus(
   status: string,
   imageDot: string | undefined,
@@ -168,6 +168,9 @@ const ListLMSTable = (props: any) => {
     } else if (alignment === 'Dropped') {
       let res3 = props.data.filter((item: any) => item.status === 'Dropped');
       setFilterteredData(res3);
+    } else if (alignment === 'Refer') {
+      let res3 = props.data.filter((item: any) => item.status === 'Refer');
+      setFilterteredData(res3);
     } else {
       setFilterteredData(props.data);
     }
@@ -278,201 +281,75 @@ const ListLMSTable = (props: any) => {
     }
     return defaultStyle;
   };
+  const [btnActive, setBtnActive] = useState(true);
 
   return (
     <Box sx={{ backgroundColor: 'white' }} className="lms-table">
-      <Stack sx={{ padding: '25px' }}>
-        <div style={{ display: 'flex' }}>
-          {(props.flag === 'sales-report' ||
-            props.flag === 'retargeting' || 
-            props.flag === 'lmsdashboard') && (
-              <TextField
-                className="text-field"
-                placeholder="Search by..."
-                InputProps={{
-                  startAdornment: (
-                    <IconButton edge="start">
-                      <SearchOutlined />
-                    </IconButton>
-                  ),
+      <Stack sx={{ padding: '25px 30px' }}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            paddingBottom: '25px',
+          }}
+        >
+          <div>
+            {props.flag === 'retargeting' && (
+              <Button
+                variant="contained"
+                color="secondary"
+                disabled={btnActive}
+                sx={{
+                  padding: '3px 10px',
+                  fontSize: '1vw',
+                  fontWeight: 400,
+                  display: 'flex',
+                  alignItems: 'center',
+                  textTransform: 'capitalize',
+                  letterSpacing: '0.0025em',
+                  marginRight: '30px',
                 }}
-              />
+              >
+                <IconButton sx={{ padding: '0', marginRight: '8px' }}>
+                  <img
+                    src={retargetingIcon}
+                    alt="retargetingIcon"
+                    style={{
+                      filter:
+                        btnActive === true
+                          ? 'invert(100%) sepia(13%) saturate(7%) hue-rotate(300deg) brightness(89%) contrast(99%)'
+                          : 'invert(100%) sepia(0%) saturate(0%) hue-rotate(108deg) brightness(102%) contrast(102%)',
+                      opacity: btnActive === true ? '0.3' : '1',
+                    }}
+                  />
+                </IconButton>
+                Retarget
+              </Button>
             )}
+          </div>
+
+          {(props.flag === 'sales-report' ||
+            props.flag === 'retargeting' ||
+            props.flag === 'lms-rule' ||
+            props.flag === 'retargeting-history' ||
+            props.flag === 'lmsdashboard') && (
+            <TextField
+              className="text-field"
+              placeholder="Search by..."
+              InputProps={{
+                startAdornment: (
+                  <IconButton edge="start">
+                    <SearchOutlined />
+                  </IconButton>
+                ),
+              }}
+            />
+          )}
           <div className="third-header">
-            {/* <ToggleButtonGroup
-              color="primary"
-              value={alignment}
-              exclusive
-              onChange={handleChange}
-              aria-label="Platform"
-            >
-              {toggleOptions.map((item: any) => {
-                return (
-                  <ColorButton value={item.title}>{item.title}</ColorButton>
-                );
-              })}
-            </ToggleButtonGroup> */}
             <GroupButton
               data={toggleOptions}
               onChange={(arg1: any) => handleChange(arg1)}
             />
-            {/* <div className={'outer-filter-box'}>
-            <div className={graphView == 1 ? 'selectedBox' : 'filter-box'}>
-              <li
-                onClick={() => {
-                  updatedListData(visibleHeader, props.rows);
-                  setCurrentPage(1);
-                  setPage(1);
-                  setGraphView(1);
-                }}
-                className={
-                  graphView == 1 ? 'selected-overview-text3' : 'overview-text3'
-                }
-              >
-                All
-              </li>
-            </div>
-            <div className="seperater-div" />
-
-            <div className="seperater-div" />
-            {!props.flag && (
-              <div className={graphView == 6 ? 'selectedBox' : 'filter-box'}>
-                <li
-                  onClick={() => {
-                    const currentData = props.rows.filter(function (item) {
-                      return item.status === 'Pending';
-                    });
-                    setFilterteredData(currentData);
-                    setCurrentPage(1);
-                    setPage(1);
-                    setGraphView(6);
-                  }}
-                  className={
-                    graphView == 6
-                      ? 'selected-overview-text3'
-                      : 'overview-text3'
-                  }
-                >
-                  Pending
-                </li>
-              </div>
-            )}
-
-            <div className="seperater-div" />
-            {!props.flag && (
-              <div className={graphView == 7 ? 'selectedBox' : 'filter-box'}>
-                <li
-                  onClick={() => {
-                    const currentData = props.rows.filter(function (item) {
-                      return item.status === 'Sent To Approver';
-                    });
-                    setFilterteredData(currentData);
-                    setCurrentPage(1);
-                    setPage(1);
-                    setGraphView(7);
-                  }}
-                  className={
-                    graphView == 7
-                      ? 'selected-overview-text3'
-                      : 'overview-text3'
-                  }
-                >
-                  Sent To Approver
-                </li>
-              </div>
-            )}
-
-            {props.flag && (
-              <div className={graphView == 2 ? 'selectedBox' : 'filter-box'}>
-                <li
-                  onClick={() => {
-                    const currentData = props.rows.filter(function (item) {
-                      return item.status === 'Approved';
-                    });
-                    updatedListData(visibleHeader, currentData);
-                    setCurrentPage(1);
-                    setPage(1);
-                    setGraphView(2);
-                  }}
-                  className={
-                    graphView == 2
-                      ? 'selected-overview-text3'
-                      : 'overview-text3'
-                  }
-                >
-                  Approved
-                </li>
-              </div>
-            )}
-
-            <div className="seperater-div" />
-
-            {props.flag && (
-              <div className={graphView == 3 ? 'selectedBox' : 'filter-box'}>
-                <li
-                  onClick={() => {
-                    const currentData = props.rows.filter(function (item) {
-                      return item.status === 'In-Progress';
-                    });
-                    updatedListData(visibleHeader, currentData);
-                    setCurrentPage(1);
-                    setPage(1);
-                    setGraphView(3);
-                  }}
-                  className={
-                    graphView == 3
-                      ? 'selected-overview-text3'
-                      : 'overview-text3'
-                  }
-                >
-                  In-Progress
-                </li>
-              </div>
-            )}
-
-            <div className="seperater-div" />
-            <div className={graphView == 4 ? 'selectedBox' : 'filter-box'}>
-              <li
-                onClick={() => {
-                  const currentData = props.rows.filter(function (item) {
-                    return item.status === 'Rejected';
-                  });
-                  updatedListData(visibleHeader, currentData);
-                  setCurrentPage(1);
-                  setPage(1);
-                  setGraphView(4);
-                }}
-                className={
-                  graphView == 4 ? 'selected-overview-text3' : 'overview-text3'
-                }
-              >
-                Rejected
-              </li>
-            </div>
-            <div className="seperater-div" />
-            {props.flag && (
-              <div className={graphView == 5 ? 'selectedBox' : 'filter-box'}>
-                <li
-                  onClick={() => {
-                    const currentData = props.rows.filter(function (item) {
-                      return item.status === 'Dropped';
-                    });
-                    updatedListData(visibleHeader, currentData);
-                    setCurrentPage(1);
-                    setPage(1);
-                    setGraphView(5);
-                  }}
-                  className={
-                    graphView == 5
-                      ? 'selected-overview-text3'
-                      : 'overview-text3'
-                  }
-                >
-                  Dropped
-                </li>
-              </div>
-            )}
-          </div> */}
 
             {(props.flag === 'dashboard' ||
               props.flag === 'sales-report' ||
@@ -495,22 +372,6 @@ const ListLMSTable = (props: any) => {
                 </Button>
               </div>
             )}
-            {props.flag === 'lmsdashboard' && 
-            <div className="reset-data">
-              <Button
-                endIcon={<RightArrow />}
-                sx={{
-                  fontSize: '1vw',
-                  marginLeft: '35px',
-                  color: '#0662B7',
-                  fontWeight: '600',
-                  textTransform: 'none',
-                }}
-              >
-                Detailed Reports
-              </Button>
-            </div>
-              }
           </div>
         </div>
 
@@ -524,7 +385,7 @@ const ListLMSTable = (props: any) => {
               <Table
                 style={{
                   width: '100%',
-                  borderBottom: 'none',
+                  borderBottom: '1px solid #F3F3F3',
                   overflowX: 'auto',
                 }}
                 aria-label="customized table"
@@ -680,6 +541,12 @@ const ListLMSTable = (props: any) => {
                                         dataItem?.status,
                                         ProgressDot,
                                         '#E4AC04'
+                                      )}
+                                    {dataItem?.status?.includes('Refer') &&
+                                      kycStatus(
+                                        dataItem?.status,
+                                        ProgressDot,
+                                        '#F37B21'
                                       )}
 
                                     {dataItem?.status?.includes(

@@ -5,6 +5,7 @@ import profile_icon from '../../../../assets/icons/profile_icon.svg';
 import passwordShow from '../../../../assets/icons/passwordView.svg';
 import DetailsCard from '../../../../components/commonComponent/DetailsCard';
 import './style.scss';
+import CustomModal from '../../../../components/commonComponent/customModal/CustomModal';
 
 export const personalDetails = {
   title: 'Profile Details',
@@ -77,8 +78,48 @@ export const contactDetails = {
   ],
 };
 export const Profile = () => {
-  const passWord = '************';
-  // const [show, setShow] = useState(false);
+  const passWord = 'M2P@123';
+  const [passwordView, setPasswordView] = useState(passWord);
+  const [changePassWord, setChangePassWord] = useState(false);
+  const [changePassWordOtp, setChangePassWordOtp] = useState(false);
+  const [createPassword, setCreatePassword] = useState(false);
+  const [successModel, setSuccessModel] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickOpen = () => {
+    setChangePassWord(true);
+  };
+
+  const closeFunction = () => {
+    setChangePassWord(false);
+    setChangePassWordOtp(false);
+    setCreatePassword(false);
+    setSuccessModel(false);
+  };
+  const ChangePasswordHandleCloseSuccess = () => {
+    setChangePassWord(false);
+    setChangePassWordOtp(true);
+  };
+  const verifyModel = () => {
+    setChangePassWordOtp(false);
+    setCreatePassword(true);
+  };
+  const UpdatehandleCloseSuccess = () => {
+    setCreatePassword(false);
+    setSuccessModel(true);
+  };
+  const handleSuccessModel = () => {
+    setSuccessModel(false);
+  };
+  const viewPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const renderPassWord = () => {
+    if (!showPassword) {
+      return passwordView.split('').map(() => <>*</>);
+    }
+    return passwordView;
+  };
   return (
     <Stack sx={{ backgroundColor: colors.bgGrey }} className="profileContainer">
       <Stack>
@@ -119,11 +160,14 @@ export const Profile = () => {
 
               <Stack className="ProfilepasswordStyle">
                 <Stack className="passwordDetailsStyle">
-                  <Stack className="profile-info-value">
-                    <Typography>{passWord}</Typography>
+                  <Stack className="profile-info-value" sx={{ width: '100px' }}>
+                    <Typography>{renderPassWord()}</Typography>
                   </Stack>
                   <Stack>
-                    <IconButton sx={{ padding: '0', marginLeft: '20px' }}>
+                    <IconButton
+                      sx={{ padding: '0', marginLeft: '20px' }}
+                      onClick={viewPassword}
+                    >
                       <img src={passwordShow} alt="password" />
                     </IconButton>
                   </Stack>
@@ -133,6 +177,7 @@ export const Profile = () => {
                     className="profile-changePassword"
                     variant="text"
                     size="small"
+                    onClick={handleClickOpen}
                     // sx={{ color: '#0662B7' }}
                   >
                     Change Password
@@ -143,6 +188,59 @@ export const Profile = () => {
           </Stack>
         </Stack>
       </Stack>
+      {changePassWord && (
+        <CustomModal
+          openSuccess={changePassWord}
+          handleCloseSuccess={ChangePasswordHandleCloseSuccess}
+          changePasswordTitle={'Change Password'}
+          changePasswordTitleMsg={
+            'Enter registered mobile number/email ID to receive OTP)'
+          }
+          ProceedBtn={'Proceed'}
+          closeFunction={closeFunction}
+        />
+      )}
+      {changePassWordOtp && (
+        <CustomModal
+          openSuccess={changePassWordOtp}
+          handleCloseSuccess={verifyModel}
+          changePasswordTitle={'Change Password'}
+          changePasswordTitleMsg={'Enter the 6-digit OTP sent to your email ID'}
+          ProceedBtn={'Verify'}
+          resentOTP={'Resent OTP'}
+          resentOTPmsg={
+            'Please enter the correct OTP sent to your registered email ID'
+          }
+          closeFunction={closeFunction}
+        />
+      )}
+      {createPassword && (
+        <CustomModal
+          openSuccess={createPassword}
+          handleCloseSuccess={UpdatehandleCloseSuccess}
+          changePasswordTitle={'Change Password'}
+          ProceedBtn={'Update'}
+          resentOTPmsg={
+            ' Password should be 8 characters, including 1 Caps, 1 lowercase, 1 numeral.'
+          }
+          enterNewPassword={'Enter New Password'}
+          confirmNewPassword={'Confirm New Password'}
+          forgotPassword={'Forgot Password?'}
+          closeFunction={closeFunction}
+        />
+      )}
+      {successModel && (
+        <CustomModal
+          openSuccess={successModel}
+          handleCloseSuccess={handleSuccessModel}
+          successModalTitle={'Request - Activate User'}
+          successModalMsg={
+            'Your request for activating user is successfully sent to the Reviewer.'
+          }
+          btn={' Close'}
+          closeFunction={closeFunction}
+        />
+      )}
     </Stack>
   );
 };

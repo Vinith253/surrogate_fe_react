@@ -1,4 +1,4 @@
-import { Typography, Button, Grid, Stack, Box } from "@mui/material";
+import { Typography, Button, Grid, Stack, Box, Link } from "@mui/material";
 import CheckBoxPopOver from "../../../components/commonComponent/CheckBoxPopOver/SingleLabel";
 import MoreFilterModal from "../../../components/commonComponent/customModal/MoreFilterModal";
 import DateTimePopOver from "../../../components/commonComponent/DateTimePopOver";
@@ -21,6 +21,9 @@ import ReactApexChart from "react-apexcharts";
 import ListLMSTable from "../../../components/commonComponent/listLmstable/listlmsTable";
 import download_icon from '../../../assets/icons/download_icon.svg';
 import mail_icon from '../../../assets/icons/mail_icon.svg';
+import { useNavigate } from "react-router-dom";
+import HeaderWithInfo from "../../../components/commonComponent/HeaderWithInfo";
+import MoreFilterRightModal from "../../../components/commonComponent/customModal/MoreFilterRightModal";
 
 
 export const lmsDashboardData = [
@@ -65,7 +68,7 @@ const donutGraphSeries2 :any =
 
 const donutGraphOptions: {} = {
   series: [12, 3, 14, 8, 17, 20, 6, 13],
-  labels: ["Office Pincode", "Resident Pincode", "C4C-Card Rejection", "HRMS Not Listed","DPD","KYC Rejection","Low Income","Low Salary","Low CIBIL"],
+  labels: ["Office Pincode", "Resident Pincode", "C4C-Card Rejection", "HRMS Not Listed","DPD","KYC Rejection","Low Income","Low Salary"],
   colors: ["#E697FF", "#F18F96","#999B9C", "#8BCD9A","#63ABFD","#F8B481","#F5DE99","#A08BDA"],
   chart: {
       type: 'donut',
@@ -164,6 +167,7 @@ const donutGraphOptions2: {} = {
 export default function LMSDashboard() {
 
   const [dayFilterValue, setDayFilter] = useState<string>('Current Day');
+  const navigate = useNavigate();
 
   const day_filter_label = [
     {
@@ -389,6 +393,17 @@ export default function LMSDashboard() {
       title: 'Actions',
       dataIndex: 'more',
       key: 'more',
+      headerRender: () => {
+        return <text>Actions</text>;
+      },
+      render: (_: string, row: any, index: number) => {
+        return <Link
+        sx={{ cursor: 'pointer', color: '#0662B7' }}
+        onClick={() => navigate('/lms/retargeting/reTargetingDetails')}
+      >
+        View
+      </Link>
+      },
     },
   ];
 
@@ -433,7 +448,7 @@ export default function LMSDashboard() {
               submit={'Select'}
               close={'Reset'}
             />
-            <MoreFilterModal
+            <MoreFilterRightModal
               product_label={product_label}
               day_filter_label={day_filter_label}
               dayFilterValue={dayFilterValue}
@@ -480,8 +495,28 @@ export default function LMSDashboard() {
           <div className="report-cards">
             <div className="graph-card">
             <div className="graph-div">
-            <div>
+            <div style={{display:'flex', justifyContent:'space-between', width:'100%'}}>
                   <text className="overview-text">Rejected data </text>
+                  <Stack>
+                <Box>
+                  <Button>
+                    <img
+                      src={download_icon}
+                      alt="download_icon"
+                      width="24px"
+                      height="24px"
+                    />
+                  </Button>
+                  <Button>
+                    <img
+                      src={mail_icon}
+                      alt="mail_icon"
+                      width="24px"
+                      height="24px"
+                    />
+                  </Button>
+                </Box>
+              </Stack>
                 </div>
                 <div className="line-div"/>
                 <div className="donut-chart-div" id="chart">
@@ -497,8 +532,28 @@ export default function LMSDashboard() {
 
             <div className="graph-card">
             <div className="graph-div">
-            <div>
+            <div style={{display:'flex', justifyContent:'space-between', width:'100%'}}>
                   <text className="overview-text">Dropped data </text>
+                  <Stack>
+                <Box>
+                  <Button>
+                    <img
+                      src={download_icon}
+                      alt="download_icon"
+                      width="24px"
+                      height="24px"
+                    />
+                  </Button>
+                  <Button>
+                    <img
+                      src={mail_icon}
+                      alt="mail_icon"
+                      width="24px"
+                      height="24px"
+                    />
+                  </Button>
+                </Box>
+              </Stack>
                 </div>
                 <div className="line-div"/>
                 <div className="donut-chart-div" id="chart">
@@ -545,39 +600,14 @@ export default function LMSDashboard() {
           </div>
         </div>
         <div className="diff-area" />
-        <Stack sx={{ marginBottom: '30px' }}>
-          <Stack
-            className="lmsDashboardOrgDetails"
-            sx={{
-              padding: '0 30px',
-            }}
-          >
-            <Stack className="retargetingOrgDetailsHeaderTable">
-              <Stack>
-                <Typography>Recent {lmsDashboardData.length} Data</Typography>
-              </Stack>
-              <Stack>
-                <Box>
-                  <Button>
-                    <img
-                      src={download_icon}
-                      alt="download_icon"
-                      width="70%"
-                      height="70%"
-                    />
-                  </Button>
-                  <Button>
-                    <img
-                      src={mail_icon}
-                      alt="mail_icon"
-                      width="70%"
-                      height="70%"
-                    />
-                  </Button>
-                </Box>
-              </Stack>
-            </Stack>
-          </Stack>
+        <Stack sx={{ backgroundColor: 'white',margin: '30px 0px'}}>
+          <Stack sx={{padding: '20px 30px 0px 30px'}}>
+        <HeaderWithInfo
+          header="Rejected and Dropped Applications"
+          isInfoEnabled={false}
+          info=""
+          isDownloadEnabled={false}
+        /></Stack>
           <ListLMSTable
             data={lmsDashboardData}
             listColumn={column1}

@@ -17,12 +17,26 @@
     margin: 30px 0px;
     border-radius: 8px;
 
-    .user-list-table-search-filters {
+    .more-btn {
+      width: 30px;
+      height: 30px;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .more-btn:hover {
+      border-radius: 50%;
+      background-color: #f3f3f3;
+    }
+
+    .lms-list-table-search-filters {
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
       margin-left: auto;
+
       .search-container {
         display: flex;
         justify-content: space-between;

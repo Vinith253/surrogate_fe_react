@@ -31,6 +31,7 @@ import UnfoldMoreIcon from '../../../../../assets/icons/sortArrow.svg';
 import { checkTagStatus } from '../../../../../utils/tagBasedIndicator/tagStatus';
 import { useNavigate } from 'react-router-dom';
 import CustomModal from '../../../../../components/commonComponent/customModal/CustomModal';
+import { DropdownFields } from '../../../userCreation/userCreation.const';
 export const organisationFilterDropdown: salesReportFilterInterface[] = [
   {
     label: 'Org Type',
@@ -158,12 +159,16 @@ export const OrganisationDetails = () => {
   const open = Boolean(anchorElement);
   const [isItem, setIsItem] = useState<boolean>(false);
   const [btnActive, setBtnActive] = useState(true);
-  const [editSchedulePause, setEditSchedulePause] = useState(false);
   const [pauseMethod, setPauseMethod] = useState('Pause Now');
+  const [editSchedulePause, setEditSchedulePause] = useState(false);
   const [successEditSchedulePause, setSuccessEditSchedulePause] =
     useState(false);
   const [successEditPause, setSuccessEditPause] = useState(false);
   const openCardMenu = Boolean(anchorEl);
+  const [addOrganisationModal, setAddOrganiationModal] = useState(false);
+  const [addorganisationMethod, setOrganisationMethod] = useState('DSA');
+
+  console.log('pausemethod', pauseMethod);
 
   useEffect(() => {
     filterData();
@@ -186,6 +191,29 @@ export const OrganisationDetails = () => {
         isEditable: true,
       },
     });
+    // navigate('/userManagement/orgStructure/screens/Onboarding/onboarding', {
+    //   state: {
+    //     isEditable: true,
+    //   },
+    // });
+    setAddOrganiationModal(true);
+  };
+
+  const handleSuccess = () => {
+    if (pauseMethod == 'DSA') {
+      navigate('/userManagement/orgStructure/DSA', {
+        state: {
+          isEditable: true,
+        },
+      });
+    }
+    if (pauseMethod == 'Fintech') {
+      navigate('/userManagement/orgStructure/Fintech', {
+        state: {
+          isEditable: true,
+        },
+      });
+    }
   };
 
   const organisationOpen = () => {
@@ -245,6 +273,7 @@ export const OrganisationDetails = () => {
     setEditSchedulePause(false);
     setSuccessEditPause(false);
     setSuccessEditSchedulePause(false);
+    setAddOrganiationModal(false);
   };
 
   const successModal = () => {
@@ -551,7 +580,7 @@ export const OrganisationDetails = () => {
         </Box>
         <Box>
           <Box className="organisation-checkbox-select-dropdown">
-            {organisationFilterDropdown?.map((eachItem: any, index: number) => {
+            {DropdownFields?.map((eachItem: any, index: number) => {
               return (
                 <Box key={index} className="select-dropdown">
                   <Typography sx={{ fontSize: '12px', fontWeight: 500 }}>
@@ -802,6 +831,22 @@ export const OrganisationDetails = () => {
             'Your action of Scheduled Pause - Card For Card Surrogate From  DD/MM/YYYTo DD/MM/YYY is successfully sent to reviewer'
           }
           btn={' Close'}
+        />
+      )}
+
+      {addOrganisationModal && (
+        <CustomModal
+          openSuccess={addOrganisationModal}
+          handleCloseSuccess={closeModal}
+          title={'Add Organisation'}
+          pause_content={'Select Channel type to add Organisation'}
+          close={'Close'}
+          submit={'Proceed'}
+          radioValuOne={'DSA'}
+          radioValuTwo={'Fintech'}
+          pauseMethodChecking={(arg1: string) => pauseMethodChange(arg1)}
+          pauseStatusKey={'DSA'}
+          handleSuccess={handleSuccess}
         />
       )}
     </Box>
