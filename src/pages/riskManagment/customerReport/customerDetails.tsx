@@ -15,6 +15,7 @@ import { FooterButton } from '../../../components/commonComponent/FooterButton/F
 import { RiskMngmtAccordian } from '../../../components/commonComponent/RiskMngmtAccordian';
 import { useState, useEffect } from 'react';
 import CustomModal from '../../../components/commonComponent/customModal/CustomModal';
+import HeaderWithInfo from '../../../components/commonComponent/HeaderWithInfo';
 
 export default function CustomerDetailScreen() {
   const navigate = useNavigate();
@@ -152,6 +153,7 @@ export default function CustomerDetailScreen() {
         </Box>
 
         <Box className="credit-score-outer-container">
+          <Box sx={{width:'50%'}}>
           <Box className="credit-container1">
             <Box>
               <Typography className="credit-title-text">
@@ -221,8 +223,17 @@ export default function CustomerDetailScreen() {
               </Box>
             </Box>
           </Box>
+          </Box>
 
-          <Box sx={{ width: '30%' }}></Box>
+          <Box sx={{ width: '50%', backgroundColor:'white', marginLeft:'20px',boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.16)', borderRadius:'4px', padding:'24px 32px 24px 32px'}}>
+          <HeaderWithInfo
+          header="M2P’s credit Score"
+          isInfoEnabled={false}
+          info=""
+          isDownloadEnabled={false}
+        />
+
+          </Box>
         </Box>
 
         <Box className="refer-value-container">

@@ -148,7 +148,7 @@
 
   .credit-score-outer-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-between;
     margin-top: 32px;
     margin-bottom: 32px;
@@ -160,7 +160,7 @@
     }
 
     .credit-container1 {
-      width: 48%;
+      // width: 48%;
       background-color: white;
       padding: 24px 32px 24px 32px;
       border-radius: 4px;
@@ -168,7 +168,7 @@
     }
 
     .credit-container2 {
-      width: 48%;
+      // width: 48%;
       background-color: white;
       padding: 24px 32px 24px 32px;
       margin-top: 24px;
