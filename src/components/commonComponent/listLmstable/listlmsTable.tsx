@@ -608,6 +608,7 @@ const ListLMSTable = (props: any) => {
           product_label={visibleHeader}
           id={id}
           showSearch={true}
+          columnNumber={2}
         />
       )}
     </Box>
