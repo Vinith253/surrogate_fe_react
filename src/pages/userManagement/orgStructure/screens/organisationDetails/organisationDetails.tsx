@@ -168,8 +168,6 @@ export const OrganisationDetails = () => {
   const [addOrganisationModal, setAddOrganiationModal] = useState(false);
   const [addorganisationMethod, setOrganisationMethod] = useState('DSA');
 
-  console.log('pausemethod', pauseMethod);
-
   useEffect(() => {
     filterData();
   }, [ascending]);
@@ -199,13 +197,15 @@ export const OrganisationDetails = () => {
       navigate('/userManagement/orgStructure/DSA', {
         state: {
           isEditable: true,
+          value: pauseMethod,
         },
       });
     }
     if (pauseMethod == 'Fintech') {
-      navigate('/userManagement/orgStructure/Fintech', {
+      navigate('/userManagement/orgStructure/DSA', {
         state: {
           isEditable: true,
+          value: pauseMethod,
         },
       });
     }
