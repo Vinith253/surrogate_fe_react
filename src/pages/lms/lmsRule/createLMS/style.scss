@@ -33,6 +33,24 @@
       margin: 3px 0px 0px 0px;
     }
 
+    .plus-icon-container {
+      margin-left: 20px;
+
+      .plus-icon {
+        width: 20px;
+        display: flex;
+        cursor: pointer;
+        margin-left: auto;
+      }
+    }
+
+    .add-more-days {
+      cursor: pointer;
+      font-size: 14px;
+      margin-left: -5px;
+      color: #0662b7;
+    }
+
     .lms-rule-form-container {
       margin-top: 20px;
       display: flex;
@@ -91,24 +109,6 @@
   .frequency-period-form {
     margin-top: 10px;
 
-    .plus-icon-container {
-      margin-left: 20px;
-
-      .plus-icon {
-        width: 20px;
-        margin-top: -40px;
-        display: flex;
-        margin-left: auto;
-      }
-    }
-
-    .add-more-days {
-      font-size: 14px;
-      margin-top: -39px;
-      margin-left: -10px;
-      color: #0662b7;
-    }
-
     .select-date-container {
       margin: 20px 0px;
       padding: 20px;
@@ -134,11 +134,29 @@
           font-size: 14px;
           width: 50%;
         }
+
+        .css-ad8z8b-MuiButtonBase-root-MuiSwitch-switchBase.Mui-checked {
+          color: #0662b7;
+        }
       }
     }
 
     .remove-container {
       cursor: pointer;
+      display: flex;
+      margin-left: auto;
+      .remove-icon {
+        width: 20px;
+        margin: -1px 10px 0px 10px;
+      }
+      .remove-label {
+        color: #0662b7;
+        font-size: 14px;
+      }
+    }
+
+    .disabled-remove-container {
+      cursor: not-allowed;
       display: flex;
       margin-left: auto;
       .remove-icon {
