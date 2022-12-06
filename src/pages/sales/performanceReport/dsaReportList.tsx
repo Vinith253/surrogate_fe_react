@@ -72,6 +72,7 @@ function DSAPerformanceReport() {
                 data={CategoryList}
                 onSelect={(event: any) => {
                   setSelectedCategory(event.target.value);
+                  setIsFiltered(false);
                 }}
               />
             </Grid>
