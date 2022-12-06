@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { Layout, PrivateRoute } from './components';
-import { Dashboard, HomePage, LoginPage, NotFoundPage } from './pages';
+import { Dashboard, HomePage, NotFoundPage } from './pages';
 import BulkUpload from './pages/productManagement/cardCatalogue/bulkUpload';
 import CreateNewCard from './pages/productManagement/cardCatalogue/createCard/createNewCard';
 import CardCatalogue from './pages/productManagement/cardCatalogue/landingScreen/cardTab';
@@ -15,7 +15,8 @@ import ReviewerLogDetails from './pages/productManagement/programmeManagement/sc
 import { BranchDetails } from './pages/userManagement/branchDetails/landingScreen';
 import { OrgStructure } from './pages/userManagement/orgStructure/landingScreen';
 import { Onboarding } from './pages/userManagement/orgStructure/screens/Onboarding/onboarding';
-import { OrgReview } from './pages/userManagement/orgStructure/screens/OrgReview/OrgReview';
+import { Fintech } from './pages/userManagement/orgStructure/screens/Onboarding/fintech';
+// import { OrgReview } from './pages/userManagement/orgStructure/screens/OrgReview/OrgReview';
 import { RoleCreation } from './pages/userManagement/roleCreation/landingScreen';
 import OrgBulkUpload from './pages/userManagement/orgStructure/orgBulkUpload';
 import UserCreation from './pages/userManagement/userCreation';
@@ -33,11 +34,13 @@ import AddLMSRule from './pages/lms/lmsRule/createLMS/addNewRule';
 import Retargeting from './pages/lms/reTargeting';
 import { OrgHistoryLogDetails } from './pages/userManagement/orgStructure/screens/historyLog/historyLogDetails/historyLogDetails';
 import UserProfile from './pages/profile/landingScreen';
-import { OrgStrHistoryLog } from './pages/userManagement/orgStructure/screens/historyLog/historyLog';
+// import { OrgStrHistoryLog } from './pages/userManagement/orgStructure/screens/historyLog/historyLog';
 import CustomerReport from './pages/riskManagment/customerReport';
 import CustomerDetailScreen from './pages/riskManagment/customerReport/customerDetails';
 import { ProgrammeHistoryDetails } from './pages/productManagement/programmeManagement/screens/listComponents/ProgrammeHistoryDetails';
-
+import {LoginPage} from './pages/login/landingScreen/Login'
+import OtpVerificationScreen from './pages/login/otp/OTPVerificationScreen';
+// import { otpPage } from './pages/userManagement/orgStructure/screens/OrgReview/otpPage/otpPage'
 export default function App() {
   return (
     <Routes>
@@ -49,7 +52,6 @@ export default function App() {
         </Route>
 
         {/* Public routes */}
-        <Route path="/login" element={<LoginPage />} />
         <Route path="/profile" element={<UserProfile />} />
         <Route
           path="/productManagement/cardCatalogue"
@@ -89,14 +91,18 @@ export default function App() {
         <Route path="/userManagement/orgStructure" element={<OrgStructure />} />
 
         <Route
-          path="/userManagement/orgStructure/screens/Onboarding/onboarding"
+          path="/userManagement/orgStructure/DSA"
           element={<Onboarding />}
         />
-
         <Route
+          path="/userManagement/orgStructure/Fintech"
+          element={<Fintech />}
+        />
+
+        {/* <Route
           path="/userManagement/orgStructure/screens/OrgReview/OrgReview"
           element={<OrgReview />}
-        />
+        /> */}
 
         <Route
           path="/userManagement/orgStructure/bulkUpload"
@@ -182,10 +188,20 @@ export default function App() {
 
         <Route path="/lms/lmsRule" element={<LMSRule />} />
         <Route path="/lms/lmsRule/addNewRule" element={<AddLMSRule />} />
-        
-        <Route path="/riskManagement/customerReports" element={<CustomerReport />} />
-        <Route path="/riskManagement/customerDetails" element={<CustomerDetailScreen />} />
 
+        <Route
+          path="/riskManagement/customerReports"
+          element={<CustomerReport />}
+        />
+        <Route
+          path="/riskManagement/customerDetails"
+          element={<CustomerDetailScreen />}
+        />
+      </Route>
+      <Route>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/login/verification" element={<OtpVerificationScreen/>} />
+        
       </Route>
     </Routes>
   );

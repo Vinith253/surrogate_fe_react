@@ -14,8 +14,9 @@ import {
   Divider,
   Checkbox,
 } from '@mui/material';
-import './onboarding.scss';
+import './fintech.scss';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+
 import { useLocation, useNavigate } from 'react-router-dom';
 import dayjs, { Dayjs } from 'dayjs';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
@@ -44,7 +45,7 @@ import ViewDoc from '../../../../../assets/images/viewDoc.svg';
 import TypographyHead from '../../../../../components/commonComponent/CustomText/Head';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 
-export const Onboarding = () => {
+export const Fintech = () => {
   const [startDatevalue, setStartDateValue] = useState(null);
   const [endDatevalue, setEndDateValue] = useState(null);
   const [open, setOpen] = React.useState(false);
@@ -205,7 +206,7 @@ export const Onboarding = () => {
                   <ArrowBackIcon className='arrow' />
                 </Box>
                 <Box>
-                  <TypoText title="View - Anand Agency - DSA" />
+                  <TypoText title="Anand Agency - Fintech Partner" />
                   <TypographyInfo title="Onboard your partners here" />
                 </Box>
               </Box>
@@ -233,7 +234,7 @@ export const Onboarding = () => {
         {viewMode === 'add' && (
           <Box className='add-header'
           >
-            <TypoText title="DSA Onboarding" />
+            <TypoText title="Fintech Partners Onboarding" />
             <Box className='head-title'
               
             >

@@ -181,7 +181,7 @@ export const OrganisationDetails = () => {
 
   const addOrganisationOpen = () => {
     // setAnchorEl(null);
-    navigate('/userManagement/orgStructure/screens/Onboarding/onboarding', {
+    navigate('/userManagement/orgStructure/DSA', {
       state: {
         isEditable: true,
       },
