@@ -20,9 +20,7 @@ import {
 
 import { useLocation, useNavigate } from 'react-router-dom';
 import wrong_info from '../../../assets/images/wrong_Info.svg';
-import CardImage from '../../../../../assets/images/image 44.png';
-import CardImg from '../../../../../assets/images/cardImg.svg';
-import ViewDoc from '../../../../../assets/images/viewDoc.svg';
+
 import Yesbank from '../../../assets/images/Yes_Bank_SVG_Logo 1.svg';
 import LoginImg from '../../../assets/images/LoginImg.svg';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -304,14 +302,7 @@ export const LoginPage = () => {
                       <Typography sx={{fontSize:'10px',color:'#992D26'}} >Error Mismatch</Typography>
                     </Box>}
                 </Box>
-                {/* {email && (
-                  <Box>
-                    <Info_Icon   />
-                    <Typography sx={{ fontSize: '10px', color: '#992D26' }}>
-                      Error Mismatch
-                    </Typography>
-                  </Box>
-                )} */}
+                
 
                 <Box sx={{ marginY: 3 }}>
                   <InputLabel required htmlFor="outlined-adornment-password">
