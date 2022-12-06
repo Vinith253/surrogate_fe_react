@@ -204,13 +204,13 @@ function ViewUser() {
             <Grid item xs={8}>
               <Stack className="each-info">
                 <Stack className="info-label">Type</Stack>
-                <Stack className="info-value">
-                  4 DSAs Selected...
+                <Stack className="info-value display-flex">
+                  <Stack>4 DSAs Selected...</Stack>
                   <Stack
                     className="show-more"
                     onClick={() => setIsDSAListModalOpen(true)}
                   >
-                    Show More
+                    Show DSAs
                   </Stack>
                 </Stack>
               </Stack>
@@ -224,12 +224,14 @@ function ViewUser() {
             <Grid item xs={8}>
               <Stack className="each-info">
                 <Stack className="info-label">Type</Stack>
-                <Stack className="info-value">4 Divisions Selected...</Stack>
-                <Stack
-                  className="show-more"
-                  onClick={() => setIsDivisionListModalOpen(true)}
-                >
-                  Show More
+                <Stack className="info-value display-flex">
+                  <Stack>4 Divisions Selected...</Stack>
+                  <Stack
+                    className="show-more"
+                    onClick={() => setIsDivisionListModalOpen(true)}
+                  >
+                    Show Divisions
+                  </Stack>
                 </Stack>
               </Stack>
             </Grid>
@@ -242,21 +244,21 @@ function ViewUser() {
             <Grid item xs={8}>
               <Stack className="each-info">
                 <Stack className="info-label">Type</Stack>
-                <Stack className="info-value">
-                  4 Fintech Partner Selected...
-                </Stack>
-                <Stack
-                  className="show-more"
-                  onClick={() => setIsFintechPartnerListModalOpen(true)}
-                >
-                  Show More
+                <Stack className="info-value display-flex">
+                  <Stack>4 Fintech Partner Selected...</Stack>
+                  <Stack
+                    className="show-more"
+                    onClick={() => setIsFintechPartnerListModalOpen(true)}
+                  >
+                    Show Fintech Partners
+                  </Stack>
                 </Stack>
               </Stack>
             </Grid>
           </Grid>
         </Stack>
 
-        <Stack className="lms-rule-container">
+        <Stack className="lms-rule-container" style={{ marginBottom: '50px' }}>
           <HeaderWithInfo
             header={'Frequency'}
             isInfoEnabled={true}
@@ -272,6 +274,7 @@ function ViewUser() {
             <Grid item xs={12}>
               1.Select Date - Daily
             </Grid>
+
             <Grid item xs={4}>
               <Stack className="each-info">
                 <Stack className="info-label">Start Date</Stack>
@@ -290,7 +293,9 @@ function ViewUser() {
                 <Stack className="info-value">12 Days once</Stack>
               </Stack>
             </Grid>
-            <Stack className="underline"></Stack>
+            <Grid item xs={12}>
+              <Stack className="underline"></Stack>
+            </Grid>
             <Grid item xs={12}>
               2.Select Date - Weekly
             </Grid>
@@ -318,7 +323,9 @@ function ViewUser() {
                 <Stack className="info-value">Monday</Stack>
               </Stack>
             </Grid>
-            <Stack className="underline"></Stack>
+            <Grid item xs={12}>
+              <Stack className="underline"></Stack>
+            </Grid>
             <Grid item xs={12}>
               3.Select Date - Monthly
             </Grid>
@@ -346,7 +353,9 @@ function ViewUser() {
                 <Stack className="info-value">For Day - First, Monday</Stack>
               </Stack>
             </Grid>
-            <Stack className="underline"></Stack>
+            <Grid item xs={12}>
+              <Stack className="underline"></Stack>
+            </Grid>
             <Grid item xs={12}>
               4.Select Date - Yearly
             </Grid>
@@ -374,7 +383,6 @@ function ViewUser() {
                 <Stack className="info-value">For Day - First, Monday</Stack>
               </Stack>
             </Grid>
-            <Stack className="underline"></Stack>
           </Grid>
         </Stack>
       </Stack>

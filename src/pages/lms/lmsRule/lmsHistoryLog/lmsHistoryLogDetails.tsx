@@ -9,15 +9,13 @@ import {
   Button,
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-
 import { colors } from '../../../../style/Color';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
   historyLogDetailData,
   historyLogDetailInterface,
-} from './LMSHistoryLogDetails.conts';
-// import './style.scss';
+} from './lmsHistoryLog.const';
 
 import { checkTagStatus } from '../../../../utils/tagBasedIndicator/tagStatus';
 
