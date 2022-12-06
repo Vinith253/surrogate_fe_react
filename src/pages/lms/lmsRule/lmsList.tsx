@@ -83,13 +83,13 @@ function LMSRuleTab() {
     { title: 'Initiated By', dataIndex: 'initiatedBy', key: 'initiatedBy' },
     { title: 'Re-targeted', dataIndex: 'reTargeted', key: 'reTargeted' },
     { title: 'Initiated', dataIndex: 'initiated', key: 'initiated' },
-    // { title: 'Failed', dataIndex: 'failed', key: 'failed' },
-    // { title: 'Again Dropped', dataIndex: 'againDropped', key: 'againDropped' },
-    // {
-    //   title: 'Again Rejected',
-    //   dataIndex: 'againRejected',
-    //   key: 'againRejected',
-    // },
+    { title: 'Failed', dataIndex: 'failed', key: 'failed' },
+    { title: 'Again Dropped', dataIndex: 'againDropped', key: 'againDropped' },
+    {
+      title: 'Again Rejected',
+      dataIndex: 'againRejected',
+      key: 'againRejected',
+    },
     // {
     //   title: 'Approved',
     //   dataIndex: 'approved',
