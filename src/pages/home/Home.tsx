@@ -11,6 +11,7 @@ import lms from '../../assets/icons/lms.svg';
 import frequentActivity from '../../assets/images/frequentActivity.svg';
 import '../home/Home.scss';
 import { useEffect, useState } from 'react';
+import Loading from '../../components/commonComponent/customModal/Re-Targeting/Loading';
 
 export default function Home() {
   const pendingActionsData = {

@@ -93,7 +93,7 @@ export default function App() {
         <Route path="/userManagement/orgStructure" element={<OrgStructure />} />
 
         <Route
-          path="/userManagement/orgStructure/screens/Onboarding/onboarding"
+          path="/userManagement/orgStructure/DSA"
           element={<Onboarding />}
         />
 

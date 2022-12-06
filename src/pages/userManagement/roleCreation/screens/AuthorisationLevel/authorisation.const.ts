@@ -153,7 +153,7 @@ export const authorisation_user_data = [
     sub_module: [
       {
         sub_module_id: 8,
-        sub_module_name: 'LMS Rule',
+        sub_module_name: '',
         sub_module_data: {
           initiator_data: [{ user_id: 1, user_name: 'Parithi' }],
           reviewer_data: [],
@@ -171,7 +171,7 @@ export const authorisation_user_data = [
     sub_module: [
       {
         sub_module_id: 9,
-        sub_module_name: 'Customer Support',
+        sub_module_name: '',
         sub_module_data: {
           initiator_data: [{ user_id: 1, user_name: 'Parithi' }],
           reviewer_data: [{ user_id: 2, user_name: 'Ashwin' }],
