@@ -61,6 +61,7 @@ export const bulkUpload = {
 
 export const tableHeader = {
   HEADING1: '#',
+  sortColumn:true,
   HEADING2: 'Application#',
   HEADING3: 'Customer Name',
   HEADING4: 'Mobile Number',
