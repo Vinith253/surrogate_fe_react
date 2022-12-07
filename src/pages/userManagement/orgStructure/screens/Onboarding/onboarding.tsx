@@ -16,7 +16,6 @@ import {
 } from '@mui/material';
 import './onboarding.scss';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import { OrgReview } from '../OrgReview/OrgReview';
 import { useLocation, useNavigate } from 'react-router-dom';
 import dayjs, { Dayjs } from 'dayjs';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
@@ -1387,7 +1386,7 @@ Koratur, chennai - 600100"
                 padding: '20px',
               }}
             >
-              <BtnOutlined onClick={() => navigate(-1)} title="close" />
+              <BtnOutlined onClick={() => navigate('/userManagement/orgStructure/screens/OrgReview/OrgReview')} title="close" />
             </Box>
           )}
         </Box>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Typography, Box } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { bulkUpload } from '../../../../utils/constants/Constants';
+import { bulkUpload } from '../../../../utils/Constants';
 import { useNavigate } from 'react-router-dom';
 import './index.scss';
 import UserUploadCard from './userUploadCard/UserUploadCard';

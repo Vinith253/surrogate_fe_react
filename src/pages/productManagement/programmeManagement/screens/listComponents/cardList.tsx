@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { colors } from '../../../../../style/Color';
-import { programMmgt } from '../../../../../utils/constants/Constants';
+import { programMmgt } from '../../../../../utils/Constants';
 import { ListTagStatus } from '../../../../../utils/tagBasedIndicator/listTagStatus';
 import CustomModal from '../../../../../components/commonComponent/customModal/CustomModal';
 

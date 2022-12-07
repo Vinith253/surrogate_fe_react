@@ -5,7 +5,7 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 import { Layout, PrivateRoute } from './components';
-import { Dashboard, HomePage, LoginPage, NotFoundPage } from './pages';
+import { Dashboard, HomePage, NotFoundPage } from './pages';
 import BulkUpload from './pages/productManagement/cardCatalogue/bulkUpload';
 import CreateNewCard from './pages/productManagement/cardCatalogue/createCard/createNewCard';
 import CardCatalogue from './pages/productManagement/cardCatalogue/landingScreen/cardTab';
@@ -20,7 +20,8 @@ import ReviewerLogDetails from './pages/productManagement/programmeManagement/sc
 import { BranchDetails } from './pages/userManagement/branchDetails/landingScreen';
 import { OrgStructure } from './pages/userManagement/orgStructure/landingScreen';
 import { Onboarding } from './pages/userManagement/orgStructure/screens/Onboarding/onboarding';
-import { OrgReview } from './pages/userManagement/orgStructure/screens/OrgReview/OrgReview';
+
+// import { OrgReview } from './pages/userManagement/orgStructure/screens/OrgReview/OrgReview';
 import { RoleCreation } from './pages/userManagement/roleCreation/landingScreen';
 import OrgBulkUpload from './pages/userManagement/orgStructure/orgBulkUpload';
 import UserCreation from './pages/userManagement/userCreation';
@@ -40,11 +41,21 @@ import EditLMSRule from './pages/lms/lmsRule/createLMS/editLMS';
 import Retargeting from './pages/lms/reTargeting';
 import { OrgHistoryLogDetails } from './pages/userManagement/orgStructure/screens/historyLog/historyLogDetails/historyLogDetails';
 import UserProfile from './pages/profile/landingScreen';
+
 import CustomerReport from './pages/riskManagment/customerReport';
 import CustomerDetailScreen from './pages/riskManagment/customerReport/customerDetails';
 import { ProgrammeHistoryDetails } from './pages/productManagement/programmeManagement/screens/listComponents/ProgrammeHistoryDetails';
+
+import OtpVerificationScreen from './pages/login/otp/OTPVerificationScreen';
+
 import ReTargetingDetails from './pages/lms/reTargeting/screens/reTargetingScreen/reTargetingDetails';
 import { LMSHistoryLogDetails } from './pages/lms/lmsRule/lmsHistoryLog/lmsHistoryLogDetails';
+import LoginLayout from './components/layout/loginLayout/loginLayout';
+import { LoginLayoutPage } from './pages/login/LoginLayoutPage';
+
+import { NewPasswordPage } from './pages/login/screens/newPasswordPage';
+import { NewLogin } from './pages/login/screens/NewLogin';
+import { ForgotPassword } from './pages/login/screens/ForgotPassword';
 
 // Loaders
 import { cardCatalogueLoader } from './pages/productManagement/cardCatalogue/screens/CardCatalogue';
@@ -59,7 +70,7 @@ const router = createBrowserRouter(
       </Route>
 
       {/* Public routes */}
-      <Route path="/login" element={<LoginPage />} />
+      
       <Route path="/profile" element={<UserProfile />} />
       <Route
         path="/productManagement/cardCatalogue"
@@ -98,10 +109,10 @@ const router = createBrowserRouter(
 
       <Route path="/userManagement/orgStructure/DSA" element={<Onboarding />} />
 
-      <Route
+      {/* <Route
         path="/userManagement/orgStructure/screens/OrgReview/OrgReview"
         element={<OrgReview />}
-      />
+      /> */}
 
       <Route
         path="/userManagement/orgStructure/bulkUpload"
@@ -208,7 +219,16 @@ const router = createBrowserRouter(
         path="/lms/retargeting/reTargetingDetails"
         element={<ReTargetingDetails />}
       />
+
+<Route path="/login" element={<LoginLayoutPage />}>
+        <Route path="/login" element={<NewLogin />} />
+        <Route path="/login/forgot" element={<ForgotPassword />} />
+        <Route path="/login/otp" element={<OtpVerificationScreen />} />
+        <Route path="/login/newpassword" element={<NewPasswordPage />} />
+      </Route>
+
     </Route>
+    
   )
 );
 

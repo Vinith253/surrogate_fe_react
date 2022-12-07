@@ -183,6 +183,12 @@ export const OrganisationDetails = () => {
   };
 
   const addOrganisationOpen = () => {
+    // setAnchorEl(null);
+    navigate('/userManagement/orgStructure/DSA', {
+      state: {
+        isEditable: true,
+      },
+    });
     setAnchorEl(null);
     // navigate('/userManagement/orgStructure/screens/Onboarding/onboarding', {
     //   state: {
@@ -430,11 +436,11 @@ export const OrganisationDetails = () => {
               }}
             >
               <MenuItem
-                // onClick={() => handleClose()}
+               
                 onClick={() => {
                   handleClose();
                   navigate(
-                    '/userManagement/orgStructure/screens/Onboarding/onboarding',
+                    '/userManagement/orgStructure/DSA',
                     {
                       state: {
                         isEditable: false,
@@ -447,11 +453,11 @@ export const OrganisationDetails = () => {
                 View Org.
               </MenuItem>
               <MenuItem
-                // onClick={handleClose}
+             
                 onClick={() => {
                   handleClose();
                   navigate(
-                    '/userManagement/orgStructure/screens/Onboarding/onboarding',
+                    '/userManagement/orgStructure/DSA',
                     {
                       state: {
                         isEditable: true,

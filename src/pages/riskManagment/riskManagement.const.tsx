@@ -1,4 +1,3 @@
-import { formLabelClasses } from "@mui/material";
 
 export const CustomerReportFilterDropdown = [
     {
@@ -97,7 +96,9 @@ export const CustomerReportFilterDropdown = [
     userCreditProfileScore: 300,
     userCashFlowTotal:500,
     userCreditProfileTotal:400,
-    customerCreditScore: 750
+    customerCreditScore: 750,
+    m2pCreditScore:750,
+    creditScoreText:'Good'
   }
 
   export const rejectedCustomerDetailData = {
@@ -105,7 +106,9 @@ export const CustomerReportFilterDropdown = [
     userCreditProfileScore: 100,
     userCashFlowTotal:500,
     userCreditProfileTotal:400,
-    customerCreditScore: 400
+    customerCreditScore: 400,
+    m2pCreditScore:400,
+    creditScoreText:'Bad'
   }
 
   export const referCustomerDetailData = {
@@ -113,7 +116,9 @@ export const CustomerReportFilterDropdown = [
     userCreditProfileScore: 170,
     userCashFlowTotal:500,
     userCreditProfileTotal:400,
-    customerCreditScore: 720
+    customerCreditScore: 720,
+    m2pCreditScore:400,
+    creditScoreText:'Moderate'
   }
 
 

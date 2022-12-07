@@ -3,7 +3,7 @@ import { Typography, Box } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import BulkList from '../bulkUpload/bulkList/BulkList';
 import UploadCard from '../bulkUpload/uploadCard/UploadCard';
-import { bulkUpload } from '../../../../utils/constants/Constants';
+import { bulkUpload } from '../../../../utils/Constants';
 import { useNavigate } from 'react-router-dom';
 import './index.scss';
 

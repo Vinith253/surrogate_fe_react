@@ -1,4 +1,4 @@
-import { lmsTableHeader } from '../../../utils/constants/Constants';
+import { lmsTableHeader } from '../../../utils/Constants';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 export const Configuration = [
