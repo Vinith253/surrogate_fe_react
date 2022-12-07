@@ -427,7 +427,7 @@ function TableComp(props: {
               </Button>
             </div>
           )}
-          {props.flag === 'dashboard' && (
+          {/* {props.flag === 'dashboard' && (
             <div className="reset-data">
               <Button
                 endIcon={<RightArrow />}
@@ -442,7 +442,7 @@ function TableComp(props: {
                 Detailed Reports
               </Button>
             </div>
-          )}
+          )} */}
         </div>
       </div>
       <Grid container spacing={0}>
