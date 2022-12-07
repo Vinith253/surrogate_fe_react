@@ -8,6 +8,8 @@ import {
   Button,
   FormControl,
   TextField,
+  Select,
+  MenuItem,
 } from '@mui/material';
 import BtnOutlined from '../../../../../components/commonComponent/CustomText/Button/Outlined';
 import SelectDropdown from '../../../../../components/commonComponent/CheckboxSelectDropdown';
@@ -69,7 +71,7 @@ function ReTargetingHistory() {
   const [communicationModel, setCommunicationModel] = useState(false);
   const [successModel, setSuccesModel] = useState(false);
   const [startDate, setStartDate] = React.useState<Dayjs | null>(dayjs());
-
+  const [value, setValue] = React.useState('10');
   const handleCloseSuccess = () => {
     setOpenModel(false);
     setCommunicationModel(false);
@@ -247,6 +249,9 @@ function ReTargetingHistory() {
   const handleChangeDate = (newValue: Dayjs | null) => {
     setStartDate(newValue);
   };
+  const handleChange = (event: any) => {
+    setValue(event.target.value as string);
+  };
   return (
     <Stack className="retargetingMainContainer">
       <Stack className="retargetingcontainer">
@@ -269,48 +274,30 @@ function ReTargetingHistory() {
             <Box sx={{ minWidth: 220 }}>
               <FormControl fullWidth>
                 <Typography className="retargetingDropDownText">
-                  Start Date
+                  Period
                 </Typography>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DesktopDatePicker
-                    inputFormat="DD/MM/YYYY"
-                    value={startDate}
-                    onChange={handleChangeDate}
-                    className="datePickerStyle"
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        sx={{ height: '10px' }}
-                        // size="medium"
-                        InputLabelProps={{
-                          style: { padding: '11.5px 14px', fontSize: 14 },
-                        }}
-                        // sx={{ padding: '11.5px 14px' }}
-                      />
-                    )}
-                  />
-                </LocalizationProvider>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={value}
+                  onChange={handleChange}
+                  sx={{
+                    '& legend': { display: 'none' },
+                    '& fieldset': { top: 0 },
+                  }}
+                  style={{ height: 46 }}
+                >
+                  <MenuItem value={10}>Current Day</MenuItem>
+                  <MenuItem value={20}>Current Week</MenuItem>
+                  <MenuItem value={30}>Current Month</MenuItem>
+                  <MenuItem value={40}>Current Quarter</MenuItem>
+                  <MenuItem value={50}>Current Year</MenuItem>
+                  <MenuItem value={60}>Custom Period</MenuItem>
+                </Select>
               </FormControl>
             </Box>
           </Grid>
-          <Grid item xs={3}>
-            <Box sx={{ minWidth: 220 }}>
-              <FormControl fullWidth>
-                <Typography className="retargetingDropDownText">
-                  End Date
-                </Typography>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DesktopDatePicker
-                    inputFormat="DD/MM/YYYY"
-                    value={startDate}
-                    onChange={handleChangeDate}
-                    className="datePickerStyle"
-                    renderInput={(params) => <TextField {...params} />}
-                  />
-                </LocalizationProvider>
-              </FormControl>
-            </Box>
-          </Grid>
+
           <Stack>
             <Stack
               sx={{

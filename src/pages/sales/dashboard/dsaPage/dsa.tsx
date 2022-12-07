@@ -81,7 +81,7 @@ export default function DsaPage() {
       index: 4,
       title: 'Virtual Card Issued',
       value: 345,
-      more: true,
+      more: false,
       image: VirtualCard,
     },
   ];

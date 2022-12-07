@@ -218,7 +218,7 @@ export const Profile = () => {
         <CustomModal
           openSuccess={createPassword}
           handleCloseSuccess={UpdatehandleCloseSuccess}
-          changePasswordTitle={'Change Password'}
+          changePasswordTitle={'Create New Password'}
           ProceedBtn={'Update'}
           resentOTPmsg={
             ' Password should be 8 characters, including 1 Caps, 1 lowercase, 1 numeral.'

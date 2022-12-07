@@ -38,7 +38,7 @@ import {
 import { colors } from '../../../../../style/Color';
 import MoreFilterModal from '../../../../../components/commonComponent/customModal/MoreFilterModal';
 import ListLMSTable from '../../../../../components/commonComponent/listLmstable/listlmsTable';
-import { lmsTableHeader } from '../../../../../utils/Constants';
+import { lmsTableHeader } from '../../../../../utils/constants/Constants';
 import { useNavigate } from 'react-router-dom';
 import CustomModal from '../../../../../components/commonComponent/customModal/CustomModal';
 import { DropdownFields } from '../../../../userManagement/userCreation/userCreation.const';

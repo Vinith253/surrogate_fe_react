@@ -1,5 +1,5 @@
 import { colors } from '../../style/Color';
-import { tagBasedIndicator } from '../Constants';
+import { tagBasedIndicator } from '../constants/Constants';
 export const ListTagStatus = (value: string) => {
   let result = {
     bgColor: '#fff',

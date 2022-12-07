@@ -28,7 +28,7 @@ import {
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import UploadCard from '../uploadCard/UploadCard';
-import { bulkUpload } from '../../../../../utils/Constants';
+import { bulkUpload } from '../../../../../utils/constants/Constants';
 import { useNavigate } from 'react-router-dom';
 import PaginationComp from '../../../../../components/commonComponent/Pagination/Pagination';
 import BulkUpload from '..';
@@ -470,11 +470,7 @@ export default function BulkList(props: any) {
   const handleCorrection = () => {
     setCorrectionState(true);
   };
-  const handleProceed = () => {
-    if (progress === 100 && correctionState) {
-      props.toggle(false, 'image');
-    }
-  };
+
   let count = 2;
   let rows = correctionState ? rows2 : rows1;
   useEffect(() => {
@@ -509,6 +505,15 @@ export default function BulkList(props: any) {
   const closeModal = () => {
     setImageUpload(false);
     navigate('/productManagement/cardCatalogue');
+  };
+  const handleProceed = () => {
+    if (progress === 100 && correctionState) {
+      if (props.fileCheck === 'image') {
+        setImageUpload(true);
+      } else {
+        props.toggle(false, 'image');
+      }
+    }
   };
   const handleContinue = () => {
     setOpenDiscard(!openDiscard);
@@ -812,9 +817,14 @@ export default function BulkList(props: any) {
                   textTransform: 'capitalize',
                 }}
               >
-                {progress === 100 && correctionState
-                  ? 'Upload card Photos'
-                  : 'Proceed'}
+                {/* {progress === 100 && correctionState
+                  ? 'Upload card Photos' 
+                  : 'Proceed'} */}
+                {!correctionState
+                  ? 'Proceed'
+                  : props.fileCheck === 'image'
+                  ? 'Submit to reviewer'
+                  : 'Upload card Photos'}
               </Button>
             </Box>
             <Box

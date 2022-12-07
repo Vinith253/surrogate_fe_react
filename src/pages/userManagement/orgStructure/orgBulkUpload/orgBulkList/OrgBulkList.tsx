@@ -28,7 +28,7 @@ import {
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import BulkUploadCard from '../orgUploadCard/OrgUploadCard';
-import { bulkUpload } from '../../../../../utils/Constants';
+import { bulkUpload } from '../../../../../utils/constants/Constants';
 import { useNavigate } from 'react-router-dom';
 import PaginationComp from '../../../../../components/commonComponent/Pagination/Pagination';
 import BulkUpload from '..';
@@ -482,6 +482,9 @@ export default function OrgBulkList(props: any) {
   const handleDiscard = () => {
     setOpenDiscard(true);
   };
+  const handleCancelClick = () => {
+    setOpenContinueDiscard(!openContinueDiscard);
+  };
   const handleContinue = () => {
     setOpenDiscard(!openDiscard);
     if (props.fileCheck === 'xls') {
@@ -768,7 +771,11 @@ export default function OrgBulkList(props: any) {
             <Box
               sx={{ display: 'flex', justifyContent: 'flex-end', gap: '1%' }}
             >
-              <Button variant="outlined" sx={{ textTransform: 'capitalize' }}>
+              <Button
+                variant="outlined"
+                sx={{ textTransform: 'capitalize' }}
+                onClick={handleCancelClick}
+              >
                 Cancel
               </Button>
               <Button
