@@ -44,6 +44,8 @@ import Modal from '@mui/material/Modal';
 import ViewDoc from '../../../../../assets/images/viewDoc.svg';
 import TypographyHead from '../../../../../components/commonComponent/CustomText/Head';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import CustomModal from '../../../../../components/commonComponent/customModal/CustomModal';
+import { log } from 'console';
 
 export const Onboarding = () => {
   const [startDatevalue, setStartDateValue] = useState(null);
@@ -55,6 +57,7 @@ export const Onboarding = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { state } = location;
+  console.log('state', state);
   // const [value, setValue] = React.useState<Dayjs | null>(dayjs('DD/MM/YYYY'));
   const [value, setValue] = React.useState<Dayjs | null>(dayjs());
   let objValue = {
@@ -91,6 +94,7 @@ export const Onboarding = () => {
     keyContact: false,
     proprietor: false,
   });
+  const [showSuccesModal, setShowSuccesModal] = useState(false);
   const [viewMode, setViewMode] = useState<string>(
     state.isEditable ? 'add' : 'edit'
   );
@@ -102,7 +106,6 @@ export const Onboarding = () => {
       ...prev,
       keyContact: [...prev.keyContact, newVal],
     }));
-   
   };
   const removeKeyContact = (index: number) => {
     let newData = data.keyContact ?? [];
@@ -135,10 +138,12 @@ export const Onboarding = () => {
         border: '1px solid black',
       },
   };
+
   const handleSubmitClick = () => {
+    setShowSuccesModal(true);
     console.log('coming here');
     // let value = 'add';
-    setViewMode('edit');
+
     // navigate('/userManagement/orgStructure/screens/OrgReview/OrgReview');
     // , {
     //   state: { record: dataObjValue },
@@ -191,33 +196,36 @@ export const Onboarding = () => {
   const handleChange = (newValue: Dayjs | null) => {
     setValue(newValue);
   };
+  const handleCloseSuccess = () => {
+    setShowSuccesModal(false);
+    setViewMode('edit');
+  };
+
   return (
     <Stack>
-      <Box className='onboarding' >
+      <Box className="onboarding">
         {viewMode === 'edit' && (
-          <Box
-          className='header'
-          >
-            <Box
-            className='header-box'
-            >
-              <Box  className='head' >
+          <Box className="header">
+            <Box className="header-box">
+              <Box className="head">
                 <Box onClick={() => navigate(-1)}>
-                  <ArrowBackIcon className='arrow' />
+                  <ArrowBackIcon className="arrow" />
                 </Box>
                 <Box>
-                  <TypoText title="View - Anand Agency - DSA" />
+                  <TypoText
+                    title={` ${
+                      state.value == 'DSA'
+                        ? 'View - Anand Agency - DSA '
+                        : 'Anand Agency - Fintech Partner'
+                    }`}
+                  />
                   <TypographyInfo title="Onboard your partners here" />
                 </Box>
               </Box>
               <Box>
-                <Button className='id-btn' >
-                  ID.NO 123456
-                </Button>
-                <Button className='btn'
-                  onClick={() => setViewMode('add')}
-                >
-                  <IconButton className='icon-btn' >
+                <Button className="id-btn">ID.NO 123456</Button>
+                <Button className="btn" onClick={() => setViewMode('add')}>
+                  <IconButton className="icon-btn">
                     <img
                       src={EditIcon}
                       style={{
@@ -232,65 +240,65 @@ export const Onboarding = () => {
           </Box>
         )}
         {viewMode === 'add' && (
-          <Box className='add-header'
-          >
-            <TypoText title="DSA Onboarding" />
-            <Box className='head-title'
-              
-            >
+          <Box className="add-header">
+            <TypoText
+              title={`${
+                state.value == 'DSA'
+                  ? 'DSA Onboarding'
+                  : 'Fintech Partners Onboarding'
+              } `}
+            />
+            <Box className="head-title">
               <TypographyInfo title="Onboard your partners here" />
             </Box>
           </Box>
         )}
 
-        <Box className='surrogate-container' 
-        >
+        <Box className="surrogate-container">
           <Box>
-            <Box className='surrogate-box' >
+            <Box className="surrogate-box">
               <TypoText title="Surrogate" />
               <img src={Info_Icon} />
               <TypographyInfo title="Choose a surrogate for your partners here" />
             </Box>
             <Divider sx={{ marginY: '20px' }} />
             {viewMode === 'add' ? (
-              <Box className='add-surrogate' sx={{ width: '90%' }}>
-                <Typography className='add-surrogate-text' >
+              <Box className="add-surrogate" sx={{ width: '90%' }}>
+                <Typography className="add-surrogate-text">
                   Select Surrogate
                 </Typography>
-                <Box className='add-surrogate-content' >
-                  <Box className='add-surrogate-box' >
+                <Box className="add-surrogate-content">
+                  <Box className="add-surrogate-box">
                     <Checkbox color="secondary" />
-                    <Typography className='add-surrogate-item' >
+                    <Typography className="add-surrogate-item">
                       Payroll
                     </Typography>
                   </Box>
-                  <Box  className='add-surrogate-box'>
+                  <Box className="add-surrogate-box">
                     <Checkbox color="secondary" />
-                    <Typography className='add-surrogate-item'>
+                    <Typography className="add-surrogate-item">
                       Card For Card
                     </Typography>
                   </Box>
-                  <Box  className='add-surrogate-box'>
+                  <Box className="add-surrogate-box">
                     <Checkbox color="secondary" />
-                    <Typography className='add-surrogate-item'>
+                    <Typography className="add-surrogate-item">
                       CIBIL
                     </Typography>
                   </Box>
-                  <Box  className='add-surrogate-box'>
+                  <Box className="add-surrogate-box">
                     <Checkbox color="secondary" />
-                    <Typography className='add-surrogate-item'>
-                      AQB
-                    </Typography>
+                    <Typography className="add-surrogate-item">AQB</Typography>
                   </Box>
-                  <Box  className='add-surrogate-box'>
+                  <Box className="add-surrogate-box">
                     <Checkbox color="secondary" />
-                    <Typography className='add-surrogate-item'>
+                    <Typography className="add-surrogate-item">
                       Pre-Approved
                     </Typography>
                   </Box>
-                  <Box  className='add-surrogate-box'>
+                  <Box className="add-surrogate-box">
                     <Checkbox color="secondary" />
-                    <Typography className='add-surrogate-item'>
+                    <Typography className="add-surrogate-item">
                       Secured
                     </Typography>
                   </Box>
@@ -305,16 +313,15 @@ export const Onboarding = () => {
           </Box>
         </Box>
 
-        <Box className='supplier-container'
-        >
-          <Box className='supplier-box' >
+        <Box className="supplier-container">
+          <Box className="supplier-box">
             <TypoText title="Supplier Profile" />
             <img src={Info_Icon} />
             <TypographyInfo title="Add company details of your partner here" />
           </Box>
           <Divider sx={{ marginY: '20px' }} />
 
-          <Grid container  spacing={3}>
+          <Grid container spacing={3}>
             {viewMode === 'add'
               ? renderEditModeText(
                   'Supplier Name',
@@ -363,7 +370,7 @@ export const Onboarding = () => {
                   '#AFAEAF',
                   'Cities of Operations'
                 )}
-           
+
             {viewMode === 'add'
               ? renderEditModeText(
                   'Enter Telephone No',
@@ -407,7 +414,6 @@ export const Onboarding = () => {
                       />
                     )}
                   />
-                  
                 </LocalizationProvider>
               </Grid>
             ) : (
@@ -418,7 +424,7 @@ export const Onboarding = () => {
                 'Year of inc./ in Business Since'
               )
             )}
-            
+
             {viewMode === 'add' ? (
               <Grid item xs={12} sm={6} md={4}>
                 <FormControl fullWidth>
@@ -523,9 +529,9 @@ export const Onboarding = () => {
           </Grid>
         </Box>
 
-        <Box className='proprietor-container' >
-          <Box className='proprietor-container-box' >
-            <Box className='proprietor-head' >
+        <Box className="proprietor-container">
+          <Box className="proprietor-container-box">
+            <Box className="proprietor-head">
               <TypoText title="Proprietor/ All Directors/ All Partners" />
               <img src={Info_Icon} />
               <TypographyInfo title="Add key personal information of your partner(s) here." />
@@ -707,10 +713,9 @@ export const Onboarding = () => {
           })}
         </Box>
 
-        <Box className='keycontact-container'
-        >
-          <Box className='keycontact-container-box' >
-            <Box className='keycontact-head' >
+        <Box className="keycontact-container">
+          <Box className="keycontact-container-box">
+            <Box className="keycontact-head">
               <TypoText title="Key Contact Details" />
               <img src={Info_Icon} />
               <TypographyInfo title="Add your partner's contact information here." />
@@ -852,23 +857,18 @@ export const Onboarding = () => {
                         '#AFAEAF',
                         'Reporting Head'
                       )}
-
-                  
                 </Grid>
-
-               
               </Box>
             );
           })}
         </Box>
 
         {viewMode === 'add' && (
-          <Box className='item-container'
-          >
+          <Box className="item-container">
             {viewMode === 'add' ? (
               <Box>
-                <Box className='item-container-box' >
-                  <Box className='item-head' >
+                <Box className="item-container-box">
+                  <Box className="item-head">
                     <TypoText title="Regulatory Requirement" />
                     <img src={Info_Icon} />
                     <TypographyInfo title="Add key regulatory requirement(s) for your partner here." />
@@ -878,18 +878,16 @@ export const Onboarding = () => {
                 <UploadDetails />
               </Box>
             ) : (
-              ""
+              ''
               // <OrgReview />
             )}
           </Box>
         )}
 
         {viewMode === 'edit' && (
-          <Box
-          className='item-container'
-          >
+          <Box className="item-container">
             <Box>
-              <Box  sx={{ display: 'flex', gap: 2 }}>
+              <Box sx={{ display: 'flex', gap: 2 }}>
                 <TypographyHead title="Regulatory Requirement" />
                 <img src={Info_Icon} />
                 <TypographyInfo title="Add key regulatory requirement(s) for your partner here. " />
@@ -958,10 +956,9 @@ export const Onboarding = () => {
           </Box>
         )}
 
-        <Box className='item-container'
-        >
-          <Box className='item-container-box'  >
-            <Box className='item-head' >
+        <Box className="item-container">
+          <Box className="item-container-box">
+            <Box className="item-head">
               <TypoText title="Regulatory Requirement" />
               <img src={Info_Icon} />
               <TypographyInfo title="Add key regulatory requirement(s) for your partner here." />
@@ -994,16 +991,13 @@ export const Onboarding = () => {
                     '#AFAEAF',
                     'Default Credit Period (Days)'
                   )}
-              {
-                viewMode === 'add'
-                  ? renderEditModeText(
-                      '15',
-                      'businessId',
-                      'Default Credit Period (Days)'
-                    )
-                  : ''
-                
-              }
+              {viewMode === 'add'
+                ? renderEditModeText(
+                    '15',
+                    'businessId',
+                    'Default Credit Period (Days)'
+                  )
+                : ''}
               {viewMode === 'edit' &&
                 renderViewModeText(
                   '#151515',
@@ -1068,7 +1062,6 @@ export const Onboarding = () => {
                 )
               )}
 
-             
               {viewMode === 'add'
                 ? renderEditModeText(
                     'Enter Bank Account Number',
@@ -1102,7 +1095,7 @@ export const Onboarding = () => {
                   '#AFAEAF',
                   'Address Line 2'
                 )}
-            </Grid> 
+            </Grid>
 
             <Grid container sx={{ marginBottom: '20px' }} spacing={5}>
               {viewMode === 'add' &&
@@ -1130,10 +1123,9 @@ export const Onboarding = () => {
                   '#AFAEAF',
                   'MICR Code (9 digit)'
                 )}
-            </Grid> 
+            </Grid>
 
             {viewMode === 'add' && (
-             
               <Grid container spacing={5}>
                 <Grid item md={4}>
                   <TypographySubTitle fullWidth title="MICR Code (9 digits)" />
@@ -1400,6 +1392,17 @@ Koratur, chennai - 600100"
           )}
         </Box>
       </Box>
+      {showSuccesModal && (
+        <CustomModal
+          openSuccess={showSuccesModal}
+          handleCloseSuccess={handleCloseSuccess}
+          successModalTitle={'Create Organisation'}
+          successModalMsg={
+            ' Your action of pausing - Card For Card Surrogate has been successully sent to the reviewer'
+          }
+          btn={' Close'}
+        />
+      )}
     </Stack>
   );
 };

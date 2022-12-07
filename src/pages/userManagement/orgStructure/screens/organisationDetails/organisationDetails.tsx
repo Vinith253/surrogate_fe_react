@@ -168,8 +168,6 @@ export const OrganisationDetails = () => {
   const [addOrganisationModal, setAddOrganiationModal] = useState(false);
   const [addorganisationMethod, setOrganisationMethod] = useState('DSA');
 
-  console.log('pausemethod', pauseMethod);
-
   useEffect(() => {
     filterData();
   }, [ascending]);
@@ -185,7 +183,7 @@ export const OrganisationDetails = () => {
   };
 
   const addOrganisationOpen = () => {
-    // setAnchorEl(null);
+    setAnchorEl(null);
     // navigate('/userManagement/orgStructure/screens/Onboarding/onboarding', {
     //   state: {
     //     isEditable: true,
@@ -199,13 +197,15 @@ export const OrganisationDetails = () => {
       navigate('/userManagement/orgStructure/DSA', {
         state: {
           isEditable: true,
+          value: pauseMethod,
         },
       });
     }
     if (pauseMethod == 'Fintech') {
-      navigate('/userManagement/orgStructure/Fintech', {
+      navigate('/userManagement/orgStructure/DSA', {
         state: {
           isEditable: true,
+          value: pauseMethod,
         },
       });
     }
@@ -213,7 +213,7 @@ export const OrganisationDetails = () => {
 
   const organisationOpen = () => {
     navigate('/userManagement/orgStructure/bulkUpload');
-    // setAnchorEl(null);
+    setAnchorEl(null);
   };
   const handleSelectAllClick = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {

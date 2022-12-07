@@ -96,10 +96,7 @@ const router = createBrowserRouter(
       <Route path="/userManagement/branchDetails" element={<BranchDetails />} />
       <Route path="/userManagement/orgStructure" element={<OrgStructure />} />
 
-      <Route
-        path="/userManagement/orgStructure/screens/Onboarding/onboarding"
-        element={<Onboarding />}
-      />
+      <Route path="/userManagement/orgStructure/DSA" element={<Onboarding />} />
 
       <Route
         path="/userManagement/orgStructure/screens/OrgReview/OrgReview"
@@ -109,6 +106,11 @@ const router = createBrowserRouter(
       <Route
         path="/userManagement/orgStructure/bulkUpload"
         element={<OrgBulkUpload />}
+      />
+
+      <Route
+        path="/userManagement/orgStructure/historyLogDetail"
+        element={<OrgHistoryLogDetails />}
       />
 
       <Route path="/userManagement/roleCreation" element={<RoleCreation />} />

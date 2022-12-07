@@ -332,7 +332,8 @@ const ListLMSTable = (props: any) => {
             props.flag === 'retargeting' ||
             props.flag === 'lms-rule' ||
             props.flag === 'retargeting-history' ||
-            props.flag === 'lmsdashboard') && (
+            props.flag === 'lmsdashboard' ||
+            props.flag === 'riskMngmt') && (
             <TextField
               className="text-field"
               placeholder="Search by..."
@@ -354,7 +355,8 @@ const ListLMSTable = (props: any) => {
             {(props.flag === 'dashboard' ||
               props.flag === 'sales-report' ||
               props.flag === 'retargeting' ||
-              props.flag === 'lmsdashboard') && (
+              props.flag === 'lmsdashboard' ||
+              props.flag === 'riskMngmt') && (
               <div className="reset-data">
                 <Button
                   startIcon={<EditIcon />}
@@ -376,17 +378,17 @@ const ListLMSTable = (props: any) => {
         </div>
 
         <Grid container spacing={0}>
-          <Grid item sm={9}>
+          <Grid item sm={9} sx={{ maxWidth: '900px !important' }}>
             <TableContainer
               component={Paper}
-              sx={{ maxWidth: '950px' }}
+              // sx={{ maxWidth: '950px' }}
               className="table1"
             >
               <Table
                 style={{
-                  width: '100%',
+                  width: '120%',
                   borderBottom: '1px solid #F3F3F3',
-                  overflowX: 'auto',
+                  // overflowX: 'auto',
                 }}
                 aria-label="customized table"
               >
@@ -449,7 +451,7 @@ const ListLMSTable = (props: any) => {
             </TableContainer>
           </Grid>
           <Grid item sm={3}>
-            <div style={{ boxShadow: '-10px 0 8px 0 #EDEDED' }}>
+            <div style={{ boxShadow: props?.flag === 'riskMngmt' ? 'none' :'-10px 0 8px 0 #EDEDED' }}>
               <TableContainer>
                 <Table
                   style={{
@@ -606,6 +608,7 @@ const ListLMSTable = (props: any) => {
           product_label={visibleHeader}
           id={id}
           showSearch={true}
+          columnNumber={2}
         />
       )}
     </Box>
