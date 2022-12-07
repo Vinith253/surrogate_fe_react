@@ -17,7 +17,7 @@ export default function UserIdentityBox({ item }: props) {
             item
             key={item.id}
             className="grid-style"
-            columnGap={70}
+            columnGap={78}
           >
             <Typography>Criteria</Typography>
             <Typography>Status</Typography>
@@ -32,7 +32,7 @@ export default function UserIdentityBox({ item }: props) {
               item
               key={item.id}
               className="risk-accordian-grid-style"
-              columnGap={57}
+              columnGap={65}
             >
               <Box className="inner-box">
                 <Typography className="box-title">{item?.title1}</Typography>
@@ -70,10 +70,13 @@ export default function UserIdentityBox({ item }: props) {
                 </Box>
               ) : (
                 <Box className="right-status-box">
+                  {item?.matchedDisplayText > 0 && 
+                  <>
                   <StatusFailIcon width={'16px'} />
                   <Typography className="text-font-style">
                     {item?.matchedDisplayText}
                   </Typography>
+                  </> }
                 </Box>
               )}
             </Grid>
