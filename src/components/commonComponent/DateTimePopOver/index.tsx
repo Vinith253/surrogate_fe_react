@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
 import '../../../style/Style.scss';
-import { Button, Popover, Stack } from '@mui/material';
+import { Box, Button, Popover, Stack } from '@mui/material';
 import FormGroup from '@mui/material/FormGroup';
 import Grid from '@mui/material/Grid';
 import { ReactComponent as DownArrow } from '../../../assets/icons/downArrow.svg';
+import CalendarTodayOutlinedIcon from '@mui/icons-material/CalendarTodayOutlined';
 
 type props = {
   day_filter_label?: Array<any>;
   dayFilterValue?: string;
 };
 
-function DateTimePopOver({
-  day_filter_label,
-  dayFilterValue,
-}: props) {
+function DateTimePopOver({ day_filter_label, dayFilterValue }: props) {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -62,24 +60,63 @@ function DateTimePopOver({
                     return (
                       <Grid item key={item.id}>
                         {' '}
-                        <Button
-                          onClick={() => {
-                            item.onclick();
-                            handleClose();
-                          }}
-                          sx={{
-                            fontSize: '0.9vw',
-                            fontWeight: '600',
-                            textTransform: 'none',
-                            width: '100%',
-                            justifyContent: 'flex-start',
-                            paddingTop: '16px',
-                            paddingBottom: '16px',
-                            paddingLeft: '12px',
-                          }}
-                        >
-                          {item.label}
-                        </Button>
+                        {item.label !== 'Custom Period' && (
+                          <Button
+                            onClick={() => {
+                              item.onclick();
+                              handleClose();
+                            }}
+                            sx={{
+                              fontSize: '0.9vw',
+                              fontWeight: '600',
+                              textTransform: 'none',
+                              width: '100%',
+                              justifyContent: 'flex-start',
+                              paddingTop: '16px',
+                              paddingBottom: '16px',
+                              paddingLeft: '12px',
+                            }}
+                          >
+                            {item.label}
+                          </Button>
+                        )}
+                        {item.label === 'Custom Period' && (
+                          <Button
+                            onClick={() => {
+                              item.onclick();
+                              handleClose();
+                            }}
+                            sx={{
+                              fontSize: '0.9vw',
+                              fontWeight: '600',
+                              textTransform: 'none',
+                              width: '100%',
+                              justifyContent: 'flex-start',
+                              paddingTop: '16px',
+                              paddingBottom: '16px',
+                              paddingLeft: '12px',
+                            }}
+                          >
+                            <Box
+                              sx={{
+                                display: 'flex',
+                                width: '100%',
+                                justifyContent: 'space-between',
+                                alignItems: 'center',
+                              }}
+                            >
+                              <Box>{item.label}</Box>
+                              <Box
+                                sx={{
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                }}
+                              >
+                                <CalendarTodayOutlinedIcon />
+                              </Box>
+                            </Box>
+                          </Button>
+                        )}
                       </Grid>
                     );
                   })}

@@ -268,7 +268,7 @@ export default function Layout() {
   const [openList, setOpenList] = React.useState(false);
   const [checkIndex, setCheckIndex] = React.useState(0);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [menuItemIndex, setMenuItemIndex] = React.useState(0);
+  const [changeColor, setChangeColor] = React.useState(false);
 
   const openMenu = Boolean(anchorEl);
 
@@ -428,10 +428,10 @@ export default function Layout() {
                         <img
                           src={text.image}
                           alt=""
-                          style={{
-                            filter:
-                              'invert(100%) sepia(100%) saturate(0%) hue-rotate(24deg) brightness(104%) contrast(101%)',
-                          }}
+                          // style={{
+                          //   filter:
+                          //     ' invert(88%) sepia(100%) saturate(3%) hue-rotate(188deg)brightness(109%) contrast(97%)',
+                          // }}
                         />
                       </ListItemIcon>
                       <ListItemText
@@ -502,10 +502,10 @@ export default function Layout() {
                                       //   classes={({ isActive }: any) =>
                                       //   isActive ? 'active' : 'inactive'
                                       // }
-                                      style={{
-                                        filter:
-                                          'invert(100%) sepia(100%) saturate(0%) hue-rotate(24deg) brightness(104%) contrast(101%)',
-                                      }}
+                                      // style={{
+                                      //   filter:
+                                      //     ' invert(88%) sepia(100%) saturate(3%) hue-rotate(188deg) brightness(109%) contrast(97%)',
+                                      // }}
                                     />
                                   </ListItemIcon>
 

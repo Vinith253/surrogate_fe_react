@@ -482,6 +482,9 @@ export default function OrgBulkList(props: any) {
   const handleDiscard = () => {
     setOpenDiscard(true);
   };
+  const handleCancelClick = () => {
+    setOpenContinueDiscard(!openContinueDiscard);
+  };
   const handleContinue = () => {
     setOpenDiscard(!openDiscard);
     if (props.fileCheck === 'xls') {
@@ -768,7 +771,11 @@ export default function OrgBulkList(props: any) {
             <Box
               sx={{ display: 'flex', justifyContent: 'flex-end', gap: '1%' }}
             >
-              <Button variant="outlined" sx={{ textTransform: 'capitalize' }}>
+              <Button
+                variant="outlined"
+                sx={{ textTransform: 'capitalize' }}
+                onClick={handleCancelClick}
+              >
                 Cancel
               </Button>
               <Button
