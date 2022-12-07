@@ -1,6 +1,7 @@
 import { dataList } from '../../../interface/Types';
 import { TabBar } from '../../../components/commonComponent/customTab/CustomTab';
-import ReportList from '../performanceReport/reportsList';
+import DSAReportList from './dsaReportList';
+import BankReportList from './bankReportList';
 import './style.scss';
 
 function PerformanceReport() {
@@ -8,14 +9,14 @@ function PerformanceReport() {
     {
       id: '1',
       data: 'DSA',
-      component: <ReportList />,
+      component: <DSAReportList />,
       isDisabled: false,
     },
     {
       id: '2',
       data: 'Bank',
-      component: <div>Bank</div>,
-      isDisabled: true,
+      component: <BankReportList />,
+      isDisabled: false,
     },
   ];
 

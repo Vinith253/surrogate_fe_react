@@ -91,12 +91,16 @@ function LMS() {
             {filterdata.map((item) => {
               return item.sub_module.map((data) => {
                 return (
-                  <ColorButton
-                    value={data.sub_module_name}
-                    className="filter-btn"
-                  >
-                    {data.sub_module_name}
-                  </ColorButton>
+                  <>
+                    {data.sub_module_name && (
+                      <ColorButton
+                        value={data.sub_module_name}
+                        className="filter-btn"
+                      >
+                        {data.sub_module_name}
+                      </ColorButton>
+                    )}
+                  </>
                 );
               });
             })}

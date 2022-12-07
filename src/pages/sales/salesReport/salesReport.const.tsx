@@ -1,42 +1,46 @@
-export const SalesReportFilterDropdown: salesReportFilterInterface[] = [
+export const SalesReportFilterDropdown = [
   {
     label: 'State',
     option: [
-      { value: 'tamilnadu', name: 'Tamilnadu' },
-      { value: 'andra', name: 'Andhra' },
-      { value: 'telungana', name: 'Telungana' },
-      { value: 'karnataka', name: 'Karnataka' },
-      { value: 'kerala', name: 'Kerala' },
+      { value: 'All', name: 'All' },
+      { value: 'Tamilnadu', name: 'Tamilnadu' },
+      { value: 'Andra', name: 'Andhra' },
+      { value: 'Telungana', name: 'Telungana' },
+      { value: 'Karnataka', name: 'Karnataka' },
+      { value: 'Kerala', name: 'Kerala' },
     ],
   },
   {
     label: 'Zone',
     option: [
-      { value: 'tamilnadu', name: 'Tamilnadu' },
-      { value: 'andra', name: 'Andhra' },
-      { value: 'telungana', name: 'Telungana' },
-      { value: 'karnataka', name: 'Karnataka' },
-      { value: 'kerala', name: 'Kerala' },
+      { value: 'All', name: 'All' },
+      { value: 'Tamilnadu', name: 'Tamilnadu' },
+      { value: 'Andra', name: 'Andhra' },
+      { value: 'Telungana', name: 'Telungana' },
+      { value: 'Karnataka', name: 'Karnataka' },
+      { value: 'Kerala', name: 'Kerala' },
     ],
   },
   {
     label: 'District',
     option: [
-      { value: 'tamilnadu', name: 'Tamilnadu' },
-      { value: 'andra', name: 'Andhra' },
-      { value: 'telungana', name: 'Telungana' },
-      { value: 'karnataka', name: 'Karnataka' },
-      { value: 'kerala', name: 'Kerala' },
+      { value: 'All', name: 'All' },
+      { value: 'Tamilnadu', name: 'Tamilnadu' },
+      { value: 'Andra', name: 'Andhra' },
+      { value: 'Telungana', name: 'Telungana' },
+      { value: 'Karnataka', name: 'Karnataka' },
+      { value: 'Kerala', name: 'Kerala' },
     ],
   },
   {
     label: 'Branch',
     option: [
-      { value: 'tamilnadu', name: 'Tamilnadu' },
-      { value: 'andra', name: 'Andhra' },
-      { value: 'telungana', name: 'Telungana' },
-      { value: 'karnataka', name: 'Karnataka' },
-      { value: 'kerala', name: 'Kerala' },
+      { value: 'All', name: 'All' },
+      { value: 'Tamilnadu', name: 'Tamilnadu' },
+      { value: 'Andra', name: 'Andhra' },
+      { value: 'Telungana', name: 'Telungana' },
+      { value: 'Karnataka', name: 'Karnataka' },
+      { value: 'Kerala', name: 'Kerala' },
     ],
   },
   {
@@ -68,8 +72,3 @@ export const SalesReportFilterDropdown: salesReportFilterInterface[] = [
     option: [{ value: 'all', name: 'All' }],
   },
 ];
-
-export interface salesReportFilterInterface {
-  label?: string;
-  option?: Array<object>;
-}
