@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Stack,
   Box,
@@ -20,7 +20,7 @@ import {
 
 import { useLocation, useNavigate } from 'react-router-dom';
 import wrong_info from '../../../assets/images/wrong_Info.svg';
-
+import IconButton from '@mui/material/IconButton';
 import Yesbank from '../../../assets/images/Yes_Bank_SVG_Logo 1.svg';
 import LoginImg from '../../../assets/images/LoginImg.svg';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -28,7 +28,7 @@ import Poweredby from '../../../assets/images/Powered by.svg';
 import BtnContained from '../../../components/commonComponent/CustomText/Button/Contained';
 import EditIcon from '../../../../../assets/images/edit_card.svg';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import IconButton from '@mui/material/IconButton';
+
 import Modal from '@mui/material/Modal';
 import Info_Icon from '../../../../../assets/images/info_icon.svg';
 import TypoText from '../../../components/commonComponent/CustomText/Textfield';
@@ -39,6 +39,7 @@ import { LinearScale, Visibility, VisibilityOff } from '@mui/icons-material';
 // import { verification } from '../../../../../utils/Constants';
 import { verification } from '../../../utils/Constants';
 import OtpVerification from '../otp/OTPVerificationScreen';
+// import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 // import OtpVerification from '../OrgReview/otpVerificationScreen/OTPVerificationScreen';
 
 interface State {
@@ -54,8 +55,23 @@ export const LoginPage = () => {
   const [password, setPassword] = useState(false);
   const [forgetPassword, setForgetPassword] = useState(false);
   const [otpVerify, setOtpVerify] = useState(false);
+  const [buttonDisabled, setButtonDisabled] = useState<boolean>(true);
+  const [emailValue, setEmailValue] = useState('');
+  const [passwordValue, setPasswordValue] = useState('');
+  const [forgetEmail, setForgetEmail] = useState(true);
+  const [emailText, setEmailText] = useState(0);
+  const [showError, setShowError] = useState<boolean>(false);
   const navigate = useNavigate();
   const location = useLocation();
+
+  const onhandlechangeFun = (e: any) => {
+    setEmailValue(e.target.value);
+
+    // if (emailValue.length > 4) {
+    //   setButtonDisabled(false);
+    // }
+  };
+  console.log('emailvalue: ', emailValue.length);
 
   const loginChange = () => {
     setEmail(true);
@@ -80,6 +96,7 @@ export const LoginPage = () => {
   const handleChange =
     (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
       setValues({ ...values, [prop]: event.target.value });
+      setPasswordValue(event.target.value);
     };
 
   const handleClickShowPassword = () => {
@@ -94,6 +111,27 @@ export const LoginPage = () => {
   ) => {
     event.preventDefault();
   };
+
+  useEffect(() => {
+    updateEmailButtonStatus();
+  }, [emailText]);
+
+  const updateEmailButtonStatus = () => {
+    setForgetEmail(emailText && String(emailText).length === 6 ? false : true);
+    // setButtonDisabled(false)
+  };
+  const onChangeEmail = (e: any) => {
+    setEmailText(e);
+    setShowError(false);
+  };
+
+  // useEffect(() => {
+  //   updateButtonStatus();
+  // }, [otp]);
+
+  // const updateButtonStatus = () => {
+  //   setButtonDisabled(otp && String(otp).length === 6 ? false : true);
+  // };
 
   return (
     <Stack>
@@ -114,7 +152,7 @@ export const LoginPage = () => {
                 fontSize: '16px',
                 fontWeight: '500',
                 lineHeight: '20px',
-                marginBottom: '10px',
+                marginBottom: '15px',
               }}
             >
               Surrogate Product for Credit Card Issuers
@@ -125,7 +163,7 @@ export const LoginPage = () => {
                 fontSize: '48px',
                 fontWeight: '500',
                 lineHeight: '50px',
-                marginBottom: '25px',
+                marginBottom: '40px',
               }}
             >
               We Can handle your Credit Card Issuance
@@ -142,8 +180,8 @@ export const LoginPage = () => {
               Disburse Credit Cards seamlessly! M2P handles your Credit Card
               issuance end-to-end with assured security and convenience.
             </Typography>
-            <Box sx={{ position: 'absolute', bottom: 0, left: '5%' }}>
-              <img width={'480px'} src={LoginImg} />
+            <Box sx={{ position: 'absolute', bottom: 0, left: '7%' }}>
+              <img width={'450px'} height={'400px'} src={LoginImg} />
             </Box>
           </Box>
         </Box>
@@ -178,6 +216,7 @@ export const LoginPage = () => {
                     fontSize: '14px',
                     fontWeight: '700',
                     lineHeight: '16.8px',
+                    letterSpacing: '3px',
                   }}
                 >
                   Surrogate Portal
@@ -200,7 +239,12 @@ export const LoginPage = () => {
                 </Box>
                 <Box>
                   <Button
-                    sx={{ textTransform: 'capitalize', color: '#0662B7' }}
+                    onClick={() => setForgetPassword(false)}
+                    sx={{
+                      textTransform: 'capitalize',
+                      color: '#0662B7',
+                      alignItems: 'center',
+                    }}
                   >
                     Back
                   </Button>
@@ -216,11 +260,13 @@ export const LoginPage = () => {
                     marginBottom: '5px',
                   }}
                 >
-                  Enter registered mobile number/email ID to receive OTP
+                  Enter registered mobile number/email ID to receive OTP*
                 </Typography>
                 <TextField
+                  onChange={onChangeEmail}
                   size="small"
                   fullWidth
+                  sx={{ fontSize: '10px' }}
                   placeholder="Enter Email Id"
                 />
               </Box>
@@ -231,10 +277,14 @@ export const LoginPage = () => {
                 fullWidth
                 variant="contained"
                 color="secondary"
+                disabled={buttonDisabled}
                 sx={{
                   textTransform: 'capitalize',
                   color: 'white',
                   width: '340px',
+                  '&:disabled': {
+                    backgroundColor: '#82B1DB',
+                  },
                 }}
               >
                 Proceed
@@ -271,6 +321,7 @@ export const LoginPage = () => {
                     fontSize: '14px',
                     fontWeight: '700',
                     lineHeight: '16.8px',
+                    letterSpacing: '3px',
                   }}
                 >
                   Surrogate Portal
@@ -279,7 +330,14 @@ export const LoginPage = () => {
 
               <Box>
                 <Typography
-                  sx={{ fontSize: '20px', fontWeight: '500', paddingY: 3 }}
+                  sx={{
+                    marginBottom: '15px',
+                    fontSize: '20px',
+                    fontWeight: 500,
+                    paddingY: 3,
+                    lineHeight: '22px',
+                    letterSpacing: '0.15%',
+                  }}
                 >
                   Login to your account
                 </Typography>
@@ -287,35 +345,54 @@ export const LoginPage = () => {
 
               <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                 <Box>
-                  <Typography>Email Id</Typography>
+                  <InputLabel
+                    sx={{ color: 'black', fontSize: '12px', fontWeight: 500 }}
+                    required
+                  >
+                    Email Id
+                  </InputLabel>
                   <TextField
+                    required
                     error={email ? true : false}
                     size="small"
                     sx={{
                       width: '340px',
+                      marginTop: '5px',
                     }}
                     placeholder="Enter Email Id"
-                    
+                    onChange={onhandlechangeFun}
                   />
-                  {email && <Box sx={{display:'flex',marginTop:'5px',gap:1}} >
-                      <img src={wrong_info} />
-                      <Typography sx={{fontSize:'10px',color:'#992D26'}} >Error Mismatch</Typography>
-                    </Box>}
+                  {email && (
+                    <Box sx={{ display: 'flex', marginTop: '5px', gap: 1 }}>
+                      <img
+                        style={{ width: '15px', height: '15px' }}
+                        src={wrong_info}
+                      />
+                      <Typography sx={{ fontSize: '10px', color: '#992D26' }}>
+                        Error Mismatch
+                      </Typography>
+                    </Box>
+                  )}
                 </Box>
-                
 
                 <Box sx={{ marginY: 3 }}>
-                  <InputLabel required htmlFor="outlined-adornment-password">
+                  {/* {password? () : ()} */}
+                  <InputLabel
+                    sx={{ color: 'black', fontSize: '12px', fontWeight: 500 }}
+                    required
+                    htmlFor="outlined-adornment-password"
+                  >
                     Password
                   </InputLabel>
                   <OutlinedInput
-                    sx={{ width: '340px' }}
+                    sx={{ width: '340px', marginTop: '5px' }}
                     id="outlined-adornment-password"
                     placeholder="Enter Password"
                     type={values.showPassword ? 'text' : 'password'}
-                    value={values.password}
+                    // value={values.password}
                     onChange={handleChange('password')}
                     size="small"
+                    error={password ? true : false}
                     endAdornment={
                       <InputAdornment position="end">
                         <IconButton
@@ -334,26 +411,25 @@ export const LoginPage = () => {
                     }
                   />
                   {password && (
-                    <Box sx={{display:'flex',marginTop:'5px',gap:1}} >
-                      <img src={wrong_info} />
-                      <Typography sx={{fontSize:'10px',color:'#992D26'}} >Password Wrong</Typography>
-
-                    {/* <FormHelperText error id="accountId-error">
-                    
-                      Password Wrong
-                    </FormHelperText> */}
+                    <Box sx={{ display: 'flex', marginTop: '5px', gap: 1 }}>
+                      <img
+                        style={{ width: '15px', height: '15px' }}
+                        src={wrong_info}
+                      />
+                      <Typography sx={{ fontSize: '10px', color: '#992D26' }}>
+                        Password Wrong
+                      </Typography>
                     </Box>
                   )}
 
                   <Typography
-                    onClick={() => {
-                      setForgetPassword(true);
-                    }}
                     sx={{
                       color: '#0662B7',
                       fontSize: '14px',
                       fontWeight: '500',
                       textAlign: 'end',
+                      paddingTop: '10px',
+                      cursor: 'pointer',
                     }}
                   >
                     Forgot Password?
@@ -364,8 +440,19 @@ export const LoginPage = () => {
                   <Button
                     onClick={loginChange}
                     fullWidth
+                    sx={{
+                      textTransform: 'capitalize',
+                      '&:disabled': {
+                        backgroundColor: '#82B1DB',
+                      },
+                    }}
                     variant="contained"
                     color="secondary"
+                    disabled={
+                      emailValue.length > 4 && passwordValue.length > 4
+                        ? false
+                        : true
+                    }
                   >
                     Login
                   </Button>

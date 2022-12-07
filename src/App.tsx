@@ -15,7 +15,7 @@ import ReviewerLogDetails from './pages/productManagement/programmeManagement/sc
 import { BranchDetails } from './pages/userManagement/branchDetails/landingScreen';
 import { OrgStructure } from './pages/userManagement/orgStructure/landingScreen';
 import { Onboarding } from './pages/userManagement/orgStructure/screens/Onboarding/onboarding';
-import { Fintech } from './pages/userManagement/orgStructure/screens/Onboarding/fintech';
+
 // import { OrgReview } from './pages/userManagement/orgStructure/screens/OrgReview/OrgReview';
 import { RoleCreation } from './pages/userManagement/roleCreation/landingScreen';
 import OrgBulkUpload from './pages/userManagement/orgStructure/orgBulkUpload';
@@ -40,11 +40,17 @@ import UserProfile from './pages/profile/landingScreen';
 import CustomerReport from './pages/riskManagment/customerReport';
 import CustomerDetailScreen from './pages/riskManagment/customerReport/customerDetails';
 import { ProgrammeHistoryDetails } from './pages/productManagement/programmeManagement/screens/listComponents/ProgrammeHistoryDetails';
-import {LoginPage} from './pages/login/landingScreen/Login'
+import { LoginPage } from './pages/login/landingScreen/Login';
 import OtpVerificationScreen from './pages/login/otp/OTPVerificationScreen';
 // import { otpPage } from './pages/userManagement/orgStructure/screens/OrgReview/otpPage/otpPage'
 import ReTargetingDetails from './pages/lms/reTargeting/screens/reTargetingScreen/reTargetingDetails';
 import { LMSHistoryLogDetails } from './pages/lms/lmsRule/lmsHistoryLog/lmsHistoryLogDetails';
+import LoginLayout from './components/layout/loginLayout/loginLayout';
+import { LoginLayoutPage } from './pages/login/LoginLayoutPage';
+
+import { NewPasswordPage } from './pages/login/screens/newPasswordPage';
+import { NewLogin } from './pages/login/screens/NewLogin';
+import { ForgotPassword } from './pages/login/screens/ForgotPassword';
 
 export default function App() {
   return (
@@ -99,10 +105,7 @@ export default function App() {
           path="/userManagement/orgStructure/DSA"
           element={<Onboarding />}
         />
-        <Route
-          path="/userManagement/orgStructure/Fintech"
-          element={<Fintech />}
-        />
+      
 
         {/* <Route
           path="/userManagement/orgStructure/screens/OrgReview/OrgReview"
@@ -208,13 +211,18 @@ export default function App() {
         />
       </Route>
       <Route>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/login/verification" element={<OtpVerificationScreen/>} />
-        
+        {/* <Route path="/login" element={<LoginPage />} /> */}
+
         <Route
           path="/lms/retargeting/reTargetingDetails"
           element={<ReTargetingDetails />}
         />
+      </Route>
+      <Route path="/login" element={<LoginLayoutPage />}>
+        <Route path="/login/userlogin" element={<NewLogin />} />
+        <Route path="/login/forgot" element={<ForgotPassword />} />
+        <Route path="/login/otp" element={<OtpVerificationScreen />} />
+        <Route path="/login/newpassword" element={<NewPasswordPage />} />
       </Route>
     </Routes>
   );

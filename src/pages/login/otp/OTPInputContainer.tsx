@@ -19,6 +19,7 @@ export default function App(props: Props) {
       <OTPInput
         disabled={props.disabled}
         inputClassName={inputClassName}
+        
         inputStyles={{
           color: '#1b2a71',
           margin: '0px 5px',

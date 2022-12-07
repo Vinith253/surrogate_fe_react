@@ -46,21 +46,21 @@ export const CommonStyle = {
   otpTextColor: {
     fontSize: '14px',
     color: CommonColor.otpTextBlue,
-    fontWeight: '700',
+    fontWeight: '500',
     cursor: 'pointer',
   },
   otpTextColorFaded: {
     fontSize: '14px',
     color: CommonColor.otpTextFadedBlue,
-    fontWeight: '700',
+    fontWeight: '500',
     cursor: 'pointer',
   },
   otpTimerColor: {
     textAlign: 'center',
     // marginTop: '40px',
     color: CommonColor.otpTextOrange,
-    fontSize: '14px',
-    fontWeight: '700',
+    fontSize: '16px',
+    fontWeight: '400',
   },
   otpInputBox: {
     width: '45px',
