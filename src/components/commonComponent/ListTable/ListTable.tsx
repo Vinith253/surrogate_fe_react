@@ -864,6 +864,7 @@ function TableComp(props: {
           product_label={product_label}
           id={id}
           showSearch={true}
+          columnNumber={7}
         />
       }
     </div>

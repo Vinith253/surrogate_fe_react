@@ -1,0 +1,30 @@
+.no-table-data-container {
+    background-color: #ffffff;
+    padding: 24px 0px;
+    border-radius: 8px;
+    text-align: center;
+  
+    .no-data-img {
+      width: 25%;
+      display: flex;
+      margin: auto;
+      padding-bottom: 15px;
+    }
+
+    .text-field {
+        .css-176f598-MuiInputBase-root-MuiOutlinedInput-root {
+          height: 42px;
+        }
+        width: 400px !important;
+      }
+
+    .third-header {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 20px;
+        width: 100%;
+        justify-content: flex-end;
+
+      }
+  }
+  

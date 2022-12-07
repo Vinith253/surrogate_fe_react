@@ -142,7 +142,7 @@ function MoreFilterRightModal({
         },}}
         PaperProps={{ sx: { margin: "0" , height:'100%'} }}
       >
-        <Stack>
+        <Stack pb={3} >
           <Stack
             sx={{
               borderBottom: `1px solid #36363624`,
@@ -498,7 +498,7 @@ function MoreFilterRightModal({
           >
             {submit && (
               <Button
-                // onClick={handleResetButton}
+                onClick={handleClose}
                 variant="outlined"
                 sx={{
                   fontSize: '11px',
@@ -521,7 +521,7 @@ function MoreFilterRightModal({
                   backgroundColor: `${colors.Modalblue}`,
                   fontWeight: '600',
                 }}
-                // onClick={() => handleCloseSuccess(categories)}
+                onClick={handleClose}
                 // disabled={!e}
               >
                 {submit}{' '}
