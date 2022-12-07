@@ -9,6 +9,9 @@ import { ReactComponent as ApprovedIcon } from '../../../assets/icons/approved_r
 import { ReactComponent as RejectedIcon } from '../../../assets/icons/risk_rejected_icon.svg';
 import { ReactComponent as ReferIcon } from '../../../assets/icons/risk_refer_icon.svg';
 import { ReactComponent as FailIcon } from '../../../assets/icons/risk_fail_icon.svg';
+import { ReactComponent as M2PGoodIcon } from '../../../assets/icons/m2p_credit_score_good.svg';
+import { ReactComponent as M2PBadIcon } from '../../../assets/icons/m2p_credit_score_bad.svg';
+import { ReactComponent as M2PModerateIcon } from '../../../assets/icons/m2p_credit_score_moderate.svg';
 import DetailsCard from '../../../components/commonComponent/DetailsCard';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FooterButton } from '../../../components/commonComponent/FooterButton/FooterButton';
@@ -16,6 +19,7 @@ import { RiskMngmtAccordian } from '../../../components/commonComponent/RiskMngm
 import { useState, useEffect } from 'react';
 import CustomModal from '../../../components/commonComponent/customModal/CustomModal';
 import HeaderWithInfo from '../../../components/commonComponent/HeaderWithInfo';
+import GaugeChart from 'react-gauge-chart';
 
 export default function CustomerDetailScreen() {
   const navigate = useNavigate();
@@ -37,6 +41,13 @@ export default function CustomerDetailScreen() {
   const [riskAccordianData, setRiskAccordianData] = useState<any>(
     state?.riskMngmtViewContent
   );
+  const [textAreaValue, setTextAreaValue] = useState('');
+  const [buttonDisabled, setButtonDisabled] = useState<boolean>(true);
+
+  const textareaonchangeFun = (e: any) => {
+    setButtonDisabled(textAreaValue.length > 6 ? false : true);
+    setTextAreaValue(e.target.value);
+  };
 
   const goBack = () => {
     navigate(-1);
@@ -153,86 +164,117 @@ export default function CustomerDetailScreen() {
         </Box>
 
         <Box className="credit-score-outer-container">
-          <Box sx={{width:'50%'}}>
-          <Box className="credit-container1">
-            <Box>
-              <Typography className="credit-title-text">
-                User Cashflow
-              </Typography>
-              <Typography className="credit-info-text">
-                Lorem ipsum dolor sit amet consectetur. Phasellus in amet netus
-                at ante. Nunc quam interdum odio consectetur. Fermentum iaculis.
-              </Typography>
+          <Box sx={{ width: '50%' }}>
+            <Box className="credit-container1">
+              <Box>
+                <Typography className="credit-title-text">
+                  User Cashflow
+                </Typography>
+                <Typography className="credit-info-text">
+                  Lorem ipsum dolor sit amet consectetur. Phasellus in amet
+                  netus at ante. Nunc quam interdum odio consectetur. Fermentum
+                  iaculis.
+                </Typography>
+              </Box>
+              <div className="underline"></div>
+              <Box className="credit-lower-box">
+                <Typography sx={{ fontSize: '20px' }}>
+                  Score {cashFlowData.userCashFlowScore}
+                  {'/'}
+                  {cashFlowData.userCashFlowTotal}
+                </Typography>
+                <Box className="credit-status-box">
+                  {cashFlowData.userCashFlowScore /
+                    cashFlowData.userCashFlowTotal >=
+                  0.5 ? (
+                    <>
+                      <Typography className="pass-text">Pass</Typography>
+                      <PassIcon />
+                    </>
+                  ) : (
+                    <>
+                      <Typography className="fail-text">Fail</Typography>
+                      <FailIcon />
+                    </>
+                  )}
+                </Box>
+              </Box>
             </Box>
-            <div className="underline"></div>
-            <Box className="credit-lower-box">
-              <Typography sx={{ fontSize: '20px' }}>
-                Score {cashFlowData.userCashFlowScore}
-                {'/'}
-                {cashFlowData.userCashFlowTotal}
-              </Typography>
-              <Box className="credit-status-box">
-                {cashFlowData.userCashFlowScore /
-                  cashFlowData.userCashFlowTotal >=
-                0.5 ? (
-                  <>
-                    <Typography className="pass-text">Pass</Typography>
-                    <PassIcon />
-                  </>
-                ) : (
-                  <>
-                    <Typography className="fail-text">Fail</Typography>
-                    <FailIcon />
-                  </>
-                )}
+
+            <Box className="credit-container2">
+              <Box>
+                <Typography className="credit-title-text">
+                  User Cashflow
+                </Typography>
+                <Typography className="credit-info-text">
+                  Lorem ipsum dolor sit amet consectetur. Phasellus in amet
+                  netus at ante. Nunc quam interdum odio consectetur. Fermentum
+                  iaculis.
+                </Typography>
+              </Box>
+              <div className="underline"></div>
+              <Box className="credit-lower-box">
+                <Typography sx={{ fontSize: '20px' }}>
+                  Score {cashFlowData.userCreditProfileScore}
+                  {'/'}
+                  {cashFlowData.userCreditProfileTotal}
+                </Typography>
+                <Box className="credit-status-box">
+                  {cashFlowData.userCreditProfileScore /
+                    cashFlowData.userCreditProfileTotal >=
+                  0.5 ? (
+                    <>
+                      <Typography className="pass-text">Pass</Typography>
+                      <PassIcon />
+                    </>
+                  ) : (
+                    <>
+                      <Typography className="fail-text">Fail</Typography>
+                      <FailIcon />
+                    </>
+                  )}
+                </Box>
               </Box>
             </Box>
           </Box>
 
-          <Box className="credit-container2">
-            <Box>
-              <Typography className="credit-title-text">
-                User Cashflow
+          <Box className="credit-score-meter-container">
+            <Box className="header-container">
+              <Typography sx={{ fontSize: '16px' }}>
+                M2P{'’'}s credit Score
               </Typography>
-              <Typography className="credit-info-text">
-                Lorem ipsum dolor sit amet consectetur. Phasellus in amet netus
-                at ante. Nunc quam interdum odio consectetur. Fermentum iaculis.
+              <Stack className="calculate-text">How its Calculated?</Stack>
+            </Box>
+            <Box className="underline" />
+            <GaugeChart
+              id="gauge-chart2"
+              nrOfLevels={18}
+              percent={cashFlowData.m2pCreditScore / 1000}
+              colors={['#EA4228', '#F5CD19', '#5BE12C']}
+              needleColor="#0662B7"
+              cornerRadius={1}
+              needleBaseColor="#82B1DB"
+              textColor="none"
+              style={{ height: 200 }}
+            />
+            <Box className="lower-container">
+              <Typography sx={{ fontSize: '16px' }}>
+                M2P{'’'}s Credit Score is{' '}
+              </Typography>
+              <Typography className="container-text">
+                {cashFlowData.m2pCreditScore}
               </Typography>
             </Box>
-            <div className="underline"></div>
-            <Box className="credit-lower-box">
-              <Typography sx={{ fontSize: '20px' }}>
-                Score {cashFlowData.userCreditProfileScore}
-                {'/'}
-                {cashFlowData.userCreditProfileTotal}
+            <Box className="status-box">
+              <Typography sx={{ color: txtColor, marginRight: '4px', marginTop:'3px' }}>
+                {cashFlowData.creditScoreText}
               </Typography>
-              <Box className="credit-status-box">
-                {cashFlowData.userCreditProfileScore /
-                  cashFlowData.userCreditProfileTotal >=
-                0.5 ? (
-                  <>
-                    <Typography className="pass-text">Pass</Typography>
-                    <PassIcon />
-                  </>
-                ) : (
-                  <>
-                    <Typography className="fail-text">Fail</Typography>
-                    <FailIcon />
-                  </>
-                )}
-              </Box>
+              {cashFlowData.creditScoreText === 'Good' && <M2PGoodIcon />}
+              {cashFlowData.creditScoreText === 'Bad' && <M2PBadIcon />}
+              {cashFlowData.creditScoreText === 'Moderate' && (
+                <M2PModerateIcon />
+              )}
             </Box>
-          </Box>
-          </Box>
-
-          <Box sx={{ width: '50%', backgroundColor:'white', marginLeft:'20px',boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.16)', borderRadius:'4px', padding:'24px 32px 24px 32px'}}>
-          <HeaderWithInfo
-          header="M2P’s credit Score"
-          isInfoEnabled={false}
-          info=""
-          isDownloadEnabled={false}
-        />
-
           </Box>
         </Box>
 
@@ -241,7 +283,9 @@ export default function CustomerDetailScreen() {
             <Typography sx={{ fontSize: '16px' }}>
               Bank - Refer Value
             </Typography>
-            <Typography sx={{ fontSize: '34px', color: '#D78320' }}>
+            <Typography
+              sx={{ fontSize: '34px', color: '#D78320', fontWeight: 'bold' }}
+            >
               700 - 749
             </Typography>
           </Box>
@@ -260,7 +304,9 @@ export default function CustomerDetailScreen() {
             <Typography sx={{ fontSize: '16px' }}>
               Customers Credit Score
             </Typography>
-            <Typography sx={{ fontSize: '34px', color: txtColor }}>
+            <Typography
+              sx={{ fontSize: '34px', color: txtColor, fontWeight: 'bold' }}
+            >
               {cashFlowData.customerCreditScore}
             </Typography>
           </Box>
@@ -298,6 +344,9 @@ export default function CustomerDetailScreen() {
             close={'Cancel'}
             submit={'Force Reject'}
             textAreaHeight={'230px'}
+            textAreaValue={textAreaValue}
+            buttonDisabled={buttonDisabled}
+            textareaonchangeFun={textareaonchangeFun}
           />
         )}
         {okForceRejectionModal && (
@@ -329,6 +378,9 @@ export default function CustomerDetailScreen() {
             close={'Cancel'}
             submit={'Force Approve'}
             textAreaHeight={'230px'}
+            textAreaValue={textAreaValue}
+            buttonDisabled={buttonDisabled}
+            textareaonchangeFun={textareaonchangeFun}
           />
         )}
         {okForceApprovalModal && (
@@ -359,6 +411,9 @@ export default function CustomerDetailScreen() {
             close={'Cancel'}
             submit={'Approve'}
             textAreaHeight={'230px'}
+            textAreaValue={textAreaValue}
+            buttonDisabled={buttonDisabled}
+            textareaonchangeFun={textareaonchangeFun}
           />
         )}
         {okApprovalModal && (
@@ -390,6 +445,9 @@ export default function CustomerDetailScreen() {
             close={'Cancel'}
             submit={'Reject'}
             textAreaHeight={'230px'}
+            textAreaValue={textAreaValue}
+            buttonDisabled={buttonDisabled}
+            textareaonchangeFun={textareaonchangeFun}
           />
         )}
         {okRejectionModal && (

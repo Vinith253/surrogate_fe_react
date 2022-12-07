@@ -1,49 +1,42 @@
 import React, { ChangeEvent, useState, useEffect } from 'react';
 import './cardCateloge.scss';
-// import useStyles from "./cardStyle";
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
-// import DashboardCard from '../../../../components/commonComponent/CommonCard/SalesDashbaordCard/DashboardCard';
-import ProgressCard from '../../../../components/commonComponent/CommonCard/ProgressCard/ProgressCard';
-import DashboardCard from '../../../../components/commonComponent/CommonCard/SalesDashbaordCard/DashboardCard';
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import { tableCellClasses } from '@mui/material/TableCell';
-import TypographyHead from '../../../../components/commonComponent/CustomText/Head';
-import { useNavigate } from 'react-router-dom';
-import SelectDropdown from '../../../../components/commonComponent/CheckboxSelectDropdown';
-import SearchSelectDropdown from '../../../../components/commonComponent/SearchDropdown';
-import TableComp from '../../../../components/commonComponent/ListTable/ListTable';
-import PaginationComp from '../../../../components/commonComponent/Pagination/Pagination';
+import { useNavigate, json, useLoaderData } from 'react-router-dom';
+
+// MUI components
 import {
   MenuItem,
   Checkbox,
   Typography,
   Box,
-  Tab,
   Stack,
   Button,
-  ToggleButtonGroup,
   ToggleButton,
-  Icon,
   IconButton,
   Divider,
-  InputLabel,
-  FormControl,
   SelectChangeEvent,
-  Table,
-  TableContainer,
-  TableBody,
-  TableHead,
-  TableRow,
-  TableCell,
-  Paper,
   Menu,
   Grid,
-  Select,
-  TextField,
-  OutlinedInput,
-  ListItemText,
 } from '@mui/material';
-import TypographySubTitle from '../../../../components/commonComponent/CustomText/Typography';
+import AddIcon from '@mui/icons-material/Add';
+import { styled } from '@mui/material/styles';
+import InputBase from '@mui/material/InputBase';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+
+// Common components
+import TypographyInfo from '../../../../components/commonComponent/CustomText/Info';
+import CustomModal from '../../../../components/commonComponent/customModal/CustomModal';
+import SelectDropdown from '../../../../components/commonComponent/CheckboxSelectDropdown';
+import TypoText from '../../../../components/commonComponent/CustomText/Textfield';
+import GroupButton from '../../../../components/commonComponent/GroupButton/GroupButton';
+import ListTable from '../../../../components/commonComponent/commonListTable/commonListTable';
+
+// services
+import {
+  getCardDropdownData,
+  getCardList,
+} from '../../../../services/cardCatalogueServices';
+
+// Assets
 import Surrogate_icon from '../../../../assets/images/surrogateIcon.svg';
 import Pause_icon from '../../../../assets/images/pauseIcon.svg';
 import Edit_icon from '../../../../assets/images/editIcon.svg';
@@ -52,50 +45,73 @@ import Email_Icon from '../../../../assets/images/emailIcon.svg';
 import Download_Icon from '../../../../assets/images/downloadIcon.svg';
 import TotalApplications from '../../../../assets/icons/total_application_icon.svg';
 import Comparisions from '../../../../assets/icons/comparision_icon.svg';
-import AddIcon from '@mui/icons-material/Add';
 import VirtualCard from '../../../../assets/icons/virtual_card_icon.svg';
 import ApprovalRate from '../../../../assets/icons/approval_rate_icon.svg';
 import ApprovedIcon from '../../../../assets/icons/approved_icon.svg';
 import Dropped from '../../../../assets/icons/dropped_icon.svg';
 import InProgress from '../../../../assets/icons/in_progress_icon.svg';
 import Rejected from '../../../../assets/icons/rejected_icon.svg';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import {} from '../../../../utils/tagBasedIndicator/tagStatus';
-// import InfoIcon from '@mui/icons-material/Info';
 import Info_Icon from '../../../../assets/images/info_icon.svg';
-import DownloadIcon from '@mui/icons-material/Download';
-import SearchIcon from '@mui/icons-material/Search';
-import TypographyInfo from '../../../../components/commonComponent/CustomText/Info';
-import { styled, alpha } from '@mui/material/styles';
-import InputBase from '@mui/material/InputBase';
-import CustomModal from '../../../../components/commonComponent/customModal/CustomModal';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+
+// Utils
 import { checkTagStatus } from '../../../../utils/tagBasedIndicator/tagStatus';
-import {
-  listRowHeading,
-  salesDashboardList,
-  statusRowHeading,
-} from '../../../../pages/sales/dashboard/dashboard.const';
-import TablePagination from '@mui/material/TablePagination';
-import { Height } from '@mui/icons-material';
-import TypoText from '../../../../components/commonComponent/CustomText/Textfield';
-import GroupButton from '../../../../components/commonComponent/GroupButton/GroupButton';
-import BtnOutlined from '../../../../components/commonComponent/CustomText/Button/Outlined';
-import BtnContained from '../../../../components/commonComponent/CustomText/Button/Contained';
 import UnfoldMoreIcon from '../../../../assets/icons/sortArrow.svg';
-import ListTable from '../../../../components/commonComponent/commonListTable/commonListTable';
 
-// const columns: GridColDef[] = [
-//   { field: 'id', headerName: 'ID', width: 70 },
-//   { field: 'cardName', headerName: 'Card Name', width: 130 },
-//   { field: 'productID', headerName: 'Product ID', width: 130 },
-//   { field: 'businessID', headerName: 'Business ID', width: 130 },
-//   { field: 'cardMode', headerName: 'Card Mode', width: 130 },
-//   { field: 'cardCategory', headerName: 'Card Category', width: 130 },
-//   { field: 'cardStatus', headerName: 'Card Status', width: 120 },
-//   { field: 'more', headerName: 'More', type: 'number', width: 20 },
+// Component Loader
 
-// ];
+export async function cardCatalogueLoader() {
+  const cardList = await getListOfCards();
+  const dropdownTypes = [
+    'CARD_CATEGORY',
+    'CARD_MODE',
+    'SURROGATE_TYPE',
+    'CARD_STATUS',
+  ];
+
+  const temp = dropdownTypes.map(async (type: String) => {
+    const payload = {
+      dropDown: type,
+    };
+    const options = await getDropdownOptions(payload);
+    const dropdownObj = {
+      name: type,
+      options: options,
+    };
+    return dropdownObj;
+  });
+  const cardListFilters = await Promise.all(temp);
+  return json({ cardList, cardListFilters }, { status: 200 });
+}
+
+// API methods
+
+const getDropdownOptions = async (payload: any) => {
+  let res = {};
+  await getCardDropdownData(payload)
+    .then((response) => {
+      res = response.data;
+    })
+    .catch((err) => {
+      res = err.response;
+    });
+  return res;
+};
+
+const getListOfCards = async () => {
+  let res = {};
+  await getCardList({
+    page: 1,
+    size: 2,
+  })
+    .then((response) => {
+      res = response.data;
+    })
+    .catch((err) => {
+      console.log(err);
+      res = { err: err.response };
+    });
+  return res;
+};
 
 export interface cardCatalogueFilterInterface {
   label?: string;
@@ -106,7 +122,7 @@ export const CardCatalogueFilterDropdown: cardCatalogueFilterInterface[] = [
   {
     label: 'Card Mode',
     option: [
-      { value: 'All', name: 'All Mode' },
+      { value: 'All', name: 'All' },
       { value: 'Salaried', name: 'Salaried' },
       { value: 'Business', name: 'Business' },
       { value: 'Doctor', name: 'Doctor' },
@@ -119,7 +135,7 @@ export const CardCatalogueFilterDropdown: cardCatalogueFilterInterface[] = [
   {
     label: 'Card Category',
     option: [
-      { value: 'All', name: 'All Category' },
+      { value: 'All', name: 'All' },
       { value: 'General', name: 'General' },
       { value: 'Travel', name: 'Travel' },
       { value: 'Fuel', name: 'Fuel' },
@@ -195,69 +211,6 @@ function createData(
     more,
   };
 }
-
-// const rows = [
-//   createData(
-//     1,
-//     'ETERNA',
-//     1234567890,
-//     1234567890,
-//     'General',
-//     'Basic',
-//     'Active',
-//     ''
-//   ),
-//   createData(
-//     2,
-//     'PREMIER',
-//     1234567890,
-//     1234567890,
-//     'General',
-//     'Premium',
-//     'In-Active',
-//     ''
-//   ),
-//   createData(
-//     3,
-//     'EXCLUSIVE ICAI',
-//     1234567890,
-//     1234567890,
-//     'General',
-//     'Ultra Premium',
-//     'Active',
-//     ''
-//   ),
-//   createData(
-//     4,
-//     'EXCLUSIVE ICAI',
-//     1234567890,
-//     1234567890,
-//     'General',
-//     'Ultra Premium',
-//     'Active',
-//     ''
-//   ),
-//   createData(
-//     5,
-//     'EXCLUSIVE ICAI',
-//     1234567890,
-//     1234567890,
-//     'General',
-//     'Ultra Premium',
-//     'Active',
-//     ''
-//   ),
-//   createData(
-//     6,
-//     'EXCLUSIVE ICAI',
-//     1234567890,
-//     1234567890,
-//     'General',
-//     'Basic',
-//     'Active',
-//     ''
-//   ),
-// ];
 
 const tableHeaderData = [
   {
@@ -344,9 +297,6 @@ export const data = [
 
 export const CardCatalogue = () => {
   const navigate = useNavigate();
-  const [age, setAge] = useState('');
-  // const [open, setOpen] = useState(false);
-  const [currency, setCurrency] = useState<number>(1);
   const [surrogateSelection, setSurrogateSelection] = useState(false);
   const [resumeModal, setResumeModal] = useState(false);
   const [resumeSuccessModal, setResumeSuccessModal] = useState(false);
@@ -356,14 +306,8 @@ export const CardCatalogue = () => {
   const [showPauseModal, setShowPauseModal] = useState<boolean>(false);
   const [pauseMethods, setPauseMethods] = useState('Pause Now');
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  //  const [selected, setSelected] = React.useState('');
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [currentPage, setCurrentPage] = useState(1);
-  // const [filteredData, setFilterteredData] = useState(rows);
   const openCardMenu = Boolean(anchorEl);
   const [surrogateMethod, setSurrogateMethod] = useState('Assign Surrogate');
-  // const [sortingData, setSortingData] = useState(data);
   const [showPauseSuccessModal, setShowPauseSuccessModal] =
     useState<boolean>(false);
   const [showScheduledPauseSuccessModal, setShowScheduledPauseSuccessModal] =
@@ -372,9 +316,8 @@ export const CardCatalogue = () => {
   const [editModal, setEditModal] = useState(false);
 
   //Table
-  const [sortingData, setSortingData] = useState(data);
+  const [cardList, setCardList] = useState(data);
   const [ascending, setAscending] = useState<boolean>(true);
-  const [idSorting, setIdSorting] = useState<boolean>(true);
   const [selected, setSelected] = useState<number[]>([]);
   const [isItem, setIsItem] = useState<boolean>(false);
   const [activateModal, setActivateModal] = useState<boolean>(false);
@@ -382,24 +325,15 @@ export const CardCatalogue = () => {
   const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorElement);
 
-  useEffect(() => {
-    filterData();
-  }, [ascending]);
+  const loaderData = useLoaderData();
+  console.log('in component', loaderData);
+
   // useEffect(() => {
-  //   idFilterData();
-  // }, [idSorting]);
+  //   filterData();
+  // }, [ascending]);
 
   const NORMAL_PAUSE = 'Pause Now';
   const SCHEDULED_PAUSE = 'Schedule Pause';
-  const [alignment, setAlignment] = useState('all');
-  // const [columnItems, setColumnItems] = useState(column);
-  // const [dataItems, setDataItems] = useState(data);
-  const handleButtonChange = (
-    event: React.MouseEvent<HTMLElement>,
-    value: string
-  ) => {
-    setAlignment(value);
-  };
 
   const ColorButton = styled(ToggleButton)(({ theme }) => ({
     // backgroundColor: ' rgb(240, 240, 240)',
@@ -414,8 +348,6 @@ export const CardCatalogue = () => {
     },
   }));
 
-  // const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
-  const menuOpen = Boolean(anchorElement);
   const handleClick = (event: React.MouseEvent<HTMLTableCellElement>) => {
     setAnchorElement(event.currentTarget);
   };
@@ -423,38 +355,9 @@ export const CardCatalogue = () => {
     setAnchorElement(null);
   };
 
-  // const handleClick = (event: React.MouseEvent<HTMLTableCellElement>) => {
-  //   setAnchorElement(event.currentTarget);
-  // };
-
-  const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement> | null,
-    newPage: number
-  ) => {
-    setPage(newPage);
-  };
-  // const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   if (event.target.checked) {
-  //     const newSelected = data.map((n: any) => n.id);
-  //     setSelected(newSelected);
-  //     return;
-  //   }
-  //   setSelected([]);
-  // };
-
-  const onPageChange = (event: React.ChangeEvent<unknown>, page: number) => {
-    setPage(page);
-    setCurrentPage(page);
-  };
-
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-    setCurrentPage(1);
-  };
-  // const isSelected = (id: number) => selected.indexOf(id) !== 1;
+  // useEffect(() => {
+  //   getListOfCards();
+  // }, []);
 
   const handleCardMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -469,10 +372,6 @@ export const CardCatalogue = () => {
 
   const bulkCardOpen = () => {
     navigate('/productManagement/cardCatalogue/bulkupload');
-  };
-
-  const handleAdd = (event: SelectChangeEvent) => {
-    setAge(event.target.value as string);
   };
 
   const modes = [
@@ -496,10 +395,6 @@ export const CardCatalogue = () => {
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value
     );
-  };
-
-  const currencyChange = (event: any) => {
-    setCurrency(event.target.value);
   };
 
   const dashboardVal = [
@@ -630,10 +525,6 @@ export const CardCatalogue = () => {
   const editModalFun = () => {
     setEditModal(true);
   };
-
-  {
-    console.log('editModal', editModal);
-  }
 
   const product_label = [
     {
@@ -796,28 +687,7 @@ export const CardCatalogue = () => {
     { title: 'Business ID', dataIndex: 'businessID', key: 'businessID' },
 
     { title: 'Card Category', dataIndex: 'cardCategory', key: 'cardCategory' },
-    // {
-    //   title: 'Card Category',
-    //   dataIndex: 'cardCategory',
-    //   key: 'cardCategory',
-    //   headerRender: (text: string) => {
-    //     return (
-    //       <Stack
-    //         sx={{
-    //           display: 'flex',
-    //           alignItems: 'center',
-    //           justifyContent: 'space-between',
-    //           flexDirection: 'row',
-    //         }}
-    //       >
-    //         <>{text}</>
-    //         <IconButton onClick={() => handleSortByName()}>
-    //           <img src={UnfoldMoreIcon} alt="Sort Icon" />
-    //         </IconButton>
-    //       </Stack>
-    //     );
-    //   },
-    // },
+    
     {
       title: 'Card Status',
       dataIndex: 'cardStatus',
@@ -862,36 +732,33 @@ export const CardCatalogue = () => {
               onClose={handleClose}
               anchorOrigin={{
                 vertical: 'top',
-                horizontal: 'right',
+                horizontal: 'left',
               }}
               transformOrigin={{
                 vertical: 'top',
-                horizontal: 'left',
+                horizontal: 'right',
               }}
             >
               <MenuItem
                 // onClick={() => handleClose()}
                 onClick={() => {
                   handleClose();
-                  navigate(
-                    '/productManagement/cardCatalogue/singleupload',
-                    {
-                      state: {
-                        isEditable: false,
-                      },
-                    }
-                  );
+                  navigate('/productManagement/cardCatalogue/singleupload', {
+                    state: {
+                      isEditable: false,
+                    },
+                  });
                 }}
                 style={{ padding: '10px 20px', textAlign: 'left' }}
               >
-                View Org.
+                View
               </MenuItem>
               <MenuItem
                 // onClick={handleClose}
                 onClick={() => {
                   handleClose();
                   navigate(
-                    '/userManagement/orgStructure/screens/Onboarding/onboarding',
+                    '/productManagement/cardCatalogue/singleupload',
                     {
                       state: {
                         isEditable: true,
@@ -901,26 +768,9 @@ export const CardCatalogue = () => {
                 }}
                 style={{ padding: '10px 20px', textAlign: 'left' }}
               >
-                Edit Org.
+                Edit
               </MenuItem>
-              <MenuItem
-                style={{ padding: '10px 20px', textAlign: 'left' }}
-                onClick={() => {
-                  handleClose();
-                  setActivateModal(!activateModal);
-                }}
-              >
-                Activate Org
-              </MenuItem>
-              <MenuItem
-                onClick={() => {
-                  handleClose();
-                  setDeactivateModal(!deactivateModal);
-                }}
-                style={{ padding: '10px 20px', textAlign: 'left' }}
-              >
-                Deactivate Org
-              </MenuItem>
+             
             </Menu>
           </>
         );
@@ -928,24 +778,31 @@ export const CardCatalogue = () => {
     },
   ];
 
-  const filterData = () => {
-    const sort = sortingData.sort((a: any, b: any) => {
-      if (ascending) {
-        return a.cardName < b.cardName ? -1 : 1;
-      }
-      return a.cardName > b.cardName ? -1 : 1;
-    });
-    setSortingData([...sort]);
+  const setSelectedDropdownValue = (
+    selectedValues: Array<String>,
+    dropdown: any
+  ) => {
+    console.log('selectedValues:', selectedValues);
   };
 
+  // const filterData = () => {
+  //   const sort = cardList.sort((a: any, b: any) => {
+  //     if (ascending) {
+  //       return a.cardName < b.cardName ? -1 : 1;
+  //     }
+  //     return a.cardName > b.cardName ? -1 : 1;
+  //   });
+  //   setCardList([...sort]);
+  // };
+
   // const idFilterData = () => {
-  //   const sort = sortingData.sort((a: any, b: any) => {
+  //   const sort = cardList.sort((a: any, b: any) => {
   //     if (idSorting) {
   //       return a.orgId < b.orgId ? -1 : 1;
   //     }
   //     return a.orgId > b.orgId ? -1 : 1;
   //   });
-  //   setSortingData([...sort]);
+  //   setCardList([...sort]);
   // };
 
   return (
@@ -1010,6 +867,12 @@ export const CardCatalogue = () => {
                         {eachItem?.label}
                       </Typography>
                       <SelectDropdown options={eachItem?.option} />
+                      {/* <SelectDropdown
+                        options={eachItem?.option}
+                        sendSelectedValue={(selectedValues: Array<String>) =>
+                          setSelectedDropdownValue(selectedValues, eachItem)
+                        }
+                      /> */}
                     </Grid>
                   );
                 }
@@ -1039,16 +902,17 @@ export const CardCatalogue = () => {
           </Box>
         </Box>
         <Box sx={{ marginTop: 4 }}>
-          
-          <Box sx={{display: 'flex',
+          <Box
+            sx={{
+              display: 'flex',
               flexDirection: 'row',
               justifyContent: 'space-between',
               alignItems: 'center',
               paddingX: 4,
               backgroundColor: 'white',
               paddingY: 2,
-              }} >
-
+            }}
+          >
             <Box>
               <Typography>Card Details</Typography>
             </Box>
@@ -1067,9 +931,8 @@ export const CardCatalogue = () => {
                 <img src={Email_Icon} alt="email" />
               </Button>
             </Box>
-            </Box>
-          <Divider sx={{marginX:3}}  />
-          
+          </Box>
+          <Divider sx={{ marginX: 3 }} />
 
           <Box className="body2">
             <Stack direction="row" spacing={2} sx={{ margin: '30px 0px' }}>
@@ -1117,12 +980,7 @@ export const CardCatalogue = () => {
                 onClick={() => setEditModal(true)}
               >
                 <IconButton className="icon">
-                  <img
-                    src={Edit_icon}
-                    style={{
-                      filter: '',
-                    }}
-                  />
+                  <img src={Edit_icon} alt="edit icon" />
                 </IconButton>
                 edit card
               </Button>
@@ -1150,22 +1008,18 @@ export const CardCatalogue = () => {
                 <GroupButton data={GroupButtonData} />
               </Box>
             </Stack>
-            
           </Box>
-         
 
           <Box className="tableBox">
             <ListTable
               column={column}
-              data={sortingData}
+              data={cardList}
               isItemSelected={selected}
               selectedKey="id"
             />
           </Box>
         </Box>
       </Stack>
-
-      
 
       {surrogateSelection && (
         <CustomModal

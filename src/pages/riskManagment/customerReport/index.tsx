@@ -5,7 +5,7 @@ import MailIcon from '../../../assets/icons/mail.svg';
 import BtnContained from '../../../components/commonComponent/CustomText/Button/Contained';
 import BtnOutlined from '../../../components/commonComponent/CustomText/Button/Outlined';
 import SelectDropdown from '../../../components/commonComponent/CheckboxSelectDropdown';
-import { Typography, Stack, Box, Grid, Link } from '@mui/material';
+import { Typography, Stack, Box, Grid, Link, FormControl, MenuItem, Select } from '@mui/material';
 import {
   approvedCustomerDetailData,
   customerDetailsRiskManagment,
@@ -81,6 +81,12 @@ function CustomerReport() {
   const [isFiltered, setIsFiltered] = useState(false);
   const [dayFilterValue, setDayFilter] = useState('Current Day');
   const navigate = useNavigate();
+  const [value, setValue] = React.useState('10');
+
+
+  const handleChange = (event: any) => {
+    setValue(event.target.value as string);
+  };
 
   const column2: any = [
     {
@@ -152,12 +158,43 @@ function CustomerReport() {
             {CustomerReportFilterDropdown?.map(
               (eachItem: any, index: number) => {
                 return (
+                  <>
+                   {eachItem?.label == "Period" ?
+                    <Grid item xs={3} key={index}>
+                    <Box mt={1}>
+                    <FormControl fullWidth>
+                      <Typography className="dropdown-label">
+                       {eachItem?.label}
+                      </Typography>
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={value}
+                        onChange={handleChange}
+                        sx={{
+                          '& legend': { display: 'none' },
+                          '& fieldset': { top: 0 },
+                        }}
+                        style={{ height: 46 }}
+                      >
+                        <MenuItem value={10}>Current Day</MenuItem>
+                        <MenuItem value={20}>Current Week</MenuItem>
+                        <MenuItem value={30}>Current Month</MenuItem>
+                        <MenuItem value={40}>Current Quarter</MenuItem>
+                        <MenuItem value={50}>Current Year</MenuItem>
+                        <MenuItem value={60}>Custom Period</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Box>
+                  </Grid>
+                   : 
                   <Grid item xs={3} key={index}>
                     <Typography className="dropdown-label">
                       {eachItem?.label}
                     </Typography>
                     <SelectDropdown options={eachItem?.option} />
-                  </Grid>
+                  </Grid> }
+                  </>
                 );
               }
             )}

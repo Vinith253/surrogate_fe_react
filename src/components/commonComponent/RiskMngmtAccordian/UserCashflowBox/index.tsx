@@ -16,7 +16,7 @@ export default function UserCashFlowBox({ item }: props) {
             item
             key={item.id}
             className="risk-accordian-grid-style"
-            columnGap={8}
+            columnGap={10}
           >
             <Box sx={{ width: '150px' }}>
               <Typography className="cashflow-text">Criteria</Typography>
@@ -53,7 +53,7 @@ export default function UserCashFlowBox({ item }: props) {
               item
               key={item.id}
               className="risk-accordian-grid-style"
-              columnGap={8}
+              columnGap={10}
             >
               <Box sx={{ width: '150px' }}>
                 <Typography className="cashflow-value-text">

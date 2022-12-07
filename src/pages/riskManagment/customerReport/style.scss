@@ -160,7 +160,6 @@
     }
 
     .credit-container1 {
-      // width: 48%;
       background-color: white;
       padding: 24px 32px 24px 32px;
       border-radius: 4px;
@@ -168,7 +167,6 @@
     }
 
     .credit-container2 {
-      // width: 48%;
       background-color: white;
       padding: 24px 32px 24px 32px;
       margin-top: 24px;
@@ -201,12 +199,62 @@
     .pass-text {
       font-size: 16px;
       color: #32a64d;
+      margin-top: 3px;
+      
     }
 
     .fail-text {
       font-size: 16px;
       color: #e63946;
+      margin-top: 3px;
     }
+  }
+
+  .credit-score-meter-container {
+    width: 48%;
+    background-color: white;
+    margin-left: 20px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.16);
+    border-radius: 4px;
+    padding: 24px 32px 24px 32px;
+
+    .header-container {
+      display:flex;
+      flex-direction:row;
+      justify-content:space-between;
+
+      .calculate-text {
+        color:#0662b7; 
+        cursor: pointer;
+        font-size:16px; 
+        text-decoration:underline;
+      }
+      }
+
+      .underline {
+        margin: 24px 0px 5px 0px;
+        border-bottom: 2px solid #f0f2f5;
+        }
+
+        .lower-container {
+          align-items: center;
+          justify-content: center;
+          display: flex;
+          margin-top:36px;
+
+          .container-text {
+            font-size: 24px;
+            font-weight: bold;
+            margin-left: 10px;
+            margin-bottom: 6px;
+          }
+        }
+
+        .status-box {
+          align-items: center;
+          justify-content: center;
+          display: flex;
+        }
   }
 
   .refer-value-container {
