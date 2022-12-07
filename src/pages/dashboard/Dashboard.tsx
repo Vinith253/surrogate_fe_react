@@ -76,7 +76,7 @@ const dashboardVal = [
     index: 2,
     title: 'Approval Rate(%)',
     value: '98.6%',
-    more: true,
+    more: false,
     image: ApprovedRate,
     boxstyles: 'progress-icon-box',
   },
@@ -432,18 +432,18 @@ export default function Dashboard() {
           <div className="divider-line" />
           <div className="horizontal-cards">
             <Grid container spacing={2}>
-            {dashboardVal.map((value) => (
-              <Grid xs={3} item>
-              <DashboardCard
-                title={value.title}
-                value={value.value}
-                more={value.more}
-                image={value.image}
-                boxStyles={value.boxstyles}
-                navPath="/sales/salesReport"
-              />
-              </Grid>
-            ))}
+              {dashboardVal.map((value) => (
+                <Grid xs={3} item>
+                  <DashboardCard
+                    title={value.title}
+                    value={value.value}
+                    more={value.more}
+                    image={value.image}
+                    boxStyles={value.boxstyles}
+                    navPath="/sales/salesReport"
+                  />
+                </Grid>
+              ))}
             </Grid>
           </div>
           <div className="report-cards">
@@ -586,19 +586,19 @@ export default function Dashboard() {
           </div>
           <div className="divider-line" />
           <div className="horizontal-cards2">
-          <Grid container spacing={2}>
-            {channelUserData.map((value) => (
-              <Grid xs={3} item>
-              <DashboardCard
-                title={value.title}
-                value={value.value}
-                more={value.more}
-                image={value.image}
-                viewAll={value.viewAll}
-                navPath=""
-              />
-              </Grid>
-            ))}
+            <Grid container spacing={2}>
+              {channelUserData.map((value) => (
+                <Grid xs={3} item>
+                  <DashboardCard
+                    title={value.title}
+                    value={value.value}
+                    more={value.more}
+                    image={value.image}
+                    viewAll={value.viewAll}
+                    navPath=""
+                  />
+                </Grid>
+              ))}
             </Grid>
           </div>
         </div>
