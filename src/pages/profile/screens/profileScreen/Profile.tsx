@@ -138,7 +138,7 @@ export const Profile = () => {
               className="userRole"
               sx={{ color: colors.textGreyHeader }}
             >
-              Surrogate Manager, Employee ID : 231456789021
+              Surrogate Manager, <span style={{color:'black'}} >Employee ID</span> : 231456789021
             </Typography>
           </Stack>
         </Box>
@@ -154,7 +154,7 @@ export const Profile = () => {
           }}
         >
           <Stack className="profile-accountHeader">
-            <Stack className="profile-header">Account Details</Stack>
+            <Stack className="profile-header">Account Password</Stack>
             <Stack>
               <Stack className="profile-password">Password</Stack>
 

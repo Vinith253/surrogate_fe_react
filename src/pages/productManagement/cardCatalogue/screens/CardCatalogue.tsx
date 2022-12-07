@@ -687,28 +687,7 @@ export const CardCatalogue = () => {
     { title: 'Business ID', dataIndex: 'businessID', key: 'businessID' },
 
     { title: 'Card Category', dataIndex: 'cardCategory', key: 'cardCategory' },
-    // {
-    //   title: 'Card Category',
-    //   dataIndex: 'cardCategory',
-    //   key: 'cardCategory',
-    //   headerRender: (text: string) => {
-    //     return (
-    //       <Stack
-    //         sx={{
-    //           display: 'flex',
-    //           alignItems: 'center',
-    //           justifyContent: 'space-between',
-    //           flexDirection: 'row',
-    //         }}
-    //       >
-    //         <>{text}</>
-    //         <IconButton onClick={() => handleSortByName()}>
-    //           <img src={UnfoldMoreIcon} alt="Sort Icon" />
-    //         </IconButton>
-    //       </Stack>
-    //     );
-    //   },
-    // },
+    
     {
       title: 'Card Status',
       dataIndex: 'cardStatus',
@@ -753,11 +732,11 @@ export const CardCatalogue = () => {
               onClose={handleClose}
               anchorOrigin={{
                 vertical: 'top',
-                horizontal: 'right',
+                horizontal: 'left',
               }}
               transformOrigin={{
                 vertical: 'top',
-                horizontal: 'left',
+                horizontal: 'right',
               }}
             >
               <MenuItem
@@ -772,14 +751,14 @@ export const CardCatalogue = () => {
                 }}
                 style={{ padding: '10px 20px', textAlign: 'left' }}
               >
-                View Org.
+                View
               </MenuItem>
               <MenuItem
                 // onClick={handleClose}
                 onClick={() => {
                   handleClose();
                   navigate(
-                    '/userManagement/orgStructure/screens/Onboarding/onboarding',
+                    '/productManagement/cardCatalogue/singleupload',
                     {
                       state: {
                         isEditable: true,
@@ -789,26 +768,9 @@ export const CardCatalogue = () => {
                 }}
                 style={{ padding: '10px 20px', textAlign: 'left' }}
               >
-                Edit Org.
+                Edit
               </MenuItem>
-              <MenuItem
-                style={{ padding: '10px 20px', textAlign: 'left' }}
-                onClick={() => {
-                  handleClose();
-                  setActivateModal(!activateModal);
-                }}
-              >
-                Activate Org
-              </MenuItem>
-              <MenuItem
-                onClick={() => {
-                  handleClose();
-                  setDeactivateModal(!deactivateModal);
-                }}
-                style={{ padding: '10px 20px', textAlign: 'left' }}
-              >
-                Deactivate Org
-              </MenuItem>
+             
             </Menu>
           </>
         );
@@ -904,12 +866,13 @@ export const CardCatalogue = () => {
                       <Typography className="dropdown-label">
                         {eachItem?.label}
                       </Typography>
-                      <SelectDropdown
+                      <SelectDropdown options={eachItem?.option} />
+                      {/* <SelectDropdown
                         options={eachItem?.option}
                         sendSelectedValue={(selectedValues: Array<String>) =>
                           setSelectedDropdownValue(selectedValues, eachItem)
                         }
-                      />
+                      /> */}
                     </Grid>
                   );
                 }

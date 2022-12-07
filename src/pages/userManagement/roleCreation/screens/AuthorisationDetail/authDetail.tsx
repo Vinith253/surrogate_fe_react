@@ -8,7 +8,7 @@ import { ListTagStatus } from '../../../../../utils/tagBasedIndicator/listTagSta
 import active_icon from '../../../../../assets/icons/active_icon.svg';
 import question_icon from '../../../../../assets/icons/questionMark_icon.svg';
 import close_icon from '../../../../../assets/icons/close_icon.svg';
-import { tagBasedIndicator } from '../../../../../utils/constants/Constants';
+import { tagBasedIndicator } from '../../../../../utils/Constants';
 import BtnContained from '../../../../../components/commonComponent/CustomText/Button/Contained';
 import { useLocation, useNavigate } from 'react-router-dom';
 import CardAndDropDown from '../../../../../components/commonComponent/cardAndDropDown/cardAndDropDown';

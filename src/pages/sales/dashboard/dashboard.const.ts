@@ -1,4 +1,4 @@
-import { tableHeader } from '../../../utils/constants/Constants';
+import { tableHeader } from '../../../utils/Constants';
 
 export const salesDashboardList: rowsDataInterface[] = [
   {
