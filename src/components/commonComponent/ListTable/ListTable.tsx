@@ -20,7 +20,7 @@ import {
 } from '../../../pages/sales/dashboard/dashboard.const';
 import PaginationComp from '../Pagination/Pagination';
 import { useNavigate } from 'react-router-dom';
-import { tabBar, tableHeader } from '../../../utils/Constants';
+import { tabBar, tableHeader } from '../../../utils/constants/Constants';
 import { Stack } from '@mui/system';
 import { SearchOutlined } from '@mui/icons-material';
 import { Link, TextField, IconButton } from '@mui/material';
@@ -236,7 +236,7 @@ function TableComp(props: {
         </Stack>
       )}
 
-      <div style={{ display: 'flex', width:'100%' }}>
+      <div style={{ display: 'flex', width: '100%' }}>
         {props.flag === 'sales-report' && (
           <TextField
             className="text-field"

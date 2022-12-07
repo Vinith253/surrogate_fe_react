@@ -3,7 +3,7 @@ import { useRef, useState } from 'react';
 import InsertDriveFileOutlinedIcon from '@mui/icons-material/InsertDriveFileOutlined';
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
 import './DragDrop.scss';
-import { bulkUpload } from '../../../utils/Constants';
+import { bulkUpload } from '../../../utils/constants/Constants';
 import { Box, Button, ButtonProps, styled, Typography } from '@mui/material';
 import { toggleFunctionType } from '../../../interface/Types';
 
