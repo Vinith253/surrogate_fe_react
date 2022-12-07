@@ -15,7 +15,7 @@ interface State {
 
 export const ForgotPassword = () => {
   const [forgetPassword, setForgetPassword] = useState(false);
-  const [emailText, setEmailText] = useState(0);
+  const [emailText, setEmailText] = useState('');
   const [showError, setShowError] = useState<boolean>(false);
   const [buttonDisabled, setButtonDisabled] = useState<boolean>(true);
   const navigate = useNavigate();
@@ -24,14 +24,15 @@ export const ForgotPassword = () => {
   const submitButtonAction = () => {
     const content = location?.state?.content ?? verification.VERIFY;
 
-    navigate('/login/verification', {
+    navigate('/login/otp', {
       state: { content: content },
     });
   };
 
   const onChangeEmail = (e: any) => {
-    setEmailText(e);
+    setEmailText(e.target.value);
     setShowError(false);
+
   };
   return (
     <Box
@@ -89,7 +90,8 @@ export const ForgotPassword = () => {
           </Box>
           <Box>
             <Button
-              onClick={() => setForgetPassword(false)}
+            
+              onClick={() => navigate('/login')}
               sx={{
                 textTransform: 'capitalize',
                 color: '#0662B7',
@@ -127,7 +129,7 @@ export const ForgotPassword = () => {
           fullWidth
           variant="contained"
           color="secondary"
-          disabled={buttonDisabled}
+          disabled={emailText.length > 4 ? false : true }
           sx={{
             textTransform: 'capitalize',
             color: 'white',

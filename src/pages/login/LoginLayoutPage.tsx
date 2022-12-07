@@ -80,13 +80,13 @@ export const LoginLayoutPage = () => {
         <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
           <Box
             sx={{
-              // backgroundImage: `url(${BGImage})`,
+             
               backgroundSize: 'cover',
               backgroundRepeat: 'no-repeat',
               height: '100vh',
             }}
           >
-            {/* <img src={BoBImage} alt="BoBImage" style={{ padding: '30px' }} /> */}
+            
 
             <Box
               sx={{
@@ -94,7 +94,7 @@ export const LoginLayoutPage = () => {
                 width: '100%',
                 background: 'linear-gradient(180.03deg, #0797FF, #005FA4)',
                 padding: '30px',
-                // backgroundImage:`url(${LoginImage})`
+               
               }}
             >
               <Box>
@@ -126,7 +126,7 @@ export const LoginLayoutPage = () => {
                     fontSize: '16px',
                     fontWeight: '500',
                     lineHeight: '20px',
-                    zIndex: 99,
+                    zIndex: '999',
                   }}
                 >
                   Disburse Credit Cards seamlessly! M2P handles your Credit Card
@@ -142,7 +142,7 @@ export const LoginLayoutPage = () => {
         <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
           <Box
             sx={{
-              // backgroundColor: 'red',
+             
               height: '100vh',
               display: 'flex',
               alignItems: 'center',

@@ -190,7 +190,8 @@ export default function OtpVerificationScreen() {
                   </Typography>
                 </Box>
                 <Box>
-                  <Button
+                  <Button 
+                  
                     sx={{ textTransform: 'capitalize', color: '#0662B7' }}
                   >
                     Back

@@ -36,13 +36,13 @@ import EditLMSRule from './pages/lms/lmsRule/createLMS/editLMS';
 import Retargeting from './pages/lms/reTargeting';
 import { OrgHistoryLogDetails } from './pages/userManagement/orgStructure/screens/historyLog/historyLogDetails/historyLogDetails';
 import UserProfile from './pages/profile/landingScreen';
-// import { OrgStrHistoryLog } from './pages/userManagement/orgStructure/screens/historyLog/historyLog';
+
 import CustomerReport from './pages/riskManagment/customerReport';
 import CustomerDetailScreen from './pages/riskManagment/customerReport/customerDetails';
 import { ProgrammeHistoryDetails } from './pages/productManagement/programmeManagement/screens/listComponents/ProgrammeHistoryDetails';
-import { LoginPage } from './pages/login/landingScreen/Login';
+
 import OtpVerificationScreen from './pages/login/otp/OTPVerificationScreen';
-// import { otpPage } from './pages/userManagement/orgStructure/screens/OrgReview/otpPage/otpPage'
+
 import ReTargetingDetails from './pages/lms/reTargeting/screens/reTargetingScreen/reTargetingDetails';
 import { LMSHistoryLogDetails } from './pages/lms/lmsRule/lmsHistoryLog/lmsHistoryLogDetails';
 import LoginLayout from './components/layout/loginLayout/loginLayout';
@@ -107,11 +107,7 @@ export default function App() {
         />
       
 
-        {/* <Route
-          path="/userManagement/orgStructure/screens/OrgReview/OrgReview"
-          element={<OrgReview />}
-        /> */}
-
+        
         <Route
           path="/userManagement/orgStructure/bulkUpload"
           element={<OrgBulkUpload />}
@@ -211,7 +207,7 @@ export default function App() {
         />
       </Route>
       <Route>
-        {/* <Route path="/login" element={<LoginPage />} /> */}
+       
 
         <Route
           path="/lms/retargeting/reTargetingDetails"
@@ -219,7 +215,7 @@ export default function App() {
         />
       </Route>
       <Route path="/login" element={<LoginLayoutPage />}>
-        <Route path="/login/userlogin" element={<NewLogin />} />
+        <Route path="/login" element={<NewLogin />} />
         <Route path="/login/forgot" element={<ForgotPassword />} />
         <Route path="/login/otp" element={<OtpVerificationScreen />} />
         <Route path="/login/newpassword" element={<NewPasswordPage />} />

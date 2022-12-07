@@ -31,6 +31,9 @@ export const NewPasswordPage = () => {
   const location = useLocation();
   const [validOtp, setValidOtp] = useState(false);
   const [showError, setShowError] = useState<boolean>(false);
+  const [buttonDisabled, setButtonDisabled] = useState<boolean>(true);
+  const [ newPassword, setNewPassword]=useState('')
+  const [ confirmPassword, setConfirmPassword]=useState('')
   const [values, setValues] = useState<State>({
     amount: '',
     password: '',
@@ -43,10 +46,12 @@ export const NewPasswordPage = () => {
   const handlePasswordChange =
     (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
       setValues({ ...values, [prop]: event.target.value });
+      setNewPassword(event.target.value)
     };
   const handleConfirmPasswordChange =
     (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
       setValues({ ...values, [prop]: event.target.value });
+      setConfirmPassword(event.target.value);
     };
 
   const handleClickShowPassword = () => {
@@ -82,6 +87,12 @@ export const NewPasswordPage = () => {
       setValidOtp(true);
     }
   };
+
+  const handleDisableBtn =()=>{
+    if(newPassword===confirmPassword){
+      setButtonDisabled(false)
+    }
+  }
 
   return (
     <Box
@@ -210,6 +221,7 @@ export const NewPasswordPage = () => {
           </Box>
           <Box sx={{ marginTop: '10%' }}>
             <Button
+            disabled={newPassword===confirmPassword ? false :true}
               onClick={submitPassword}
               fullWidth
               variant="contained"
@@ -218,7 +230,11 @@ export const NewPasswordPage = () => {
                 textTransform: 'capitalize',
                 color: 'white',
                 width: '340px',
+                '&:disabled': {
+                  backgroundColor: '#82B1DB',
+                },
               }}
+              
             >
               Update
             </Button>

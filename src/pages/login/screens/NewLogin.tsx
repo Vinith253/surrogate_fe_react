@@ -200,7 +200,7 @@ export const NewLogin = () => {
 
             <Typography
               onClick={() => {
-                navigate('/login/forgotpage');
+                navigate('/login/forgot');
               }}
               sx={{
                 color: '#0662B7',
