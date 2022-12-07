@@ -866,12 +866,13 @@ export const CardCatalogue = () => {
                       <Typography className="dropdown-label">
                         {eachItem?.label}
                       </Typography>
-                      <SelectDropdown
+                      <SelectDropdown options={eachItem?.option} />
+                      {/* <SelectDropdown
                         options={eachItem?.option}
                         sendSelectedValue={(selectedValues: Array<String>) =>
                           setSelectedDropdownValue(selectedValues, eachItem)
                         }
-                      />
+                      /> */}
                     </Grid>
                   );
                 }

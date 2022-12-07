@@ -70,7 +70,7 @@ const router = createBrowserRouter(
       </Route>
 
       {/* Public routes */}
-      <Route path="/login" element={<LoginPage />} />
+      
       <Route path="/profile" element={<UserProfile />} />
       <Route
         path="/productManagement/cardCatalogue"
@@ -109,10 +109,10 @@ const router = createBrowserRouter(
 
       <Route path="/userManagement/orgStructure/DSA" element={<Onboarding />} />
 
-      <Route
+      {/* <Route
         path="/userManagement/orgStructure/screens/OrgReview/OrgReview"
         element={<OrgReview />}
-      />
+      /> */}
 
       <Route
         path="/userManagement/orgStructure/bulkUpload"
@@ -219,7 +219,16 @@ const router = createBrowserRouter(
         path="/lms/retargeting/reTargetingDetails"
         element={<ReTargetingDetails />}
       />
+
+<Route path="/login" element={<LoginLayoutPage />}>
+        <Route path="/login" element={<NewLogin />} />
+        <Route path="/login/forgot" element={<ForgotPassword />} />
+        <Route path="/login/otp" element={<OtpVerificationScreen />} />
+        <Route path="/login/newpassword" element={<NewPasswordPage />} />
+      </Route>
+
     </Route>
+    
   )
 );
 

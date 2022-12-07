@@ -28,7 +28,7 @@ import {
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import UploadCard from '../uploadCard/UploadCard';
-import { bulkUpload } from '../../../../../utils/constants/Constants';
+import { bulkUpload } from '../../../../../utils/Constants';
 import { useNavigate } from 'react-router-dom';
 import PaginationComp from '../../../../../components/commonComponent/Pagination/Pagination';
 import BulkUpload from '..';

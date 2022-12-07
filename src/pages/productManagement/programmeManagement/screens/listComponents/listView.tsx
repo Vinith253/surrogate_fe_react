@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { colors } from '../../../../../style/Color';
-import { programMmgt } from '../../../../../utils/constants/Constants';
+import { programMmgt } from '../../../../../utils/Constants';
 import { checkTagStatus } from '../../../../../utils/tagBasedIndicator/tagStatus';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import UnfoldMoreIcon from '../../../../../assets/icons/sortArrow.svg';

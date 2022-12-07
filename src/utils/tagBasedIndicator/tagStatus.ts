@@ -1,6 +1,6 @@
 import { off } from 'process';
 import { colors } from '../../style/Color';
-import { tagBasedIndicator } from '../constants/Constants';
+import { tagBasedIndicator } from '../Constants';
 
 export const checkTagStatus = (value: string) => {
   let result = {
