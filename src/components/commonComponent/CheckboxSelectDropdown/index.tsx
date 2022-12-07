@@ -18,6 +18,7 @@ import { Stack } from '@mui/system';
 type Props = {
   options: Array<object>;
   flag?: string;
+  sendSelectedValue?: Function;
 };
 
 function CheckboxSelectDropdown({ options, flag }: Props) {
@@ -34,7 +35,11 @@ function CheckboxSelectDropdown({ options, flag }: Props) {
     let array = [] as any;
     listOptions?.map((eachOption: any) => {
       if (isAllSelected) eachOption.isSelected = true;
-      else eachOption.isSelected = false;
+      else {
+        if (selectedValues.find((value: string) => value === eachOption.value))
+          eachOption.isSelected = true;
+        else eachOption.isSelected = false;
+      }
       array.push(eachOption);
     });
     await setListOptions(array);
@@ -44,24 +49,36 @@ function CheckboxSelectDropdown({ options, flag }: Props) {
     const {
       target: { value },
     } = event;
+    // console.log('value', value);
     setSelectedValues(typeof value === 'string' ? value.split(',') : value);
   };
 
-  const checkboxHandleChange = (each: any) => {
+  const checkboxHandleChange = (each: any, event: any) => {
     if (each?.value === 'All') {
-      setIsAllSelected(!isAllSelected);
+      if (event?.target?.checked) {
+        setIsAllSelected(true);
+        setSelectedValues(['All']);
+      } else {
+        setIsAllSelected(false);
+        setSelectedValues([]);
+      }
     } else {
       let array = [] as any;
+      let selectedItems = [] as any;
       listOptions?.map((eachItem: any, index: number) => {
+        if (!event?.target?.checked && eachItem.value === 'All') {
+          eachItem.isSelected = false;
+        }
         if (each.value === eachItem.value) {
           eachItem.isSelected = !eachItem.isSelected;
         }
         if (!eachItem.isSelected) {
           setIsAllSelected(false);
-        }
+        } else selectedItems.push(eachItem.value);
         array.push(eachItem);
       });
       setListOptions(array);
+      setSelectedValues(selectedItems);
     }
   };
 
@@ -73,19 +90,13 @@ function CheckboxSelectDropdown({ options, flag }: Props) {
     });
     setListOptions(array);
     setIsAllSelected(true);
+    setSelectedValues(['All']);
   };
 
   const submitSelectedOptions = () => {
     let array = [] as any;
-    listOptions?.map((eachOption: any) => {
-      if (isAllSelected) {
-        setSelectedValues(['All']);
-      } else if (eachOption.isSelected) {
-        array.push(eachOption.value);
-        setSelectedValues(array);
-      }
-    });
     setIsSelectLayoutOpen(false);
+    console.log('selectedValues', selectedValues);
   };
 
   return (
@@ -124,14 +135,14 @@ function CheckboxSelectDropdown({ options, flag }: Props) {
                   control={
                     <Checkbox
                       style={
-                        each?.name === 'All'
+                        each?.value === 'All'
                           ? { marginLeft: '0px' }
                           : { marginLeft: '20px' }
                       }
                       color="secondary"
                       className="each-option"
                       checked={each.isSelected}
-                      onChange={() => checkboxHandleChange(each)}
+                      onChange={(event) => checkboxHandleChange(each, event)}
                     />
                   }
                 />

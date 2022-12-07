@@ -1,4 +1,9 @@
-import { Route, Routes } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from 'react-router-dom';
 import { Layout, PrivateRoute } from './components';
 import { Dashboard, HomePage, LoginPage, NotFoundPage } from './pages';
 import BulkUpload from './pages/productManagement/cardCatalogue/bulkUpload';
@@ -35,7 +40,6 @@ import EditLMSRule from './pages/lms/lmsRule/createLMS/editLMS';
 import Retargeting from './pages/lms/reTargeting';
 import { OrgHistoryLogDetails } from './pages/userManagement/orgStructure/screens/historyLog/historyLogDetails/historyLogDetails';
 import UserProfile from './pages/profile/landingScreen';
-import { OrgStrHistoryLog } from './pages/userManagement/orgStructure/screens/historyLog/historyLog';
 import CustomerReport from './pages/riskManagment/customerReport';
 import CustomerDetailScreen from './pages/riskManagment/customerReport/customerDetails';
 import { ProgrammeHistoryDetails } from './pages/productManagement/programmeManagement/screens/listComponents/ProgrammeHistoryDetails';
@@ -45,171 +49,167 @@ import { LMSHistoryLogDetails } from './pages/lms/lmsRule/lmsHistoryLog/lmsHisto
 // Loaders
 import { cardCatalogueLoader } from './pages/productManagement/cardCatalogue/screens/CardCatalogue';
 
-export default function App() {
-  return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        {/* Private routes */}
-        <Route element={<PrivateRoute />}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Route>
-
-        {/* Public routes */}
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/profile" element={<UserProfile />} />
-        <Route
-          path="/productManagement/cardCatalogue"
-          element={<CardCatalogue />}
-          // loader={cardCatalogueLoader}
-        />
-        <Route
-          path="/productManagement/cardCatalogue/bulkupload"
-          element={<BulkUpload flag={'xlsFormat'} />}
-        />
-        <Route
-          path="/productManagement/cardCatalogue/singleupload"
-          element={<CreateNewCard />}
-        />
-
-        <Route
-          path="/productManagement/programmeManagement"
-          element={<ProgramManagement />}
-        />
-
-        <Route
-          path="/productManagement/programmeManagement/:id"
-          element={<ReviewerLogDetails />}
-        />
-
-        <Route
-          path="/productManagement/cardCatalogue/reviewCard"
-          element={<ReviewCard />}
-        />
-        <Route
-          path="/productManagement/programmeManagement/ProgrammeHistoryDetails"
-          element={<ProgrammeHistoryDetails />}
-        />
-        <Route
-          path="/userManagement/branchDetails"
-          element={<BranchDetails />}
-        />
-        <Route path="/userManagement/orgStructure" element={<OrgStructure />} />
-
-        <Route
-          path="/userManagement/orgStructure/screens/Onboarding/onboarding"
-          element={<Onboarding />}
-        />
-
-        <Route
-          path="/userManagement/orgStructure/screens/OrgReview/OrgReview"
-          element={<OrgReview />}
-        />
-
-        <Route
-          path="/userManagement/orgStructure/bulkUpload"
-          element={<OrgBulkUpload />}
-        />
-
-        <Route path="/userManagement/roleCreation" element={<RoleCreation />} />
-        <Route
-          path="/userManagement/roleCreation/createRole"
-          element={<CreateRole />}
-        />
-
-        <Route path="/userManagement/userCreation" element={<UserCreation />} />
-
-        <Route
-          path="/userManagement/userCreation/createUser"
-          element={<CreateUser />}
-        />
-
-        <Route
-          path="/userManagement/userCreation/editUser"
-          element={<EditUser />}
-        />
-
-        <Route
-          path="/userManagement/userCreation/viewUser"
-          element={<ViewUser />}
-        />
-
-        <Route
-          path="/userManagement/userCreation/bulkUpload"
-          element={<UserBulkUpload />}
-        />
-
-        <Route path="/sales/salesDashboard" element={<SalesDashboard />} />
-
-        <Route path="/sales/salesReport" element={<SalesReport />} />
-
-        <Route
-          path="/sales/performanceReport"
-          element={<PerformanceReport />}
-        />
-
-        <Route
-          path="/sales/salesReportDetails"
-          element={<SalesReportDetails />}
-        />
-        <Route path="/accessLibrary" element={<AccessLibrary />} />
-
-        <Route
-          path="/userManagement/roleCreation/userdetails"
-          element={<UserDetails />}
-        />
-        <Route
-          path="/userManagement/orgStructure/historyLogDetail"
-          element={<OrgHistoryLogDetails />}
-        />
-        <Route
-          path="/userManagement/roleCreation/authorisationDetails"
-          element={<AuthDetail />}
-        />
-        <Route
-          path="/userManagement/roleCreation/historyLogDetail"
-          element={<HistoryLogDetailScreen />}
-        />
-
-        <Route
-          path="/userManagement/userCreation/historyLogDetail"
-          element={<HistoryLogDetailScreen />}
-        />
-
-        {/* Catch all */}
-        <Route path="*" element={<NotFoundPage />} />
-
-        <Route
-          path="/userManagement/roleCreation/authorisationDetails"
-          element={<AuthDetail />}
-        />
-
-        <Route path="/lms/dashboard" element={<LMSDashboard />} />
-
-        <Route path="/lms/retargeting" element={<Retargeting />} />
-
-        <Route path="/lms/lmsRule" element={<LMSRule />} />
-        <Route
-          path="/lms/lmsRule/historyLogDetails"
-          element={<LMSHistoryLogDetails />}
-        />
-        <Route path="/lms/lmsRule/addNewRule" element={<AddLMSRule />} />
-        <Route path="/lms/lmsRule/viewRule" element={<ViewLMSRule />} />
-        <Route path="/lms/lmsRule/editRule" element={<EditLMSRule />} />
-
-        <Route
-          path="/riskManagement/customerReports"
-          element={<CustomerReport />}
-        />
-        <Route
-          path="/riskManagement/customerDetails"
-          element={<CustomerDetailScreen />}
-        />
-        <Route
-          path="/lms/retargeting/reTargetingDetails"
-          element={<ReTargetingDetails />}
-        />
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Layout />}>
+      {/* Private routes */}
+      <Route element={<PrivateRoute />}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Route>
-    </Routes>
-  );
+
+      {/* Public routes */}
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/profile" element={<UserProfile />} />
+      <Route
+        path="/productManagement/cardCatalogue"
+        element={<CardCatalogue />}
+        loader={cardCatalogueLoader}
+      />
+      <Route
+        path="/productManagement/cardCatalogue/bulkupload"
+        element={<BulkUpload flag={'xlsFormat'} />}
+      />
+      <Route
+        path="/productManagement/cardCatalogue/singleupload"
+        element={<CreateNewCard />}
+      />
+
+      <Route
+        path="/productManagement/programmeManagement"
+        element={<ProgramManagement />}
+      />
+
+      <Route
+        path="/productManagement/programmeManagement/:id"
+        element={<ReviewerLogDetails />}
+      />
+
+      <Route
+        path="/productManagement/cardCatalogue/reviewCard"
+        element={<ReviewCard />}
+      />
+      <Route
+        path="/productManagement/programmeManagement/ProgrammeHistoryDetails"
+        element={<ProgrammeHistoryDetails />}
+      />
+      <Route path="/userManagement/branchDetails" element={<BranchDetails />} />
+      <Route path="/userManagement/orgStructure" element={<OrgStructure />} />
+
+      <Route
+        path="/userManagement/orgStructure/screens/Onboarding/onboarding"
+        element={<Onboarding />}
+      />
+
+      <Route
+        path="/userManagement/orgStructure/screens/OrgReview/OrgReview"
+        element={<OrgReview />}
+      />
+
+      <Route
+        path="/userManagement/orgStructure/bulkUpload"
+        element={<OrgBulkUpload />}
+      />
+
+      <Route path="/userManagement/roleCreation" element={<RoleCreation />} />
+      <Route
+        path="/userManagement/roleCreation/createRole"
+        element={<CreateRole />}
+      />
+
+      <Route path="/userManagement/userCreation" element={<UserCreation />} />
+
+      <Route
+        path="/userManagement/userCreation/createUser"
+        element={<CreateUser />}
+      />
+
+      <Route
+        path="/userManagement/userCreation/editUser"
+        element={<EditUser />}
+      />
+
+      <Route
+        path="/userManagement/userCreation/viewUser"
+        element={<ViewUser />}
+      />
+
+      <Route
+        path="/userManagement/userCreation/bulkUpload"
+        element={<UserBulkUpload />}
+      />
+
+      <Route path="/sales/salesDashboard" element={<SalesDashboard />} />
+
+      <Route path="/sales/salesReport" element={<SalesReport />} />
+
+      <Route path="/sales/performanceReport" element={<PerformanceReport />} />
+
+      <Route
+        path="/sales/salesReportDetails"
+        element={<SalesReportDetails />}
+      />
+      <Route path="/accessLibrary" element={<AccessLibrary />} />
+
+      <Route
+        path="/userManagement/roleCreation/userdetails"
+        element={<UserDetails />}
+      />
+      <Route
+        path="/userManagement/orgStructure/historyLogDetail"
+        element={<OrgHistoryLogDetails />}
+      />
+      <Route
+        path="/userManagement/roleCreation/authorisationDetails"
+        element={<AuthDetail />}
+      />
+      <Route
+        path="/userManagement/roleCreation/historyLogDetail"
+        element={<HistoryLogDetailScreen />}
+      />
+
+      <Route
+        path="/userManagement/userCreation/historyLogDetail"
+        element={<HistoryLogDetailScreen />}
+      />
+
+      {/* Catch all */}
+      <Route path="*" element={<NotFoundPage />} />
+
+      <Route
+        path="/userManagement/roleCreation/authorisationDetails"
+        element={<AuthDetail />}
+      />
+
+      <Route path="/lms/dashboard" element={<LMSDashboard />} />
+
+      <Route path="/lms/retargeting" element={<Retargeting />} />
+
+      <Route path="/lms/lmsRule" element={<LMSRule />} />
+      <Route
+        path="/lms/lmsRule/historyLogDetails"
+        element={<LMSHistoryLogDetails />}
+      />
+      <Route path="/lms/lmsRule/addNewRule" element={<AddLMSRule />} />
+      <Route path="/lms/lmsRule/viewRule" element={<ViewLMSRule />} />
+      <Route path="/lms/lmsRule/editRule" element={<EditLMSRule />} />
+
+      <Route
+        path="/riskManagement/customerReports"
+        element={<CustomerReport />}
+      />
+      <Route
+        path="/riskManagement/customerDetails"
+        element={<CustomerDetailScreen />}
+      />
+      <Route
+        path="/lms/retargeting/reTargetingDetails"
+        element={<ReTargetingDetails />}
+      />
+    </Route>
+  )
+);
+
+export default function App() {
+  return <RouterProvider router={router} />;
 }
