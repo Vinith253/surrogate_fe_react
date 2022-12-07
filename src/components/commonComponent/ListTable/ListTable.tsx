@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import './table.scss';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -25,6 +25,7 @@ import { Stack } from '@mui/system';
 import { SearchOutlined } from '@mui/icons-material';
 import { Link, TextField, IconButton } from '@mui/material';
 import CheckBoxModal from '../customModal/PopoverModal';
+import UnfoldMoreIcon from '../../../assets/icons/sortArrow.svg';
 
 function TableComp(props: {
   rows: rowsDataInterface[];
@@ -208,6 +209,29 @@ function TableComp(props: {
     } else {
       navigate(`${props.viewPath}`);
     }
+  };
+
+  const [ascending, setAscending] = useState<boolean>(true);
+  const [sortingData, setSortingData] = useState(props.rows);
+
+  const filterData = () => {
+    const sort = currentTableData.sort((a: any, b: any) => {
+      if (ascending) {
+        return a.id < b.id ? -1 : 1;
+      }
+      return a.id > b.id ? -1 : 1;
+    });
+    console.log('sortinf', [...sort]);
+    setSortingData([...sort]);
+  };
+
+  useEffect(() => {
+    filterData();
+  }, [ascending]);
+
+  const handleSortByName = () => {
+    setAscending(!ascending);
+    console.log('click');
   };
 
   return (
@@ -472,10 +496,17 @@ function TableComp(props: {
                           fontWeight: 'bold',
                           borderBottom: 'none',
                           backgroundColor: '#EFF7FE',
-                          minWidth: '100px',
+                          minWidth: '150px',
                         }}
                       >
                         {row?.header2}
+                        {row?.sortColumn && (
+                          <span>
+                            <IconButton onClick={() => handleSortByName()}>
+                              <img src={UnfoldMoreIcon} alt="Sort Icon" />
+                            </IconButton>
+                          </span>
+                        )}
                       </TableCell>
                     )}
                     {row?.header3 && (
@@ -820,7 +851,11 @@ function TableComp(props: {
                       </TableCell>
                       <TableCell align="left" sx={{ borderBottom: 'none' }}>
                         <Link
-                          sx={{ cursor: 'pointer', color: '#0662B7' }}
+                          sx={{
+                            cursor: 'pointer',
+                            color: '#0662B7',
+                            textDecoration: 'none',
+                          }}
                           onClick={() => viewAction(row)}
                         >
                           View

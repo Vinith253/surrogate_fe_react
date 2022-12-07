@@ -15,7 +15,7 @@ import FintechIcon from '../../assets/icons/fintech-partner-icon.svg';
 import dsaIcon from '../../assets/icons/totaldsa_icon.svg';
 import unionIcon from '../../assets/icons/Union.svg';
 import UserIcon from '../../assets/icons/users_icon.svg';
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import TableComp from '../../components/commonComponent/ListTable/ListTable';
 import BarGarph from '../../components/commonComponent/BarGraph/BarGraph';
 import { Button, Grid, TextField, Typography } from '@mui/material';
@@ -24,7 +24,9 @@ import CheckBoxPopOver from '../../components/commonComponent/CheckBoxPopOver/Si
 import DateTimePopOver from '../../components/commonComponent/DateTimePopOver';
 import { ReactComponent as Reset } from '../../assets/icons/reset.svg';
 import MoreFilterModal from '../../components/commonComponent/customModal/MoreFilterModal';
+import download_icon from '../../assets/icons/download_icon.svg';
 
+import mail_icon from '../../assets/icons/mail_icon.svg';
 const currencies = [
   {
     value: 1,
@@ -76,7 +78,7 @@ const dashboardVal = [
     index: 2,
     title: 'Approval Rate(%)',
     value: '98.6%',
-    more: true,
+    more: false,
     image: ApprovedRate,
     boxstyles: 'progress-icon-box',
   },
@@ -103,6 +105,12 @@ const options: {} = {
   chart: {
     type: 'bar',
     height: 350,
+    toolbar: {
+      show: true,
+      tools: {
+        download: false,
+      },
+    },
   },
   plotOptions: {
     bar: {
@@ -168,6 +176,12 @@ const options: {} = {
   fill: {
     opacity: 1,
   },
+  legend: {
+    horizontalAlign: 'left',
+    markers: {
+      radius: 20,
+    },
+  },
 };
 
 const series = [
@@ -205,6 +219,18 @@ const spineGraphOptions: {} = {
   chart: {
     height: 350,
     type: 'area',
+    toolbar: {
+      show: true,
+      tools: {
+        download: false,
+      },
+    },
+    zoom: {
+      enabled: false,
+    },
+  },
+  legend: {
+    horizontalAlign: 'left',
   },
   dataLabels: {
     enabled: false,
@@ -262,7 +288,7 @@ const channelUserData = [
     value: 345,
     more: false,
     image: UserIcon,
-    viewAll: true,
+    viewAll: false,
   },
 ];
 
@@ -432,18 +458,18 @@ export default function Dashboard() {
           <div className="divider-line" />
           <div className="horizontal-cards">
             <Grid container spacing={2}>
-            {dashboardVal.map((value) => (
-              <Grid xs={3} item>
-              <DashboardCard
-                title={value.title}
-                value={value.value}
-                more={value.more}
-                image={value.image}
-                boxStyles={value.boxstyles}
-                navPath="/sales/salesReport"
-              />
-              </Grid>
-            ))}
+              {dashboardVal.map((value) => (
+                <Grid xs={3} item>
+                  <DashboardCard
+                    title={value.title}
+                    value={value.value}
+                    more={value.more}
+                    image={value.image}
+                    boxStyles={value.boxstyles}
+                    navPath="/sales/salesReport"
+                  />
+                </Grid>
+              ))}
             </Grid>
           </div>
           <div className="report-cards">
@@ -461,9 +487,29 @@ export default function Dashboard() {
 
             <div className="graph-card">
               <div className="graph-div">
-                <div>
-                  <text className="overview-text">Surrogate Wise Data </text>
-                  <text className="overview-text2">- Current Day</text>
+                <div className="dashboard-graph">
+                  <div>
+                    <text className="overview-text">Surrogate Wise Data </text>
+                    <text className="overview-text2">- Current Day</text>
+                  </div>
+                  <div>
+                    <Button>
+                      <img
+                        src={download_icon}
+                        alt="download_icon"
+                        width="100%"
+                        height="70%"
+                      />
+                    </Button>
+                    <Button>
+                      <img
+                        src={mail_icon}
+                        alt="mail_icon"
+                        width="100%"
+                        height="70%"
+                      />
+                    </Button>
+                  </div>
                 </div>
                 <div className="line-div" />
                 <div className="filter-graph-box">
@@ -586,19 +632,19 @@ export default function Dashboard() {
           </div>
           <div className="divider-line" />
           <div className="horizontal-cards2">
-          <Grid container spacing={2}>
-            {channelUserData.map((value) => (
-              <Grid xs={3} item>
-              <DashboardCard
-                title={value.title}
-                value={value.value}
-                more={value.more}
-                image={value.image}
-                viewAll={value.viewAll}
-                navPath=""
-              />
-              </Grid>
-            ))}
+            <Grid container spacing={2}>
+              {channelUserData.map((value) => (
+                <Grid xs={3} item>
+                  <DashboardCard
+                    title={value.title}
+                    value={value.value}
+                    more={value.more}
+                    image={value.image}
+                    viewAll={value.viewAll}
+                    navPath=""
+                  />
+                </Grid>
+              ))}
             </Grid>
           </div>
         </div>

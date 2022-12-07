@@ -261,6 +261,7 @@ export const statusRowHeading: statusRowHeadingInterface[] = [
 
 export const listRowHeading: statusRowHeadingInterface[] = [
   {
+    sortColumn:tableHeader.sortColumn,
     header1: tableHeader.HEADING1,
     header2: tableHeader.HEADING2,
     header3: tableHeader.HEADING3,
@@ -296,7 +297,9 @@ export interface rowsDataInterface {
 }
 
 export interface statusRowHeadingInterface {
+  
   header1?: string;
+  sortColumn?:any
   header2?: string;
   header3?: string;
   header4?: string;
@@ -313,11 +316,13 @@ export const product_label = [
     id: 1,
     label: tableHeader.HEADING1,
     defaultChecked: true,
+    
   },
   {
     id: 2,
     label: tableHeader.HEADING2,
     defaultChecked: true,
+    
   },
   {
     id: 3,
