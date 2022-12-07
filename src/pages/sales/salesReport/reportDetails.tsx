@@ -91,7 +91,7 @@ function SalesReportDetails() {
       },
       {
         label: 'Overall status',
-        value: '987654321',
+        value: 'Rejected',
       },
       {
         label: 'Status Description',
@@ -129,7 +129,7 @@ function SalesReportDetails() {
       />
       <DetailsCard data={personalDetails} gridColumn={4} />
       <DetailsCard data={channelDetails} gridColumn={4} />
-      <DetailsCard data={applicationDetails} gridColumn={4} />
+      <DetailsCard data={applicationDetails} gridColumn={3} />
       <DetailsCard data={remarkDetails} gridColumn={4} />
       <FooterButton submit="Close" handleSubmitClick={goBack} />
     </Stack>
