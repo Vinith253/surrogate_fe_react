@@ -1,0 +1,23 @@
+export const CommonColor = {
+  BackgroundColor: '#F5F5F5',
+  LightGrey: '#eceff2',
+  Blue: '#0C4CA8',
+  Black: '#000000',
+  TableGrey: '#F0F0F0',
+  White: '#FFFFFF',
+  ThemeOrange: '#E16E38',
+  ThemeOrangeFaded: '#F5BD9C',
+  descriptionColor: '#58585C',
+  darkBlue: '#1B2A71',
+  darkGrey: '#33333',
+  lineColorGrey: '#06357A',
+  otpTextBlue: '#0662B7',
+  otpTextOrange: '#D02127',
+  otpTextFadedBlue: '#82B1DB',
+  ThemeOrangeText: '#E27039',
+  ThemeOrangeOpacity: '#FDF2EB',
+  loaderColor: '#DCE2F7',
+  TitleTextColor: '#333333',
+  LandingPageButtonColor: '#EBEBEB',
+  CheckboxSelectionColor: '#1B2A71'
+};

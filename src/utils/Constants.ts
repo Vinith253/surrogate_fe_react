@@ -1,3 +1,10 @@
+export const verification = {
+  VALIDATE: 'validate',
+  VERIFY: 'verify',
+  CHOOSE_YOU_BANK_VALIDATION: 'choose you bank validation',
+  FINDING_SUITABLE_CARD: 'Finding suitable cards . . .',
+};
+
 export const tabBar = {
   PROGRAMME_MANAGEMENT: 'Programme Management',
   HISTORY_LOG: 'History Log',
@@ -61,6 +68,7 @@ export const bulkUpload = {
 
 export const tableHeader = {
   HEADING1: '#',
+  sortColumn:true,
   HEADING2: 'Application#',
   HEADING3: 'Customer Name',
   HEADING4: 'Mobile Number',
