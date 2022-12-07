@@ -1189,6 +1189,20 @@ function CustomModal({
               <Button
                 variant="contained"
                 className="submit-button"
+                sx={
+                  buttonDisabled
+                    ? {
+                        backgroundColor: '#82B1DB !important',
+                        color: '#FFFFFF !important',
+                      }
+                    : {
+                        backgroundColor: ' #0662B7',
+                        color: '#FFFFFF',
+                        '&:hover': {
+                          backgroundColor: '#0662B7',
+                        },
+                      }
+                }
                 onClick={handleSuccess}
                 disabled={buttonDisabled}
               >
