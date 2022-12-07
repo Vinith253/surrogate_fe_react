@@ -103,6 +103,8 @@ export const rejectedCustomerDetailData = {
   userCashFlowTotal: 500,
   userCreditProfileTotal: 400,
   customerCreditScore: 400,
+  m2pCreditScore:400,
+    creditScoreText:'Bad'
 };
 
 export const referCustomerDetailData = {
@@ -111,6 +113,8 @@ export const referCustomerDetailData = {
   userCashFlowTotal: 500,
   userCreditProfileTotal: 400,
   customerCreditScore: 720,
+  m2pCreditScore:400,
+    creditScoreText:'Moderate'
 };
 
 export const riskChannnelData = {
@@ -224,16 +228,46 @@ export const riskMngmtViewData = [
         matchedDisplayText: 'Successfull',
       },
     ],
-  },
-  {
-    id: 2,
-    label: 'User Tracceability',
-    infoData: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    isExpanded: false,
-    passFailText: 'Good',
-    showHeader: false,
-    isPassed: true,
-    data: [
+  }
+};
+
+  
+  export const approvedCustomerDetailData = {
+    userCashFlowScore: 300,
+    userCreditProfileScore: 300,
+    userCashFlowTotal:500,
+    userCreditProfileTotal:400,
+    customerCreditScore: 750,
+    m2pCreditScore:750,
+    creditScoreText:'Good'
+  }
+
+  export const rejectedCustomerDetailData = {
+    userCashFlowScore: 300,
+    userCreditProfileScore: 100,
+    userCashFlowTotal:500,
+    userCreditProfileTotal:400,
+    customerCreditScore: 400,
+    m2pCreditScore:400,
+    creditScoreText:'Bad'
+  }
+
+  export const referCustomerDetailData = {
+    userCashFlowScore: 450,
+    userCreditProfileScore: 170,
+    userCashFlowTotal:500,
+    userCreditProfileTotal:400,
+    customerCreditScore: 720,
+    m2pCreditScore:400,
+    creditScoreText:'Moderate'
+  }
+
+
+  export const riskChannnelData = {
+    title: 'Channel Details',
+    icon: true,
+    note: 'Lorem ipusm dolor sit amet, consectetur adipiscing elit. Euismod nulla cursus nascetur velit nisl sed',
+    details: [
       {
         id: 1,
         title1: 'Current Address',

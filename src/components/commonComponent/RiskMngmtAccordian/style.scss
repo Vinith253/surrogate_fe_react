@@ -3,19 +3,25 @@
   align-items: 'center';
 
   .risk-label-text {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
     margin-bottom: 12px;
   }
 
   .risk-info-label {
-    font-size: 14px;
+    font-size: 16px;
     color: #656769;
+  }
+
+  .risk-score-info-label {
+    font-size: 16px;
+    color: #AFAEAF;
   }
 
   .status-box {
     display: flex;
-    gap: 16px;
+    gap: 4px;
+    margin-bottom: 10px;
   }
 
   .cashflow-text {

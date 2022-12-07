@@ -10,6 +10,7 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 import { ReactComponent as RiskExpand } from '../../../assets/icons/risk_mgmt_expand.svg';
+import { ReactComponent as ExpandedIcon } from '../../../assets/icons/expanded_icon_risk.svg';
 import { ReactComponent as PassIcon } from '../../../assets/icons/risk_mgmt_pass.svg';
 import { ReactComponent as FailIcon } from '../../../assets/icons/risk_fail_icon.svg';
 import UserIdentityBox from './UserIdentityBox';
@@ -21,6 +22,7 @@ const CustomAccordion = styled(Accordion)(({ theme }) => {
     border: 'none',
     boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.16)',
     marginBottom: '24px',
+    paddingLeft:'10px',
     '.MuiAccordionSummary-content': {
       margin: '0',
       height: '108px',
@@ -36,14 +38,12 @@ type props = {
 export const RiskMngmtAccordian = ({ data }: props) => {
   const [categories, setCategories] = useState(data);
 
-
-
-  const handleExpandedClick = ( id: number) => {
+  const handleExpandedClick = (id: number) => {
     let updatedList = categories?.map((item) => {
       if (item.id === id) {
         return { ...item, isExpanded: !item.isExpanded }; //gets everything that was already in item, and updates "done"
       }
-      return {...item, isExpanded: false}; // else return unmodified item
+      return { ...item, isExpanded: false }; // else return unmodified item
     });
     setCategories(updatedList);
   };
@@ -60,11 +60,11 @@ export const RiskMngmtAccordian = ({ data }: props) => {
                   backgroundColor: 'white',
                 },
               }}
-              onClick={()=> handleExpandedClick(item.id)}
+              onClick={() => handleExpandedClick(item.id)}
               expanded={item.isExpanded}
             >
               <AccordionSummary
-                expandIcon={<RiskExpand />}
+                expandIcon={item.isExpanded ? <ExpandedIcon /> : <RiskExpand />}
                 aria-controls="panel1a-content"
                 id="panel1a-header"
               >
@@ -88,21 +88,21 @@ export const RiskMngmtAccordian = ({ data }: props) => {
                     <Box className="status-box">
                       <Typography
                         sx={{
-                          fontSize: '14px',
+                          fontSize: '16px',
                           color: item.isPassed ? '#32A64D' : '#E63946',
-                          marginBottom: '12px',
+                          marginTop:'3px'
                         }}
                       >
                         {item.passFailText}
                       </Typography>
                       {item.isPassed ? (
-                        <PassIcon width={'16px'} />
+                        <PassIcon/>
                       ) : (
-                        <FailIcon width={'16px'} />
+                        <FailIcon />
                       )}
                     </Box>
                     {item?.score && (
-                      <Typography className="risk-info-label">
+                      <Typography className="risk-score-info-label">
                         Score {item?.score?.result}
                         {'/'}
                         {item?.score?.total}

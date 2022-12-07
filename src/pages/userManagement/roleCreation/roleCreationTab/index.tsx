@@ -119,9 +119,9 @@ function RoleCreationTab() {
   const filterData = () => {
     const sort = currentTableData.sort((a: any, b: any) => {
       if (ascending) {
-        return a.roleName < b.roleName ? -1 : 1;
+        return a.id < b.id ? -1 : 1;
       }
-      return a.roleName > b.roleName ? -1 : 1;
+      return a.id > b.id ? -1 : 1;
     });
     console.log('sortinf', [...sort]);
     setSortingData([...sort]);
