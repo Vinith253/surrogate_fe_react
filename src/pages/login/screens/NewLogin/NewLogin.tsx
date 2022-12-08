@@ -12,14 +12,14 @@ import {
 } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
-import Yesbank from '../../../assets/images/Yes_Bank_SVG_Logo 1.svg';
-import LoginImg from '../../assets/images/LoginImg.svg';
+import Yesbank from '../../../../assets/images/Yes_Bank_SVG_Logo 1.svg';
+import LoginImg from '../../../../assets/images/LoginImg.svg';
 import { LinearScale, Visibility, VisibilityOff } from '@mui/icons-material';
-import wrong_info from '../../../assets/images/wrong_Info.svg';
+import wrong_info from '../../../../assets/images/wrong_Info.svg';
 import IconButton from '@mui/material/IconButton';
-import { verification } from '../../../utils/Constants';
+import { verification } from '../../../../utils/Constants';
 import OutlinedInput from '@mui/material/OutlinedInput';
-import Poweredby from '../../assets/images/Powered by.svg';
+
 
 interface State {
   amount: string;
@@ -38,6 +38,13 @@ export const NewLogin = () => {
   const [passwordValue, setPasswordValue] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
+  const [values, setValues] = React.useState<State>({
+    amount: '',
+    password: '',
+    weight: '',
+    weightRange: '',
+    showPassword: false,
+  });
 
   const onhandlechangeFun = (e: any) => {
     setEmailValue(e.target.value);
@@ -47,13 +54,7 @@ export const NewLogin = () => {
     setPassword(true);
   };
 
-  const [values, setValues] = React.useState<State>({
-    amount: '',
-    password: '',
-    weight: '',
-    weightRange: '',
-    showPassword: false,
-  });
+  
   const handleChange =
     (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
       setValues({ ...values, [prop]: event.target.value });

@@ -53,15 +53,16 @@ import { LMSHistoryLogDetails } from './pages/lms/lmsRule/lmsHistoryLog/lmsHisto
 import LoginLayout from './components/layout/loginLayout/loginLayout';
 import { LoginLayoutPage } from './pages/login/LoginLayoutPage';
 
-import { NewPasswordPage } from './pages/login/screens/newPasswordPage';
-import { NewLogin } from './pages/login/screens/NewLogin';
-import { ForgotPassword } from './pages/login/screens/ForgotPassword';
+import { NewPasswordPage } from './pages/login/screens/NewPassword/newPasswordPage';
+import { NewLogin } from './pages/login/screens/NewLogin/NewLogin';
+import { ForgotPassword } from './pages/login/screens/ForgotPassword/ForgotPassword';
 
 // Loaders
 import { cardCatalogueLoader } from './pages/productManagement/cardCatalogue/screens/CardCatalogue';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
+    <>
     <Route path="/" element={<Layout />}>
       {/* Private routes */}
       <Route element={<PrivateRoute />}>
@@ -70,7 +71,7 @@ const router = createBrowserRouter(
       </Route>
 
       {/* Public routes */}
-      
+
       <Route path="/profile" element={<UserProfile />} />
       <Route
         path="/productManagement/cardCatalogue"
@@ -220,15 +221,15 @@ const router = createBrowserRouter(
         element={<ReTargetingDetails />}
       />
 
-<Route path="/login" element={<LoginLayoutPage />}>
+      
+    </Route>
+    <Route path="/login" element={<LoginLayoutPage />}>
         <Route path="/login" element={<NewLogin />} />
         <Route path="/login/forgot" element={<ForgotPassword />} />
         <Route path="/login/otp" element={<OtpVerificationScreen />} />
         <Route path="/login/newpassword" element={<NewPasswordPage />} />
       </Route>
-
-    </Route>
-    
+    </>
   )
 );
 

@@ -1,10 +1,10 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import './ForgotPassword.scss';
 import { Stack, Box, Typography, Button, TextField } from '@mui/material';
-import { verification } from '../../../utils/Constants';
-// import { verification } from '../../../utils/Constants';
+import { verification } from '../../../../utils/Constants';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Yesbank from '../../../assets/images/Yes_Bank_SVG_Logo 1.svg';
+import Yesbank from '../../../../assets/images/Yes_Bank_SVG_Logo 1.svg';
 
 interface State {
   amount: string;
@@ -33,71 +33,27 @@ export const ForgotPassword = () => {
   const onChangeEmail = (e: any) => {
     setEmailText(e.target.value);
     setShowError(false);
-
   };
   return (
-    <Box
-      sx={{
-        height: '70%',
-        width: '40vw',
-        backgroundColor: 'white',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        padding: '30px',
-
-        // borderRadius: '10px',
-        // boxShadow: '1px 1px 4px rgba(0, 0, 0, 0.12)',
-      }}
-    >
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'flex-start',
-          paddingX: '30px',
-          // backgroundColor: 'red',
-          justifyContent: 'center',
-        }}
-      >
+    <Box className="forgotpassword-container">
+      <Box className="forgotpassword-heading">
         <Box>
           <img src={Yesbank} alt="logo" />
-          <Typography
-            sx={{
-              color: '#004C8F',
-              fontSize: '14px',
-              fontWeight: '700',
-              lineHeight: '16.8px',
-              letterSpacing: '3px',
-            }}
-          >
+          <Typography className="forgotpassword-heading-text">
             Surrogate Portal
           </Typography>
         </Box>
 
-        <Box
-          sx={{
-            display: 'flex',
-            marginY: '20px',
-            alignItem: 'center',
-            justifyContent: 'space-between',
-            width: '90%',
-          }}
-        >
+        <Box className="forgot-head">
           <Box>
-            <Typography sx={{ fontSize: '20px', fontWeight: '500' }}>
+            <Typography className="forgot-head-left">
               Forgot Password
             </Typography>
           </Box>
           <Box>
             <Button
-            
               onClick={() => navigate('/login')}
-              sx={{
-                textTransform: 'capitalize',
-                color: '#0662B7',
-                alignItems: 'center',
-              }}
+              className="forgot-head-right"
             >
               Back
             </Button>
@@ -105,37 +61,26 @@ export const ForgotPassword = () => {
         </Box>
 
         <Box>
-          <Typography
-            sx={{
-              fontSize: '12px',
-              fontWeight: '500',
-              lineHeight: '14px',
-              marginBottom: '5px',
-            }}
-          >
+          <Typography className="forgot-text">
             Enter registered mobile number/email ID to receive OTP*
           </Typography>
           <TextField
             onChange={onChangeEmail}
             size="small"
             fullWidth
-            sx={{ fontSize: '10px' }}
             placeholder="Enter Email Id"
           />
         </Box>
       </Box>
-      <Box sx={{ marginTop: '20%', marginLeft: '40px' }}>
+      <Box className="footer">
         <Button
           onClick={submitButtonAction}
           fullWidth
           variant="contained"
           color="secondary"
-          disabled={emailText.length > 4 ? false : true }
+          disabled={emailText.length > 4 ? false : true}
+          className="footer-button"
           sx={{
-            textTransform: 'capitalize',
-            color: 'white',
-            width: '320px',
-
             '&:disabled': {
               backgroundColor: '#82B1DB',
             },
