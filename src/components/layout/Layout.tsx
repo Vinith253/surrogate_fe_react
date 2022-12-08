@@ -592,7 +592,7 @@ export default function Layout() {
                 fontSize: '20px',
                 fontWeight: '500',
                 color: '#151515',
-                fontStyle: 'normal',
+                
               }}
             >
               Surrogate Programme
