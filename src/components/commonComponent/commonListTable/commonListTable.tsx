@@ -72,6 +72,7 @@ const CommonTable = (props: any) => {
     const lastPageIndex = firstPageIndex + rowsPerPage;
     return props.data.slice(firstPageIndex, lastPageIndex);
   }, [currentPage, rowsPerPage, props.data]);
+
   const renderColoumn = (
     dataItem: any,
     columnItem: columnType,
