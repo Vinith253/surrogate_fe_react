@@ -256,7 +256,10 @@ export const ProgrammeHistoryLog = () => {
             showBackButton={false}
           />
         </Stack>
-        <Stack className="orgStructureHistoryLogTable">
+        <Stack
+          className="orgStructureHistoryLogTable"
+          sx={{ margin: '20px 0' }}
+        >
           <ListTable column={column} data={sortingData} />
         </Stack>
       </Stack>

@@ -57,19 +57,20 @@ function EditLMSRule() {
   const [isNewRuleCreated, setIsNewRuleCreated] = useState(false);
   const [datesList, setDatesList] = useState([
     {
-      title: 'Select Date',
+      title: 'Frequency Schedule',
     },
   ]);
   const [daysList, setDaysList] = useState([
     {
-      title: 'Frequency Period',
+      title: 'Frequency Schedule',
     },
   ]);
   const [monthlyYearlyPeriodValue, setMonthlyYearlyPeriodValue] =
     useState('date');
+
   const navigate = useNavigate();
   const goBack = () => {
-    navigate(-1);
+    navigate('/lms/lmsRule', { state: { activeTab: '1' } });
   };
 
   const handleSubmitClick = () => {
@@ -78,7 +79,7 @@ function EditLMSRule() {
 
   const handleSubmit = () => {
     setIsNewRuleCreated(false);
-    navigate('/lms/lmsRule');
+    navigate('/lms/lmsRule', { state: { activeTab: '1' } });
   };
 
   const handleChange = (newValue: Dayjs | null) => {
@@ -96,12 +97,12 @@ function EditLMSRule() {
     else setIsSelectedDates(false);
     setDatesList([
       {
-        title: 'Select Date',
+        title: 'Frequency Schedule',
       },
     ]);
     setDaysList([
       {
-        title: 'Frequency Period',
+        title: 'Frequency Schedule',
       },
     ]);
   };
@@ -121,35 +122,41 @@ function EditLMSRule() {
   const addMoreDates = () => {
     let array = [];
     array.push(...datesList, {
-      title: 'Select Date',
+      title: 'Frequency Schedule',
     });
     setDatesList(array);
   };
 
-  const removeDates = () => {
+  const removeDates = (itemIndex: number) => {
     setDatesList((current) =>
-      current.filter((each: any, index: number) => index !== 1)
+      current.filter((each: any, index: number) => index !== itemIndex)
+    );
+  };
+
+  const removeDays = (itemIndex: number) => {
+    setDaysList((current) =>
+      current.filter((each: any, index: number) => index !== itemIndex)
     );
   };
 
   const addMoreDays = () => {
-    console.log('called');
     let array = [];
     array.push(...daysList, {
-      title: `Frequency Period ${daysList?.length + 1}`,
+      title: 'Frequency Schedule',
     });
     setDaysList(array);
   };
 
   return (
     <Stack className="create-lms-rule-container">
-      <Stack className="create-lms-rule-header">
+      <Stack className="create-lms-rule-header margin-top">
         <ScreenHeader
           title="Rule Name: C4CNORCKYC (Auto Populate)"
           info="From here you can create access presets to assign with users in Users Creation."
           showBackButton={false}
         />
       </Stack>
+
       <Stack className="lms-rule-container">
         <HeaderWithInfo
           header="Role Details"
@@ -363,345 +370,380 @@ function EditLMSRule() {
             info="From here, you can add the user’s personal details"
             isDownloadEnabled={false}
           />
-          {daysList?.map((eachItem: any, index: number) => {
-            return (
-              <Stack
-                className="lms-rule-form-container"
-                style={{ marginTop: '25px' }}
+          <Stack
+            className="lms-rule-form-container"
+            style={{ marginTop: '25px' }}
+          >
+            <Typography className="each-field-label">
+              Frequency Period
+            </Typography>
+            <Grid container spacing={2}>
+              <RadioGroup
+                name="radio-buttons-group"
+                className="radio-group-container"
+                onChange={changeFrequencyPeriod}
+                value={frequencyPeriodValue}
               >
-                <Typography className="each-field-label">
-                  {eachItem?.title ?? '--'}
-                </Typography>
-                <Grid container spacing={2}>
-                  <RadioGroup
-                    name="radio-buttons-group"
-                    className="radio-group-container"
-                    onChange={changeFrequencyPeriod}
-                    value={frequencyPeriodValue}
-                  >
-                    {FrequencyPeriod?.map((eachItem: any, index: number) => {
-                      return (
-                        <Grid item xs={2} key={index} className="checkbox-name">
-                          <FormControlLabel
-                            value={eachItem?.value}
-                            control={<Radio color="secondary" />}
-                            label={eachItem?.label}
-                          />
-                        </Grid>
-                      );
-                    })}
-                  </RadioGroup>
-                </Grid>
-                <Stack className="frequency-period-form">
-                  {isSelectedDates ? (
-                    <>
-                      {datesList?.map((eachItem: any, index: number) => {
-                        return (
-                          <Grid container spacing={2} key={index}>
-                            <Grid item xs={12}>
-                              <Typography className="each-field-label">
-                                {eachItem?.title}
-                              </Typography>
-                            </Grid>
-
-                            <Grid
-                              item
-                              xs={12}
-                              className="select-date-container"
+                {FrequencyPeriod?.map((eachItem: any, index: number) => {
+                  return (
+                    <Grid item xs={2} key={index} className="checkbox-name">
+                      <FormControlLabel
+                        value={eachItem?.value}
+                        control={<Radio color="secondary" />}
+                        label={eachItem?.label}
+                      />
+                    </Grid>
+                  );
+                })}
+              </RadioGroup>
+            </Grid>
+            <Stack className="frequency-period-form">
+              {isSelectedDates ? (
+                <>
+                  {datesList?.map((eachItem: any, index: number) => {
+                    return (
+                      <Grid
+                        container
+                        spacing={2}
+                        className="select-date-container"
+                        key={index}
+                      >
+                        <Box className="frequency-header-container">
+                          <Grid item xs={6}>
+                            <Typography className="frequency-header">
+                              {eachItem?.title
+                                ? `${eachItem?.title} - ${index + 1}`
+                                : '--'}
+                            </Typography>
+                          </Grid>
+                          <Grid
+                            item
+                            xs={6}
+                            className={
+                              datesList?.length > 1
+                                ? 'enabled remove-container'
+                                : 'disabled remove-container'
+                            }
+                          >
+                            <Box
+                              className={
+                                datesList?.length > 1
+                                  ? 'enabled remove-container'
+                                  : 'disabled remove-container'
+                              }
+                              onClick={() =>
+                                datesList?.length > 1 && removeDates(index)
+                              }
                             >
-                              <Grid item xs={12} style={{ display: 'flex' }}>
-                                <Grid
-                                  item
-                                  xs={4}
-                                  style={{ margin: '0px 10px' }}
-                                >
-                                  <Typography className="each-field-label">
-                                    Start Date
-                                  </Typography>
-                                  <LocalizationProvider
-                                    dateAdapter={AdapterDayjs}
-                                  >
-                                    <DesktopDatePicker
-                                      inputFormat="DD/MM/YYYY"
-                                      value={startDate}
-                                      onChange={handleChange}
-                                      renderInput={(params) => (
-                                        <TextField {...params} />
-                                      )}
-                                    />
-                                  </LocalizationProvider>
+                              <img
+                                src={RemoveIcon}
+                                alt=""
+                                className="remove-icon"
+                              />
+                              <Stack className="remove-label">Remove</Stack>
+                            </Box>
+                          </Grid>
+                        </Box>
 
-                                  <Stack className="repeat-conatiner">
-                                    <Typography className="each-field-label">
-                                      Repeat
-                                    </Typography>
-                                    <Box className="swicth-container">
-                                      <Stack className="swicth-label">
-                                        Daily
-                                      </Stack>
-                                      <Switch
-                                        onChange={() =>
-                                          switchHandleChange('daily')
-                                        }
-                                        checked={
-                                          selectedOccurence === 'daily'
-                                            ? true
-                                            : false
-                                        }
-                                      />
-                                    </Box>
-                                    <Box className="swicth-container">
-                                      <Stack className="swicth-label">
-                                        Weekly
-                                      </Stack>
-                                      <Switch
-                                        onChange={() =>
-                                          switchHandleChange('weekly')
-                                        }
-                                        checked={
-                                          selectedOccurence === 'weekly'
-                                            ? true
-                                            : false
-                                        }
-                                      />
-                                    </Box>
-                                    <Box className="swicth-container">
-                                      <Stack className="swicth-label">
-                                        Monthly
-                                      </Stack>
-                                      <Switch
-                                        onChange={() =>
-                                          switchHandleChange('monthly')
-                                        }
-                                        checked={
-                                          selectedOccurence === 'monthly'
-                                            ? true
-                                            : false
-                                        }
-                                      />
-                                    </Box>
-                                    <Box className="swicth-container">
-                                      <Stack className="swicth-label">
-                                        Yearly
-                                      </Stack>
-                                      <Switch
-                                        onChange={() =>
-                                          switchHandleChange('yearly')
-                                        }
-                                        checked={
-                                          selectedOccurence === 'yearly'
-                                            ? true
-                                            : false
-                                        }
-                                      />
-                                    </Box>
-                                  </Stack>
+                        <Stack className="frequency-header-underline"></Stack>
 
-                                  <Stack>
-                                    <FormControlLabel
-                                      control={<Checkbox checked={true} />}
-                                      label={'End Date'}
-                                    />
-                                    <LocalizationProvider
-                                      dateAdapter={AdapterDayjs}
-                                    >
-                                      <DesktopDatePicker
-                                        inputFormat="DD/MM/YYYY"
-                                        value={startDate}
-                                        onChange={handleChange}
-                                        renderInput={(params) => (
-                                          <TextField {...params} />
-                                        )}
-                                      />
-                                    </LocalizationProvider>
-                                    <Stack className="each-field-label">
-                                      Every 12 days the process runs, and it
-                                      starting on 10 Aug, 2022
-                                    </Stack>
-                                  </Stack>
-                                </Grid>
-                                <Grid
-                                  item
-                                  xs={4}
-                                  style={{ margin: '0px 10px' }}
-                                >
-                                  {selectedOccurence === 'daily' && (
-                                    <>
-                                      <Typography className="each-field-label">
-                                        Every
-                                      </Typography>
-                                      <Dropdown data={EveryDays} />
-                                    </>
+                        <Grid item xs={12} className="frequency-textfield">
+                          <Grid item xs={12} style={{ display: 'flex' }}>
+                            <Grid item xs={4} style={{ margin: '0px 10px' }}>
+                              <Typography className="each-field-label">
+                                Start Date
+                              </Typography>
+                              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DesktopDatePicker
+                                  inputFormat="DD/MM/YYYY"
+                                  value={startDate}
+                                  onChange={handleChange}
+                                  renderInput={(params) => (
+                                    <TextField {...params} />
                                   )}
-                                  {selectedOccurence === 'weekly' && (
-                                    <>
-                                      <Typography className="each-field-label">
-                                        Every
-                                      </Typography>
-                                      <Dropdown data={EveryDays} />
-                                      <Stack className="radio-buttons-conatiner">
-                                        <Typography className="each-field-label">
-                                          On
-                                        </Typography>
-                                      </Stack>
-                                      <Dropdown data={WeekDays} />
-                                    </>
-                                  )}
-                                  {(selectedOccurence === 'monthly' ||
-                                    selectedOccurence === 'yearly') && (
-                                    <>
-                                      <Typography className="each-field-label">
-                                        Every
-                                      </Typography>
-                                      <Dropdown data={EveryDays} />
-                                      <Stack className="radio-buttons-conatiner">
-                                        <Typography className="each-field-label">
-                                          On
-                                        </Typography>
-                                        <Grid container spacing={2} key={index}>
-                                          <RadioGroup
-                                            name="radio-buttons-group"
-                                            className="radio-group-container"
-                                            value={monthlyYearlyPeriodValue}
-                                            onChange={changeMonthlyYearlyPeriod}
-                                          >
-                                            {periodOptions?.map(
-                                              (
-                                                eachItem: any,
-                                                index: number
-                                              ) => {
-                                                return (
-                                                  <Grid
-                                                    item
-                                                    xs={4}
-                                                    key={index}
-                                                    className="checkbox-name"
-                                                  >
-                                                    <FormControlLabel
-                                                      value={eachItem?.value}
-                                                      control={
-                                                        <Radio color="secondary" />
-                                                      }
-                                                      label={eachItem?.label}
-                                                    />
-                                                  </Grid>
-                                                );
-                                              }
-                                            )}
-                                          </RadioGroup>
-                                        </Grid>
-                                        <Grid container spacing={2} key={index}>
-                                          {monthlyYearlyPeriodValue ===
-                                          'date' ? (
-                                            <Grid
-                                              item
-                                              xs={8}
-                                              key={index}
-                                              className="checkbox-name"
-                                            >
-                                              <Dropdown data={EveryDays} />
-                                            </Grid>
-                                          ) : (
-                                            <>
-                                              <Grid
-                                                item
-                                                xs={4}
-                                                key={index}
-                                                className="checkbox-name"
-                                              >
-                                                <Dropdown data={EveryOrder} />
-                                              </Grid>
-                                              <Grid
-                                                item
-                                                xs={4}
-                                                key={index}
-                                                className="checkbox-name"
-                                              >
-                                                <Dropdown data={WeekDays} />
-                                              </Grid>
-                                            </>
-                                          )}
-                                        </Grid>
-                                      </Stack>
-                                    </>
-                                  )}
-                                </Grid>
-                              </Grid>
-                              <Grid
-                                item
-                                xs={12}
-                                className={
-                                  datesList?.length > 1
-                                    ? 'remove-container'
-                                    : 'disabled-remove-container'
-                                }
-                              >
-                                <Box
-                                  className={
-                                    datesList?.length > 1
-                                      ? 'remove-container'
-                                      : 'disabled-remove-container'
-                                  }
-                                  onClick={removeDates}
-                                >
-                                  <img
-                                    src={RemoveIcon}
-                                    alt=""
-                                    className="remove-icon"
+                                />
+                              </LocalizationProvider>
+
+                              <Stack className="repeat-conatiner">
+                                <Typography className="each-field-label">
+                                  Repeat
+                                </Typography>
+                                <Box className="swicth-container">
+                                  <Stack className="swicth-label">Daily</Stack>
+                                  <Switch
+                                    onChange={() => switchHandleChange('daily')}
+                                    checked={
+                                      selectedOccurence === 'daily'
+                                        ? true
+                                        : false
+                                    }
                                   />
-                                  <Stack className="remove-label">Remove</Stack>
                                 </Box>
-                              </Grid>
+                                <Box className="swicth-container">
+                                  <Stack className="swicth-label">Weekly</Stack>
+                                  <Switch
+                                    onChange={() =>
+                                      switchHandleChange('weekly')
+                                    }
+                                    checked={
+                                      selectedOccurence === 'weekly'
+                                        ? true
+                                        : false
+                                    }
+                                  />
+                                </Box>
+                                <Box className="swicth-container">
+                                  <Stack className="swicth-label">
+                                    Monthly
+                                  </Stack>
+                                  <Switch
+                                    onChange={() =>
+                                      switchHandleChange('monthly')
+                                    }
+                                    checked={
+                                      selectedOccurence === 'monthly'
+                                        ? true
+                                        : false
+                                    }
+                                  />
+                                </Box>
+                                <Box className="swicth-container">
+                                  <Stack className="swicth-label">Yearly</Stack>
+                                  <Switch
+                                    onChange={() =>
+                                      switchHandleChange('yearly')
+                                    }
+                                    checked={
+                                      selectedOccurence === 'yearly'
+                                        ? true
+                                        : false
+                                    }
+                                  />
+                                </Box>
+                              </Stack>
+
+                              <Stack>
+                                <FormControlLabel
+                                  control={<Checkbox checked={true} />}
+                                  label={'End Date'}
+                                />
+                                <LocalizationProvider
+                                  dateAdapter={AdapterDayjs}
+                                >
+                                  <DesktopDatePicker
+                                    inputFormat="DD/MM/YYYY"
+                                    value={startDate}
+                                    onChange={handleChange}
+                                    renderInput={(params) => (
+                                      <TextField {...params} />
+                                    )}
+                                  />
+                                </LocalizationProvider>
+                                <Stack className="each-field-label">
+                                  Every 12 days the process runs, and it
+                                  starting on 10 Aug, 2022
+                                </Stack>
+                              </Stack>
+                            </Grid>
+                            <Grid item xs={4} style={{ margin: '0px 10px' }}>
+                              {selectedOccurence === 'daily' && (
+                                <>
+                                  <Typography className="each-field-label">
+                                    Every
+                                  </Typography>
+                                  <Dropdown data={EveryDays} />
+                                </>
+                              )}
+                              {selectedOccurence === 'weekly' && (
+                                <>
+                                  <Typography className="each-field-label">
+                                    Every
+                                  </Typography>
+                                  <Dropdown data={EveryDays} />
+                                  <Stack className="radio-buttons-conatiner">
+                                    <Typography className="each-field-label">
+                                      On
+                                    </Typography>
+                                  </Stack>
+                                  <Dropdown data={WeekDays} />
+                                </>
+                              )}
+                              {(selectedOccurence === 'monthly' ||
+                                selectedOccurence === 'yearly') && (
+                                <>
+                                  <Typography className="each-field-label">
+                                    Every
+                                  </Typography>
+                                  <Dropdown data={EveryDays} />
+                                  <Stack className="radio-buttons-conatiner">
+                                    <Typography className="each-field-label">
+                                      On
+                                    </Typography>
+                                    <Grid container spacing={2} key={index}>
+                                      <RadioGroup
+                                        name="radio-buttons-group"
+                                        className="radio-group-container"
+                                        value={monthlyYearlyPeriodValue}
+                                        onChange={changeMonthlyYearlyPeriod}
+                                      >
+                                        {periodOptions?.map(
+                                          (eachItem: any, index: number) => {
+                                            return (
+                                              <Grid
+                                                item
+                                                xs={4}
+                                                key={index}
+                                                className="checkbox-name"
+                                              >
+                                                <FormControlLabel
+                                                  value={eachItem?.value}
+                                                  control={
+                                                    <Radio color="secondary" />
+                                                  }
+                                                  label={eachItem?.label}
+                                                />
+                                              </Grid>
+                                            );
+                                          }
+                                        )}
+                                      </RadioGroup>
+                                    </Grid>
+                                    <Grid container spacing={2} key={index}>
+                                      {monthlyYearlyPeriodValue === 'date' ? (
+                                        <Grid
+                                          item
+                                          xs={8}
+                                          key={index}
+                                          className="checkbox-name"
+                                        >
+                                          <Dropdown data={EveryDays} />
+                                        </Grid>
+                                      ) : (
+                                        <>
+                                          <Grid
+                                            item
+                                            xs={4}
+                                            key={index}
+                                            className="checkbox-name"
+                                          >
+                                            <Dropdown data={EveryOrder} />
+                                          </Grid>
+                                          <Grid
+                                            item
+                                            xs={4}
+                                            key={index}
+                                            className="checkbox-name"
+                                          >
+                                            <Dropdown data={WeekDays} />
+                                          </Grid>
+                                        </>
+                                      )}
+                                    </Grid>
+                                  </Stack>
+                                </>
+                              )}
                             </Grid>
                           </Grid>
-                        );
-                      })}
-                      <Grid container spacing={2}>
-                        <Grid item xs={12} className="remove-container">
-                          <Box
-                            className="remove-container"
-                            onClick={addMoreDates}
-                          >
-                            <img
-                              src={AddMoreDataIcon}
-                              alt=""
-                              className="remove-icon"
-                            />
-                            <Stack className="remove-label">
-                              Add More Date
-                            </Stack>
-                          </Box>
                         </Grid>
                       </Grid>
-                    </>
-                  ) : (
-                    <Grid container spacing={2}>
-                      <Grid item xs={12}>
-                        <TextField placeholder={'Enter days count (ie., 15)'} />
-                      </Grid>
+                    );
+                  })}
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} className="plus-icon-container">
+                      <Box
+                        className="plus-icon-container"
+                        onClick={addMoreDates}
+                      >
+                        <img
+                          src={AddMoreDataIcon}
+                          alt=""
+                          className="plus-icon"
+                        />
+                        <Stack className="add-more-days">Add More Date</Stack>
+                      </Box>
                     </Grid>
-                  )}
-                </Stack>
-              </Stack>
-            );
-          })}
-          {!isSelectedDates && (
-            <Grid container spacing={2}>
-              <Grid item xs={4} className="plus-icon-container">
-                <img
-                  src={PlusCircleIcon}
-                  alt=""
-                  className="plus-icon"
-                  onClick={addMoreDays}
-                />
-              </Grid>
-              <Grid item xs={4}>
-                <Stack className="add-more-days" onClick={addMoreDays}>
-                  Add More Days
-                </Stack>
-              </Grid>
-            </Grid>
-          )}
+                  </Grid>
+                </>
+              ) : (
+                <>
+                  {daysList?.map((eachItem: any, index: number) => {
+                    return (
+                      <Grid
+                        key={index}
+                        container
+                        spacing={2}
+                        className="select-date-container"
+                      >
+                        <Box className="frequency-header-container">
+                          <Grid item xs={6}>
+                            <Typography className="frequency-header">
+                              {eachItem?.title
+                                ? `${eachItem?.title} - ${index + 1}`
+                                : '--'}
+                            </Typography>
+                          </Grid>
+                          <Grid
+                            item
+                            xs={6}
+                            className={
+                              daysList?.length > 1
+                                ? 'enabled remove-container'
+                                : 'disabled remove-container'
+                            }
+                          >
+                            <Box
+                              className={
+                                daysList?.length > 1
+                                  ? 'enabled remove-container'
+                                  : 'disabled remove-container'
+                              }
+                              onClick={() =>
+                                daysList?.length > 1 && removeDays(index)
+                              }
+                            >
+                              <img
+                                src={RemoveIcon}
+                                alt=""
+                                className="remove-icon"
+                              />
+                              <Stack className="remove-label">Remove</Stack>
+                            </Box>
+                          </Grid>
+                        </Box>
+
+                        <Stack className="frequency-header-underline"></Stack>
+
+                        <Grid item xs={12} className="frequency-textfield">
+                          <Typography className="each-field-label">
+                            Enter Days
+                          </Typography>
+                          <TextField
+                            placeholder={'Enter days count (ie., 15)'}
+                          />
+                        </Grid>
+                      </Grid>
+                    );
+                  })}
+
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} className="plus-icon-container">
+                      <Box className="plus-icon-container">
+                        <img
+                          src={PlusCircleIcon}
+                          alt=""
+                          className="plus-icon"
+                          onClick={addMoreDays}
+                        />
+                        <Stack className="add-more-days" onClick={addMoreDays}>
+                          Add More Days
+                        </Stack>
+                      </Box>
+                    </Grid>
+                  </Grid>
+                </>
+              )}
+            </Stack>
+          </Stack>
 
           <FooterButton
             cancel="Cancel"
@@ -709,17 +751,16 @@ function EditLMSRule() {
             saveAsDraft="Save as draft"
             handleSubmitClick={handleSubmitClick}
             handleCancelClick={goBack}
-            // handleSaveasDraftClick={handleSaveasDraftClick}
           />
           {isNewRuleCreated && (
             <CustomModal
               openSuccess={isNewRuleCreated}
               handleCloseSuccess={handleSubmit}
-              successModalTitle={'LMS Rule Created Successfully'}
+              successModalTitle={'LMS Rule Edited Successfully'}
               successModalMsg={
-                'Your request for creating new rule is successfully sent to the Reviewer.'
+                'Your request for editing new rule is successfully sent to the Reviewer.'
               }
-              btn={' Close'}
+              btn={'Close'}
             />
           )}
           {isDSAListModalOpen && (

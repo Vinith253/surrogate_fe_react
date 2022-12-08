@@ -387,7 +387,7 @@ const ListLMSTable = (props: any) => {
               <Table
                 style={{
                   width: '120%',
-                  borderBottom: '1px solid #F3F3F3',
+                  borderBottom: 'none',
                   // overflowX: 'auto',
                 }}
                 aria-label="customized table"
