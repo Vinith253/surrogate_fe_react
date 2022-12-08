@@ -16,6 +16,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import IconButton from '@mui/material/IconButton';
 import { useLocation, useNavigate } from 'react-router-dom';
 import info_icon from '../../../../assets/images/info_icon.svg';
+import Poweredby from '../../../../assets/images/Powered by.svg';
 
 interface State {
   amount: string;
@@ -221,7 +222,7 @@ export const NewPasswordPage = () => {
           </Box>
           <Box className='footer'>
             <Button
-            disabled={newPassword===confirmPassword ? false :true}
+            disabled={newPassword===confirmPassword && newPassword!=='' && confirmPassword!==''? false :true}
               onClick={submitPassword}
               fullWidth
               variant="contained"
@@ -251,6 +252,9 @@ export const NewPasswordPage = () => {
             </Box>
           </Box>
         </Box>
+      </Box>
+      <Box sx={{ position: 'absolute', bottom: 20, right: 20 }}>
+        <img src={Poweredby} />
       </Box>
     </Box>
   );

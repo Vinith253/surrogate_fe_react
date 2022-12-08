@@ -5,6 +5,7 @@ import { Stack, Box, Typography, Button, TextField } from '@mui/material';
 import { verification } from '../../../../utils/Constants';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Yesbank from '../../../../assets/images/Yes_Bank_SVG_Logo 1.svg';
+import Poweredby from '../../../../assets/images/Powered by.svg'
 
 interface State {
   amount: string;
@@ -15,8 +16,8 @@ interface State {
 }
 
 export const ForgotPassword = () => {
-  const [forgetPassword, setForgetPassword] = useState(false);
-  const [emailText, setEmailText] = useState('');
+  const [forgetPassword, setForgetPassword] = useState<boolean>(false);
+  const [emailText, setEmailText] = useState<string>('');
   const [showError, setShowError] = useState<boolean>(false);
   const [buttonDisabled, setButtonDisabled] = useState<boolean>(true);
   const navigate = useNavigate();
@@ -62,7 +63,7 @@ export const ForgotPassword = () => {
 
         <Box>
           <Typography className="forgot-text">
-            Enter registered mobile number/email ID to receive OTP*
+            Enter registered mobile number/email ID to receive OTP<span style={{color:'red'}} >*</span>
           </Typography>
           <TextField
             onChange={onChangeEmail}
@@ -88,6 +89,9 @@ export const ForgotPassword = () => {
         >
           Proceed
         </Button>
+      </Box>
+      <Box sx={{ position: 'absolute', bottom: 20, right: 20 }}>
+        <img src={Poweredby} />
       </Box>
     </Box>
   );

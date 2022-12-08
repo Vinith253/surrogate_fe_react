@@ -19,6 +19,7 @@ import wrong_info from '../../../../assets/images/wrong_Info.svg';
 import IconButton from '@mui/material/IconButton';
 import { verification } from '../../../../utils/Constants';
 import OutlinedInput from '@mui/material/OutlinedInput';
+import Poweredby from '../../../../assets/images/Powered by.svg'
 
 
 interface State {
@@ -90,7 +91,7 @@ export const NewLogin = () => {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'flex-start',
-          paddingX: '30px',
+          paddingX: '1.875rem',
           // backgroundColor: 'red',
           justifyContent: 'center',
         }}
@@ -100,10 +101,10 @@ export const NewLogin = () => {
           <Typography
             sx={{
               color: '#004C8F',
-              fontSize: '14px',
+              fontSize: '0.875rem',
               fontWeight: '700',
-              lineHeight: '16.8px',
-              letterSpacing: '3px',
+              lineHeight: '1.05rem',
+              letterSpacing: '0.1875rem',
             }}
           >
             Surrogate Portal
@@ -113,11 +114,11 @@ export const NewLogin = () => {
         <Box>
           <Typography
             sx={{
-              marginBottom: '15px',
-              fontSize: '20px',
+              marginBottom: '0.9375rem',
+              fontSize: '1.25rem',
               fontWeight: 500,
               paddingY: 3,
-              lineHeight: '22px',
+              lineHeight: '1.375rem',
               letterSpacing: '0.15%',
             }}
           >
@@ -128,7 +129,7 @@ export const NewLogin = () => {
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
           <Box>
             <InputLabel
-              sx={{ color: 'black', fontSize: '12px', fontWeight: 500 }}
+              sx={{ color: 'black', fontSize: '0.75rem', fontWeight: 500 }}
               required
             >
               Email Id
@@ -138,19 +139,19 @@ export const NewLogin = () => {
               error={email ? true : false}
               size="small"
               sx={{
-                width: '340px',
-                marginTop: '5px',
+                width: '21.25rem',
+                marginTop: '0.3125rem',
               }}
               placeholder="Enter Email Id"
               onChange={onhandlechangeFun}
             />
             {email && (
-              <Box sx={{ display: 'flex', marginTop: '5px', gap: 1 }}>
+              <Box sx={{ display: 'flex', marginTop: '0.3125rem', gap: 1 }}>
                 <img
-                  style={{ width: '15px', height: '15px' }}
+                  style={{ width: '0.9375rem', height: '0.9375rem' }}
                   src={wrong_info}
                 />
-                <Typography sx={{ fontSize: '10px', color: '#992D26' }}>
+                <Typography sx={{ fontSize: '0.625rem', color: '#992D26' }}>
                   Error Mismatch
                 </Typography>
               </Box>
@@ -159,14 +160,14 @@ export const NewLogin = () => {
 
           <Box sx={{ marginY: 3 }}>
             <InputLabel
-              sx={{ color: 'black', fontSize: '12px', fontWeight: 500 }}
+              sx={{ color: 'black', fontSize: '0.75rem', fontWeight: 500 }}
               required
               htmlFor="outlined-adornment-password"
             >
               Password
             </InputLabel>
             <OutlinedInput
-              sx={{ width: '340px', marginTop: '5px' }}
+              sx={{ width: '21.25rem', marginTop: '0.3125rem' }}
               id="outlined-adornment-password"
               placeholder="Enter Password"
               type={values.showPassword ? 'text' : 'password'}
@@ -188,12 +189,12 @@ export const NewLogin = () => {
               }
             />
             {password && (
-              <Box sx={{ display: 'flex', marginTop: '5px', gap: 1 }}>
+              <Box sx={{ display: 'flex', marginTop: '0.3125rem', gap: 1 }}>
                 <img
-                  style={{ width: '15px', height: '15px' }}
+                  style={{ width: '0.9375rem', height: '0.9375rem' }}
                   src={wrong_info}
                 />
-                <Typography sx={{ fontSize: '10px', color: '#992D26' }}>
+                <Typography sx={{ fontSize: '0.625rem', color: '#992D26' }}>
                   Password Wrong
                 </Typography>
               </Box>
@@ -205,10 +206,10 @@ export const NewLogin = () => {
               }}
               sx={{
                 color: '#0662B7',
-                fontSize: '14px',
+                fontSize: '0.875rem',
                 fontWeight: '500',
                 textAlign: 'end',
-                paddingTop: '10px',
+                paddingTop: '0.625rem',
                 cursor: 'pointer',
               }}
             >
@@ -236,6 +237,9 @@ export const NewLogin = () => {
             </Button>
           </Box>
         </Box>
+      </Box>
+      <Box sx={{ position: 'absolute', bottom: 20, right: 20 }}>
+        <img src={Poweredby} />
       </Box>
     </Box>
   );

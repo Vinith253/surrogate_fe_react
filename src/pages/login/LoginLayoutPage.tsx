@@ -147,8 +147,8 @@ export const LoginLayoutPage = () => {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              borderTopLeftRadius: '10px',
-              borderBottomLeftRadius: '10px',
+              borderTopLeftRadius: '0.625rem',
+              borderBottomLeftRadius: '0.625rem',
             }}
           >
             
