@@ -14,7 +14,7 @@ export default function SearchDropdown(props: { data: any }) {
   };
 
   return (
-    <FormControl sx={{ m: 1, minWidth: 120 }}>
+    <FormControl sx={{ m: 1, minWidth: 120 }} className="editReviewStyle">
       <Select
         style={{ height: '45px' }}
         value={selectedValue}

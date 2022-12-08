@@ -16,17 +16,19 @@ function ApproverReviewerTable(props: { data: Array<Object>; mode: string }) {
       {props?.data?.map((eachItem: any) => {
         return (
           <>
-            <Stack className="header">{eachItem?.moduleName}</Stack>
+            <Stack className="header" style={{ paddingLeft: '9px' }}>
+              {eachItem?.moduleName}
+            </Stack>
             <Stack className="sub-modules-headers">
               <Grid container spacing={2}>
                 <Grid item xs={4}>
-                  <Stack>Sub-modules</Stack>
+                  <Stack style={{ marginLeft: '9px' }}>Sub-modules</Stack>
                 </Grid>
                 <Grid item xs={4}>
-                  <Stack style={{ marginLeft: '2px' }}>Reviewer</Stack>
+                  <Stack style={{ marginLeft: '0px' }}>Reviewer</Stack>
                 </Grid>
                 <Grid item xs={4}>
-                  <Stack style={{ marginLeft: '13px' }}>Approver</Stack>
+                  <Stack style={{ marginLeft: '2px' }}>Approver</Stack>
                 </Grid>
               </Grid>
             </Stack>

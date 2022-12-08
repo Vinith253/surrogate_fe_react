@@ -26,7 +26,6 @@ import {
   CSSObject,
   withStyles,
 } from '@mui/material/styles';
-// import Box from "@mui/material/Box";
 import MuiDrawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
@@ -580,18 +579,20 @@ export default function Layout() {
               alignItems: 'center',
               justifyContent: 'space-between',
               padding: '0 20px',
-              borderBottom: '1px solid',
-              boxShadow: '0 0 15px #aaaaaa',
+              boxShadow: '0 0 18px #DFE0E3',
               backgroundColor: 'white',
+              // boxShadow: 2,
             }}
           >
             <Typography
               variant="h5"
               sx={{
-                letterSpacing: '0.2px',
+                fontFamily: 'Ilisarniq',
+                letterSpacing: '0.0015em',
                 fontSize: '20px',
                 fontWeight: '500',
                 color: '#151515',
+                lineHeight: '22px',
               }}
             >
               Surrogate Programme
@@ -603,8 +604,6 @@ export default function Layout() {
                 flexDirection: 'row',
                 alignItems: 'center',
                 padding: '0 20px',
-                // borderBottom
-                // borderColor: "success.light"
               }}
             >
               <Box className="search-container-layout">
