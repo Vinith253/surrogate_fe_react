@@ -7,22 +7,22 @@
     padding: 20px 25px;
     .each-info {
       margin-bottom: 10px;
+
+      .info-label {
+        color: #656769;
+        font-size: 12px;
+        font-weight: 500;
+      }
+
+      .info-value {
+        color: #151515;
+        font-size: 14px;
+        font-weight: 500;
+      }
     }
 
     .details-card {
       margin-top: 0px;
-    }
-
-    .info-label {
-      color: #afaeaf;
-      font-size: 12px;
-      font-weight: 500;
-      margin: 0px 0px 6px 0px;
-    }
-    .info-value {
-      color: #151515;
-      font-size: 14px;
-      font-weight: 500;
     }
   }
 

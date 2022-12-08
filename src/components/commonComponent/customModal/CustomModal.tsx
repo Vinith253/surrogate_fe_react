@@ -108,6 +108,12 @@ type props = {
   textAreaValue?: any;
   buttonDisabled?: any;
   textareaonchangeFun?: any;
+  emailValue?: any;
+  handleMouseDownPassword?: any;
+  handleClickShowPassword?: any;
+  handleClickShowConfirmPassword?: any;
+  createValuePassword?: any;
+  closeButtonMsg?: string;
 };
 
 function CustomModal({
@@ -171,43 +177,18 @@ function CustomModal({
   textAreaValue,
   buttonDisabled,
   textareaonchangeFun,
+  emailValue,
+  handleMouseDownPassword,
+  handleClickShowPassword,
+  handleClickShowConfirmPassword,
+  createValuePassword,
+  closeButtonMsg,
 }: props) {
   const [pauseStatus, setPauseStatus] = useState(pauseStatusKey);
   const [startDatevalue, setStartDateValue] = useState(null);
   const [endDatevalue, setEndDateValue] = useState(null);
   const [existingRole, setexistingRole] = React.useState('');
   const [checked, setChecked] = React.useState(false);
-  // const [textAreaValue, setTextAreaValue] = useState('');
-  // const [buttonDisabled, setButtonDisabled] = useState<boolean>(true);
-
-  // const textareaonchangeFun = (e: any) => {
-  //   setButtonDisabled(textAreaValue.length > 6 ? false : true);
-  //   setTextAreaValue(e.target.value);
-  // };
-
-  const [values, setValues] = React.useState<any>({
-    password: '',
-    confirmPassword: '',
-    showPassword: false,
-  });
-
-  const createNewPasswordFun =
-    (prop: keyof any) => (event: React.ChangeEvent<HTMLInputElement>) => {
-      setValues({ ...values, [prop]: event.target.value });
-    };
-
-  const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    event.preventDefault();
-  };
-
-  const handleClickShowPassword = () => {
-    setValues({
-      ...values,
-      showPassword: !values.showPassword,
-    });
-  };
 
   useEffect(() => {
     if (pauseStatus) {
@@ -471,7 +452,7 @@ function CustomModal({
                 sx={{ fontSize: '14px', textTransform: 'capitalize' }}
                 onClick={closeFunction}
               >
-                Close
+                {closeButtonMsg}
               </Button>
             </Stack>
           )}
@@ -498,22 +479,15 @@ function CustomModal({
               >
                 {enterNewPassword}
               </InputLabel>
-              {/* <TextField
-                variant="outlined"
-                size="small"
-                sx={{ height: '40px', fontSize: '14px' }}
-                type="password"
-                autoComplete="current-password"
-              /> */}
 
               <FormControl sx={{ width: '32ch' }} variant="outlined">
                 <OutlinedInput
                   size="small"
                   sx={{ height: '45px', fontSize: '14px' }}
                   id="outlined-adornment-password"
-                  type={values.showPassword ? 'password' : 'text '}
-                  value={values.password}
-                  onChange={createNewPasswordFun('password')}
+                  type={createValuePassword.showPassword ? 'password' : 'text '}
+                  value={createValuePassword.password}
+                  onChange={textareaonchangeFun('password')}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton
@@ -522,7 +496,7 @@ function CustomModal({
                         onMouseDown={handleMouseDownPassword}
                         edge="end"
                       >
-                        {values.showPassword ? (
+                        {createValuePassword.showPassword ? (
                           <VisibilityOff />
                         ) : (
                           <Visibility />
@@ -551,18 +525,22 @@ function CustomModal({
                   size="small"
                   sx={{ height: '45px', fontSize: '14px' }}
                   id="outlined-adornment-password"
-                  type={values.showPassword ? 'password' : 'text '}
-                  value={values.confirmPassword}
-                  onChange={createNewPasswordFun('confirmPassword')}
+                  type={
+                    createValuePassword.showConfirmPassword
+                      ? 'password'
+                      : 'text '
+                  }
+                  value={createValuePassword.confirmPassword}
+                  onChange={textareaonchangeFun('confirmPassword')}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton
                         aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
+                        onClick={handleClickShowConfirmPassword}
                         onMouseDown={handleMouseDownPassword}
                         edge="end"
                       >
-                        {values.showPassword ? (
+                        {createValuePassword.showConfirmPassword ? (
                           <VisibilityOff />
                         ) : (
                           <Visibility />
@@ -572,26 +550,6 @@ function CustomModal({
                   }
                 />
               </FormControl>
-
-              {/* <TextField
-                variant="outlined"
-                size="small"
-                sx={{ height: '40px', fontSize: '14px' }}
-                type="password"
-                autoComplete="current-password"
-              /> */}
-              <Typography
-                sx={{
-                  fontSize: '14px',
-                  textAlign: 'end',
-                  color: ' #0662B7',
-                  fontWeight: '500',
-                  marginTop: '10px',
-                  marginBottom: '20px',
-                }}
-              >
-                {forgotPassword}
-              </Typography>
             </Stack>
           )}
 
@@ -660,46 +618,42 @@ function CustomModal({
                 size="small"
                 sx={{ height: '40px', fontSize: '14px' }}
                 placeholder={'Ashwin@yesbank.com'}
+                onChange={textareaonchangeFun}
+                value={emailValue}
               ></TextField>
+            </Stack>
+          )}
 
+          {(ProceedBtn === 'Verify' ||
+            ProceedBtn === 'Proceed' ||
+            ProceedBtn === 'Update') && (
+            <Stack sx={{ margin: '0 60px' }}>
               <Button
                 variant="contained"
                 onClick={handleCloseSuccess}
-                sx={{
+                disabled={buttonDisabled}
+                style={{
                   // width: '340px',
                   height: '48px',
                   fontSize: '12px',
                   marginTop: '30px',
                   marginBottom: '40px',
                   textTransform: 'capitalize',
-                  backgroundColor: `${colors.Modalblue}`,
-                  '&:hover': {
-                    backgroundColor: `${colors.Modalblue}`,
-                  },
                 }}
-              >
-                {ProceedBtn}
-              </Button>
-            </Stack>
-          )}
-
-          {(ProceedBtn === 'Verify' || ProceedBtn === 'Update') && (
-            <Stack sx={{ margin: '0 60px' }}>
-              <Button
-                variant="contained"
-                onClick={handleCloseSuccess}
-                sx={{
-                  // width: '340px',
-                  height: '48px',
-                  fontSize: '12px',
-                  marginTop: '10px',
-                  marginBottom: '14px',
-                  textTransform: 'capitalize',
-                  backgroundColor: `${colors.Modalblue}`,
-                  '&:hover': {
-                    backgroundColor: `${colors.Modalblue}`,
-                  },
-                }}
+                sx={
+                  buttonDisabled
+                    ? {
+                        backgroundColor: '#82B1DB !important',
+                        color: '#FFFFFF !important',
+                      }
+                    : {
+                        backgroundColor: ' #0662B7',
+                        color: '#FFFFFF',
+                        '&:hover': {
+                          backgroundColor: '#0662B7',
+                        },
+                      }
+                }
               >
                 {ProceedBtn}
               </Button>
@@ -721,26 +675,6 @@ function CustomModal({
               </Typography>
             </Stack>
           )}
-
-          {/* {rejectedModaltitle && (
-            <DialogContent sx={{ paddingTop: '18px', paddingBottom: '0px' }}>
-              <DialogContentText
-                id="alert-dialog-slide-description"
-                align={'center'}
-                fontSize={16}
-                fontWeight={600}
-                color="#1d1d1d"
-                sx={{
-                  padding: {
-                    xs: '0 13px',
-                  },
-                  hyphens: 'initial',
-                }}
-              >
-                {rejectedModaltitle}
-              </DialogContentText>
-            </DialogContent>
-          )} */}
 
           {successModalMsg && (
             <Typography
@@ -1189,6 +1123,20 @@ function CustomModal({
               <Button
                 variant="contained"
                 className="submit-button"
+                sx={
+                  buttonDisabled
+                    ? {
+                        backgroundColor: '#82B1DB !important',
+                        color: '#FFFFFF !important',
+                      }
+                    : {
+                        backgroundColor: ' #0662B7',
+                        color: '#FFFFFF',
+                        '&:hover': {
+                          backgroundColor: '#0662B7',
+                        },
+                      }
+                }
                 onClick={handleSuccess}
                 disabled={buttonDisabled}
               >
