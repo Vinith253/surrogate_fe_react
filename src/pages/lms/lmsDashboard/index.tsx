@@ -1,11 +1,13 @@
-import { Typography, Button, Grid, Stack, Box, Link } from "@mui/material";
-import CheckBoxPopOver from "../../../components/commonComponent/CheckBoxPopOver/SingleLabel";
-import MoreFilterModal from "../../../components/commonComponent/customModal/MoreFilterModal";
-import DateTimePopOver from "../../../components/commonComponent/DateTimePopOver";
-import { product_label, state_label } from "../../sales/dashboard/dashboard.const";
+import { Typography, Button, Grid, Stack, Box, Link } from '@mui/material';
+import CheckBoxPopOver from '../../../components/commonComponent/CheckBoxPopOver/SingleLabel';
+import DateTimePopOver from '../../../components/commonComponent/DateTimePopOver';
+import {
+  product_label,
+  state_label,
+} from '../../sales/dashboard/dashboard.const';
 import { ReactComponent as Reset } from '../../../assets/icons/reset.svg';
-import { useState } from "react";
-import './style.scss'; 
+import { useState } from 'react';
+import './style.scss';
 import Rejected from '../../../assets/icons/rejected_icon.svg';
 import Dropped from '../../../assets/icons/dropped_icon.svg';
 import ApprovedIcon from '../../../assets/icons/approved_icon.svg';
@@ -15,16 +17,15 @@ import RetargetedInitiate from '../../../assets/icons/retargetedaInitiate.svg';
 import RetargetedFailed from '../../../assets/icons/retargetedFailed.svg';
 import RetargetedRate from '../../../assets/icons/retargetedRate.svg';
 
-import DashboardCard from "../../../components/commonComponent/CommonCard/SalesDashbaordCard/DashboardCard";
-import LMSDashboardCard from "../../../components/commonComponent/CommonCard/LMSDashboardCard";
-import ReactApexChart from "react-apexcharts";
-import ListLMSTable from "../../../components/commonComponent/listLmstable/listlmsTable";
+import DashboardCard from '../../../components/commonComponent/CommonCard/SalesDashbaordCard/DashboardCard';
+import LMSDashboardCard from '../../../components/commonComponent/CommonCard/LMSDashboardCard';
+import ReactApexChart from 'react-apexcharts';
+import ListLMSTable from '../../../components/commonComponent/listLmstable/listlmsTable';
 import download_icon from '../../../assets/icons/download_icon.svg';
 import mail_icon from '../../../assets/icons/mail_icon.svg';
-import { useNavigate } from "react-router-dom";
-import HeaderWithInfo from "../../../components/commonComponent/HeaderWithInfo";
-import MoreFilterRightModal from "../../../components/commonComponent/customModal/MoreFilterRightModal";
-
+import { useNavigate } from 'react-router-dom';
+import HeaderWithInfo from '../../../components/commonComponent/HeaderWithInfo';
+import MoreFilterRightModal from '../../../components/commonComponent/customModal/MoreFilterRightModal';
 
 export const lmsDashboardData = [
   {
@@ -59,19 +60,34 @@ export const lmsDashboardData = [
   },
 ];
 
-const donutGraphSeries :any = 
-[12, 3, 14, 8, 17, 20, 6, 13];
+const donutGraphSeries: any = [12, 3, 14, 8, 17, 20, 6, 13];
 
-const donutGraphSeries2 :any = 
-[20, 13, 17, 4, 3, 12, 13, 6];
-
+const donutGraphSeries2: any = [20, 13, 17, 4, 3, 12, 13, 6];
 
 const donutGraphOptions: {} = {
   series: [12, 3, 14, 8, 17, 20, 6, 13],
-  labels: ["Office Pincode", "Resident Pincode", "C4C-Card Rejection", "HRMS Not Listed","DPD","KYC Rejection","Low Income","Low Salary"],
-  colors: ["#E697FF", "#F18F96","#999B9C", "#8BCD9A","#63ABFD","#F8B481","#F5DE99","#A08BDA"],
+  labels: [
+    'Office Pincode',
+    'Resident Pincode',
+    'C4C-Card Rejection',
+    'HRMS Not Listed',
+    'DPD',
+    'KYC Rejection',
+    'Low Income',
+    'Low Salary',
+  ],
+  colors: [
+    '#E697FF',
+    '#F18F96',
+    '#999B9C',
+    '#8BCD9A',
+    '#63ABFD',
+    '#F8B481',
+    '#F5DE99',
+    '#A08BDA',
+  ],
   chart: {
-      type: 'donut',
+    type: 'donut',
   },
   // legend: {
   //   show: true,
@@ -79,26 +95,27 @@ const donutGraphOptions: {} = {
   //   horizontalAlign: 'center',
   //   offsetX: 30,
   //   // offsetY:50,
-    
+
   // },
-  responsive: [{
+  responsive: [
+    {
       // breakpoint: 480,
       options: {
-          // chart: {
-          //     width: 300,
-          // },
-          // legend: {
-          //     position: 'bottom',
-          // }
+        // chart: {
+        //     width: 300,
+        // },
+        // legend: {
+        //     position: 'bottom',
+        // }
       },
-  }],
+    },
+  ],
   plotOptions: {
     pie: {
       dataLabels: {
         offset: 50,
       },
       donut: {
-        
         labels: {
           show: true,
           total: {
@@ -110,62 +127,78 @@ const donutGraphOptions: {} = {
             //     return a + b
             //   }, 0)
             // }
-          }
-        }
-      }
-    }
-  }
+          },
+        },
+      },
+    },
+  },
 };
 
 const donutGraphOptions2: {} = {
   series: [20, 13, 17, 4, 3, 12, 13, 6],
-  labels: ["Initial Verification", "Surrogare Selection", "HRMS - Input", "Employment Details","HRMS - Fetching Data","C4C - Eligible","C4C - Verification","Card Selection"],
-  colors: [ "#8BCD9A","#F8B481","#63ABFD","#F18F96","#E697FF", "#F5DE99","#A08BDA","#999B9C",],
+  labels: [
+    'Initial Verification',
+    'Surrogare Selection',
+    'HRMS - Input',
+    'Employment Details',
+    'HRMS - Fetching Data',
+    'C4C - Eligible',
+    'C4C - Verification',
+    'Card Selection',
+  ],
+  colors: [
+    '#8BCD9A',
+    '#F8B481',
+    '#63ABFD',
+    '#F18F96',
+    '#E697FF',
+    '#F5DE99',
+    '#A08BDA',
+    '#999B9C',
+  ],
   chart: {
-      type: 'donut',
+    type: 'donut',
   },
   // legend: {
   //   show: true,
   //   position: 'bottom',
   //   horizontalAlign: 'center',
   //   offsetX: 30,
-    
+
   // },
-  responsive: [{
+  responsive: [
+    {
       // breakpoint: 480,
       options: {
-          // chart: {
-          //     width: 300,
-          // },
-          // legend: {
-          //     position: 'bottom',
-          // }
+        // chart: {
+        //     width: 300,
+        // },
+        // legend: {
+        //     position: 'bottom',
+        // }
       },
-  }],
+    },
+  ],
   plotOptions: {
     pie: {
       dataLabels: {
         offset: 50,
       },
       donut: {
-        
         labels: {
           show: true,
           total: {
             show: true,
             label: 'Rejected',
             color: '#999B9C',
-          }
-        }
-      }
-    }
-  }
+          },
+        },
+      },
+    },
+  },
 };
 
-
-
 export default function LMSDashboard() {
-
   const [dayFilterValue, setDayFilter] = useState<string>('Current Day');
   const navigate = useNavigate();
 
@@ -292,8 +325,8 @@ export default function LMSDashboard() {
       more: false,
       image: RetargetedInitiate,
       viewAll: false,
-      lastPeriodValue:2500,
-      lastYearValue:2500,
+      lastPeriodValue: 2500,
+      lastYearValue: 2500,
     },
     {
       index: 3,
@@ -302,8 +335,8 @@ export default function LMSDashboard() {
       more: false,
       image: RetargetedFailed,
       viewAll: false,
-      lastPeriodValue:2500,
-      lastYearValue:2500,
+      lastPeriodValue: 2500,
+      lastYearValue: 2500,
     },
     {
       index: 4,
@@ -312,8 +345,8 @@ export default function LMSDashboard() {
       more: false,
       image: RetargetedRate,
       viewAll: false,
-      lastPeriodValue:2500,
-      lastYearValue:2500,
+      lastPeriodValue: 2500,
+      lastYearValue: 2500,
     },
     {
       index: 5,
@@ -322,7 +355,7 @@ export default function LMSDashboard() {
       more: true,
       image: InProgress,
       viewAll: false,
-      boxstyles: "progress-icon-box",
+      boxstyles: 'progress-icon-box',
     },
     {
       index: 6,
@@ -331,9 +364,9 @@ export default function LMSDashboard() {
       more: true,
       image: ApprovedIcon,
       viewAll: false,
-      lastPeriodValue:2500,
-      lastYearValue:2500,
-      boxstyles: "approval-icon-box",
+      lastPeriodValue: 2500,
+      lastYearValue: 2500,
+      boxstyles: 'approval-icon-box',
     },
     {
       index: 7,
@@ -342,9 +375,9 @@ export default function LMSDashboard() {
       more: true,
       image: Dropped,
       viewAll: false,
-      lastPeriodValue:2500,
-      lastYearValue:2500,
-      boxstyles: "dropped-icon-box",
+      lastPeriodValue: 2500,
+      lastYearValue: 2500,
+      boxstyles: 'dropped-icon-box',
     },
     {
       index: 8,
@@ -353,9 +386,9 @@ export default function LMSDashboard() {
       more: true,
       image: Rejected,
       viewAll: false,
-      lastPeriodValue:2500,
-      lastYearValue:2500,
-      boxstyles: "rejected-icon-box",
+      lastPeriodValue: 2500,
+      lastYearValue: 2500,
+      boxstyles: 'rejected-icon-box',
     },
   ];
 
@@ -397,12 +430,14 @@ export default function LMSDashboard() {
         return <text>Actions</text>;
       },
       render: (_: string, row: any, index: number) => {
-        return <Link
-        sx={{ cursor: 'pointer', color: '#0662B7' }}
-        onClick={() => navigate('/lms/retargeting/reTargetingDetails')}
-      >
-        View
-      </Link>
+        return (
+          <Link
+            sx={{ cursor: 'pointer', color: '#0662B7' }}
+            onClick={() => navigate('/lms/retargeting/reTargetingDetails')}
+          >
+            View
+          </Link>
+        );
       },
     },
   ];
@@ -413,112 +448,117 @@ export default function LMSDashboard() {
     { title: 'Dropped' },
   ];
 
-
   return (
     <>
-    <div className="lms-dashboard-container">
-      <>
-        <div className="filter-header">
-          <div className="filter-data">
-            <Typography
-              sx={{
-                fontSize: '1.1vw',
-                marginRight: '24px',
-                color: '#000',
-                fontWeight: 'bold',
-              }}
-            >
-              Overview
-            </Typography>
-            <DateTimePopOver
-              day_filter_label={day_filter_label}
-              dayFilterValue={dayFilterValue}
-            />
-            <CheckBoxPopOver
+      <div className="lms-dashboard-container">
+        <>
+          <div className="filter-header">
+            <div className="filter-data">
+              <Typography
+                sx={{
+                  fontSize: '1.1vw',
+                  marginRight: '24px',
+                  color: '#000',
+                  fontWeight: 'bold',
+                }}
+              >
+                Overview
+              </Typography>
+              <DateTimePopOver
+                day_filter_label={day_filter_label}
+                dayFilterValue={dayFilterValue}
+              />
+              <CheckBoxPopOver
                 surrogates_label={channels_label}
                 displayText={'All Channels'}
                 showSearch={true}
                 submit={'Select'}
                 close={'Reset'}
               />
-            <CheckBoxPopOver
-              surrogates_label={surrogates_label}
-              displayText={'All Surrogates'}
-              showSearch={true}
-              submit={'Select'}
-              close={'Reset'}
-            />
-            <MoreFilterRightModal
-              product_label={product_label}
-              day_filter_label={day_filter_label}
-              dayFilterValue={dayFilterValue}
-              submit={'Select'}
-              close={'Reset'}
-              policies_label={channels_label}
-              surrogates_label={surrogates_label}
-              state_label={state_label}
-              flag="main-dashboard"
-            />
-          </div>
-          <div className="reset-data">
-            <Button
-              startIcon={<Reset />}
-              sx={{
-                fontSize: '0.9vw',
-                marginRight: '10px',
-                color: '#0662B7',
-                backgroundColor: '#EEF7FF',
-                textTransform: 'none',
-              }}
-            >
-              Reset
-            </Button>
-          </div>
-        </div>
-        <div className="divider-line" />
-        <div className="horizontal-cards">
-          <Grid container spacing={2}>
-            {dashboardVal?.map((value) => (
-              <Grid xs={6} item>
-              <DashboardCard
-                title={value.title}
-                value={value.value}
-                more={value.more}
-                image={value.image}
-                boxStyles={value.boxstyles}
-                navPath="/sales/salesReport"
+              <CheckBoxPopOver
+                surrogates_label={surrogates_label}
+                displayText={'All Surrogates'}
+                showSearch={true}
+                submit={'Select'}
+                close={'Reset'}
               />
-              </Grid>
-            ))}
+              <MoreFilterRightModal
+                product_label={product_label}
+                day_filter_label={day_filter_label}
+                dayFilterValue={dayFilterValue}
+                submit={'Select'}
+                close={'Reset'}
+                policies_label={channels_label}
+                surrogates_label={surrogates_label}
+                state_label={state_label}
+                flag="main-dashboard"
+              />
+            </div>
+            <div className="reset-data">
+              <Button
+                startIcon={<Reset />}
+                sx={{
+                  fontSize: '0.9vw',
+                  marginRight: '10px',
+                  color: '#0662B7',
+                  backgroundColor: '#EEF7FF',
+                  textTransform: 'none',
+                }}
+              >
+                Reset
+              </Button>
+            </div>
+          </div>
+          <div className="divider-line" />
+          <div className="horizontal-cards">
+            <Grid container spacing={2}>
+              {dashboardVal?.map((value) => (
+                <Grid xs={6} item>
+                  <DashboardCard
+                    title={value.title}
+                    value={value.value}
+                    more={value.more}
+                    image={value.image}
+                    boxStyles={value.boxstyles}
+                    navPath="/sales/salesReport"
+                  />
+                </Grid>
+              ))}
             </Grid>
           </div>
           <div className="report-cards">
             <div className="graph-card">
-            <div className="graph-div">
-            <div style={{display:'flex', justifyContent:'space-between', width:'100%'}}>
+              <div className="graph-div">
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    width: '100%',
+                  }}
+                >
                   <text className="overview-text">Rejected data </text>
                   <Stack>
-                <Box>
-                  <Button>
-                    <img
-                      src={download_icon}
-                      alt="download_icon"
-                      width="24px"
-                      height="24px"
-                    />
-                  </Button>
-                  <Button>
-                    <img
-                      src={mail_icon}
-                      alt="mail_icon"
-                      width="24px"
-                      height="24px"
-                    />
-                  </Button>
-                </Box>
-              </Stack>
+                    <Box>
+                      <Button>
+                        <img
+                          src={download_icon}
+                          alt="download_icon"
+                          width="24px"
+                          height="24px"
+                        />
+                      </Button>
+                      <Button>
+                        <img
+                          src={mail_icon}
+                          alt="mail_icon"
+                          width="24px"
+                          height="24px"
+                        />
+                      </Button>
+                    </Box>
+                  </Stack>
                 </div>
-                <div className="line-div"/>
+                <div className="line-div" />
                 <div className="donut-chart-div" id="chart">
                   <ReactApexChart
                     options={donutGraphOptions}
@@ -527,35 +567,41 @@ export default function LMSDashboard() {
                     height={220}
                   />
                 </div>
-                </div>
+              </div>
             </div>
 
             <div className="graph-card">
-            <div className="graph-div">
-            <div style={{display:'flex', justifyContent:'space-between', width:'100%'}}>
+              <div className="graph-div">
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    width: '100%',
+                  }}
+                >
                   <text className="overview-text">Dropped data </text>
                   <Stack>
-                <Box>
-                  <Button>
-                    <img
-                      src={download_icon}
-                      alt="download_icon"
-                      width="24px"
-                      height="24px"
-                    />
-                  </Button>
-                  <Button>
-                    <img
-                      src={mail_icon}
-                      alt="mail_icon"
-                      width="24px"
-                      height="24px"
-                    />
-                  </Button>
-                </Box>
-              </Stack>
+                    <Box>
+                      <Button>
+                        <img
+                          src={download_icon}
+                          alt="download_icon"
+                          width="24px"
+                          height="24px"
+                        />
+                      </Button>
+                      <Button>
+                        <img
+                          src={mail_icon}
+                          alt="mail_icon"
+                          width="24px"
+                          height="24px"
+                        />
+                      </Button>
+                    </Box>
+                  </Stack>
                 </div>
-                <div className="line-div"/>
+                <div className="line-div" />
                 <div className="donut-chart-div" id="chart">
                   <ReactApexChart
                     options={donutGraphOptions2}
@@ -564,59 +610,58 @@ export default function LMSDashboard() {
                     height={220}
                   />
                 </div>
-                </div>
+              </div>
             </div>
-
-           
           </div>
         </>
-        </div>
-        <div className="diff-area" />
-        <div className="lms-dashboard-container">
-          <div className="heading-text">
-            <Typography sx={{ color: 'black', fontSize: '16px' }}>
+      </div>
+      <div className="diff-area" />
+      <div className="lms-dashboard-container">
+        <div className="heading-text">
+          <Typography sx={{ color: 'black', fontSize: '16px' }}>
             Re-target Insights
-            </Typography>
-          </div>
-          <div className="divider-line" />
-          <div className="horizontal-cards2">
-            <Grid container spacing={2}>
+          </Typography>
+        </div>
+        <div className="divider-line" />
+        <div className="horizontal-cards2">
+          <Grid container spacing={2}>
             {channelUserData.map((value) => (
               <Grid xs={3} item>
-              <LMSDashboardCard
-                title={value.title}
-                value={value.value}
-                more={value.more}
-                image={value.image}
-                viewAll={value.viewAll}
-                navPath="/lms/retargeting"
-                lastPeriodValue={value.lastPeriodValue}
-                lastYearValue={value.lastYearValue}
-                boxStyles={value.boxstyles}
-              />
+                <LMSDashboardCard
+                  title={value.title}
+                  value={value.value}
+                  more={value.more}
+                  image={value.image}
+                  viewAll={value.viewAll}
+                  navPath="/lms/retargeting"
+                  lastPeriodValue={value.lastPeriodValue}
+                  lastYearValue={value.lastYearValue}
+                  boxStyles={value.boxstyles}
+                />
               </Grid>
             ))}
-            </Grid>
-          </div>
+          </Grid>
         </div>
-        <div className="diff-area" />
-        <Stack sx={{ backgroundColor: 'white',margin: '30px 0px'}}>
-          <Stack sx={{padding: '20px 30px 0px 30px'}}>
-        <HeaderWithInfo
-          header="Rejected and Dropped Applications"
-          isInfoEnabled={false}
-          info=""
-          isDownloadEnabled={false}
-        /></Stack>
-          <ListLMSTable
-            data={lmsDashboardData}
-            listColumn={column1}
-            statusColumn={column2}
-            flag="lmsdashboard"
-            label={product_label}
-            toggleOptions={toggleOptions}
+      </div>
+      <div className="diff-area" />
+      <Stack sx={{ backgroundColor: 'white', margin: '30px 0px' }}>
+        <Stack sx={{ padding: '20px 30px 0px 30px' }}>
+          <HeaderWithInfo
+            header="Rejected and Dropped Applications"
+            isInfoEnabled={false}
+            info=""
+            isDownloadEnabled={false}
           />
         </Stack>
-        </>
+        <ListLMSTable
+          data={lmsDashboardData}
+          listColumn={column1}
+          statusColumn={column2}
+          flag="lmsdashboard"
+          label={product_label}
+          toggleOptions={toggleOptions}
+        />
+      </Stack>
+    </>
   );
 }
