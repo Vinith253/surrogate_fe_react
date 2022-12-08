@@ -19,9 +19,11 @@ export const ScreenHeader = (props: {
         {props.showBackButton && (
           <ArrowBackIcon onClick={goBack} className="go-back-icon" />
         )}
-        <Typography>{props.title}</Typography>
+        <Box>
+          <Typography>{props.title}</Typography>
+          <TypographyInfo title={props.info} />
+        </Box>
       </Box>
-      <TypographyInfo title={props.info} />
     </Box>
   );
 };
