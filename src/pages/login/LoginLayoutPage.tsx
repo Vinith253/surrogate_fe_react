@@ -1,10 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import {
-  Box,
-  Typography,
-  Grid,
-} from '@mui/material';
+import { Box, Typography, Grid } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 import Yesbank from '../../assets/images/Yes_Bank_SVG_Logo 1.svg';
@@ -80,31 +76,27 @@ export const LoginLayoutPage = () => {
         <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
           <Box
             sx={{
-             
               backgroundSize: 'cover',
               backgroundRepeat: 'no-repeat',
               height: '100vh',
             }}
           >
-            
-
             <Box
               sx={{
                 height: '100vh',
                 width: '100%',
                 background: 'linear-gradient(180.03deg, #0797FF, #005FA4)',
-                padding: '30px',
-               
+                padding: '1.875rem',
               }}
             >
               <Box>
                 <Typography
                   sx={{
                     color: 'white',
-                    fontSize: '16px',
+                    fontSize: '1rem',
                     fontWeight: '500',
-                    lineHeight: '20px',
-                    marginBottom: '15px',
+                    lineHeight: '1.25rem',
+                    marginBottom: '0.9375rem',
                   }}
                 >
                   Surrogate Product for Credit Card Issuers
@@ -112,10 +104,10 @@ export const LoginLayoutPage = () => {
                 <Typography
                   sx={{
                     color: 'white',
-                    fontSize: '48px',
+                    fontSize: '3rem',
                     fontWeight: '500',
-                    lineHeight: '50px',
-                    marginBottom: '40px',
+                    lineHeight: '3.125rem',
+                    marginBottom: '2.5rem',
                   }}
                 >
                   We Can handle your Credit Card Issuance
@@ -123,9 +115,9 @@ export const LoginLayoutPage = () => {
                 <Typography
                   sx={{
                     color: 'white',
-                    fontSize: '16px',
+                    fontSize: '1rem',
                     fontWeight: '500',
-                    lineHeight: '20px',
+                    lineHeight: '1.25rem',
                     zIndex: '999',
                   }}
                 >
@@ -133,7 +125,7 @@ export const LoginLayoutPage = () => {
                   issuance end-to-end with assured security and convenience.
                 </Typography>
                 <Box sx={{ position: 'absolute', bottom: 0, left: '7%' }}>
-                  <img width={'450px'} height={'400px'} src={LoginImg} />
+                  <img width={'28.125rem'} height={'25rem'} src={LoginImg} />
                 </Box>
               </Box>
             </Box>
@@ -142,7 +134,6 @@ export const LoginLayoutPage = () => {
         <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
           <Box
             sx={{
-             
               height: '100vh',
               display: 'flex',
               alignItems: 'center',
@@ -151,7 +142,6 @@ export const LoginLayoutPage = () => {
               borderBottomLeftRadius: '0.625rem',
             }}
           >
-            
             <Outlet />
           </Box>
         </Grid>

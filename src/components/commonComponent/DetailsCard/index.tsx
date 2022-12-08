@@ -33,12 +33,12 @@ function DetailsCard({ data, gridColumn }: Props) {
           <Grid
             container
             rowSpacing={2}
-            columnSpacing={{ xs: 1, sm: 2, md: 8 }}
+            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
             className="details-card"
           >
             {record?.details?.map((eachItem: any, index: number) => {
               return (
-                <Grid item xs={gridColumn} md={2}  key={index}>
+                <Grid item xs={gridColumn}  key={index}>
                   <Stack className="each-info">
                     <Stack className="info-label">
                       {eachItem?.label ?? '--'}
