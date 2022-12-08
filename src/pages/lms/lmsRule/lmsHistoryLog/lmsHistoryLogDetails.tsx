@@ -94,7 +94,7 @@ export const LMSHistoryLogDetails = () => {
                     className="back-arrow"
                     onClick={() => navigate(-1)}
                   >
-                    <ArrowBackIcon className="back-arrow" />{' '}
+                    <ArrowBackIcon width={200} className="back-arrow" />{' '}
                   </Typography>
                 </Stack>
 
@@ -196,7 +196,9 @@ export const LMSHistoryLogDetails = () => {
             variant="outlined"
             color="secondary"
             className="history-close-button"
-            onClick={() => navigate('/lms/lmsRule')}
+            onClick={() =>
+              navigate('/lms/lmsRule', { state: { activeTab: '2' } })
+            }
           >
             Close
           </Button>

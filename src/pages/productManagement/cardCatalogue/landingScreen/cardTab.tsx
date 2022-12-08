@@ -1,6 +1,6 @@
 import { TabContext } from '@mui/lab';
 import { TabList } from '@mui/lab';
-import { TabPanel } from '@mui/lab';
+import { TabPanel } from '@mui/lab';  
 import { Box, Tab, Stack } from '@mui/material';
 import { TabBar } from '../../../../components/commonComponent/customTab/CustomTab';
 import { dataList } from '../../../../interface/Types';

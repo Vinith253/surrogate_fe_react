@@ -291,27 +291,27 @@ export const ApplicableOrNOT = [
 ];
 
 export const DSAList = [
-  { value: 'All', name: 'All' },
-  { value: 'name1', name: 'Name 1' },
-  { value: 'name2', name: 'Name 2' },
-  { value: 'name3', name: 'Name 3' },
-  { value: 'name4', name: 'Name 4' },
+  { code: 'All', name: 'All' },
+  { code: 'name1', name: 'Name 1' },
+  { code: 'name2', name: 'Name 2' },
+  { code: 'name3', name: 'Name 3' },
+  { code: 'name4', name: 'Name 4' },
 ];
 
 export const DivisionList = [
-  { value: 'All', name: 'All' },
-  { value: 'name1', name: 'Name 1' },
-  { value: 'name2', name: 'Name 2' },
-  { value: 'name3', name: 'Name 3' },
-  { value: 'name4', name: 'Name 4' },
+  { code: 'All', name: 'All' },
+  { code: 'name1', name: 'Name 1' },
+  { code: 'name2', name: 'Name 2' },
+  { code: 'name3', name: 'Name 3' },
+  { code: 'name4', name: 'Name 4' },
 ];
 
 export const FintechPartnerList = [
-  { value: 'All', name: 'All' },
-  { value: 'name1', name: 'Name 1' },
-  { value: 'name2', name: 'Name 2' },
-  { value: 'name3', name: 'Name 3' },
-  { value: 'name4', name: 'Name 4' },
+  { code: 'All', name: 'All' },
+  { code: 'name1', name: 'Name 1' },
+  { code: 'name2', name: 'Name 2' },
+  { code: 'name3', name: 'Name 3' },
+  { code: 'name4', name: 'Name 4' },
 ];
 
 export const product_label = [

@@ -1,4 +1,4 @@
-import { tableHeader } from "../../../utils/Constants";
+import { tableHeader } from '../../../utils/Constants';
 
 export const salesDashboardList: rowsDataInterface[] = [
   {
@@ -261,6 +261,7 @@ export const statusRowHeading: statusRowHeadingInterface[] = [
 
 export const listRowHeading: statusRowHeadingInterface[] = [
   {
+    sortColumn:tableHeader.sortColumn,
     header1: tableHeader.HEADING1,
     header2: tableHeader.HEADING2,
     header3: tableHeader.HEADING3,
@@ -288,15 +289,17 @@ export interface rowsDataInterface {
   kycStatus?: string;
   status?: string;
 
-  version? :string;
-  currentStatus?:string;
-  initiatedBy?:string;
-  request?:string;
-  dateAndTime?:string;
+  version?: string;
+  currentStatus?: string;
+  initiatedBy?: string;
+  request?: string;
+  dateAndTime?: string;
 }
 
 export interface statusRowHeadingInterface {
+  
   header1?: string;
+  sortColumn?:any
   header2?: string;
   header3?: string;
   header4?: string;
@@ -313,11 +316,13 @@ export const product_label = [
     id: 1,
     label: tableHeader.HEADING1,
     defaultChecked: true,
+    
   },
   {
     id: 2,
     label: tableHeader.HEADING2,
     defaultChecked: true,
+    
   },
   {
     id: 3,
@@ -361,79 +366,78 @@ export const product_label = [
   },
 ];
 
-export const state_label =[
+export const state_label = [
   {
-    name:'State',
-    dataLabel : [
-      { value: 'All', name: 'All' },
-      { value: 'tamilnadu', name: 'Tamilnadu' },
-      { value: 'andra', name: 'Andhra' },
-      { value: 'telungana', name: 'Telungana' },
-      { value: 'karnataka', name: 'Karnataka' },
-      { value: 'kerala', name: 'Kerala' },
-    ]
+    name: 'State',
+    dataLabel: [
+      { code: 'All', name: 'All' },
+      { code: 'tamilnadu', name: 'Tamilnadu' },
+      { code: 'andra', name: 'Andhra' },
+      { code: 'telungana', name: 'Telungana' },
+      { code: 'karnataka', name: 'Karnataka' },
+      { code: 'kerala', name: 'Kerala' },
+    ],
   },
   {
-    name:'Zonal',
-    dataLabel : [
-      { value: 'All', name: 'All' },
-      { value: 'tamilnadu', name: 'Tamilnadu' },
-      { value: 'andra', name: 'Andhra' },
-      { value: 'telungana', name: 'Telungana' },
-      { value: 'karnataka', name: 'Karnataka' },
-      { value: 'kerala', name: 'Kerala' },
-    ]
+    name: 'Zonal',
+    dataLabel: [
+      { code: 'All', name: 'All' },
+      { code: 'tamilnadu', name: 'Tamilnadu' },
+      { code: 'andra', name: 'Andhra' },
+      { code: 'telungana', name: 'Telungana' },
+      { code: 'karnataka', name: 'Karnataka' },
+      { code: 'kerala', name: 'Kerala' },
+    ],
   },
   {
-    name:'District',
-    dataLabel : [
-      { value: 'All', name: 'All' },
-      { value: 'tamilnadu', name: 'Tamilnadu' },
-      { value: 'andra', name: 'Andhra' },
-      { value: 'telungana', name: 'Telungana' },
-      { value: 'karnataka', name: 'Karnataka' },
-      { value: 'kerala', name: 'Kerala' },
-    ]
+    name: 'District',
+    dataLabel: [
+      { code: 'All', name: 'All' },
+      { code: 'tamilnadu', name: 'Tamilnadu' },
+      { code: 'andra', name: 'Andhra' },
+      { code: 'telungana', name: 'Telungana' },
+      { code: 'karnataka', name: 'Karnataka' },
+      { code: 'kerala', name: 'Kerala' },
+    ],
   },
   {
-    name:'DSA Name(s)',
-    dataLabel : [
-      { value: 'All', name: 'All' },
-      { value: 'tamilnadu', name: 'Tamilnadu' },
-      { value: 'andra', name: 'Andhra' },
-      { value: 'telungana', name: 'Telungana' },
-      { value: 'karnataka', name: 'Karnataka' },
-      { value: 'kerala', name: 'Kerala' },
-    ]
+    name: 'DSA Name(s)',
+    dataLabel: [
+      { code: 'All', name: 'All' },
+      { code: 'tamilnadu', name: 'Tamilnadu' },
+      { code: 'andra', name: 'Andhra' },
+      { code: 'telungana', name: 'Telungana' },
+      { code: 'karnataka', name: 'Karnataka' },
+      { code: 'kerala', name: 'Kerala' },
+    ],
   },
   {
-    name:'F. Partner Name(s)',
-    dataLabel : [
-      { value: 'All', name: 'All' },
-      { value: 'tamilnadu', name: 'Tamilnadu' },
-      { value: 'andra', name: 'Andhra' },
-      { value: 'telungana', name: 'Telungana' },
-      { value: 'karnataka', name: 'Karnataka' },
-      { value: 'kerala', name: 'Kerala' },
-    ]
+    name: 'F. Partner Name(s)',
+    dataLabel: [
+      { code: 'All', name: 'All' },
+      { code: 'tamilnadu', name: 'Tamilnadu' },
+      { code: 'andra', name: 'Andhra' },
+      { code: 'telungana', name: 'Telungana' },
+      { code: 'karnataka', name: 'Karnataka' },
+      { code: 'kerala', name: 'Kerala' },
+    ],
   },
   {
-    name:'Branch Name(s)',
-    dataLabel : [
-      { value: 'All', name: 'All' },
-      { value: 'tamilnadu', name: 'Tamilnadu' },
-      { value: 'andra', name: 'Andhra' },
-      { value: 'telungana', name: 'Telungana' },
-      { value: 'karnataka', name: 'Karnataka' },
-      { value: 'kerala', name: 'Kerala' },
-    ]
-  }
-]
+    name: 'Branch Name(s)',
+    dataLabel: [
+      { code: 'All', name: 'All' },
+      { code: 'tamilnadu', name: 'Tamilnadu' },
+      { code: 'andra', name: 'Andhra' },
+      { code: 'telungana', name: 'Telungana' },
+      { code: 'karnataka', name: 'Karnataka' },
+      { code: 'kerala', name: 'Kerala' },
+    ],
+  },
+];
 
-
-export const duplicate_role =[
+export const duplicate_role = [
   { value: 'head', name: 'Head' },
   { value: 'executive', name: 'Executive' },
   { value: 'underwritingManager', name: 'Underwriting Manager' },
   { value: 'manager', name: 'Manager' },
-]
+];

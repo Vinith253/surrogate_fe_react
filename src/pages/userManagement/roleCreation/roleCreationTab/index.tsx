@@ -16,7 +16,7 @@ import {
 import { Box, Stack } from '@mui/system';
 import '../style.scss';
 import AddIcon from '@mui/icons-material/Add';
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import PaginationComp from '../../../../components/commonComponent/Pagination/Pagination';
 import { roleCreationHeaderList, rows } from './rolecreation.const';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
@@ -46,6 +46,12 @@ function RoleCreationTab() {
   const handleCardMenuClose = () => {
     setAnchorEl(null);
   };
+
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * rowsPerPage;
+    const lastPageIndex = firstPageIndex + rowsPerPage;
+    return filteredData.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage, rowsPerPage, filteredData]);
 
   const tableHeaderData = [
     {
@@ -105,6 +111,29 @@ function RoleCreationTab() {
     navigate('/userManagement/roleCreation/createRole', {
       state: { roleName: `${roleValue} Copy`, data: duplicateRoleData },
     });
+  };
+
+  const [ascending, setAscending] = useState<boolean>(true);
+  const [sortingData, setSortingData] = useState(rows);
+
+  const filterData = () => {
+    const sort = currentTableData.sort((a: any, b: any) => {
+      if (ascending) {
+        return a.id < b.id ? -1 : 1;
+      }
+      return a.id > b.id ? -1 : 1;
+    });
+    console.log('sortinf', [...sort]);
+    setSortingData([...sort]);
+  };
+
+  useEffect(() => {
+    filterData();
+  }, [ascending]);
+
+  const handleSortByName = () => {
+    setAscending(!ascending);
+    console.log('click');
   };
 
   return (
@@ -204,7 +233,7 @@ function RoleCreationTab() {
                             }}
                           >
                             <> {items.roleName}</>
-                            <IconButton>
+                            <IconButton onClick={() => handleSortByName()}>
                               <img src={UnfoldMoreIcon} alt="Sort Icon" />
                             </IconButton>
                           </Stack>
@@ -244,7 +273,7 @@ function RoleCreationTab() {
                 </TableHead>
 
                 <TableBody>
-                  {rows.map((row) => (
+                  {currentTableData.map((row) => (
                     <TableRow key={row.id}>
                       <TableCell
                         align="center"

@@ -496,6 +496,9 @@ export default function UserBulkList(props: any) {
     setOpenContinueDiscard(false);
     navigate('/userManagement/userCreation');
   };
+  const handleCancelClick = () => {
+    setOpenContinueDiscard(!openContinueDiscard);
+  };
   const progressBar = {
     borderRadius: '10px',
     height: '8px',
@@ -757,7 +760,11 @@ export default function UserBulkList(props: any) {
             <Box
               sx={{ display: 'flex', justifyContent: 'flex-end', gap: '1%' }}
             >
-              <Button variant="outlined" sx={{ textTransform: 'capitalize' }}>
+              <Button
+                variant="outlined"
+                sx={{ textTransform: 'capitalize' }}
+                onClick={handleCancelClick}
+              >
                 Cancel
               </Button>
               <Button

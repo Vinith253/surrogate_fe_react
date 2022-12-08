@@ -21,6 +21,11 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import IconButton from '@mui/material/IconButton';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import InputAdornment from '@mui/material/InputAdornment';
 import Box from '@mui/material/Box';
 import FormGroup from '@mui/material/FormGroup';
 import Checkbox from '@mui/material/Checkbox';
@@ -100,6 +105,15 @@ type props = {
   modalType?: string;
   duplicate_modal_label?: string;
   closeFunction?: () => void;
+  textAreaValue?: any;
+  buttonDisabled?: any;
+  textareaonchangeFun?: any;
+  emailValue?: any;
+  handleMouseDownPassword?: any;
+  handleClickShowPassword?: any;
+  handleClickShowConfirmPassword?: any;
+  createValuePassword?: any;
+  closeButtonMsg?: string;
 };
 
 function CustomModal({
@@ -160,14 +174,21 @@ function CustomModal({
   modalType,
   duplicate_modal_label,
   closeFunction,
+  textAreaValue,
+  buttonDisabled,
+  textareaonchangeFun,
+  emailValue,
+  handleMouseDownPassword,
+  handleClickShowPassword,
+  handleClickShowConfirmPassword,
+  createValuePassword,
+  closeButtonMsg,
 }: props) {
   const [pauseStatus, setPauseStatus] = useState(pauseStatusKey);
   const [startDatevalue, setStartDateValue] = useState(null);
   const [endDatevalue, setEndDateValue] = useState(null);
   const [existingRole, setexistingRole] = React.useState('');
   const [checked, setChecked] = React.useState(false);
-
-  console.log('existingRole', existingRole);
 
   useEffect(() => {
     if (pauseStatus) {
@@ -215,7 +236,7 @@ function CustomModal({
           className={`${
             successModalMsg || discardModalMsg || rejectedModalMsg
               ? 'modal_container1'
-              : ProceedBtn == 'Update'
+              : ProceedBtn == 'Update' || ProceedBtn === 'Verify'
               ? 'create_newpassword'
               : 'request_Activation_modal'
           }`}
@@ -411,7 +432,9 @@ function CustomModal({
           {changePasswordTitle && (
             <Stack
               sx={{
-                margin: '50px  60px 25px 60px',
+                margin: `${
+                  ProceedBtn === 'Proceed' ? '50px  60px 25px 60px' : '0px 60px'
+                }`,
                 display: 'flex',
                 flexDirection: 'row',
                 justifyContent: 'space-between',
@@ -419,7 +442,7 @@ function CustomModal({
               }}
             >
               <Typography
-                sx={{ fontSize: '20px', fontWeight: '500', color: '#151515' }}
+                sx={{ fontSize: '18px', fontWeight: '500', color: '#151515' }}
               >
                 {changePasswordTitle}
               </Typography>
@@ -429,14 +452,14 @@ function CustomModal({
                 sx={{ fontSize: '14px', textTransform: 'capitalize' }}
                 onClick={closeFunction}
               >
-                Close
+                {closeButtonMsg}
               </Button>
             </Stack>
           )}
 
           {changePasswordTitleMsg && (
             <Stack sx={{ margin: '0 60px', textAlign: 'start' }}>
-              <Typography fontWeight={700} pb={1} fontSize={11}>
+              <Typography fontWeight={700} pb={2} pt={1} fontSize={11}>
                 {changePasswordTitleMsg}
               </Typography>
             </Stack>
@@ -446,47 +469,87 @@ function CustomModal({
             <Stack sx={{ margin: '0 60px' }}>
               <InputLabel
                 htmlFor="outlined-adornment-amount"
-                sx={{ fontSize: '12px', color: '#151515' }}
+                sx={{
+                  marginTop: '20px',
+                  color: '#151515',
+                  fontWeight: '600',
+                  fontSize: '12px',
+                  marginBottom: '5px',
+                }}
               >
                 {enterNewPassword}
               </InputLabel>
-              <TextField
-                variant="outlined"
-                size="small"
-                sx={{ height: '40px', fontSize: '14px' }}
-                id="outlined-password-input"
-                label="Password"
-                type="password"
-                autoComplete="current-password"
-              />
+
+              <FormControl sx={{ width: '32ch' }} variant="outlined">
+                <OutlinedInput
+                  size="small"
+                  sx={{ height: '45px', fontSize: '14px' }}
+                  id="outlined-adornment-password"
+                  type={createValuePassword.showPassword ? 'password' : 'text '}
+                  value={createValuePassword.password}
+                  onChange={textareaonchangeFun('password')}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {createValuePassword.showPassword ? (
+                          <VisibilityOff />
+                        ) : (
+                          <Visibility />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                />
+              </FormControl>
 
               <InputLabel
                 htmlFor="outlined-adornment-amount"
-                sx={{ marginTop: '20px' }}
+                sx={{
+                  marginTop: '20px',
+                  color: '#151515',
+                  fontWeight: '600',
+                  fontSize: '12px',
+                  marginBottom: '5px',
+                }}
               >
                 {confirmNewPassword}
               </InputLabel>
-              <TextField
-                variant="outlined"
-                size="small"
-                sx={{ height: '40px', fontSize: '14px' }}
-                id="outlined-password-input"
-                label="Password"
-                type="password"
-                autoComplete="current-password"
-              />
-              <Typography
-                sx={{
-                  fontSize: '14px',
-                  textAlign: 'end',
-                  color: ' #0662B7',
-                  fontWeight: '500',
-                  marginTop: '10px',
-                  marginBottom: '20px',
-                }}
-              >
-                {forgotPassword}
-              </Typography>
+
+              <FormControl sx={{ width: '32ch' }} variant="outlined">
+                <OutlinedInput
+                  size="small"
+                  sx={{ height: '45px', fontSize: '14px' }}
+                  id="outlined-adornment-password"
+                  type={
+                    createValuePassword.showConfirmPassword
+                      ? 'password'
+                      : 'text '
+                  }
+                  value={createValuePassword.confirmPassword}
+                  onChange={textareaonchangeFun('confirmPassword')}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowConfirmPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {createValuePassword.showConfirmPassword ? (
+                          <VisibilityOff />
+                        ) : (
+                          <Visibility />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                />
+              </FormControl>
             </Stack>
           )}
 
@@ -539,10 +602,10 @@ function CustomModal({
                 margin: '10px 60px',
               }}
             >
-              <Typography sx={{ color: '#D02127', fontSize: '16px' }}>
+              <Typography sx={{ color: '#D02127', fontSize: '13px' }}>
                 02 : 29
               </Typography>
-              <Typography sx={{ color: '#82B1DB', fontSize: '16px' }}>
+              <Typography sx={{ color: '#82B1DB', fontSize: '13px' }}>
                 {resentOTP}
               </Typography>
             </Stack>
@@ -554,45 +617,43 @@ function CustomModal({
                 variant="outlined"
                 size="small"
                 sx={{ height: '40px', fontSize: '14px' }}
-                value={'Ashwin@yesbank.com'}
+                placeholder={'Ashwin@yesbank.com'}
+                onChange={textareaonchangeFun}
+                value={emailValue}
               ></TextField>
+            </Stack>
+          )}
 
+          {(ProceedBtn === 'Verify' ||
+            ProceedBtn === 'Proceed' ||
+            ProceedBtn === 'Update') && (
+            <Stack sx={{ margin: '0 60px' }}>
               <Button
                 variant="contained"
                 onClick={handleCloseSuccess}
-                sx={{
+                disabled={buttonDisabled}
+                style={{
                   // width: '340px',
                   height: '48px',
                   fontSize: '12px',
                   marginTop: '30px',
                   marginBottom: '40px',
-                  backgroundColor: `${colors.Modalblue}`,
-                  '&:hover': {
-                    backgroundColor: `${colors.Modalblue}`,
-                  },
+                  textTransform: 'capitalize',
                 }}
-              >
-                {ProceedBtn}
-              </Button>
-            </Stack>
-          )}
-
-          {(ProceedBtn === 'Verify' || ProceedBtn === 'Update') && (
-            <Stack sx={{ margin: '0 60px' }}>
-              <Button
-                variant="contained"
-                onClick={handleCloseSuccess}
-                sx={{
-                  // width: '340px',
-                  height: '48px',
-                  fontSize: '12px',
-                  marginTop: '10px',
-                  marginBottom: '14px',
-                  backgroundColor: `${colors.Modalblue}`,
-                  '&:hover': {
-                    backgroundColor: `${colors.Modalblue}`,
-                  },
-                }}
+                sx={
+                  buttonDisabled
+                    ? {
+                        backgroundColor: '#82B1DB !important',
+                        color: '#FFFFFF !important',
+                      }
+                    : {
+                        backgroundColor: ' #0662B7',
+                        color: '#FFFFFF',
+                        '&:hover': {
+                          backgroundColor: '#0662B7',
+                        },
+                      }
+                }
               >
                 {ProceedBtn}
               </Button>
@@ -614,26 +675,6 @@ function CustomModal({
               </Typography>
             </Stack>
           )}
-
-          {/* {rejectedModaltitle && (
-            <DialogContent sx={{ paddingTop: '18px', paddingBottom: '0px' }}>
-              <DialogContentText
-                id="alert-dialog-slide-description"
-                align={'center'}
-                fontSize={16}
-                fontWeight={600}
-                color="#1d1d1d"
-                sx={{
-                  padding: {
-                    xs: '0 13px',
-                  },
-                  hyphens: 'initial',
-                }}
-              >
-                {rejectedModaltitle}
-              </DialogContentText>
-            </DialogContent>
-          )} */}
 
           {successModalMsg && (
             <Typography
@@ -698,10 +739,9 @@ function CustomModal({
 
             {successMsg && (
               <Typography
-                fontWeight={400}
                 align={'center'}
                 pb={0}
-                fontSize={12}
+                fontSize={14}
                 sx={{
                   padding: {
                     xs: '0 13px',
@@ -710,6 +750,7 @@ function CustomModal({
                   marginBottom: '10px',
                   color: '#656769',
                   hyphens: 'initial',
+                  fontWeight: '500',
                 }}
               >
                 {successMsg}
@@ -1014,6 +1055,8 @@ function CustomModal({
                       border: `1px solid #36363624`,
                       height: `${textAreaHeight ? textAreaHeight : '160px'}`,
                     }}
+                    value={textAreaValue}
+                    onChange={textareaonchangeFun}
                   />
                 </Grid>
               </Grid>
@@ -1080,7 +1123,22 @@ function CustomModal({
               <Button
                 variant="contained"
                 className="submit-button"
+                sx={
+                  buttonDisabled
+                    ? {
+                        backgroundColor: '#82B1DB !important',
+                        color: '#FFFFFF !important',
+                      }
+                    : {
+                        backgroundColor: ' #0662B7',
+                        color: '#FFFFFF',
+                        '&:hover': {
+                          backgroundColor: '#0662B7',
+                        },
+                      }
+                }
                 onClick={handleSuccess}
+                disabled={buttonDisabled}
               >
                 {pauseStatus == 'Remove Surrogate' ? 'Remove' : submit}
               </Button>

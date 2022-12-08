@@ -37,7 +37,19 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      
+      
+      
+      // width: 20px;
+      // height:20px;
+      // background-color: grey;
       cursor: pointer;
+    }
+    .flex-class:hover{
+      background-color: #dedcdc;
+      
+      border-radius: 100%;
+
     }
     .saved-items-flex {
       display: flex;
@@ -52,6 +64,7 @@
     align-items: center !important;
     padding: 0.5rem !important;
     width: 20rem;
+    margin: auto;
     img {
       width: 100%;
     }

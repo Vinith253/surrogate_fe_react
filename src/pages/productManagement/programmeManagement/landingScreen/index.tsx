@@ -19,12 +19,12 @@ function ProgramManagement() {
       component: <ProgrammeHistoryLog />,
       isDisabled: false,
     },
-    {
-      id: '3',
-      data: 'Reviewer Log',
-      component: <ReviewerLog />,
-      isDisabled: false,
-    },
+    // {
+    //   id: '3',
+    //   data: 'Reviewer Log',
+    //   component: <ReviewerLog />,
+    //   isDisabled: false,
+    // },
   ];
   return (
     <>

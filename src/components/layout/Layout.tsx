@@ -10,6 +10,7 @@ import {
   ListItemIcon,
   ListItemText,
   Stack,
+  Button
 } from '@mui/material';
 import {
   Link,
@@ -53,7 +54,8 @@ import retargeting_icon from '../../assets/icons/retargeting-icon.svg';
 import lms_rule_icon from '../../assets/icons/lms-rule-icon.svg';
 import powerByM2p from '../../assets/icons/power_by_icon.svg';
 import risk_customer_report from '../../assets/icons/risk-customer-report.svg';
-
+import profile_img from '../../assets/images/profile.svg';
+import logout_img from '../../assets/images/logout.svg';
 import profile_icon from '../../assets/icons/profile_icon.svg';
 import profile_arrow_icon from '../../assets/icons/profile_arrow_icon.svg';
 import Collapse from '@mui/material/Collapse';
@@ -270,7 +272,7 @@ export default function Layout() {
   const [openList, setOpenList] = React.useState(false);
   const [checkIndex, setCheckIndex] = React.useState(0);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [menuItemIndex, setMenuItemIndex] = React.useState(0);
+  const [changeColor, setChangeColor] = React.useState(false);
 
   const openMenu = Boolean(anchorEl);
 
@@ -431,10 +433,10 @@ export default function Layout() {
                         <img
                           src={text.image}
                           alt=""
-                          style={{
-                            filter:
-                              'invert(100%) sepia(100%) saturate(0%) hue-rotate(24deg) brightness(104%) contrast(101%)',
-                          }}
+                          // style={{
+                          //   filter:
+                          //     ' invert(88%) sepia(100%) saturate(3%) hue-rotate(188deg)brightness(109%) contrast(97%)',
+                          // }}
                         />
                       </ListItemIcon>
                       <ListItemText
@@ -505,10 +507,10 @@ export default function Layout() {
                                       //   classes={({ isActive }: any) =>
                                       //   isActive ? 'active' : 'inactive'
                                       // }
-                                      style={{
-                                        filter:
-                                          'invert(100%) sepia(100%) saturate(0%) hue-rotate(24deg) brightness(104%) contrast(101%)',
-                                      }}
+                                      // style={{
+                                      //   filter:
+                                      //     ' invert(88%) sepia(100%) saturate(3%) hue-rotate(188deg) brightness(109%) contrast(97%)',
+                                      // }}
                                     />
                                   </ListItemIcon>
 
@@ -632,22 +634,13 @@ export default function Layout() {
                 </Typography>
               </Box>
 
-              {/* <IconButton
-                sx={{
-                  height: 45,
-                  width: 45,
-                }}
-                onClick={() => setOpenMenu(!setOpenMenu)}
-              >
-                <img src={profile_icon} />
-                <img src={profile_arrow_icon} style={{ padding: "0 10px" }} />
-              </IconButton> */}
+             
               <IconButton
                 id="basic-button"
                 sx={{
-                  height: 45,
-
-                  width: 45,
+                  height: 10,
+                 
+                  width: 10,
                 }}
                 aria-controls={openMenu ? 'basic-menu' : undefined}
                 aria-haspopup="true"
@@ -672,8 +665,21 @@ export default function Layout() {
                   'aria-labelledby': 'basic-button',
                 }}
               >
-                <MenuItem onClick={onClickHandleProfile}>Profile</MenuItem>
+                <Box sx={{display:'flex',paddingX:2}} >
+                  <Button>
+
+                  <img src={profile_img} />
+                  <MenuItem onClick={onClickHandleProfile}>Profile</MenuItem>
+                  </Button>
+
+                </Box>
+                <Box sx={{display:'flex',paddingX:2}} >
+                  <Button>
+
+                  <img src={logout_img} />
                 <MenuItem onClick={handleClose}>Logout</MenuItem>
+                  </Button>
+                </Box>
               </Menu>
             </Box>
           </Box>

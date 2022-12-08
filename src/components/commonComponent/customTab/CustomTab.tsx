@@ -5,8 +5,14 @@ import { dataList, tabList } from '../../../interface/Types';
 import { colors } from '../../../style/Color';
 import '../customTab/customTabStyle.scss';
 
-export const TabBar = ({ data }: { data: dataList }) => {
-  const [value, setValue] = useState('1');
+type props = {
+  data?: dataList;
+  activeTab?: string;
+};
+
+export const TabBar = ({ data, activeTab }: props) => {
+  const [value, setValue] = useState(activeTab ?? '1');
+
   const handleChange = (event: React.SyntheticEvent, val: string) => {
     setValue(val);
   };
@@ -25,7 +31,7 @@ export const TabBar = ({ data }: { data: dataList }) => {
               padding: '30px 30px 0  30px',
             }}
           >
-            {data.map((item: tabList, index: number) => {
+            {data?.map((item: tabList, index: number) => {
               return (
                 <Tab
                   className="tabBar"
@@ -37,7 +43,7 @@ export const TabBar = ({ data }: { data: dataList }) => {
               );
             })}
           </TabList>
-          {data.map((item: tabList, index: number) => {
+          {data?.map((item: tabList, index: number) => {
             return (
               <TabPanel
                 key={index}

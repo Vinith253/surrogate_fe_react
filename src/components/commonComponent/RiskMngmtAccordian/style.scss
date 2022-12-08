@@ -1,0 +1,96 @@
+.risk-accordian-grid-style {
+  justify-content: 'space-between';
+  align-items: 'center';
+
+  .risk-label-text {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 12px;
+  }
+
+  .risk-info-label {
+    font-size: 16px;
+    color: #656769;
+  }
+
+  .risk-score-info-label {
+    font-size: 16px;
+    color: #AFAEAF;
+  }
+
+  .status-box {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 10px;
+  }
+
+  .cashflow-text {
+    font-size:14px; 
+    font-weight:bold;
+  }
+
+  .cashflow-value-text {
+    font-size:12px; 
+  }
+
+  .cashflow-status-box {
+    display: flex;
+    gap: 14px;
+  }
+}
+
+.risk-user-identity-box {
+   height: 40px; 
+   border-bottom: 2px solid #F0F2F5; 
+  }
+
+.risk-user-identiy-box2 {
+    border-bottom: 2px solid #F0F2F5;
+    padding: 24px 0px 24px 0px;
+
+    .inner-box { 
+      width: 163px;
+
+    .box-title { 
+      color: #AFAEAF; 
+      font-size: 12px; 
+    }
+
+    .account-detail-text {
+      font-size: 14px;
+      color: #0662B7;
+      margin-top: 12px;
+    }
+
+    .box-title2 {
+      font-size: 12px;
+      color: #1C592A;
+      background-color: #E3F3E6;
+      text-transform: none;
+      height: 24px;
+      margin-top: 16px
+    }
+
+    .extra-title { 
+      margin-top: 32px;
+      
+      .text-style { 
+        color: #AFAEAF;
+        font-size: 12px; 
+      }
+
+      .text-value-style { 
+        font-size: 14px; 
+      }
+    }
+  }
+
+  .right-status-box { 
+    display: flex; 
+    gap: 14px;
+
+    .text-font-style { 
+      font-size: 12px;
+    } 
+  }
+}

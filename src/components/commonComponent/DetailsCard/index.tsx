@@ -7,7 +7,7 @@ import HeaderWithInfo from '../../commonComponent/HeaderWithInfo';
 type Props = {
   data: {
     title: string;
-    note: string;
+    // note?: string;
     details: Array<object>;
   };
   gridColumn: number;
@@ -23,22 +23,22 @@ function DetailsCard({ data, gridColumn }: Props) {
           <HeaderWithInfo
             header={record?.title || '--'}
             isInfoEnabled={true}
-            info={
-              record?.note ||
-              'Lorem ipusm dolor sit amet, consectetur adipiscing elit.'
-            }
+            // info={
+            //   record?.note ||
+            //   'Lorem ipusm dolor sit amet, consectetur adipiscing elit.'
+            // }
             isDownloadEnabled={false}
           />
 
           <Grid
             container
             rowSpacing={2}
-            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+            columnSpacing={{ xs: 1, sm: 2, md: 12 }}
             className="details-card"
           >
             {record?.details?.map((eachItem: any, index: number) => {
               return (
-                <Grid item xs={gridColumn} key={index}>
+                <Grid item xs={gridColumn} md={2}  key={index}>
                   <Stack className="each-info">
                     <Stack className="info-label">
                       {eachItem?.label ?? '--'}

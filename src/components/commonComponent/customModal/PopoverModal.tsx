@@ -26,6 +26,7 @@ type props = {
   anchorEl?: any;
   id?: any;
   showSearch?: boolean;
+  columnNumber: number;
 };
 
 function CheckBoxModal({
@@ -38,6 +39,7 @@ function CheckBoxModal({
   anchorEl,
   id,
   showSearch,
+  columnNumber
 }: props) {
   const [categories, setCategories] = useState(product_label);
   const [value, setValue] = useState('');
@@ -83,7 +85,7 @@ function CheckBoxModal({
       count++;
     }
   });
-  const e = count >= 2;
+  const e = count >= columnNumber;
 
   return (
     <Stack className="App">
