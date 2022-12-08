@@ -6,7 +6,7 @@ import './style.scss';
 
 export const ScreenHeader = (props: {
   title: string;
-  info: string;
+  info?: string;
   showBackButton: boolean;
 }) => {
   const navigate = useNavigate();
