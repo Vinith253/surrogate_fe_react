@@ -104,10 +104,9 @@ function Card({ content }: { content: cardItems }) {
                   className="flex-class"
                   onClick={() => handlePath(item.path)}
                 >
-                 <IconButton>
-                 <ArrowForwardIosIcon color="secondary" />
-                 </IconButton>
-                  
+                  <IconButton>
+                    <ArrowForwardIosIcon color="secondary" />
+                  </IconButton>
                 </Box>
               )}
               {content.key === 'savedItems' && (

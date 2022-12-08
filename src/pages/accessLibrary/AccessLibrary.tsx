@@ -2,6 +2,7 @@ import {
   Box,
   Divider,
   InputBase,
+  Stack,
   styled,
   ToggleButton,
   ToggleButtonGroup,
@@ -14,29 +15,62 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import PageLayout from '../../components/layout/pageLayout/pageLayout';
 import SearchIcon from '@mui/icons-material/Search';
 import CustomModal from '../../components/commonComponent/customModal/CustomModal';
-
+import ListTable from '../../components/commonComponent/commonListTable/commonListTable';
 const AccessLibrary = () => {
   const [accessModal, setAccessModal] = useState(false);
   const [accessLink, setAccessLink] = useState('');
   const column = [
-    { title: '#', dataIndex: 'id', key: 'id', sortColumn: false },
+    {
+      title: '#',
+      dataIndex: 'id',
+      key: 'id',
+      sortColumn: false,
+      headerRender: (text: string) => {
+        return (
+          <Stack sx={{ width: '2.34375vw', textAlign: 'center' }}>{text}</Stack>
+        );
+      },
+      render: (text: string) => {
+        return (
+          <Stack sx={{ width: '2.34375vw', textAlign: 'center' }}>{text}</Stack>
+        );
+      },
+    },
     {
       title: 'Application #',
       dataIndex: 'application',
       key: 'application',
       sortColumn: true,
+      headerRender: (text: string) => {
+        return <Stack sx={{ width: '7.8125vw' }}>{text}</Stack>;
+      },
+      render: (text: string) => {
+        return <Stack sx={{ width: '7.8125vw' }}>{text}</Stack>;
+      },
     },
     {
       title: 'Customer Name',
       dataIndex: 'customerName',
       key: 'customerName',
       sortColumn: false,
+      headerRender: (text: string) => {
+        return <Stack sx={{ width: '9.375vw' }}>{text}</Stack>;
+      },
+      render: (text: string) => {
+        return <Stack sx={{ width: '9.375vw' }}>{text}</Stack>;
+      },
     },
     {
       title: 'Channel Type',
       dataIndex: 'channelType',
       key: 'channelType',
       sortColumn: false,
+      headerRender: (text: string) => {
+        return <Stack sx={{ width: '9.375vw' }}>{text}</Stack>;
+      },
+      render: (text: string) => {
+        return <Stack sx={{ width: '9.375vw' }}>{text}</Stack>;
+      },
     },
     {
       title: 'Copy Link',
@@ -50,6 +84,11 @@ const AccessLibrary = () => {
       key: 'copyIcon',
       sortColumn: false,
       onClick: (link: string) => onClickCopyIcon(link),
+      render: (text: string) => {
+        return (
+          <Stack sx={{ width: '30px', textAlign: 'center' }}>{text}</Stack>
+        );
+      },
     },
   ];
   const onClickCopyIcon = (link: string) => {
@@ -158,19 +197,32 @@ const AccessLibrary = () => {
               exclusive
               onChange={handleChange}
               aria-label="Platform"
-              sx={{ padding: '5px !important', height: '45px' }}
+              sx={{
+                padding: '5px !important',
+                height: '45px',
+                textTransform: 'capitalize',
+              }}
             >
-              <ColorButton value="bank">Bank</ColorButton>
-              <ColorButton value="dsa">DSA</ColorButton>
-              <ColorButton value="fintech">Fintech</ColorButton>
+              <ColorButton value="bank" sx={{ textTransform: 'capitalize' }}>
+                Bank
+              </ColorButton>
+              <ColorButton value="dsa" sx={{ textTransform: 'capitalize' }}>
+                DSA
+              </ColorButton>
+              <ColorButton value="fintech" sx={{ textTransform: 'capitalize' }}>
+                Fintech
+              </ColorButton>
             </ToggleButtonGroup>
           </Box>
         </Box>
-        <CommonTable
-          column={columnItems}
-          data={dataItems}
-          handle={handleClick}
-        />
+        <Stack sx={{ margin: '30px 0' }}>
+          <ListTable
+            column={columnItems}
+            data={dataItems}
+            handle={handleClick}
+          />
+        </Stack>
+
         {accessModal && (
           <CustomModal
             openSuccess={accessModal}
