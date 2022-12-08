@@ -31,13 +31,10 @@
 //   );
 // }
 
-
-import React from 'react'
+import React from 'react';
 
 const DateRangePopUp = () => {
-  return (
-    <div>DateRangePopUp</div>
-  )
-}
+  return <div>DateRangePopUp</div>;
+};
 
-export default DateRangePopUp
+export default DateRangePopUp;
