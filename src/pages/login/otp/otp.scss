@@ -1,3 +1,46 @@
 .css-wgai2y-MuiFormLabel-asterisk{
     color:red !important
 }
+.otp-container{
+    display: flex;
+    .otp-head-container{
+        height: 100vh;
+          width: 50%;
+          background-color: white;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          .otp-logo-container{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0 1.875rem;
+            justify-content: center;
+            margin-left:100%;
+            .otp-logo-text{
+                color: #004C8F;
+                font-size: 0.875rem;
+                font-weight: 700;
+                line-height: 1.05rem;
+                letter-spacing:0.1875rem; 
+            }
+          }
+          .otp-forgot-box{
+            display: flex;
+                  margin: 0.9375rem 0;
+                  align-items: center;
+                  justify-content: space-between;
+                  width: 100%;
+                  .otp-forgot-left{
+                    font-size: 1.25rem; 
+                    font-weight: 500;
+                  }
+                  .otp-forgot-right{
+                    text-transform: capitalize;
+                    color: #0662B7;
+                  }
+          }
+          
+    }
+}

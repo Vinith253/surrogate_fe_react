@@ -125,7 +125,7 @@ export const LoginLayoutPage = () => {
                   issuance end-to-end with assured security and convenience.
                 </Typography>
                 <Box sx={{ position: 'absolute', bottom: 0, left: '7%' }}>
-                  <img width={'28.125rem'} height={'25rem'} src={LoginImg} />
+                  <img width={'450px'} height={'400px'} src={LoginImg} />
                 </Box>
               </Box>
             </Box>
