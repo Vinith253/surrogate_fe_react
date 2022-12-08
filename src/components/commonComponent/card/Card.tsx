@@ -44,7 +44,15 @@ function Card({ content }: { content: cardItems }) {
   }));
 
   return (
-    <Paper elevation={3} sx={{ width: '100%' }} className="card-container">
+    <Paper
+      elevation={3}
+      sx={
+        content.title != 'Frequent Activities'
+          ? { width: '100%', maxHeight: '100vh', overflowY: 'auto' }
+          : { width: '100%' }
+      }
+      className="card-container"
+    >
       <Stack
         className="header-container"
         // sx={{
@@ -75,7 +83,10 @@ function Card({ content }: { content: cardItems }) {
       <Box>
         {content.data.map((item: any) => {
           return (
-            <Box className="list-box">
+            <Box
+              sx={{ overflowX: 'auto', maxHeight: '400px' }}
+              className="list-box"
+            >
               <Box sx={{ width: '3rem' }}>
                 <img src={item.image} style={{ width: '100%' }} />
               </Box>

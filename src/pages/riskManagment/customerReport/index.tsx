@@ -120,7 +120,7 @@ function CustomerReport() {
         }
         return (
           <Link
-            sx={{ cursor: 'pointer', color: '#0662B7' }}
+            sx={{ cursor: 'pointer', color: '#0662B7' ,textDecoration:'none'}}
             onClick={() =>
               navigate('/riskManagement/customerDetails', {
                 state: {

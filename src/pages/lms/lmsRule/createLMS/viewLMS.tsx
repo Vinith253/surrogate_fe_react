@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Stack, Grid, Button } from '@mui/material';
 import './style.scss';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { FooterButton } from '../../../../components/commonComponent/FooterButton/FooterButton';
 import { ScreenHeader } from '../../../../components/commonComponent/ScreenHeader/ScreenHeader';
 import { ReactComponent as EditRole } from '../../../../assets/icons/edit_role.svg';
@@ -17,8 +17,15 @@ function ViewUser() {
     useState(false);
 
   const navigate = useNavigate();
+  const location = useLocation();
+
   const goBack = () => {
-    navigate(-1);
+    if (
+      location?.state?.routeFromHistoryLog &&
+      location.state?.routeFromHistoryLog !== null
+    )
+      navigate('/lms/lmsRule', { state: { activeTab: '2' } });
+    else navigate('/lms/lmsRule', { state: { activeTab: '1' } });
   };
 
   const selectedConfiguration = {
@@ -386,11 +393,7 @@ function ViewUser() {
           </Grid>
         </Stack>
       </Stack>
-      <FooterButton
-        cancel="Close"
-        handleCancelClick={goBack}
-        // handleSaveasDraftClick={handleSaveasDraftClick}
-      />
+      <FooterButton cancel="Close" handleCancelClick={goBack} />
       {isRejectedTypeModalOpen && (
         <CustomModal
           openSuccess={isRejectedTypeModalOpen}

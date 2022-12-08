@@ -67,9 +67,10 @@ function CreateLMSRule() {
   ]);
   const [monthlyYearlyPeriodValue, setMonthlyYearlyPeriodValue] =
     useState('date');
+
   const navigate = useNavigate();
   const goBack = () => {
-    navigate(-1);
+    navigate('/lms/lmsRule', { state: { activeTab: '1' } });
   };
 
   const handleSubmitClick = () => {
@@ -78,7 +79,7 @@ function CreateLMSRule() {
 
   const handleSubmit = () => {
     setIsNewRuleCreated(false);
-    navigate('/lms/lmsRule');
+    navigate('/lms/lmsRule', { state: { activeTab: '1' } });
   };
 
   const handleChange = (newValue: Dayjs | null) => {

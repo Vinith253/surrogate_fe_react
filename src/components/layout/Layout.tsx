@@ -663,17 +663,18 @@ export default function Layout() {
                   'aria-labelledby': 'basic-button',
                 }}
               >
-                <Box sx={{ display: 'flex', paddingX: 2 }}>
-                  <Button>
+                <Box>
+                  <MenuItem sx={{ gap: 2 }} onClick={onClickHandleProfile}>
                     <img src={profile_img} />
-                    <MenuItem onClick={onClickHandleProfile}>Profile</MenuItem>
-                  </Button>
+                    Profile
+                  </MenuItem>
                 </Box>
-                <Box sx={{ display: 'flex', paddingX: 2 }}>
-                  <Button>
+
+                <Box>
+                  <MenuItem sx={{ gap: 2 }} onClick={handleClose}>
                     <img src={logout_img} />
-                    <MenuItem onClick={handleClose}>Logout</MenuItem>
-                  </Button>
+                    Logout
+                  </MenuItem>
                 </Box>
               </Menu>
             </Box>
