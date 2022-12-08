@@ -133,9 +133,9 @@ export default function OtpVerificationScreen() {
   
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box  className='otp-container' sx={{ display: 'flex' }}>
       
-      <Box
+      <Box className='otp-head-container'
         sx={{
           height: '100vh',
           width: '50%',
@@ -146,21 +146,19 @@ export default function OtpVerificationScreen() {
           alignItems: 'center',
         }}
       >
-        <Box
+        <Box className='otp-logo-container'
           sx={{
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'flex-start',
             paddingX: '1.875rem',
-          
-            // backgroundColor: 'red',
             justifyContent: 'center',
             marginLeft:'100%'
           }}
         >
           <Box>
             <img src={Yesbank} alt="logo" />
-            <Typography
+            <Typography className='otp-logo-text'
               sx={{
                 color: '#004C8F',
                 fontSize: '0.875rem',
@@ -175,7 +173,7 @@ export default function OtpVerificationScreen() {
 
          
             <>
-              <Box
+              <Box className='otp-forgot-box'
                 sx={{
                   display: 'flex',
                   marginY: '0.9375rem',
@@ -184,13 +182,13 @@ export default function OtpVerificationScreen() {
                   width: '100%',
                 }}
               >
-                <Box>
+                <Box className='otp-forgot-left' >
                   <Typography sx={{ fontSize: '1.25rem', fontWeight: '500' }}>
                     Forgot Password
                   </Typography>
                 </Box>
                 <Box>
-                  <Button  onClick={()=>navigate('/login/newpassword')}
+                  <Button  onClick={()=>navigate('/login/newpassword')} className='otp-forgot-right'
                   
                     sx={{ textTransform: 'capitalize', color: '#0662B7' }}
                   >
