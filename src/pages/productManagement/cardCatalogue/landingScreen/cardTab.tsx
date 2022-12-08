@@ -5,7 +5,8 @@ import { Box, Tab, Stack } from '@mui/material';
 import { TabBar } from '../../../../components/commonComponent/customTab/CustomTab';
 import { dataList } from '../../../../interface/Types';
 import { CardCatalogue } from '../screens/CardCatalogue';
-import HistoryLog from '../screens/HistoryLog';
+import { HistoryLog } from '../screens/HistoryLog';
+
 
 const LabTabs = () => {
   const TabListData: dataList = [
@@ -15,7 +16,7 @@ const LabTabs = () => {
       component: <CardCatalogue />,
       isDisabled: false,
     },
-    // { id: '2', data: 'history log', component: <HistoryLog /> },
+    { id: '2', data: 'history log', component: <HistoryLog /> },
   ];
   return (
     <Stack sx={{ borderLeft: '3px solid blue', backgroundColor: '#eceff2' }}>

@@ -10,7 +10,6 @@ import {
   Box,
   Stack,
   Button,
-  ToggleButton,
   IconButton,
   Divider,
   SelectChangeEvent,
@@ -53,34 +52,49 @@ import InProgress from '../../../../assets/icons/in_progress_icon.svg';
 import Rejected from '../../../../assets/icons/rejected_icon.svg';
 import Info_Icon from '../../../../assets/images/info_icon.svg';
 
-// Utils
+// Utils and constants
 import { checkTagStatus } from '../../../../utils/tagBasedIndicator/tagStatus';
 import UnfoldMoreIcon from '../../../../assets/icons/sortArrow.svg';
+import { getCamelCaseFeatureName } from '../../../../utils/getCamelcaseFeatureName';
+import { dropdownTypes } from '../card.const';
 
 // Component Loader
 
 export async function cardCatalogueLoader() {
-  const cardList = await getListOfCards();
-  const dropdownTypes = [
-    'CARD_CATEGORY',
-    'CARD_MODE',
-    'SURROGATE_TYPE',
-    'CARD_STATUS',
-  ];
+  // get card list
+  const cardList = await getListOfCards({ page: 0, size: 1 });
 
-  const temp = dropdownTypes.map(async (type: String) => {
+  // get table filter dropdown
+  const temp = dropdownTypes.map(async (type: any) => {
     const payload = {
-      dropDown: type,
+      dropDown: type.name,
     };
-    const options = await getDropdownOptions(payload);
+    const result = (await getDropdownOptions(payload)) as any;
     const dropdownObj = {
-      name: type,
-      options: options,
+      name: type.name,
+      options: result.options ? result.options : result.error,
+      payloadKey: getCamelCaseFeatureName(type.name.toLowerCase()),
+      selectedValues: ['ALL'],
+      label: type.label,
     };
     return dropdownObj;
   });
   const cardListFilters = await Promise.all(temp);
-  return json({ cardList, cardListFilters }, { status: 200 });
+
+  // get table tabs
+  // const tabPayload = {
+  //   dropDown: 'CARD_TYPE',
+  // };
+  // const tabs = (await getDropdownOptions(tabPayload)) as any;
+
+  return json(
+    {
+      cardList,
+      cardListFilters,
+      //  tabs: tabs.options
+    },
+    { status: 200 }
+  );
 }
 
 // API methods
@@ -89,26 +103,28 @@ const getDropdownOptions = async (payload: any) => {
   let res = {};
   await getCardDropdownData(payload)
     .then((response) => {
-      res = response.data;
+      const result = response.data?.result;
+      if (result?.cardAddDropdown && Array.isArray(result.cardAddDropdown)) {
+        res = {
+          options: [{ code: 'ALL', name: 'ALL' }, ...result.cardAddDropdown],
+        };
+      }
     })
     .catch((err) => {
-      res = err.response;
+      res = { error: err.response.data };
     });
   return res;
 };
 
-const getListOfCards = async () => {
+const getListOfCards = async (payload: any) => {
   let res = {};
-  await getCardList({
-    page: 1,
-    size: 2,
-  })
+  await getCardList(payload)
     .then((response) => {
-      res = response.data;
+      res = response.data ? response.data : {};
     })
     .catch((err) => {
       console.log(err);
-      res = { err: err.response };
+      res = { error: err.response.data };
     });
   return res;
 };
@@ -117,56 +133,6 @@ export interface cardCatalogueFilterInterface {
   label?: string;
   option?: Array<object>;
 }
-
-export const CardCatalogueFilterDropdown: cardCatalogueFilterInterface[] = [
-  {
-    label: 'Card Mode',
-    option: [
-      { value: 'All', name: 'All' },
-      { value: 'Salaried', name: 'Salaried' },
-      { value: 'Business', name: 'Business' },
-      { value: 'Doctor', name: 'Doctor' },
-      { value: 'Teacher', name: 'Teacher' },
-      { value: 'Defence', name: 'Defence' },
-      { value: 'Chartered Accountant', name: 'Chartered Accountant' },
-      { value: 'FD Based', name: 'FD Based' },
-    ],
-  },
-  {
-    label: 'Card Category',
-    option: [
-      { value: 'All', name: 'All' },
-      { value: 'General', name: 'General' },
-      { value: 'Travel', name: 'Travel' },
-      { value: 'Fuel', name: 'Fuel' },
-      { value: 'Online Shopping', name: 'Online Shopping' },
-      { value: 'Entertainment', name: 'Entertainment' },
-      { value: 'Utility Bills', name: 'Utility Bills' },
-      { value: 'Offline Shopping', name: 'Offline Shopping' },
-      { value: 'Restaurant', name: 'Restaurant' },
-      { value: 'Grocery', name: 'Grocery' },
-    ],
-  },
-  {
-    label: 'Card Status',
-    option: [
-      { value: 'All', name: 'All' },
-      { value: 'Active', name: 'Active' },
-      { value: 'In-Active', name: 'In-Active' },
-    ],
-  },
-  {
-    label: 'Choose Surrogate',
-    option: [
-      { value: 'All', name: 'All Surrogates' },
-      { value: 'Payroll', name: 'Payroll' },
-      { value: 'Card on Card', name: 'Card on Card' },
-      { value: 'CIBIL', name: 'CIBIL' },
-      { value: 'AQB', name: 'AQB' },
-      { value: 'RC', name: 'RC' },
-    ],
-  },
-];
 
 export interface dataHeaderList {
   id: string;
@@ -232,68 +198,68 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export const data = [
-  createData(
-    1,
-    'ETERNA',
-    1234567890,
-    1234567890,
-    'General',
-    'Basic',
-    'Active',
-    ''
-  ),
-  createData(
-    2,
-    'PREMIER',
-    1234567890,
-    1234567890,
-    'General',
-    'Premium',
-    'In-Active',
-    ''
-  ),
-  createData(
-    3,
-    'EXCLUSIVE ICAI',
-    1234567890,
-    1234567890,
-    'General',
-    'Ultra Premium',
-    'Active',
-    ''
-  ),
-  createData(
-    4,
-    'EXCLUSIVE ICAI',
-    1234567890,
-    1234567890,
-    'General',
-    'Ultra Premium',
-    'Active',
-    ''
-  ),
-  createData(
-    5,
-    'EXCLUSIVE ICAI',
-    1234567890,
-    1234567890,
-    'General',
-    'Ultra Premium',
-    'Active',
-    ''
-  ),
-  createData(
-    6,
-    'EXCLUSIVE ICAI',
-    1234567890,
-    1234567890,
-    'General',
-    'Basic',
-    'Active',
-    ''
-  ),
-];
+// export const data = [
+//   createData(
+//     1,
+//     'ETERNA',
+//     1234567890,
+//     1234567890,
+//     'General',
+//     'Basic',
+//     'Active',
+//     ''
+//   ),
+//   createData(
+//     2,
+//     'PREMIER',
+//     1234567890,
+//     1234567890,
+//     'General',
+//     'Premium',
+//     'In-Active',
+//     ''
+//   ),
+//   createData(
+//     3,
+//     'EXCLUSIVE ICAI',
+//     1234567890,
+//     1234567890,
+//     'General',
+//     'Ultra Premium',
+//     'Active',
+//     ''
+//   ),
+//   createData(
+//     4,
+//     'EXCLUSIVE ICAI',
+//     1234567890,
+//     1234567890,
+//     'General',
+//     'Ultra Premium',
+//     'Active',
+//     ''
+//   ),
+//   createData(
+//     5,
+//     'EXCLUSIVE ICAI',
+//     1234567890,
+//     1234567890,
+//     'General',
+//     'Ultra Premium',
+//     'Active',
+//     ''
+//   ),
+//   createData(
+//     6,
+//     'EXCLUSIVE ICAI',
+//     1234567890,
+//     1234567890,
+//     'General',
+//     'Basic',
+//     'Active',
+//     ''
+//   ),
+// ];
 
 export const CardCatalogue = () => {
   const navigate = useNavigate();
@@ -316,7 +282,7 @@ export const CardCatalogue = () => {
   const [editModal, setEditModal] = useState(false);
 
   //Table
-  const [cardList, setCardList] = useState(data);
+  const [cardList, setCardList] = useState([]);
   const [ascending, setAscending] = useState<boolean>(true);
   const [selected, setSelected] = useState<number[]>([]);
   const [isItem, setIsItem] = useState<boolean>(false);
@@ -325,28 +291,29 @@ export const CardCatalogue = () => {
   const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorElement);
 
-  const loaderData = useLoaderData();
-  console.log('in component', loaderData);
-
-  // useEffect(() => {
-  //   filterData();
-  // }, [ascending]);
-
   const NORMAL_PAUSE = 'Pause Now';
   const SCHEDULED_PAUSE = 'Schedule Pause';
 
-  const ColorButton = styled(ToggleButton)(({ theme }) => ({
-    // backgroundColor: ' rgb(240, 240, 240)',
-    // border: ' rgb(240, 240, 240) 1px ',
-    // paddingX:'2px',
-    backgroundColor: '#F3F3F3',
-    color: 'black',
+  const prepareCardList = (responseData: any) => {
+    console.log(responseData);
+    const result = responseData.result;
+    if (result && result.content && Array.isArray(result.content)) {
+      setCardList(result.content);
+    } else if (responseData.error && responseData.error.error)
+      console.log('API error! ', responseData.error.error);
+  };
+  const loaderData = useLoaderData() as any;
+  useEffect(() => {
+    prepareCardList(loaderData.cardList);
+  }, []);
 
-    '&.Mui-selected, &.Mui-selected:hover': {
-      color: 'white',
-      background: '#0662B7',
-    },
-  }));
+  // useEffect
+
+  // useEffect(() => {
+
+  // }, [filters])
+
+  const [filters, setFilters] = useState(loaderData.cardListFilters);
 
   const handleClick = (event: React.MouseEvent<HTMLTableCellElement>) => {
     setAnchorElement(event.currentTarget);
@@ -354,10 +321,6 @@ export const CardCatalogue = () => {
   const handleClose = () => {
     setAnchorElement(null);
   };
-
-  // useEffect(() => {
-  //   getListOfCards();
-  // }, []);
 
   const handleCardMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -374,17 +337,6 @@ export const CardCatalogue = () => {
     navigate('/productManagement/cardCatalogue/bulkupload');
   };
 
-  const modes = [
-    'All',
-    'Salaried',
-    'Doctor',
-    'Teacher',
-    'Business',
-    'Defence',
-    'Chartered Accountant',
-    'FD Based',
-  ];
-
   const [cardMode, setCardMode] = React.useState<string[]>(['All']);
 
   const handleChange = (event: SelectChangeEvent<typeof cardMode>) => {
@@ -396,75 +348,6 @@ export const CardCatalogue = () => {
       typeof value === 'string' ? value.split(',') : value
     );
   };
-
-  const dashboardVal = [
-    {
-      index: 1,
-      title: 'Total Applications',
-      value: 3500,
-      more: true,
-      image: TotalApplications,
-    },
-    {
-      index: 2,
-      title: 'Approval Rate (%)',
-      value: 98.6,
-      more: false,
-      image: ApprovalRate,
-    },
-    {
-      index: 3,
-      title: 'Comparision %(With Previous periods)',
-      value: 26,
-      more: false,
-      image: Comparisions,
-    },
-    {
-      index: 4,
-      title: 'Virtual Card Issued',
-      value: 345,
-      more: true,
-      image: VirtualCard,
-    },
-  ];
-  const progressValue = [
-    {
-      index: 1,
-      title: 'In Progress #',
-      value: 3500,
-      lastPeriodValue: 0,
-      lastYearValue: 0,
-      image: InProgress,
-      navPath: '/sales/salesReport',
-    },
-    {
-      index: 2,
-      title: 'Approval #',
-      value: 3500,
-      lastPeriodValue: 2500,
-      lastYearValue: 2500,
-      image: ApprovedIcon,
-      navPath: '/sales/salesReport',
-    },
-    {
-      index: 3,
-      title: 'Dropped #',
-      value: 3500,
-      lastPeriodValue: 2500,
-      lastYearValue: 2500,
-      image: Dropped,
-      navPath: '/sales/salesReport',
-    },
-    {
-      index: 4,
-      title: 'Rejected #',
-      value: 3500,
-      lastPeriodValue: 2500,
-      lastYearValue: 2500,
-      image: Rejected,
-      navPath: '/sales/salesReport',
-    },
-  ];
 
   const pauseMethodChange = (value: any) => {
     setPauseMethods(value);
@@ -585,7 +468,7 @@ export const CardCatalogue = () => {
 
   const handleSelectAllClick = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const newSelected = data.map((n: any) => n.id);
+      const newSelected = cardList.map((n: any) => n.id);
       setSelected(newSelected);
       return;
     }
@@ -622,8 +505,10 @@ export const CardCatalogue = () => {
         return (
           <Checkbox
             color={'secondary'}
-            indeterminate={selected.length > 0 && selected.length < data.length}
-            checked={data.length > 0 && selected.length === data.length}
+            indeterminate={
+              selected.length > 0 && selected.length < cardList.length
+            }
+            checked={cardList.length > 0 && selected.length === cardList.length}
             onChange={handleSelectAllClick}
             inputProps={{
               'aria-label': 'select all desserts',
@@ -687,7 +572,7 @@ export const CardCatalogue = () => {
     { title: 'Business ID', dataIndex: 'businessID', key: 'businessID' },
 
     { title: 'Card Category', dataIndex: 'cardCategory', key: 'cardCategory' },
-    
+
     {
       title: 'Card Status',
       dataIndex: 'cardStatus',
@@ -757,20 +642,16 @@ export const CardCatalogue = () => {
                 // onClick={handleClose}
                 onClick={() => {
                   handleClose();
-                  navigate(
-                    '/productManagement/cardCatalogue/singleupload',
-                    {
-                      state: {
-                        isEditable: true,
-                      },
-                    }
-                  );
+                  navigate('/productManagement/cardCatalogue/singleupload', {
+                    state: {
+                      isEditable: true,
+                    },
+                  });
                 }}
                 style={{ padding: '10px 20px', textAlign: 'left' }}
               >
                 Edit
               </MenuItem>
-             
             </Menu>
           </>
         );
@@ -780,30 +661,31 @@ export const CardCatalogue = () => {
 
   const setSelectedDropdownValue = (
     selectedValues: Array<String>,
-    dropdown: any
+    selectedDropdown: any
   ) => {
-    console.log('selectedValues:', selectedValues);
+    let dropdownFilters = [...filters];
+    dropdownFilters = dropdownFilters.map((filter: any) => {
+      if (filter.name === selectedDropdown.name) {
+        filter.selectedValues = selectedValues;
+      }
+      return filter;
+    });
+    setFilters(dropdownFilters);
   };
 
-  // const filterData = () => {
-  //   const sort = cardList.sort((a: any, b: any) => {
-  //     if (ascending) {
-  //       return a.cardName < b.cardName ? -1 : 1;
-  //     }
-  //     return a.cardName > b.cardName ? -1 : 1;
-  //   });
-  //   setCardList([...sort]);
-  // };
-
-  // const idFilterData = () => {
-  //   const sort = cardList.sort((a: any, b: any) => {
-  //     if (idSorting) {
-  //       return a.orgId < b.orgId ? -1 : 1;
-  //     }
-  //     return a.orgId > b.orgId ? -1 : 1;
-  //   });
-  //   setCardList([...sort]);
-  // };
+  const fetchCardList = async () => {
+    const payload = {
+      page: 0,
+      size: 10,
+    } as any;
+    filters.forEach((filter: any) => {
+      payload[filter.payloadKey] = filter.selectedValues;
+    });
+    console.log('payload', payload);
+    const result = await getListOfCards(payload);
+    console.log('resultttttttt', result);
+    prepareCardList(result);
+  };
 
   return (
     <Stack>
@@ -859,24 +741,21 @@ export const CardCatalogue = () => {
 
           <Box className="bodyBox">
             <Grid container spacing={2}>
-              {CardCatalogueFilterDropdown?.map(
-                (eachItem: any, index: number) => {
-                  return (
-                    <Grid item xs={12} sm={6} md={3} key={index}>
-                      <Typography className="dropdown-label">
-                        {eachItem?.label}
-                      </Typography>
-                      <SelectDropdown options={eachItem?.option} />
-                      {/* <SelectDropdown
-                        options={eachItem?.option}
-                        sendSelectedValue={(selectedValues: Array<String>) =>
-                          setSelectedDropdownValue(selectedValues, eachItem)
-                        }
-                      /> */}
-                    </Grid>
-                  );
-                }
-              )}
+              {filters?.map((eachItem: any, index: number) => {
+                return (
+                  <Grid item xs={12} sm={6} md={3} key={index}>
+                    <Typography className="dropdown-label">
+                      {eachItem?.label}
+                    </Typography>
+                    <SelectDropdown
+                      options={eachItem?.options}
+                      sendSelectedValues={(selectedValues: Array<String>) =>
+                        setSelectedDropdownValue(selectedValues, eachItem)
+                      }
+                    />
+                  </Grid>
+                );
+              })}
             </Grid>
           </Box>
 
@@ -896,6 +775,7 @@ export const CardCatalogue = () => {
               sx={{ textTransform: 'capitalize' }}
               color="secondary"
               variant="contained"
+              onClick={fetchCardList}
             >
               Search
             </Button>

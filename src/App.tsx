@@ -52,6 +52,7 @@ import ReTargetingDetails from './pages/lms/reTargeting/screens/reTargetingScree
 import { LMSHistoryLogDetails } from './pages/lms/lmsRule/lmsHistoryLog/lmsHistoryLogDetails';
 import LoginLayout from './components/layout/loginLayout/loginLayout';
 import { LoginLayoutPage } from './pages/login/LoginLayoutPage';
+import { DetailsHistoryLogDetails } from './pages/productManagement/cardCatalogue/screens/detailsHistoryLogDetails';
 
 import { NewPasswordPage } from './pages/login/screens/NewPassword/newPasswordPage';
 import { NewLogin } from './pages/login/screens/NewLogin/NewLogin';
@@ -102,6 +103,10 @@ const router = createBrowserRouter(
         element={<ReviewCard />}
       />
       <Route
+          path="/productManagement/cardCatalogue/cardCataloguehistoryLog"
+          element={<DetailsHistoryLogDetails />}
+        />
+        <Route
         path="/productManagement/programmeManagement/ProgrammeHistoryDetails"
         element={<ProgrammeHistoryDetails />}
       />

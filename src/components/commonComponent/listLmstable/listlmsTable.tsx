@@ -378,7 +378,7 @@ const ListLMSTable = (props: any) => {
         </div>
 
         <Grid container spacing={0}>
-          <Grid item sm={9} sx={{ maxWidth: '900px !important' }}>
+          <Grid item sm={9}>
             <TableContainer
               component={Paper}
               // sx={{ maxWidth: '950px' }}
@@ -451,7 +451,14 @@ const ListLMSTable = (props: any) => {
             </TableContainer>
           </Grid>
           <Grid item sm={3}>
-            <div style={{ boxShadow: props?.flag === 'riskMngmt' ? 'none' :'-10px 0 8px 0 #EDEDED' }}>
+            <div
+              style={{
+                boxShadow:
+                  props?.flag === 'riskMngmt'
+                    ? 'none'
+                    : '-10px 0 8px 0 #EDEDED',
+              }}
+            >
               <TableContainer>
                 <Table
                   style={{

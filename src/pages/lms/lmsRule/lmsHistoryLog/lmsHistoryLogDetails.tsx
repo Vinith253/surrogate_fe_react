@@ -196,7 +196,9 @@ export const LMSHistoryLogDetails = () => {
             variant="outlined"
             color="secondary"
             className="history-close-button"
-            onClick={() => navigate('/lms/lmsRule')}
+            onClick={() =>
+              navigate('/lms/lmsRule', { state: { activeTab: '2' } })
+            }
           >
             Close
           </Button>
