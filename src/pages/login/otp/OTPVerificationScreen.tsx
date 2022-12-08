@@ -133,9 +133,9 @@ export default function OtpVerificationScreen() {
   
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box  className='otp-container' sx={{ display: 'flex' }}>
       
-      <Box
+      <Box className='otp-head-container'
         sx={{
           height: '100vh',
           width: '50%',
@@ -146,27 +146,25 @@ export default function OtpVerificationScreen() {
           alignItems: 'center',
         }}
       >
-        <Box
+        <Box className='otp-logo-container'
           sx={{
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'flex-start',
-            paddingX: '30px',
-          
-            // backgroundColor: 'red',
+            paddingX: '1.875rem',
             justifyContent: 'center',
             marginLeft:'100%'
           }}
         >
           <Box>
             <img src={Yesbank} alt="logo" />
-            <Typography
+            <Typography className='otp-logo-text'
               sx={{
                 color: '#004C8F',
-                fontSize: '14px',
+                fontSize: '0.875rem',
                 fontWeight: '700',
-                lineHeight: '16.8px',
-                letterSpacing:'3px',
+                lineHeight: '1.05rem',
+                letterSpacing:'0.1875rem',
               }}
             >
               Surrogate Portal
@@ -175,22 +173,22 @@ export default function OtpVerificationScreen() {
 
          
             <>
-              <Box
+              <Box className='otp-forgot-box'
                 sx={{
                   display: 'flex',
-                  marginY: '15px',
+                  marginY: '0.9375rem',
                   alignItem: 'center',
                   justifyContent: 'space-between',
                   width: '100%',
                 }}
               >
-                <Box>
-                  <Typography sx={{ fontSize: '20px', fontWeight: '500' }}>
+                <Box className='otp-forgot-left' >
+                  <Typography sx={{ fontSize: '1.25rem', fontWeight: '500' }}>
                     Forgot Password
                   </Typography>
                 </Box>
                 <Box>
-                  <Button 
+                  <Button  onClick={()=>navigate('/login/newpassword')} className='otp-forgot-right'
                   
                     sx={{ textTransform: 'capitalize', color: '#0662B7' }}
                   >
@@ -201,7 +199,7 @@ export default function OtpVerificationScreen() {
 
               <Box>
                 <Box style={{ backgroundColor: 'success.light' }}>
-                  <Typography sx={{ fontSize: '14px', marginBottom: '30px' }}>
+                  <Typography sx={{ fontSize: '0.875rem', marginBottom: '1.875rem' }}>
                     Enter the 6-digit OTP sent to your email ID
                   </Typography>
                   <OTPInputContainer
@@ -214,7 +212,7 @@ export default function OtpVerificationScreen() {
                       display: 'flex',
                       flexDirection: 'row',
                       justifyContent: 'space-between',
-                      marginTop: '20px',
+                      marginTop: '1.25rem',
                       alignItems: 'center',
                     }}
                   >
@@ -240,7 +238,7 @@ export default function OtpVerificationScreen() {
                   {showError ? (
                     <Box
                       sx={{
-                        marginTop: '25px',
+                        marginTop: '1.5625rem',
                         display: 'flex',
                         gap: 2,
                         alignItems: 'center',
@@ -249,7 +247,7 @@ export default function OtpVerificationScreen() {
                       <img src={wrong_Info} />
                       <Typography
                         sx={{
-                          fontSize: '10px',
+                          fontSize: '0.625rem',
                           fontWeight: '400',
                           color: '#992D26',
                         }}
@@ -273,7 +271,7 @@ export default function OtpVerificationScreen() {
                     sx={{
                       textTransform: 'capitalize',
                       color: 'white',
-                      width: '340px',
+                      width: '21.25rem',
                       '&:disabled': {
                         backgroundColor: '#82B1DB',
                       }
@@ -286,14 +284,14 @@ export default function OtpVerificationScreen() {
                     sx={{
                       display: 'flex',
                       gap: 2,
-                      marginTop: '10px',
+                      marginTop: '0.625rem',
                       alignItems: 'center',
                     }}
                   >
                     <img style={{color:'#AFAEAF'}} src={info_icon} />
                     <Typography
                       sx={{
-                        fontSize: '10px',
+                        fontSize: '0.625rem',
                         fontWeight: 400,
                         color: ' #898989',
                       }}

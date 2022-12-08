@@ -3,6 +3,7 @@ import { TabBar } from '../../../components/commonComponent/customTab/CustomTab'
 import LMSList from './lmsList';
 import { Stack } from '@mui/material';
 import './style.scss';
+import { useLocation } from 'react-router-dom';
 import { LMSHistoryLog } from './lmsHistoryLog/lmsHistoryLog';
 
 function LMSRule() {
@@ -21,9 +22,14 @@ function LMSRule() {
     },
   ];
 
+  const location = useLocation();
+  console.log('location?.state?.activeTab', location?.state?.activeTab);
   return (
     <Stack className="lms-rule-main-container">
-      <TabBar data={TabListData} />
+      <TabBar
+        data={TabListData}
+        activeTab={location?.state?.activeTab ?? '1'}
+      />
     </Stack>
   );
 }

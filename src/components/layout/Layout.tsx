@@ -10,6 +10,7 @@ import {
   ListItemIcon,
   ListItemText,
   Stack,
+  Button,
 } from '@mui/material';
 import {
   Link,
@@ -25,7 +26,6 @@ import {
   CSSObject,
   withStyles,
 } from '@mui/material/styles';
-// import Box from "@mui/material/Box";
 import MuiDrawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
@@ -53,7 +53,8 @@ import retargeting_icon from '../../assets/icons/retargeting-icon.svg';
 import lms_rule_icon from '../../assets/icons/lms-rule-icon.svg';
 import powerByM2p from '../../assets/icons/power_by_icon.svg';
 import risk_customer_report from '../../assets/icons/risk-customer-report.svg';
-
+import profile_img from '../../assets/images/profile.svg';
+import logout_img from '../../assets/images/logout.svg';
 import profile_icon from '../../assets/icons/profile_icon.svg';
 import profile_arrow_icon from '../../assets/icons/profile_arrow_icon.svg';
 import Collapse from '@mui/material/Collapse';
@@ -578,18 +579,20 @@ export default function Layout() {
               alignItems: 'center',
               justifyContent: 'space-between',
               padding: '0 20px',
-              borderBottom: '1px solid',
-              boxShadow: '0 0 15px #aaaaaa',
+              boxShadow: '0 0 18px #DFE0E3',
               backgroundColor: 'white',
+              // boxShadow: 2,
             }}
           >
             <Typography
               variant="h5"
               sx={{
-                letterSpacing: '0.2px',
+                fontFamily: 'Ilisarniq',
+                letterSpacing: '0.0015em',
                 fontSize: '20px',
                 fontWeight: '500',
                 color: '#151515',
+                lineHeight: '22px',
               }}
             >
               Surrogate Programme
@@ -601,8 +604,6 @@ export default function Layout() {
                 flexDirection: 'row',
                 alignItems: 'center',
                 padding: '0 20px',
-                // borderBottom
-                // borderColor: "success.light"
               }}
             >
               <Box className="search-container-layout">
@@ -632,22 +633,12 @@ export default function Layout() {
                 </Typography>
               </Box>
 
-              {/* <IconButton
-                sx={{
-                  height: 45,
-                  width: 45,
-                }}
-                onClick={() => setOpenMenu(!setOpenMenu)}
-              >
-                <img src={profile_icon} />
-                <img src={profile_arrow_icon} style={{ padding: "0 10px" }} />
-              </IconButton> */}
               <IconButton
                 id="basic-button"
                 sx={{
-                  height: 45,
+                  height: 10,
 
-                  width: 45,
+                  width: 10,
                 }}
                 aria-controls={openMenu ? 'basic-menu' : undefined}
                 aria-haspopup="true"
@@ -672,8 +663,19 @@ export default function Layout() {
                   'aria-labelledby': 'basic-button',
                 }}
               >
-                <MenuItem onClick={onClickHandleProfile}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                <Box>
+                  <MenuItem sx={{ gap: 2 }} onClick={onClickHandleProfile}>
+                    <img src={profile_img} />
+                    Profile
+                  </MenuItem>
+                </Box>
+
+                <Box>
+                  <MenuItem sx={{ gap: 2 }} onClick={handleClose}>
+                    <img src={logout_img} />
+                    Logout
+                  </MenuItem>
+                </Box>
               </Menu>
             </Box>
           </Box>

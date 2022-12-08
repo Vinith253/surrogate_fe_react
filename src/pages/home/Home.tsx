@@ -12,6 +12,11 @@ import frequentActivity from '../../assets/images/frequentActivity.svg';
 import '../home/Home.scss';
 import { useEffect, useState } from 'react';
 import Loading from '../../components/commonComponent/customModal/Re-Targeting/Loading';
+import { Calculate } from '@mui/icons-material';
+import Calculated from '../../components/commonComponent/customModal/Risk-managementNew/Calculated';
+import EmployeeDetails from '../../components/commonComponent/customModal/ROLE-CREATION/EmployeeDetails';
+import AccountDetais from '../../components/commonComponent/customModal/Risk-managementNew/AccountDetais';
+import AddressDetails from '../../components/commonComponent/customModal/Risk-managementNew/AddressDetails';
 
 export default function Home() {
   const pendingActionsData = {
@@ -64,22 +69,22 @@ export default function Home() {
       {
         image: sales_report,
         mainContent: 'Sales Report',
-        path: '/sales/salesReport',
+        // path: '/sales/salesReport',
       },
       {
         image: customer_report,
         mainContent: 'Customer Report',
-        path: '/sales/salesReport',
+        // path: '/sales/salesReport',
       },
       {
         image: performance_report,
         mainContent: 'Performance Report',
-        path: '/sales/salesReport',
+        // path: '/sales/salesReport',
       },
       {
         image: lms,
         mainContent: 'LMS',
-        path: '/sales/salesReport',
+        // path: '/sales/salesReport',
       },
     ],
   };
@@ -95,6 +100,10 @@ export default function Home() {
       </Typography>
 
       <Box className="home-container">
+        {/* <Calculated />
+        <EmployeeDetails />
+        <AccountDetais /> */}
+        {/* <AddressDetails /> */}
         <Card content={pendingActionsData} />
         <Card content={savedItemsData} />
         <Card content={frequentActivitiesData} />

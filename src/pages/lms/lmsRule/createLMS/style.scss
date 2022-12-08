@@ -7,6 +7,11 @@
     padding: 24px 32px 24px 32px;
     border-radius: 8px;
   }
+
+  .margin-top {
+    margin-top: 30px;
+  }
+
   .lms-rule-container {
     background-color: #ffffff;
     padding: 20px 30px 30px 30px;
@@ -31,24 +36,6 @@
     .css-1869usk-MuiFormControl-root {
       width: 100%;
       margin: 3px 0px 0px 0px;
-    }
-
-    .plus-icon-container {
-      margin-left: 20px;
-
-      .plus-icon {
-        width: 20px;
-        display: flex;
-        cursor: pointer;
-        margin-left: auto;
-      }
-    }
-
-    .add-more-days {
-      cursor: pointer;
-      font-size: 14px;
-      margin-left: -5px;
-      color: #0662b7;
     }
 
     .lms-rule-form-container {
@@ -109,11 +96,71 @@
   .frequency-period-form {
     margin-top: 10px;
 
+    .plus-icon-container {
+      display: flex;
+      width: 100%;
+      .plus-icon {
+        margin-left: auto;
+        width: 23px;
+        cursor: pointer;
+      }
+
+      .add-more-days {
+        margin: 2px 0px 0px 5px;
+        cursor: pointer;
+        font-size: 14px;
+        color: #0662b7;
+      }
+    }
+
     .select-date-container {
-      margin: 20px 0px;
-      padding: 20px;
+      margin: 10px 0px;
       border: 1px solid #d7d8d8;
       border-radius: 8px;
+
+      .frequency-header-container {
+        padding: 20px;
+        display: flex;
+        width: 100%;
+
+        .frequency-header {
+          font-size: 14px;
+        }
+
+        .remove-container {
+          display: flex;
+          margin-left: auto;
+          .remove-icon {
+            width: 19px;
+            margin: 0px 10px;
+          }
+          .remove-label {
+            color: #0662b7;
+            font-size: 14px;
+            margin-top: 1px;
+          }
+        }
+
+        .enabled {
+          cursor: pointer;
+        }
+
+        .disabled {
+          cursor: not-allowed;
+        }
+      }
+
+      .frequency-header-underline {
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        width: 100%;
+        border-bottom: 2px solid #eceff2;
+      }
+
+      .frequency-textfield {
+        padding-bottom: 20px;
+      }
 
       .radio-buttons-conatiner {
         margin-top: 20px;
@@ -138,34 +185,6 @@
         .css-ad8z8b-MuiButtonBase-root-MuiSwitch-switchBase.Mui-checked {
           color: #0662b7;
         }
-      }
-    }
-
-    .remove-container {
-      cursor: pointer;
-      display: flex;
-      margin-left: auto;
-      .remove-icon {
-        width: 20px;
-        margin: -1px 10px 0px 10px;
-      }
-      .remove-label {
-        color: #0662b7;
-        font-size: 14px;
-      }
-    }
-
-    .disabled-remove-container {
-      cursor: not-allowed;
-      display: flex;
-      margin-left: auto;
-      .remove-icon {
-        width: 20px;
-        margin: -1px 10px 0px 10px;
-      }
-      .remove-label {
-        color: #0662b7;
-        font-size: 14px;
       }
     }
 

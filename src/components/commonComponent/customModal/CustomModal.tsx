@@ -46,6 +46,9 @@ import loading_icon from '../../../assets/icons/modal-loading.svg';
 import reject_icon from '../../../assets/icons/Rejection-icon.svg';
 import info_icon from '../../../assets/images/info_icon.svg';
 import './CustomModal.scss';
+import OTPInputContainer from './otpInput/OtpInputContainer';
+import TimerComponent from '../../../utils/Timer';
+import { Label } from '@mui/icons-material';
 
 type props = {
   openSuccess?: any;
@@ -94,6 +97,7 @@ type props = {
   existingRoleItem?: Array<string>;
   employeeDetailsRowOne?: any;
   employeeDetailsRowTwo?: any;
+  addressDetails?: any;
   employeeDetailsRowThree?: any;
   radioValueThree?: string;
   radioValueFour?: string;
@@ -108,6 +112,13 @@ type props = {
   textAreaValue?: any;
   buttonDisabled?: any;
   textareaonchangeFun?: any;
+  emailValue?: any;
+  handleMouseDownPassword?: any;
+  handleClickShowPassword?: any;
+  handleClickShowConfirmPassword?: any;
+  createValuePassword?: any;
+  closeButtonMsg?: string;
+  modalContent?: string;
 };
 
 function CustomModal({
@@ -156,6 +167,7 @@ function CustomModal({
   duplicate_role_content,
   existingRoleItem,
   employeeDetailsRowOne,
+  addressDetails,
   employeeDetailsRowTwo,
   employeeDetailsRowThree,
   radioValueThree,
@@ -171,42 +183,30 @@ function CustomModal({
   textAreaValue,
   buttonDisabled,
   textareaonchangeFun,
+  emailValue,
+  handleMouseDownPassword,
+  handleClickShowPassword,
+  handleClickShowConfirmPassword,
+  createValuePassword,
+  closeButtonMsg,
+  modalContent,
 }: props) {
   const [pauseStatus, setPauseStatus] = useState(pauseStatusKey);
   const [startDatevalue, setStartDateValue] = useState(null);
   const [endDatevalue, setEndDateValue] = useState(null);
   const [existingRole, setexistingRole] = React.useState('');
   const [checked, setChecked] = React.useState(false);
-  // const [textAreaValue, setTextAreaValue] = useState('');
-  // const [buttonDisabled, setButtonDisabled] = useState<boolean>(true);
+  const [otp, setOtp] = useState<number>(0);
+  const [showError, setShowError] = useState<boolean>(false);
+  const [resentOTPDisabled, setResentOTPDisabled] = useState<boolean>(false);
 
-  // const textareaonchangeFun = (e: any) => {
-  //   setButtonDisabled(textAreaValue.length > 6 ? false : true);
-  //   setTextAreaValue(e.target.value);
-  // };
-
-  const [values, setValues] = React.useState<any>({
-    password: '',
-    confirmPassword: '',
-    showPassword: false,
-  });
-
-  const createNewPasswordFun =
-    (prop: keyof any) => (event: React.ChangeEvent<HTMLInputElement>) => {
-      setValues({ ...values, [prop]: event.target.value });
-    };
-
-  const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    event.preventDefault();
+  const updateTimer = (value: number) => {
+    setResentOTPDisabled(value === 0 ? true : false);
   };
 
-  const handleClickShowPassword = () => {
-    setValues({
-      ...values,
-      showPassword: !values.showPassword,
-    });
+  const onChangeOtp = (e: any) => {
+    setOtp(e);
+    setShowError(false);
   };
 
   useEffect(() => {
@@ -243,6 +243,7 @@ function CustomModal({
           title == 'Duplicate LMS Rule' ||
           title == 'Employee Details' ||
           title == 'Choose the mode of communication' ||
+          title == 'User Traceability - Address Details' ||
           LoadingMsg ||
           tableDataLMSRule
             ? true
@@ -393,6 +394,66 @@ function CustomModal({
             </Stack>
           )}
 
+          {addressDetails && (
+            <Box
+              sx={{
+                marginTop: '8px',
+                paddingBottom: '12px',
+              }}
+            >
+              {addressDetails.map((item: any) => (
+                <div className="modalContainer">
+                  <div className="one">
+                    <Typography sx={{ color: '#AFAEAF', fontSize: '12px' }}>
+                      {item.Key}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        color: ' #151515',
+                        fontSize: '14px',
+                        fontWeight: '400',
+                        marginRight: '8rem',
+                      }}
+                    >
+                      {item.value}
+                    </Typography>
+                  </div>
+                  <div className="one">
+                    <Typography
+                      className="employee-details-key"
+                      sx={{ color: '#AFAEAF', fontSize: '12px' }}
+                    >
+                      {item.addressSource}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        color: ' #151515',
+                        fontSize: '14px',
+                        fontWeight: '400',
+                      }}
+                    >
+                      {item.billMethod}
+                    </Typography>
+                    {item.selectedAddress && (
+                      <Typography
+                        sx={{
+                          fontSize: '12px',
+                          backgroundColor: '#E3F3E6',
+                          padding: '4px 8px',
+                          color: '#1C592A',
+                          width: '142px',
+                          textAlign: 'end',
+                        }}
+                      >
+                        Selected Address
+                      </Typography>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </Box>
+          )}
+
           {successModalTitle && (
             <DialogContent className="successs-modal-content">
               <DialogContentText
@@ -471,16 +532,26 @@ function CustomModal({
                 sx={{ fontSize: '14px', textTransform: 'capitalize' }}
                 onClick={closeFunction}
               >
-                Close
+                {closeButtonMsg}
               </Button>
             </Stack>
           )}
 
           {changePasswordTitleMsg && (
             <Stack sx={{ margin: '0 60px', textAlign: 'start' }}>
-              <Typography fontWeight={700} pb={2} pt={1} fontSize={11}>
+              <InputLabel
+                htmlFor="outlined-adornment-amount"
+                required
+                sx={{
+                  marginTop: '20px',
+                  color: '#151515',
+                  fontWeight: '600',
+                  fontSize: '12px',
+                  marginBottom: '5px',
+                }}
+              >
                 {changePasswordTitleMsg}
-              </Typography>
+              </InputLabel>
             </Stack>
           )}
 
@@ -488,6 +559,7 @@ function CustomModal({
             <Stack sx={{ margin: '0 60px' }}>
               <InputLabel
                 htmlFor="outlined-adornment-amount"
+                required
                 sx={{
                   marginTop: '20px',
                   color: '#151515',
@@ -498,22 +570,15 @@ function CustomModal({
               >
                 {enterNewPassword}
               </InputLabel>
-              {/* <TextField
-                variant="outlined"
-                size="small"
-                sx={{ height: '40px', fontSize: '14px' }}
-                type="password"
-                autoComplete="current-password"
-              /> */}
 
               <FormControl sx={{ width: '32ch' }} variant="outlined">
                 <OutlinedInput
                   size="small"
                   sx={{ height: '45px', fontSize: '14px' }}
                   id="outlined-adornment-password"
-                  type={values.showPassword ? 'password' : 'text '}
-                  value={values.password}
-                  onChange={createNewPasswordFun('password')}
+                  type={createValuePassword.showPassword ? 'password' : 'text '}
+                  value={createValuePassword.password}
+                  onChange={textareaonchangeFun('password')}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton
@@ -522,7 +587,7 @@ function CustomModal({
                         onMouseDown={handleMouseDownPassword}
                         edge="end"
                       >
-                        {values.showPassword ? (
+                        {createValuePassword.showPassword ? (
                           <VisibilityOff />
                         ) : (
                           <Visibility />
@@ -535,6 +600,7 @@ function CustomModal({
 
               <InputLabel
                 htmlFor="outlined-adornment-amount"
+                required={confirmNewPassword !== '' ? true : false}
                 sx={{
                   marginTop: '20px',
                   color: '#151515',
@@ -551,18 +617,22 @@ function CustomModal({
                   size="small"
                   sx={{ height: '45px', fontSize: '14px' }}
                   id="outlined-adornment-password"
-                  type={values.showPassword ? 'password' : 'text '}
-                  value={values.confirmPassword}
-                  onChange={createNewPasswordFun('confirmPassword')}
+                  type={
+                    createValuePassword.showConfirmPassword
+                      ? 'password'
+                      : 'text '
+                  }
+                  value={createValuePassword.confirmPassword}
+                  onChange={textareaonchangeFun('confirmPassword')}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton
                         aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
+                        onClick={handleClickShowConfirmPassword}
                         onMouseDown={handleMouseDownPassword}
                         edge="end"
                       >
-                        {values.showPassword ? (
+                        {createValuePassword.showConfirmPassword ? (
                           <VisibilityOff />
                         ) : (
                           <Visibility />
@@ -572,26 +642,6 @@ function CustomModal({
                   }
                 />
               </FormControl>
-
-              {/* <TextField
-                variant="outlined"
-                size="small"
-                sx={{ height: '40px', fontSize: '14px' }}
-                type="password"
-                autoComplete="current-password"
-              /> */}
-              <Typography
-                sx={{
-                  fontSize: '14px',
-                  textAlign: 'end',
-                  color: ' #0662B7',
-                  fontWeight: '500',
-                  marginTop: '10px',
-                  marginBottom: '20px',
-                }}
-              >
-                {forgotPassword}
-              </Typography>
             </Stack>
           )}
 
@@ -603,36 +653,11 @@ function CustomModal({
                 margin: '0 60px',
               }}
             >
-              <TextField
-                variant="outlined"
-                size="small"
-                sx={{ width: '45px', margin: '4px' }}
-              ></TextField>
-              <TextField
-                variant="outlined"
-                size="small"
-                sx={{ width: '45px', margin: '4px' }}
-              ></TextField>
-              <TextField
-                variant="outlined"
-                size="small"
-                sx={{ width: '45px', margin: '4px' }}
-              ></TextField>
-              <TextField
-                variant="outlined"
-                size="small"
-                sx={{ width: '45px', margin: '4px' }}
-              ></TextField>
-              <TextField
-                variant="outlined"
-                size="small"
-                sx={{ width: '45px', margin: '4px' }}
-              ></TextField>
-              <TextField
-                variant="outlined"
-                size="small"
-                sx={{ width: '45px', margin: '4px' }}
-              ></TextField>
+              <OTPInputContainer
+                otpError={showError}
+                otpValue={otp}
+                onOTPChange={onChangeOtp}
+              />
             </Box>
           )}
 
@@ -645,9 +670,17 @@ function CustomModal({
               }}
             >
               <Typography sx={{ color: '#D02127', fontSize: '13px' }}>
-                02 : 29
+                <TimerComponent time={9} callBackFunction={updateTimer} />
               </Typography>
-              <Typography sx={{ color: '#82B1DB', fontSize: '13px' }}>
+              <Typography
+                sx={{
+                  color: resentOTPDisabled ? `${colors.Modalblue}` : '#82B1DB',
+                  fontSize: '13px',
+                }}
+                onClick={() =>
+                  resentOTPDisabled ? console.log('resend otp clicked') : null
+                }
+              >
                 {resentOTP}
               </Typography>
             </Stack>
@@ -660,46 +693,53 @@ function CustomModal({
                 size="small"
                 sx={{ height: '40px', fontSize: '14px' }}
                 placeholder={'Ashwin@yesbank.com'}
+                onChange={textareaonchangeFun}
+                value={emailValue}
               ></TextField>
+            </Stack>
+          )}
 
+          {(ProceedBtn === 'Verify' ||
+            ProceedBtn === 'Proceed' ||
+            ProceedBtn === 'Update') && (
+            <Stack sx={{ margin: '0 60px' }}>
               <Button
                 variant="contained"
                 onClick={handleCloseSuccess}
-                sx={{
+                disabled={
+                  ProceedBtn === 'Verify'
+                    ? String(otp).length === 6
+                      ? false
+                      : true
+                    : buttonDisabled
+                }
+                style={{
                   // width: '340px',
                   height: '48px',
                   fontSize: '12px',
                   marginTop: '30px',
                   marginBottom: '40px',
                   textTransform: 'capitalize',
-                  backgroundColor: `${colors.Modalblue}`,
-                  '&:hover': {
-                    backgroundColor: `${colors.Modalblue}`,
-                  },
                 }}
-              >
-                {ProceedBtn}
-              </Button>
-            </Stack>
-          )}
-
-          {(ProceedBtn === 'Verify' || ProceedBtn === 'Update') && (
-            <Stack sx={{ margin: '0 60px' }}>
-              <Button
-                variant="contained"
-                onClick={handleCloseSuccess}
-                sx={{
-                  // width: '340px',
-                  height: '48px',
-                  fontSize: '12px',
-                  marginTop: '10px',
-                  marginBottom: '14px',
-                  textTransform: 'capitalize',
-                  backgroundColor: `${colors.Modalblue}`,
-                  '&:hover': {
-                    backgroundColor: `${colors.Modalblue}`,
-                  },
-                }}
+                sx={
+                  buttonDisabled
+                    ? {
+                        backgroundColor: '#82B1DB !important',
+                        color: '#FFFFFF !important',
+                      }
+                    : (ProceedBtn === 'Verify' ? String(otp).length != 6 : '')
+                    ? {
+                        backgroundColor: '#82B1DB !important',
+                        color: '#FFFFFF !important',
+                      }
+                    : {
+                        backgroundColor: ' #0662B7',
+                        color: '#FFFFFF',
+                        '&:hover': {
+                          backgroundColor: '#0662B7',
+                        },
+                      }
+                }
               >
                 {ProceedBtn}
               </Button>
@@ -722,26 +762,6 @@ function CustomModal({
             </Stack>
           )}
 
-          {/* {rejectedModaltitle && (
-            <DialogContent sx={{ paddingTop: '18px', paddingBottom: '0px' }}>
-              <DialogContentText
-                id="alert-dialog-slide-description"
-                align={'center'}
-                fontSize={16}
-                fontWeight={600}
-                color="#1d1d1d"
-                sx={{
-                  padding: {
-                    xs: '0 13px',
-                  },
-                  hyphens: 'initial',
-                }}
-              >
-                {rejectedModaltitle}
-              </DialogContentText>
-            </DialogContent>
-          )} */}
-
           {successModalMsg && (
             <Typography
               fontWeight={400}
@@ -759,6 +779,19 @@ function CustomModal({
               }}
             >
               {successModalMsg}
+            </Typography>
+          )}
+
+          {modalContent && (
+            <Typography
+              fontWeight={400}
+              sx={{
+                padding: '16px 10px 0 10px',
+                color: '#656769',
+                fontSize: '13px',
+              }}
+            >
+              {modalContent}
             </Typography>
           )}
 
@@ -1189,6 +1222,20 @@ function CustomModal({
               <Button
                 variant="contained"
                 className="submit-button"
+                sx={
+                  buttonDisabled
+                    ? {
+                        backgroundColor: '#82B1DB !important',
+                        color: '#FFFFFF !important',
+                      }
+                    : {
+                        backgroundColor: ' #0662B7',
+                        color: '#FFFFFF',
+                        '&:hover': {
+                          backgroundColor: '#0662B7',
+                        },
+                      }
+                }
                 onClick={handleSuccess}
                 disabled={buttonDisabled}
               >

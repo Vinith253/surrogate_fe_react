@@ -1,4 +1,5 @@
 .card-container {
+  box-shadow: 0px 1px 2px 1px rgba(21, 21, 21, 0.1) !important;
   .header-container {
     display: flex !important;
     flex-direction: row !important;
@@ -17,28 +18,40 @@
   }
   .list-box {
     display: flex !important;
+    justify-content: space-between !important;
     gap: 5% !important;
     padding: 1rem !important;
+   
     .card-head {
-      font-size: calc(1px + 1vw);
-      color: #656769;
+      font-family: 'Ilisarniq';
+      font-style: normal;
       font-weight: 400;
+      font-size: 1.09375vw;
+      line-height: 16px;
+      letter-spacing: 0.0025em;
+      color: #656769;
+      padding-bottom: 6px;
     }
     .card-subhead {
-      font-size: calc(-2.5px + 1vw);
+      font-family: 'Ilisarniq';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 0.78125vw;
+      line-height: 14px;
+      letter-spacing: 0.004em;
       color: #afaeaf;
     }
     .main-content {
       display: flex;
       align-items: center;
-      width: 70%;
+      width: 80%;
     }
     .flex-class {
       display: flex;
       justify-content: center;
       align-items: center;
-      cursor: pointer;
     }
+
     .saved-items-flex {
       display: flex;
       justify-content: center;

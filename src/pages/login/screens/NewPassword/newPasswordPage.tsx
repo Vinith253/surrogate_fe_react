@@ -1,5 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
+import './Newpassword.scss';
 import {
   Box,
   Typography,
@@ -8,13 +9,13 @@ import {
   InputLabel,
   InputAdornment,
 } from '@mui/material';
-import Poweredby from '../../../assets/images/Powered by.svg';
-import Yesbank from '../../../assets/images/Yes_Bank_SVG_Logo 1.svg';
+import Yesbank from '../../../../assets/images/Yes_Bank_SVG_Logo 1.svg';
 import { LinearScale, Visibility, VisibilityOff } from '@mui/icons-material';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import IconButton from '@mui/material/IconButton';
 import { useLocation, useNavigate } from 'react-router-dom';
-import info_icon from '../../../assets/images/info_icon.svg';
+import info_icon from '../../../../assets/images/info_icon.svg';
+import Poweredby from '../../../../assets/images/Powered by.svg';
 
 interface State {
   amount: string;
@@ -32,8 +33,8 @@ export const NewPasswordPage = () => {
   const [validOtp, setValidOtp] = useState(false);
   const [showError, setShowError] = useState<boolean>(false);
   const [buttonDisabled, setButtonDisabled] = useState<boolean>(true);
-  const [ newPassword, setNewPassword]=useState('')
-  const [ confirmPassword, setConfirmPassword]=useState('')
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [values, setValues] = useState<State>({
     amount: '',
     password: '',
@@ -46,7 +47,7 @@ export const NewPasswordPage = () => {
   const handlePasswordChange =
     (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
       setValues({ ...values, [prop]: event.target.value });
-      setNewPassword(event.target.value)
+      setNewPassword(event.target.value);
     };
   const handleConfirmPasswordChange =
     (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -88,44 +89,26 @@ export const NewPasswordPage = () => {
     }
   };
 
-  const handleDisableBtn =()=>{
-    if(newPassword===confirmPassword){
-      setButtonDisabled(false)
+  const handleDisableBtn = () => {
+    if (newPassword === confirmPassword) {
+      setButtonDisabled(false);
     }
-  }
+  };
 
   return (
     <Box
-      sx={{
-        height: '100vh',
-        width: '50%',
-        backgroundColor: 'white',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
+      className="newpassword-container"
+      
     >
       <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'flex-start',
-          paddingX: '30px',
-          // backgroundColor: 'red',
-          justifyContent: 'center',
-        }}
+        className="newpassword-head"
+        
       >
         <Box>
           <img src={Yesbank} alt="logo" />
           <Typography
-            sx={{
-              color: '#004C8F',
-              fontSize: '14px',
-              fontWeight: '700',
-              lineHeight: '16.8px',
-              letterSpacing: '3px',
-            }}
+            className="logo-text"
+            
           >
             Surrogate Portal
           </Typography>
@@ -133,29 +116,24 @@ export const NewPasswordPage = () => {
 
         <Box>
           <Box
-            sx={{
-              display: 'flex',
-              marginY: '20px',
-              paddingTop: '10px',
-              alignItem: 'center',
-              justifyContent: 'space-between',
-              width: '100%',
-            }}
+            className="password-header"
+            
           >
-            <Box>
+            <Box className="head-left">
               <Typography sx={{ fontSize: '20px', fontWeight: '500' }}>
                 Enter New Password
               </Typography>
             </Box>
-            <Box>
-              <Button sx={{ textTransform: 'capitalize', color: '#0662B7' }}>
+            <Box className="head-right">
+              <Button  onClick={()=>navigate('/login/otp')} sx={{ textTransform: 'capitalize', color: '#0662B7' }}>
                 Back
               </Button>
             </Box>
           </Box>
-          <Box>
-            <Box sx={{ marginY: 3 }}>
+          <Box className="text-field">
+            <Box className="text-new-password-container">
               <InputLabel
+                className="text-new-password"
                 sx={{ color: 'black' }}
                 required
                 htmlFor="outlined-adornment-password"
@@ -163,7 +141,8 @@ export const NewPasswordPage = () => {
                 Enter New Password
               </InputLabel>
               <OutlinedInput
-                sx={{ width: '340px' }}
+                className="input-new-password"
+                // sx={{ width: '340px' }}
                 id="outlined-adornment-password"
                 placeholder="Enter New Password"
                 type={values.showPassword ? 'text' : 'password'}
@@ -178,14 +157,15 @@ export const NewPasswordPage = () => {
                       onMouseDown={handleMouseDownPassword}
                       edge="end"
                     >
-                      {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                      {values.showPassword ? <Visibility /> : <VisibilityOff />}
                     </IconButton>
                   </InputAdornment>
                 }
               />
             </Box>
-            <Box sx={{ marginY: 3 }}>
+            <Box text-confirm-password-container sx={{ marginY: 3 }}>
               <InputLabel
+                className="text-confirm-password"
                 sx={{ color: 'black' }}
                 required
                 htmlFor="outlined-adornment-confirm-password"
@@ -193,10 +173,11 @@ export const NewPasswordPage = () => {
                 Confirm New Password
               </InputLabel>
               <OutlinedInput
+                className="input-confirm-password"
                 sx={{ width: '340px' }}
                 id="outlined-adornment-confirm-password"
                 placeholder="Re-enter New Password"
-                type={values.showConfirmPassword ? 'text' : 'confirmPassword'}
+                type={values.showConfirmPassword ? 'text' : 'password'}
                 value={values.confirmPassword}
                 onChange={handleConfirmPasswordChange('confirmPassword')}
                 size="small"
@@ -209,9 +190,9 @@ export const NewPasswordPage = () => {
                       edge="end"
                     >
                       {values.showConfirmPassword ? (
-                        <VisibilityOff />
-                      ) : (
                         <Visibility />
+                      ) : (
+                        <VisibilityOff />
                       )}
                     </IconButton>
                   </InputAdornment>
@@ -219,49 +200,41 @@ export const NewPasswordPage = () => {
               />
             </Box>
           </Box>
-          <Box sx={{ marginTop: '10%' }}>
+          <Box className="footer">
             <Button
-            disabled={newPassword===confirmPassword ? false :true}
+              disabled={
+                newPassword === confirmPassword &&
+                newPassword !== '' &&
+                confirmPassword !== ''
+                  ? false
+                  : true
+              }
               onClick={submitPassword}
               fullWidth
               variant="contained"
               color="secondary"
+              className="footer-button"
               sx={{
-                textTransform: 'capitalize',
-                color: 'white',
-                width: '340px',
                 '&:disabled': {
                   backgroundColor: '#82B1DB',
                 },
               }}
-              
             >
               Update
             </Button>
             {}
-            <Box
-              sx={{
-                display: 'flex',
-                gap: 2,
-                marginTop: '20px',
-                alignItems: 'center',
-                width: '75%',
-              }}
-            >
+            <Box className="footer-info">
               <img src={info_icon} />
-              <Typography
-                sx={{
-                  fontSize: '10px',
-                  fontWeight: 400,
-                  color: ' #898989',
-                }}
-              >
+              <Typography className="footer-info-message">
                 Password should be 8 characters, including 1 caps, 1 lowercase,
                 1 numeral.
               </Typography>
             </Box>
           </Box>
         </Box>
+      </Box>
+      <Box sx={{ position: 'absolute', bottom: 20, right: 20 }}>
+        <img src={Poweredby} />
       </Box>
     </Box>
   );

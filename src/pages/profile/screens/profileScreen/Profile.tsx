@@ -1,11 +1,12 @@
 import { Box, IconButton, Stack, Typography, Button } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { colors } from '../../../../style/Color';
 import profile_icon from '../../../../assets/icons/profile_icon.svg';
 import passwordShow from '../../../../assets/icons/passwordView.svg';
 import DetailsCard from '../../../../components/commonComponent/DetailsCard';
 import './style.scss';
 import CustomModal from '../../../../components/commonComponent/customModal/CustomModal';
+import { RegexValidation } from '../../../../utils/Regex';
 
 export const personalDetails = {
   title: 'Profile Details',
@@ -85,6 +86,23 @@ export const Profile = () => {
   const [createPassword, setCreatePassword] = useState(false);
   const [successModel, setSuccessModel] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
+  const [emailValue, setEmailValue] = useState('');
+  const [buttonDisabled, setButtonDisabled] = useState<boolean>(true);
+
+  useEffect(() => {
+    updateButtonStatus();
+  }, [emailValue]);
+
+  const updateButtonStatus = () => {
+    setButtonDisabled(
+      emailValue.match(RegexValidation.EmailPattern) ? false : true
+    );
+  };
+  const textareaonchangeFun = (e: any) => {
+    setEmailValue(e.target.value);
+  };
+
   const handleClickOpen = () => {
     setChangePassWord(true);
   };
@@ -94,6 +112,14 @@ export const Profile = () => {
     setChangePassWordOtp(false);
     setCreatePassword(false);
     setSuccessModel(false);
+  };
+  const backButtonVerify = () => {
+    setChangePassWordOtp(false);
+    setChangePassWord(true);
+  };
+  const backButtonCreatePassword = () => {
+    setCreatePassword(false);
+    setChangePassWordOtp(true);
   };
   const ChangePasswordHandleCloseSuccess = () => {
     setChangePassWord(false);
@@ -120,6 +146,56 @@ export const Profile = () => {
     }
     return passwordView;
   };
+
+  const [newPasswordButtonDisabled, setNewPasswordButtonDisabled] =
+    useState<boolean>(true);
+  const [createValuePassword, setCreateValuePassword] = React.useState<any>({
+    password: '',
+    confirmPassword: '',
+    showPassword: true,
+    showConfirmPassword: true,
+  });
+
+  useEffect(() => {
+    console.log(
+      ' createValuePassword.password----2',
+      createValuePassword.password
+    );
+    setNewPasswordButtonDisabled(
+      createValuePassword.password.match(RegexValidation.passwordPattern) &&
+        createValuePassword.confirmPassword === createValuePassword.password
+        ? false
+        : true
+    );
+  }, [createValuePassword.password, createValuePassword.confirmPassword]);
+  const createNewPasswordOnchangeFun =
+    (prop: keyof any) => (event: React.ChangeEvent<HTMLInputElement>) => {
+      setCreateValuePassword({
+        ...createValuePassword,
+        [prop]: event.target.value,
+      });
+    };
+
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+  };
+
+  const handleClickShowPassword = () => {
+    setCreateValuePassword({
+      ...createValuePassword,
+      showPassword: !createValuePassword.showPassword,
+    });
+  };
+
+  const handleClickShowConfirmPassword = () => {
+    setCreateValuePassword({
+      ...createValuePassword,
+      showConfirmPassword: !createValuePassword.showConfirmPassword,
+    });
+  };
+
   return (
     <Stack sx={{ backgroundColor: colors.bgGrey }} className="profileContainer">
       <Stack>
@@ -138,7 +214,8 @@ export const Profile = () => {
               className="userRole"
               sx={{ color: colors.textGreyHeader }}
             >
-              Surrogate Manager, <span style={{color:'black'}} >Employee ID</span> : 231456789021
+              Surrogate Manager,{' '}
+              <span style={{ color: 'black' }}>Employee ID</span> : 231456789021
             </Typography>
           </Stack>
         </Box>
@@ -197,7 +274,11 @@ export const Profile = () => {
             'Enter registered mobile number/email ID to receive OTP)'
           }
           ProceedBtn={'Proceed'}
+          closeButtonMsg={'Close'}
           closeFunction={closeFunction}
+          buttonDisabled={buttonDisabled}
+          textareaonchangeFun={textareaonchangeFun}
+          emailValue={emailValue}
         />
       )}
       {changePassWordOtp && (
@@ -211,9 +292,11 @@ export const Profile = () => {
           resentOTPmsg={
             'Please enter the correct OTP sent to your registered email ID'
           }
-          closeFunction={closeFunction}
+          closeButtonMsg={'Back'}
+          closeFunction={backButtonVerify}
         />
       )}
+
       {createPassword && (
         <CustomModal
           openSuccess={createPassword}
@@ -226,18 +309,23 @@ export const Profile = () => {
           enterNewPassword={'Enter New Password'}
           confirmNewPassword={'Confirm New Password'}
           forgotPassword={'Forgot Password?'}
-          closeFunction={closeFunction}
+          closeButtonMsg={'Back'}
+          closeFunction={backButtonCreatePassword}
+          textareaonchangeFun={createNewPasswordOnchangeFun}
+          handleMouseDownPassword={handleMouseDownPassword}
+          handleClickShowPassword={handleClickShowPassword}
+          handleClickShowConfirmPassword={handleClickShowConfirmPassword}
+          buttonDisabled={newPasswordButtonDisabled}
+          createValuePassword={createValuePassword}
         />
       )}
       {successModel && (
         <CustomModal
           openSuccess={successModel}
           handleCloseSuccess={handleSuccessModel}
-          successModalTitle={'Request - Activate User'}
-          successModalMsg={
-            'Your request for activating user is successfully sent to the Reviewer.'
-          }
-          btn={' Close'}
+          successModalTitle={'Password Changed'}
+          successModalMsg={'Please log in with new password'}
+          btn={' Login'}
           closeFunction={closeFunction}
         />
       )}
