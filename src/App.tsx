@@ -41,6 +41,7 @@ import CustomerDetailScreen from './pages/riskManagment/customerReport/customerD
 import { ProgrammeHistoryDetails } from './pages/productManagement/programmeManagement/screens/listComponents/ProgrammeHistoryDetails';
 import ReTargetingDetails from './pages/lms/reTargeting/screens/reTargetingScreen/reTargetingDetails';
 import { LMSHistoryLogDetails } from './pages/lms/lmsRule/lmsHistoryLog/lmsHistoryLogDetails';
+import { DetailsHistoryLogDetails } from './pages/productManagement/cardCatalogue/screens/detailsHistoryLogDetails';
 
 export default function App() {
   return (
@@ -81,6 +82,10 @@ export default function App() {
         <Route
           path="/productManagement/cardCatalogue/reviewCard"
           element={<ReviewCard />}
+        />
+        <Route
+          path="/productManagement/cardCatalogue/cardCataloguehistoryLog"
+          element={<DetailsHistoryLogDetails />}
         />
         <Route
           path="/productManagement/programmeManagement/ProgrammeHistoryDetails"
