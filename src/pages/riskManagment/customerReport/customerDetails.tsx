@@ -141,12 +141,12 @@ export default function CustomerDetailScreen() {
             <Grid
               container
               rowSpacing={2}
-              columnSpacing={{ xs: 1, sm: 2, md: 1 }}
+              columnSpacing={{ xs: 0.5, sm: 2 }}
             >
               {displayCategories?.details?.map(
                 (eachItem: any, index: number) => {
                   return (
-                    <Grid item xs={3} key={index}>
+                    <Grid item xs={2.1} key={index}>
                       <div className="each-info">
                         <div className="info-label">
                           {eachItem?.label ?? '--'}
@@ -316,7 +316,7 @@ export default function CustomerDetailScreen() {
           <DetailsCard data={riskChannnelData} gridColumn={2.3} />
         </Stack>
 
-        <Stack sx={{ marginTop: '32px', marginBottom: '80px' }}>
+        <Stack sx={{ marginTop: '32px'}} mb={13}>
           <RiskMngmtAccordian data={riskAccordianData} />
         </Stack>
 

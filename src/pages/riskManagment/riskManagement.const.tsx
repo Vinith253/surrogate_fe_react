@@ -2,7 +2,7 @@ export const CustomerReportFilterDropdown = [
   {
     label: 'State',
     option: [
-      { code: 'all', name: 'All' },
+      { code: 'All', name: 'All' },
       { code: 'tamilnadu', name: 'Tamilnadu' },
       { code: 'andra', name: 'Andhra' },
       { code: 'telungana', name: 'Telungana' },
@@ -13,7 +13,7 @@ export const CustomerReportFilterDropdown = [
   {
     label: 'Zone',
     option: [
-      { code: 'all', name: 'All' },
+      { code: 'All', name: 'All' },
       { code: 'tamilnadu', name: 'Tamilnadu' },
       { code: 'andra', name: 'Andhra' },
       { code: 'telungana', name: 'Telungana' },
@@ -24,7 +24,7 @@ export const CustomerReportFilterDropdown = [
   {
     label: 'District',
     option: [
-      { code: 'all', name: 'All' },
+      { code: 'All', name: 'All' },
       { code: 'tamilnadu', name: 'Tamilnadu' },
       { code: 'andra', name: 'Andhra' },
       { code: 'telungana', name: 'Telungana' },
@@ -35,7 +35,7 @@ export const CustomerReportFilterDropdown = [
   {
     label: 'Branch',
     option: [
-      { code: 'all', name: 'All' },
+      { code: 'All', name: 'All' },
       { code: 'tamilnadu', name: 'Tamilnadu' },
       { code: 'andra', name: 'Andhra' },
       { code: 'telungana', name: 'Telungana' },
@@ -45,12 +45,12 @@ export const CustomerReportFilterDropdown = [
   },
   {
     label: 'Period',
-    option: [{ code: 'all', name: 'All' }],
+    option: [{ code: 'All', name: 'All' },  ],
   },
   {
     label: 'Channel',
     option: [
-      { code: 'all', name: 'All' },
+      { code: 'All', name: 'All' },
       { code: 'bank', name: 'Bank' },
       { code: 'dsa', name: 'DSA' },
       { code: 'fintech partners', name: 'Fintech Partners' },
@@ -58,11 +58,11 @@ export const CustomerReportFilterDropdown = [
   },
   {
     label: 'Surrogate',
-    option: [{ code: 'all', name: 'All' }],
+    option: [{ code: 'All', name: 'All' }],
   },
   {
     label: 'Application Status',
-    option: [{ code: 'all', name: 'All' }],
+    option: [{ code: 'All', name: 'All' }],
   },
 ];
 
@@ -139,7 +139,7 @@ export const riskChannnelData = {
       value: 'Tamil Nadu',
     },
     {
-      label: 'DSDSA BranchA',
+      label: 'DSA Branch',
       value: 'Chromepet',
     },
     {
