@@ -113,6 +113,14 @@ export const Profile = () => {
     setCreatePassword(false);
     setSuccessModel(false);
   };
+  const backButtonVerify = () => {
+    setChangePassWordOtp(false);
+    setChangePassWord(true);
+  };
+  const backButtonCreatePassword = () => {
+    setCreatePassword(false);
+    setChangePassWordOtp(true);
+  };
   const ChangePasswordHandleCloseSuccess = () => {
     setChangePassWord(false);
     setChangePassWordOtp(true);
@@ -148,28 +156,24 @@ export const Profile = () => {
     showConfirmPassword: true,
   });
 
+  useEffect(() => {
+    console.log(
+      ' createValuePassword.password----2',
+      createValuePassword.password
+    );
+    setNewPasswordButtonDisabled(
+      createValuePassword.password.match(RegexValidation.passwordPattern) &&
+        createValuePassword.confirmPassword === createValuePassword.password
+        ? false
+        : true
+    );
+  }, [createValuePassword.password, createValuePassword.confirmPassword]);
   const createNewPasswordOnchangeFun =
     (prop: keyof any) => (event: React.ChangeEvent<HTMLInputElement>) => {
       setCreateValuePassword({
         ...createValuePassword,
         [prop]: event.target.value,
       });
-
-      setNewPasswordButtonDisabled(
-        createValuePassword.password.match(RegexValidation.passwordPattern) &&
-          createValuePassword.confirmPassword === createValuePassword.password
-          ? false
-          : true
-      );
-
-      console.log(
-        'newPasswordButtonDisabled',
-        createValuePassword,
-        createValuePassword.password.match(RegexValidation.passwordPattern) &&
-          createValuePassword.confirmPassword === createValuePassword.password
-          ? false
-          : true
-      );
     };
 
   const handleMouseDownPassword = (
@@ -289,10 +293,10 @@ export const Profile = () => {
             'Please enter the correct OTP sent to your registered email ID'
           }
           closeButtonMsg={'Back'}
-          closeFunction={closeFunction}
+          closeFunction={backButtonVerify}
         />
       )}
-      {/* {console.log('newPasswordButtonDisabled', newPasswordButtonDisabled)} */}
+
       {createPassword && (
         <CustomModal
           openSuccess={createPassword}
@@ -306,7 +310,7 @@ export const Profile = () => {
           confirmNewPassword={'Confirm New Password'}
           forgotPassword={'Forgot Password?'}
           closeButtonMsg={'Back'}
-          closeFunction={closeFunction}
+          closeFunction={backButtonCreatePassword}
           textareaonchangeFun={createNewPasswordOnchangeFun}
           handleMouseDownPassword={handleMouseDownPassword}
           handleClickShowPassword={handleClickShowPassword}
