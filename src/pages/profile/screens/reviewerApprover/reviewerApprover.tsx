@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Box, Button, IconButton, Stack } from '@mui/material';
 import { ScreenHeader } from '../../../../components/commonComponent/ScreenHeader/ScreenHeader';
 import './style.scss';
-import Edit_icon from '../../../../assets/icons/edit_scheduled_pause_icon.svg';
+import Edit_icon from '../../../../assets/icons/editReviewer.svg';
 import BtnOutlined from '../../../../components/commonComponent/CustomText/Button/Outlined';
 import BtnContained from '../../../../components/commonComponent/CustomText/Button/Contained';
 import { useNavigate } from 'react-router-dom';
@@ -36,16 +36,9 @@ export const ReviewerApprover = () => {
                     sx={{ color: '#0662B7', fontSize: '14px' }}
                     onClick={() => setEdit(true)}
                   >
-                    <IconButton>
-                      <img
-                        src={Edit_icon}
-                        alt=""
-                        style={{
-                          filter:
-                            'invert(26%) sepia(97%) saturate(1278%) hue-rotate(190deg) brightness(92%) contrast(101%)',
-                        }}
-                      />
-                    </IconButton>
+                    <Stack sx={{ marginRight: '6px' }}>
+                      <img src={Edit_icon} width="25px" height="25px" alt="" />
+                    </Stack>
                     Edit
                   </Button>
                 </Stack>
