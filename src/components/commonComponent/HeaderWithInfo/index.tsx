@@ -6,7 +6,7 @@ import './style.scss';
 
 function HeaderWithInfo(props: {
   header: string;
-  info: string;
+  info?: string;
   isInfoEnabled: boolean;
   isDownloadEnabled: boolean;
 }) {
@@ -14,12 +14,12 @@ function HeaderWithInfo(props: {
     <Stack className="header-with-info-container">
       <Box className="header">
         {props?.header || '--'}
-        {props?.isInfoEnabled && (
+        {/* {props?.isInfoEnabled && (
           <>
             <img src={info_icon} className="info-icon" alt="info_icon" />
             <Stack className="info-label margins">{props?.info ?? '--'}</Stack>
           </>
-        )}
+        )} */}
       </Box>
       {props?.isDownloadEnabled && (
         <Typography className="icons-container">
