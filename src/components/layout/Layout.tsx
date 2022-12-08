@@ -10,7 +10,7 @@ import {
   ListItemIcon,
   ListItemText,
   Stack,
-  Button
+  Button,
 } from '@mui/material';
 import {
   Link,
@@ -592,7 +592,6 @@ export default function Layout() {
                 fontSize: '20px',
                 fontWeight: '500',
                 color: '#151515',
-                
               }}
             >
               Surrogate Programme
@@ -635,12 +634,11 @@ export default function Layout() {
                 </Typography>
               </Box>
 
-             
               <IconButton
                 id="basic-button"
                 sx={{
                   height: 10,
-                 
+
                   width: 10,
                 }}
                 aria-controls={openMenu ? 'basic-menu' : undefined}
@@ -666,20 +664,18 @@ export default function Layout() {
                   'aria-labelledby': 'basic-button',
                 }}
               >
-                <Box sx={{display:'flex',paddingX:2}} >
-                  <Button>
-
-                  <img src={profile_img} />
-                  <MenuItem onClick={onClickHandleProfile}>Profile</MenuItem>
-                  </Button>
-
+                <Box>
+                  <MenuItem sx={{ gap: 2 }} onClick={onClickHandleProfile}>
+                    <img src={profile_img} />
+                    Profile
+                  </MenuItem>
                 </Box>
-                <Box sx={{display:'flex',paddingX:2}} >
-                  <Button>
 
-                  <img src={logout_img} />
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
-                  </Button>
+                <Box>
+                  <MenuItem sx={{ gap: 2 }} onClick={handleClose}>
+                    <img src={logout_img} />
+                    Logout
+                  </MenuItem>
                 </Box>
               </Menu>
             </Box>
