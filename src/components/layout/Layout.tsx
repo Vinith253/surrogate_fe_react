@@ -323,7 +323,7 @@ export default function Layout() {
           position: 'relative',
         }}
       >
-        <Drawer variant="permanent" open={open}>
+        <Drawer variant="permanent" open={open} className="sidebar-main">
           <DrawerHeader sx={{ height: '10vh' }}>
             <IconButton sx={{ display: !open ? 'none' : 'block' }}>
               <img src={YesBank} alt="" />
@@ -343,7 +343,7 @@ export default function Layout() {
             </IconButton>
           </DrawerHeader>
           <Divider />
-          <List>
+          <List className="sidebar-menu">
             {sideBarOptions.map((text, index) => (
               <ListItem
                 key={text.content}

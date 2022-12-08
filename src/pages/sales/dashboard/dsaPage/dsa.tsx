@@ -437,7 +437,7 @@ export default function DsaPage() {
           statusRowsHeading={statusRowHeading}
           listRowHeading={listRowHeading}
           flag="dashboard"
-          viewPath="/sales/salesReportDetails"
+          viewPath="/sales/salesDashboard/salesReportDetails"
         />
       </div>
     </>

@@ -70,7 +70,7 @@ const router = createBrowserRouter(
       </Route>
 
       {/* Public routes */}
-      
+
       <Route path="/profile" element={<UserProfile />} />
       <Route
         path="/productManagement/cardCatalogue"
@@ -159,7 +159,7 @@ const router = createBrowserRouter(
       <Route path="/sales/performanceReport" element={<PerformanceReport />} />
 
       <Route
-        path="/sales/salesReportDetails"
+        path="/sales/salesDashboard/salesReportDetails"
         element={<SalesReportDetails />}
       />
       <Route path="/accessLibrary" element={<AccessLibrary />} />
@@ -220,15 +220,13 @@ const router = createBrowserRouter(
         element={<ReTargetingDetails />}
       />
 
-<Route path="/login" element={<LoginLayoutPage />}>
+      <Route path="/login" element={<LoginLayoutPage />}>
         <Route path="/login" element={<NewLogin />} />
         <Route path="/login/forgot" element={<ForgotPassword />} />
         <Route path="/login/otp" element={<OtpVerificationScreen />} />
         <Route path="/login/newpassword" element={<NewPasswordPage />} />
       </Route>
-
     </Route>
-    
   )
 );
 

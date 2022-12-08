@@ -55,7 +55,7 @@ function SalesReportList() {
             isDownloadEnabled={true}
           />
           <TableComp
-            viewPath="/sales/salesReportDetails"
+            viewPath="/sales/salesDashboard/salesReportDetails"
             rows={salesDashboardList}
             statusRowsHeading={statusRowHeading}
             listRowHeading={listRowHeading}
