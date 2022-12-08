@@ -97,6 +97,7 @@ type props = {
   existingRoleItem?: Array<string>;
   employeeDetailsRowOne?: any;
   employeeDetailsRowTwo?: any;
+  addressDetails?: any;
   employeeDetailsRowThree?: any;
   radioValueThree?: string;
   radioValueFour?: string;
@@ -117,6 +118,7 @@ type props = {
   handleClickShowConfirmPassword?: any;
   createValuePassword?: any;
   closeButtonMsg?: string;
+  modalContent?: string;
 };
 
 function CustomModal({
@@ -165,6 +167,7 @@ function CustomModal({
   duplicate_role_content,
   existingRoleItem,
   employeeDetailsRowOne,
+  addressDetails,
   employeeDetailsRowTwo,
   employeeDetailsRowThree,
   radioValueThree,
@@ -186,6 +189,7 @@ function CustomModal({
   handleClickShowConfirmPassword,
   createValuePassword,
   closeButtonMsg,
+  modalContent,
 }: props) {
   const [pauseStatus, setPauseStatus] = useState(pauseStatusKey);
   const [startDatevalue, setStartDateValue] = useState(null);
@@ -239,6 +243,7 @@ function CustomModal({
           title == 'Duplicate LMS Rule' ||
           title == 'Employee Details' ||
           title == 'Choose the mode of communication' ||
+          title == 'User Traceability - Address Details' ||
           LoadingMsg ||
           tableDataLMSRule
             ? true
@@ -387,6 +392,66 @@ function CustomModal({
                 </Box>
               )}
             </Stack>
+          )}
+
+          {addressDetails && (
+            <Box
+              sx={{
+                marginTop: '8px',
+                paddingBottom: '12px',
+              }}
+            >
+              {addressDetails.map((item: any) => (
+                <div className="modalContainer">
+                  <div className="one">
+                    <Typography sx={{ color: '#AFAEAF', fontSize: '12px' }}>
+                      {item.Key}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        color: ' #151515',
+                        fontSize: '14px',
+                        fontWeight: '400',
+                        marginRight: '8rem',
+                      }}
+                    >
+                      {item.value}
+                    </Typography>
+                  </div>
+                  <div className="one">
+                    <Typography
+                      className="employee-details-key"
+                      sx={{ color: '#AFAEAF', fontSize: '12px' }}
+                    >
+                      {item.addressSource}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        color: ' #151515',
+                        fontSize: '14px',
+                        fontWeight: '400',
+                      }}
+                    >
+                      {item.billMethod}
+                    </Typography>
+                    {item.selectedAddress && (
+                      <Typography
+                        sx={{
+                          fontSize: '12px',
+                          backgroundColor: '#E3F3E6',
+                          padding: '4px 8px',
+                          color: '#1C592A',
+                          width: '142px',
+                          textAlign: 'end',
+                        }}
+                      >
+                        Selected Address
+                      </Typography>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </Box>
           )}
 
           {successModalTitle && (
@@ -714,6 +779,19 @@ function CustomModal({
               }}
             >
               {successModalMsg}
+            </Typography>
+          )}
+
+          {modalContent && (
+            <Typography
+              fontWeight={400}
+              sx={{
+                padding: '16px 10px 0 10px',
+                color: '#656769',
+                fontSize: '13px',
+              }}
+            >
+              {modalContent}
             </Typography>
           )}
 
