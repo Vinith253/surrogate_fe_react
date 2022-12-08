@@ -23,7 +23,7 @@ function LMSRule() {
   ];
 
   const location = useLocation();
-
+  console.log('location?.state?.activeTab', location?.state?.activeTab);
   return (
     <Stack className="lms-rule-main-container">
       <TabBar
