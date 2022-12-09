@@ -186,7 +186,7 @@ const sideBarOptions = [
     subContent: [
       {
         data: 'Customer Reports',
-        path: '/riskManagement/customerReports',
+        path: '/riskManagement',
         img: risk_customer_report,
       },
     ],
