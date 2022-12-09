@@ -46,15 +46,16 @@ export const ForgotPassword = () => {
         </Box>
 
         <Box className="forgot-head">
-          <Box>
-            <Typography className="forgot-head-left">
+          <Box className="forgot-head-left" >
+            <Typography >
               Forgot Password
             </Typography>
           </Box>
-          <Box>
+          <Box >
             <Button
+            className="forgot-head-right"
               onClick={() => navigate('/login')}
-              className="forgot-head-right"
+              
             >
               Back
             </Button>
@@ -63,7 +64,7 @@ export const ForgotPassword = () => {
 
         <Box>
           <Typography className="forgot-text">
-            Enter registered mobile number/email ID to receive OTP<span style={{color:'red'}} >*</span>
+            Enter registered mobile number/email ID to receive OTP<span style={{color:'#D02127'}} >*</span>
           </Typography>
           <TextField
             onChange={onChangeEmail}
@@ -72,8 +73,7 @@ export const ForgotPassword = () => {
             placeholder="Enter Email Id"
           />
         </Box>
-      </Box>
-      <Box className="footer">
+        <Box className="footer">
         <Button
           onClick={submitButtonAction}
           fullWidth
@@ -88,9 +88,11 @@ export const ForgotPassword = () => {
           }}
         >
           Proceed
-        </Button>
+         </Button>
+       </Box>
       </Box>
-      <Box sx={{ position: 'absolute', bottom: 20, right: 20 }}>
+      
+      <Box className='footer_img' sx={{ position: 'absolute', bottom: 20, right: 20 }}>
         <img src={Poweredby} />
       </Box>
     </Box>

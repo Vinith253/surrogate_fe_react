@@ -166,7 +166,7 @@ export const NewLogin = () => {
                   // style={{ width: '0.9375rem', height: '0.9375rem' }}
                   src={wrong_info}
                 />
-                <Typography  className='newlogin-password-error-msg' sx={{ fontSize: '0.625rem', color: '#992D26' }}>
+                <Typography  className='newlogin-password-error-msg' >
                   Password Wrong
                 </Typography>
               </Box>
