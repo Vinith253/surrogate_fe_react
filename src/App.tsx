@@ -54,184 +54,194 @@ import LoginLayout from './components/layout/loginLayout/loginLayout';
 import { LoginLayoutPage } from './pages/login/LoginLayoutPage';
 import { DetailsHistoryLogDetails } from './pages/productManagement/cardCatalogue/screens/detailsHistoryLogDetails';
 
-import { NewPasswordPage } from './pages/login/screens/newPasswordPage';
-import { NewLogin } from './pages/login/screens/NewLogin';
-import { ForgotPassword } from './pages/login/screens/ForgotPassword';
+import { NewPasswordPage } from './pages/login/screens/NewPassword/newPasswordPage';
+import { NewLogin } from './pages/login/screens/NewLogin/NewLogin';
+import { ForgotPassword } from './pages/login/screens/ForgotPassword/ForgotPassword';
 
 // Loaders
 import { cardCatalogueLoader } from './pages/productManagement/cardCatalogue/screens/CardCatalogue';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Layout />}>
-      {/* Private routes */}
-      <Route element={<PrivateRoute />}>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-      </Route>
+    <>
+      <Route path="/" element={<Layout />}>
+        {/* Private routes */}
+        <Route element={<PrivateRoute />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
 
-      {/* Public routes */}
+        {/* Public routes */}
 
-      <Route path="/profile" element={<UserProfile />} />
-      <Route
-        path="/productManagement/cardCatalogue"
-        element={<CardCatalogue />}
-        loader={cardCatalogueLoader}
-      />
-      <Route
-        path="/productManagement/cardCatalogue/bulkupload"
-        element={<BulkUpload flag={'xlsFormat'} />}
-      />
-      <Route
-        path="/productManagement/cardCatalogue/singleupload"
-        element={<CreateNewCard />}
-      />
+        <Route path="/profile" element={<UserProfile />} />
+        <Route
+          path="/productManagement/cardCatalogue"
+          element={<CardCatalogue />}
+          loader={cardCatalogueLoader}
+        />
+        <Route
+          path="/productManagement/cardCatalogue/bulkupload"
+          element={<BulkUpload flag={'xlsFormat'} />}
+        />
+        <Route
+          path="/productManagement/cardCatalogue/singleupload"
+          element={<CreateNewCard />}
+        />
 
-      <Route
-        path="/productManagement/programmeManagement"
-        element={<ProgramManagement />}
-      />
+        <Route
+          path="/productManagement/programmeManagement"
+          element={<ProgramManagement />}
+        />
 
-      <Route
-        path="/productManagement/programmeManagement/:id"
-        element={<ReviewerLogDetails />}
-      />
+        <Route
+          path="/productManagement/programmeManagement/:id"
+          element={<ReviewerLogDetails />}
+        />
 
-      <Route
-        path="/productManagement/cardCatalogue/reviewCard"
-        element={<ReviewCard />}
-      />
-      <Route
+        <Route
+          path="/productManagement/cardCatalogue/reviewCard"
+          element={<ReviewCard />}
+        />
+        <Route
           path="/productManagement/cardCatalogue/cardCataloguehistoryLog"
           element={<DetailsHistoryLogDetails />}
         />
         <Route
-        path="/productManagement/programmeManagement/ProgrammeHistoryDetails"
-        element={<ProgrammeHistoryDetails />}
-      />
-      <Route path="/userManagement/branchDetails" element={<BranchDetails />} />
-      <Route path="/userManagement/orgStructure" element={<OrgStructure />} />
+          path="/productManagement/programmeManagement/ProgrammeHistoryDetails"
+          element={<ProgrammeHistoryDetails />}
+        />
+        <Route
+          path="/userManagement/branchDetails"
+          element={<BranchDetails />}
+        />
+        <Route path="/userManagement/orgStructure" element={<OrgStructure />} />
 
-      <Route path="/userManagement/orgStructure/DSA" element={<Onboarding />} />
+        <Route
+          path="/userManagement/orgStructure/DSA"
+          element={<Onboarding />}
+        />
 
-      {/* <Route
+        {/* <Route
         path="/userManagement/orgStructure/screens/OrgReview/OrgReview"
         element={<OrgReview />}
       /> */}
 
-      <Route
-        path="/userManagement/orgStructure/bulkUpload"
-        element={<OrgBulkUpload />}
-      />
+        <Route
+          path="/userManagement/orgStructure/bulkUpload"
+          element={<OrgBulkUpload />}
+        />
 
-      <Route
-        path="/userManagement/orgStructure/historyLogDetail"
-        element={<OrgHistoryLogDetails />}
-      />
+        <Route
+          path="/userManagement/orgStructure/historyLogDetail"
+          element={<OrgHistoryLogDetails />}
+        />
 
-      <Route path="/userManagement/roleCreation" element={<RoleCreation />} />
-      <Route
-        path="/userManagement/roleCreation/createRole"
-        element={<CreateRole />}
-      />
+        <Route path="/userManagement/roleCreation" element={<RoleCreation />} />
+        <Route
+          path="/userManagement/roleCreation/createRole"
+          element={<CreateRole />}
+        />
 
-      <Route path="/userManagement/userCreation" element={<UserCreation />} />
+        <Route path="/userManagement/userCreation" element={<UserCreation />} />
 
-      <Route
-        path="/userManagement/userCreation/createUser"
-        element={<CreateUser />}
-      />
+        <Route
+          path="/userManagement/userCreation/createUser"
+          element={<CreateUser />}
+        />
 
-      <Route
-        path="/userManagement/userCreation/editUser"
-        element={<EditUser />}
-      />
+        <Route
+          path="/userManagement/userCreation/editUser"
+          element={<EditUser />}
+        />
 
-      <Route
-        path="/userManagement/userCreation/viewUser"
-        element={<ViewUser />}
-      />
+        <Route
+          path="/userManagement/userCreation/viewUser"
+          element={<ViewUser />}
+        />
 
-      <Route
-        path="/userManagement/userCreation/bulkUpload"
-        element={<UserBulkUpload />}
-      />
+        <Route
+          path="/userManagement/userCreation/bulkUpload"
+          element={<UserBulkUpload />}
+        />
 
-      <Route path="/sales/salesDashboard" element={<SalesDashboard />} />
+        <Route path="/sales/salesDashboard" element={<SalesDashboard />} />
 
-      <Route path="/sales/salesReport" element={<SalesReport />} />
+        <Route path="/sales/salesReport" element={<SalesReport />} />
 
-      <Route path="/sales/performanceReport" element={<PerformanceReport />} />
+        <Route
+          path="/sales/performanceReport"
+          element={<PerformanceReport />}
+        />
 
-      <Route
-        path="/sales/salesDashboard/salesReportDetails"
-        element={<SalesReportDetails />}
-      />
-      <Route path="/accessLibrary" element={<AccessLibrary />} />
+        <Route
+          path="/sales/salesDashboard/salesReportDetails"
+          element={<SalesReportDetails />}
+        />
+        <Route path="/accessLibrary" element={<AccessLibrary />} />
 
-      <Route
-        path="/userManagement/roleCreation/userdetails"
-        element={<UserDetails />}
-      />
-      <Route
-        path="/userManagement/orgStructure/historyLogDetail"
-        element={<OrgHistoryLogDetails />}
-      />
-      <Route
-        path="/userManagement/roleCreation/authorisationDetails"
-        element={<AuthDetail />}
-      />
-      <Route
-        path="/userManagement/roleCreation/historyLogDetail"
-        element={<HistoryLogDetailScreen />}
-      />
+        <Route
+          path="/userManagement/roleCreation/userdetails"
+          element={<UserDetails />}
+        />
+        <Route
+          path="/userManagement/orgStructure/historyLogDetail"
+          element={<OrgHistoryLogDetails />}
+        />
+        <Route
+          path="/userManagement/roleCreation/authorisationDetails"
+          element={<AuthDetail />}
+        />
+        <Route
+          path="/userManagement/roleCreation/historyLogDetail"
+          element={<HistoryLogDetailScreen />}
+        />
 
-      <Route
-        path="/userManagement/userCreation/historyLogDetail"
-        element={<HistoryLogDetailScreen />}
-      />
+        <Route
+          path="/userManagement/userCreation/historyLogDetail"
+          element={<HistoryLogDetailScreen />}
+        />
 
-      {/* Catch all */}
-      <Route path="*" element={<NotFoundPage />} />
+        {/* Catch all */}
+        <Route path="*" element={<NotFoundPage />} />
 
-      <Route
-        path="/userManagement/roleCreation/authorisationDetails"
-        element={<AuthDetail />}
-      />
+        <Route
+          path="/userManagement/roleCreation/authorisationDetails"
+          element={<AuthDetail />}
+        />
 
-      <Route path="/lms/dashboard" element={<LMSDashboard />} />
+        <Route path="/lms/dashboard" element={<LMSDashboard />} />
 
-      <Route path="/lms/retargeting" element={<Retargeting />} />
+        <Route path="/lms/retargeting" element={<Retargeting />} />
 
-      <Route path="/lms/lmsRule" element={<LMSRule />} />
-      <Route
-        path="/lms/lmsRule/historyLogDetails"
-        element={<LMSHistoryLogDetails />}
-      />
-      <Route path="/lms/lmsRule/addNewRule" element={<AddLMSRule />} />
-      <Route path="/lms/lmsRule/viewRule" element={<ViewLMSRule />} />
-      <Route path="/lms/lmsRule/editRule" element={<EditLMSRule />} />
+        <Route path="/lms/lmsRule" element={<LMSRule />} />
+        <Route
+          path="/lms/lmsRule/historyLogDetails"
+          element={<LMSHistoryLogDetails />}
+        />
+        <Route path="/lms/lmsRule/addNewRule" element={<AddLMSRule />} />
+        <Route path="/lms/lmsRule/viewRule" element={<ViewLMSRule />} />
+        <Route path="/lms/lmsRule/editRule" element={<EditLMSRule />} />
 
-      <Route
-        path="/riskManagement/customerReports"
-        element={<CustomerReport />}
-      />
-      <Route
-        path="/riskManagement/customerDetails"
-        element={<CustomerDetailScreen />}
-      />
-      <Route
-        path="/lms/retargeting/reTargetingDetails"
-        element={<ReTargetingDetails />}
-      />
-
+        <Route
+          path="/riskManagement/customerReports"
+          element={<CustomerReport />}
+        />
+        <Route
+          path="/riskManagement/customerDetails"
+          element={<CustomerDetailScreen />}
+        />
+        <Route
+          path="/lms/retargeting/reTargetingDetails"
+          element={<ReTargetingDetails />}
+        />
+      </Route>
       <Route path="/login" element={<LoginLayoutPage />}>
         <Route path="/login" element={<NewLogin />} />
         <Route path="/login/forgot" element={<ForgotPassword />} />
         <Route path="/login/otp" element={<OtpVerificationScreen />} />
         <Route path="/login/newpassword" element={<NewPasswordPage />} />
       </Route>
-    </Route>
+    </>
   )
 );
 
