@@ -49,6 +49,7 @@ import './CustomModal.scss';
 import OTPInputContainer from './otpInput/OtpInputContainer';
 import TimerComponent from '../../../utils/Timer';
 import { Label } from '@mui/icons-material';
+import { ReactComponent as ApprovedIcon } from '../../../assets/icons/approved_risk_mngm_icon.svg';
 
 type props = {
   openSuccess?: any;
@@ -435,18 +436,16 @@ function CustomModal({
                       {item.billMethod}
                     </Typography>
                     {item.selectedAddress && (
-                      <Typography
-                        sx={{
-                          fontSize: '12px',
-                          backgroundColor: '#E3F3E6',
-                          padding: '4px 8px',
-                          color: '#1C592A',
-                          width: '142px',
-                          textAlign: 'end',
-                        }}
-                      >
-                        Selected Address
-                      </Typography>
+                      <Button startIcon={<ApprovedIcon />} sx={{
+                        fontSize: '12px',
+                        color:' #1C592A',
+                        backgroundColor: '#E3F3E6',
+                        textTransform: 'none',
+                        height: '24px',
+                        marginTop: '16px'
+                      }}>
+                      Selected Address
+                    </Button>
                     )}
                   </div>
                 </div>
