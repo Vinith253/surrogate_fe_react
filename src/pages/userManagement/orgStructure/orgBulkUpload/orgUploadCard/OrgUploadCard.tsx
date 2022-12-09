@@ -113,12 +113,15 @@ const OrgUploadCard = ({
           <Button
             variant="text"
             // color={progress > 0 ? ' #82B1DB' : 'secondary'}
-            style={{ color: progress > 0 ? ' #82B1DB' : '#0662B7' }}
+            style={{
+              color: progress > 0 ? ' #82B1DB' : '#0662B7',
+              fontSize: '0.8rem',
+            }}
             disabled={progress > 0 ? true : false}
             startIcon={
               <FileDownloadOutlinedIcon
                 sx={{
-                  fontSize: '1.5rem !important',
+                  fontSize: '1.3rem !important',
                   color: progress > 0 ? ' #82B1DB' : '#0662B7',
                 }}
               />

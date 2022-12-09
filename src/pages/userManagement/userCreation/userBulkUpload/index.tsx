@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import './index.scss';
 import UserUploadCard from './userUploadCard/UserUploadCard';
 import UserBulkList from './userBulkList/UserBulkList';
+import { ScreenHeader } from '../../../../components/commonComponent/ScreenHeader/ScreenHeader';
 
 const UserBulkUpload = ({ flag }: any) => {
   const navigate = useNavigate();
@@ -33,7 +34,12 @@ const UserBulkUpload = ({ flag }: any) => {
   return (
     <Box className="bulk-upload-container">
       <Box className="bulk-upload-header">
-        <Box sx={{ display: 'flex' }}>
+        <ScreenHeader
+          title={bulkUpload.BULK_UPLOAD_USER_HEAD}
+          info={bulkUpload.BULK_UPLOAD_ORG_SUBHEAD}
+          showBackButton={true}
+        />
+        {/* <Box sx={{ display: 'flex' }}>
           <ArrowBackIcon
             color="secondary"
             className="arrowBtn"
@@ -47,8 +53,9 @@ const UserBulkUpload = ({ flag }: any) => {
               {bulkUpload.BULK_UPLOAD_ORG_SUBHEAD}
             </Typography>
           </Box>
-        </Box>
+        </Box> */}
       </Box>
+
       <Box className="upload-card-container">
         {openUpload && (
           <UserUploadCard
