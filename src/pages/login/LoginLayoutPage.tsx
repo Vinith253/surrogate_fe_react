@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import './loginlayout.scss'
 import { Box, Typography, Grid } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
@@ -72,60 +73,39 @@ export const LoginLayoutPage = () => {
 
   return (
     <>
-      <Grid container style={{ height: '100%' }}>
+      <Grid container className='login-layout-page' style={{ height: '100%' }}>
         <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
-          <Box
-            sx={{
-              backgroundSize: 'cover',
-              backgroundRepeat: 'no-repeat',
-              height: '100vh',
-            }}
+          <Box className='layout-container'
+           
           >
-            <Box
-              sx={{
-                height: '100vh',
-                width: '100%',
-                background: 'linear-gradient(180.03deg, #0797FF, #005FA4)',
-                padding: '1.875rem',
-              }}
+            <Box className='layout-head'
+              
             >
               <Box>
-                <Typography
-                  sx={{
-                    color: 'white',
-                    fontSize: '1rem',
-                    fontWeight: '500',
-                    lineHeight: '1.25rem',
-                    marginBottom: '0.9375rem',
-                  }}
+                <Typography className='layout-heading'
+                  
                 >
                   Surrogate Product for Credit Card Issuers
                 </Typography>
                 <Typography
-                  sx={{
-                    color: 'white',
-                    fontSize: '3rem',
-                    fontWeight: '500',
-                    lineHeight: '3.125rem',
-                    marginBottom: '2.5rem',
-                  }}
+                 className='layout-heading-text'
+                  
                 >
-                  We Can handle your Credit Card Issuance
+                  <Grid xs={12}>We Can handle</Grid>
+                  <Grid xs={12}>your Credit Card Issuance</Grid>
                 </Typography>
                 <Typography
-                  sx={{
-                    color: 'white',
-                    fontSize: '1rem',
-                    fontWeight: '500',
-                    lineHeight: '1.25rem',
-                    zIndex: '999',
-                  }}
+                className='layout-text'
+                  
                 >
                   Disburse Credit Cards seamlessly! M2P handles your Credit Card
                   issuance end-to-end with assured security and convenience.
                 </Typography>
-                <Box sx={{ position: 'absolute', bottom: 0, left: '7%' }}>
-                  <img width={'450px'} height={'400px'} src={LoginImg} />
+                <Box
+                className='layout-image'
+                  
+                >
+                  <img width={'75%'} height={'75%'} src={LoginImg} />
                 </Box>
               </Box>
             </Box>
@@ -133,14 +113,8 @@ export const LoginLayoutPage = () => {
         </Grid>
         <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
           <Box
-            sx={{
-              height: '100vh',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderTopLeftRadius: '0.625rem',
-              borderBottomLeftRadius: '0.625rem',
-            }}
+          className='layout-outlet'
+            
           >
             <Outlet />
           </Box>

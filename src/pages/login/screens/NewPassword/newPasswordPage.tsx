@@ -15,6 +15,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import IconButton from '@mui/material/IconButton';
 import { useLocation, useNavigate } from 'react-router-dom';
 import info_icon from '../../../../assets/images/info_icon.svg';
+import info_grey from '../../../../assets/images/info_grey.svg';
 import Poweredby from '../../../../assets/images/Powered by.svg';
 
 interface State {
@@ -120,12 +121,13 @@ export const NewPasswordPage = () => {
             
           >
             <Box className="head-left">
-              <Typography sx={{ fontSize: '20px', fontWeight: '500' }}>
+              <Typography >
                 Enter New Password
               </Typography>
             </Box>
-            <Box className="head-right">
-              <Button  onClick={()=>navigate('/login/otp')} sx={{ textTransform: 'capitalize', color: '#0662B7' }}>
+            <Box >
+              <Button className="head-right"  
+              onClick={()=>navigate('/login/otp')} >
                 Back
               </Button>
             </Box>
@@ -134,7 +136,7 @@ export const NewPasswordPage = () => {
             <Box className="text-new-password-container">
               <InputLabel
                 className="text-new-password"
-                sx={{ color: 'black' }}
+                
                 required
                 htmlFor="outlined-adornment-password"
               >
@@ -142,7 +144,7 @@ export const NewPasswordPage = () => {
               </InputLabel>
               <OutlinedInput
                 className="input-new-password"
-                // sx={{ width: '340px' }}
+                
                 id="outlined-adornment-password"
                 placeholder="Enter New Password"
                 type={values.showPassword ? 'text' : 'password'}
@@ -163,7 +165,7 @@ export const NewPasswordPage = () => {
                 }
               />
             </Box>
-            <Box text-confirm-password-container sx={{ marginY: 3 }}>
+            <Box className='text-confirm-password-container' >
               <InputLabel
                 className="text-confirm-password"
                 sx={{ color: 'black' }}
@@ -224,7 +226,7 @@ export const NewPasswordPage = () => {
             </Button>
             {}
             <Box className="footer-info">
-              <img src={info_icon} />
+              <img src={info_grey} />
               <Typography className="footer-info-message">
                 Password should be 8 characters, including 1 caps, 1 lowercase,
                 1 numeral.
@@ -233,7 +235,7 @@ export const NewPasswordPage = () => {
           </Box>
         </Box>
       </Box>
-      <Box sx={{ position: 'absolute', bottom: 20, right: 20 }}>
+      <Box className='footer-img'>
         <img src={Poweredby} />
       </Box>
     </Box>
