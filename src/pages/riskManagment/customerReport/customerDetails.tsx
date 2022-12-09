@@ -18,7 +18,6 @@ import { FooterButton } from '../../../components/commonComponent/FooterButton/F
 import { RiskMngmtAccordian } from '../../../components/commonComponent/RiskMngmtAccordian';
 import { useState, useEffect } from 'react';
 import CustomModal from '../../../components/commonComponent/customModal/CustomModal';
-import HeaderWithInfo from '../../../components/commonComponent/HeaderWithInfo';
 import GaugeChart from 'react-gauge-chart';
 
 export default function CustomerDetailScreen() {
@@ -34,6 +33,7 @@ export default function CustomerDetailScreen() {
   const [okApprovalModal, setOKApprovalModal] = useState(false);
   const [rejectionModal, setrejectionModal] = useState(false);
   const [okRejectionModal, setOKRejectionModal] = useState(false);
+  const [showHowItsCalculatedModal, setHowItsCalulatedModal] = useState(false);
   const [displayCategories, setDisplayCategories] = useState<any>(
     state?.scoreData
   );
@@ -138,15 +138,11 @@ export default function CustomerDetailScreen() {
           </Box>
           <div className="viewpage-detail">
             <div className="underline"></div>
-            <Grid
-              container
-              rowSpacing={2}
-              columnSpacing={{ xs: 1, sm: 2, md: 1 }}
-            >
+            <Grid container rowSpacing={2} columnSpacing={{ xs: 0.5, sm: 2 }}>
               {displayCategories?.details?.map(
                 (eachItem: any, index: number) => {
                   return (
-                    <Grid item xs={3} key={index}>
+                    <Grid item xs={2.1} key={index}>
                       <div className="each-info">
                         <div className="info-label">
                           {eachItem?.label ?? '--'}
@@ -243,7 +239,12 @@ export default function CustomerDetailScreen() {
               <Typography sx={{ fontSize: '16px' }}>
                 M2P{'’'}s credit Score
               </Typography>
-              <Stack className="calculate-text">How its Calculated?</Stack>
+              <Stack
+                className="calculate-text"
+                onClick={() => setHowItsCalulatedModal(true)}
+              >
+                How its Calculated?
+              </Stack>
             </Box>
             <Box className="underline" />
             <GaugeChart
@@ -266,7 +267,9 @@ export default function CustomerDetailScreen() {
               </Typography>
             </Box>
             <Box className="status-box">
-              <Typography sx={{ color: txtColor, marginRight: '4px', marginTop:'3px' }}>
+              <Typography
+                sx={{ color: txtColor, marginRight: '4px', marginTop: '3px' }}
+              >
                 {cashFlowData.creditScoreText}
               </Typography>
               {cashFlowData.creditScoreText === 'Good' && <M2PGoodIcon />}
@@ -316,7 +319,7 @@ export default function CustomerDetailScreen() {
           <DetailsCard data={riskChannnelData} gridColumn={2.3} />
         </Stack>
 
-        <Stack sx={{ marginTop: '32px', marginBottom: '80px' }}>
+        <Stack sx={{ marginTop: '32px' }} mb={13}>
           <RiskMngmtAccordian data={riskAccordianData} />
         </Stack>
 
@@ -461,6 +464,17 @@ export default function CustomerDetailScreen() {
             rejectedModaltitle={'Application Rejected'}
             rejectedModalMsg={'Application no: 123456 has been rejected.'}
             modalType={'Success For Rejection'}
+          />
+        )}
+        {showHowItsCalculatedModal && (
+          <CustomModal
+            openSuccess={showHowItsCalculatedModal}
+            handleCloseSuccess={() => setHowItsCalulatedModal(false)}
+            title={'How Its Calculated?'}
+            duplicateRoleCloseBtn={' Close'}
+            modalContent={
+              'Lorem ipsum dolor sit amet consectetur. Ut velit placerat vestibulum sit sollicitudin nullam nascetur. Nec at sed proin consectetur. Pellentesque id ut blandit scelerisque diam. Duis convallis diam placerat amet. Vestibulum neque consectetur et amet mauris purus nullam iaculis. In adipiscing viverra nunc mattis ultricies cras elit. Tincidunt dictum faucibus interdum cras aliquet. Non lacus.'
+            }
           />
         )}
       </Stack>

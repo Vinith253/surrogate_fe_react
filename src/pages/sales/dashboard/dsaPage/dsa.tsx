@@ -381,18 +381,18 @@ export default function DsaPage() {
 
           <div className="divider-line" />
           <div className="horizontal-cards">
-          <Grid container spacing={2}>
-            {dashboardVal?.map((value) => (
-              <Grid xs={3} item>
-              <DashboardCard
-                title={value.title}
-                value={value.value}
-                more={value.more}
-                image={value.image}
-                navPath="/sales/salesReport"
-              />
-              </Grid>
-            ))}
+            <Grid container spacing={2}>
+              {dashboardVal?.map((value) => (
+                <Grid xs={3} item>
+                  <DashboardCard
+                    title={value.title}
+                    value={value.value}
+                    more={value.more}
+                    image={value.image}
+                    navPath="/sales/salesReport"
+                  />
+                </Grid>
+              ))}
             </Grid>
           </div>
 
@@ -437,7 +437,7 @@ export default function DsaPage() {
           statusRowsHeading={statusRowHeading}
           listRowHeading={listRowHeading}
           flag="dashboard"
-          viewPath="/sales/salesDashboard/salesReportDetails"
+          viewPath="/sales/salesReport/salesReportDetails"
         />
       </div>
     </>

@@ -1,3 +1,96 @@
 .css-wgai2y-MuiFormLabel-asterisk{
-    color:red !important
+    color:#D02127 !important
 }
+.otp-container{
+    display: flex;
+    .otp-head-container{
+        height: 100vh;
+          width: 50%;
+          background-color: white;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          .otp-logo-container{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0 1.875rem;
+            justify-content: center;
+            margin-left:100%;
+            .otp-logo-text{
+                color: #004C8F;
+                font-size: 0.875rem;
+                font-weight: 700;
+                line-height: 1.05rem;
+                letter-spacing:0.1875rem; 
+            }
+          }
+          .otp-forgot-box{
+            display: flex;
+                  margin: 0.9375rem 0;
+                  align-items: center;
+                  justify-content: space-between;
+                  width: 100%;
+                  .otp-forgot-left{
+                    font-size: 1.25rem; 
+                    font-weight: 500;
+                  }
+                  .otp-forgot-right{
+                    text-transform: capitalize;
+                    color: #0662B7;
+                  }
+          }
+          .otp-6-digit{
+            .otp-6-digit-text{
+                font-size: 0.875rem; 
+                margin-bottom: 1.875rem
+            }
+            .otp-timer{
+                display: flex;
+                      flex-direction: row;
+                      justify-content: space-between;
+                      margin-top: 1.25rem;
+                      align-items: center;
+            }
+            .otp-error-img{
+                margin-top: 1.5625rem;
+                display: flex;
+                gap: 0.5rem;
+                align-items: center;
+                .otp-error-text{
+                    font-size: 0.625rem;
+                          font-weight: 400;
+                          color: #992D26;
+                        }}
+
+                }
+                .otp-btn-box{
+                    margin-top: 15%;
+                    .otp-btn{
+                        text-transform: capitalize;
+                        color: white;
+                        width: 21.25rem;
+                    }
+                    .otp-info{
+                        display: flex;
+                    gap: 0.5rem;
+                    margin-top: 0.625rem;
+                    align-items: center;
+                    .otp-info-img{
+                        color:#AFAEAF;
+                    }
+                    .otp-info-text{
+                        font-size: 0.625rem;
+                        font-weight: 400;
+                        color: #898989;
+                    }
+                }
+            }
+          }
+          .footer-img{
+            position: absolute; 
+            bottom: 1rem; 
+            right: 1rem;
+          }
+        }

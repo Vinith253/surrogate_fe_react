@@ -1,13 +1,75 @@
-import { Box, Grid, Typography, Button } from '@mui/material';
+import { Box, Grid, Typography, Button, Stack } from '@mui/material';
 import { ReactComponent as StatusPassIcon } from '../../../../assets/icons/risk_status_pass.svg';
 import { ReactComponent as ApprovedIcon } from '../../../../assets/icons/approved_risk_mngm_icon.svg';
 import { ReactComponent as StatusFailIcon } from '../../../../assets/icons/risk_mgmt_expand_fail.svg';
+import { useState } from 'react';
+import CustomModal from '../../customModal/CustomModal';
 
 type props = {
   item?: any;
 };
 
+const addressDetails = [
+  {
+    Key: 'Address 1',
+    value: 'No 45, D-Block Gandhi Nagar Chennai - 600021',
+    addressSource: 'Address source',
+    billMethod: 'CIBIL',
+    selectedAddress: true,
+  },
+  {
+    Key: 'Address 1',
+    value: 'No 45, D-Block Gandhi Nagar Chennai - 600021',
+    addressSource: 'Address source',
+    billMethod: 'CIBIL',
+    selectedAddress: false,
+  },
+  {
+    Key: 'Address 1',
+    value: 'No 45, D-Block Gandhi Nagar Chennai - 600021',
+    addressSource: 'Address source',
+    billMethod: 'CIBIL',
+    selectedAddress: false,
+  },
+  {
+    Key: 'Address 1',
+    value: 'No 45, D-Block Gandhi Nagar Chennai - 600021',
+    addressSource: 'Address source',
+    billMethod: 'CIBIL',
+    selectedAddress: false,
+  },
+];
+
+const employeeDetailsRowOne = [
+  {
+    Key: 'Relationship with bank',
+    value: 'Existing to Bank',
+  },
+  {
+    Key: 'Account Type',
+    value: 'Savings Account',
+  },
+  {
+    Key: 'Account Holder Name',
+    value: 'Antony Jackson',
+  },
+  {
+    Key: 'Account Number',
+    value: '8090785645342312',
+  },
+  {
+    Key: 'IFSC Code',
+    value: 'YES00001212',
+  },
+  {
+    Key: 'Branch',
+    value: 'Chromepet - 600044',
+  },
+];
+
 export default function UserIdentityBox({ item }: props) {
+  const [approvalModal, setApprovalModal] = useState(false);
+  const [accountModal, setAccountModal] = useState(false);
   return (
     <>
       {item?.showHeader && (
@@ -40,9 +102,19 @@ export default function UserIdentityBox({ item }: props) {
                   {item?.title1Value}
                 </Typography>
                 {item?.showAccountDetails && (
-                  <Typography className="account-detail-text">
+                  <Stack
+                    className="account-detail-text"
+                    onClick={() => {
+                      if (item?.showMoreText === 'Account Details') {
+                        setAccountModal(true);
+                      }
+                      if (item?.showMoreText === 'More Addresses') {
+                        setApprovalModal(true);
+                      }
+                    }}
+                  >
                     {item?.showMoreText} {'>'}
-                  </Typography>
+                  </Stack>
                 )}
                 {item?.isSelectedAddress && (
                   <Button startIcon={<ApprovedIcon />} className="box-title2">
@@ -70,19 +142,39 @@ export default function UserIdentityBox({ item }: props) {
                 </Box>
               ) : (
                 <Box className="right-status-box">
-                  {item?.matchedDisplayText > 0 && 
-                  <>
-                  <StatusFailIcon width={'16px'} />
-                  <Typography className="text-font-style">
-                    {item?.matchedDisplayText}
-                  </Typography>
-                  </> }
+                  {item?.matchedDisplayText > 0 && (
+                    <>
+                      <StatusFailIcon width={'16px'} />
+                      <Typography className="text-font-style">
+                        {item?.matchedDisplayText}
+                      </Typography>
+                    </>
+                  )}
                 </Box>
               )}
             </Grid>
           </Box>
         );
       })}
+
+      {approvalModal && (
+        <CustomModal
+          openSuccess={approvalModal}
+          handleCloseSuccess={() => setApprovalModal(false)}
+          title={'User Traceability - Address Details'}
+          duplicateRoleCloseBtn={' Close'}
+          addressDetails={addressDetails}
+        />
+      )}
+      {accountModal && (
+        <CustomModal
+          openSuccess={accountModal}
+          handleCloseSuccess={() => setAccountModal(false)}
+          employeeDetailsRowOne={employeeDetailsRowOne}
+          title={'Employee Details'}
+          duplicateRoleCloseBtn={' Close'}
+        />
+      )}
     </>
   );
 }

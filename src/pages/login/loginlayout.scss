@@ -1,0 +1,54 @@
+.css-wgai2y-MuiFormLabel-asterisk {
+  color: #d02127 !important;
+}
+.login-layout-page {
+  .layout-container {
+    background-color: violet;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    .layout-head {
+      height: 100vh;
+      width: 100%;
+      background: linear-gradient(180.03deg, #0797ff, #005fa4);
+      padding: 1.875rem;
+      .layout-heading {
+        color: white;
+        font-size: 1rem;
+        font-weight: 500;
+        line-height: 1.25rem;
+        margin-bottom: 0.9375rem;
+      }
+      .layout-heading-text {
+        color: white;
+        font-size: 40px;
+        font-weight: 500;
+        line-height: 3rem;
+        margin-bottom: 2.5rem;
+      }
+      .layout-text {
+        position: relative;
+        color: white;
+        font-size: 1rem;
+        font-weight: 500;
+        line-height: 1.25rem;
+        z-index: 1;
+        width: '45%';
+      }
+      .layout-image {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+      }
+    }
+  }
+  .layout-outlet {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    // borderTopLeftRadius: 0.625rem;
+    // borderBottomLeftRadius: 0.625rem;
+  }
+}

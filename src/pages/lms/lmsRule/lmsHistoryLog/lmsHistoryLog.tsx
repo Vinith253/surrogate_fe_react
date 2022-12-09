@@ -186,7 +186,7 @@ export const LMSHistoryLog = () => {
                   handleClose();
                   navigate('/lms/lmsRule/viewRule', {
                     state: {
-                      isEditable: true,
+                      routeFromHistoryLog: true,
                     },
                   });
                 }}

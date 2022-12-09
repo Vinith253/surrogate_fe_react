@@ -10,6 +10,7 @@ import {
   InputLabel,
   InputAdornment,
 } from '@mui/material';
+import './NewLogin.scss'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 import Yesbank from '../../../../assets/images/Yes_Bank_SVG_Logo 1.svg';
@@ -75,61 +76,33 @@ export const NewLogin = () => {
     event.preventDefault();
   };
   return (
-    <Box
-      sx={{
-        height: '100vh',
-        width: '50%',
-        backgroundColor: 'white',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
+    <Box className='newlogin-container'
+      
     >
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'flex-start',
-          paddingX: '1.875rem',
-          // backgroundColor: 'red',
-          justifyContent: 'center',
-        }}
+      <Box className='newlogin-header'
+       
       >
         <Box>
           <img src={Yesbank} alt="logo" />
-          <Typography
-            sx={{
-              color: '#004C8F',
-              fontSize: '0.875rem',
-              fontWeight: '700',
-              lineHeight: '1.05rem',
-              letterSpacing: '0.1875rem',
-            }}
+          <Typography className='newlogin-logo-text'
+           
           >
             Surrogate Portal
           </Typography>
         </Box>
 
         <Box>
-          <Typography
-            sx={{
-              marginBottom: '0.9375rem',
-              fontSize: '1.25rem',
-              fontWeight: 500,
-              paddingY: 3,
-              lineHeight: '1.375rem',
-              letterSpacing: '0.15%',
-            }}
+          <Typography className='newlogin-heading'
+            
           >
             Login to your account
           </Typography>
         </Box>
 
-        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+        <Box className='newlogin-content' >
           <Box>
-            <InputLabel
-              sx={{ color: 'black', fontSize: '0.75rem', fontWeight: 500 }}
+            <InputLabel className='newlogin-content-text'
+              
               required
             >
               Email Id
@@ -138,36 +111,35 @@ export const NewLogin = () => {
               required
               error={email ? true : false}
               size="small"
-              sx={{
-                width: '21.25rem',
-                marginTop: '0.3125rem',
-              }}
+              className='newlogin-content-textfield'
+              
               placeholder="Enter Email Id"
               onChange={onhandlechangeFun}
             />
             {email && (
-              <Box sx={{ display: 'flex', marginTop: '0.3125rem', gap: 1 }}>
-                <img
-                  style={{ width: '0.9375rem', height: '0.9375rem' }}
+              <Box className='newlogin-error' >
+                <img className='newlogin-error-img'
+                  // style={{ width: '0.9375rem', height: '0.9375rem' }}
                   src={wrong_info}
                 />
-                <Typography sx={{ fontSize: '0.625rem', color: '#992D26' }}>
+                <Typography className='newlogin-error-msg' >
                   Error Mismatch
                 </Typography>
               </Box>
             )}
           </Box>
 
-          <Box sx={{ marginY: 3 }}>
-            <InputLabel
-              sx={{ color: 'black', fontSize: '0.75rem', fontWeight: 500 }}
+          <Box className='newlogin-password' >
+            <InputLabel className='newlogin-password-text'
+          
               required
               htmlFor="outlined-adornment-password"
             >
               Password
             </InputLabel>
             <OutlinedInput
-              sx={{ width: '21.25rem', marginTop: '0.3125rem' }}
+            className='newlogin-password-field'
+            
               id="outlined-adornment-password"
               placeholder="Enter Password"
               type={values.showPassword ? 'text' : 'password'}
@@ -183,46 +155,39 @@ export const NewLogin = () => {
                     onMouseDown={handleMouseDownPassword}
                     edge="end"
                   >
-                    {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                    {values.showPassword ?   <Visibility />: <VisibilityOff />}
                   </IconButton>
                 </InputAdornment>
               }
             />
             {password && (
-              <Box sx={{ display: 'flex', marginTop: '0.3125rem', gap: 1 }}>
-                <img
-                  style={{ width: '0.9375rem', height: '0.9375rem' }}
+              <Box className='newlogin-password-error' >
+                <img className='newlogin-password-error-img'
+                  // style={{ width: '0.9375rem', height: '0.9375rem' }}
                   src={wrong_info}
                 />
-                <Typography sx={{ fontSize: '0.625rem', color: '#992D26' }}>
+                <Typography  className='newlogin-password-error-msg' >
                   Password Wrong
                 </Typography>
               </Box>
             )}
 
-            <Typography
+            <Typography className='newlogin-forgotpassword'
               onClick={() => {
                 navigate('/login/forgot');
               }}
-              sx={{
-                color: '#0662B7',
-                fontSize: '0.875rem',
-                fontWeight: '500',
-                textAlign: 'end',
-                paddingTop: '0.625rem',
-                cursor: 'pointer',
-              }}
+              
             >
               Forgot Password?
             </Typography>
           </Box>
 
-          <Box sx={{ textAlign: 'center' }}>
-            <Button
+          <Box className='footer' >
+            <Button className='footer-text'
               onClick={loginChange}
               fullWidth
               sx={{
-                textTransform: 'capitalize',
+              
                 '&:disabled': {
                   backgroundColor: '#82B1DB',
                 },
@@ -238,7 +203,7 @@ export const NewLogin = () => {
           </Box>
         </Box>
       </Box>
-      <Box sx={{ position: 'absolute', bottom: 20, right: 20 }}>
+      <Box className='footer-img' >
         <img src={Poweredby} />
       </Box>
     </Box>

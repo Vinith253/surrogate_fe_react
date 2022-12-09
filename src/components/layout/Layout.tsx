@@ -10,7 +10,7 @@ import {
   ListItemIcon,
   ListItemText,
   Stack,
-  Button
+  Button,
 } from '@mui/material';
 import {
   Link,
@@ -26,7 +26,6 @@ import {
   CSSObject,
   withStyles,
 } from '@mui/material/styles';
-// import Box from "@mui/material/Box";
 import MuiDrawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
@@ -187,7 +186,7 @@ const sideBarOptions = [
     subContent: [
       {
         data: 'Customer Reports',
-        path: '/riskManagement/customerReports',
+        path: '/riskManagement',
         img: risk_customer_report,
       },
     ],
@@ -580,19 +579,20 @@ export default function Layout() {
               alignItems: 'center',
               justifyContent: 'space-between',
               padding: '0 20px',
-              borderBottom: '1px solid',
-              boxShadow: '0 0 15px #aaaaaa',
+              boxShadow: '0 0 18px #DFE0E3',
               backgroundColor: 'white',
+              // boxShadow: 2,
             }}
           >
             <Typography
               variant="h5"
               sx={{
-                letterSpacing: '0.2px',
+                fontFamily: 'Ilisarniq',
+                letterSpacing: '0.0015em',
                 fontSize: '20px',
                 fontWeight: '500',
                 color: '#151515',
-                
+                lineHeight: '22px',
               }}
             >
               Surrogate Programme
@@ -604,8 +604,6 @@ export default function Layout() {
                 flexDirection: 'row',
                 alignItems: 'center',
                 padding: '0 20px',
-                // borderBottom
-                // borderColor: "success.light"
               }}
             >
               <Box className="search-container-layout">
@@ -635,12 +633,11 @@ export default function Layout() {
                 </Typography>
               </Box>
 
-             
               <IconButton
                 id="basic-button"
                 sx={{
                   height: 10,
-                 
+
                   width: 10,
                 }}
                 aria-controls={openMenu ? 'basic-menu' : undefined}
@@ -666,20 +663,18 @@ export default function Layout() {
                   'aria-labelledby': 'basic-button',
                 }}
               >
-                <Box sx={{display:'flex',paddingX:2}} >
-                  <Button>
-
-                  <img src={profile_img} />
-                  <MenuItem onClick={onClickHandleProfile}>Profile</MenuItem>
-                  </Button>
-
+                <Box>
+                  <MenuItem sx={{ gap: 2 }} onClick={onClickHandleProfile}>
+                    <img src={profile_img} />
+                    Profile
+                  </MenuItem>
                 </Box>
-                <Box sx={{display:'flex',paddingX:2}} >
-                  <Button>
 
-                  <img src={logout_img} />
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
-                  </Button>
+                <Box>
+                  <MenuItem sx={{ gap: 2 }} onClick={handleClose}>
+                    <img src={logout_img} />
+                    Logout
+                  </MenuItem>
                 </Box>
               </Menu>
             </Box>

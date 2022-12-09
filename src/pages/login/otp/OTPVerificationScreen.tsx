@@ -24,6 +24,7 @@ import Poweredby from '../../../assets/images/Powered by.svg';
 import Yesbank from '../../../assets/images/Yes_Bank_SVG_Logo 1.svg';
 import { verification } from '../../../utils/Constants';
 import info_icon from '../../../assets/images/info_icon.svg';
+import info_grey from '../../../assets/images/info_grey.svg'
 import wrong_Info from '../../../assets/images/wrong_Info.svg';
 import { LinearScale, Visibility, VisibilityOff } from '@mui/icons-material';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -43,8 +44,8 @@ export default function OtpVerificationScreen() {
   const location = useLocation();
   const [enableResendButton, setEnableResendButton] = useState<boolean>(false);
   const [mobileNo, setMobileNo] = useState<String>('+91 *******210');
-  const [forgetEmail, setForgetEmail] = useState(true)
-  const [emailText,setEmailText] = useState(0)
+  const [forgetEmail, setForgetEmail] = useState(true);
+  const [emailText, setEmailText] = useState(0);
   const [otp, setOtp] = useState<number>(0);
   // const
   const [showError, setShowError] = useState<boolean>(false);
@@ -129,186 +130,104 @@ export default function OtpVerificationScreen() {
     setOtp(e);
     setShowError(false);
   };
-  
-  
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      
-      <Box
-        sx={{
-          height: '100vh',
-          width: '50%',
-          backgroundColor: 'white',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-start',
-            paddingX: '1.875rem',
-          
-            // backgroundColor: 'red',
-            justifyContent: 'center',
-            marginLeft:'100%'
-          }}
-        >
+    <Box className="otp-container">
+      <Box className="otp-head-container">
+        <Box className="otp-logo-container">
           <Box>
             <img src={Yesbank} alt="logo" />
-            <Typography
-              sx={{
-                color: '#004C8F',
-                fontSize: '0.875rem',
-                fontWeight: '700',
-                lineHeight: '1.05rem',
-                letterSpacing:'0.1875rem',
-              }}
-            >
-              Surrogate Portal
-            </Typography>
+            <Typography className="otp-logo-text">Surrogate Portal</Typography>
           </Box>
 
-         
-            <>
-              <Box
-                sx={{
-                  display: 'flex',
-                  marginY: '0.9375rem',
-                  alignItem: 'center',
-                  justifyContent: 'space-between',
-                  width: '100%',
-                }}
-              >
-                <Box>
-                  <Typography sx={{ fontSize: '1.25rem', fontWeight: '500' }}>
-                    Forgot Password
-                  </Typography>
-                </Box>
-                <Box>
-                  <Button  onClick={()=>navigate('/login/newpassword')}
-                  
-                    sx={{ textTransform: 'capitalize', color: '#0662B7' }}
-                  >
-                    Back
-                  </Button>
-                </Box>
+          <>
+            <Box className="otp-forgot-box">
+              <Box className="otp-forgot-left">
+                <Typography>Forgot Password</Typography>
               </Box>
-
               <Box>
-                <Box style={{ backgroundColor: 'success.light' }}>
-                  <Typography sx={{ fontSize: '0.875rem', marginBottom: '1.875rem' }}>
-                    Enter the 6-digit OTP sent to your email ID
-                  </Typography>
-                  <OTPInputContainer
-                    otpError={showError}
-                    otpValue={otp}
-                    onOTPChange={onChangeOtp}
-                  />
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      flexDirection: 'row',
-                      justifyContent: 'space-between',
-                      marginTop: '1.25rem',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <Box>
-                      <TimerComponent
-                        time={180}
-                        callBackFunction={updateTimer}
-                      />
-                    </Box>
-                    <Box>
-                      <Typography
-                        onClick={() => console.log('resend otp clicked')}
-                        sx={
-                          !enableResendButton
-                            ? CommonStyle.otpTextColorFaded
-                            : CommonStyle.otpTextColor
-                        }
-                      >
-                        Resend OTP
-                      </Typography>
-                    </Box>
+                <Button
+                  onClick={() => navigate('/login/forgot')}
+                  className="otp-forgot-right"
+                >
+                  Back
+                </Button>
+              </Box>
+            </Box>
+
+            <Box>
+              <Box
+                className="otp-6-digit"
+                style={{ backgroundColor: 'success.light' }}
+              >
+                <Typography className="otp-6-digit-text">
+                  Enter the 6-digit OTP sent to your email ID
+                </Typography>
+                <OTPInputContainer
+                  otpError={showError}
+                  otpValue={otp}
+                  onOTPChange={onChangeOtp}
+                />
+                <Box className="otp-timer">
+                  <Box>
+                    <TimerComponent time={180} callBackFunction={updateTimer} />
                   </Box>
-                  {showError ? (
-                    <Box
-                      sx={{
-                        marginTop: '1.5625rem',
-                        display: 'flex',
-                        gap: 2,
-                        alignItems: 'center',
-                      }}
-                    >
-                      <img src={wrong_Info} />
-                      <Typography
-                        sx={{
-                          fontSize: '0.625rem',
-                          fontWeight: '400',
-                          color: '#992D26',
-                        }}
-                      >
-                        Please enter the correct OTP sent to your registered
-                        Email ID
-                      </Typography>
-                    </Box>
-                  ) : (
-                    ''
-                  )}
-                </Box>
-                <Box sx={{ marginTop: '15%' }}>
-                  <Button
-                    onClick={submitPassword}
-                    fullWidth
-                    variant="contained"
-                    color="secondary"
-                    disabled={buttonDisabled}
-                  
-                    sx={{
-                      textTransform: 'capitalize',
-                      color: 'white',
-                      width: '21.25rem',
-                      '&:disabled': {
-                        backgroundColor: '#82B1DB',
-                      }
-                    }}
-                  >
-                    Verify
-                  </Button>
-                  {}
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      gap: 2,
-                      marginTop: '0.625rem',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <img style={{color:'#AFAEAF'}} src={info_icon} />
+                  <Box>
                     <Typography
-                      sx={{
-                        fontSize: '0.625rem',
-                        fontWeight: 400,
-                        color: ' #898989',
-                      }}
+                      onClick={() => console.log('resend otp clicked')}
+                      sx={
+                        !enableResendButton
+                          ? CommonStyle.otpTextColorFaded
+                          : CommonStyle.otpTextColor
+                      }
                     >
-                      Please enter the correct OTP sent to your registered email
-                      ID
+                      Resend OTP
                     </Typography>
                   </Box>
                 </Box>
+                {showError ? (
+                  <Box className="otp-error-img">
+                    <img src={wrong_Info} />
+                    <Typography className="otp-error-text">
+                      Please enter the correct OTP sent to your registered Email
+                      ID
+                    </Typography>
+                  </Box>
+                ) : (
+                  ''
+                )}
               </Box>
-            </>
-          
+              <Box className="otp-btn-box">
+                <Button
+                  className="otp-btn"
+                  // onClick={submitPassword}
+                  onClick={() => navigate('/login/newpassword')}
+                  fullWidth
+                  variant="contained"
+                  color="secondary"
+                  disabled={buttonDisabled}
+                  sx={{
+                    '&:disabled': {
+                      backgroundColor: '#82B1DB',
+                    },
+                  }}
+                >
+                  Verify
+                </Button>
+                {}
+                <Box className="otp-info">
+                  <img className="otp-info-img" src={info_grey} />
+                  <Typography className="otp-info-text">
+                    Please enter the correct OTP sent to your registered email
+                    ID
+                  </Typography>
+                </Box>
+              </Box>
+            </Box>
+          </>
         </Box>
       </Box>
-      <Box sx={{ position: 'absolute', bottom: 20, right: 20 }}>
+      <Box className="footer-img">
         <img src={Poweredby} />
       </Box>
     </Box>

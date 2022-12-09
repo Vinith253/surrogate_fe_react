@@ -661,7 +661,7 @@ export default function Dashboard() {
             statusRowsHeading={statusRowHeading}
             listRowHeading={listRowHeading}
             flag="dashboard"
-            viewPath="/sales/salesDashboard/salesReportDetails"
+            viewPath="/sales/salesReport/salesReportDetails"
           />
         </div>
       </div>

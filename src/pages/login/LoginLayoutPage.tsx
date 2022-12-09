@@ -1,10 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import {
-  Box,
-  Typography,
-  Grid,
-} from '@mui/material';
+import './loginlayout.scss';
+import { Box, Typography, Grid } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 import Yesbank from '../../assets/images/Yes_Bank_SVG_Logo 1.svg';
@@ -76,82 +73,41 @@ export const LoginLayoutPage = () => {
 
   return (
     <>
-      <Grid container style={{ height: '100%' }}>
+      <Grid container className="login-layout-page" style={{ height: '100%' }}>
         <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
-          <Box
-            sx={{
-             
-              backgroundSize: 'cover',
-              backgroundRepeat: 'no-repeat',
-              height: '100vh',
-            }}
-          >
-            
-
-            <Box
-              sx={{
-                height: '100vh',
-                width: '100%',
-                background: 'linear-gradient(180.03deg, #0797FF, #005FA4)',
-                padding: '30px',
-               
-              }}
-            >
-              <Box>
-                <Typography
-                  sx={{
-                    color: 'white',
-                    fontSize: '16px',
-                    fontWeight: '500',
-                    lineHeight: '20px',
-                    marginBottom: '15px',
-                  }}
-                >
-                  Surrogate Product for Credit Card Issuers
-                </Typography>
-                <Typography
-                  sx={{
-                    color: 'white',
-                    fontSize: '48px',
-                    fontWeight: '500',
-                    lineHeight: '50px',
-                    marginBottom: '40px',
-                  }}
-                >
-                  We Can handle your Credit Card Issuance
-                </Typography>
-                <Typography
-                  sx={{
-                    color: 'white',
-                    fontSize: '16px',
-                    fontWeight: '500',
-                    lineHeight: '20px',
-                    zIndex: '999',
-                  }}
-                >
-                  Disburse Credit Cards seamlessly! M2P handles your Credit Card
-                  issuance end-to-end with assured security and convenience.
-                </Typography>
-                <Box sx={{ position: 'absolute', bottom: 0, left: '7%' }}>
-                  <img width={'450px'} height={'400px'} src={LoginImg} />
+          <Box className="layout-container">
+            <Box className="layout-head">
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  height: '100%',
+                }}
+              >
+                <Box sx={{ width: '90%' }}>
+                  <Typography className="layout-heading">
+                    Surrogate Product for Credit Card Issuers
+                  </Typography>
+                  <Typography className="layout-heading-text">
+                    <Grid xs={12}>We Can handle</Grid>
+                    <Grid xs={12}>your Credit Card Issuance</Grid>
+                  </Typography>
+                  <Typography className="layout-text">
+                    Disburse Credit Cards seamlessly! M2P handles your Credit
+                    Card issuance end-to-end with assured security and
+                    convenience.
+                  </Typography>
+                </Box>
+                <Box className="layout-image">
+                  <img width={'90%'} height={'100%'} src={LoginImg} />
                 </Box>
               </Box>
             </Box>
           </Box>
         </Grid>
         <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
-          <Box
-            sx={{
-             
-              height: '100vh',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderTopLeftRadius: '0.625rem',
-              borderBottomLeftRadius: '0.625rem',
-            }}
-          >
-            
+          <Box className="layout-outlet">
             <Outlet />
           </Box>
         </Grid>

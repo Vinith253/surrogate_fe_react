@@ -24,7 +24,7 @@ type Props = {
 function CheckboxSelectDropdown({ options, flag, sendSelectedValues }: Props) {
   const [selectedValues, setSelectedValues] = useState<string[]>(['ALL']);
   const [isAllSelected, setIsAllSelected] = useState(true);
-  const [listOptions, setListOptions] = useState(options);
+  const [listOptions, setListOptions] = useState<Array<object>>([]);
   const [isSelectLayoutOpen, setIsSelectLayoutOpen] = useState(false);
 
   useEffect(() => {

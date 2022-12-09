@@ -46,6 +46,10 @@ import loading_icon from '../../../assets/icons/modal-loading.svg';
 import reject_icon from '../../../assets/icons/Rejection-icon.svg';
 import info_icon from '../../../assets/images/info_icon.svg';
 import './CustomModal.scss';
+import OTPInputContainer from './otpInput/OtpInputContainer';
+import TimerComponent from '../../../utils/Timer';
+import { Label } from '@mui/icons-material';
+import { ReactComponent as ApprovedIcon } from '../../../assets/icons/approved_risk_mngm_icon.svg';
 
 type props = {
   openSuccess?: any;
@@ -94,6 +98,7 @@ type props = {
   existingRoleItem?: Array<string>;
   employeeDetailsRowOne?: any;
   employeeDetailsRowTwo?: any;
+  addressDetails?: any;
   employeeDetailsRowThree?: any;
   radioValueThree?: string;
   radioValueFour?: string;
@@ -114,6 +119,7 @@ type props = {
   handleClickShowConfirmPassword?: any;
   createValuePassword?: any;
   closeButtonMsg?: string;
+  modalContent?: string;
 };
 
 function CustomModal({
@@ -162,6 +168,7 @@ function CustomModal({
   duplicate_role_content,
   existingRoleItem,
   employeeDetailsRowOne,
+  addressDetails,
   employeeDetailsRowTwo,
   employeeDetailsRowThree,
   radioValueThree,
@@ -183,12 +190,25 @@ function CustomModal({
   handleClickShowConfirmPassword,
   createValuePassword,
   closeButtonMsg,
+  modalContent,
 }: props) {
   const [pauseStatus, setPauseStatus] = useState(pauseStatusKey);
   const [startDatevalue, setStartDateValue] = useState(null);
   const [endDatevalue, setEndDateValue] = useState(null);
   const [existingRole, setexistingRole] = React.useState('');
   const [checked, setChecked] = React.useState(false);
+  const [otp, setOtp] = useState<number>(0);
+  const [showError, setShowError] = useState<boolean>(false);
+  const [resentOTPDisabled, setResentOTPDisabled] = useState<boolean>(false);
+
+  const updateTimer = (value: number) => {
+    setResentOTPDisabled(value === 0 ? true : false);
+  };
+
+  const onChangeOtp = (e: any) => {
+    setOtp(e);
+    setShowError(false);
+  };
 
   useEffect(() => {
     if (pauseStatus) {
@@ -224,6 +244,7 @@ function CustomModal({
           title == 'Duplicate LMS Rule' ||
           title == 'Employee Details' ||
           title == 'Choose the mode of communication' ||
+          title == 'User Traceability - Address Details' ||
           LoadingMsg ||
           tableDataLMSRule
             ? true
@@ -374,6 +395,64 @@ function CustomModal({
             </Stack>
           )}
 
+          {addressDetails && (
+            <Box
+              sx={{
+                marginTop: '8px',
+                paddingBottom: '12px',
+              }}
+            >
+              {addressDetails.map((item: any) => (
+                <div className="modalContainer">
+                  <div className="one">
+                    <Typography sx={{ color: '#AFAEAF', fontSize: '12px' }}>
+                      {item.Key}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        color: ' #151515',
+                        fontSize: '14px',
+                        fontWeight: '400',
+                        marginRight: '8rem',
+                      }}
+                    >
+                      {item.value}
+                    </Typography>
+                  </div>
+                  <div className="one">
+                    <Typography
+                      className="employee-details-key"
+                      sx={{ color: '#AFAEAF', fontSize: '12px' }}
+                    >
+                      {item.addressSource}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        color: ' #151515',
+                        fontSize: '14px',
+                        fontWeight: '400',
+                      }}
+                    >
+                      {item.billMethod}
+                    </Typography>
+                    {item.selectedAddress && (
+                      <Button startIcon={<ApprovedIcon />} sx={{
+                        fontSize: '12px',
+                        color:' #1C592A',
+                        backgroundColor: '#E3F3E6',
+                        textTransform: 'none',
+                        height: '24px',
+                        marginTop: '16px'
+                      }}>
+                      Selected Address
+                    </Button>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </Box>
+          )}
+
           {successModalTitle && (
             <DialogContent className="successs-modal-content">
               <DialogContentText
@@ -459,9 +538,19 @@ function CustomModal({
 
           {changePasswordTitleMsg && (
             <Stack sx={{ margin: '0 60px', textAlign: 'start' }}>
-              <Typography fontWeight={700} pb={2} pt={1} fontSize={11}>
+              <InputLabel
+                htmlFor="outlined-adornment-amount"
+                required
+                sx={{
+                  marginTop: '20px',
+                  color: '#151515',
+                  fontWeight: '600',
+                  fontSize: '12px',
+                  marginBottom: '5px',
+                }}
+              >
                 {changePasswordTitleMsg}
-              </Typography>
+              </InputLabel>
             </Stack>
           )}
 
@@ -469,6 +558,7 @@ function CustomModal({
             <Stack sx={{ margin: '0 60px' }}>
               <InputLabel
                 htmlFor="outlined-adornment-amount"
+                required
                 sx={{
                   marginTop: '20px',
                   color: '#151515',
@@ -509,6 +599,7 @@ function CustomModal({
 
               <InputLabel
                 htmlFor="outlined-adornment-amount"
+                required={confirmNewPassword !== '' ? true : false}
                 sx={{
                   marginTop: '20px',
                   color: '#151515',
@@ -561,36 +652,11 @@ function CustomModal({
                 margin: '0 60px',
               }}
             >
-              <TextField
-                variant="outlined"
-                size="small"
-                sx={{ width: '45px', margin: '4px' }}
-              ></TextField>
-              <TextField
-                variant="outlined"
-                size="small"
-                sx={{ width: '45px', margin: '4px' }}
-              ></TextField>
-              <TextField
-                variant="outlined"
-                size="small"
-                sx={{ width: '45px', margin: '4px' }}
-              ></TextField>
-              <TextField
-                variant="outlined"
-                size="small"
-                sx={{ width: '45px', margin: '4px' }}
-              ></TextField>
-              <TextField
-                variant="outlined"
-                size="small"
-                sx={{ width: '45px', margin: '4px' }}
-              ></TextField>
-              <TextField
-                variant="outlined"
-                size="small"
-                sx={{ width: '45px', margin: '4px' }}
-              ></TextField>
+              <OTPInputContainer
+                otpError={showError}
+                otpValue={otp}
+                onOTPChange={onChangeOtp}
+              />
             </Box>
           )}
 
@@ -603,9 +669,17 @@ function CustomModal({
               }}
             >
               <Typography sx={{ color: '#D02127', fontSize: '13px' }}>
-                02 : 29
+                <TimerComponent time={9} callBackFunction={updateTimer} />
               </Typography>
-              <Typography sx={{ color: '#82B1DB', fontSize: '13px' }}>
+              <Typography
+                sx={{
+                  color: resentOTPDisabled ? `${colors.Modalblue}` : '#82B1DB',
+                  fontSize: '13px',
+                }}
+                onClick={() =>
+                  resentOTPDisabled ? console.log('resend otp clicked') : null
+                }
+              >
                 {resentOTP}
               </Typography>
             </Stack>
@@ -631,7 +705,13 @@ function CustomModal({
               <Button
                 variant="contained"
                 onClick={handleCloseSuccess}
-                disabled={buttonDisabled}
+                disabled={
+                  ProceedBtn === 'Verify'
+                    ? String(otp).length === 6
+                      ? false
+                      : true
+                    : buttonDisabled
+                }
                 style={{
                   // width: '340px',
                   height: '48px',
@@ -642,6 +722,11 @@ function CustomModal({
                 }}
                 sx={
                   buttonDisabled
+                    ? {
+                        backgroundColor: '#82B1DB !important',
+                        color: '#FFFFFF !important',
+                      }
+                    : (ProceedBtn === 'Verify' ? String(otp).length != 6 : '')
                     ? {
                         backgroundColor: '#82B1DB !important',
                         color: '#FFFFFF !important',
@@ -693,6 +778,19 @@ function CustomModal({
               }}
             >
               {successModalMsg}
+            </Typography>
+          )}
+
+          {modalContent && (
+            <Typography
+              fontWeight={400}
+              sx={{
+                padding: '16px 10px 0 10px',
+                color: '#656769',
+                fontSize: '13px',
+              }}
+            >
+              {modalContent}
             </Typography>
           )}
 
