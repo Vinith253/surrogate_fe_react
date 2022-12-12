@@ -60,14 +60,14 @@ export const RiskMngmtAccordian = ({ data }: props) => {
                   backgroundColor: 'white',
                 },
               }}
-              onClick={() => handleExpandedClick(item.id)}
               expanded={item.isExpanded}
             >
               <AccordionSummary
                 expandIcon={item.isExpanded ? <ExpandedIcon /> : <RiskExpand />}
                 aria-controls="panel1a-content"
                 id="panel1a-header"
-              >
+                onClick={() => handleExpandedClick(item.id)}
+                >
                 <Grid
                   container
                   item
@@ -111,14 +111,12 @@ export const RiskMngmtAccordian = ({ data }: props) => {
                   </Box>
                 </Grid>
               </AccordionSummary>
-              {item.isExpanded && (
-                <AccordionDetails>
+              <AccordionDetails>
                   {item.id === 1 && <UserIdentityBox item={item} />}
                   {item.id === 2 && <UserIdentityBox item={item} />}
                   {item.id === 3 && <UserCashFlowBox item={item} />}
                   {item.id === 4 && <UserCashFlowBox item={item} />}
                 </AccordionDetails>
-              )}
             </CustomAccordion>
           </>
         );

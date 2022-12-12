@@ -222,10 +222,7 @@ const router = createBrowserRouter(
         <Route path="/lms/lmsRule/viewRule" element={<ViewLMSRule />} />
         <Route path="/lms/lmsRule/editRule" element={<EditLMSRule />} />
 
-        <Route
-          path="/riskManagement/customerReports"
-          element={<CustomerReport />}
-        />
+        <Route path="/riskManagement" element={<CustomerReport />} />
         <Route
           path="/riskManagement/customerDetails"
           element={<CustomerDetailScreen />}

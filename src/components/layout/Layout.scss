@@ -9,7 +9,23 @@
 .inactive {
   background-color: transparent !important;
 }
+.sidebar-main {
+  /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
 
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #999b9c;
+    border-radius: 10px;
+  }
+}
+.sidebar-menu {
+  height: 80vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
 .search-container-layout {
   display: flex;
   justify-content: space-between;

@@ -1,5 +1,5 @@
 .css-wgai2y-MuiFormLabel-asterisk{
-    color:red !important
+    color:#D02127 !important
 }
 .otp-container{
     display: flex;
@@ -41,6 +41,56 @@
                     color: #0662B7;
                   }
           }
-          
-    }
-}
+          .otp-6-digit{
+            .otp-6-digit-text{
+                font-size: 0.875rem; 
+                margin-bottom: 1.875rem
+            }
+            .otp-timer{
+                display: flex;
+                      flex-direction: row;
+                      justify-content: space-between;
+                      margin-top: 1.25rem;
+                      align-items: center;
+            }
+            .otp-error-img{
+                margin-top: 1.5625rem;
+                display: flex;
+                gap: 0.5rem;
+                align-items: center;
+                .otp-error-text{
+                    font-size: 0.625rem;
+                          font-weight: 400;
+                          color: #992D26;
+                        }}
+
+                }
+                .otp-btn-box{
+                    margin-top: 15%;
+                    .otp-btn{
+                        text-transform: capitalize;
+                        color: white;
+                        width: 21.25rem;
+                    }
+                    .otp-info{
+                        display: flex;
+                    gap: 0.5rem;
+                    margin-top: 0.625rem;
+                    align-items: center;
+                    .otp-info-img{
+                        color:#AFAEAF;
+                    }
+                    .otp-info-text{
+                        font-size: 0.625rem;
+                        font-weight: 400;
+                        color: #898989;
+                    }
+                }
+            }
+          }
+          .footer-img{
+            position: absolute; 
+            bottom: 1rem; 
+            right: 1rem;
+          }
+        }
