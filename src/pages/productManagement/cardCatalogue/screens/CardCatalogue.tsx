@@ -243,23 +243,14 @@ export const CardCatalogue = () => {
   const loaderData = useLoaderData() as any;
   console.log('loaderData', loaderData);
 
-  // prepareCardList(loaderData.cardList);
-  // useEffect
-
-  // useEffect(() => {
-  //   prepareCardList(loaderData.cardList);
-  // }, []);
-
   const [filters, setFilters] = useState(loaderData.cardListFilters);
 
   const didMount = useRef(false);
   useEffect(() => {
-    console.log('fetchCardList');
     if (!didMount.current) {
       didMount.current = true;
       return;
     } else fetchCardList();
-    console.log('pagination', pagination);
   }, [pagination, filters]);
 
   const handleClick = (event: React.MouseEvent<HTMLTableCellElement>) => {
@@ -447,12 +438,11 @@ export const CardCatalogue = () => {
   };
 
   const onTabStatusChange = (item: any) => {
-    console.log('itemmmmm', item);
     let dropdownFilters = [...filters];
 
     dropdownFilters = dropdownFilters.map((filter: any) => {
       if (filter.payloadKey === 'cardStatus') {
-        filter.options = [item.statusCode];
+        filter.selectedValues = [item.statusCode];
       }
       return filter;
     });
@@ -544,7 +534,6 @@ export const CardCatalogue = () => {
       dataIndex: 'cardCategory',
       key: 'cardCategory',
       render: (_: string, row: any, index: number) => {
-        console.log('rowwwww', row);
         const cardCategoryFilter = filters.find(
           (filter: any) => filter.payloadKey === 'cardCategory'
         );
