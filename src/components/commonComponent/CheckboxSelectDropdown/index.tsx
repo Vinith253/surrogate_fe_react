@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
+
+// MUI components
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import BtnContained from '../../../components/commonComponent/CustomText/Button/Contained';
-import BtnOutlined from '../../../components/commonComponent/CustomText/Button/Outlined';
-import { SearchOutlined } from '@mui/icons-material';
 import {
   FormControlLabel,
   Grid,
@@ -12,8 +11,15 @@ import {
   Checkbox,
   Box,
 } from '@mui/material';
-import './style.scss';
 import { Stack } from '@mui/system';
+import { SearchOutlined } from '@mui/icons-material';
+
+// Common component
+import BtnContained from '../../../components/commonComponent/CustomText/Button/Contained';
+import BtnOutlined from '../../../components/commonComponent/CustomText/Button/Outlined';
+
+// styles
+import './style.scss';
 
 type Props = {
   options: Array<object>;
@@ -24,7 +30,7 @@ type Props = {
 function CheckboxSelectDropdown({ options, flag, sendSelectedValues }: Props) {
   const [selectedValues, setSelectedValues] = useState<string[]>(['ALL']);
   const [isAllSelected, setIsAllSelected] = useState(true);
-  const [listOptions, setListOptions] = useState<Array<object>>([]);
+  const [listOptions, setListOptions] = useState<Array<object>>(options);
   const [isSelectLayoutOpen, setIsSelectLayoutOpen] = useState(false);
 
   useEffect(() => {
@@ -49,7 +55,6 @@ function CheckboxSelectDropdown({ options, flag, sendSelectedValues }: Props) {
     const {
       target: { value },
     } = event;
-    // console.log('value', value);
     setSelectedValues(typeof value === 'string' ? value.split(',') : value);
   };
 

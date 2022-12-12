@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState, useEffect } from 'react';
+import React, { ChangeEvent, useState, useEffect, useRef } from 'react';
 import './cardCateloge.scss';
 import { useNavigate, json, useLoaderData } from 'react-router-dom';
 
@@ -42,14 +42,6 @@ import Edit_icon from '../../../../assets/images/editIcon.svg';
 import Resume_icon from '../../../../assets/images/resumeIcon.svg';
 import Email_Icon from '../../../../assets/images/emailIcon.svg';
 import Download_Icon from '../../../../assets/images/downloadIcon.svg';
-import TotalApplications from '../../../../assets/icons/total_application_icon.svg';
-import Comparisions from '../../../../assets/icons/comparision_icon.svg';
-import VirtualCard from '../../../../assets/icons/virtual_card_icon.svg';
-import ApprovalRate from '../../../../assets/icons/approval_rate_icon.svg';
-import ApprovedIcon from '../../../../assets/icons/approved_icon.svg';
-import Dropped from '../../../../assets/icons/dropped_icon.svg';
-import InProgress from '../../../../assets/icons/in_progress_icon.svg';
-import Rejected from '../../../../assets/icons/rejected_icon.svg';
 import Info_Icon from '../../../../assets/images/info_icon.svg';
 
 // Utils and constants
@@ -62,7 +54,7 @@ import { dropdownTypes } from '../card.const';
 
 export async function cardCatalogueLoader() {
   // get card list
-  const cardList = await getListOfCards({ page: 0, size: 1 });
+  const cardList = await getListOfCards({ page: 0, size: 10 });
 
   // get table filter dropdown
   const temp = dropdownTypes.map(async (type: any) => {
@@ -198,69 +190,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-// export const data = [
-//   createData(
-//     1,
-//     'ETERNA',
-//     1234567890,
-//     1234567890,
-//     'General',
-//     'Basic',
-//     'Active',
-//     ''
-//   ),
-//   createData(
-//     2,
-//     'PREMIER',
-//     1234567890,
-//     1234567890,
-//     'General',
-//     'Premium',
-//     'In-Active',
-//     ''
-//   ),
-//   createData(
-//     3,
-//     'EXCLUSIVE ICAI',
-//     1234567890,
-//     1234567890,
-//     'General',
-//     'Ultra Premium',
-//     'Active',
-//     ''
-//   ),
-//   createData(
-//     4,
-//     'EXCLUSIVE ICAI',
-//     1234567890,
-//     1234567890,
-//     'General',
-//     'Ultra Premium',
-//     'Active',
-//     ''
-//   ),
-//   createData(
-//     5,
-//     'EXCLUSIVE ICAI',
-//     1234567890,
-//     1234567890,
-//     'General',
-//     'Ultra Premium',
-//     'Active',
-//     ''
-//   ),
-//   createData(
-//     6,
-//     'EXCLUSIVE ICAI',
-//     1234567890,
-//     1234567890,
-//     'General',
-//     'Basic',
-//     'Active',
-//     ''
-//   ),
-// ];
-
 export const CardCatalogue = () => {
   const navigate = useNavigate();
   const [surrogateSelection, setSurrogateSelection] = useState(false);
@@ -283,11 +212,16 @@ export const CardCatalogue = () => {
 
   //Table
   const [cardList, setCardList] = useState([]);
+  const [pagination, setPagination] = useState({
+    pageSize: 10,
+    pageNumber: 0,
+  });
+  const [totalCount, setTotalCount] = useState({
+    totaLNoOfRecords: 0,
+    totalNoOfPages: 0,
+  });
   const [ascending, setAscending] = useState<boolean>(true);
   const [selected, setSelected] = useState<number[]>([]);
-  const [isItem, setIsItem] = useState<boolean>(false);
-  const [activateModal, setActivateModal] = useState<boolean>(false);
-  const [deactivateModal, setDeactivateModal] = useState<boolean>(false);
   const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorElement);
 
@@ -295,25 +229,29 @@ export const CardCatalogue = () => {
   const SCHEDULED_PAUSE = 'Schedule Pause';
 
   const prepareCardList = (responseData: any) => {
-    console.log(responseData);
     const result = responseData.result;
     if (result && result.content && Array.isArray(result.content)) {
       setCardList(result.content);
+      setTotalCount({
+        totaLNoOfRecords: result.totalElements,
+        totalNoOfPages: result.totalPages,
+      });
     } else if (responseData.error && responseData.error.error)
       console.log('API error! ', responseData.error.error);
   };
+
   const loaderData = useLoaderData() as any;
-  useEffect(() => {
-    prepareCardList(loaderData.cardList);
-  }, []);
-
-  // useEffect
-
-  // useEffect(() => {
-
-  // }, [filters])
+  console.log('loaderData', loaderData);
 
   const [filters, setFilters] = useState(loaderData.cardListFilters);
+
+  const didMount = useRef(false);
+  useEffect(() => {
+    if (!didMount.current) {
+      didMount.current = true;
+      return;
+    } else fetchCardList();
+  }, [pagination, filters]);
 
   const handleClick = (event: React.MouseEvent<HTMLTableCellElement>) => {
     setAnchorElement(event.currentTarget);
@@ -445,15 +383,19 @@ export const CardCatalogue = () => {
   const GroupButtonData = [
     {
       title: 'All',
+      stausCode: 'ALL',
     },
     {
-      title: 'Activate',
+      title: 'Activated',
+      statusCode: 'ACTIVE',
     },
     {
       title: 'Deactivated',
+      statusCode: 'IN_ACTIVE',
     },
     {
       title: 'Saved',
+      statusCode: 'DRAFT',
     },
   ];
 
@@ -468,7 +410,7 @@ export const CardCatalogue = () => {
 
   const handleSelectAllClick = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const newSelected = cardList.map((n: any) => n.id);
+      const newSelected = cardList?.map((n: any) => n.id);
       setSelected(newSelected);
       return;
     }
@@ -495,6 +437,18 @@ export const CardCatalogue = () => {
     }
   };
 
+  const onTabStatusChange = (item: any) => {
+    let dropdownFilters = [...filters];
+
+    dropdownFilters = dropdownFilters.map((filter: any) => {
+      if (filter.payloadKey === 'cardStatus') {
+        filter.selectedValues = [item.statusCode];
+      }
+      return filter;
+    });
+    setFilters(dropdownFilters);
+  };
+
   const column = [
     {
       title: '',
@@ -518,7 +472,7 @@ export const CardCatalogue = () => {
       },
       render: (_: string, row: any, index: number) => {
         const isItemSelected = isSelected(row.id);
-        setIsItem(isItemSelected);
+        // setIsItem(isItemSelected);
         console.log('isItemSelected', isItemSelected);
         const labelId = `enhanced-table-checkbox-${index}`;
         return (
@@ -538,8 +492,8 @@ export const CardCatalogue = () => {
       dataIndex: 'id',
       key: 'id',
       width: '70px',
-      render: (text: string) => {
-        return <Stack>{text}</Stack>;
+      render: (_: string, row: any, index: number) => {
+        return <Stack>{index + 1}</Stack>;
       },
     },
     {
@@ -566,26 +520,54 @@ export const CardCatalogue = () => {
     },
     {
       title: 'Product ID',
-      dataIndex: 'productID',
-      key: 'productID',
+      dataIndex: 'id',
+      key: 'id',
     },
-    { title: 'Business ID', dataIndex: 'businessID', key: 'businessID' },
+    {
+      title: 'Business ID',
+      dataIndex: 'business',
+      key: 'business',
+    },
 
-    { title: 'Card Category', dataIndex: 'cardCategory', key: 'cardCategory' },
+    {
+      title: 'Card Category',
+      dataIndex: 'cardCategory',
+      key: 'cardCategory',
+      render: (_: string, row: any, index: number) => {
+        const cardCategoryFilter = filters.find(
+          (filter: any) => filter.payloadKey === 'cardCategory'
+        );
+        let selectedOption = row.cardCategory;
+        if (cardCategoryFilter) {
+          selectedOption = cardCategoryFilter.options?.find(
+            (option: any) => option.code === row.cardCategory
+          )?.name;
+        }
+        return <Stack>{selectedOption}</Stack>;
+      },
+    },
 
     {
       title: 'Card Status',
       dataIndex: 'cardStatus',
       key: 'cardStatus',
-
-      render: (text: string) => {
+      render: (_: string, row: any, index: number) => {
+        const cardStatusFilter = filters.find(
+          (filter: any) => filter.payloadKey === 'cardStatus'
+        );
+        let selectedOption = row.cardStatus;
+        if (cardStatusFilter) {
+          selectedOption = cardStatusFilter.options?.find(
+            (option: any) => option.code === row.cardStatus
+          )?.name;
+        }
         return (
           <Stack
             sx={{
-              color: text ? checkTagStatus(text).color : '',
+              color: selectedOption ? checkTagStatus(selectedOption).color : '',
             }}
           >
-            {text}
+            {selectedOption}
           </Stack>
         );
       },
@@ -675,16 +657,37 @@ export const CardCatalogue = () => {
 
   const fetchCardList = async () => {
     const payload = {
-      page: 0,
-      size: 10,
+      page: pagination.pageNumber,
+      size: pagination.pageSize,
     } as any;
     filters.forEach((filter: any) => {
-      payload[filter.payloadKey] = filter.selectedValues;
+      if (!filter.selectedValues.includes('ALL'))
+        payload[filter.payloadKey] = filter.selectedValues;
     });
-    console.log('payload', payload);
     const result = await getListOfCards(payload);
-    console.log('resultttttttt', result);
     prepareCardList(result);
+  };
+
+  // Pagination methods
+
+  const onPageChange = (pageNo: number) => {
+    setPagination({
+      ...pagination,
+      pageNumber: pageNo,
+    });
+  };
+
+  const onPageSizeChange = (size: number) => {
+    if (size === -1) {
+      setPagination({
+        ...pagination,
+        pageSize: totalCount.totaLNoOfRecords,
+      });
+    } else
+      setPagination({
+        ...pagination,
+        pageSize: size,
+      });
   };
 
   return (
@@ -885,7 +888,10 @@ export const CardCatalogue = () => {
             </Stack>
             <Stack>
               <Box>
-                <GroupButton data={GroupButtonData} />
+                <GroupButton
+                  data={GroupButtonData}
+                  onChange={onTabStatusChange}
+                />
               </Box>
             </Stack>
           </Box>
@@ -896,6 +902,12 @@ export const CardCatalogue = () => {
               data={cardList}
               isItemSelected={selected}
               selectedKey="id"
+              pagination={{
+                ...pagination,
+                ...totalCount,
+                onPageChange: onPageChange,
+                onPageSizeChange: onPageSizeChange,
+              }}
             />
           </Box>
         </Box>

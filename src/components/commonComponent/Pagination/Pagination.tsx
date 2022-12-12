@@ -1,3 +1,6 @@
+import { ChangeEvent, ChangeEventHandler, MouseEventHandler } from 'react';
+
+// MUI components
 import {
   Button,
   Grid,
@@ -6,18 +9,18 @@ import {
   TablePagination,
   TableRow,
 } from '@mui/material';
-import { useStyles } from '../../../style/MuiStyles/muiStyles';
 import LeftArrow from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import LastArrow from '@mui/icons-material/KeyboardDoubleArrowRight';
-import { ChangeEvent, ChangeEventHandler, MouseEventHandler } from 'react';
+
+// Styles
+import { useStyles } from '../../../style/MuiStyles/muiStyles';
 
 function PaginationComp(props: {
   lastButtonDisabled: boolean | undefined;
   onFirstClick: MouseEventHandler<HTMLButtonElement> | undefined;
   onLastClick: MouseEventHandler<HTMLButtonElement> | undefined;
-  onPageChange:
-    | ((event: ChangeEvent<unknown>, page: number) => void)
-    | undefined;
+  onPageChange: (event: ChangeEvent<unknown>, page: number) => void;
+  // Remove this
   handleChangeRowsPerPage:
     | ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>
     | undefined;
@@ -27,8 +30,11 @@ function PaginationComp(props: {
   ) => void;
   page: number;
   rowsPerPage: number;
-  rows: string | any[];
+  rows: any[]; // Remove this
+  totalRecordCount?: number;
+  totalPages?: number;
 }) {
+  const { totalPages, totalRecordCount, rowsPerPage, page } = props;
   return (
     <Grid container sx={{ justifyContent: 'space-between' }}>
       <Grid>
@@ -36,9 +42,9 @@ function PaginationComp(props: {
           <TablePagination
             rowsPerPageOptions={[5, 10, 20, 30, { label: 'All', value: -1 }]}
             colSpan={3}
-            count={props.rows?.length}
-            rowsPerPage={props.rowsPerPage}
-            page={props.page}
+            count={totalRecordCount || props.rows?.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
             labelRowsPerPage={'Listing per Page'}
             SelectProps={{
               inputProps: {
@@ -66,7 +72,7 @@ function PaginationComp(props: {
           }}
         >
           <Button
-            disabled={props.page === 1}
+            disabled={props.page + 1 === 1}
             startIcon={<LeftArrow />}
             sx={{
               fontSize: '14px',
@@ -82,14 +88,22 @@ function PaginationComp(props: {
             sx={{
               ...useStyles.numberPag,
             }}
-            count={Math.ceil(props.rows?.length / props.rowsPerPage)}
+            boundaryCount={3}
+            count={
+              totalPages || Math.ceil(props.rows?.length / props.rowsPerPage)
+            }
             variant="outlined"
             shape="rounded"
-            onChange={props.onPageChange}
+            onChange={(event, page) => props.onPageChange(event, page - 1)}
             siblingCount={0}
+            page={page + 1}
+            // showFirstButton
+            // showLastButton
           />
           <Button
-            disabled={props.lastButtonDisabled}
+            disabled={
+              totalPages ? page === totalPages - 1 : props.lastButtonDisabled
+            }
             endIcon={<LastArrow />}
             sx={{
               fontSize: '14px',
