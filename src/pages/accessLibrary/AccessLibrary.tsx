@@ -219,7 +219,7 @@ const AccessLibrary = () => {
           <ListTable
             column={columnItems}
             data={dataItems}
-            handle={handleClick}
+            // handle={handleClick}
           />
         </Stack>
 

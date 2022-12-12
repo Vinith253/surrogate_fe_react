@@ -1,3 +1,6 @@
+import { useMemo, useState } from 'react';
+
+// MUI components
 import {
   Box,
   Grid,
@@ -9,70 +12,80 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import { useMemo, useState } from 'react';
+
+// Styles
 import { colors } from '../../../style/Color';
+
+// Common components
 import PaginationComp from '../Pagination/Pagination';
 
-// const StyledTableCell = styled(TableCell)(({ theme }) => ({
-//   [`&.${tableCellClasses.head}`]: {
-//     // backgroundColor: theme.palette.common.white ,
-//     color: theme.palette.common.black,
-//     fontWeight: 'bold',
-//   },
-//   [`&.${tableCellClasses.body}`]: {
-//     fontSize: 14,
-//   },
-// }));
-
+// Types
 type columnType = {
   title: string;
   dataIndex: string;
   key: string;
-  onClick: any;
+  onClick?: any;
   headerRender?: any;
   render?: any;
   width?: any;
 };
-type columnArr = columnType[];
-type dataProps = {
-  column: columnArr;
+const indexKey = 'index';
+
+// Component begins here
+const CommonTable = (props: {
+  column: Array<columnType>;
+  data: any;
   isItemSelected?: any;
   selectedKey?: string;
-};
-
-const indexKey = 'index';
-const CommonTable = (props: any) => {
+  pagination?: {
+    totaLNoOfRecords: number;
+    totalNoOfPages: number;
+    pageSize: number;
+    pageNumber: number;
+    onPageChange: Function;
+    onPageSizeChange: Function;
+  };
+}) => {
   const {
     column,
     isItemSelected = null,
     selectedKey = indexKey,
-  }: dataProps = props;
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [currentPage, setCurrentPage] = useState(1);
-  const handleChangePage = (
+    pagination,
+  } = props;
+  const [rowsPerPage, setRowsPerPage] = useState(pagination?.pageSize || 10);
+  const [currentPage, setCurrentPage] = useState(pagination?.pageNumber || 0);
+  console.log('propssssss', props);
+  // Pagination methods
+  const handlePageChange = (
     event: React.MouseEvent<HTMLButtonElement> | null,
     newPage: number
   ) => {
-    setPage(newPage);
+    setCurrentPage(newPage);
+    pagination?.onPageChange && pagination?.onPageChange(newPage);
   };
-  const handleChangeRowsPerPage = (
+
+  const handleRowsPerPageChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-    setCurrentPage(1);
+    setCurrentPage(0);
+    pagination?.onPageSizeChange &&
+      pagination?.onPageSizeChange(parseInt(event.target.value, 10));
   };
-  const onPageChange = (event: React.ChangeEvent<unknown>, page: number) => {
-    setPage(page);
-    setCurrentPage(page);
-  };
-  const currentTableData = useMemo(() => {
-    const firstPageIndex = (currentPage - 1) * rowsPerPage;
-    const lastPageIndex = firstPageIndex + rowsPerPage;
-    return props.data.slice(firstPageIndex, lastPageIndex);
-  }, [currentPage, rowsPerPage, props.data]);
 
+  const onPageChange = (event: React.ChangeEvent<unknown>, page: number) => {
+    setCurrentPage(page);
+    pagination?.onPageChange && pagination?.onPageChange(page);
+  };
+
+  // Table data
+  // const currentTableData = useMemo(() => {
+  //   const firstPageIndex = (currentPage - 1) * rowsPerPage;
+  //   const lastPageIndex = firstPageIndex + rowsPerPage;
+  //   return props.data.slice(firstPageIndex, lastPageIndex);
+  // }, [currentPage, rowsPerPage, props.data]);
+
+  // Each table cell of table body
   const renderColoumn = (
     dataItem: any,
     columnItem: columnType,
@@ -146,7 +159,7 @@ const CommonTable = (props: any) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {currentTableData?.map((dataItem: any, index: number) => {
+            {props.data?.map((dataItem: any, index: number) => {
               return (
                 <TableRow
                   sx={{ padding: '10px', height: '45px' }}
@@ -175,22 +188,26 @@ const CommonTable = (props: any) => {
       </TableContainer>
       <Grid>
         <PaginationComp
-          rows={props.data}
+          rows={props.data} //Unnecessary prop, remove while integrating other non-common table paginations
+          totalRecordCount={pagination?.totaLNoOfRecords || 0}
+          totalPages={pagination?.totalNoOfPages || 0}
           rowsPerPage={rowsPerPage}
-          page={page}
-          handleChangePage={handleChangePage}
-          handleChangeRowsPerPage={handleChangeRowsPerPage}
-          onPageChange={onPageChange}
-          onLastClick={() => {
-            setPage(Math.ceil(props.data.length / rowsPerPage));
-            setCurrentPage(Math.ceil(props.data.length / rowsPerPage));
+          page={currentPage}
+          handleChangePage={handlePageChange}
+          handleChangeRowsPerPage={handleRowsPerPageChange}
+          onPageChange={onPageChange} //This is same as handlePageChange. Remove while integrating other non-common table paginations
+          onLastClick={(event) => {
+            // setCurrentPage(Math.ceil(props.data.length / rowsPerPage));
+            handlePageChange(
+              event,
+              pagination?.totalNoOfPages ? pagination?.totalNoOfPages - 1 : 0
+            );
           }}
-          onFirstClick={() => {
-            setPage(1);
-            setCurrentPage(1);
+          onFirstClick={(event) => {
+            handlePageChange(event, 0);
           }}
           lastButtonDisabled={
-            page === Math.ceil(props.data.length / rowsPerPage)
+            currentPage === Math.ceil(props.data.length / rowsPerPage)
           }
         />
       </Grid>
