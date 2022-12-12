@@ -485,8 +485,8 @@ export const CardCatalogue = () => {
       dataIndex: 'id',
       key: 'id',
       width: '70px',
-      render: (text: string) => {
-        return <Stack>{text}</Stack>;
+      render: (_: string, row: any, index: number) => {
+        return <Stack>{index + 1}</Stack>;
       },
     },
     {
@@ -513,10 +513,10 @@ export const CardCatalogue = () => {
     },
     {
       title: 'Product ID',
-      dataIndex: 'productID',
-      key: 'productID',
+      dataIndex: 'id',
+      key: 'id',
     },
-    { title: 'Business ID', dataIndex: 'businessID', key: 'businessID' },
+    { title: 'Business ID', dataIndex: 'business', key: 'business' },
 
     { title: 'Card Category', dataIndex: 'cardCategory', key: 'cardCategory' },
 
