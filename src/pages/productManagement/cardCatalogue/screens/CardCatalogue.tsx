@@ -250,6 +250,8 @@ export const CardCatalogue = () => {
   //   prepareCardList(loaderData.cardList);
   // }, []);
 
+  const [filters, setFilters] = useState(loaderData.cardListFilters);
+
   const didMount = useRef(false);
   useEffect(() => {
     console.log('fetchCardList');
@@ -258,9 +260,7 @@ export const CardCatalogue = () => {
       return;
     } else fetchCardList();
     console.log('pagination', pagination);
-  }, [pagination]);
-
-  const [filters, setFilters] = useState(loaderData.cardListFilters);
+  }, [pagination, filters]);
 
   const handleClick = (event: React.MouseEvent<HTMLTableCellElement>) => {
     setAnchorElement(event.currentTarget);
@@ -392,15 +392,19 @@ export const CardCatalogue = () => {
   const GroupButtonData = [
     {
       title: 'All',
+      stausCode: 'ALL',
     },
     {
-      title: 'Activate',
+      title: 'Activated',
+      statusCode: 'ACTIVE',
     },
     {
       title: 'Deactivated',
+      statusCode: 'IN_ACTIVE',
     },
     {
       title: 'Saved',
+      statusCode: 'DRAFT',
     },
   ];
 
@@ -440,6 +444,19 @@ export const CardCatalogue = () => {
     } else {
       setSelected([...selectedData, id]);
     }
+  };
+
+  const onTabStatusChange = (item: any) => {
+    console.log('itemmmmm', item);
+    let dropdownFilters = [...filters];
+
+    dropdownFilters = dropdownFilters.map((filter: any) => {
+      if (filter.payloadKey === 'cardStatus') {
+        filter.options = [item.statusCode];
+      }
+      return filter;
+    });
+    setFilters(dropdownFilters);
   };
 
   const column = [
@@ -516,23 +533,52 @@ export const CardCatalogue = () => {
       dataIndex: 'id',
       key: 'id',
     },
-    { title: 'Business ID', dataIndex: 'business', key: 'business' },
+    {
+      title: 'Business ID',
+      dataIndex: 'business',
+      key: 'business',
+    },
 
-    { title: 'Card Category', dataIndex: 'cardCategory', key: 'cardCategory' },
+    {
+      title: 'Card Category',
+      dataIndex: 'cardCategory',
+      key: 'cardCategory',
+      render: (_: string, row: any, index: number) => {
+        console.log('rowwwww', row);
+        const cardCategoryFilter = filters.find(
+          (filter: any) => filter.payloadKey === 'cardCategory'
+        );
+        let selectedOption = row.cardCategory;
+        if (cardCategoryFilter) {
+          selectedOption = cardCategoryFilter.options?.find(
+            (option: any) => option.code === row.cardCategory
+          )?.name;
+        }
+        return <Stack>{selectedOption}</Stack>;
+      },
+    },
 
     {
       title: 'Card Status',
       dataIndex: 'cardStatus',
       key: 'cardStatus',
-
-      render: (text: string) => {
+      render: (_: string, row: any, index: number) => {
+        const cardStatusFilter = filters.find(
+          (filter: any) => filter.payloadKey === 'cardStatus'
+        );
+        let selectedOption = row.cardStatus;
+        if (cardStatusFilter) {
+          selectedOption = cardStatusFilter.options?.find(
+            (option: any) => option.code === row.cardStatus
+          )?.name;
+        }
         return (
           <Stack
             sx={{
-              color: text ? checkTagStatus(text).color : '',
+              color: selectedOption ? checkTagStatus(selectedOption).color : '',
             }}
           >
-            {text}
+            {selectedOption}
           </Stack>
         );
       },
@@ -853,7 +899,10 @@ export const CardCatalogue = () => {
             </Stack>
             <Stack>
               <Box>
-                <GroupButton data={GroupButtonData} />
+                <GroupButton
+                  data={GroupButtonData}
+                  onChange={onTabStatusChange}
+                />
               </Box>
             </Stack>
           </Box>
